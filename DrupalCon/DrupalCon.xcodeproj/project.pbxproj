@@ -1,0 +1,642 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5D38E68219867062006F7A59 /* DCMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D38E68119867062006F7A59 /* DCMenuContainerViewController.m */; };
+		5D38E68619867644006F7A59 /* DCAppFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D38E68519867644006F7A59 /* DCAppFacade.m */; };
+		5D38E68A19868C53006F7A59 /* DCSideMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D38E68919868C53006F7A59 /* DCSideMenuCell.m */; };
+		5D38E696198692E9006F7A59 /* DCSpeakersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D38E695198692E9006F7A59 /* DCSpeakersViewController.m */; };
+		5D38E69919869303006F7A59 /* DCProgramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D38E69819869303006F7A59 /* DCProgramViewController.m */; };
+		5DC8C415198656DA00BF5816 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C414198656DA00BF5816 /* Foundation.framework */; };
+		5DC8C417198656DA00BF5816 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C416198656DA00BF5816 /* CoreGraphics.framework */; };
+		5DC8C419198656DA00BF5816 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C418198656DA00BF5816 /* UIKit.framework */; };
+		5DC8C41F198656DB00BF5816 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5DC8C41D198656DB00BF5816 /* InfoPlist.strings */; };
+		5DC8C421198656DB00BF5816 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8C420198656DB00BF5816 /* main.m */; };
+		5DC8C428198656DB00BF5816 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5DC8C426198656DB00BF5816 /* Main.storyboard */; };
+		5DC8C42D198656DB00BF5816 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5DC8C42C198656DB00BF5816 /* Images.xcassets */; };
+		5DC8C434198656DB00BF5816 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C433198656DB00BF5816 /* XCTest.framework */; };
+		5DC8C435198656DB00BF5816 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C414198656DA00BF5816 /* Foundation.framework */; };
+		5DC8C436198656DB00BF5816 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C418198656DA00BF5816 /* UIKit.framework */; };
+		5DC8C43E198656DB00BF5816 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5DC8C43C198656DB00BF5816 /* InfoPlist.strings */; };
+		5DC8C440198656DB00BF5816 /* DrupalConTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8C43F198656DB00BF5816 /* DrupalConTests.m */; };
+		5DC8C459198658BF00BF5816 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8C455198658BF00BF5816 /* AppDelegate.m */; };
+		5DC8C46C198658FF00BF5816 /* DCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8C463198658FF00BF5816 /* DCLoginViewController.m */; };
+		5DC8C46D198658FF00BF5816 /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8C467198658FF00BF5816 /* MFSideMenuContainerViewController.m */; };
+		5DC8C46E198658FF00BF5816 /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8C469198658FF00BF5816 /* MFSideMenuShadow.m */; };
+		5DC8C46F198658FF00BF5816 /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8C46B198658FF00BF5816 /* UIViewController+MFSideMenuAdditions.m */; };
+		5DC8C4731986594400BF5816 /* DCBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8C4721986594400BF5816 /* DCBaseViewController.m */; };
+		5DC8C47A19865C8400BF5816 /* DCSideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8C47919865C8400BF5816 /* DCSideMenuViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5DC8C437198656DB00BF5816 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5DC8C409198656DA00BF5816 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5DC8C410198656DA00BF5816;
+			remoteInfo = DrupalCon;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5D38E68019867062006F7A59 /* DCMenuContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCMenuContainerViewController.h; path = MenuContainer/DCMenuContainerViewController.h; sourceTree = "<group>"; };
+		5D38E68119867062006F7A59 /* DCMenuContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCMenuContainerViewController.m; path = MenuContainer/DCMenuContainerViewController.m; sourceTree = "<group>"; };
+		5D38E68419867644006F7A59 /* DCAppFacade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCAppFacade.h; path = Classes/Utilites/AppFacade/DCAppFacade.h; sourceTree = "<group>"; };
+		5D38E68519867644006F7A59 /* DCAppFacade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCAppFacade.m; path = Classes/Utilites/AppFacade/DCAppFacade.m; sourceTree = "<group>"; };
+		5D38E68819868C53006F7A59 /* DCSideMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCSideMenuCell.h; path = Classes/Views/DCSideMenuCell.h; sourceTree = "<group>"; };
+		5D38E68919868C53006F7A59 /* DCSideMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCSideMenuCell.m; path = Classes/Views/DCSideMenuCell.m; sourceTree = "<group>"; };
+		5D38E694198692E9006F7A59 /* DCSpeakersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCSpeakersViewController.h; sourceTree = "<group>"; };
+		5D38E695198692E9006F7A59 /* DCSpeakersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCSpeakersViewController.m; sourceTree = "<group>"; };
+		5D38E69719869303006F7A59 /* DCProgramViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCProgramViewController.h; sourceTree = "<group>"; };
+		5D38E69819869303006F7A59 /* DCProgramViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCProgramViewController.m; sourceTree = "<group>"; };
+		5DC8C411198656DA00BF5816 /* DrupalCon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrupalCon.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DC8C414198656DA00BF5816 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5DC8C416198656DA00BF5816 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		5DC8C418198656DA00BF5816 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		5DC8C41C198656DB00BF5816 /* DrupalCon-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DrupalCon-Info.plist"; sourceTree = "<group>"; };
+		5DC8C41E198656DB00BF5816 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5DC8C420198656DB00BF5816 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5DC8C422198656DB00BF5816 /* DrupalCon-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DrupalCon-Prefix.pch"; sourceTree = "<group>"; };
+		5DC8C427198656DB00BF5816 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5DC8C42C198656DB00BF5816 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		5DC8C432198656DB00BF5816 /* DrupalConTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrupalConTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DC8C433198656DB00BF5816 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		5DC8C43B198656DB00BF5816 /* DrupalConTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DrupalConTests-Info.plist"; sourceTree = "<group>"; };
+		5DC8C43D198656DB00BF5816 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5DC8C43F198656DB00BF5816 /* DrupalConTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DrupalConTests.m; sourceTree = "<group>"; };
+		5DC8C454198658BF00BF5816 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		5DC8C455198658BF00BF5816 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		5DC8C462198658FF00BF5816 /* DCLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCLoginViewController.h; sourceTree = "<group>"; };
+		5DC8C463198658FF00BF5816 /* DCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCLoginViewController.m; sourceTree = "<group>"; };
+		5DC8C465198658FF00BF5816 /* MFSideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenu.h; sourceTree = "<group>"; };
+		5DC8C466198658FF00BF5816 /* MFSideMenuContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenuContainerViewController.h; sourceTree = "<group>"; };
+		5DC8C467198658FF00BF5816 /* MFSideMenuContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuContainerViewController.m; sourceTree = "<group>"; };
+		5DC8C468198658FF00BF5816 /* MFSideMenuShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenuShadow.h; sourceTree = "<group>"; };
+		5DC8C469198658FF00BF5816 /* MFSideMenuShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuShadow.m; sourceTree = "<group>"; };
+		5DC8C46A198658FF00BF5816 /* UIViewController+MFSideMenuAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MFSideMenuAdditions.h"; sourceTree = "<group>"; };
+		5DC8C46B198658FF00BF5816 /* UIViewController+MFSideMenuAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MFSideMenuAdditions.m"; sourceTree = "<group>"; };
+		5DC8C4711986594400BF5816 /* DCBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCBaseViewController.h; sourceTree = "<group>"; };
+		5DC8C4721986594400BF5816 /* DCBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCBaseViewController.m; sourceTree = "<group>"; };
+		5DC8C47819865C8400BF5816 /* DCSideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCSideMenuViewController.h; sourceTree = "<group>"; };
+		5DC8C47919865C8400BF5816 /* DCSideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCSideMenuViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5DC8C40E198656DA00BF5816 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5DC8C417198656DA00BF5816 /* CoreGraphics.framework in Frameworks */,
+				5DC8C419198656DA00BF5816 /* UIKit.framework in Frameworks */,
+				5DC8C415198656DA00BF5816 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5DC8C42F198656DB00BF5816 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5DC8C434198656DB00BF5816 /* XCTest.framework in Frameworks */,
+				5DC8C436198656DB00BF5816 /* UIKit.framework in Frameworks */,
+				5DC8C435198656DB00BF5816 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5D38E67F1986703D006F7A59 /* MenuContainer */ = {
+			isa = PBXGroup;
+			children = (
+				5D38E68019867062006F7A59 /* DCMenuContainerViewController.h */,
+				5D38E68119867062006F7A59 /* DCMenuContainerViewController.m */,
+			);
+			name = MenuContainer;
+			sourceTree = "<group>";
+		};
+		5D38E6831986761D006F7A59 /* AppFacade */ = {
+			isa = PBXGroup;
+			children = (
+				5D38E68419867644006F7A59 /* DCAppFacade.h */,
+				5D38E68519867644006F7A59 /* DCAppFacade.m */,
+			);
+			name = AppFacade;
+			sourceTree = "<group>";
+		};
+		5D38E68719868BFE006F7A59 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5D38E68819868C53006F7A59 /* DCSideMenuCell.h */,
+				5D38E68919868C53006F7A59 /* DCSideMenuCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		5D38E691198692E9006F7A59 /* ConferenceViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				5D38E692198692E9006F7A59 /* Program */,
+				5D38E693198692E9006F7A59 /* Speakers */,
+			);
+			name = ConferenceViewControllers;
+			path = Classes/ConferenceViewControllers;
+			sourceTree = "<group>";
+		};
+		5D38E692198692E9006F7A59 /* Program */ = {
+			isa = PBXGroup;
+			children = (
+				5D38E69719869303006F7A59 /* DCProgramViewController.h */,
+				5D38E69819869303006F7A59 /* DCProgramViewController.m */,
+			);
+			path = Program;
+			sourceTree = "<group>";
+		};
+		5D38E693198692E9006F7A59 /* Speakers */ = {
+			isa = PBXGroup;
+			children = (
+				5D38E694198692E9006F7A59 /* DCSpeakersViewController.h */,
+				5D38E695198692E9006F7A59 /* DCSpeakersViewController.m */,
+			);
+			path = Speakers;
+			sourceTree = "<group>";
+		};
+		5DC8C408198656DA00BF5816 = {
+			isa = PBXGroup;
+			children = (
+				5DC8C41A198656DB00BF5816 /* DrupalCon */,
+				5DC8C439198656DB00BF5816 /* DrupalConTests */,
+				5DC8C413198656DA00BF5816 /* Frameworks */,
+				5DC8C412198656DA00BF5816 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5DC8C412198656DA00BF5816 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5DC8C411198656DA00BF5816 /* DrupalCon.app */,
+				5DC8C432198656DB00BF5816 /* DrupalConTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5DC8C413198656DA00BF5816 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5DC8C414198656DA00BF5816 /* Foundation.framework */,
+				5DC8C416198656DA00BF5816 /* CoreGraphics.framework */,
+				5DC8C418198656DA00BF5816 /* UIKit.framework */,
+				5DC8C433198656DB00BF5816 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5DC8C41A198656DB00BF5816 /* DrupalCon */ = {
+			isa = PBXGroup;
+			children = (
+				5DC8C44A1986571300BF5816 /* Classes */,
+				5DC8C426198656DB00BF5816 /* Main.storyboard */,
+				5DC8C42C198656DB00BF5816 /* Images.xcassets */,
+				5DC8C41B198656DB00BF5816 /* Supporting Files */,
+			);
+			path = DrupalCon;
+			sourceTree = "<group>";
+		};
+		5DC8C41B198656DB00BF5816 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5DC8C41C198656DB00BF5816 /* DrupalCon-Info.plist */,
+				5DC8C41D198656DB00BF5816 /* InfoPlist.strings */,
+				5DC8C420198656DB00BF5816 /* main.m */,
+				5DC8C422198656DB00BF5816 /* DrupalCon-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5DC8C439198656DB00BF5816 /* DrupalConTests */ = {
+			isa = PBXGroup;
+			children = (
+				5DC8C43F198656DB00BF5816 /* DrupalConTests.m */,
+				5DC8C43A198656DB00BF5816 /* Supporting Files */,
+			);
+			path = DrupalConTests;
+			sourceTree = "<group>";
+		};
+		5DC8C43A198656DB00BF5816 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5DC8C43B198656DB00BF5816 /* DrupalConTests-Info.plist */,
+				5DC8C43C198656DB00BF5816 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5DC8C44A1986571300BF5816 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				5D38E691198692E9006F7A59 /* ConferenceViewControllers */,
+				5D38E68719868BFE006F7A59 /* Views */,
+				5D38E6831986761D006F7A59 /* AppFacade */,
+				5DC8C460198658FF00BF5816 /* ViewControllers */,
+				5DC8C453198658BF00BF5816 /* AppDelegate */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		5DC8C453198658BF00BF5816 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				5DC8C454198658BF00BF5816 /* AppDelegate.h */,
+				5DC8C455198658BF00BF5816 /* AppDelegate.m */,
+			);
+			name = AppDelegate;
+			path = Classes/AppDelegate;
+			sourceTree = "<group>";
+		};
+		5DC8C460198658FF00BF5816 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				5D38E67F1986703D006F7A59 /* MenuContainer */,
+				5DC8C47719865C8400BF5816 /* SideMenu */,
+				5DC8C4701986592400BF5816 /* Base */,
+				5DC8C461198658FF00BF5816 /* LoginViewController */,
+				5DC8C464198658FF00BF5816 /* Sidebar */,
+			);
+			name = ViewControllers;
+			path = Classes/ViewControllers;
+			sourceTree = "<group>";
+		};
+		5DC8C461198658FF00BF5816 /* LoginViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5DC8C462198658FF00BF5816 /* DCLoginViewController.h */,
+				5DC8C463198658FF00BF5816 /* DCLoginViewController.m */,
+			);
+			path = LoginViewController;
+			sourceTree = "<group>";
+		};
+		5DC8C464198658FF00BF5816 /* Sidebar */ = {
+			isa = PBXGroup;
+			children = (
+				5DC8C465198658FF00BF5816 /* MFSideMenu.h */,
+				5DC8C466198658FF00BF5816 /* MFSideMenuContainerViewController.h */,
+				5DC8C467198658FF00BF5816 /* MFSideMenuContainerViewController.m */,
+				5DC8C468198658FF00BF5816 /* MFSideMenuShadow.h */,
+				5DC8C469198658FF00BF5816 /* MFSideMenuShadow.m */,
+				5DC8C46A198658FF00BF5816 /* UIViewController+MFSideMenuAdditions.h */,
+				5DC8C46B198658FF00BF5816 /* UIViewController+MFSideMenuAdditions.m */,
+			);
+			path = Sidebar;
+			sourceTree = "<group>";
+		};
+		5DC8C4701986592400BF5816 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				5DC8C4711986594400BF5816 /* DCBaseViewController.h */,
+				5DC8C4721986594400BF5816 /* DCBaseViewController.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		5DC8C47719865C8400BF5816 /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				5DC8C47819865C8400BF5816 /* DCSideMenuViewController.h */,
+				5DC8C47919865C8400BF5816 /* DCSideMenuViewController.m */,
+			);
+			path = SideMenu;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5DC8C410198656DA00BF5816 /* DrupalCon */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5DC8C443198656DB00BF5816 /* Build configuration list for PBXNativeTarget "DrupalCon" */;
+			buildPhases = (
+				5DC8C40D198656DA00BF5816 /* Sources */,
+				5DC8C40E198656DA00BF5816 /* Frameworks */,
+				5DC8C40F198656DA00BF5816 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DrupalCon;
+			productName = DrupalCon;
+			productReference = 5DC8C411198656DA00BF5816 /* DrupalCon.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5DC8C431198656DB00BF5816 /* DrupalConTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5DC8C446198656DB00BF5816 /* Build configuration list for PBXNativeTarget "DrupalConTests" */;
+			buildPhases = (
+				5DC8C42E198656DB00BF5816 /* Sources */,
+				5DC8C42F198656DB00BF5816 /* Frameworks */,
+				5DC8C430198656DB00BF5816 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5DC8C438198656DB00BF5816 /* PBXTargetDependency */,
+			);
+			name = DrupalConTests;
+			productName = DrupalConTests;
+			productReference = 5DC8C432198656DB00BF5816 /* DrupalConTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5DC8C409198656DA00BF5816 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Rostyslav Stepanyak";
+				TargetAttributes = {
+					5DC8C431198656DB00BF5816 = {
+						TestTargetID = 5DC8C410198656DA00BF5816;
+					};
+				};
+			};
+			buildConfigurationList = 5DC8C40C198656DA00BF5816 /* Build configuration list for PBXProject "DrupalCon" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5DC8C408198656DA00BF5816;
+			productRefGroup = 5DC8C412198656DA00BF5816 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5DC8C410198656DA00BF5816 /* DrupalCon */,
+				5DC8C431198656DB00BF5816 /* DrupalConTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5DC8C40F198656DA00BF5816 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5DC8C42D198656DB00BF5816 /* Images.xcassets in Resources */,
+				5DC8C41F198656DB00BF5816 /* InfoPlist.strings in Resources */,
+				5DC8C428198656DB00BF5816 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5DC8C430198656DB00BF5816 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5DC8C43E198656DB00BF5816 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5DC8C40D198656DA00BF5816 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5DC8C459198658BF00BF5816 /* AppDelegate.m in Sources */,
+				5DC8C46D198658FF00BF5816 /* MFSideMenuContainerViewController.m in Sources */,
+				5D38E68619867644006F7A59 /* DCAppFacade.m in Sources */,
+				5D38E68219867062006F7A59 /* DCMenuContainerViewController.m in Sources */,
+				5DC8C46E198658FF00BF5816 /* MFSideMenuShadow.m in Sources */,
+				5D38E696198692E9006F7A59 /* DCSpeakersViewController.m in Sources */,
+				5DC8C46F198658FF00BF5816 /* UIViewController+MFSideMenuAdditions.m in Sources */,
+				5D38E68A19868C53006F7A59 /* DCSideMenuCell.m in Sources */,
+				5DC8C421198656DB00BF5816 /* main.m in Sources */,
+				5DC8C47A19865C8400BF5816 /* DCSideMenuViewController.m in Sources */,
+				5D38E69919869303006F7A59 /* DCProgramViewController.m in Sources */,
+				5DC8C46C198658FF00BF5816 /* DCLoginViewController.m in Sources */,
+				5DC8C4731986594400BF5816 /* DCBaseViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5DC8C42E198656DB00BF5816 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5DC8C440198656DB00BF5816 /* DrupalConTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5DC8C438198656DB00BF5816 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5DC8C410198656DA00BF5816 /* DrupalCon */;
+			targetProxy = 5DC8C437198656DB00BF5816 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5DC8C41D198656DB00BF5816 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5DC8C41E198656DB00BF5816 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		5DC8C426198656DB00BF5816 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5DC8C427198656DB00BF5816 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		5DC8C43C198656DB00BF5816 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5DC8C43D198656DB00BF5816 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5DC8C441198656DB00BF5816 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		5DC8C442198656DB00BF5816 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5DC8C444198656DB00BF5816 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DrupalCon/DrupalCon-Prefix.pch";
+				INFOPLIST_FILE = "DrupalCon/DrupalCon-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		5DC8C445198656DB00BF5816 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DrupalCon/DrupalCon-Prefix.pch";
+				INFOPLIST_FILE = "DrupalCon/DrupalCon-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		5DC8C447198656DB00BF5816 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DrupalCon.app/DrupalCon";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DrupalCon/DrupalCon-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "DrupalConTests/DrupalConTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		5DC8C448198656DB00BF5816 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/DrupalCon.app/DrupalCon";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DrupalCon/DrupalCon-Prefix.pch";
+				INFOPLIST_FILE = "DrupalConTests/DrupalConTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5DC8C40C198656DA00BF5816 /* Build configuration list for PBXProject "DrupalCon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5DC8C441198656DB00BF5816 /* Debug */,
+				5DC8C442198656DB00BF5816 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5DC8C443198656DB00BF5816 /* Build configuration list for PBXNativeTarget "DrupalCon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5DC8C444198656DB00BF5816 /* Debug */,
+				5DC8C445198656DB00BF5816 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5DC8C446198656DB00BF5816 /* Build configuration list for PBXNativeTarget "DrupalConTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5DC8C447198656DB00BF5816 /* Debug */,
+				5DC8C448198656DB00BF5816 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5DC8C409198656DA00BF5816 /* Project object */;
+}
