@@ -8,6 +8,6 @@
 
 #import "DCBaseViewController.h"
 
-@interface DCProgramViewController : DCBaseViewController
+@interface DCProgramViewController : DCBaseViewController<UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
 @end

@@ -7,9 +7,12 @@
 //
 
 #import "DCProgramViewController.h"
+#import "DCProgramItemsViewController.h"
+#import "DCProgramsDataSourceMananger.h"
 
 @interface DCProgramViewController ()
-
+@property (nonatomic, strong) UIPageViewController *pageViewController;
+@property (nonatomic, strong) NSArray *viewControllers;
 @end
 
 @implementation DCProgramViewController
@@ -26,15 +29,79 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self addPageController];
 }
 
-- (void)didReceiveMemoryWarning
+-(void) addPageController {
+    // Create page view controller
+    
+    self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
+    
+    self.pageViewController.dataSource = self;
+    
+    
+    DCProgramItemsViewController *programItemsViewController = [self viewControllerAtIndex:0];
+    
+    self.viewControllers = [[NSArray alloc] initWithObjects: programItemsViewController, nil];
+    [self.pageViewController setViewControllers:self.viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+    
+    // Change the size of page view controller
+    self.pageViewController.view.frame = CGRectMake(0, 30, self.view.frame.size.width, self.view.frame.size.height - 30);
+    [self addChildViewController: _pageViewController];
+    [self.view addSubview: _pageViewController.view];
+    [self.pageViewController didMoveToParentViewController:self];
+}
+
+- (DCProgramItemsViewController *)viewControllerAtIndex:(NSUInteger)index
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    int days = [[DCProgramsDataSourceMananger shared] days];
+    if ((days == 0) || (index >= days)) {
+        return nil;
+    }
+    
+    // Create a new view controller and pass suitable data.
+    DCProgramItemsViewController *programItemsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgramItemsViewController"];
+    programItemsViewController.pageIndex = index;
+    return programItemsViewController;
 }
 
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
+{
+     NSUInteger index = ((DCProgramItemsViewController*) viewController).pageIndex;
+    
+    if ((index == 0) || (index == NSNotFound)) {
+        return nil;
+    }
+    
+    index--;
+    return [self viewControllerAtIndex:index];
+}
+
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
+{
+    NSUInteger index = ((DCProgramItemsViewController*) viewController).pageIndex;
+    
+    if (index == NSNotFound) {
+        return nil;
+    }
+    
+    index++;
+    if (index == (NSUInteger)[[DCProgramsDataSourceMananger shared] days] ) {
+        return nil;
+    }
+    return [self viewControllerAtIndex:index];
+}
+
+- (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
+{
+    return [[DCProgramsDataSourceMananger shared] days];
+}
+
+- (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController
+{
+    return 0;
+
+}
 /*
 #pragma mark - Navigation
 

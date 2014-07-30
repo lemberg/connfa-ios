@@ -10,21 +10,20 @@
 #import "DCSideMenuCell.h"
 #import "DCBaseViewController.h"
 #import "DCAppFacade.h"
+#import "DCSideMenuType.h"
+#import "DCMenuImage.h"
+#import "DCMenuStoryboardHelper.h"
 
-typedef NS_ENUM (int, DCMenuSection) {
-    DCMENU_PROGRAM_ITEM = 0,
-    DCMENU_SPEAKERS_ITEM = 1,
-    DCMENU_LOCATION_ITEM = 2,
-    DCMENU_ABOUT_ITEM = 3,
-    DCMENU_MYSCHEDULE_ITEM = 4,
-    DCMENU_ITEMS_COUNT
-};
+#define isiPhone5  ([[UIScreen mainScreen] bounds].size.height == 568)?TRUE:FALSE
 
 @interface DCSideMenuViewController ()
 @property (nonatomic, strong) NSArray *arrayOfCaptions;
 
 // This stores the view controller instance which is placed on the menu container
-@property (nonatomic, weak) DCBaseViewController *presentedController;
+@property (nonatomic, strong) DCBaseViewController *presentedController;
+
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *avatarTopSpaceConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *tableViewTopContraint;
 @end
 
 @implementation DCSideMenuViewController
@@ -44,6 +43,29 @@ typedef NS_ENUM (int, DCMenuSection) {
     if(!self.arrayOfCaptions) {
         self.arrayOfCaptions = [NSArray arrayWithObjects: @"Program", @"Speakers", @"Locations", @"About", @"My Schedule", nil];
     }
+    
+    if(!isiPhone5) {
+        self.tableViewTopContraint.constant = 0;
+        self.avatarTopSpaceConstraint.constant = 6;
+    }
+    
+    //our first menu item is Program, this is actually the screen that we should see right after the login page, thats why lets just add it on top as if the user alerady selected it
+    
+    [self placeViewControllerAssociatedWithMenuItem: DCMENU_PROGRAM_ITEM];
+}
+
+-(void) placeViewControllerAssociatedWithMenuItem: (DCMenuSection) menuItem {
+    NSString *storyboardControllerID = [DCMenuStoryboardHelper viewControllerStoryboardIDFromMenuType: menuItem];
+    
+    DCBaseViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier: storyboardControllerID];
+    
+    if(self.presentedController)
+        [self.presentedController.view removeFromSuperview];
+    
+    [[DCAppFacade shared].menuContainerViewController.view addSubview: viewController.view];
+    [[DCAppFacade shared].sideMenuController setMenuState: MFSideMenuStateClosed completion: nil];
+    self.presentedController = viewController;
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -56,45 +78,24 @@ typedef NS_ENUM (int, DCMenuSection) {
     
     DCSideMenuCell *cell = (DCSideMenuCell*)[tableView dequeueReusableCellWithIdentifier: cellIdentifier];
     
+    
+    DCMenuImage *menuImage = [[DCMenuImage alloc] initWithMenuType: indexPath.row];
+    cell.leftImageView.image = menuImage;
     cell.captionLabel.text = [self.arrayOfCaptions objectAtIndex: indexPath.row];
     
     //Selection style
+    /*
     UIView *selectedBackgroundView = [[UIView alloc] initWithFrame: cell.bounds];
     selectedBackgroundView.backgroundColor = [UIColor colorWithRed: 52./255. green: 52./255. blue: 59./255. alpha: 1.0];
     cell.selectedBackgroundView = selectedBackgroundView;
-    
+    */
     return cell;
     
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *storyboardControllerID = @"";
-    if(indexPath.row == DCMENU_PROGRAM_ITEM)
-        storyboardControllerID = @"ProgramViewController";
     
-    if(indexPath.row == DCMENU_SPEAKERS_ITEM)
-        storyboardControllerID = @"SpeakersViewController";
-      
-    
-    if(indexPath.row == DCMENU_LOCATION_ITEM) {
-       
-    }
-    if(indexPath.row == DCMENU_ABOUT_ITEM) {
-        
-    }
-    if(indexPath.row == DCMENU_MYSCHEDULE_ITEM) {
-       
-    }
-    
-    DCBaseViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier: storyboardControllerID];
-    
-    if(self.presentedController)
-      [self.presentedController.view removeFromSuperview];
-
-    [[DCAppFacade shared].menuContainerViewController.view addSubview: viewController.view];
-    [[DCAppFacade shared].sideMenuController setMenuState: MFSideMenuStateClosed completion: nil];
-    self.presentedController = viewController;
-    
+    [self placeViewControllerAssociatedWithMenuItem: (DCMenuSection)indexPath.row];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -104,6 +105,10 @@ typedef NS_ENUM (int, DCMenuSection) {
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return DCMENU_ITEMS_COUNT;
+}
+
+-(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 50;
 }
 
 
