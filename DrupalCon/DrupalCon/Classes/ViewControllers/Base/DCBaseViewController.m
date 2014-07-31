@@ -44,7 +44,6 @@
     
 
     self.navigationController.navigationBar.titleTextAttributes = textAttributes;
-    
     self.navigationController.navigationBar.translucent = NO;
 }
 
