@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5D38E68219867062006F7A59 /* DCMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D38E68119867062006F7A59 /* DCMenuContainerViewController.m */; };
-		5D38E68619867644006F7A59 /* DCAppFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D38E68519867644006F7A59 /* DCAppFacade.m */; };
 		5D38E696198692E9006F7A59 /* DCSpeakersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D38E695198692E9006F7A59 /* DCSpeakersViewController.m */; };
 		5D38E69919869303006F7A59 /* DCProgramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D38E69819869303006F7A59 /* DCProgramViewController.m */; };
 		5D38E69D1987A631006F7A59 /* DCSideMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D38E69C1987A631006F7A59 /* DCSideMenuCell.m */; };
@@ -26,6 +25,9 @@
 		5D6449CD19893BC300BC1775 /* DCSpeechOfDayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D6449CC19893BC300BC1775 /* DCSpeechOfDayCell.m */; };
 		5D6449D019893BD700BC1775 /* DCCofeeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D6449CF19893BD700BC1775 /* DCCofeeCell.m */; };
 		5D6449D319893BEF00BC1775 /* DCLunchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D6449D219893BEF00BC1775 /* DCLunchCell.m */; };
+		5D6449D7198A93E400BC1775 /* DCProgramHeaderCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D6449D6198A93E400BC1775 /* DCProgramHeaderCellView.m */; };
+		5D6449DB198AAA0600BC1775 /* DCDateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D6449DA198AAA0600BC1775 /* DCDateHelper.m */; };
+		5D6449DF198ABA4E00BC1775 /* DCAppFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D6449DE198ABA4E00BC1775 /* DCAppFacade.m */; };
 		5DC8C415198656DA00BF5816 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C414198656DA00BF5816 /* Foundation.framework */; };
 		5DC8C417198656DA00BF5816 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C416198656DA00BF5816 /* CoreGraphics.framework */; };
 		5DC8C419198656DA00BF5816 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C418198656DA00BF5816 /* UIKit.framework */; };
@@ -60,8 +62,6 @@
 /* Begin PBXFileReference section */
 		5D38E68019867062006F7A59 /* DCMenuContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCMenuContainerViewController.h; path = MenuContainer/DCMenuContainerViewController.h; sourceTree = "<group>"; };
 		5D38E68119867062006F7A59 /* DCMenuContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCMenuContainerViewController.m; path = MenuContainer/DCMenuContainerViewController.m; sourceTree = "<group>"; };
-		5D38E68419867644006F7A59 /* DCAppFacade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCAppFacade.h; path = Classes/Utilites/AppFacade/DCAppFacade.h; sourceTree = "<group>"; };
-		5D38E68519867644006F7A59 /* DCAppFacade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCAppFacade.m; path = Classes/Utilites/AppFacade/DCAppFacade.m; sourceTree = "<group>"; };
 		5D38E694198692E9006F7A59 /* DCSpeakersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCSpeakersViewController.h; sourceTree = "<group>"; };
 		5D38E695198692E9006F7A59 /* DCSpeakersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCSpeakersViewController.m; sourceTree = "<group>"; };
 		5D38E69719869303006F7A59 /* DCProgramViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCProgramViewController.h; sourceTree = "<group>"; };
@@ -96,6 +96,13 @@
 		5D6449CF19893BD700BC1775 /* DCCofeeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCCofeeCell.m; path = Classes/Views/ProgramCells/DCCofeeCell.m; sourceTree = "<group>"; };
 		5D6449D119893BEF00BC1775 /* DCLunchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCLunchCell.h; path = Classes/Views/ProgramCells/DCLunchCell.h; sourceTree = "<group>"; };
 		5D6449D219893BEF00BC1775 /* DCLunchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCLunchCell.m; path = Classes/Views/ProgramCells/DCLunchCell.m; sourceTree = "<group>"; };
+		5D6449D5198A93E400BC1775 /* DCProgramHeaderCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCProgramHeaderCellView.h; path = Classes/Views/ProgramCells/Headers/DCProgramHeaderCellView.h; sourceTree = "<group>"; };
+		5D6449D6198A93E400BC1775 /* DCProgramHeaderCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCProgramHeaderCellView.m; path = Classes/Views/ProgramCells/Headers/DCProgramHeaderCellView.m; sourceTree = "<group>"; };
+		5D6449D9198AAA0600BC1775 /* DCDateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCDateHelper.h; path = Classes/Helpers/DCDateHelper.h; sourceTree = "<group>"; };
+		5D6449DA198AAA0600BC1775 /* DCDateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCDateHelper.m; path = Classes/Helpers/DCDateHelper.m; sourceTree = "<group>"; };
+		5D6449DD198ABA4E00BC1775 /* DCAppFacade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCAppFacade.h; path = Classes/AppFacade/DCAppFacade.h; sourceTree = "<group>"; };
+		5D6449DE198ABA4E00BC1775 /* DCAppFacade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCAppFacade.m; path = Classes/AppFacade/DCAppFacade.m; sourceTree = "<group>"; };
+		5D6449E1198ABD6900BC1775 /* UIConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = UIConstants.h; path = Classes/UIConstants/UIConstants.h; sourceTree = "<group>"; };
 		5DC8C411198656DA00BF5816 /* DrupalCon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrupalCon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC8C414198656DA00BF5816 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5DC8C416198656DA00BF5816 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -159,15 +166,6 @@
 				5D38E68119867062006F7A59 /* DCMenuContainerViewController.m */,
 			);
 			name = MenuContainer;
-			sourceTree = "<group>";
-		};
-		5D38E6831986761D006F7A59 /* AppFacade */ = {
-			isa = PBXGroup;
-			children = (
-				5D38E68419867644006F7A59 /* DCAppFacade.h */,
-				5D38E68519867644006F7A59 /* DCAppFacade.m */,
-			);
-			name = AppFacade;
 			sourceTree = "<group>";
 		};
 		5D38E68719868BFE006F7A59 /* Views */ = {
@@ -299,6 +297,7 @@
 		5D6449C719893B7E00BC1775 /* ProgramCells */ = {
 			isa = PBXGroup;
 			children = (
+				5D6449D4198A93BF00BC1775 /* Headers */,
 				5D6449C819893BAD00BC1775 /* DCSpeechCell.h */,
 				5D6449C919893BAD00BC1775 /* DCSpeechCell.m */,
 				5D6449CB19893BC300BC1775 /* DCSpeechOfDayCell.h */,
@@ -309,6 +308,41 @@
 				5D6449D219893BEF00BC1775 /* DCLunchCell.m */,
 			);
 			name = ProgramCells;
+			sourceTree = "<group>";
+		};
+		5D6449D4198A93BF00BC1775 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				5D6449D5198A93E400BC1775 /* DCProgramHeaderCellView.h */,
+				5D6449D6198A93E400BC1775 /* DCProgramHeaderCellView.m */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
+		5D6449D8198AA9E100BC1775 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				5D6449D9198AAA0600BC1775 /* DCDateHelper.h */,
+				5D6449DA198AAA0600BC1775 /* DCDateHelper.m */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		5D6449DC198ABA3C00BC1775 /* AppFacade */ = {
+			isa = PBXGroup;
+			children = (
+				5D6449DD198ABA4E00BC1775 /* DCAppFacade.h */,
+				5D6449DE198ABA4E00BC1775 /* DCAppFacade.m */,
+			);
+			name = AppFacade;
+			sourceTree = "<group>";
+		};
+		5D6449E0198ABD4C00BC1775 /* UIConstants */ = {
+			isa = PBXGroup;
+			children = (
+				5D6449E1198ABD6900BC1775 /* UIConstants.h */,
+			);
+			name = UIConstants;
 			sourceTree = "<group>";
 		};
 		5DC8C408198656DA00BF5816 = {
@@ -385,10 +419,12 @@
 		5DC8C44A1986571300BF5816 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				5D6449E0198ABD4C00BC1775 /* UIConstants */,
+				5D6449DC198ABA3C00BC1775 /* AppFacade */,
+				5D6449D8198AA9E100BC1775 /* Helpers */,
 				5D6449B619890E5D00BC1775 /* Model */,
 				5D38E691198692E9006F7A59 /* ConferenceViewControllers */,
 				5D38E68719868BFE006F7A59 /* Views */,
-				5D38E6831986761D006F7A59 /* AppFacade */,
 				5DC8C460198658FF00BF5816 /* ViewControllers */,
 				5DC8C453198658BF00BF5816 /* AppDelegate */,
 			);
@@ -560,12 +596,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D6449DF198ABA4E00BC1775 /* DCAppFacade.m in Sources */,
 				5D6449C61989209600BC1775 /* DCTimeRangeForGrouper.m in Sources */,
 				5DC8C459198658BF00BF5816 /* AppDelegate.m in Sources */,
 				5D6449CA19893BAD00BC1775 /* DCSpeechCell.m in Sources */,
 				5D6449D319893BEF00BC1775 /* DCLunchCell.m in Sources */,
 				5DC8C46D198658FF00BF5816 /* MFSideMenuContainerViewController.m in Sources */,
-				5D38E68619867644006F7A59 /* DCAppFacade.m in Sources */,
+				5D6449DB198AAA0600BC1775 /* DCDateHelper.m in Sources */,
 				5D6449BC1989101E00BC1775 /* DCTimeRange.m in Sources */,
 				5D6449B519890B6200BC1775 /* DCProgramsDataSourceMananger.m in Sources */,
 				5D38E68219867062006F7A59 /* DCMenuContainerViewController.m in Sources */,
@@ -586,6 +623,7 @@
 				5DC8C46C198658FF00BF5816 /* DCLoginViewController.m in Sources */,
 				5D38E6A11987A673006F7A59 /* DCTextField.m in Sources */,
 				5DC8C4731986594400BF5816 /* DCBaseViewController.m in Sources */,
+				5D6449D7198A93E400BC1775 /* DCProgramHeaderCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -53,11 +53,12 @@
 }
 
 - (UIBarButtonItem *)leftMenuBarButtonItem {
+    UIImage *image = [UIImage imageNamed:@"menu-icon"];
+    UIButton *button = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, image.size.width, image.size.height)];
+    [button setBackgroundImage: image forState: UIControlStateNormal];
+    [button addTarget: self action:@selector(leftSideMenuButtonPressed:) forControlEvents: UIControlEventTouchUpInside];
     UIBarButtonItem * item = [[UIBarButtonItem alloc]
-                              initWithImage:[UIImage imageNamed:@"menu-icon"] style:
-     UIBarButtonItemStyleBordered
-     target:self
-     action:@selector(leftSideMenuButtonPressed:)];
+                              initWithCustomView: button];
     return item;
 }
 
@@ -87,6 +88,10 @@
     DCMenuContainerViewController *contaienrController = [self.storyboard instantiateViewControllerWithIdentifier:@"SideMenuContainer"];
     
     [self.navigationController pushViewController:contaienrController animated:YES];
+}
+
+-(void) setTitle: (NSString*) title {
+    self.navigationItem.title = title;
 }
 
 

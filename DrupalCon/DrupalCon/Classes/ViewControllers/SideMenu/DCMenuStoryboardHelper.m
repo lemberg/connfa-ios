@@ -11,7 +11,7 @@
 @implementation DCMenuStoryboardHelper
 +(NSString*) viewControllerStoryboardIDFromMenuType: (DCMenuSection) menu {
     
-    NSString *storyboardControllerID = @"";
+    NSString *storyboardControllerID = nil;
     
     if(menu == DCMENU_PROGRAM_ITEM)
         storyboardControllerID = @"ProgramViewController";
@@ -32,4 +32,27 @@
     
     return storyboardControllerID;
 }
+
++(NSString*) titleForMenuType: (DCMenuSection) menu {
+    NSString *title = nil;
+    
+    if(menu == DCMENU_PROGRAM_ITEM)
+        title = @"Programs";
+    
+    if(menu == DCMENU_SPEAKERS_ITEM)
+        title = @"Speakers";
+    
+    if(menu == DCMENU_LOCATION_ITEM)
+        title = @"Locations";
+    
+    if(menu == DCMENU_ABOUT_ITEM)
+        title = @"About";
+    
+    if(menu == DCMENU_MYSCHEDULE_ITEM)
+        title = @"My Schedule";
+    
+    
+    return title;
+}
+
 @end

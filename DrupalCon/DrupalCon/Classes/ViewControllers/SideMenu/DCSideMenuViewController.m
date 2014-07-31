@@ -13,6 +13,7 @@
 #import "DCSideMenuType.h"
 #import "DCMenuImage.h"
 #import "DCMenuStoryboardHelper.h"
+#import "UIConstants.h"
 
 #define isiPhone5  ([[UIScreen mainScreen] bounds].size.height == 568)?TRUE:FALSE
 
@@ -57,15 +58,20 @@
 -(void) placeViewControllerAssociatedWithMenuItem: (DCMenuSection) menuItem {
     NSString *storyboardControllerID = [DCMenuStoryboardHelper viewControllerStoryboardIDFromMenuType: menuItem];
     
-    DCBaseViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier: storyboardControllerID];
+    NSString *title = [DCMenuStoryboardHelper titleForMenuType: menuItem];
     
-    if(self.presentedController)
-        [self.presentedController.view removeFromSuperview];
+    if(storyboardControllerID) {
+        DCBaseViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier: storyboardControllerID];
+        
+        if(self.presentedController)
+            [self.presentedController.view removeFromSuperview];
+        
+        [[DCAppFacade shared].menuContainerViewController.view addSubview: viewController.view];
+        [[DCAppFacade shared].menuContainerViewController setTitle: title];
+        self.presentedController = viewController;
+    }
     
-    [[DCAppFacade shared].menuContainerViewController.view addSubview: viewController.view];
     [[DCAppFacade shared].sideMenuController setMenuState: MFSideMenuStateClosed completion: nil];
-    self.presentedController = viewController;
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -84,11 +90,11 @@
     cell.captionLabel.text = [self.arrayOfCaptions objectAtIndex: indexPath.row];
     
     //Selection style
-    /*
+    
     UIView *selectedBackgroundView = [[UIView alloc] initWithFrame: cell.bounds];
-    selectedBackgroundView.backgroundColor = [UIColor colorWithRed: 52./255. green: 52./255. blue: 59./255. alpha: 1.0];
+    selectedBackgroundView.backgroundColor = MENU_SELECTION_COLOR;
     cell.selectedBackgroundView = selectedBackgroundView;
-    */
+    
     return cell;
     
 }

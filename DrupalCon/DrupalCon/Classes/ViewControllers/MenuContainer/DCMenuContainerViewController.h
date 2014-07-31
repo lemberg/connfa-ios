@@ -10,4 +10,5 @@
 
 @interface DCMenuContainerViewController : DCBaseViewController
 
+-(void) setTitle: (NSString*) title;
 @end

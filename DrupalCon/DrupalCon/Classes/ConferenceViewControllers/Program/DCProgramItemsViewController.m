@@ -13,6 +13,7 @@
 #import "DCCofeeCell.h"
 #import "DCLunchCell.h"
 #import "DCEvent.h"
+#import "DCProgramHeaderCellView.h"
 
 @interface DCProgramItemsViewController ()
 @property (nonatomic, strong) IBOutlet UITableView *tablewView;
@@ -101,7 +102,51 @@
      cell.selectedBackgroundView = selectedBackgroundView;
      */
     return cell;
+}
+
+-(BOOL) headerNeededInSection: (int) section {
+    NSDictionary *rangeDict = [[DCProgramsDataSourceMananger shared] dictionaryContatiningRangeAndArrayOfEventsInDay:self.pageIndex section: section];
+    /*lets check if this date range contains some events that need a time period header, DCSpeechCelll and DCSPeechofTheDayCell, if its only coffe breaks or lunch - we dont display a header*/
+    BOOL headerNeeded = NO;
+    for(DCEvent *event in rangeDict[@"events"]) {
+        if(event.eventType == DC_EVENT_SPEACH || event.eventType == DC_EVENT_SPEACH_OF_DAY) {
+            headerNeeded = YES; break;
+        }
+    }
+    return headerNeeded;
+}
+
+
+-(UIView*) tableView: (UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
+    DCProgramHeaderCellView *headerViewCell = (DCProgramHeaderCellView*)[tableView dequeueReusableCellWithIdentifier: @"ProgramCellHeaderCell"];
+    
+    /*lets check if this date range contains some events that need a time period header, DCSpeechCelll and DCSPeechofTheDayCell, if its only coffe breaks or lunch - we dont display a header*/
+    BOOL headerNeeded = [self headerNeededInSection: section];
+    NSDictionary *rangeDict = [[DCProgramsDataSourceMananger shared] dictionaryContatiningRangeAndArrayOfEventsInDay:self.pageIndex section: section];
+    if(headerNeeded) {
+        headerViewCell.startLabel.text = rangeDict[@"from"];
+        headerViewCell.endLabel.text = rangeDict[@"to"];
+        return headerViewCell;
+    }
+    
+    UIView *v = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 320, 0.0)];
+     v.backgroundColor = [UIColor whiteColor];
+    return v;
+}
+
+-(CGFloat) tableView: (UITableView*) tableView heightForHeaderInSection:(NSInteger)section {
+    BOOL headerNeeded = [self headerNeededInSection: section];
+    return headerNeeded ? 97 : 1.0;
+}
+
+-(CGFloat)  tableView: (UITableView*) tableView heightForFooterInSection:(NSInteger)section {
+    return 1.0;
+}
+
+- (NSString*) tableView:(UITableView *) tableView titleForHeaderInSection:(NSInteger)section
+{
+        return nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

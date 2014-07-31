@@ -50,5 +50,13 @@
     return [((self.program[day])[@"ranges"])[section][@"events"] count];
 }
 
+-(NSDictionary*) dictionaryContatiningRangeAndArrayOfEventsInDay: (int) day section: (int) section {
+    return ((self.program[day])[@"ranges"])[section];
+}
+
+-(NSDictionary*) dictionaryForDay: (int) day {
+    return self.program[day];
+}
+
 
 @end

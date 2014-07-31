@@ -11,4 +11,5 @@
 
 @interface DCMenuStoryboardHelper : NSObject
 +(NSString*) viewControllerStoryboardIDFromMenuType: (DCMenuSection) menu;
++(NSString*) titleForMenuType: (DCMenuSection) menu;
 @end

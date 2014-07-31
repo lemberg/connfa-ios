@@ -36,7 +36,7 @@
             event.time.to = item[@"to"];
             event.name = item[@"name"];
             event.speaker = item[@"speaker"];
-            event.track = item[@"speaker"];
+            event.track = item[@"track"];
             event.experienceLevel = item[@"experience_level"];
             [itemsInDay addObject: event];
         }
@@ -62,13 +62,13 @@
         }
         
         NSArray *uniqueRanges = [timeRanges valueForKeyPath:@"@distinctUnionOfObjects.state"];
+        uniqueRanges = [uniqueRanges sortedArrayUsingFunction:compare context:NULL];
         
         NSMutableDictionary *dateDict = [[NSMutableDictionary alloc] init];
         [dateDict setObject: day[@"date"] forKey: @"date"];
         
         
         NSMutableArray *ranges = [[NSMutableArray alloc] init];
-        
         for(NSString *range in uniqueRanges) {
             for(DCEvent *item in day[@"events"]) {
                 
@@ -80,7 +80,6 @@
                     NSMutableDictionary *rangeDict = [DCTestContentGenerator findDictForRange: r inArray: ranges];
                     [rangeDict[@"events"] addObject: item];
                 }
-                
             }
         }
         [dateDict setObject: ranges forKey: @"ranges"];
@@ -89,6 +88,18 @@
     
     return groupedDaysInConference;
 
+}
+
+NSInteger compare(id obj1, id obj2, void* context) {
+    float startHour = [[[(NSString*)obj1 componentsSeparatedByString:@"-"] objectAtIndex:0] floatValue];
+    float startMinutes = [[[(NSString*)obj1 componentsSeparatedByString:@"-"] objectAtIndex:1] floatValue];
+    startHour += (startMinutes / 60.0);
+    
+    float endHour = [[[(NSString*)obj2 componentsSeparatedByString:@"-"] objectAtIndex:0] floatValue];
+    float endMinutes = [[[(NSString*)obj2 componentsSeparatedByString:@"-"] objectAtIndex:1] floatValue];
+    endHour += (endMinutes / 60.0);
+    
+    return startHour > endHour;
 }
 
 +(NSMutableDictionary*) findDictForRange: (DCTimeRangeForGrouper*) range inArray: (NSMutableArray*) array {

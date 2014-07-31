@@ -7,6 +7,7 @@
 //
 
 #import "DCBaseViewController.h"
+#import "UIConstants.h"
 
 @interface DCBaseViewController ()
 
@@ -33,6 +34,18 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear: animated];
+    
+    self.navigationController.navigationBar.barTintColor = NAV_BAR_COLOR;
+    NSDictionary *textAttributes = NAV_BAR_TITLE_ATTRIBUTES;
+    
+
+    self.navigationController.navigationBar.titleTextAttributes = textAttributes;
+    
+    self.navigationController.navigationBar.translucent = NO;
 }
 
 /*
