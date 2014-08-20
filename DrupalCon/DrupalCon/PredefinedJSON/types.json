@@ -1,0 +1,19 @@
+{
+    "types" : [ {
+               "typeID" : 0,
+               "typeName" : "Speach"
+               },
+               {
+               "typeID" : 1,
+               "typeName" : "Speach of day"
+               },
+               {
+               "typeID" : 2,
+               "typeName" : "Coffe break"
+               },
+               {
+               "typeID" : 3,
+               "typeName" : "Lunch"
+               }
+               ]
+}

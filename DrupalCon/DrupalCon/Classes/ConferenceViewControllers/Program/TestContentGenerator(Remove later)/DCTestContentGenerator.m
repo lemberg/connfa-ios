@@ -3,7 +3,7 @@
 //  DrupalCon
 //
 //  Created by Rostyslav Stepanyak on 7/30/14.
-//  Copyright (c) 2014 Rostyslav Stepanyak. All rights reserved.
+//  Copyright (c) 2014 Lemberg Solution. All rights reserved.
 //
 
 #import "DCTestContentGenerator.h"
