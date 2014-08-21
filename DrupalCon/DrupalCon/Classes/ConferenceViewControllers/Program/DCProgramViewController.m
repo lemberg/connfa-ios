@@ -8,12 +8,13 @@
 
 #import "DCProgramViewController.h"
 #import "DCProgramItemsViewController.h"
-#import "DCProgramsDataSourceMananger.h"
-#import "DCDateHelper.h"
+#import "DCMainProxy+Additions.h"
+#import "NSDate+DC.h"
 
 @interface DCProgramViewController ()
 @property (nonatomic, strong) UIPageViewController *pageViewController;
 @property (nonatomic, strong) NSArray *viewControllers;
+@property (nonatomic, strong) NSArray *dates;
 
 @property (nonatomic) int currentIndex;
 @property (nonatomic, strong) IBOutlet UILabel *dateLabel;
@@ -33,17 +34,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    _dates = [[NSArray alloc] initWithArray:[[DCMainProxy sharedProxy] days]];
     [self addPageController];
 }
 
 -(void) addPageController {
-    // Create page view controller
-    
     self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
-    
     self.pageViewController.dataSource = self;
-    
-    
     DCProgramItemsViewController *programItemsViewController = [self viewControllerAtIndex:0];
     
     self.viewControllers = [[NSArray alloc] initWithObjects: programItemsViewController, nil];
@@ -59,8 +56,8 @@
 }
 
 -(void) displayDateForDay: (int) day {
-    NSDictionary *dayDict = [[DCProgramsDataSourceMananger shared] dictionaryForDay: day];
-    self.dateLabel.text = [DCDateHelper getPageViewDateStringFromString: dayDict[@"date"]];
+    NSDate * date = _dates[day];
+    self.dateLabel.text = [date pageViewDateString];
 }
 
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed {
@@ -72,13 +69,14 @@
 }
 
 
--(IBAction) previousDayClicked:(id)sender {
-    
+-(IBAction) previousDayClicked:(id)sender
+{
     if(self.currentIndex == 0)
         return;
     
     NSMutableArray *arrayOfViewController = [[NSMutableArray alloc] init];
-    for(int i = [[DCProgramsDataSourceMananger shared] days]-1; i >= 0; i--) {
+    
+    for(int i = _dates.count-1; i >= 0; i--) {
         if(i < self.currentIndex) {
             [arrayOfViewController addObject: [self viewControllerAtIndex:i]];
             break;
@@ -87,18 +85,17 @@
     self.currentIndex -= 1;
     [self displayDateForDay: self.currentIndex];
 
-    
     [self.pageViewController setViewControllers: arrayOfViewController direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:NULL];
 }
 
 
-
--(IBAction) nextDayClicked:(id)sender {
-    if(self.currentIndex >= [[DCProgramsDataSourceMananger shared] days] - 1)
+-(IBAction) nextDayClicked:(id)sender
+{
+    if(self.currentIndex >= _dates.count-1)
         return;
     
     NSMutableArray *arrayOfViewController = [[NSMutableArray alloc] init];
-    for(int i = 0; i < [[DCProgramsDataSourceMananger shared] days]; i++) {
+    for(int i = 0; i < _dates.count; i++) {
         if(i > self.currentIndex) {
             [arrayOfViewController addObject: [self viewControllerAtIndex:i]];
             break;
@@ -113,8 +110,7 @@
 #pragma mark page view delegate and datasource
 - (DCProgramItemsViewController *)viewControllerAtIndex:(NSUInteger)index
 {
-    int days = [[DCProgramsDataSourceMananger shared] days];
-    if ((days == 0) || (index >= days)) {
+    if ((_dates.count == 0) || (index >= _dates.count)) {
         return nil;
     }
     
@@ -145,7 +141,7 @@
     }
     
     index++;
-    if (index == (NSUInteger)[[DCProgramsDataSourceMananger shared] days] ) {
+    if (index == _dates.count) {
         return nil;
     }
     return [self viewControllerAtIndex:index];
@@ -153,7 +149,7 @@
 
 - (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
 {
-    return [[DCProgramsDataSourceMananger shared] days];
+    return _dates.count;
 }
 
 - (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController

@@ -12,7 +12,7 @@
 
 + (void)updateMainDataFromFile:(NSString *)fileName callBack:(DataProviderCallBack)callBack
 {
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"conference" ofType:@"json"];
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"json"];
     
     if (filePath)
     {

@@ -7,16 +7,23 @@
 //
 
 #import "DCProgramItemsViewController.h"
-#import "DCProgramsDataSourceMananger.h"
 #import "DCSpeechCell.h"
 #import "DCSpeechOfDayCell.h"
 #import "DCCofeeCell.h"
 #import "DCLunchCell.h"
-#import "DCEvent.h"
 #import "DCProgramHeaderCellView.h"
 
+#import "DCProgram+DC.h"
+#import "DCEvent+DC.h"
+#import "DCType+DC.h"
+#import "DCTimeRange+DC.h"
+#import "DCTime+DC.h"
+#import "DCMainProxy+Additions.h"
+
 @interface DCProgramItemsViewController ()
-@property (nonatomic, strong) IBOutlet UITableView *tablewView;
+
+@property (nonatomic, weak) IBOutlet UITableView *tablewView;
+
 @end
 
 @implementation DCProgramItemsViewController
@@ -33,7 +40,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    _events = [[DCMainProxy sharedProxy] programEventsForDayNum:self.pageIndex];
+    NSArray * a = [[DCMainProxy sharedProxy] timeRangesForDayNum:self.pageIndex];
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,16 +57,15 @@
     NSString *cellIdCoffeBreak = @"ProgramCellIdentifierCoffeBreak";
     NSString *cellIdLunch = @"ProgramCellIdentifierLunch";
     
-    
-    DCEvent *event = [[DCProgramsDataSourceMananger shared] eventForSection:indexPath.section row: indexPath.row inDay: self.pageIndex];
-    
+    DCProgram * event = _events[indexPath.row];
     UITableViewCell *cell;
-    switch (event.eventType) {
+
+    switch ([event.type.typeID integerValue]) {
         case DC_EVENT_SPEACH: {
             NSLog(@"CelId: %@", cellIdSpeech);
             DCSpeechCell *_cell = (DCSpeechCell*)[tableView dequeueReusableCellWithIdentifier: cellIdSpeech];
-            _cell.speakerLabel.text = event.speaker;
-            _cell.experienceLevelLabel.text = event.experienceLevel;
+            _cell.speakerLabel.text = event.speakers;
+            _cell.experienceLevelLabel.text = event.level;
             _cell.trackLabel.text = event.track;
             _cell.nameLabel.text = event.name;
             cell = _cell;
@@ -67,8 +74,8 @@
         case DC_EVENT_SPEACH_OF_DAY: {
             NSLog(@"CelId: %@", cellIdSpeechOfDay);
             DCSpeechOfDayCell *_cell = (DCSpeechOfDayCell*)[tableView dequeueReusableCellWithIdentifier: cellIdSpeechOfDay];
-            _cell.speakerLabel.text = event.speaker;
-            _cell.experienceLevelLabel.text = event.experienceLevel;
+            _cell.speakerLabel.text = event.speakers;
+            _cell.experienceLevelLabel.text = event.level;
             _cell.trackLabel.text = event.track;
             _cell.nameLabel.text = event.name;
             cell = _cell;
@@ -77,23 +84,23 @@
         case DC_EVENT_COFEE_BREAK: {
             NSLog(@"CelId: %@", cellIdCoffeBreak);
             DCCofeeCell *_cell = (DCCofeeCell*)[tableView dequeueReusableCellWithIdentifier: cellIdCoffeBreak];
-            _cell.startLabel.text = event.time.from;
-            _cell.startLabel.text = event.time.to;
+            _cell.startLabel.text = @"n/a";
+            _cell.startLabel.text = @"n/a";
             cell = _cell;
             break;
         }
         case DC_EVENT_LUNCH: {
               NSLog(@"CelId: %@", cellIdLunch);
             DCLunchCell *_cell = (DCLunchCell*)[tableView dequeueReusableCellWithIdentifier: cellIdLunch];
-            _cell.startLabel.text = event.time.from;
-            _cell.startLabel.text = event.time.to;
+            _cell.startLabel.text = @"n/a";
+            _cell.startLabel.text = @"n/a";
             cell = _cell;
             break;
         }
         default:
             break;
     }
-    
+
     
     //Selection style
     /*
@@ -104,12 +111,12 @@
     return cell;
 }
 
--(BOOL) headerNeededInSection: (int) section {
-    NSDictionary *rangeDict = [[DCProgramsDataSourceMananger shared] dictionaryContatiningRangeAndArrayOfEventsInDay:self.pageIndex section: section];
+-(BOOL) headerNeededInSection: (int) section
+{
     /*lets check if this date range contains some events that need a time period header, DCSpeechCelll and DCSPeechofTheDayCell, if its only coffe breaks or lunch - we dont display a header*/
     BOOL headerNeeded = NO;
-    for(DCEvent *event in rangeDict[@"events"]) {
-        if(event.eventType == DC_EVENT_SPEACH || event.eventType == DC_EVENT_SPEACH_OF_DAY) {
+    for(DCProgram *event in _events) {
+        if([event.type.typeID integerValue] == DC_EVENT_SPEACH || [event.type.typeID integerValue] == DC_EVENT_SPEACH_OF_DAY) {
             headerNeeded = YES; break;
         }
     }
@@ -118,10 +125,10 @@
 
 
 -(UIView*) tableView: (UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
+    /*
     DCProgramHeaderCellView *headerViewCell = (DCProgramHeaderCellView*)[tableView dequeueReusableCellWithIdentifier: @"ProgramCellHeaderCell"];
     
-    /*lets check if this date range contains some events that need a time period header, DCSpeechCelll and DCSPeechofTheDayCell, if its only coffe breaks or lunch - we dont display a header*/
+//    lets check if this date range contains some events that need a time period header, DCSpeechCelll and DCSPeechofTheDayCell, if its only coffe breaks or lunch - we dont display a header
     BOOL headerNeeded = [self headerNeededInSection: section];
     NSDictionary *rangeDict = [[DCProgramsDataSourceMananger shared] dictionaryContatiningRangeAndArrayOfEventsInDay:self.pageIndex section: section];
     if(headerNeeded) {
@@ -129,7 +136,7 @@
         headerViewCell.endLabel.text = rangeDict[@"to"];
         return headerViewCell;
     }
-    
+    */
     UIView *v = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 320, 0.0)];
      v.backgroundColor = [UIColor whiteColor];
     return v;
@@ -155,17 +162,16 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    int sections = [[DCProgramsDataSourceMananger shared]  sectionsInDay: self.pageIndex];
-    return sections;
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    int rows = [[DCProgramsDataSourceMananger shared] itemsInDay: self.pageIndex inSection:section];
-    return rows;
+    return 0;
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
+/*
     DCEvent *event = [[DCProgramsDataSourceMananger shared] eventForSection:indexPath.section row: indexPath.row inDay: self.pageIndex];
     
     switch (event.eventType) {
@@ -186,7 +192,7 @@
             break;
         }
     }
-    
+ */
     return 94;
 }
 

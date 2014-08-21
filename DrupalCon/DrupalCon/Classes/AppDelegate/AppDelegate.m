@@ -7,12 +7,15 @@
 //
 
 #import "AppDelegate.h"
+#import "DCMainProxy.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    [[DCMainProxy sharedProxy] update];
     return YES;
 }
 							

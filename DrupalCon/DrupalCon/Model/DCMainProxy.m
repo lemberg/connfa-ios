@@ -10,15 +10,15 @@
 #import "DCProgram+DC.h"
 #import "DCBof.h"
 #import "DCType+DC.h"
+#import "DCTime+DC.h"
+#import "DCTimeRange+DC.h"
+
+#import "DCDataProvider.h"
 
 static NSString * kDCMainProxyModelName = @"main";
 
-@interface DCMainProxy ()
-{
-    NSManagedObjectContext * _backgroundManagedContext;
-}
-
-@end
+static NSString * kDCMainProxyProgramFile = @"conference";
+static NSString * kDCMainProxyTypesFile = @"types";
 
 @implementation DCMainProxy
 @synthesize managedObjectModel=_managedObjectModel,
@@ -39,7 +39,8 @@ static NSString * kDCMainProxyModelName = @"main";
 
 - (void)update
 {
-    
+    [self updateTypes];
+    [self updateProgram];
 }
 
 - (NSArray*)programInstances
@@ -60,24 +61,43 @@ static NSString * kDCMainProxyModelName = @"main";
 {
     return [self instancesOfClass:[DCType class]
             filtredUsingPredicate:nil
-                        inContext:[self DC_threadManagedContex]];
+                        inContext:self.managedObjectContext];
+}
+
+- (DCType*)typeForID:(int)typeID
+{
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"typeID == %i",typeID];
+    NSArray * results = [self instancesOfClass:[DCType class]
+                         filtredUsingPredicate:predicate
+                                     inContext:self.managedObjectContext];
+    return (results.count ? [results firstObject] : nil);
 }
 
 #pragma mark - DO creation
 
 - (DCProgram*)createProgramItem
 {
-    return [self createInstanceOfClass:[DCProgram class] inContext:[self DC_threadManagedContex]];
+    return [self createInstanceOfClass:[DCProgram class] inContext:self.managedObjectContext];
 }
 
 - (DCBof*)createBofItem
 {
-    return [self createInstanceOfClass:[DCBof class] inContext:[self DC_threadManagedContex]];
+    return [self createInstanceOfClass:[DCBof class] inContext:self.managedObjectContext];
 }
 
-- (NSManagedObjectContext*)DC_threadManagedContex
+- (DCType*)createType
 {
-    return ([NSThread isMainThread] ? self.managedObjectContext : _backgroundManagedContext);
+    return [self createInstanceOfClass:[DCType class] inContext:self.managedObjectContext];
+}
+
+- (DCTime*)createTime
+{
+    return [self createInstanceOfClass:[DCTime class] inContext:self.managedObjectContext];
+}
+
+- (DCTimeRange*)createTimeRange
+{
+    return [self createInstanceOfClass:[DCTimeRange class] inContext:self.managedObjectContext];
 }
 
 #pragma mark - DO remove
@@ -85,7 +105,13 @@ static NSString * kDCMainProxyModelName = @"main";
 - (void)clearTypes
 {
     [self removeItems:[self typeInstances]
-            inContext:[self DC_threadManagedContex]];
+            inContext:self.managedObjectContext];
+}
+
+- (void)clearProgram
+{
+    [self removeItems:[self programInstances]
+            inContext:self.managedObjectContext];
 }
 
 - (void)removeItems:(NSArray*)items inContext:(NSManagedObjectContext*)context
@@ -96,7 +122,56 @@ static NSString * kDCMainProxyModelName = @"main";
     }
 }
 
+#pragma mark - DO save
+
+- (void)saveContext
+{
+    NSError * err = nil;
+    [self.managedObjectContext save:&err];
+    if (err)
+    {
+        NSLog(@"WRONG! context save");
+    }
+}
+
 #pragma mark -
+
+- (void)updateProgram
+{
+    [self. managedObjectContext performBlock:^{
+        [DCDataProvider updateMainDataFromFile:kDCMainProxyProgramFile callBack:^(BOOL success, id result) {
+            if (success && result)
+            {
+                [self clearProgram];
+                [DCProgram parceFromJSONData:result];
+                [self saveContext];
+            }
+            else
+            {
+                NSLog(@"%@", result);
+            }
+        }];
+    }];
+}
+
+- (void)updateTypes
+{
+    [self.managedObjectContext performBlockAndWait:^{
+       [DCDataProvider updateMainDataFromFile:kDCMainProxyTypesFile callBack:^(BOOL success, id result) {
+           if (success && result)
+           {
+               [self clearTypes];
+               [DCType parceFromJsonData:result];
+               [self saveContext];
+           }
+           else
+           {
+               NSLog(@"%@", result);
+           }
+       }];
+    }];
+}
+
 
 - (NSArray*) instancesOfClass:(Class)objectClass filtredUsingPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context
 {
@@ -175,7 +250,7 @@ static NSString * kDCMainProxyModelName = @"main";
         NSPersistentStoreCoordinator * coordinator = [self persistentStoreCoordinator];
         if (coordinator)
         {
-            _managedObjectContext = [[NSManagedObjectContext alloc] init];
+            _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
             [_managedObjectContext setPersistentStoreCoordinator:coordinator];
         }
     }

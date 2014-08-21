@@ -8,6 +8,13 @@
 
 #import "DCProgram.h"
 
+typedef NS_ENUM (int, DCEventType) {
+    DC_EVENT_SPEACH = 0,
+    DC_EVENT_SPEACH_OF_DAY = 1,
+    DC_EVENT_COFEE_BREAK = 2,
+    DC_EVENT_LUNCH = 3,
+};
+
 @interface DCProgram (DC)
 
 + (void)parceFromJSONData:(NSData*)jsonData;

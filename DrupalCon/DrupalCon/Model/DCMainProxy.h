@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class DCProgram, DCBof;
+@class DCProgram, DCBof, DCType, DCTime, DCTimeRange;
 
 @interface DCMainProxy : NSObject
 
@@ -28,7 +28,7 @@
 - (DCProgram*)createProgramItem;
 - (DCBof*)createBofItem;
 - (DCType*)createType;
-
-- (void)clearTypes;
+- (DCTime*)createTime;
+- (DCTimeRange*)createTimeRange;
 
 @end

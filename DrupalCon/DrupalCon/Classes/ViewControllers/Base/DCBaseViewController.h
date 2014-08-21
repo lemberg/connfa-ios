@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DCMainProxy.h"
 
 @interface DCBaseViewController : UIViewController
 

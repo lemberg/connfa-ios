@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface DCProgramItemsViewController : UIViewController
+
 @property (nonatomic) int pageIndex;
+@property (nonatomic, strong) NSArray* events;
+
 @end

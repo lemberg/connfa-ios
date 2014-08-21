@@ -2,7 +2,7 @@
 //  DCSpeaker.m
 //  DrupalCon
 //
-//  Created by Volodymyr Hyrka on 8/20/14.
+//  Created by Volodymyr Hyrka on 8/21/14.
 //  Copyright (c) 2014 Lemberg Solution. All rights reserved.
 //
 
@@ -11,9 +11,9 @@
 
 @implementation DCSpeaker
 
+@dynamic characteristic;
+@dynamic jobTitle;
 @dynamic name;
 @dynamic organizationName;
-@dynamic jobTitle;
-@dynamic characteristic;
 
 @end
