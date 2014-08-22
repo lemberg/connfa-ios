@@ -20,6 +20,8 @@
 #import "DCTime+DC.h"
 #import "DCMainProxy+Additions.h"
 
+#import "NSArray+DC.h"
+
 @interface DCProgramItemsViewController ()
 
 @property (nonatomic, weak) IBOutlet UITableView *tablewView;
@@ -41,7 +43,8 @@
 {
     [super viewDidLoad];
     _events = [[DCMainProxy sharedProxy] programEventsForDayNum:self.pageIndex];
-    NSArray * a = [[DCMainProxy sharedProxy] timeRangesForDayNum:self.pageIndex];
+    NSArray * a = [[DCMainProxy sharedProxy] uniqueTimeRangesForDayNum:self.pageIndex];
+    NSArray * b = [_events eventsForTimeRange:a[0]];
 }
 
 - (void)didReceiveMemoryWarning

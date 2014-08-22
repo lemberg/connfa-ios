@@ -12,4 +12,6 @@
 
 - (void)setTime:(NSString*)time;
 
+- (NSString*)stringValue;
+
 @end

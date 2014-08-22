@@ -54,7 +54,6 @@
 		849EFE3E19A5051C00C43E05 /* types.json in Resources */ = {isa = PBXBuildFile; fileRef = 849EFE3D19A5051C00C43E05 /* types.json */; };
 		849EFE4119A5067000C43E05 /* DCType+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 849EFE4019A5067000C43E05 /* DCType+DC.m */; };
 		84FAE0E819A645E000DC9FF1 /* NSArray+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAE0E719A645E000DC9FF1 /* NSArray+DC.m */; };
-		84FAE0EB19A65E4C00DC9FF1 /* NSArray+Program.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAE0EA19A65E4C00DC9FF1 /* NSArray+Program.m */; };
 		84FAE0EE19A65F9400DC9FF1 /* DCLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAE0ED19A65F9400DC9FF1 /* DCLevel.m */; };
 		84FAE0F119A65F9500DC9FF1 /* DCType.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAE0F019A65F9500DC9FF1 /* DCType.m */; };
 		84FAE0F419A65F9500DC9FF1 /* DCBof.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAE0F319A65F9500DC9FF1 /* DCBof.m */; };
@@ -162,8 +161,6 @@
 		849EFE4019A5067000C43E05 /* DCType+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DCType+DC.m"; path = "Model/Categories/DCType+DC.m"; sourceTree = "<group>"; };
 		84FAE0E619A645E000DC9FF1 /* NSArray+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+DC.h"; path = "Classes/Helpers/NSArray+DC.h"; sourceTree = "<group>"; };
 		84FAE0E719A645E000DC9FF1 /* NSArray+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+DC.m"; path = "Classes/Helpers/NSArray+DC.m"; sourceTree = "<group>"; };
-		84FAE0E919A65E4C00DC9FF1 /* NSArray+Program.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+Program.h"; path = "Classes/Helpers/NSArray+Program.h"; sourceTree = "<group>"; };
-		84FAE0EA19A65E4C00DC9FF1 /* NSArray+Program.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+Program.m"; path = "Classes/Helpers/NSArray+Program.m"; sourceTree = "<group>"; };
 		84FAE0EC19A65F9400DC9FF1 /* DCLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCLevel.h; path = Model/DOObjects/DCLevel.h; sourceTree = "<group>"; };
 		84FAE0ED19A65F9400DC9FF1 /* DCLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCLevel.m; path = Model/DOObjects/DCLevel.m; sourceTree = "<group>"; };
 		84FAE0EF19A65F9500DC9FF1 /* DCType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCType.h; path = Model/DOObjects/DCType.h; sourceTree = "<group>"; };
@@ -369,8 +366,6 @@
 				849CF82019A6246A00C84675 /* NSDate+DC.m */,
 				84FAE0E619A645E000DC9FF1 /* NSArray+DC.h */,
 				84FAE0E719A645E000DC9FF1 /* NSArray+DC.m */,
-				84FAE0E919A65E4C00DC9FF1 /* NSArray+Program.h */,
-				84FAE0EA19A65E4C00DC9FF1 /* NSArray+Program.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -708,7 +703,6 @@
 				84FAE10919A65FEA00DC9FF1 /* DCTime+DC.m in Sources */,
 				5DC8C459198658BF00BF5816 /* AppDelegate.m in Sources */,
 				5D6449CA19893BAD00BC1775 /* DCSpeechCell.m in Sources */,
-				84FAE0EB19A65E4C00DC9FF1 /* NSArray+Program.m in Sources */,
 				84FAE0EE19A65F9400DC9FF1 /* DCLevel.m in Sources */,
 				849CF80419A5EFEC00C84675 /* DCMainProxy.m in Sources */,
 				5D6449D319893BEF00BC1775 /* DCLunchCell.m in Sources */,

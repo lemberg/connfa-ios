@@ -14,7 +14,7 @@
 
 - (NSArray*)days;
 - (NSArray*)programEventsForDayNum:(NSInteger)dayNum;
-- (NSArray*)timeRangesForDayNum:(NSInteger)dayNum;
+- (NSArray*)uniqueTimeRangesForDayNum:(NSInteger)dayNum;
 
 #pragma mark -
 

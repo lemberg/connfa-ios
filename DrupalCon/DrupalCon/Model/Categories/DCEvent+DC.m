@@ -7,6 +7,7 @@
 //
 
 #import "DCEvent+DC.h"
+#import "DCTimeRange+DC.h"
 
 const NSString * kDCEvent_days_key = @"days";
 const NSString * kDCEvent_date_key = @"date";
@@ -25,6 +26,11 @@ const NSString * kDCEvent_experienceLevel_key = @"experience_level";
 + (void)parceFromJSONData:(NSData *)jsonData
 {
 
+}
+
+- (NSString*)description
+{
+    return [NSString stringWithFormat:@"%@ (%@ %@)", self.name, self.date, [self.timeRange stringValue]];
 }
 
 @end

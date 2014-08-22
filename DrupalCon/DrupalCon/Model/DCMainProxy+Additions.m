@@ -32,7 +32,7 @@
         NSArray *result = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
         if(result && [result count])
         {
-            return [result objectsFromDictionaries];
+            return [[result objectsFromDictionaries] sortedDates];
         }
     }
     @catch (NSException *exception) {
@@ -83,22 +83,19 @@
     return nil;
 }
 
-- (NSArray*)timeRangesForDayNum:(NSInteger)dayNum
+- (NSArray*)uniqueTimeRangesForDayNum:(NSInteger)dayNum
 {
     @try {
         NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass([DCProgram class]) inManagedObjectContext:self.managedObjectContext];
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         [fetchRequest setEntity:entityDescription];
         [fetchRequest setReturnsObjectsAsFaults:NO];
-        [fetchRequest setPropertiesToFetch:@[@"timeRange"]];
-        [fetchRequest setResultType:NSDictionaryResultType];
-        [fetchRequest setReturnsDistinctResults:YES];
         NSPredicate * predicate = [NSPredicate predicateWithFormat:@"date = %@", [[self days] objectAtIndex:dayNum]];
         [fetchRequest setPredicate:predicate];
         NSArray *result = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
         if(result && [result count])
         {
-            return [result objectsFromDictionaries];
+            return [[self DC_filterUniqueTimeRangeFromEvents:result] sortedByStartHour];
         }
     }
     @catch (NSException *exception) {
@@ -115,7 +112,30 @@
     return nil;
 }
 
+
 #pragma mark -
+
+- (NSArray*)DC_filterUniqueTimeRangeFromEvents:(NSArray*)events
+{
+    NSMutableArray * ranges = [[NSMutableArray alloc] initWithCapacity:events.count];
+    for (DCProgram * event in events)
+    {
+        BOOL isUnique = YES;
+        for (DCTimeRange* range in ranges)
+        {
+            if ([event.timeRange isEqualTo:range])
+            {
+                isUnique = NO;
+                break;
+            }
+        }
+        if (isUnique)
+        {
+            [ranges addObject:event.timeRange];
+        }
+    }
+    return  ranges;
+}
 
 - (NSString*)DC_firstPartForDateString:(NSString*)string
 {

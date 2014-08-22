@@ -10,6 +10,11 @@
 
 @implementation DCTime (DC)
 
+- (NSString*)stringValue
+{
+    return [NSString stringWithFormat:@"%@:%@%@", self.hour, ([self.minute integerValue] < 10 ? @"0" : @""), self.minute];
+}
+
 - (void)setTime:(NSString *)time
 {
     NSArray * components = [time componentsSeparatedByString:@":"];

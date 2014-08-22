@@ -26,6 +26,7 @@ static NSString * kDCEventViewOutputFormat = @"EEEE - dd MMM";
 {
     NSDateFormatter *outPutDateFormat = [[NSDateFormatter alloc] init];
     [outPutDateFormat setDateFormat:kDCEventViewOutputFormat];
+    [outPutDateFormat setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
     NSString *theDate = [outPutDateFormat stringFromDate:self];
     return theDate;
 }
@@ -35,6 +36,7 @@ static NSString * kDCEventViewOutputFormat = @"EEEE - dd MMM";
 + (NSDateFormatter*)eventDateFormatter
 {
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
     [dateFormat setDateFormat:kDCEventDateFormat];
     return dateFormat;
 }
