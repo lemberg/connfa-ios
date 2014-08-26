@@ -17,7 +17,7 @@
                             "to" : "10:55",
                             "type" : 0,
                             "name" : "12 Best practises from Wunderkraut",
-                            "speaker" : "Frank Baele",
+                            "speaker" : "Frank Baele, Test Speaker",
                             "track" : "Business",
                             "experience_level" : "Beginner"
                          },
@@ -40,7 +40,7 @@
                             "experience_level" : "Advanced"
                         },
                         {
-                            "from" : "9:00",
+                            "from" : "9:10",
                             "to" : "10:55",
                             "type" : 2,
                         },

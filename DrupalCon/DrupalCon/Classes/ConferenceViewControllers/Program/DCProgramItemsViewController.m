@@ -7,6 +7,8 @@
 //
 
 #import "DCProgramItemsViewController.h"
+#import "DCEventDetailViewController.h"
+
 #import "DCSpeechCell.h"
 #import "DCSpeechOfDayCell.h"
 #import "DCCofeeCell.h"
@@ -43,8 +45,7 @@
 {
     [super viewDidLoad];
     _events = [[DCMainProxy sharedProxy] programEventsForDayNum:self.pageIndex];
-    NSArray * a = [[DCMainProxy sharedProxy] uniqueTimeRangesForDayNum:self.pageIndex];
-    NSArray * b = [_events eventsForTimeRange:a[0]];
+    _timeslots = [[DCMainProxy sharedProxy] uniqueTimeRangesForDayNum:self.pageIndex];
 }
 
 - (void)didReceiveMemoryWarning
@@ -53,6 +54,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - uitableview datasource methods
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSString *cellIdSpeech = @"ProgramCellIdentifierSpeech";
@@ -60,10 +63,10 @@
     NSString *cellIdCoffeBreak = @"ProgramCellIdentifierCoffeBreak";
     NSString *cellIdLunch = @"ProgramCellIdentifierLunch";
     
-    DCProgram * event = _events[indexPath.row];
+    DCProgram * event = [self DC_eventForIndexPath:indexPath];
     UITableViewCell *cell;
 
-    switch ([event.type.typeID integerValue]) {
+    switch ([event getTypeID]) {
         case DC_EVENT_SPEACH: {
             NSLog(@"CelId: %@", cellIdSpeech);
             DCSpeechCell *_cell = (DCSpeechCell*)[tableView dequeueReusableCellWithIdentifier: cellIdSpeech];
@@ -87,16 +90,18 @@
         case DC_EVENT_COFEE_BREAK: {
             NSLog(@"CelId: %@", cellIdCoffeBreak);
             DCCofeeCell *_cell = (DCCofeeCell*)[tableView dequeueReusableCellWithIdentifier: cellIdCoffeBreak];
-            _cell.startLabel.text = @"n/a";
-            _cell.startLabel.text = @"n/a";
+            _cell.startLabel.text = [event.timeRange.from stringValue];
+            _cell.endLabel.text = [event.timeRange.to stringValue];
+            [_cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             cell = _cell;
             break;
         }
         case DC_EVENT_LUNCH: {
               NSLog(@"CelId: %@", cellIdLunch);
             DCLunchCell *_cell = (DCLunchCell*)[tableView dequeueReusableCellWithIdentifier: cellIdLunch];
-            _cell.startLabel.text = @"n/a";
-            _cell.startLabel.text = @"n/a";
+            _cell.startLabel.text = [event.timeRange.from stringValue];
+            _cell.endLabel.text = [event.timeRange.to stringValue];
+            [_cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             cell = _cell;
             break;
         }
@@ -118,8 +123,10 @@
 {
     /*lets check if this date range contains some events that need a time period header, DCSpeechCelll and DCSPeechofTheDayCell, if its only coffe breaks or lunch - we dont display a header*/
     BOOL headerNeeded = NO;
-    for(DCProgram *event in _events) {
-        if([event.type.typeID integerValue] == DC_EVENT_SPEACH || [event.type.typeID integerValue] == DC_EVENT_SPEACH_OF_DAY) {
+    for(DCProgram *event in [_events eventsForTimeRange:_timeslots[section]])
+    {
+        if([event getTypeID] == DC_EVENT_SPEACH || [event getTypeID] == DC_EVENT_SPEACH_OF_DAY)
+        {
             headerNeeded = YES; break;
         }
     }
@@ -128,18 +135,16 @@
 
 
 -(UIView*) tableView: (UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    /*
+
     DCProgramHeaderCellView *headerViewCell = (DCProgramHeaderCellView*)[tableView dequeueReusableCellWithIdentifier: @"ProgramCellHeaderCell"];
-    
 //    lets check if this date range contains some events that need a time period header, DCSpeechCelll and DCSPeechofTheDayCell, if its only coffe breaks or lunch - we dont display a header
     BOOL headerNeeded = [self headerNeededInSection: section];
-    NSDictionary *rangeDict = [[DCProgramsDataSourceMananger shared] dictionaryContatiningRangeAndArrayOfEventsInDay:self.pageIndex section: section];
     if(headerNeeded) {
-        headerViewCell.startLabel.text = rangeDict[@"from"];
-        headerViewCell.endLabel.text = rangeDict[@"to"];
+        DCTimeRange * timeslot = _timeslots[section];
+        headerViewCell.startLabel.text = [timeslot.from stringValue];
+        headerViewCell.endLabel.text = [timeslot.to stringValue];
         return headerViewCell;
     }
-    */
     UIView *v = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 320, 0.0)];
      v.backgroundColor = [UIColor whiteColor];
     return v;
@@ -159,25 +164,18 @@
         return nil;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 0;
+    return _timeslots.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return [_events eventsForTimeRange:(DCTimeRange*)_timeslots[section]].count;
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    DCEvent *event = [self DC_eventForIndexPath:indexPath];
     
-/*
-    DCEvent *event = [[DCProgramsDataSourceMananger shared] eventForSection:indexPath.section row: indexPath.row inDay: self.pageIndex];
-    
-    switch (event.eventType) {
+    switch ([event getTypeID]) {
         case DC_EVENT_SPEACH: {
             return 97;
             break;
@@ -195,12 +193,34 @@
             break;
         }
     }
- */
     return 94;
 }
 
--(void) dealloc {
+#pragma mark - uitableview delegate methods
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    DCProgram * event = [self DC_eventForIndexPath:indexPath];
+    if([event getTypeID] == DC_EVENT_LUNCH || [event getTypeID] == DC_EVENT_COFEE_BREAK)
+    {
+        return;
+    }
+    
+    DCEventDetailViewController * detailController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
+    [detailController setEvent:event];
+//    UINavigationController * container = [[UINavigationController alloc] initWithRootViewController:detaiulController];
+//    [self presentModalViewController:container animated:YES];
+//    [self.navigationController pushViewController:detaiulController animated:YES];
+    [[[[self parentViewController] parentViewController] navigationController] pushViewController:detailController animated:YES];
+}
+
+#pragma mark - private
+
+- (DCProgram*)DC_eventForIndexPath:(NSIndexPath *)indexPath
+{
+    return [[_events eventsForTimeRange:_timeslots[indexPath.section]] objectAtIndex:indexPath.row];
 }
 
 @end

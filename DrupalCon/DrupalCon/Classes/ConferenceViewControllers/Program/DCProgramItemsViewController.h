@@ -12,5 +12,6 @@
 
 @property (nonatomic) int pageIndex;
 @property (nonatomic, strong) NSArray* events;
+@property (nonatomic, strong) NSArray* timeslots;
 
 @end

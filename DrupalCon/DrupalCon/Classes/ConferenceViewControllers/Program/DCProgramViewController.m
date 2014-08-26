@@ -14,7 +14,7 @@
 @interface DCProgramViewController ()
 @property (nonatomic, strong) UIPageViewController *pageViewController;
 @property (nonatomic, strong) NSArray *viewControllers;
-@property (nonatomic, strong) NSArray *dates;
+@property (nonatomic, strong) NSArray *days;
 
 @property (nonatomic) int currentIndex;
 @property (nonatomic, strong) IBOutlet UILabel *dateLabel;
@@ -34,7 +34,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _dates = [[NSArray alloc] initWithArray:[[DCMainProxy sharedProxy] days]];
+    _days = [[NSArray alloc] initWithArray:[[DCMainProxy sharedProxy] days]];
     [self addPageController];
 }
 
@@ -56,7 +56,7 @@
 }
 
 -(void) displayDateForDay: (int) day {
-    NSDate * date = _dates[day];
+    NSDate * date = _days[day];
     self.dateLabel.text = [date pageViewDateString];
 }
 
@@ -76,7 +76,7 @@
     
     NSMutableArray *arrayOfViewController = [[NSMutableArray alloc] init];
     
-    for(int i = _dates.count-1; i >= 0; i--) {
+    for(int i = _days.count-1; i >= 0; i--) {
         if(i < self.currentIndex) {
             [arrayOfViewController addObject: [self viewControllerAtIndex:i]];
             break;
@@ -91,11 +91,11 @@
 
 -(IBAction) nextDayClicked:(id)sender
 {
-    if(self.currentIndex >= _dates.count-1)
+    if(self.currentIndex >= _days.count-1)
         return;
     
     NSMutableArray *arrayOfViewController = [[NSMutableArray alloc] init];
-    for(int i = 0; i < _dates.count; i++) {
+    for(int i = 0; i < _days.count; i++) {
         if(i > self.currentIndex) {
             [arrayOfViewController addObject: [self viewControllerAtIndex:i]];
             break;
@@ -110,7 +110,7 @@
 #pragma mark page view delegate and datasource
 - (DCProgramItemsViewController *)viewControllerAtIndex:(NSUInteger)index
 {
-    if ((_dates.count == 0) || (index >= _dates.count)) {
+    if ((_days.count == 0) || (index >= _days.count)) {
         return nil;
     }
     
@@ -141,7 +141,7 @@
     }
     
     index++;
-    if (index == _dates.count) {
+    if (index == _days.count) {
         return nil;
     }
     return [self viewControllerAtIndex:index];
@@ -149,7 +149,7 @@
 
 - (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
 {
-    return _dates.count;
+    return _days.count;
 }
 
 - (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController

@@ -22,4 +22,6 @@ extern NSString * kDCEvent_experienceLevel_key;
 
 @interface DCEvent (DC)
 
+- (NSInteger)getTypeID;
+
 @end

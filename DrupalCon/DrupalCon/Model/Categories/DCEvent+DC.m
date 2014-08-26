@@ -8,6 +8,7 @@
 
 #import "DCEvent+DC.h"
 #import "DCTimeRange+DC.h"
+#import "DCType+DC.h"
 
 const NSString * kDCEvent_days_key = @"days";
 const NSString * kDCEvent_date_key = @"date";
@@ -31,6 +32,11 @@ const NSString * kDCEvent_experienceLevel_key = @"experience_level";
 - (NSString*)description
 {
     return [NSString stringWithFormat:@"%@ (%@ %@)", self.name, self.date, [self.timeRange stringValue]];
+}
+
+- (NSInteger)getTypeID
+{
+    return [self.type.typeID integerValue];
 }
 
 @end

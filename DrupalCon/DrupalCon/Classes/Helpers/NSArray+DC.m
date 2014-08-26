@@ -85,7 +85,9 @@
     if (self.count) {
         if ([self.firstObject isKindOfClass:[DCEvent class]])
         {
-            NSPredicate * predicate = [NSPredicate predicateWithFormat:@"stringValue == %@", [timeRange stringValue]];
+            NSPredicate * predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
+                return [(DCTimeRange*)[(DCEvent*)evaluatedObject timeRange] isEqualTo:timeRange];
+            }];
             return [self filteredArrayUsingPredicate:predicate];
         }
     }

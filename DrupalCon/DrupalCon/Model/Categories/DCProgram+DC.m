@@ -40,7 +40,7 @@
             programInstance.name = event[kDCEvent_name_key];
             programInstance.favorite = @NO;
             programInstance.place = @"n/a";
-            programInstance.desctiptText = @"empty text";
+            programInstance.desctiptText = @"description is empty";
             programInstance.level = event[kDCEvent_experienceLevel_key];
             programInstance.timeRange = [[DCMainProxy sharedProxy] createTimeRange];
             [programInstance.timeRange setFrom:event[kDCEvent_from_key] to:event[kDCEvent_to_key]];
