@@ -45,6 +45,7 @@
 		849CF81E19A6080000C84675 /* lastUpdate.json in Resources */ = {isa = PBXBuildFile; fileRef = 849CF81D19A6080000C84675 /* lastUpdate.json */; };
 		849CF82119A6246A00C84675 /* NSDate+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 849CF82019A6246A00C84675 /* NSDate+DC.m */; };
 		849CF82419A62F8600C84675 /* DCMainProxy+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 849CF82319A62F8600C84675 /* DCMainProxy+Additions.m */; };
+		849D92C219ADCCDD00977D67 /* DCNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849D92C119ADCCDD00977D67 /* DCNavViewController.m */; };
 		849EFDA319A49FB600C43E05 /* main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 849EFDA119A49FB600C43E05 /* main.xcdatamodeld */; };
 		849EFDDB19A4ACB800C43E05 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849EFDDA19A4ACB800C43E05 /* CoreData.framework */; };
 		849EFE1219A4D63500C43E05 /* DCDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 849EFE1119A4D63500C43E05 /* DCDataProvider.m */; };
@@ -148,6 +149,8 @@
 		849CF82019A6246A00C84675 /* NSDate+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+DC.m"; path = "Classes/Helpers/NSDate+DC.m"; sourceTree = "<group>"; };
 		849CF82219A62F8600C84675 /* DCMainProxy+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DCMainProxy+Additions.h"; path = "Model/DCMainProxy+Additions.h"; sourceTree = "<group>"; };
 		849CF82319A62F8600C84675 /* DCMainProxy+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DCMainProxy+Additions.m"; path = "Model/DCMainProxy+Additions.m"; sourceTree = "<group>"; };
+		849D92C019ADCCDD00977D67 /* DCNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCNavViewController.h; sourceTree = "<group>"; };
+		849D92C119ADCCDD00977D67 /* DCNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCNavViewController.m; sourceTree = "<group>"; };
 		849EFDA219A49FB600C43E05 /* main.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = main.xcdatamodel; sourceTree = "<group>"; };
 		849EFDDA19A4ACB800C43E05 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		849EFE1019A4D63500C43E05 /* DCDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCDataProvider.h; path = Classes/Helpers/DCDataProvider.h; sourceTree = "<group>"; };
@@ -516,6 +519,8 @@
 			children = (
 				5DC8C4711986594400BF5816 /* DCBaseViewController.h */,
 				5DC8C4721986594400BF5816 /* DCBaseViewController.m */,
+				849D92C019ADCCDD00977D67 /* DCNavViewController.h */,
+				849D92C119ADCCDD00977D67 /* DCNavViewController.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -753,6 +758,7 @@
 				84FAE0F119A65F9500DC9FF1 /* DCType.m in Sources */,
 				5D6449D019893BD700BC1775 /* DCCofeeCell.m in Sources */,
 				5DC8C46C198658FF00BF5816 /* DCLoginViewController.m in Sources */,
+				849D92C219ADCCDD00977D67 /* DCNavViewController.m in Sources */,
 				5D38E6A11987A673006F7A59 /* DCTextField.m in Sources */,
 				84FAE10019A65F9500DC9FF1 /* DCTime.m in Sources */,
 				849CF82119A6246A00C84675 /* NSDate+DC.m in Sources */,

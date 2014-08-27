@@ -11,7 +11,7 @@
 
 
 @class DCEvent, DCProgram, DCBof;
-@interface DCEventDetailViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, DCFacotiteDelegateProtocol>
+@interface DCEventDetailViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, DCFacotiteDelegateProtocol, UIScrollViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UIView * infoPannel;
 @property (nonatomic, weak) IBOutlet DCFavoriteButton * favoriteBtn;

@@ -8,6 +8,7 @@
 
 #import "DCProgramItemsViewController.h"
 #import "DCEventDetailViewController.h"
+#import "AppDelegate.h"
 
 #import "DCSpeechCell.h"
 #import "DCSpeechOfDayCell.h"
@@ -207,13 +208,12 @@
     {
         return;
     }
-    
+
     DCEventDetailViewController * detailController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
     [detailController setEvent:event];
-//    UINavigationController * container = [[UINavigationController alloc] initWithRootViewController:detaiulController];
-//    [self presentModalViewController:container animated:YES];
-//    [self.navigationController pushViewController:detaiulController animated:YES];
-    [[[[self parentViewController] parentViewController] navigationController] pushViewController:detailController animated:YES];
+    UINavigationController * navContainer = [[UINavigationController alloc] initWithRootViewController:detailController];
+    [navContainer setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+    [[(AppDelegate*)[[UIApplication sharedApplication] delegate] window].rootViewController presentViewController:navContainer animated:YES completion:nil];
 }
 
 #pragma mark - private

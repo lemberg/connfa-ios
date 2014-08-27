@@ -14,9 +14,10 @@
 #import "DCBof.h"
 
 
-@interface DCEventDetailViewController ()
+static float kDCEventDetailSpeakerCellHeight = 65.0;
+static float kDCEventInfoPanelTop = 100.0;
+static float kDCEventInfoPanelBottom = 244.0;
 
-@end
 
 @implementation DCEventDetailViewController
 
@@ -35,12 +36,26 @@
     [super viewDidLoad];
     
     self.title = [_event.timeRange stringValue];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-                                                  forBarMetrics:UIBarMetricsDefault];
+                             forBarMetrics:UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
-    self.navigationController.view.backgroundColor = [UIColor clearColor];
+
+    UIButton* backButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [backButton addTarget:self action:@selector(onBack) forControlEvents:UIControlEventTouchUpInside];
+    [backButton setFrame:CGRectMake(0, 0, 100, 40)];
+    [backButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
+    [backButton setExclusiveTouch:YES];
+    [backButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    [backButton setTitle:@"⟨ Back" forState:UIControlStateNormal];
+    [backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    UIBarButtonItem *backMenuBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+    self.navigationItem.leftBarButtonItem = backMenuBarButton;
     
+    _favoriteBtn.delegate = self;
+    [(UIScrollView*)_detailTxt setDelegate:self];
+    [(UIScrollView*)_speakersTbl setDelegate:self];
     [self updateUI];
 }
 
@@ -52,6 +67,12 @@
     [_placeLbl setText:_event.place];
     [_detailTxt setText:_event.desctiptText];
     _speakers = [self DC_speakers_tmp:_event.speakers];
+    
+    float speakersTblY = _speakersTbl.frame.origin.y;
+    float speakersTblH = kDCEventDetailSpeakerCellHeight * _speakers.count;
+    [_speakersTbl setFrame:CGRectMake(0, speakersTblY, 320, speakersTblH)];
+    [_detailTxt setFrame:CGRectMake(0, speakersTblY + speakersTblH, 320, _infoPannel.frame.size.height - (speakersTblY + speakersTblH))];
+    
     [_speakersTbl reloadData];
 }
 
@@ -59,7 +80,7 @@
 
 - (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 65;
+    return kDCEventDetailSpeakerCellHeight;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -90,6 +111,20 @@
 - (void)DCFavoriteButton:(DCFavoriteButton *)favoriteButton didChangedState:(BOOL)isSelected
 {
     NSLog(@"%@added", (isSelected ? @"" : @"not "));
+}
+
+#pragma mark - UIScrollView Delegate methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    NSLog(@"%@", scrollView);
+}
+
+#pragma mark - IBActions
+
+- (void)onBack
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - private

@@ -43,16 +43,27 @@
     _starImg = [[UIImageView alloc] initWithFrame:CGRectMake(self.bounds.size.width - 3 * imgSide, (self.bounds.size.height - imgSide) / 2, imgSide, imgSide)];
     [_starImg setBackgroundColor:[UIColor clearColor]];
     
-    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton * button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [button setFrame:self.bounds];
     [button setBackgroundColor:[UIColor clearColor]];
     [button setTitle:@"Add to your schedule" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [button.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Bold" size:14]];
+    [button addTarget:self action:@selector(onClick) forControlEvents:UIControlEventTouchUpInside];
     
     [self addSubview:_starImg];
     [self addSubview:button];
     
     [self setSelected:NO];
+}
+
+- (void)onClick
+{
+    [self setSelected:!self.selected];
+    if (_delegate && [_delegate respondsToSelector:@selector(DCFavoriteButton:didChangedState:)])
+    {
+        [_delegate DCFavoriteButton:self didChangedState:self.selected];
+    }
 }
 
 #pragma mark - get/set
