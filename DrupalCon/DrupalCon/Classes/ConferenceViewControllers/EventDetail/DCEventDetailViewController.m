@@ -7,17 +7,20 @@
 //
 
 #import "DCEventDetailViewController.h"
-#import "DCSpeakerCell.h"
 #import "DCEvent+DC.h"
 #import "DCProgram+DC.h"
 #import "DCTimeRange+DC.h"
+#import "DCSpeaker+DC.h"
 #import "DCBof.h"
 
+#import "DCEventDetailTitleCell.h"
+#import "DCEventDetailEmptyCell.h"
+#import "DCEventDetailHeader2Cell.h"
+#import "DCSpeakerCell.h"
+#import "DCDescriptionTextCell.h"
 
-static float kDCEventDetailSpeakerCellHeight = 65.0;
-static float kDCEventInfoPanelTop = 100.0;
-static float kDCEventInfoPanelBottom = 244.0;
-
+static CGFloat kEventDetailBGImageTop = 246.0;
+static CGFloat kEventDetailBGImageBottom = 0.0;
 
 @implementation DCEventDetailViewController
 
@@ -36,68 +39,115 @@ static float kDCEventInfoPanelBottom = 244.0;
     [super viewDidLoad];
     
     self.title = [_event.timeRange stringValue];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
-                             forBarMetrics:UIBarMetricsDefault];
-    self.navigationController.navigationBar.shadowImage = [UIImage new];
-    self.navigationController.navigationBar.translucent = YES;
+    self.navigatorBarStyle = EBaseViewControllerNatigatorBarStyleTransparrent;
+    self.speakers = [self DC_speakers_tmp:_event.speakers];
+}
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     UIButton* backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton addTarget:self action:@selector(onBack) forControlEvents:UIControlEventTouchUpInside];
     [backButton setFrame:CGRectMake(0, 0, 100, 40)];
     [backButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [backButton setExclusiveTouch:YES];
-    [backButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+//    [backButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
     [backButton setTitle:@"⟨ Back" forState:UIControlStateNormal];
     [backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     UIBarButtonItem *backMenuBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     self.navigationItem.leftBarButtonItem = backMenuBarButton;
-    
-    _favoriteBtn.delegate = self;
-    [(UIScrollView*)_detailTxt setDelegate:self];
-    [(UIScrollView*)_speakersTbl setDelegate:self];
-    [self updateUI];
+    NSLog(@"...");
 }
 
-- (void)updateUI
-{
-    [_eventNameLbl setText:_event.name];
-    [_trackLbl setText:_event.track];
-    [_levelLbl setText:_event.level];
-    [_placeLbl setText:_event.place];
-    [_detailTxt setText:_event.desctiptText];
-    _speakers = [self DC_speakers_tmp:_event.speakers];
-    
-    float speakersTblY = _speakersTbl.frame.origin.y;
-    float speakersTblH = kDCEventDetailSpeakerCellHeight * _speakers.count;
-    [_speakersTbl setFrame:CGRectMake(0, speakersTblY, 320, speakersTblH)];
-    [_detailTxt setFrame:CGRectMake(0, speakersTblY + speakersTblH, 320, _infoPannel.frame.size.height - (speakersTblY + speakersTblH))];
-    
-    [_speakersTbl reloadData];
-}
 
 #pragma mark - UITableView DataSource/Delegate methods
 
-- (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return kDCEventDetailSpeakerCellHeight;
+    NSLog(@"..");
+    return 2;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) // title
+        return [DCEventDetailTitleCell cellHeight];
+
+    return [DCEventDetailHeader2Cell cellHeight];
+}
+
+- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section == 0)
+    {
+        DCEventDetailTitleCell * titleCell = (DCEventDetailTitleCell*)[tableView dequeueReusableCellWithIdentifier:@"DetailCellIdTitle"];
+        [titleCell.titleLbl setText:_event.name];
+        return titleCell;
+    }
+    else if (section == 1)
+    {
+        DCEventDetailHeader2Cell * infoPanel = (DCEventDetailHeader2Cell*)[tableView dequeueReusableCellWithIdentifier:@"DetailCellIdHeader2"];
+        [infoPanel.trackValueLbl setText:_event.track];
+        [infoPanel.levelValueLbl setText:_event.level];
+        [infoPanel.placeValueLbl setText:_event.place];
+        [infoPanel.favorBtn setDelegate:self];
+        return infoPanel;
+    }
+    return [[UIView alloc] initWithFrame:CGRectZero];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        return [DCEventDetailEmptyCell cellHeight];
+    }
+    else if (indexPath.row == _speakers.count) // description cell is the last
+    {
+        return [DCDescriptionTextCell cellHeightForText:_event.desctiptText];
+    }
+    return [DCSpeakerCell cellHeight]; // rest should be in section#1 all rows exept last
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _speakers.count;
+    if (section == 0)
+        return 1;
+    
+    return _speakers.count+1; // speakers + description
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString * cellIdSpeaker = @"DetailCellIdentifierSpeaker";
+    static NSString * cellIdEmpty = @"DetailCellIdEmpty";
+    static NSString * cellIdSpeaker = @"DetailCellIdSpeaker";
+    static NSString * cellIdDescription = @"DetailCellIdDescription";
     UITableViewCell *cell;
-    DCSpeakerCell *_cell = (DCSpeakerCell*)[tableView dequeueReusableCellWithIdentifier: cellIdSpeaker];
-    [_cell.nameLbl setText:_speakers[indexPath.row]];
-    [_cell.positionTitleLbl setText:@"n/a"];
-    [_cell.pictureImg setImage:[UIImage imageNamed:@"avatar_test_image"]];
-    cell = _cell;
-    return _cell;
+    if (indexPath.section==0)
+    {
+        if (indexPath.row != 0) {
+            NSLog(@"WRONG! event detail cells");
+        }
+        DCEventDetailEmptyCell * _cell = (DCEventDetailEmptyCell*)[tableView dequeueReusableCellWithIdentifier:cellIdEmpty];
+        cell = _cell;
+    }
+    else if (indexPath.row == _speakers.count) // description cell
+    {
+        DCDescriptionTextCell * _cell = (DCDescriptionTextCell*)[tableView dequeueReusableCellWithIdentifier:cellIdDescription];
+        [_cell.descriptionTxt setText:_event.desctiptText];
+        cell = _cell;
+    }
+    else
+    {
+        NSString * speaker = _speakers[indexPath.row];
+        DCSpeakerCell * _cell = (DCSpeakerCell*)[tableView dequeueReusableCellWithIdentifier:cellIdSpeaker];
+        [_cell.pictureImg setImage:[UIImage imageNamed:@"avatar_test_image"]];
+//        [_cell.nampoeLbl setText:speaker.name];
+//        [_cell.positionTitleLbl setText:speaker.jobTitle];
+        [_cell.nameLbl setText:speaker];
+        [_cell.positionTitleLbl setText:@"default position"];
+        cell = _cell;
+    }
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -106,18 +156,22 @@ static float kDCEventInfoPanelBottom = 244.0;
     NSLog(@"speker selected");
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView == _detailTable)
+    {
+        if (scrollView.contentOffset.y < 0) {
+            [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0) animated:NO];
+        }
+        _eventPictureImg.frame = CGRectMake(0, -1 * scrollView.contentOffset.y/2, _eventPictureImg.frame.size.width, _eventPictureImg.frame.size.height);
+    }
+}
+
 #pragma mark - FavorBtn delegate
 
 - (void)DCFavoriteButton:(DCFavoriteButton *)favoriteButton didChangedState:(BOOL)isSelected
 {
     NSLog(@"%@added", (isSelected ? @"" : @"not "));
-}
-
-#pragma mark - UIScrollView Delegate methods
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    NSLog(@"%@", scrollView);
 }
 
 #pragma mark - IBActions

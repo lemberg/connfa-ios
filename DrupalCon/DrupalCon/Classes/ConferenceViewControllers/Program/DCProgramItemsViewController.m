@@ -120,7 +120,7 @@
     return cell;
 }
 
--(BOOL) headerNeededInSection: (int) section
+-(BOOL) headerNeededInSection: (NSInteger) section
 {
     /*lets check if this date range contains some events that need a time period header, DCSpeechCelll and DCSPeechofTheDayCell, if its only coffe breaks or lunch - we dont display a header*/
     BOOL headerNeeded = NO;

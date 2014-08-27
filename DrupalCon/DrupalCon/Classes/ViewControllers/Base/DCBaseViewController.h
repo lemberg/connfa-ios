@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "DCMainProxy.h"
 
+typedef enum {
+    EBaseViewControllerNatigatorBarStyleNormal,
+    EBaseViewControllerNatigatorBarStyleTransparrent
+}EBaseViewControllerNatigatorBarStyle;
+
 @interface DCBaseViewController : UIViewController
+
+@property (nonatomic) EBaseViewControllerNatigatorBarStyle navigatorBarStyle;
 
 @end

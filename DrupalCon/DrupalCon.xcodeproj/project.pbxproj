@@ -46,6 +46,15 @@
 		849CF82119A6246A00C84675 /* NSDate+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 849CF82019A6246A00C84675 /* NSDate+DC.m */; };
 		849CF82419A62F8600C84675 /* DCMainProxy+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 849CF82319A62F8600C84675 /* DCMainProxy+Additions.m */; };
 		849D92C219ADCCDD00977D67 /* DCNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849D92C119ADCCDD00977D67 /* DCNavViewController.m */; };
+		849D92C519ADEA8700977D67 /* DCSpeaker+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 849D92C419ADEA8700977D67 /* DCSpeaker+DC.m */; };
+		849D92C819ADF31D00977D67 /* UIImageView+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 849D92C719ADF31D00977D67 /* UIImageView+DC.m */; };
+		849D92CB19ADF98600977D67 /* DCSpeakerHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 849D92CA19ADF98600977D67 /* DCSpeakerHeaderCell.m */; };
+		849D92CE19ADFAA100977D67 /* DCSpeakerBottomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 849D92CD19ADFAA100977D67 /* DCSpeakerBottomCell.m */; };
+		849D92D119AE07D200977D67 /* DCSpeakersDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849D92D019AE07D200977D67 /* DCSpeakersDetailViewController.m */; };
+		849D92D819AE295200977D67 /* DCEventDetailTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 849D92D719AE295200977D67 /* DCEventDetailTitleCell.m */; };
+		849D92DE19AE29B000977D67 /* DCEventDetailHeader2Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = 849D92DD19AE29B000977D67 /* DCEventDetailHeader2Cell.m */; };
+		849D92E119AE29D100977D67 /* DCEventDetailEmptyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 849D92E019AE29D100977D67 /* DCEventDetailEmptyCell.m */; };
+		849D92E419AE2A6600977D67 /* DCDescriptionTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 849D92E319AE2A6600977D67 /* DCDescriptionTextCell.m */; };
 		849EFDA319A49FB600C43E05 /* main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 849EFDA119A49FB600C43E05 /* main.xcdatamodeld */; };
 		849EFDDB19A4ACB800C43E05 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849EFDDA19A4ACB800C43E05 /* CoreData.framework */; };
 		849EFE1219A4D63500C43E05 /* DCDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 849EFE1119A4D63500C43E05 /* DCDataProvider.m */; };
@@ -151,6 +160,24 @@
 		849CF82319A62F8600C84675 /* DCMainProxy+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DCMainProxy+Additions.m"; path = "Model/DCMainProxy+Additions.m"; sourceTree = "<group>"; };
 		849D92C019ADCCDD00977D67 /* DCNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCNavViewController.h; sourceTree = "<group>"; };
 		849D92C119ADCCDD00977D67 /* DCNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCNavViewController.m; sourceTree = "<group>"; };
+		849D92C319ADEA8700977D67 /* DCSpeaker+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DCSpeaker+DC.h"; path = "Model/Categories/DCSpeaker+DC.h"; sourceTree = "<group>"; };
+		849D92C419ADEA8700977D67 /* DCSpeaker+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DCSpeaker+DC.m"; path = "Model/Categories/DCSpeaker+DC.m"; sourceTree = "<group>"; };
+		849D92C619ADF31D00977D67 /* UIImageView+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+DC.h"; path = "Classes/Helpers/UIImageView+DC.h"; sourceTree = "<group>"; };
+		849D92C719ADF31D00977D67 /* UIImageView+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+DC.m"; path = "Classes/Helpers/UIImageView+DC.m"; sourceTree = "<group>"; };
+		849D92C919ADF98600977D67 /* DCSpeakerHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCSpeakerHeaderCell.h; path = Classes/Views/SpeakerCells/DCSpeakerHeaderCell.h; sourceTree = "<group>"; };
+		849D92CA19ADF98600977D67 /* DCSpeakerHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCSpeakerHeaderCell.m; path = Classes/Views/SpeakerCells/DCSpeakerHeaderCell.m; sourceTree = "<group>"; };
+		849D92CC19ADFAA100977D67 /* DCSpeakerBottomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCSpeakerBottomCell.h; path = Classes/Views/SpeakerCells/DCSpeakerBottomCell.h; sourceTree = "<group>"; };
+		849D92CD19ADFAA100977D67 /* DCSpeakerBottomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCSpeakerBottomCell.m; path = Classes/Views/SpeakerCells/DCSpeakerBottomCell.m; sourceTree = "<group>"; };
+		849D92CF19AE07D200977D67 /* DCSpeakersDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCSpeakersDetailViewController.h; sourceTree = "<group>"; };
+		849D92D019AE07D200977D67 /* DCSpeakersDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCSpeakersDetailViewController.m; sourceTree = "<group>"; };
+		849D92D619AE295200977D67 /* DCEventDetailTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCEventDetailTitleCell.h; path = Classes/Views/ProgramDetailCells/DCEventDetailTitleCell.h; sourceTree = "<group>"; };
+		849D92D719AE295200977D67 /* DCEventDetailTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCEventDetailTitleCell.m; path = Classes/Views/ProgramDetailCells/DCEventDetailTitleCell.m; sourceTree = "<group>"; };
+		849D92DC19AE29B000977D67 /* DCEventDetailHeader2Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCEventDetailHeader2Cell.h; path = Classes/Views/ProgramDetailCells/DCEventDetailHeader2Cell.h; sourceTree = "<group>"; };
+		849D92DD19AE29B000977D67 /* DCEventDetailHeader2Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCEventDetailHeader2Cell.m; path = Classes/Views/ProgramDetailCells/DCEventDetailHeader2Cell.m; sourceTree = "<group>"; };
+		849D92DF19AE29D100977D67 /* DCEventDetailEmptyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCEventDetailEmptyCell.h; path = Classes/Views/ProgramDetailCells/DCEventDetailEmptyCell.h; sourceTree = "<group>"; };
+		849D92E019AE29D100977D67 /* DCEventDetailEmptyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCEventDetailEmptyCell.m; path = Classes/Views/ProgramDetailCells/DCEventDetailEmptyCell.m; sourceTree = "<group>"; };
+		849D92E219AE2A6600977D67 /* DCDescriptionTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCDescriptionTextCell.h; path = Classes/Views/ProgramDetailCells/DCDescriptionTextCell.h; sourceTree = "<group>"; };
+		849D92E319AE2A6600977D67 /* DCDescriptionTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCDescriptionTextCell.m; path = Classes/Views/ProgramDetailCells/DCDescriptionTextCell.m; sourceTree = "<group>"; };
 		849EFDA219A49FB600C43E05 /* main.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = main.xcdatamodel; sourceTree = "<group>"; };
 		849EFDDA19A4ACB800C43E05 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		849EFE1019A4D63500C43E05 /* DCDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCDataProvider.h; path = Classes/Helpers/DCDataProvider.h; sourceTree = "<group>"; };
@@ -231,6 +258,7 @@
 		5D38E68719868BFE006F7A59 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				849D92D519AE285700977D67 /* ProgramDetailCells */,
 				84A06E2C19ACA3D100104876 /* controls */,
 				84A06E2819ACA2B100104876 /* SpeakerCells */,
 				5D6449C719893B7E00BC1775 /* ProgramCells */,
@@ -266,6 +294,8 @@
 			children = (
 				5D38E694198692E9006F7A59 /* DCSpeakersViewController.h */,
 				5D38E695198692E9006F7A59 /* DCSpeakersViewController.m */,
+				849D92CF19AE07D200977D67 /* DCSpeakersDetailViewController.h */,
+				849D92D019AE07D200977D67 /* DCSpeakersDetailViewController.m */,
 			);
 			path = Speakers;
 			sourceTree = "<group>";
@@ -360,6 +390,8 @@
 				849CF82019A6246A00C84675 /* NSDate+DC.m */,
 				84FAE0E619A645E000DC9FF1 /* NSArray+DC.h */,
 				84FAE0E719A645E000DC9FF1 /* NSArray+DC.m */,
+				849D92C619ADF31D00977D67 /* UIImageView+DC.h */,
+				849D92C719ADF31D00977D67 /* UIImageView+DC.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -537,6 +569,21 @@
 			path = SideMenu;
 			sourceTree = "<group>";
 		};
+		849D92D519AE285700977D67 /* ProgramDetailCells */ = {
+			isa = PBXGroup;
+			children = (
+				849D92D619AE295200977D67 /* DCEventDetailTitleCell.h */,
+				849D92D719AE295200977D67 /* DCEventDetailTitleCell.m */,
+				849D92DF19AE29D100977D67 /* DCEventDetailEmptyCell.h */,
+				849D92E019AE29D100977D67 /* DCEventDetailEmptyCell.m */,
+				849D92DC19AE29B000977D67 /* DCEventDetailHeader2Cell.h */,
+				849D92DD19AE29B000977D67 /* DCEventDetailHeader2Cell.m */,
+				849D92E219AE2A6600977D67 /* DCDescriptionTextCell.h */,
+				849D92E319AE2A6600977D67 /* DCDescriptionTextCell.m */,
+			);
+			name = ProgramDetailCells;
+			sourceTree = "<group>";
+		};
 		849EFDA019A49F8600C43E05 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -589,6 +636,8 @@
 				84FAE10819A65FEA00DC9FF1 /* DCTime+DC.m */,
 				84FAE10A19A6600900DC9FF1 /* DCTimeRange+DC.h */,
 				84FAE10B19A6600900DC9FF1 /* DCTimeRange+DC.m */,
+				849D92C319ADEA8700977D67 /* DCSpeaker+DC.h */,
+				849D92C419ADEA8700977D67 /* DCSpeaker+DC.m */,
 			);
 			name = DOCategories;
 			sourceTree = "<group>";
@@ -598,6 +647,10 @@
 			children = (
 				84A06E2919ACA2F700104876 /* DCSpeakerCell.h */,
 				84A06E2A19ACA2F700104876 /* DCSpeakerCell.m */,
+				849D92C919ADF98600977D67 /* DCSpeakerHeaderCell.h */,
+				849D92CA19ADF98600977D67 /* DCSpeakerHeaderCell.m */,
+				849D92CC19ADFAA100977D67 /* DCSpeakerBottomCell.h */,
+				849D92CD19ADFAA100977D67 /* DCSpeakerBottomCell.m */,
 			);
 			name = SpeakerCells;
 			sourceTree = "<group>";
@@ -723,6 +776,7 @@
 			files = (
 				5D6449DF198ABA4E00BC1775 /* DCAppFacade.m in Sources */,
 				84FAE10919A65FEA00DC9FF1 /* DCTime+DC.m in Sources */,
+				849D92D119AE07D200977D67 /* DCSpeakersDetailViewController.m in Sources */,
 				5DC8C459198658BF00BF5816 /* AppDelegate.m in Sources */,
 				5D6449CA19893BAD00BC1775 /* DCSpeechCell.m in Sources */,
 				84FAE0EE19A65F9400DC9FF1 /* DCLevel.m in Sources */,
@@ -733,14 +787,17 @@
 				84A06E3319ACBA0600104876 /* DCEventDetailViewController.m in Sources */,
 				849CF82419A62F8600C84675 /* DCMainProxy+Additions.m in Sources */,
 				84FAE10319A65F9500DC9FF1 /* DCEvent.m in Sources */,
+				849D92DE19AE29B000977D67 /* DCEventDetailHeader2Cell.m in Sources */,
 				849EFE4119A5067000C43E05 /* DCType+DC.m in Sources */,
 				84FAE0F419A65F9500DC9FF1 /* DCBof.m in Sources */,
 				849EFE2119A4FB9600C43E05 /* DCProgram+DC.m in Sources */,
 				5D38E68219867062006F7A59 /* DCMenuContainerViewController.m in Sources */,
+				849D92C519ADEA8700977D67 /* DCSpeaker+DC.m in Sources */,
 				5D38E69D1987A631006F7A59 /* DCSideMenuCell.m in Sources */,
 				5DC8C46E198658FF00BF5816 /* MFSideMenuShadow.m in Sources */,
 				5D38E696198692E9006F7A59 /* DCSpeakersViewController.m in Sources */,
 				84A06E2F19ACA41100104876 /* DCFavoriteButton.m in Sources */,
+				849D92CE19ADFAA100977D67 /* DCSpeakerBottomCell.m in Sources */,
 				84FAE0FA19A65F9500DC9FF1 /* DCSpeaker.m in Sources */,
 				84A06E2B19ACA2F700104876 /* DCSpeakerCell.m in Sources */,
 				5D6449B1198908C600BC1775 /* DCProgramItemsViewController.m in Sources */,
@@ -748,9 +805,11 @@
 				84FAE0FD19A65F9500DC9FF1 /* DCTrack.m in Sources */,
 				5D6449AD1988ECA400BC1775 /* DCMenuStoryboardHelper.m in Sources */,
 				84FAE0E819A645E000DC9FF1 /* NSArray+DC.m in Sources */,
+				849D92E419AE2A6600977D67 /* DCDescriptionTextCell.m in Sources */,
 				84FAE10619A65F9500DC9FF1 /* DCTimeRange.m in Sources */,
 				5DC8C46F198658FF00BF5816 /* UIViewController+MFSideMenuAdditions.m in Sources */,
 				84FAE10C19A6600900DC9FF1 /* DCTimeRange+DC.m in Sources */,
+				849D92D819AE295200977D67 /* DCEventDetailTitleCell.m in Sources */,
 				5D6449CD19893BC300BC1775 /* DCSpeechOfDayCell.m in Sources */,
 				5DC8C421198656DB00BF5816 /* main.m in Sources */,
 				5DC8C47A19865C8400BF5816 /* DCSideMenuViewController.m in Sources */,
@@ -761,7 +820,10 @@
 				849D92C219ADCCDD00977D67 /* DCNavViewController.m in Sources */,
 				5D38E6A11987A673006F7A59 /* DCTextField.m in Sources */,
 				84FAE10019A65F9500DC9FF1 /* DCTime.m in Sources */,
+				849D92CB19ADF98600977D67 /* DCSpeakerHeaderCell.m in Sources */,
+				849D92C819ADF31D00977D67 /* UIImageView+DC.m in Sources */,
 				849CF82119A6246A00C84675 /* NSDate+DC.m in Sources */,
+				849D92E119AE29D100977D67 /* DCEventDetailEmptyCell.m in Sources */,
 				84FAE0F719A65F9500DC9FF1 /* DCProgram.m in Sources */,
 				849EFE1219A4D63500C43E05 /* DCDataProvider.m in Sources */,
 				5DC8C4731986594400BF5816 /* DCBaseViewController.m in Sources */,

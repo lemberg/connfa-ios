@@ -14,4 +14,6 @@
 @property (nonatomic, weak) IBOutlet UILabel * nameLbl;
 @property (nonatomic, weak) IBOutlet UILabel * positionTitleLbl;
 
++ (float)cellHeight;
+
 @end

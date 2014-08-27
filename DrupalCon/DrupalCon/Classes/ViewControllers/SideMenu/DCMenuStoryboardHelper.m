@@ -16,6 +16,9 @@
     if(menu == DCMENU_PROGRAM_ITEM)
         storyboardControllerID = @"ProgramViewController";
     
+    if (menu == DCMENU_BOFS_ITEM)
+        storyboardControllerID = @"ProgramViewController";
+    
     if(menu == DCMENU_SPEAKERS_ITEM)
         storyboardControllerID = @"SpeakersViewController";
     
@@ -38,6 +41,9 @@
     
     if(menu == DCMENU_PROGRAM_ITEM)
         title = @"Programs";
+    
+    if (menu == DCMENU_BOFS_ITEM)
+        title = @"BoFs";
     
     if(menu == DCMENU_SPEAKERS_ITEM)
         title = @"Speakers";

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class DCProgram, DCBof, DCType, DCTime, DCTimeRange;
+@class DCProgram, DCBof, DCType, DCTime, DCTimeRange, DCSpeaker;
 
 @interface DCMainProxy : NSObject
 
@@ -23,12 +23,14 @@
 - (NSArray*)programInstances;
 - (NSArray*)bofInstances;
 - (NSArray*)typeInstances;
+- (NSArray*)speakerInstances;
 - (DCType*)typeForID:(int)typeID;
 
 - (DCProgram*)createProgramItem;
 - (DCBof*)createBofItem;
 - (DCType*)createType;
 - (DCTime*)createTime;
+- (DCSpeaker*)createSpeaker;
 - (DCTimeRange*)createTimeRange;
 
 @end

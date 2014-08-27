@@ -16,6 +16,8 @@
     UIImage *image = nil;
     if(menu == DCMENU_PROGRAM_ITEM)
         image = [UIImage imageNamed: @"ic_program"];
+    if (menu == DCMENU_BOFS_ITEM)
+        image = [UIImage imageNamed:@"ic_bofs"];
     if(menu == DCMENU_SPEAKERS_ITEM)
         image = [UIImage imageNamed: @"ic_speakers"];
     if(menu == DCMENU_LOCATION_ITEM)

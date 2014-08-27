@@ -26,13 +26,25 @@
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear: animated];
-    
-    self.navigationController.navigationBar.barTintColor = NAV_BAR_COLOR;
-    NSDictionary *textAttributes = NAV_BAR_TITLE_ATTRIBUTES;
-    
 
-    self.navigationController.navigationBar.titleTextAttributes = textAttributes;
-    self.navigationController.navigationBar.translucent = NO;
+    if (self.navigatorBarStyle == EBaseViewControllerNatigatorBarStyleNormal)
+    {
+        self.navigationController.navigationBar.barTintColor = NAV_BAR_COLOR;
+        NSDictionary *textAttributes = NAV_BAR_TITLE_ATTRIBUTES;
+        
+        
+        self.navigationController.navigationBar.titleTextAttributes = textAttributes;
+        self.navigationController.navigationBar.translucent = NO;
+    }
+    else if (self.navigatorBarStyle == EBaseViewControllerNatigatorBarStyleTransparrent)
+    {
+        [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+        [self.navigationController.navigationBar setBackgroundImage:[UIImage new]
+                                                      forBarMetrics:UIBarMetricsDefault];
+        self.navigationController.navigationBar.shadowImage = [UIImage new];
+        self.navigationController.navigationBar.translucent = YES;
+        
+    }
 }
 
 @end

@@ -8,19 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "DCFavoriteButton.h"
+#import "DCBaseViewController.h"
 
 
 @class DCEvent, DCProgram, DCBof;
-@interface DCEventDetailViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, DCFacotiteDelegateProtocol, UIScrollViewDelegate>
+@interface DCEventDetailViewController : DCBaseViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, DCFacotiteDelegateProtocol>
 
-@property (nonatomic, weak) IBOutlet UIView * infoPannel;
-@property (nonatomic, weak) IBOutlet DCFavoriteButton * favoriteBtn;
-@property (nonatomic, weak) IBOutlet UILabel * eventNameLbl;
-@property (nonatomic, weak) IBOutlet UILabel * trackLbl;
-@property (nonatomic, weak) IBOutlet UILabel * levelLbl;
-@property (nonatomic, weak) IBOutlet UILabel * placeLbl;
-@property (nonatomic, weak) IBOutlet UITextView * detailTxt;
-@property (nonatomic,weak) IBOutlet UITableView * speakersTbl;
+@property (nonatomic, weak) IBOutlet UITableView * detailTable;
+@property (nonatomic, weak) IBOutlet UIImageView * eventPictureImg;
 
 @property (nonatomic, strong) DCEvent * event;
 @property (nonatomic, strong) NSArray * speakers;

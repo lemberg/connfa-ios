@@ -7,43 +7,62 @@
 //
 
 #import "DCSpeakersViewController.h"
+#import "AppDelegate.h"
+#import "DCSpeakersDetailViewController.h"
+#import "DCSpeakerCell.h"
+#import "DCMainProxy+Additions.h"
+#import "DCSpeaker+DC.h"
 
 @interface DCSpeakersViewController ()
+
+@property (nonatomic, weak) IBOutlet UITableView * speakersTbl;
 
 @end
 
 @implementation DCSpeakersViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    _speakers = [[DCMainProxy sharedProxy] speakerInstances];
+    [_speakersTbl reloadData];
 }
 
-- (void)didReceiveMemoryWarning
+#pragma mark - UITableView delegate/datasourse methods
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    return [DCSpeakerCell cellHeight];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    return _speakers.count;
 }
-*/
+
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString * cellIdSpeaker = @"DetailCellIdentifierSpeaker";
+    UITableViewCell *cell;
+    DCSpeakerCell *_cell = (DCSpeakerCell*)[tableView dequeueReusableCellWithIdentifier: cellIdSpeaker];
+    
+    DCSpeaker * speaker = _speakers[indexPath.row];
+    
+    [_cell.nameLbl setText:speaker.name];
+    [_cell.positionTitleLbl setText:speaker.jobTitle];
+    [_cell.pictureImg setImage:[UIImage imageNamed:@"avatar_test_image"]];
+    cell = _cell;
+    return _cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    DCSpeakersDetailViewController * detailController = [self.storyboard instantiateViewControllerWithIdentifier:@"SpeakersDetailViewController"];
+    [detailController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+    detailController.speaker = _speakers[indexPath.row];
+    [[(AppDelegate*)[[UIApplication sharedApplication] delegate] window].rootViewController presentViewController:detailController animated:YES completion:nil];
+}
+
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "DCSpeakerCell.h"
+#import "UIImageView+DC.h"
 
 @implementation DCSpeakerCell
 
@@ -21,7 +22,7 @@
 
 - (void)awakeFromNib
 {
-    // Initialization code
+    [_pictureImg cutCircle];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -29,6 +30,11 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
++ (float)cellHeight
+{
+    return 65.0;
 }
 
 @end
