@@ -2,12 +2,15 @@
 //  DCEvent.m
 //  DrupalCon
 //
-//  Created by Volodymyr Hyrka on 8/21/14.
+//  Created by Volodymyr Hyrka on 8/28/14.
 //  Copyright (c) 2014 Lemberg Solution. All rights reserved.
 //
 
 #import "DCEvent.h"
+#import "DCLevel.h"
+#import "DCSpeaker.h"
 #import "DCTimeRange.h"
+#import "DCTrack.h"
 #import "DCType.h"
 
 
@@ -16,12 +19,12 @@
 @dynamic date;
 @dynamic desctiptText;
 @dynamic favorite;
-@dynamic level;
 @dynamic name;
 @dynamic place;
 @dynamic speakers;
-@dynamic track;
-@dynamic type;
 @dynamic timeRange;
+@dynamic type;
+@dynamic level;
+@dynamic tracks;
 
 @end

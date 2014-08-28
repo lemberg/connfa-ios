@@ -21,6 +21,8 @@
 #import "DCType+DC.h"
 #import "DCTimeRange+DC.h"
 #import "DCTime+DC.h"
+#import "DCLevel+DC.h"
+#import "DCTrack+DC.h"
 #import "DCMainProxy+Additions.h"
 
 #import "NSArray+DC.h"
@@ -69,27 +71,24 @@
 
     switch ([event getTypeID]) {
         case DC_EVENT_SPEACH: {
-            NSLog(@"CelId: %@", cellIdSpeech);
             DCSpeechCell *_cell = (DCSpeechCell*)[tableView dequeueReusableCellWithIdentifier: cellIdSpeech];
-            _cell.speakerLabel.text = event.speakers;
-            _cell.experienceLevelLabel.text = event.level;
-            _cell.trackLabel.text = event.track;
+            _cell.speakerLabel.text = [self DC_speakersTextForSpeakerNames:[event speakersNames]];
+            _cell.experienceLevelLabel.text = event.level.name;
+            _cell.trackLabel.text = [[event.tracks allObjects].firstObject name];
             _cell.nameLabel.text = event.name;
             cell = _cell;
             break;
         }
         case DC_EVENT_SPEACH_OF_DAY: {
-            NSLog(@"CelId: %@", cellIdSpeechOfDay);
             DCSpeechOfDayCell *_cell = (DCSpeechOfDayCell*)[tableView dequeueReusableCellWithIdentifier: cellIdSpeechOfDay];
-            _cell.speakerLabel.text = event.speakers;
-            _cell.experienceLevelLabel.text = event.level;
-            _cell.trackLabel.text = event.track;
+            _cell.speakerLabel.text = [self DC_speakersTextForSpeakerNames:[event speakersNames]];
+            _cell.experienceLevelLabel.text = event.level.name;
+            _cell.trackLabel.text = [[event.tracks allObjects].firstObject name];
             _cell.nameLabel.text = event.name;
             cell = _cell;
             break;
         }
         case DC_EVENT_COFEE_BREAK: {
-            NSLog(@"CelId: %@", cellIdCoffeBreak);
             DCCofeeCell *_cell = (DCCofeeCell*)[tableView dequeueReusableCellWithIdentifier: cellIdCoffeBreak];
             _cell.startLabel.text = [event.timeRange.from stringValue];
             _cell.endLabel.text = [event.timeRange.to stringValue];
@@ -98,7 +97,6 @@
             break;
         }
         case DC_EVENT_LUNCH: {
-              NSLog(@"CelId: %@", cellIdLunch);
             DCLunchCell *_cell = (DCLunchCell*)[tableView dequeueReusableCellWithIdentifier: cellIdLunch];
             _cell.startLabel.text = [event.timeRange.from stringValue];
             _cell.endLabel.text = [event.timeRange.to stringValue];
@@ -221,6 +219,24 @@
 - (DCProgram*)DC_eventForIndexPath:(NSIndexPath *)indexPath
 {
     return [[_events eventsForTimeRange:_timeslots[indexPath.section]] objectAtIndex:indexPath.row];
+}
+
+- (NSString*)DC_speakersTextForSpeakerNames:(NSArray*)speakerNames
+{
+    NSString * resultStr = @"";
+    if (speakerNames.count == 1)
+    {
+        resultStr = speakerNames[0];
+    }
+    else if (speakerNames.count == 2)
+    {
+        resultStr = [NSString stringWithFormat:@"%@\n%@",speakerNames[0], speakerNames[1]];
+    }
+    else if (speakerNames.count > 2)
+    {
+        resultStr = [NSString stringWithFormat:@"%@\n...",speakerNames[0]];
+    }
+    return resultStr;
 }
 
 @end

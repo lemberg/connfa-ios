@@ -1,0 +1,56 @@
+{
+    "speakers" : [
+                  {
+                  "speakerId" : 0,
+                  "name" : "Jenn Sramek",
+                  "organization" : "Jen LTD",
+                  "jobTitle" : "CEO",
+                  "charact" : "normal person"
+                  },
+                  {
+                  "speakerId" : 1,
+                  "name" : "Frank Baele",
+                  "organization" : "Indigo",
+                  "jobTitle" : "developer",
+                  "charact" : "quite normal person"
+                  },
+                  {
+                  "speakerId" : 2,
+                  "name" : "Alexander Ward",
+                  "organization" : "Jen LTD",
+                  "jobTitle" : "Alexander",
+                  "charact" : "He is just Alexander"
+                  },
+                  {
+                  "speakerId" : 3,
+                  "name" : "Jozeph Toth",
+                  "organization" : "T-Corporation",
+                  "jobTitle" : "senior ingeneer",
+                  "charact" : "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."
+                  },
+                  {
+                  "speakerId" : 4,
+                  "name" : "Roel De Meester",
+                  "organization" : "T-Corporation",
+                  "jobTitle" : "clever one",
+                  "charact" : "very clever person"
+                  },
+                  {
+                  "speakerId" : 5,
+                  "name" : "Jou Wouters",
+                  "jobTitle" : "freelancer",
+                  "charact" : ""
+                  },
+                  {
+                  "speakerId" : 6,
+                  "name" : "Tom Waits"
+                  },
+                  {
+                  "speakerId" : 7,
+                  "name" : "Wayne Rooney",
+                  "organization" : "T-Corporation",
+                  "jobTitle" : "prof speaker",
+                  "charact" : "Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda."
+                  }
+                ]
+}

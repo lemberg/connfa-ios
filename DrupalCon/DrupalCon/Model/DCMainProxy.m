@@ -13,6 +13,8 @@
 #import "DCTime+DC.h"
 #import "DCTimeRange+DC.h"
 #import "DCSpeaker+DC.h"
+#import "DCLevel+DC.h"
+#import "DCTrack+DC.h"
 
 #import "DCDataProvider.h"
 
@@ -42,6 +44,8 @@ static NSString * kDCMainProxyTypesFile = @"types";
 {
     [self updateTypes];
     [self updateSpeakers];
+    [self updateLevels];
+    [self updateTracks];
     [self updateProgram];
 }
 
@@ -73,13 +77,63 @@ static NSString * kDCMainProxyTypesFile = @"types";
                         inContext:self.managedObjectContext];
 }
 
-- (DCType*)typeForID:(int)typeID
+- (NSArray*)levelInstances
+{
+    return [self instancesOfClass:[DCLevel class]
+            filtredUsingPredicate:nil
+                        inContext:self.managedObjectContext];
+}
+
+- (NSArray*)trackInstances
+{
+    return [self instancesOfClass:[DCTrack class]
+            filtredUsingPredicate:nil
+                        inContext:self.managedObjectContext];
+}
+
+- (DCType*)typeForID:(NSInteger)typeID
 {
     NSPredicate * predicate = [NSPredicate predicateWithFormat:@"typeID == %i",typeID];
     NSArray * results = [self instancesOfClass:[DCType class]
                          filtredUsingPredicate:predicate
                                      inContext:self.managedObjectContext];
     return (results.count ? [results firstObject] : nil);
+}
+
+- (DCSpeaker*)speakerForId:(NSInteger)speakerId
+{
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"speakerId == %i", speakerId];
+    NSArray * results = [self instancesOfClass:[DCSpeaker class]
+                         filtredUsingPredicate:predicate
+                                     inContext:self.managedObjectContext];
+    if (results.count>1)
+        NSLog(@"WRONG! too many speakers for id# %i", speakerId);
+        
+    return (results.count ? results.firstObject : nil);
+}
+
+- (DCLevel*)levelForId:(NSInteger)levelId
+{
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"levelId == %i", levelId];
+    NSArray * results = [self instancesOfClass:[DCLevel class]
+                         filtredUsingPredicate:predicate
+                                     inContext:self.managedObjectContext];
+    if (results.count>1)
+        NSLog(@"WRONG! too many speakers for id# %i", levelId);
+    
+    return (results.count ? results.firstObject : nil);
+}
+
+- (DCTrack*)trackForId:(NSInteger)trackId
+{
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"trackId == %i", trackId];
+    NSArray * results = [self instancesOfClass:[DCTrack class]
+                         filtredUsingPredicate:predicate
+                                     inContext:self.managedObjectContext];
+    if (results.count>1)
+        NSLog(@"WRONG! too many speakers for id# %i", trackId);
+    
+    return (results.count ? results.firstObject : nil);
 }
 
 #pragma mark - DO creation
@@ -114,7 +168,29 @@ static NSString * kDCMainProxyTypesFile = @"types";
     return [self createInstanceOfClass:[DCSpeaker class] inContext:self.managedObjectContext];
 }
 
+- (DCLevel*)createLevel
+{
+    return [self createInstanceOfClass:[DCLevel class] inContext:self.managedObjectContext];
+}
+
+- (DCTrack*)createTrack
+{
+    return [self createInstanceOfClass:[DCTrack class] inContext:self.managedObjectContext];
+}
+
 #pragma mark - DO remove
+
+- (void)clearLevels
+{
+    [self removeItems:[self levelInstances]
+            inContext:self.managedObjectContext];
+}
+
+- (void)clearTracks
+{
+    [self removeItems:[self trackInstances]
+            inContext:self.managedObjectContext];
+}
 
 - (void)clearTypes
 {
@@ -195,9 +271,56 @@ static NSString * kDCMainProxyTypesFile = @"types";
 
 - (void)updateSpeakers
 {
-    [self clearSpeakers];
-    [self DC_generateSpeakers_tmp];
-    [self saveContext];
+    [self.managedObjectContext performBlockAndWait:^{
+        [DCDataProvider updateMainDataFromFile:[NSString stringWithFormat:@"%@",[NSStringFromClass([DCSpeaker class]) lowercaseString]] callBack:^(BOOL success, id result) {
+            if (success && result)
+            {
+                [self clearSpeakers];
+                [DCSpeaker parceFromJSONData:result];
+                [self saveContext];
+            }
+            else
+            {
+                NSLog(@"WRONG! %@", result);
+            }
+        }];
+    }];
+}
+
+- (void)updateLevels
+{
+    [self.managedObjectContext performBlockAndWait:^{
+        [DCDataProvider updateMainDataFromFile:[self DC_fileNameForClass:[DCLevel class]] callBack:^(BOOL success, id result) {
+            if (success && result)
+            {
+                [self clearLevels];
+                [DCLevel parceFromJsonData:result];
+                [self saveContext];
+            }
+            else
+            {
+                NSLog(@"WRONG! %@", result);
+            }
+        }];
+    }];
+}
+
+- (void)updateTracks
+{
+    [self.managedObjectContext performBlockAndWait:^{
+        [DCDataProvider updateMainDataFromFile:[self DC_fileNameForClass:[DCTrack class]] callBack:^(BOOL success, id result) {
+            if (success && result)
+            {
+                [self clearTracks];
+                [DCTrack parceFromJsonData:result];
+                [self saveContext];
+            }
+            else
+            {
+                NSLog(@"WRONG! %@", result);
+            }
+        }];
+    }];
 }
 
 - (NSArray*) instancesOfClass:(Class)objectClass filtredUsingPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context
@@ -286,13 +409,8 @@ static NSString * kDCMainProxyTypesFile = @"types";
 
 #pragma mark -
 
-- (void)DC_generateSpeakers_tmp
+- (NSString*)DC_fileNameForClass:(__unsafe_unretained Class)aClass
 {
-    DCSpeaker * speaker = [[DCMainProxy sharedProxy] createSpeaker];
-    speaker.name = @"Test SpeakerDB";
-    speaker.jobTitle = @"generator";
-    speaker.organizationName = @"lemberg LTD";
-    speaker.characteristic = @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+    return [NSStringFromClass(aClass) lowercaseString];
 }
-
 @end

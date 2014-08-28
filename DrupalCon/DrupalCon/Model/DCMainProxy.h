@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class DCProgram, DCBof, DCType, DCTime, DCTimeRange, DCSpeaker;
+@class DCProgram, DCBof, DCType, DCTime, DCTimeRange, DCSpeaker, DCLevel, DCTrack;
 
 @interface DCMainProxy : NSObject
 
@@ -24,7 +24,12 @@
 - (NSArray*)bofInstances;
 - (NSArray*)typeInstances;
 - (NSArray*)speakerInstances;
+- (NSArray*)levelInstances;
+- (NSArray*)trackInstances;
 - (DCType*)typeForID:(int)typeID;
+- (DCSpeaker*)speakerForId:(NSInteger)speakerId;
+- (DCLevel*)levelForId:(NSInteger)levelId;
+- (DCTrack*)trackForId:(NSInteger)trackId;
 
 - (DCProgram*)createProgramItem;
 - (DCBof*)createBofItem;
@@ -32,5 +37,7 @@
 - (DCTime*)createTime;
 - (DCSpeaker*)createSpeaker;
 - (DCTimeRange*)createTimeRange;
+- (DCLevel*)createLevel;
+- (DCTrack*)createTrack;
 
 @end

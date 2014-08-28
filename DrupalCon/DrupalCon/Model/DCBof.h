@@ -1,17 +1,17 @@
 //
-//  DCTrack.h
+//  DCBof.h
 //  DrupalCon
 //
-//  Created by Volodymyr Hyrka on 8/21/14.
+//  Created by Volodymyr Hyrka on 8/28/14.
 //  Copyright (c) 2014 Lemberg Solution. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "DCEvent.h"
 
 
-@interface DCTrack : NSManagedObject
+@interface DCBof : DCEvent
 
-@property (nonatomic, retain) NSString * name;
 
 @end

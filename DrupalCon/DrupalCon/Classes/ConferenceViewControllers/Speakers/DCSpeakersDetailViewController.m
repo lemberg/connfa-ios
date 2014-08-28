@@ -7,10 +7,17 @@
 //
 
 #import "DCSpeakersDetailViewController.h"
-#import "DCSpeaker+DC.h"
+#import "NSDate+DC.h"
 
-#import "DCSpeakerBottomCell.h"
+#import "DCSpeaker+DC.h"
+#import "DCEvent+DC.h"
+#import "DCTimeRange+DC.h"
+#import "DCTrack+DC.h"
+#import "DCLevel+DC.h"
+
+#import "DCDescriptionTextCell.h"
 #import "DCSpeakerHeaderCell.h"
+#import "DCSpeakerEventCell.h"
 
 @interface DCSpeakersDetailViewController ()
 
@@ -25,13 +32,16 @@
 {
     [super viewDidLoad];
     self.navigatorBarStyle = EBaseViewControllerNatigatorBarStyleTransparrent;
+    _events = [_speaker.events allObjects];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     if (self.navigationController)
     {
-        
+        self.navigatorBarStyle = EBaseViewControllerNatigatorBarStyleNormal;
+        [super viewWillAppear:animated];
+        self.title = @"Speaker Profile";
     }
     else
     {
@@ -39,8 +49,8 @@
         [backButton addTarget:self action:@selector(onBack) forControlEvents:UIControlEventTouchUpInside];
         [backButton setFrame:CGRectMake(0, 0, 60, 64)];
         [backButton setExclusiveTouch:YES];
-//        [backButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-        [backButton setTitle:@"⟨ Back" forState:UIControlStateNormal];
+        [backButton setImage:[UIImage imageNamed:@"back_arrow"] forState:UIControlStateNormal];
+        [backButton setTitle:@"Back" forState:UIControlStateNormal];
         [backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.view addSubview:backButton];
         
@@ -73,23 +83,23 @@
         return [DCSpeakerHeaderCell cellHeight];
     
     else if ([self isLastRow:indexPath.row])
-        return [DCSpeakerBottomCell cellHeightForText:_speaker.characteristic];
+        return [DCDescriptionTextCell cellHeightForText:_speaker.characteristic];
     
     else
-        return 0.0;
+        return [DCSpeakerEventCell cellHeight];
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *cellIdSpeech = @"ProgramCellIdentifierSpeech";
-    NSString *cellIdHeader = @"SpeakerCellIdHeader";
-    NSString *cellIdBottom = @"SpeakerCellIdBottom";
+    static NSString *cellIdEvent = @"cellId_SpeakersEvent";
+    static NSString *cellIdHeader = @"cellId_SpeakersHeader";
+    static NSString *cellIdBottom = @"cellId_SpeakersBottom";
     
     UITableViewCell *cell;
     
     if (indexPath.row == 0)
     {
-        DCSpeakerHeaderCell *_cell = (DCSpeakerHeaderCell*)[tableView dequeueReusableCellWithIdentifier: cellIdHeader];
+        DCSpeakerHeaderCell *_cell = (DCSpeakerHeaderCell*)[tableView dequeueReusableCellWithIdentifier:cellIdHeader];
         [_cell.pictureImg setImage:[UIImage imageNamed:@"avatar_test_image"]];
         [_cell.nameLbl setText:_speaker.name];
         [_cell.organizationLbl setText:_speaker.organizationName];
@@ -99,14 +109,22 @@
     
     else if ([self isLastRow:indexPath.row])
     {
-        DCSpeakerBottomCell * _cell = (DCSpeakerBottomCell*)[tableView dequeueReusableCellWithIdentifier:cellIdBottom];
-        [_cell.characteristicTxt setText:_speaker.characteristic];
+        DCDescriptionTextCell * _cell = (DCDescriptionTextCell*)[tableView dequeueReusableCellWithIdentifier:cellIdBottom];
+        [_cell.descriptionTxt setText:_speaker.characteristic];
         cell = _cell;
     }
     
-    else
+    else // all events cells
     {
-        cell = nil;
+        DCEvent * event = _events[indexPath.row-1];
+        DCSpeakerEventCell * _cell = (DCSpeakerEventCell*)[tableView dequeueReusableCellWithIdentifier:cellIdEvent];
+        _cell.favorite = NO;
+        [_cell.eventNameValueLbl setText:event.name];
+        [_cell.eventDateValueLbl setText:[event.date stringForSpeakerEventCell]];
+        [_cell.eventTimeValueLbl setText:[event.timeRange stringValue]];
+        [_cell.eventTrackValueLbl setText:[[event.tracks allObjects].firstObject name]];
+        [_cell.eventLevelValueLbl setText:event.level.name];
+        cell = _cell;
     }
 
     return cell;

@@ -12,5 +12,6 @@
 
 + (NSDate*)fabricateWithEventString:(NSString*)string;
 - (NSString*)pageViewDateString;
+- (NSString*)stringForSpeakerEventCell;
 
 @end

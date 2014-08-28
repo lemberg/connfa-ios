@@ -9,6 +9,7 @@
 #import "DCEvent+DC.h"
 #import "DCTimeRange+DC.h"
 #import "DCType+DC.h"
+#import "DCSpeaker+DC.h"
 
 const NSString * kDCEvent_days_key = @"days";
 const NSString * kDCEvent_date_key = @"date";
@@ -17,7 +18,7 @@ const NSString * kDCEvent_from_key = @"from";
 const NSString * kDCEvent_to_key = @"to";
 const NSString * kDCEvent_type_key = @"type";
 const NSString * kDCEvent_name_key = @"name";
-const NSString * kDCEvent_speaker_key = @"speaker";
+const NSString * kDCEvent_speakers_key = @"speakers";
 const NSString * kDCEvent_track_key = @"track";
 const NSString * kDCEvent_experienceLevel_key = @"experience_level";
 
@@ -27,6 +28,16 @@ const NSString * kDCEvent_experienceLevel_key = @"experience_level";
 + (void)parceFromJSONData:(NSData *)jsonData
 {
 
+}
+
+- (NSArray*)speakersNames
+{
+    NSMutableArray * speakerNames = [[NSMutableArray alloc] initWithCapacity:self.speakers.count];
+    for (DCSpeaker * speaker in self.speakers)
+    {
+        [speakerNames addObject:(NSString*)speaker.name];
+    }
+    return speakerNames;
 }
 
 - (NSString*)description

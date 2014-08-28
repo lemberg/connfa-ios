@@ -24,6 +24,12 @@
     return self;
 }
 
+-(void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+}
+
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear: animated];
 
@@ -35,6 +41,12 @@
         
         self.navigationController.navigationBar.titleTextAttributes = textAttributes;
         self.navigationController.navigationBar.translucent = NO;
+        UIBarButtonItem * backBtn = [[UIBarButtonItem alloc] initWithTitle:@"Back"
+                                                                     style:UIBarButtonItemStyleBordered
+                                                                    target:self
+                                                                    action:@selector(onBack)];
+        self.navigationItem.backBarButtonItem = backBtn;
+        self.navigationController.navigationBar.topItem.title = @"Back";
     }
     else if (self.navigatorBarStyle == EBaseViewControllerNatigatorBarStyleTransparrent)
     {
@@ -45,6 +57,11 @@
         self.navigationController.navigationBar.translucent = YES;
         
     }
+}
+
+- (void)onBack
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 @end

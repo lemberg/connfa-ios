@@ -15,7 +15,7 @@ extern NSString * kDCEvent_from_key;
 extern NSString * kDCEvent_to_key;
 extern NSString * kDCEvent_type_key;
 extern NSString * kDCEvent_name_key;
-extern NSString * kDCEvent_speaker_key;
+extern NSString * kDCEvent_speakers_key;
 extern NSString * kDCEvent_track_key;
 extern NSString * kDCEvent_experienceLevel_key;
 
@@ -23,5 +23,6 @@ extern NSString * kDCEvent_experienceLevel_key;
 @interface DCEvent (DC)
 
 - (NSInteger)getTypeID;
+- (NSArray*)speakersNames;
 
 @end

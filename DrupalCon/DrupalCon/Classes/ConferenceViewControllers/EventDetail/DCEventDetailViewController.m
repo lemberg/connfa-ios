@@ -7,10 +7,14 @@
 //
 
 #import "DCEventDetailViewController.h"
+#import "DCSpeakersDetailViewController.h"
+
 #import "DCEvent+DC.h"
 #import "DCProgram+DC.h"
 #import "DCTimeRange+DC.h"
 #import "DCSpeaker+DC.h"
+#import "DCLevel+DC.h"
+#import "DCTrack+DC.h"
 #import "DCBof.h"
 
 #import "DCEventDetailTitleCell.h"
@@ -19,8 +23,6 @@
 #import "DCSpeakerCell.h"
 #import "DCDescriptionTextCell.h"
 
-static CGFloat kEventDetailBGImageTop = 246.0;
-static CGFloat kEventDetailBGImageBottom = 0.0;
 
 @implementation DCEventDetailViewController
 
@@ -40,23 +42,24 @@ static CGFloat kEventDetailBGImageBottom = 0.0;
     
     self.title = [_event.timeRange stringValue];
     self.navigatorBarStyle = EBaseViewControllerNatigatorBarStyleTransparrent;
-    self.speakers = [self DC_speakers_tmp:_event.speakers];
+    self.speakers = [_event.speakers allObjects];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     UIButton* backButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [backButton addTarget:self action:@selector(onBack) forControlEvents:UIControlEventTouchUpInside];
     [backButton setFrame:CGRectMake(0, 0, 100, 40)];
     [backButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
     [backButton setExclusiveTouch:YES];
-//    [backButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
-    [backButton setTitle:@"⟨ Back" forState:UIControlStateNormal];
+    [backButton setImage:[UIImage imageNamed:@"back_arrow"] forState:UIControlStateNormal];
+    [backButton setTitle:@"Back" forState:UIControlStateNormal];
     [backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     UIBarButtonItem *backMenuBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     self.navigationItem.leftBarButtonItem = backMenuBarButton;
-    NSLog(@"...");
+    
 }
 
 
@@ -64,7 +67,6 @@ static CGFloat kEventDetailBGImageBottom = 0.0;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    NSLog(@"..");
     return 2;
 }
 
@@ -87,8 +89,8 @@ static CGFloat kEventDetailBGImageBottom = 0.0;
     else if (section == 1)
     {
         DCEventDetailHeader2Cell * infoPanel = (DCEventDetailHeader2Cell*)[tableView dequeueReusableCellWithIdentifier:@"DetailCellIdHeader2"];
-        [infoPanel.trackValueLbl setText:_event.track];
-        [infoPanel.levelValueLbl setText:_event.level];
+        [infoPanel.trackValueLbl setText:[[_event.tracks allObjects].firstObject name]];
+        [infoPanel.levelValueLbl setText:_event.level.name];
         [infoPanel.placeValueLbl setText:_event.place];
         [infoPanel.favorBtn setDelegate:self];
         return infoPanel;
@@ -138,13 +140,11 @@ static CGFloat kEventDetailBGImageBottom = 0.0;
     }
     else
     {
-        NSString * speaker = _speakers[indexPath.row];
+        DCSpeaker * speaker = _speakers[indexPath.row];
         DCSpeakerCell * _cell = (DCSpeakerCell*)[tableView dequeueReusableCellWithIdentifier:cellIdSpeaker];
         [_cell.pictureImg setImage:[UIImage imageNamed:@"avatar_test_image"]];
-//        [_cell.nampoeLbl setText:speaker.name];
-//        [_cell.positionTitleLbl setText:speaker.jobTitle];
-        [_cell.nameLbl setText:speaker];
-        [_cell.positionTitleLbl setText:@"default position"];
+        [_cell.nameLbl setText:speaker.name];
+        [_cell.positionTitleLbl setText:speaker.jobTitle];
         cell = _cell;
     }
     return cell;
@@ -153,7 +153,10 @@ static CGFloat kEventDetailBGImageBottom = 0.0;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    NSLog(@"speker selected");
+    
+    DCSpeakersDetailViewController * speakerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SpeakersDetailViewController"];
+    speakerViewController.speaker = _speakers[indexPath.row];
+    [self.navigationController pushViewController:speakerViewController animated:YES];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -163,7 +166,12 @@ static CGFloat kEventDetailBGImageBottom = 0.0;
         if (scrollView.contentOffset.y < 0) {
             [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0) animated:NO];
         }
-        _eventPictureImg.frame = CGRectMake(0, -1 * scrollView.contentOffset.y/2, _eventPictureImg.frame.size.width, _eventPictureImg.frame.size.height);
+        float stopPoint = -1 * (_eventPictureImg.frame.size.height - 64);
+        float offsetPoint = -1 * (scrollView.contentOffset.y/2);
+        _eventPictureImg.frame = CGRectMake(0,
+                                            (offsetPoint > stopPoint ? offsetPoint : stopPoint),
+                                            _eventPictureImg.frame.size.width,
+                                            _eventPictureImg.frame.size.height);
     }
 }
 

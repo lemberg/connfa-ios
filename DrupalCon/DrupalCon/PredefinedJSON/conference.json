@@ -7,9 +7,9 @@
                             "to" : "10:55",
                             "type" : 0,
                             "name" : "Axure prototyping for Drupal",
-                            "speaker" : "Jenn Sramek",
-                            "track" : "Frontend",
-                            "experience_level" : "Intermediate"
+                            "speakers" : [0],
+                            "track" : 0,
+                            "experience_level" : 1
                          },
                          {
                         
@@ -17,64 +17,64 @@
                             "to" : "10:55",
                             "type" : 0,
                             "name" : "12 Best practises from Wunderkraut",
-                            "speaker" : "Frank Baele, Test Speaker",
-                            "track" : "Business",
-                            "experience_level" : "Beginner"
+                            "speakers" : [0, 1],
+                            "track" : 1,
+                            "experience_level" : 0
                          },
                          {
                             "from" : "9:00",
                             "to" : "10:55",
                             "type" : 0,
                             "name" : "12 Best practises from Wunderkraut",
-                            "speaker" : "Jenn Sramek",
-                            "track" : "Frontend",
-                            "experience_level" : "Intermediate"
+                            "speakers" : [0],
+                            "track" : 0,
+                            "experience_level" : 1
                         },
                         {
                             "from" : "9:00",
                             "to" : "10:55",
                             "type" : 0,
                             "name" : "Content staging in Drupal8, continued!",
-                            "speaker" : "Alexander Ward",
-                            "track" : "Site building",
-                            "experience_level" : "Advanced"
+                            "speakers" : [2],
+                            "track" : 2,
+                            "experience_level" : 2
                         },
                         {
                             "from" : "9:10",
                             "to" : "10:55",
-                            "type" : 2,
+                            "type" : 2
                         },
                         {
                             "from" : "11:55",
                             "to" : "12:55",
                             "type" : 1,
                             "name" : "Modernizing Testbot: The Future of Drupal.org Automated Testing",
-                            "speaker" : "Jozeph Toth",
-                            "track" : "Drupal.org",
-                            "experience_level" : "Intermediate"
+                            "speakers" : [3],
+                            "track" : 3,
+                            "experience_level" : 1
                         },
                         {
                             "from" : "13:00",
                             "to" : "14:30",
-                            "type" : 3,
+                            "type" : 3
                         },
                         {
                             "from" : "14:35",
                             "to" : "15:30",
                             "type" : 0,
                             "name" : "Q&A width Dries",
-                            "speaker" : "Roel De Meester",
-                            "track" : "Core Converstaion",
-                            "experience_level" : "Advanced"
+                            "speakers" : [4],
+                            "track" : 4,
+                            "experience_level" : 2
                         },
                         {
                             "from" : "14:35",
                             "to" : "15:30",
                             "type" : 0,
                             "name" : "The future of HTML and CSS",
-                            "speaker" : "Jou Wouters",
-                            "track" : "Frontend",
-                            "experience_level" : "Intermediate"
+                            "speakers" : [5],
+                            "track" : 0,
+                            "experience_level" : 1
                         }
             ]
     },
@@ -85,9 +85,9 @@
                            "to" : "10:45",
                            "type" : 0,
                            "name" : "Drupal in mobile",
-                           "speaker" : "Marilyn Manson",
-                           "track" : "Frontend",
-                           "experience_level" : "Beginner"
+                           "speakers" : [6, 7],
+                           "track" : 0,
+                           "experience_level" : 0
                         },
                         {
                         
@@ -95,64 +95,64 @@
                            "to" : "12:55",
                            "type" : 0,
                            "name" : "Common pitfals for a drupal user",
-                           "speaker" : "Tom Waits",
-                           "track" : "Business",
-                           "experience_level" : "Advanced"
+                           "speakers" : [6],
+                           "track" : 1,
+                           "experience_level" : 2
                         },
                         {
                            "from" : "11:00",
                            "to" : "12:55",
                            "type" : 0,
                            "name" : "Drupal CSS cache",
-                           "speaker" : "Wayne Rooney",
-                           "track" : "Frontend",
-                           "experience_level" : "Intermediate"
+                           "speakers" : [7],
+                           "track" : 0,
+                           "experience_level" : 1
                         },
                         {
                            "from" : "11:00",
                            "to" : "12:55",
                            "type" : 0,
                            "name" : "Content staging in Drupal8, continued!",
-                           "speaker" : "Alexander Ward",
-                           "track" : "Site building",
-                           "experience_level" : "Advanced"
+                           "speakers" : [2],
+                           "track" : 2,
+                           "experience_level" : 2
                         },
                         {
                            "from" : "13:00",
                            "to" : "13:30",
-                           "type" : 2,
+                           "type" : 2
                         },
                         {
                            "from" : "13:55",
                            "to" : "14:55",
                            "type" : 1,
                            "name" : "Modernizing Testbot: The Future of Drupal.org Automated Testing",
-                           "speaker" : "Jozeph Toth",
-                           "track" : "Drupal.org",
-                           "experience_level" : "Intermediate"
+                           "speakers" : [3],
+                           "track" : 3,
+                           "experience_level" : 1
                         },
                         {
                            "from" : "15:00",
                            "to" : "15:30",
-                           "type" : 3,
+                           "type" : 3
                         },
                         {
                            "from" : "16:35",
                            "to" : "17:30",
                            "type" : 0,
                            "name" : "Q&A width Dries",
-                           "speaker" : "Roel De Meester",
-                           "track" : "Core Converstaion",
-                           "experience_level" : "Advanced"
+                           "speakers" : [4],
+                           "track" : 4,
+                           "experience_level" : 2
                         },
                         {
                            "from" : "16:35",
                            "to" : "17:30",
                            "type" : 0,
                            "name" : "The future of HTML and CSS",
-                           "speaker" : "Jou Wouters",
-                           "track" : "Frontend",
-                           "experience_level" : "Intermediate"
+                           "speakers" : [7],
+                           "track" : 0,
+                           "experience_level" : 1
                         }
                         ]
             },
@@ -163,9 +163,9 @@
                         "to" : "10:45",
                         "type" : 0,
                         "name" : "Drupal in mobile",
-                        "speaker" : "Marilyn Manson",
-                        "track" : "Frontend",
-                        "experience_level" : "Beginner"
+                        "speakers" : [0, 1, 2, 3, 4, 5, 6, 7],
+                        "track" : 0,
+                        "experience_level" : 0
                         },
                         {
                         
@@ -173,64 +173,64 @@
                         "to" : "12:55",
                         "type" : 0,
                         "name" : "Common pitfals for a drupal user",
-                        "speaker" : "Tom Waits",
-                        "track" : "Business",
-                        "experience_level" : "Advanced"
+                        "speakers" : [6],
+                        "track" : 1,
+                        "experience_level" : 2
                         },
                         {
                         "from" : "11:00",
                         "to" : "12:55",
                         "type" : 0,
                         "name" : "Drupal CSS cache",
-                        "speaker" : "Wayne Rooney",
-                        "track" : "Frontend",
-                        "experience_level" : "Intermediate"
+                        "speakers" : [7],
+                        "track" : 0,
+                        "experience_level" : 1
                         },
                         {
                         "from" : "11:00",
                         "to" : "12:55",
                         "type" : 0,
                         "name" : "Content staging in Drupal8, continued!",
-                        "speaker" : "Alexander Ward",
-                        "track" : "Site building",
-                        "experience_level" : "Advanced"
+                        "speakers" : [2],
+                        "track" : 2,
+                        "experience_level" : 2
                         },
                         {
                         "from" : "13:00",
                         "to" : "13:30",
-                        "type" : 2,
+                        "type" : 2
                         },
                         {
                         "from" : "13:55",
                         "to" : "14:55",
                         "type" : 1,
                         "name" : "Modernizing Testbot: The Future of Drupal.org Automated Testing",
-                        "speaker" : "Jozeph Toth",
-                        "track" : "Drupal.org",
-                        "experience_level" : "Intermediate"
+                        "speakers" : [3],
+                        "track" : 3,
+                        "experience_level" : 1
                         },
                         {
                         "from" : "15:00",
                         "to" : "15:30",
-                        "type" : 3,
+                        "type" : 3
                         },
                         {
                         "from" : "16:35",
                         "to" : "17:30",
                         "type" : 0,
                         "name" : "Q&A width Dries",
-                        "speaker" : "Roel De Meester",
-                        "track" : "Core Converstaion",
-                        "experience_level" : "Advanced"
+                        "speakers" : [5],
+                        "track" : 4,
+                        "experience_level" : 2
                         },
                         {
                         "from" : "16:35",
                         "to" : "17:30",
                         "type" : 0,
                         "name" : "The future of HTML and CSS",
-                        "speaker" : "Jou Wouters",
-                        "track" : "Frontend",
-                        "experience_level" : "Intermediate"
+                        "speakers" : [3],
+                        "track" : 0,
+                        "experience_level" : 1
                         }
                         ]
             }
