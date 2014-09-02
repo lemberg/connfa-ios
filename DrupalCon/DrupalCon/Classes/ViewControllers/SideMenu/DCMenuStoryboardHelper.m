@@ -27,6 +27,7 @@
         
     }
     if(menu == DCMENU_ABOUT_ITEM) {
+        storyboardControllerID = @"AboutViewController";
         
     }
     if(menu == DCMENU_MYSCHEDULE_ITEM) {

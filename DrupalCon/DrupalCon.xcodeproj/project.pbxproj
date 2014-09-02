@@ -41,6 +41,9 @@
 		5DC8C46F198658FF00BF5816 /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8C46B198658FF00BF5816 /* UIViewController+MFSideMenuAdditions.m */; };
 		5DC8C4731986594400BF5816 /* DCBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8C4721986594400BF5816 /* DCBaseViewController.m */; };
 		5DC8C47A19865C8400BF5816 /* DCSideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8C47919865C8400BF5816 /* DCSideMenuViewController.m */; };
+		74A470E119B5B21900B01BC5 /* about_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 74A470E019B5B21900B01BC5 /* about_img.png */; };
+		74F0340519B4A965007E4AB9 /* DCAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F0340419B4A965007E4AB9 /* DCAboutViewController.m */; };
+		74F0340819B4C821007E4AB9 /* About.html in Resources */ = {isa = PBXBuildFile; fileRef = 74F0340719B4C821007E4AB9 /* About.html */; };
 		849CF80419A5EFEC00C84675 /* DCMainProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 849CF80319A5EFEC00C84675 /* DCMainProxy.m */; };
 		849CF81E19A6080000C84675 /* lastUpdate.json in Resources */ = {isa = PBXBuildFile; fileRef = 849CF81D19A6080000C84675 /* lastUpdate.json */; };
 		849CF82119A6246A00C84675 /* NSDate+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 849CF82019A6246A00C84675 /* NSDate+DC.m */; };
@@ -156,6 +159,10 @@
 		5DC8C4721986594400BF5816 /* DCBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCBaseViewController.m; sourceTree = "<group>"; };
 		5DC8C47819865C8400BF5816 /* DCSideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCSideMenuViewController.h; sourceTree = "<group>"; };
 		5DC8C47919865C8400BF5816 /* DCSideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCSideMenuViewController.m; sourceTree = "<group>"; };
+		74A470E019B5B21900B01BC5 /* about_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_img.png; sourceTree = "<group>"; };
+		74F0340319B4A965007E4AB9 /* DCAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCAboutViewController.h; sourceTree = "<group>"; };
+		74F0340419B4A965007E4AB9 /* DCAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCAboutViewController.m; sourceTree = "<group>"; };
+		74F0340719B4C821007E4AB9 /* About.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = About.html; sourceTree = "<group>"; };
 		849CF80219A5EFEC00C84675 /* DCMainProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCMainProxy.h; path = Model/DCMainProxy.h; sourceTree = "<group>"; };
 		849CF80319A5EFEC00C84675 /* DCMainProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCMainProxy.m; path = Model/DCMainProxy.m; sourceTree = "<group>"; };
 		849CF81D19A6080000C84675 /* lastUpdate.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = lastUpdate.json; path = PredefinedJSON/lastUpdate.json; sourceTree = "<group>"; };
@@ -462,6 +469,7 @@
 		5DC8C41A198656DB00BF5816 /* DrupalCon */ = {
 			isa = PBXGroup;
 			children = (
+				74F0340619B4C821007E4AB9 /* PredefinedHTML */,
 				5D6449C11989128000BC1775 /* PredefinedJSON */,
 				5DC8C44A1986571300BF5816 /* Classes */,
 				5DC8C426198656DB00BF5816 /* Main.storyboard */,
@@ -533,6 +541,7 @@
 				5DC8C4701986592400BF5816 /* Base */,
 				5DC8C461198658FF00BF5816 /* LoginViewController */,
 				5DC8C464198658FF00BF5816 /* Sidebar */,
+				74A470E219B5B5C400B01BC5 /* About */,
 			);
 			name = ViewControllers;
 			path = Classes/ViewControllers;
@@ -582,6 +591,24 @@
 				5D6449A81988EA0800BC1775 /* DCSideMenuType.h */,
 			);
 			path = SideMenu;
+			sourceTree = "<group>";
+		};
+		74A470E219B5B5C400B01BC5 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				74F0340319B4A965007E4AB9 /* DCAboutViewController.h */,
+				74F0340419B4A965007E4AB9 /* DCAboutViewController.m */,
+			);
+			name = About;
+			sourceTree = "<group>";
+		};
+		74F0340619B4C821007E4AB9 /* PredefinedHTML */ = {
+			isa = PBXGroup;
+			children = (
+				74F0340719B4C821007E4AB9 /* About.html */,
+				74A470E019B5B21900B01BC5 /* about_img.png */,
+			);
+			path = PredefinedHTML;
 			sourceTree = "<group>";
 		};
 		849D92D519AE285700977D67 /* ProgramDetailCells */ = {
@@ -769,12 +796,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74A470E119B5B21900B01BC5 /* about_img.png in Resources */,
 				849D92E719AE4D8F00977D67 /* dcspeaker.json in Resources */,
 				849CF81E19A6080000C84675 /* lastUpdate.json in Resources */,
 				5DC8C42D198656DB00BF5816 /* Images.xcassets in Resources */,
 				849E852319AF67C3006F43B3 /* dclevel.json in Resources */,
 				849EFE3E19A5051C00C43E05 /* types.json in Resources */,
 				5DC8C41F198656DB00BF5816 /* InfoPlist.strings in Resources */,
+				74F0340819B4C821007E4AB9 /* About.html in Resources */,
 				5DC8C428198656DB00BF5816 /* Main.storyboard in Resources */,
 				5D6449C3198919B700BC1775 /* conference.json in Resources */,
 				849E852419AF67C3006F43B3 /* dctrack.json in Resources */,
@@ -837,6 +866,7 @@
 				5DC8C47A19865C8400BF5816 /* DCSideMenuViewController.m in Sources */,
 				5D38E69919869303006F7A59 /* DCProgramViewController.m in Sources */,
 				5D6449D019893BD700BC1775 /* DCCofeeCell.m in Sources */,
+				74F0340519B4A965007E4AB9 /* DCAboutViewController.m in Sources */,
 				5DC8C46C198658FF00BF5816 /* DCLoginViewController.m in Sources */,
 				849D92C219ADCCDD00977D67 /* DCNavViewController.m in Sources */,
 				849E852019AF679F006F43B3 /* DCTrack+DC.m in Sources */,
