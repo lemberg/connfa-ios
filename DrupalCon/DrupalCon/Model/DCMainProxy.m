@@ -15,6 +15,7 @@
 #import "DCSpeaker+DC.h"
 #import "DCLevel+DC.h"
 #import "DCTrack+DC.h"
+#import "DCLocation+DC.h"
 
 #import "DCDataProvider.h"
 
@@ -47,6 +48,7 @@ static NSString * kDCMainProxyTypesFile = @"types";
     [self updateLevels];
     [self updateTracks];
     [self updateProgram];
+    [self updateLocation];
 }
 
 - (NSArray*)programInstances
@@ -87,6 +89,13 @@ static NSString * kDCMainProxyTypesFile = @"types";
 - (NSArray*)trackInstances
 {
     return [self instancesOfClass:[DCTrack class]
+            filtredUsingPredicate:nil
+                        inContext:self.managedObjectContext];
+}
+
+- (NSArray *)locationInstances
+{
+    return [self instancesOfClass:[DCLocation class]
             filtredUsingPredicate:nil
                         inContext:self.managedObjectContext];
 }
@@ -178,12 +187,22 @@ static NSString * kDCMainProxyTypesFile = @"types";
     return [self createInstanceOfClass:[DCTrack class] inContext:self.managedObjectContext];
 }
 
+- (DCLocation*)createLocation
+{
+    return [self createInstanceOfClass:[DCLocation class] inContext:self.managedObjectContext];
+}
+
 #pragma mark - DO remove
 
 - (void)clearLevels
 {
     [self removeItems:[self levelInstances]
             inContext:self.managedObjectContext];
+}
+- (void)clearLocation
+{
+    [self removeItems:[self locationInstances] inContext:self.managedObjectContext];
+    
 }
 
 - (void)clearTracks
@@ -313,6 +332,24 @@ static NSString * kDCMainProxyTypesFile = @"types";
             {
                 [self clearTracks];
                 [DCTrack parceFromJsonData:result];
+                [self saveContext];
+            }
+            else
+            {
+                NSLog(@"WRONG! %@", result);
+            }
+        }];
+    }];
+}
+
+- (void)updateLocation
+{
+    [self.managedObjectContext performBlockAndWait:^{
+        [DCDataProvider updateMainDataFromFile:[self DC_fileNameForClass:[DCLocation class]] callBack:^(BOOL success, id result) {
+            if (success && result)
+            {
+                [self clearLocation];
+                [DCLocation parceFromJsonData:result];
                 [self saveContext];
             }
             else

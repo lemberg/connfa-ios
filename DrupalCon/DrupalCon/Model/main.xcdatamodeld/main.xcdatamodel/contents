@@ -23,6 +23,13 @@
         <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DCEvent" inverseName="level" inverseEntity="DCEvent" syncable="YES"/>
     </entity>
+    <entity name="DCLocation" syncable="YES">
+        <attribute name="latitude" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="number" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="streetName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="DCProgram" representedClassName="DCProgram" parentEntity="DCEvent" syncable="YES"/>
     <entity name="DCSpeaker" representedClassName="DCSpeaker" syncable="YES">
         <attribute name="characteristic" optional="YES" attributeType="String" syncable="YES"/>
@@ -61,5 +68,6 @@
         <element name="DCTrack" positionX="-5994" positionY="-1998" width="128" height="88"/>
         <element name="DCType" positionX="-5969" positionY="-1879" width="128" height="88"/>
         <element name="DCFavoriteEvent" positionX="-5481" positionY="-1858" width="128" height="58"/>
+        <element name="DCLocation" positionX="-6111" positionY="-1755" width="128" height="118"/>
     </elements>
 </model>

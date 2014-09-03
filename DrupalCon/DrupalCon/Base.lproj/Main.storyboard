@@ -1043,6 +1043,42 @@
             </objects>
             <point key="canvasLocation" x="1724" y="1258"/>
         </scene>
+        <!--Location View Controller-->
+        <scene sceneID="RUw-ax-OC6">
+            <objects>
+                <viewController storyboardIdentifier="LocationViewController" id="HyN-5J-w0d" customClass="DCLocationViewController" sceneMemberID="viewController">
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="M4p-67-Pw4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="RdW-sU-V58">
+                                <rect key="frame" x="0.0" y="92" width="320" height="430"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="HyN-5J-w0d" id="WZq-FL-8h0"/>
+                                </connections>
+                            </mapView>
+                            <label clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="H00-wW-8nd">
+                                <rect key="frame" x="20" y="0.0" width="280" height="91"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="addressHeader" destination="H00-wW-8nd" id="8Dn-Gi-pfH"/>
+                        <outlet property="mapView" destination="RdW-sU-V58" id="2Hu-eF-GVW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ptj-t8-hbe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2234" y="1258"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="ONf-yE-dPM">
             <objects>

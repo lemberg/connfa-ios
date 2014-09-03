@@ -24,7 +24,7 @@
     
     
     if(menu == DCMENU_LOCATION_ITEM) {
-        
+        storyboardControllerID = @"LocationViewController";
     }
     if(menu == DCMENU_ABOUT_ITEM) {
         storyboardControllerID = @"AboutViewController";
