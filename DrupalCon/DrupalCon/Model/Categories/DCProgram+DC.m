@@ -18,6 +18,8 @@
 
 #import "DCMainProxy.h"
 
+const NSString * kDCProgram_programEvents_key = @"program_events";
+
 @implementation DCProgram (DC)
 
 + (void)parceFromJSONData:(NSData *)jsonData
@@ -35,10 +37,11 @@
     for (NSDictionary * day in eventItems[kDCEvent_days_key])
     {
         NSDate * date = [NSDate fabricateWithEventString:day[kDCEvent_date_key]];
-        for (NSDictionary * event in day[kDCEvent_events_key])
+        for (NSDictionary * event in day[kDCProgram_programEvents_key])
         {
             DCProgram * programInstance = [[DCMainProxy sharedProxy] createProgramItem];
             programInstance.date = date;
+            programInstance.eventID = event[kDCEvent_eventId_key];
             programInstance.name = event[kDCEvent_name_key];
             programInstance.favorite = @NO;
             programInstance.place = @"default place";

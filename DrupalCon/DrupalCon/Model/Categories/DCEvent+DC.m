@@ -13,7 +13,6 @@
 
 const NSString * kDCEvent_days_key = @"days";
 const NSString * kDCEvent_date_key = @"date";
-const NSString * kDCEvent_events_key = @"events";
 const NSString * kDCEvent_from_key = @"from";
 const NSString * kDCEvent_to_key = @"to";
 const NSString * kDCEvent_type_key = @"type";
@@ -21,6 +20,7 @@ const NSString * kDCEvent_name_key = @"name";
 const NSString * kDCEvent_speakers_key = @"speakers";
 const NSString * kDCEvent_track_key = @"track";
 const NSString * kDCEvent_experienceLevel_key = @"experience_level";
+const NSString * kDCEvent_eventId_key = @"event_id";
 
 @implementation DCEvent (DC)
 

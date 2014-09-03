@@ -2,7 +2,8 @@
   "days" : [
     {
             "date" : "30-08-2014",
-            "events" : [ {
+            "program_events" : [ {
+                            "event_id": 0,
                             "from" : "9:00",
                             "to" : "10:55",
                             "type" : 0,
@@ -12,7 +13,7 @@
                             "experience_level" : 1
                          },
                          {
-                        
+                            "event_id": 21,
                             "from" : "9:00",
                             "to" : "10:55",
                             "type" : 0,
@@ -80,7 +81,7 @@
     },
     {
             "date" : "31-08-2014",
-            "events" : [ {
+            "program_events" : [ {
                            "from" : "9:15",
                            "to" : "10:45",
                            "type" : 0,
@@ -158,7 +159,7 @@
             },
             {
             "date" : "01-09-2014",
-            "events" : [ {
+            "program_events" : [ {
                         "from" : "9:15",
                         "to" : "10:45",
                         "type" : 0,

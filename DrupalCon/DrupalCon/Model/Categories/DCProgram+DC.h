@@ -8,6 +8,8 @@
 
 #import "DCProgram.h"
 
+extern NSString * kDCProgram_programEvents_key;
+
 typedef NS_ENUM (int, DCEventType) {
     DC_EVENT_SPEACH = 0,
     DC_EVENT_SPEACH_OF_DAY = 1,

@@ -1,5 +1,5 @@
 //
-//  DCBof.h
+//  DCFavoriteEvent.h
 //  DrupalCon
 //
 //  Created by Volodymyr Hyrka on 9/3/14.
@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import "DCEvent.h"
 
 
-@interface DCBof : DCEvent
+@interface DCFavoriteEvent : NSManagedObject
 
+@property (nonatomic, retain) NSNumber * eventID;
 
 @end

@@ -1,17 +1,16 @@
 //
-//  DCBof.h
+//  DCFavoriteEvent.m
 //  DrupalCon
 //
 //  Created by Volodymyr Hyrka on 9/3/14.
 //  Copyright (c) 2014 Lemberg Solution. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
-#import "DCEvent.h"
+#import "DCFavoriteEvent.h"
 
 
-@interface DCBof : DCEvent
+@implementation DCFavoriteEvent
 
+@dynamic eventID;
 
 @end
