@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^FavoriteButtonPressedCallback)(UITableViewCell *cell, BOOL isSelected);
+
 @interface DCSpeakerEventCell : UITableViewCell
 
 @property (nonatomic, weak) IBOutlet UILabel * eventNameValueLbl;
@@ -20,5 +22,6 @@
 @property (nonatomic, getter = isFavorite) BOOL favorite;
 
 + (float)cellHeight;
+- (void)favoriteButtonDidSelected:(FavoriteButtonPressedCallback )favoriteButtonPressed;
 
 @end

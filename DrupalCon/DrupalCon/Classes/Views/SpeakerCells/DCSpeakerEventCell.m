@@ -7,13 +7,23 @@
 //
 
 #import "DCSpeakerEventCell.h"
+@interface DCSpeakerEventCell ()
 
+@property (strong, nonatomic) FavoriteButtonPressedCallback favoriteBtnCallback;
+
+@end
 @implementation DCSpeakerEventCell
 
 - (void)awakeFromNib
 {
     [self DC_setStarImage];
 }
+
+- (void)favoriteButtonDidSelected:(FavoriteButtonPressedCallback )newFavoriteButtonPressed
+{
+    self.favoriteBtnCallback = newFavoriteButtonPressed;
+}
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
@@ -23,7 +33,9 @@
         [self setSelected:NO animated:YES];
         self.favorite = !self.isFavorite;
         [self DC_setStarImage];
+        self.favoriteBtnCallback(self, self.isFavorite);
     }
+    
 }
 
 - (void)DC_setStarImage

@@ -118,7 +118,11 @@
     {
         DCEvent * event = _events[indexPath.row-1];
         DCSpeakerEventCell * _cell = (DCSpeakerEventCell*)[tableView dequeueReusableCellWithIdentifier:cellIdEvent];
-        _cell.favorite = NO;
+        _cell.favorite = [event.favorite boolValue];
+        [_cell favoriteButtonDidSelected:^(UITableViewCell *cell, BOOL isSelected) {
+            [self updateFavoriteItemsInIndexPath:[self.speakerDetailTbl indexPathForCell:cell]
+                                       withValue:isSelected];
+        }];
         [_cell.eventNameValueLbl setText:event.name];
         [_cell.eventDateValueLbl setText:[event.date stringForSpeakerEventCell]];
         [_cell.eventTimeValueLbl setText:[event.timeRange stringValue]];
@@ -128,6 +132,21 @@
     }
 
     return cell;
+}
+
+
+- (void)updateFavoriteItemsInIndexPath:(NSIndexPath *)anIndexPath
+                             withValue:(BOOL)isFavorite {
+    DCEvent * event = _events[anIndexPath.row-1];
+    event.favorite = [NSNumber numberWithBool:isFavorite];
+    if (isFavorite) {
+        [[DCMainProxy sharedProxy]
+         addToFavoriteEventWithID:event.eventID];
+    } else {
+        [[DCMainProxy sharedProxy]
+         removeFavoriteEventWithID:event.eventID];
+    }
+
 }
 
 #pragma mark - 
