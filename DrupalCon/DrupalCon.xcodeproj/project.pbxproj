@@ -43,6 +43,7 @@
 		5DC8C47A19865C8400BF5816 /* DCSideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8C47919865C8400BF5816 /* DCSideMenuViewController.m */; };
 		74A470E119B5B21900B01BC5 /* about_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 74A470E019B5B21900B01BC5 /* about_img.png */; };
 		74A470E819B5EA3C00B01BC5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74A470E719B5EA3C00B01BC5 /* MapKit.framework */; };
+		74A6278819B8A37200B46B75 /* DCFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A6278719B8A37200B46B75 /* DCFavoritesViewController.m */; };
 		74E67C7219B6FDF400DF9D71 /* DCLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E67C7119B6FDF400DF9D71 /* DCLocationViewController.m */; };
 		74E67C7519B6FE9800DF9D71 /* DCPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E67C7419B6FE9800DF9D71 /* DCPin.m */; };
 		74E67C7719B6FEF500DF9D71 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74E67C7619B6FEF500DF9D71 /* CoreLocation.framework */; };
@@ -51,6 +52,7 @@
 		74E67C8219B73BE000DF9D71 /* dclocation.json in Resources */ = {isa = PBXBuildFile; fileRef = 74E67C8119B73BE000DF9D71 /* dclocation.json */; };
 		74F0340519B4A965007E4AB9 /* DCAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F0340419B4A965007E4AB9 /* DCAboutViewController.m */; };
 		74F0340819B4C821007E4AB9 /* About.html in Resources */ = {isa = PBXBuildFile; fileRef = 74F0340719B4C821007E4AB9 /* About.html */; };
+		74F159CB19B9DD750033B31F /* DCFavoriteSourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F159CA19B9DD750033B31F /* DCFavoriteSourceManager.m */; };
 		849AC4F119B7357F0093A29B /* DCProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 849AC4F019B7357F0093A29B /* DCProgram.m */; };
 		849AC4F419B735800093A29B /* DCEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 849AC4F319B735800093A29B /* DCEvent.m */; };
 		849AC4F719B735800093A29B /* DCTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 849AC4F619B735800093A29B /* DCTime.m */; };
@@ -169,6 +171,8 @@
 		5DC8C47919865C8400BF5816 /* DCSideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCSideMenuViewController.m; sourceTree = "<group>"; };
 		74A470E019B5B21900B01BC5 /* about_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_img.png; sourceTree = "<group>"; };
 		74A470E719B5EA3C00B01BC5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		74A6278619B8A37200B46B75 /* DCFavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCFavoritesViewController.h; path = Favorites/DCFavoritesViewController.h; sourceTree = "<group>"; };
+		74A6278719B8A37200B46B75 /* DCFavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCFavoritesViewController.m; path = Favorites/DCFavoritesViewController.m; sourceTree = "<group>"; };
 		74E67C7019B6FDF400DF9D71 /* DCLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCLocationViewController.h; path = Location/DCLocationViewController.h; sourceTree = "<group>"; };
 		74E67C7119B6FDF400DF9D71 /* DCLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCLocationViewController.m; path = Location/DCLocationViewController.m; sourceTree = "<group>"; };
 		74E67C7319B6FE9800DF9D71 /* DCPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCPin.h; path = Location/DCPin.h; sourceTree = "<group>"; };
@@ -182,6 +186,8 @@
 		74F0340319B4A965007E4AB9 /* DCAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCAboutViewController.h; sourceTree = "<group>"; };
 		74F0340419B4A965007E4AB9 /* DCAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCAboutViewController.m; sourceTree = "<group>"; };
 		74F0340719B4C821007E4AB9 /* About.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = About.html; sourceTree = "<group>"; };
+		74F159C919B9DD750033B31F /* DCFavoriteSourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCFavoriteSourceManager.h; path = Favorites/DCFavoriteSourceManager.h; sourceTree = "<group>"; };
+		74F159CA19B9DD750033B31F /* DCFavoriteSourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCFavoriteSourceManager.m; path = Favorites/DCFavoriteSourceManager.m; sourceTree = "<group>"; };
 		849AC4EF19B7357F0093A29B /* DCProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCProgram.h; path = Model/DCProgram.h; sourceTree = "<group>"; };
 		849AC4F019B7357F0093A29B /* DCProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCProgram.m; path = Model/DCProgram.m; sourceTree = "<group>"; };
 		849AC4F219B735800093A29B /* DCEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCEvent.h; path = Model/DCEvent.h; sourceTree = "<group>"; };
@@ -316,6 +322,7 @@
 				84A06E3019ACB9AD00104876 /* EventDetail */,
 				5D38E692198692E9006F7A59 /* Program */,
 				5D38E693198692E9006F7A59 /* Speakers */,
+				74A6278919B8A3AC00B46B75 /* Favorites */,
 			);
 			name = ConferenceViewControllers;
 			path = Classes/ConferenceViewControllers;
@@ -640,6 +647,17 @@
 			name = Location;
 			sourceTree = "<group>";
 		};
+		74A6278919B8A3AC00B46B75 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				74A6278619B8A37200B46B75 /* DCFavoritesViewController.h */,
+				74A6278719B8A37200B46B75 /* DCFavoritesViewController.m */,
+				74F159C919B9DD750033B31F /* DCFavoriteSourceManager.h */,
+				74F159CA19B9DD750033B31F /* DCFavoriteSourceManager.m */,
+			);
+			name = Favorites;
+			sourceTree = "<group>";
+		};
 		74F0340619B4C821007E4AB9 /* PredefinedHTML */ = {
 			isa = PBXGroup;
 			children = (
@@ -917,6 +935,7 @@
 				5DC8C47A19865C8400BF5816 /* DCSideMenuViewController.m in Sources */,
 				5D38E69919869303006F7A59 /* DCProgramViewController.m in Sources */,
 				5D6449D019893BD700BC1775 /* DCCofeeCell.m in Sources */,
+				74A6278819B8A37200B46B75 /* DCFavoritesViewController.m in Sources */,
 				74F0340519B4A965007E4AB9 /* DCAboutViewController.m in Sources */,
 				5DC8C46C198658FF00BF5816 /* DCLoginViewController.m in Sources */,
 				849D92C219ADCCDD00977D67 /* DCNavViewController.m in Sources */,
@@ -929,6 +948,7 @@
 				849D92E119AE29D100977D67 /* DCEventDetailEmptyCell.m in Sources */,
 				849E851D19AF677A006F43B3 /* DCLevel+DC.m in Sources */,
 				849AC4FD19B735800093A29B /* DCTimeRange.m in Sources */,
+				74F159CB19B9DD750033B31F /* DCFavoriteSourceManager.m in Sources */,
 				849EFE1219A4D63500C43E05 /* DCDataProvider.m in Sources */,
 				5DC8C4731986594400BF5816 /* DCBaseViewController.m in Sources */,
 				849EFDA319A49FB600C43E05 /* main.xcdatamodeld in Sources */,

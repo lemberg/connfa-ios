@@ -23,7 +23,9 @@
 #import "DCSpeakerCell.h"
 #import "DCDescriptionTextCell.h"
 
-
+@interface DCEventDetailViewController ()
+@property (nonatomic, strong) CloseCallback closeCallback;
+@end
 @implementation DCEventDetailViewController
 
 - (instancetype)initWithEvent:(DCEvent *)event
@@ -62,6 +64,10 @@
     
 }
 
+- (void)didCloseWithCallback:(CloseCallback)callback
+{
+    self.closeCallback = callback;
+}
 
 #pragma mark - UITableView DataSource/Delegate methods
 
@@ -74,7 +80,7 @@
 {
     if (section == 0) // title
         return [DCEventDetailTitleCell cellHeight];
-
+    
     return [DCEventDetailHeader2Cell cellHeight];
 }
 
@@ -93,6 +99,7 @@
         [infoPanel.levelValueLbl setText:_event.level.name];
         [infoPanel.placeValueLbl setText:_event.place];
         [infoPanel.favorBtn setDelegate:self];
+        [infoPanel.favorBtn setSelected:[_event.favorite boolValue]];
         return infoPanel;
     }
     return [[UIView alloc] initWithFrame:CGRectZero];
@@ -180,12 +187,22 @@
 - (void)DCFavoriteButton:(DCFavoriteButton *)favoriteButton didChangedState:(BOOL)isSelected
 {
     NSLog(@"%@added", (isSelected ? @"" : @"not "));
+    
+    self.event.favorite = [NSNumber numberWithBool:isSelected];
+    if (isSelected) {
+        [[DCMainProxy sharedProxy]
+         addToFavoriteEventWithID:self.event.eventID];
+    } else {
+        [[DCMainProxy sharedProxy]
+         removeFavoriteEventWithID:self.event.eventID];
+    }
 }
 
 #pragma mark - IBActions
 
 - (void)onBack
 {
+    self.closeCallback();
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

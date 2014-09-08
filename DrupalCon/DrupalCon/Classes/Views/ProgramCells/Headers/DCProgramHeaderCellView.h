@@ -12,4 +12,6 @@
 @property (nonatomic, weak) IBOutlet UIImageView *leftImageView;
 @property (nonatomic, weak) IBOutlet UILabel *startLabel;
 @property (nonatomic, weak) IBOutlet UILabel *endLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+
 @end

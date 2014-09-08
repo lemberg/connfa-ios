@@ -10,7 +10,7 @@
 #import "DCFavoriteButton.h"
 #import "DCBaseViewController.h"
 
-
+typedef void(^CloseCallback) ();
 @class DCEvent, DCProgram, DCBof;
 @interface DCEventDetailViewController : DCBaseViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, DCFacotiteDelegateProtocol>
 
@@ -21,5 +21,5 @@
 @property (nonatomic, strong) NSArray * speakers;
 
 - (instancetype)initWithEvent:(DCEvent*)event;
-
+- (void)didCloseWithCallback:(CloseCallback)callback;
 @end

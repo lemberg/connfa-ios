@@ -15,6 +15,7 @@
 - (NSArray*)days;
 - (NSArray*)programEventsForDayNum:(NSInteger)dayNum;
 - (NSArray*)uniqueTimeRangesForDayNum:(NSInteger)dayNum;
+- (NSArray *)favoriteEvents;
 
 #pragma mark -
 

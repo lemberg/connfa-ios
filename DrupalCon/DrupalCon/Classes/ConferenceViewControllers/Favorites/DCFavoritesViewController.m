@@ -1,19 +1,17 @@
 //
-//  DCProgramItemsViewController.m
+//  DCFavoritesViewController.m
 //  DrupalCon
 //
-//  Created by Rostyslav Stepanyak on 7/30/14.
+//  Created by Olexandr Poburynnyi on 9/4/14.
 //  Copyright (c) 2014 Lemberg Solution. All rights reserved.
 //
 
-#import "DCProgramItemsViewController.h"
+#import "DCFavoritesViewController.h"
 #import "DCEventDetailViewController.h"
 #import "AppDelegate.h"
 
 #import "DCSpeechCell.h"
 #import "DCSpeechOfDayCell.h"
-#import "DCCofeeCell.h"
-#import "DCLunchCell.h"
 #import "DCProgramHeaderCellView.h"
 
 #import "DCProgram+DC.h"
@@ -26,20 +24,21 @@
 #import "DCMainProxy+Additions.h"
 
 #import "NSArray+DC.h"
+#import "DCFavoriteSourceManager.h"
 
-@interface DCProgramItemsViewController ()
-
-@property (nonatomic, weak) IBOutlet UITableView *tablewView;
-
+@interface DCFavoritesViewController ()
+@property (weak, nonatomic) IBOutlet UITableView *favoritesTableView;
+@property (nonatomic, strong) DCFavoriteSourceManager *favoriteSourceMng;
 @end
 
-@implementation DCProgramItemsViewController
+@implementation DCFavoritesViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
     }
     return self;
 }
@@ -47,8 +46,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _events = [[DCMainProxy sharedProxy] programEventsForDayNum:self.pageIndex];
-    _timeslots = [[DCMainProxy sharedProxy] uniqueTimeRangesForDayNum:self.pageIndex];
+    self.favoriteSourceMng = [[DCFavoriteSourceManager alloc]
+                            initWithSection:[[DCMainProxy sharedProxy] favoriteEvents]];
+    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,15 +57,22 @@
     // Dispose of any resources that can be recreated.
 }
 
+/*
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+ {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 #pragma mark - uitableview datasource methods
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSString *cellIdSpeech = @"ProgramCellIdentifierSpeech";
     NSString *cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
-    NSString *cellIdCoffeBreak = @"ProgramCellIdentifierCoffeBreak";
-    NSString *cellIdLunch = @"ProgramCellIdentifierLunch";
-    
     DCProgram * event = [self DC_eventForIndexPath:indexPath];
     UITableViewCell *cell;
     
@@ -77,11 +84,12 @@
             _cell.trackLabel.text = [[event.tracks allObjects].firstObject name];
             _cell.nameLabel.text = event.name;
             _cell.favoriteButton.selected = [event.favorite boolValue];
-            [_cell favoriteButtonDidSelected:^(UITableViewCell *cell, BOOL isSelected) {
-                
-                [self updateFavoriteItemsInIndexPath:[self.tablewView indexPathForCell:cell]
-                                           withValue:isSelected];
-            }];
+            [_cell favoriteButtonDidSelected:
+             ^(UITableViewCell *cell, BOOL isSelected) {
+                 [self updateFavoriteItemsInIndexPath:
+                  [self.favoritesTableView indexPathForCell:cell]
+                                            withValue:isSelected];
+             }];
             cell = _cell;
             break;
         }
@@ -92,26 +100,12 @@
             _cell.trackLabel.text = [[event.tracks allObjects].firstObject name];
             _cell.nameLabel.text = event.name;
             _cell.favoriteButton.selected = [event.favorite boolValue];
-            [_cell favoriteButtonDidSelected:^(UITableViewCell *cell, BOOL isSelected) {
-                [self updateFavoriteItemsInIndexPath:[self.tablewView indexPathForCell:cell]
-                                           withValue:isSelected];
-            }];
-            cell = _cell;
-            break;
-        }
-        case DC_EVENT_COFEE_BREAK: {
-            DCCofeeCell *_cell = (DCCofeeCell*)[tableView dequeueReusableCellWithIdentifier: cellIdCoffeBreak];
-            _cell.startLabel.text = [event.timeRange.from stringValue];
-            _cell.endLabel.text = [event.timeRange.to stringValue];
-            [_cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            cell = _cell;
-            break;
-        }
-        case DC_EVENT_LUNCH: {
-            DCLunchCell *_cell = (DCLunchCell*)[tableView dequeueReusableCellWithIdentifier: cellIdLunch];
-            _cell.startLabel.text = [event.timeRange.from stringValue];
-            _cell.endLabel.text = [event.timeRange.to stringValue];
-            [_cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            [_cell favoriteButtonDidSelected:
+             ^(UITableViewCell *cell, BOOL isSelected) {
+                 [self updateFavoriteItemsInIndexPath:
+                  [self.favoritesTableView indexPathForCell:cell]
+                                            withValue:isSelected];
+             }];
             cell = _cell;
             break;
         }
@@ -133,51 +127,52 @@
                              withValue:(BOOL)isFavorite {
     DCProgram * event = [self DC_eventForIndexPath:anIndexPath];
     event.favorite = [NSNumber numberWithBool:isFavorite];
-    if (isFavorite) {
-        [[DCMainProxy sharedProxy]
-         addToFavoriteEventWithID:event.eventID];
-    } else {
+    if (!isFavorite) {
         [[DCMainProxy sharedProxy]
          removeFavoriteEventWithID:event.eventID];
+        [self deleteCellAtIndexPath:anIndexPath];
+        
     }
-    
     
 }
 
--(BOOL) headerNeededInSection: (NSInteger) section
+- (void)deleteCellAtIndexPath:(NSIndexPath *)indexPath
 {
-    /*lets check if this date range contains some events that need a time period header, DCSpeechCelll and DCSPeechofTheDayCell, if its only coffe breaks or lunch - we dont display a header*/
-    BOOL headerNeeded = NO;
-    for(DCProgram *event in [_events eventsForTimeRange:_timeslots[section]])
-    {
-        if([event getTypeID] == DC_EVENT_SPEACH || [event getTypeID] == DC_EVENT_SPEACH_OF_DAY)
-        {
-            headerNeeded = YES; break;
-        }
+    // If section has last event than remote them
+    if ([self.favoriteSourceMng numberOfEventsInSection:indexPath.section] == 1) {
+        
+        [self.favoriteSourceMng deleteEventsAtIndexPath:indexPath];
+        [self.favoriteSourceMng deleteSectionAtIndex:indexPath.section];
+        [self.favoritesTableView beginUpdates];
+        [self.favoritesTableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section]
+                               withRowAnimation:UITableViewRowAnimationFade];
+        [self.favoritesTableView endUpdates];
+    } else {
+        // Remove event
+        [self.favoriteSourceMng deleteEventsAtIndexPath:indexPath];
+        [self.favoritesTableView beginUpdates];
+        [self.favoritesTableView deleteRowsAtIndexPaths:@[indexPath]
+                                       withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.favoritesTableView endUpdates];
+        
     }
-    return headerNeeded;
 }
 
 
 -(UIView*) tableView: (UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
     DCProgramHeaderCellView *headerViewCell = (DCProgramHeaderCellView*)[tableView dequeueReusableCellWithIdentifier: @"ProgramCellHeaderCell"];
-    //    lets check if this date range contains some events that need a time period header, DCSpeechCelll and DCSPeechofTheDayCell, if its only coffe breaks or lunch - we dont display a header
-    BOOL headerNeeded = [self headerNeededInSection: section];
-    if(headerNeeded) {
-        DCTimeRange * timeslot = _timeslots[section];
-        headerViewCell.startLabel.text = [timeslot.from stringValue];
-        headerViewCell.endLabel.text = [timeslot.to stringValue];
-        return headerViewCell;
-    }
-    UIView *v = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 320, 0.0)];
-    v.backgroundColor = [UIColor whiteColor];
-    return v;
+    
+    DCTimeRange * timeslot = [self.favoriteSourceMng timeRangeForSection:section];//_timeslots[section];
+    headerViewCell.startLabel.text = [timeslot.from stringValue];
+    headerViewCell.endLabel.text = [timeslot.to stringValue];
+    headerViewCell.dateLabel.text = [self.favoriteSourceMng dateForSection:section];
+    return [headerViewCell contentView];
+    
 }
 
 -(CGFloat) tableView: (UITableView*) tableView heightForHeaderInSection:(NSInteger)section {
-    BOOL headerNeeded = [self headerNeededInSection: section];
-    return headerNeeded ? 97 : 1.0;
+    return  97;
 }
 
 -(CGFloat)  tableView: (UITableView*) tableView heightForFooterInSection:(NSInteger)section {
@@ -190,11 +185,11 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return _timeslots.count;
+    return [self.favoriteSourceMng numberOfSection];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_events eventsForTimeRange:(DCTimeRange*)_timeslots[section]].count;
+    return [self.favoriteSourceMng  numberOfEventsInSection:section];
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -209,14 +204,6 @@
             return 97;
             break;
         }
-        case DC_EVENT_COFEE_BREAK: {
-            return 94;
-            break;
-        }
-        case DC_EVENT_LUNCH: {
-            return 94;
-            break;
-        }
     }
     return 94;
 }
@@ -227,17 +214,21 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    DCProgram * event = [self DC_eventForIndexPath:indexPath];
+    __block DCProgram * event = [self DC_eventForIndexPath:indexPath];
     if([event getTypeID] == DC_EVENT_LUNCH || [event getTypeID] == DC_EVENT_COFEE_BREAK)
     {
         return;
     }
     
     DCEventDetailViewController * detailController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
-    [detailController didCloseWithCallback:^{
-        [self.tablewView reloadData];
-    }];
     [detailController setEvent:event];
+    __block NSIndexPath *tmpIndex = indexPath;
+    [detailController didCloseWithCallback:^{
+        if (![event.favorite boolValue]) {
+            [self deleteCellAtIndexPath:tmpIndex];
+        }
+        
+    }];
     UINavigationController * navContainer = [[UINavigationController alloc] initWithRootViewController:detailController];
     [navContainer setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     [[(AppDelegate*)[[UIApplication sharedApplication] delegate] window].rootViewController presentViewController:navContainer animated:YES completion:nil];
@@ -247,7 +238,7 @@
 
 - (DCProgram*)DC_eventForIndexPath:(NSIndexPath *)indexPath
 {
-    return [[_events eventsForTimeRange:_timeslots[indexPath.section]] objectAtIndex:indexPath.row];
+    return [self.favoriteSourceMng eventForIndexPath:indexPath];
 }
 
 - (NSString*)DC_speakersTextForSpeakerNames:(NSArray*)speakerNames

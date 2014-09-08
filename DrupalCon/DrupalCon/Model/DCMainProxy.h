@@ -42,4 +42,6 @@
 - (DCTrack*)createTrack;
 - (DCLocation*)createLocation;
 
+- (void)addToFavoriteEventWithID:(NSNumber *)eventID;
+- (void)removeFavoriteEventWithID:(NSNumber *)eventID;
 @end

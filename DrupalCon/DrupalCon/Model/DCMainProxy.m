@@ -16,6 +16,7 @@
 #import "DCLevel+DC.h"
 #import "DCTrack+DC.h"
 #import "DCLocation+DC.h"
+#import "DCFavoriteEvent.h"
 
 #import "DCDataProvider.h"
 
@@ -26,8 +27,8 @@ static NSString * kDCMainProxyTypesFile = @"types";
 
 @implementation DCMainProxy
 @synthesize managedObjectModel=_managedObjectModel,
-            managedObjectContext=_managedObjectContext,
-            persistentStoreCoordinator=_persistentStoreCoordinator;
+managedObjectContext=_managedObjectContext,
+persistentStoreCoordinator=_persistentStoreCoordinator;
 
 + (DCMainProxy*)sharedProxy
 {
@@ -39,6 +40,7 @@ static NSString * kDCMainProxyTypesFile = @"types";
     return sharedProxy;
 }
 
+
 #pragma mark - public
 
 - (void)update
@@ -49,8 +51,35 @@ static NSString * kDCMainProxyTypesFile = @"types";
     [self updateTracks];
     [self updateProgram];
     [self updateLocation];
+    [self synchrosizeFavoritePrograms];
 }
 
+- (void)synchrosizeFavoritePrograms
+{
+    //    synchronize
+    NSArray *favoriteEventIDs = [self favoriteInstanceIDs];
+    if (!favoriteEventIDs) return;
+    NSMutableArray *favorteIDs = [NSMutableArray array];
+    for (NSDictionary *favorite in favoriteEventIDs) {
+        [favorteIDs addObjectsFromArray:[favorite allValues]];
+    }
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"eventID IN %@", favorteIDs];
+    NSArray * results = [self instancesOfClass:[DCProgram class]
+                         filtredUsingPredicate:predicate
+                                     inContext:self.managedObjectContext];
+    for (DCProgram *program in results) {
+        program.favorite = [NSNumber numberWithBool:YES];
+    }
+    [self saveContext];
+    
+}
+
+- (NSArray *)favoriteInstanceIDs
+{
+    return [self valuesFromProperties:@[@"eventID"]
+                   forInstanceOfClass:[DCFavoriteEvent class]
+                            inContext:self.managedObjectContext];
+}
 - (NSArray*)programInstances
 {
     return [self instancesOfClass:[DCProgram class]
@@ -117,7 +146,7 @@ static NSString * kDCMainProxyTypesFile = @"types";
                                      inContext:self.managedObjectContext];
     if (results.count>1)
         NSLog(@"WRONG! too many speakers for id# %i", speakerId);
-        
+    
     return (results.count ? results.firstObject : nil);
 }
 
@@ -143,6 +172,37 @@ static NSString * kDCMainProxyTypesFile = @"types";
         NSLog(@"WRONG! too many speakers for id# %i", trackId);
     
     return (results.count ? results.firstObject : nil);
+}
+
+- (DCFavoriteEvent *)favoriteEventFromID:(NSInteger)eventID
+{
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"eventID == %i", eventID];
+    NSArray * results = [self instancesOfClass:[DCFavoriteEvent class]
+                         filtredUsingPredicate:predicate
+                                     inContext:self.managedObjectContext];
+    if (results.count>1)
+        NSLog(@"WRONG! too many favorite events for id# %i", eventID);
+    
+    return (results.count ? results.firstObject : nil);
+}
+
+#pragma mark - Operation with favorites
+
+- (void)addToFavoriteEventWithID:(NSNumber *)eventID
+{
+    DCFavoriteEvent *favoriteEvent = [self createFavoriteEvent];
+    favoriteEvent.eventID = eventID;
+    [self saveContext];
+}
+
+- (void)removeFavoriteEventWithID:(NSNumber *)eventID
+{
+    DCFavoriteEvent *event = [self favoriteEventFromID:[eventID integerValue]];
+    if (event) {
+        [self removeItems:@[event]
+                inContext:self.managedObjectContext];
+    }
+    [self saveContext];
 }
 
 #pragma mark - DO creation
@@ -190,6 +250,11 @@ static NSString * kDCMainProxyTypesFile = @"types";
 - (DCLocation*)createLocation
 {
     return [self createInstanceOfClass:[DCLocation class] inContext:self.managedObjectContext];
+}
+
+- (DCFavoriteEvent *)createFavoriteEvent
+{
+    return [self createInstanceOfClass:[DCFavoriteEvent class] inContext:self.managedObjectContext];
 }
 
 #pragma mark - DO remove
@@ -272,18 +337,18 @@ static NSString * kDCMainProxyTypesFile = @"types";
 - (void)updateTypes
 {
     [self.managedObjectContext performBlockAndWait:^{
-       [DCDataProvider updateMainDataFromFile:kDCMainProxyTypesFile callBack:^(BOOL success, id result) {
-           if (success && result)
-           {
-               [self clearTypes];
-               [DCType parceFromJsonData:result];
-               [self saveContext];
-           }
-           else
-           {
-               NSLog(@"%@", result);
-           }
-       }];
+        [DCDataProvider updateMainDataFromFile:kDCMainProxyTypesFile callBack:^(BOOL success, id result) {
+            if (success && result)
+            {
+                [self clearTypes];
+                [DCType parceFromJsonData:result];
+                [self saveContext];
+            }
+            else
+            {
+                NSLog(@"%@", result);
+            }
+        }];
     }];
 }
 
@@ -360,14 +425,9 @@ static NSString * kDCMainProxyTypesFile = @"types";
     }];
 }
 
-- (NSArray*) instancesOfClass:(Class)objectClass filtredUsingPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context
+- (NSArray *)executeFetchRequest:(NSFetchRequest *)fetchRequest inContext:(NSManagedObjectContext *)context
 {
     @try {
-        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass(objectClass) inManagedObjectContext:context];
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        [fetchRequest setEntity:entityDescription];
-        [fetchRequest setReturnsObjectsAsFaults:NO];
-        [fetchRequest setPredicate:predicate];
         NSArray *result = [context executeFetchRequest:fetchRequest error:nil];
         if(result && [result count])
         {
@@ -388,12 +448,35 @@ static NSString * kDCMainProxyTypesFile = @"types";
     return nil;
 }
 
+- (NSArray*) instancesOfClass:(Class)objectClass filtredUsingPredicate:(NSPredicate *)predicate inContext:(NSManagedObjectContext *)context
+{
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass(objectClass) inManagedObjectContext:context];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:entityDescription];
+    [fetchRequest setReturnsObjectsAsFaults:NO];
+    [fetchRequest setPredicate:predicate];
+    
+    return [self executeFetchRequest:fetchRequest inContext:context];
+}
+
+- (NSArray *)valuesFromProperties:(NSArray *)values forInstanceOfClass:(Class)objectClass inContext:(NSManagedObjectContext *)context
+{
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass(objectClass) inManagedObjectContext:context];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:entityDescription];
+    [fetchRequest setResultType:NSDictionaryResultType];
+    [fetchRequest setPropertiesToFetch:values];
+    [fetchRequest setReturnsObjectsAsFaults:NO];
+    return [self executeFetchRequest:fetchRequest inContext:context];
+}
+
 - (id) createInstanceOfClass:(Class)instanceClass inContext:(NSManagedObjectContext *)context
 {
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass(instanceClass)  inManagedObjectContext:context];
     NSManagedObject *result = [[NSManagedObject alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:context];
     return result;
 }
+
 
 #pragma mark - Core Data stack
 
@@ -418,10 +501,10 @@ static NSString * kDCMainProxyTypesFile = @"types";
         NSError * err = nil;
         _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
         if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
-                                                      configuration:nil
-                                                                URL:storeURL
-                                                            options:nil
-                                                              error:&err])
+                                                       configuration:nil
+                                                                 URL:storeURL
+                                                             options:nil
+                                                               error:&err])
         {
             NSLog(@"Unresolved error %@, %@", err, [err userInfo]);
             abort();
@@ -440,6 +523,7 @@ static NSString * kDCMainProxyTypesFile = @"types";
             _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
             [_managedObjectContext setPersistentStoreCoordinator:coordinator];
         }
+        
     }
     return _managedObjectContext;
 }

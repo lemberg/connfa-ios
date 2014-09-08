@@ -31,7 +31,7 @@
         
     }
     if(menu == DCMENU_MYSCHEDULE_ITEM) {
-        
+        storyboardControllerID = @"FavoritesViewController";
     }
     
     return storyboardControllerID;

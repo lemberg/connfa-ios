@@ -57,9 +57,9 @@
         [fetchRequest setEntity:entity];
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"date = %@", [[self days] objectAtIndex:dayNum]];
         [fetchRequest setPredicate:predicate];
-    //    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@""
-    //                                                                   ascending:YES];
-    //    [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
+        //    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@""
+        //                                                                   ascending:YES];
+        //    [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
         
         NSError *error = nil;
         NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
@@ -112,6 +112,48 @@
     return nil;
 }
 
+- (NSArray *)favoriteEvents
+{
+    @try {
+        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass([DCProgram class]) inManagedObjectContext:self.managedObjectContext];
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        [fetchRequest setEntity:entityDescription];
+        [fetchRequest setReturnsObjectsAsFaults:NO];
+        NSPredicate * predicate = [NSPredicate predicateWithFormat:@"favorite=%@", [NSNumber numberWithBool:YES]];
+        [fetchRequest setPredicate:predicate];
+        
+        NSArray *result = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
+        NSArray *uniqueDates = [result valueForKeyPath:@"@distinctUnionOfObjects.date"];
+        NSArray *sortDates = [uniqueDates sortedDates];
+        NSMutableArray *eventsByDate = [NSMutableArray array];
+        for (id date in sortDates) {
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"date == %@", date];
+            NSArray *eventsForOneDay = [result filteredArrayUsingPredicate:predicate];
+            NSArray *uniqueSection = [[self DC_filterUniqueTimeRangeFromEvents:eventsForOneDay] sortedByStartHour];
+            NSDictionary *dayInfo = @{@"sections": [NSMutableArray arrayWithArray:uniqueSection],
+                                      @"events": [NSMutableArray arrayWithArray:eventsForOneDay] };
+            [eventsByDate addObject:dayInfo];
+        }
+        
+        if(eventsByDate && [eventsByDate count])
+        {
+            return eventsByDate;
+        }
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@", NSStringFromClass([self class]));
+        NSLog(@"%@", [self.managedObjectContext description]);
+        NSLog(@"%@", [self.managedObjectContext.persistentStoreCoordinator description]);
+        NSLog(@"%@", [self.managedObjectContext.persistentStoreCoordinator.managedObjectModel description]);
+        NSLog(@"%@", [self.managedObjectContext.persistentStoreCoordinator.managedObjectModel.entities description]);
+        @throw exception;
+    }
+    @finally {
+        
+    }
+    
+    return nil;
+}
 
 #pragma mark -
 
