@@ -16,5 +16,6 @@
 - (NSArray*)sortedDates;
 - (NSArray*)sortedByStartHour;
 - (NSArray*)eventsForTimeRange:(DCTimeRange*)timeRange;
+- (NSArray *)dictionaryByReplacingNullsWithStrings;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "DCTrack+DC.h"
 #import "DCMainProxy.h"
+#import "NSDictionary+DC.h"
 
 NSString * kDCTrack_traks_key = @"tracks";
 NSString * kDCTrack_trackID_key = @"trackID";
@@ -21,6 +22,7 @@ NSString * kDCTrack_trackName_key = @"trackName";
     NSDictionary * tracks = [NSJSONSerialization JSONObjectWithData:jsonData
                                                             options:kNilOptions
                                                               error:&err];
+    tracks = [tracks dictionaryByReplacingNullsWithStrings];
     if (err)
     {
         NSLog(@"WRONG! json");

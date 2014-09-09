@@ -19,6 +19,8 @@
 
 + (DCMainProxy*)sharedProxy;
 
+- (void)dataReadyBlock:(void(^)(BOOL isDataReady))callback;
+
 - (void)update;
 - (NSArray*)programInstances;
 - (NSArray*)bofInstances;
@@ -27,6 +29,8 @@
 - (NSArray*)levelInstances;
 - (NSArray*)trackInstances;
 - (NSArray *)locationInstances;
+- (void)loadHtmlAboutInfo:(void(^)(NSString *))callback;
+
 - (DCType*)typeForID:(int)typeID;
 - (DCSpeaker*)speakerForId:(NSInteger)speakerId;
 - (DCLevel*)levelForId:(NSInteger)levelId;

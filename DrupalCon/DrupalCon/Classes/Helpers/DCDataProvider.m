@@ -8,6 +8,7 @@
 
 #import "DCDataProvider.h"
 
+
 @implementation DCDataProvider
 
 + (void)updateMainDataFromFile:(NSString *)fileName callBack:(DataProviderCallBack)callBack
@@ -33,5 +34,28 @@
         callBack(NO, @"no json file");
     }
 }
+
++ (void)updateMainDataFromURI:(NSString *)uri callBack:(DataProviderCallBack)callBack
+{
+    NSURL *requestURL = [NSURL URLWithString:uri relativeToURL:[NSURL URLWithString:SERVER_URL]];
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setHTTPMethod:@"GET"];
+    [request setURL:requestURL];
+    NSError * error = nil;
+    NSURLResponse* response;
+    //Capturing server response
+    NSData *data = [NSURLConnection sendSynchronousRequest:request  returningResponse:&response error:&error];
+    
+    if (error == nil)
+    {
+        // Parse data here
+        callBack(YES, data);
+    } else {
+        callBack (NO, data);
+    }
+    
+}
+
+
 
 @end

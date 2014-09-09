@@ -7,6 +7,7 @@
 //
 
 #import "DCLocation+DC.h"
+#import "NSDictionary+DC.h"
 
 NSString *kDCLocation = @"location";
 NSString *kDCLocationLongitude = @"longitude";
@@ -23,6 +24,8 @@ NSString *kDCLocationBuildNum = @"number";
     NSDictionary *location = [NSJSONSerialization JSONObjectWithData:jsonData
                                                             options:kNilOptions
                                                               error:&err];
+    location = [location dictionaryByReplacingNullsWithStrings];
+
     if (err)
     {
         NSLog(@"WRONG! json");

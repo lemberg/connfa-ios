@@ -15,6 +15,7 @@
 @property (nonatomic, strong) UIPageViewController *pageViewController;
 @property (nonatomic, strong) NSArray *viewControllers;
 @property (nonatomic, strong) NSArray *days;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @property (nonatomic) int currentIndex;
 @property (nonatomic, strong) IBOutlet UILabel *dateLabel;
@@ -34,8 +35,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _days = [[NSArray alloc] initWithArray:[[DCMainProxy sharedProxy] days]];
-    [self addPageController];
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    [self.activityIndicator startAnimating];
+    [self showNetworkIndicator:YES];
+    [[DCMainProxy sharedProxy] dataReadyBlock:^(BOOL isDataReady) {
+        if (isDataReady) {
+            _days = [[NSArray alloc] initWithArray:[[DCMainProxy sharedProxy] days]];
+            [self addPageController];
+            [self.activityIndicator stopAnimating];
+            [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+            [self showNetworkIndicator:NO];
+        }
+    }];
+
+}
+- (void)showNetworkIndicator:(BOOL)shouldShow
+{
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = shouldShow;
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = shouldShow;
 }
 
 -(void) addPageController {
