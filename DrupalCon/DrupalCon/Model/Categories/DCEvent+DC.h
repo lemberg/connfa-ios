@@ -18,7 +18,8 @@ extern NSString * kDCEvent_speakers_key;
 extern NSString * kDCEvent_track_key;
 extern NSString * kDCEvent_experienceLevel_key;
 extern NSString * kDCEvent_eventId_key;
-
+extern NSString * kDCEvent_text_key;
+extern NSString * kDCEvent_place_key;
 
 @interface DCEvent (DC)
 

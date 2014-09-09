@@ -8,6 +8,7 @@
 
 #import "DCSpeaker+DC.h"
 #import "DCMainProxy.h"
+#import "NSDictionary+DC.h"
 
 const NSString * kDCSpeaker_speakers_key = @"speakers";
 const NSString * kDCSpeaker_speakerId_key = @"speakerId";
@@ -25,6 +26,7 @@ const NSString * kDCSpeaker_charact_key = @"charact";
     NSDictionary * speakers = [NSJSONSerialization JSONObjectWithData:jsonData
                                                            options:kNilOptions
                                                              error:&err];
+    speakers = [speakers dictionaryByReplacingNullsWithStrings];
     if (err)
     {
         NSLog(@"WRONG! json");

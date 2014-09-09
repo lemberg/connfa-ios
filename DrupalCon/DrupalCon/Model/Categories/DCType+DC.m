@@ -8,6 +8,7 @@
 
 #import "DCType+DC.h"
 #import "DCMainProxy.h"
+#import "NSDictionary+DC.h"
 
 const NSString * kDCType_types_key = @"types";
 const NSString * kDCType_typeID_key = @"typeID";
@@ -21,6 +22,8 @@ const NSString * kDCType_typeName_key = @"typeName";
     NSDictionary * types = [NSJSONSerialization JSONObjectWithData:jsonData
                                                                 options:kNilOptions
                                                                   error:&err];
+    types = [types dictionaryByReplacingNullsWithStrings];
+
     if (err)
     {
         NSLog(@"WRONG! json");

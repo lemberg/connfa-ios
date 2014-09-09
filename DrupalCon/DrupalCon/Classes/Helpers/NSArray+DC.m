@@ -10,6 +10,7 @@
 #import "DCTime+DC.h"
 #import "DCTimeRange+DC.h"
 #import "DCEvent+DC.h"
+#import "NSDictionary+DC.h"
 
 @implementation NSArray (DC)
 
@@ -122,4 +123,17 @@
     return NSOrderedSame;
 }
 
+
+- (NSArray *)dictionaryByReplacingNullsWithStrings  {
+    NSMutableArray *replaced = [self mutableCopy];
+    const id nul = [NSNull null];
+    const NSString *blank = @"";
+    for (int idx = 0; idx < [replaced count]; idx++) {
+        id object = [replaced objectAtIndex:idx];
+        if (object == nul) [replaced replaceObjectAtIndex:idx withObject:blank];
+        else if ([object isKindOfClass:[NSDictionary class]]) [replaced replaceObjectAtIndex:idx withObject:[object dictionaryByReplacingNullsWithStrings]];
+        else if ([object isKindOfClass:[NSArray class]]) [replaced replaceObjectAtIndex:idx withObject:[object dictionaryByReplacingNullsWithStrings]];
+    }
+    return [replaced copy];
+}
 @end

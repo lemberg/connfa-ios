@@ -19,12 +19,30 @@
 #import "DCLocation+DC.h"
 #import "DCFavoriteEvent.h"
 #import "NSDate+DC.h"
+
+#import "Reachability.h"
 #import "DCDataProvider.h"
 
 static NSString * kDCMainProxyModelName = @"main";
 
 static NSString * kDCMainProxyProgramFile = @"conference";
 static NSString * kDCMainProxyTypesFile = @"types";
+static NSString * kTimeStampSynchronisation = @"lastUpdate";
+static NSString * kAboutInfo = @"aboutHTML";
+
+static NSString *const TYPES_URI = @"getTypes";
+static NSString *const SPEKERS_URI = @"getSpeakers";
+static NSString *const LEVELS_URI = @"getTracks";
+static NSString *const TRACKS_URI = @"getTracks";
+static NSString *const PROGRAMS_URI = @"getPrograms";
+static NSString *const BOFS_URI = @"getBofs";
+static NSString *const TIME_STAMP_URI = @"getLastUpdate";
+static NSString *const ABOUT_INFO_URI = @"getAbout";
+
+@interface DCMainProxy ()
+@property (nonatomic, strong) void(^dataReadyCallback)(BOOL isDataReady);
+@property (nonatomic) BOOL isDataReady;
+@end
 
 @implementation DCMainProxy
 @synthesize managedObjectModel=_managedObjectModel,
@@ -41,45 +59,100 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     return sharedProxy;
 }
 
+- (void)dataReadyBlock:(void(^)(BOOL isDataReady))callback
+{
+    if (self.isDataReady) {
+        callback(self.isDataReady);
+    } else {
+        callback(self.isDataReady);
+    }
+   
+}
 
+- (void)startNetworkChecking
+{
+    
+    Reachability * reach = [Reachability reachabilityWithHostname:@"google.com"];
+    
+    reach.reachableBlock = ^(Reachability * reachability)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self updateEvents];
+            if (self.dataReadyCallback) {
+                self.dataReadyCallback(self.isDataReady);
+            }
+            
+        });
+    };
+    
+    reach.unreachableBlock = ^(Reachability * reachability)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"Internet connection unreachable");
+        });
+    };
+    
+    [reach startNotifier];
+
+}
 #pragma mark - public
 
 - (void)update
 {
-    [self updateTypes];
-    [self updateSpeakers];
-    [self updateLevels];
-    [self updateTracks];
-    [self updateProgram];
-    [self updateLocation];
-    [self DC_addTestBof_TMP];
-    [self synchrosizeFavoritePrograms];
+    self.isDataReady = NO;
+    [self startNetworkChecking];
+
 }
 
-- (void)DC_addTestBof_TMP
+- (void)updateEvents
 {
-    [self removeItems:[self instancesOfClass:[DCBof class]
-                       filtredUsingPredicate:nil
-                                   inContext:self.managedObjectContext]
-            inContext:self.managedObjectContext];
-    DCBof * bof = [self createBofItem];
+    [self timeStamp:^(NSString *timeStamp) {
+        if ([self updateTimeStampSynchronisation:timeStamp]) {
+            [self updateTypes];
+            [self updateSpeakers];
+            [self updateLevels];
+            [self updateTracks];
+            [self updateProgram];
+            [self updateBofs];
+            [self updateLocation];
+            [self synchrosizeFavoritePrograms];
+        }
+        self.isDataReady = YES;
+    }];
+}
+- (BOOL)updateTimeStampSynchronisation:(NSString *)timeStamp
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *lastUpdateTime = [userDefaults objectForKey:kTimeStampSynchronisation];
+    if (!lastUpdateTime || ![lastUpdateTime isEqualToString: timeStamp]) {
+        [userDefaults setObject:timeStamp forKey:kTimeStampSynchronisation];
+        [userDefaults synchronize];
+        return YES;
+    }
+    return YES;
+    
+}
 
-    bof.date = [NSDate fabricateWithEventString:@"30-08-2014"];
-    bof.eventID = @(1005);
-    bof.name = @"test Bof";
-    bof.favorite = @NO;
-    bof.place = @"default place";
-    bof.desctiptText = @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
-    bof.timeRange = [[DCMainProxy sharedProxy] createTimeRange];
-    [bof.timeRange setFrom:@"10:35" to:@"11:46"];
+- (void)timeStamp:(void(^)(NSString *timeStamp))callback
+{
+    // TODO: Remove time stamp hardcode
     
-    [bof addTypeForID:0];
-    [bof addSpeakersForIds:@[@(0)]];
-    [bof addLevelForID:0];
-    [bof addTrackForId:0];
-    
-    [self saveContext];
-    
+    [DCDataProvider
+     updateMainDataFromURI:TIME_STAMP_URI
+     callBack:^(BOOL success, id result) {
+         if (success && result) {
+             NSError *err;
+             NSDictionary * tracks = [NSJSONSerialization JSONObjectWithData:result
+                                                                     options:kNilOptions
+                                                                       error:&err];
+//             callback([tracks objectForKey:kTimeStampSynchronisation]);
+
+             callback(@"12341234");
+         }
+         else {
+             NSLog(@"%@", result);
+         }
+     }];
 }
 
 - (void)synchrosizeFavoritePrograms
@@ -233,6 +306,29 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     [self saveContext];
 }
 
+- (void)loadHtmlAboutInfo:(void(^)(NSString *))callback
+{
+// FIXME: change ABOUT_INFO_URI value
+    [self.managedObjectContext performBlockAndWait:^{
+        [DCDataProvider
+         updateMainDataFromURI:ABOUT_INFO_URI
+         callBack:^(BOOL success, id result) {
+             if (success && result)
+             {
+                 NSError *error;
+                 NSDictionary * about  = [NSJSONSerialization JSONObjectWithData:result
+                                                                         options:kNilOptions
+                                                                           error:&error];
+                 callback([about objectForKey:kAboutInfo]);
+             }
+             else
+             {
+                 callback(@"");
+                 NSLog(@"WRONG! %@", result);
+             }
+         }];
+    }];
+}
 #pragma mark - DO creation
 
 - (DCProgram*)createProgramItem
@@ -322,6 +418,12 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
             inContext:self.managedObjectContext];
 }
 
+- (void)clearBofs
+{
+    [self removeItems:[self bofInstances]
+            inContext:self.managedObjectContext];
+}
+
 - (void)removeItems:(NSArray*)items inContext:(NSManagedObjectContext*)context
 {
     for (NSManagedObject * object in items)
@@ -347,36 +449,61 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 - (void)updateProgram
 {
     [self. managedObjectContext performBlock:^{
-        [DCDataProvider updateMainDataFromFile:kDCMainProxyProgramFile callBack:^(BOOL success, id result) {
-            if (success && result)
-            {
-                [self clearProgram];
-                [DCProgram parceFromJSONData:result];
-                [self saveContext];
-            }
-            else
-            {
-                NSLog(@"%@", result);
-            }
-        }];
+        [DCDataProvider
+         updateMainDataFromURI:PROGRAMS_URI
+         callBack:^(BOOL success, id result) {
+             if (success && result)
+             {
+                 [self clearProgram];
+                 [DCProgram parceFromJSONData:result];
+                 [self saveContext];
+             }
+             else
+             {
+                 NSLog(@"%@", result);
+             }
+         }];
+    }];
+}
+
+- (void)updateBofs
+{
+    // TODO: Add category to Bof and parser
+    [self. managedObjectContext performBlock:^{
+        [DCDataProvider
+         updateMainDataFromURI:BOFS_URI
+         callBack:^(BOOL success, id result) {
+             if (success && result)
+             {
+                 [self clearBofs];
+//                 [DCBof parseFromJSONData:result];
+                 [self saveContext];
+             }
+             else
+             {
+                 NSLog(@"%@", result);
+             }
+         }];
     }];
 }
 
 - (void)updateTypes
 {
     [self.managedObjectContext performBlockAndWait:^{
-        [DCDataProvider updateMainDataFromFile:kDCMainProxyTypesFile callBack:^(BOOL success, id result) {
-            if (success && result)
-            {
-                [self clearTypes];
-                [DCType parceFromJsonData:result];
-                [self saveContext];
-            }
-            else
-            {
-                NSLog(@"%@", result);
-            }
-        }];
+        [DCDataProvider
+         updateMainDataFromURI:TYPES_URI
+         callBack:^(BOOL success, id result) {
+             if (success && result)
+             {
+                 [self clearTypes];
+                 [DCType parceFromJsonData:result];
+                 [self saveContext];
+             }
+             else
+             {
+                 NSLog(@"%@", result);
+             }
+         }];
     }];
 }
 
@@ -384,54 +511,61 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 - (void)updateSpeakers
 {
     [self.managedObjectContext performBlockAndWait:^{
-        [DCDataProvider updateMainDataFromFile:[NSString stringWithFormat:@"%@",[NSStringFromClass([DCSpeaker class]) lowercaseString]] callBack:^(BOOL success, id result) {
-            if (success && result)
-            {
-                [self clearSpeakers];
-                [DCSpeaker parceFromJSONData:result];
-                [self saveContext];
-            }
-            else
-            {
-                NSLog(@"WRONG! %@", result);
-            }
-        }];
+        [DCDataProvider
+         updateMainDataFromURI:SPEKERS_URI
+         callBack:^(BOOL success, id result) {
+             if (success && result)
+             {
+                 [self clearSpeakers];
+                 [DCSpeaker parceFromJSONData:result];
+                 [self saveContext];
+             }
+             else
+             {
+                 NSLog(@"WRONG! %@", result);
+             }
+         }];
     }];
 }
 
 - (void)updateLevels
 {
     [self.managedObjectContext performBlockAndWait:^{
-        [DCDataProvider updateMainDataFromFile:[self DC_fileNameForClass:[DCLevel class]] callBack:^(BOOL success, id result) {
-            if (success && result)
-            {
-                [self clearLevels];
-                [DCLevel parceFromJsonData:result];
-                [self saveContext];
-            }
-            else
-            {
-                NSLog(@"WRONG! %@", result);
-            }
-        }];
+        [DCDataProvider
+         updateMainDataFromURI:LEVELS_URI
+         callBack:^(BOOL success, id result) {
+             if (success && result)
+             {
+                 [self clearLevels];
+                 [DCLevel parceFromJsonData:result];
+                 [self saveContext];
+             }
+             else
+             {
+                 NSLog(@"WRONG! %@", result);
+             }
+         }];
     }];
 }
 
 - (void)updateTracks
 {
     [self.managedObjectContext performBlockAndWait:^{
-        [DCDataProvider updateMainDataFromFile:[self DC_fileNameForClass:[DCTrack class]] callBack:^(BOOL success, id result) {
-            if (success && result)
-            {
-                [self clearTracks];
-                [DCTrack parceFromJsonData:result];
-                [self saveContext];
-            }
-            else
-            {
-                NSLog(@"WRONG! %@", result);
-            }
-        }];
+        [DCDataProvider
+         updateMainDataFromURI:TRACKS_URI
+         callBack:^(BOOL success, id result) {
+             if (success && result)
+             {
+                 [self clearTracks];
+                 [DCTrack parceFromJsonData:result];
+                 [self saveContext];
+             }
+             else
+             {
+                 NSLog(@"WRONG! %@", result);
+             }
+         }];
+        
     }];
 }
 

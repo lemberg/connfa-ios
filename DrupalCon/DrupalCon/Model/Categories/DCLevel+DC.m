@@ -8,6 +8,7 @@
 
 #import "DCLevel+DC.h"
 #import "DCMainProxy.h"
+#import "NSDictionary+DC.h"
 
 NSString * kDCLevel_levels_key = @"levels";
 NSString * kDCLevel_levelID_key = @"levelID";
@@ -22,6 +23,7 @@ NSString * kDCLevel_levelOrder_key = @"levelOrder";
     NSDictionary * levels = [NSJSONSerialization JSONObjectWithData:jsonData
                                                               options:kNilOptions
                                                                 error:&err];
+    levels = [levels dictionaryByReplacingNullsWithStrings];
     if (err)
     {
         NSLog(@"WRONG! json");

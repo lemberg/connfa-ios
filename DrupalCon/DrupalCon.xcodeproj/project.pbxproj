@@ -41,6 +41,9 @@
 		5DC8C46F198658FF00BF5816 /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8C46B198658FF00BF5816 /* UIViewController+MFSideMenuAdditions.m */; };
 		5DC8C4731986594400BF5816 /* DCBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8C4721986594400BF5816 /* DCBaseViewController.m */; };
 		5DC8C47A19865C8400BF5816 /* DCSideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8C47919865C8400BF5816 /* DCSideMenuViewController.m */; };
+		74356D5219BEE1D90055F13D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74356D5119BEE1D90055F13D /* SystemConfiguration.framework */; };
+		74356D5819BEE4860055F13D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 74356D5719BEE4860055F13D /* Reachability.m */; };
+		74A43C6D19BDDE9200F7BFA0 /* NSDictionary+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A43C6C19BDDE9200F7BFA0 /* NSDictionary+DC.m */; };
 		74A470E119B5B21900B01BC5 /* about_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 74A470E019B5B21900B01BC5 /* about_img.png */; };
 		74A470E819B5EA3C00B01BC5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74A470E719B5EA3C00B01BC5 /* MapKit.framework */; };
 		74A6278819B8A37200B46B75 /* DCFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A6278719B8A37200B46B75 /* DCFavoritesViewController.m */; };
@@ -170,6 +173,11 @@
 		5DC8C4721986594400BF5816 /* DCBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCBaseViewController.m; sourceTree = "<group>"; };
 		5DC8C47819865C8400BF5816 /* DCSideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCSideMenuViewController.h; sourceTree = "<group>"; };
 		5DC8C47919865C8400BF5816 /* DCSideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCSideMenuViewController.m; sourceTree = "<group>"; };
+		74356D5119BEE1D90055F13D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		74356D5619BEE4860055F13D /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Classes/Helpers/Reachability.h; sourceTree = "<group>"; };
+		74356D5719BEE4860055F13D /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Classes/Helpers/Reachability.m; sourceTree = "<group>"; };
+		74A43C6B19BDDE9200F7BFA0 /* NSDictionary+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+DC.h"; path = "Classes/Helpers/NSDictionary+DC.h"; sourceTree = "<group>"; };
+		74A43C6C19BDDE9200F7BFA0 /* NSDictionary+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+DC.m"; path = "Classes/Helpers/NSDictionary+DC.m"; sourceTree = "<group>"; };
 		74A470E019B5B21900B01BC5 /* about_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_img.png; sourceTree = "<group>"; };
 		74A470E719B5EA3C00B01BC5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		74A6278619B8A37200B46B75 /* DCFavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCFavoritesViewController.h; path = Favorites/DCFavoritesViewController.h; sourceTree = "<group>"; };
@@ -275,6 +283,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				74356D5219BEE1D90055F13D /* SystemConfiguration.framework in Frameworks */,
 				74E67C7719B6FEF500DF9D71 /* CoreLocation.framework in Frameworks */,
 				74A470E819B5EA3C00B01BC5 /* MapKit.framework in Frameworks */,
 				849EFDDB19A4ACB800C43E05 /* CoreData.framework in Frameworks */,
@@ -447,10 +456,14 @@
 				849EFE1119A4D63500C43E05 /* DCDataProvider.m */,
 				849CF81F19A6246A00C84675 /* NSDate+DC.h */,
 				849CF82019A6246A00C84675 /* NSDate+DC.m */,
+				74A43C6B19BDDE9200F7BFA0 /* NSDictionary+DC.h */,
+				74A43C6C19BDDE9200F7BFA0 /* NSDictionary+DC.m */,
 				84FAE0E619A645E000DC9FF1 /* NSArray+DC.h */,
 				84FAE0E719A645E000DC9FF1 /* NSArray+DC.m */,
 				849D92C619ADF31D00977D67 /* UIImageView+DC.h */,
 				849D92C719ADF31D00977D67 /* UIImageView+DC.m */,
+				74356D5619BEE4860055F13D /* Reachability.h */,
+				74356D5719BEE4860055F13D /* Reachability.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -494,6 +507,7 @@
 		5DC8C413198656DA00BF5816 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				74356D5119BEE1D90055F13D /* SystemConfiguration.framework */,
 				74E67C7619B6FEF500DF9D71 /* CoreLocation.framework */,
 				74A470E719B5EA3C00B01BC5 /* MapKit.framework */,
 				849EFDDA19A4ACB800C43E05 /* CoreData.framework */,
@@ -946,6 +960,7 @@
 				74F0340519B4A965007E4AB9 /* DCAboutViewController.m in Sources */,
 				5DC8C46C198658FF00BF5816 /* DCLoginViewController.m in Sources */,
 				849D92C219ADCCDD00977D67 /* DCNavViewController.m in Sources */,
+				74A43C6D19BDDE9200F7BFA0 /* NSDictionary+DC.m in Sources */,
 				849E852019AF679F006F43B3 /* DCTrack+DC.m in Sources */,
 				5D38E6A11987A673006F7A59 /* DCTextField.m in Sources */,
 				849D92CB19ADF98600977D67 /* DCSpeakerHeaderCell.m in Sources */,
@@ -959,6 +974,7 @@
 				849EFE1219A4D63500C43E05 /* DCDataProvider.m in Sources */,
 				5DC8C4731986594400BF5816 /* DCBaseViewController.m in Sources */,
 				849EFDA319A49FB600C43E05 /* main.xcdatamodeld in Sources */,
+				74356D5819BEE4860055F13D /* Reachability.m in Sources */,
 				5D6449D7198A93E400BC1775 /* DCProgramHeaderCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
