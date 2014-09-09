@@ -25,4 +25,9 @@ extern NSString * kDCEvent_eventId_key;
 - (NSInteger)getTypeID;
 - (NSArray*)speakersNames;
 
+- (void)addTypeForID:(NSInteger)typeID;
+- (void)addSpeakersForIds:(NSArray*)speakerIds;
+- (void)addLevelForID:(NSInteger)levelID;
+- (void)addTrackForId:(NSInteger)trackId;
+
 @end

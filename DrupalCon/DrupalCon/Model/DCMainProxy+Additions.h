@@ -12,9 +12,9 @@
 
 #pragma mark - 
 
-- (NSArray*)days;
-- (NSArray*)programEventsForDayNum:(NSInteger)dayNum;
-- (NSArray*)uniqueTimeRangesForDayNum:(NSInteger)dayNum;
+- (NSArray*)daysForClass:(Class)eventClass;
+- (NSArray*)eventsForDayNum:(NSInteger)dayNum forClass:(Class)eventClass;
+- (NSArray*)uniqueTimeRangesForDayNum:(NSInteger)dayNum forClass:(Class)eventClass;
 - (NSArray *)favoriteEvents;
 
 #pragma mark -

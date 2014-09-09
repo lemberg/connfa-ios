@@ -57,58 +57,5 @@ const NSString * kDCProgram_programEvents_key = @"program_events";
     }
 }
 
-- (void)addTypeForID:(NSInteger)typeID
-{
-    DCType * type = [[DCMainProxy sharedProxy] typeForID:typeID];
-    if (!type)
-    {
-        type = [[DCMainProxy sharedProxy] createType];
-        type.name = @"noname";
-        type.typeID = @(typeID);
-    }
-    [type addEventsObject:self];
-}
-
-- (void)addSpeakersForIds:(NSArray*)speakerIds
-{
-    for (NSNumber* speakerIdNum in speakerIds)
-    {
-        DCSpeaker * speaker = [[DCMainProxy sharedProxy] speakerForId:[speakerIdNum integerValue]];
-        if (!speaker)
-        {
-            speaker = [[DCMainProxy sharedProxy] createSpeaker];
-            speaker.speakerId = speakerIdNum;
-            speaker.name = @"unknown speaker";
-        }
-        [speaker addEventsObject:self];
-    }
-}
-
-- (void)addLevelForID:(NSInteger)levelID
-{
-    DCLevel * level = [[DCMainProxy sharedProxy] levelForId:levelID];
-    if (!level)
-    {
-        level = [[DCMainProxy sharedProxy] createLevel];
-        level.levelId = @(levelID);
-        level.name = @"unknown";
-        level.order = @(100);
-    }
-    [level addEventsObject:self];
-}
-
--(void)addTrackForId:(NSInteger)trackId
-{
-    DCTrack * track = [[DCMainProxy sharedProxy] trackForId:trackId];
-    if (!track)
-    {
-        track = [[DCMainProxy sharedProxy] createTrack];
-        track.trackId = @(trackId);
-        track.name = @"General";
-    }
-    [track addEventsObject:self];
-}
-
-
 
 @end

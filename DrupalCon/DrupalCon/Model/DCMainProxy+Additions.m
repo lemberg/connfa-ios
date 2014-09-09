@@ -9,6 +9,7 @@
 #import "DCMainProxy+Additions.h"
 #import "DCEvent+DC.h"
 #import "DCProgram+DC.h"
+#import "DCBof.h"
 #import "DCTimeRange+DC.h"
 
 #import "NSDate+DC.h"
@@ -18,10 +19,10 @@
 
 #pragma mark -
 
-- (NSArray*)days
+- (NSArray*)daysForClass:(Class)eventClass
 {
     @try {
-        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass([DCProgram class]) inManagedObjectContext:self.managedObjectContext];
+        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass(eventClass) inManagedObjectContext:self.managedObjectContext];
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         [fetchRequest setEntity:entityDescription];
         [fetchRequest setReturnsObjectsAsFaults:NO];
@@ -49,13 +50,13 @@
     return nil;
 }
 
-- (NSArray*)programEventsForDayNum:(int)dayNum
+- (NSArray*)eventsForDayNum:(int)dayNum forClass:(__unsafe_unretained Class)eventClass
 {
     @try {
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:NSStringFromClass([DCProgram class]) inManagedObjectContext:self.managedObjectContext];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:NSStringFromClass(eventClass) inManagedObjectContext:self.managedObjectContext];
         [fetchRequest setEntity:entity];
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"date = %@", [[self days] objectAtIndex:dayNum]];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"date = %@", [[self daysForClass:eventClass] objectAtIndex:dayNum]];
         [fetchRequest setPredicate:predicate];
         //    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@""
         //                                                                   ascending:YES];
@@ -83,14 +84,14 @@
     return nil;
 }
 
-- (NSArray*)uniqueTimeRangesForDayNum:(NSInteger)dayNum
+- (NSArray*)uniqueTimeRangesForDayNum:(NSInteger)dayNum forClass:(__unsafe_unretained Class)eventClass
 {
     @try {
-        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass([DCProgram class]) inManagedObjectContext:self.managedObjectContext];
+        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass(eventClass) inManagedObjectContext:self.managedObjectContext];
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         [fetchRequest setEntity:entityDescription];
         [fetchRequest setReturnsObjectsAsFaults:NO];
-        NSPredicate * predicate = [NSPredicate predicateWithFormat:@"date = %@", [[self days] objectAtIndex:dayNum]];
+        NSPredicate * predicate = [NSPredicate predicateWithFormat:@"date = %@", [[self daysForClass:eventClass] objectAtIndex:dayNum]];
         [fetchRequest setPredicate:predicate];
         NSArray *result = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
         if(result && [result count])
@@ -115,7 +116,7 @@
 - (NSArray *)favoriteEvents
 {
     @try {
-        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass([DCProgram class]) inManagedObjectContext:self.managedObjectContext];
+        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass([DCEvent class]) inManagedObjectContext:self.managedObjectContext];
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         [fetchRequest setEntity:entityDescription];
         [fetchRequest setReturnsObjectsAsFaults:NO];

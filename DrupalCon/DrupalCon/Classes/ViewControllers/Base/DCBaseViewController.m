@@ -46,7 +46,12 @@
                                                                     target:self
                                                                     action:@selector(onBack)];
         self.navigationItem.backBarButtonItem = backBtn;
-        self.navigationController.navigationBar.topItem.title = @"Back";
+        
+        if (self.navigationController.viewControllers.count != 1)
+        // for all root view controllers 'topItem' is Title not Back Button
+        {
+            self.navigationController.navigationBar.topItem.title = @"Back";
+        }
     }
     else if (self.navigatorBarStyle == EBaseViewControllerNatigatorBarStyleTransparrent)
     {

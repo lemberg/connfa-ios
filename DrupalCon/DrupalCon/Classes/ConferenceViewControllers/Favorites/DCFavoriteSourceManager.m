@@ -81,13 +81,13 @@ static NSString * const kTimeSection = @"time";
     self.sectionsItems = sectionList;
 }
 
-- (DCProgram *)eventForIndexPath:(NSIndexPath *)indexPath
+- (DCEvent *)eventForIndexPath:(NSIndexPath *)indexPath
 {
     return [self DC_eventForIndexPath:indexPath];
 }
 
 
-- (DCProgram*)DC_eventForIndexPath:(NSIndexPath *)indexPath
+- (DCEvent*)DC_eventForIndexPath:(NSIndexPath *)indexPath
 {
     return self.sectionsItems[indexPath.section][kEventSections][indexPath.row];
 }

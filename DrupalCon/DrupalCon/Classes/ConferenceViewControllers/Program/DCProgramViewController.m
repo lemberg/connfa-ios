@@ -34,16 +34,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _days = [[NSArray alloc] initWithArray:[[DCMainProxy sharedProxy] days]];
+    _days = [_eventsStrategy days];
     [self addPageController];
 }
 
 -(void) addPageController {
     self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
     self.pageViewController.dataSource = self;
-    DCProgramItemsViewController *programItemsViewController = [self viewControllerAtIndex:0];
+    DCProgramItemsViewController *eventItemsViewController = [self viewControllerAtIndex:0];
+    eventItemsViewController.eventsStrategy = self.eventsStrategy;
     
-    self.viewControllers = [[NSArray alloc] initWithObjects: programItemsViewController, nil];
+    self.viewControllers = [[NSArray alloc] initWithObjects: eventItemsViewController, nil];
     [self.pageViewController setViewControllers:self.viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     self.pageViewController.delegate = self;
     // Change the size of page view controller
@@ -115,9 +116,10 @@
     }
     
     // Create a new view controller and pass suitable data.
-    DCProgramItemsViewController *programItemsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgramItemsViewController"];
-    programItemsViewController.pageIndex = index;
-    return programItemsViewController;
+    DCProgramItemsViewController *eventItemsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgramItemsViewController"];
+    eventItemsViewController.pageIndex = index;
+    eventItemsViewController.eventsStrategy = self.eventsStrategy;
+    return eventItemsViewController;
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController

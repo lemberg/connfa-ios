@@ -73,7 +73,7 @@
     
     NSString *cellIdSpeech = @"ProgramCellIdentifierSpeech";
     NSString *cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
-    DCProgram * event = [self DC_eventForIndexPath:indexPath];
+    DCEvent * event = [self DC_eventForIndexPath:indexPath];
     UITableViewCell *cell;
     
     switch ([event getTypeID]) {
@@ -125,7 +125,7 @@
 
 - (void)updateFavoriteItemsInIndexPath:(NSIndexPath *)anIndexPath
                              withValue:(BOOL)isFavorite {
-    DCProgram * event = [self DC_eventForIndexPath:anIndexPath];
+    DCEvent * event = [self DC_eventForIndexPath:anIndexPath];
     event.favorite = [NSNumber numberWithBool:isFavorite];
     if (!isFavorite) {
         [[DCMainProxy sharedProxy]
@@ -214,7 +214,7 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    __block DCProgram * event = [self DC_eventForIndexPath:indexPath];
+    __block DCEvent * event = [self DC_eventForIndexPath:indexPath];
     if([event getTypeID] == DC_EVENT_LUNCH || [event getTypeID] == DC_EVENT_COFEE_BREAK)
     {
         return;
@@ -236,7 +236,7 @@
 
 #pragma mark - private
 
-- (DCProgram*)DC_eventForIndexPath:(NSIndexPath *)indexPath
+- (DCEvent*)DC_eventForIndexPath:(NSIndexPath *)indexPath
 {
     return [self.favoriteSourceMng eventForIndexPath:indexPath];
 }

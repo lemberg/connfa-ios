@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-@class DCProgram, DCTimeRange;
+@class DCEvent, DCTimeRange;
 
 @interface DCFavoriteSourceManager : NSObject
 
 - (id)initWithSection:(NSArray *)newSections;
-- (DCProgram *)eventForIndexPath:(NSIndexPath *)indexPath;
+- (DCEvent *)eventForIndexPath:(NSIndexPath *)indexPath;
 - (int)numberOfSection;
 - (int)numberOfEventsInSection:(int)aSection;
 - (DCTimeRange *)timeRangeForSection:(int)aSection;

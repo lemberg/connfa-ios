@@ -92,6 +92,7 @@
 		84A06E2B19ACA2F700104876 /* DCSpeakerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A06E2A19ACA2F700104876 /* DCSpeakerCell.m */; };
 		84A06E2F19ACA41100104876 /* DCFavoriteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A06E2E19ACA41100104876 /* DCFavoriteButton.m */; };
 		84A06E3319ACBA0600104876 /* DCEventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A06E3219ACBA0600104876 /* DCEventDetailViewController.m */; };
+		84ABE8F519BEEB8F0019D5DC /* DCEventStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ABE8F419BEEB8F0019D5DC /* DCEventStrategy.m */; };
 		84FAE0E819A645E000DC9FF1 /* NSArray+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAE0E719A645E000DC9FF1 /* NSArray+DC.m */; };
 		84FAE10919A65FEA00DC9FF1 /* DCTime+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAE10819A65FEA00DC9FF1 /* DCTime+DC.m */; };
 		84FAE10C19A6600900DC9FF1 /* DCTimeRange+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAE10B19A6600900DC9FF1 /* DCTimeRange+DC.m */; };
@@ -259,6 +260,8 @@
 		84A06E2E19ACA41100104876 /* DCFavoriteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCFavoriteButton.m; path = Classes/Views/controls/DCFavoriteButton.m; sourceTree = "<group>"; };
 		84A06E3119ACBA0600104876 /* DCEventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCEventDetailViewController.h; path = EventDetail/DCEventDetailViewController.h; sourceTree = "<group>"; };
 		84A06E3219ACBA0600104876 /* DCEventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCEventDetailViewController.m; path = EventDetail/DCEventDetailViewController.m; sourceTree = "<group>"; };
+		84ABE8F319BEEB8F0019D5DC /* DCEventStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCEventStrategy.h; sourceTree = "<group>"; };
+		84ABE8F419BEEB8F0019D5DC /* DCEventStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCEventStrategy.m; sourceTree = "<group>"; };
 		84FAE0E619A645E000DC9FF1 /* NSArray+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+DC.h"; path = "Classes/Helpers/NSArray+DC.h"; sourceTree = "<group>"; };
 		84FAE0E719A645E000DC9FF1 /* NSArray+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+DC.m"; path = "Classes/Helpers/NSArray+DC.m"; sourceTree = "<group>"; };
 		84FAE10719A65FEA00DC9FF1 /* DCTime+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DCTime+DC.h"; path = "Model/Categories/DCTime+DC.h"; sourceTree = "<group>"; };
@@ -320,7 +323,7 @@
 			isa = PBXGroup;
 			children = (
 				84A06E3019ACB9AD00104876 /* EventDetail */,
-				5D38E692198692E9006F7A59 /* Program */,
+				5D38E692198692E9006F7A59 /* Programs&BoFs */,
 				5D38E693198692E9006F7A59 /* Speakers */,
 				74A6278919B8A3AC00B46B75 /* Favorites */,
 			);
@@ -328,13 +331,16 @@
 			path = Classes/ConferenceViewControllers;
 			sourceTree = "<group>";
 		};
-		5D38E692198692E9006F7A59 /* Program */ = {
+		5D38E692198692E9006F7A59 /* Programs&BoFs */ = {
 			isa = PBXGroup;
 			children = (
+				84ABE8F319BEEB8F0019D5DC /* DCEventStrategy.h */,
+				84ABE8F419BEEB8F0019D5DC /* DCEventStrategy.m */,
 				5D6449AE1989088C00BC1775 /* ProgramItemsViewController */,
 				5D38E69719869303006F7A59 /* DCProgramViewController.h */,
 				5D38E69819869303006F7A59 /* DCProgramViewController.m */,
 			);
+			name = "Programs&BoFs";
 			path = Program;
 			sourceTree = "<group>";
 		};
@@ -910,6 +916,7 @@
 				849EFE4119A5067000C43E05 /* DCType+DC.m in Sources */,
 				849EFE2119A4FB9600C43E05 /* DCProgram+DC.m in Sources */,
 				74E67C7219B6FDF400DF9D71 /* DCLocationViewController.m in Sources */,
+				84ABE8F519BEEB8F0019D5DC /* DCEventStrategy.m in Sources */,
 				5D38E68219867062006F7A59 /* DCMenuContainerViewController.m in Sources */,
 				849AC50619B735810093A29B /* DCFavoriteEvent.m in Sources */,
 				849D92C519ADEA8700977D67 /* DCSpeaker+DC.m in Sources */,

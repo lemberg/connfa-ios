@@ -10,6 +10,9 @@
 #import "DCTimeRange+DC.h"
 #import "DCType+DC.h"
 #import "DCSpeaker+DC.h"
+#import "DCLevel+DC.h"
+#import "DCTrack+DC.h"
+#import "DCMainProxy+Additions.h"
 
 const NSString * kDCEvent_days_key = @"days";
 const NSString * kDCEvent_date_key = @"date";
@@ -48,6 +51,59 @@ const NSString * kDCEvent_eventId_key = @"event_id";
 - (NSInteger)getTypeID
 {
     return [self.type.typeID integerValue];
+}
+
+
+- (void)addTypeForID:(NSInteger)typeID
+{
+    DCType * type = [[DCMainProxy sharedProxy] typeForID:typeID];
+    if (!type)
+    {
+        type = [[DCMainProxy sharedProxy] createType];
+        type.name = @"noname";
+        type.typeID = @(typeID);
+    }
+    [type addEventsObject:self];
+}
+
+- (void)addSpeakersForIds:(NSArray*)speakerIds
+{
+    for (NSNumber* speakerIdNum in speakerIds)
+    {
+        DCSpeaker * speaker = [[DCMainProxy sharedProxy] speakerForId:[speakerIdNum integerValue]];
+        if (!speaker)
+        {
+            speaker = [[DCMainProxy sharedProxy] createSpeaker];
+            speaker.speakerId = speakerIdNum;
+            speaker.name = @"unknown speaker";
+        }
+        [speaker addEventsObject:self];
+    }
+}
+
+- (void)addLevelForID:(NSInteger)levelID
+{
+    DCLevel * level = [[DCMainProxy sharedProxy] levelForId:levelID];
+    if (!level)
+    {
+        level = [[DCMainProxy sharedProxy] createLevel];
+        level.levelId = @(levelID);
+        level.name = @"unknown";
+        level.order = @(100);
+    }
+    [level addEventsObject:self];
+}
+
+-(void)addTrackForId:(NSInteger)trackId
+{
+    DCTrack * track = [[DCMainProxy sharedProxy] trackForId:trackId];
+    if (!track)
+    {
+        track = [[DCMainProxy sharedProxy] createTrack];
+        track.trackId = @(trackId);
+        track.name = @"General";
+    }
+    [track addEventsObject:self];
 }
 
 @end

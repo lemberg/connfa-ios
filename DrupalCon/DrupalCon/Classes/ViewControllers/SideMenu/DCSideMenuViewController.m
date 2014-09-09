@@ -13,6 +13,7 @@
 #import "DCSideMenuType.h"
 #import "DCMenuImage.h"
 #import "DCMenuStoryboardHelper.h"
+#import "DCProgramViewController.h"
 #import "UIConstants.h"
 
 #define isiPhone5  ([[UIScreen mainScreen] bounds].size.height == 568)?TRUE:FALSE
@@ -62,9 +63,14 @@
     
     if(storyboardControllerID) {
         DCBaseViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier: storyboardControllerID];
+        if ([viewController isKindOfClass:[DCProgramViewController class]])
+        {
+            [(DCProgramViewController*)viewController setEventsStrategy:[DCMenuStoryboardHelper strategyForEventMenuType:menuItem]];
+        }
         
         if(self.presentedController)
             [self.presentedController.view removeFromSuperview];
+
         
         [[DCAppFacade shared].menuContainerViewController.view addSubview: viewController.view];
         [[DCAppFacade shared].menuContainerViewController setTitle: title];

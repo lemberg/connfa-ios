@@ -16,7 +16,7 @@
 #import "DCLunchCell.h"
 #import "DCProgramHeaderCellView.h"
 
-#import "DCProgram+DC.h"
+//#import "DCProgram+DC.h"
 #import "DCEvent+DC.h"
 #import "DCType+DC.h"
 #import "DCTimeRange+DC.h"
@@ -47,8 +47,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _events = [[DCMainProxy sharedProxy] programEventsForDayNum:self.pageIndex];
-    _timeslots = [[DCMainProxy sharedProxy] uniqueTimeRangesForDayNum:self.pageIndex];
+    _events =  [self.eventsStrategy eventsForDayNum:self.pageIndex];
+    _timeslots = [self.eventsStrategy uniqueTimeRangesForDayNum:self.pageIndex];
 }
 
 - (void)didReceiveMemoryWarning
@@ -66,7 +66,7 @@
     NSString *cellIdCoffeBreak = @"ProgramCellIdentifierCoffeBreak";
     NSString *cellIdLunch = @"ProgramCellIdentifierLunch";
     
-    DCProgram * event = [self DC_eventForIndexPath:indexPath];
+    DCEvent * event = [self DC_eventForIndexPath:indexPath];
     UITableViewCell *cell;
     
     switch ([event getTypeID]) {
@@ -131,7 +131,7 @@
 
 - (void)updateFavoriteItemsInIndexPath:(NSIndexPath *)anIndexPath
                              withValue:(BOOL)isFavorite {
-    DCProgram * event = [self DC_eventForIndexPath:anIndexPath];
+    DCEvent * event = [self DC_eventForIndexPath:anIndexPath];
     event.favorite = [NSNumber numberWithBool:isFavorite];
     if (isFavorite) {
         [[DCMainProxy sharedProxy]
@@ -148,7 +148,7 @@
 {
     /*lets check if this date range contains some events that need a time period header, DCSpeechCelll and DCSPeechofTheDayCell, if its only coffe breaks or lunch - we dont display a header*/
     BOOL headerNeeded = NO;
-    for(DCProgram *event in [_events eventsForTimeRange:_timeslots[section]])
+    for(DCEvent *event in [_events eventsForTimeRange:_timeslots[section]])
     {
         if([event getTypeID] == DC_EVENT_SPEACH || [event getTypeID] == DC_EVENT_SPEACH_OF_DAY)
         {
@@ -227,7 +227,7 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    DCProgram * event = [self DC_eventForIndexPath:indexPath];
+    DCEvent * event = [self DC_eventForIndexPath:indexPath];
     if([event getTypeID] == DC_EVENT_LUNCH || [event getTypeID] == DC_EVENT_COFEE_BREAK)
     {
         return;
@@ -245,7 +245,7 @@
 
 #pragma mark - private
 
-- (DCProgram*)DC_eventForIndexPath:(NSIndexPath *)indexPath
+- (DCEvent*)DC_eventForIndexPath:(NSIndexPath *)indexPath
 {
     return [[_events eventsForTimeRange:_timeslots[indexPath.section]] objectAtIndex:indexPath.row];
 }

@@ -62,4 +62,29 @@
     return title;
 }
 
++ (BOOL)isProgramOrBof:(DCMenuSection)menu
+{
+    return (menu == DCMENU_PROGRAM_ITEM || menu == DCMENU_BOFS_ITEM);
+}
+
++ (DCEventStrategy*)strategyForEventMenuType:(DCMenuSection)menu
+{
+    EDCEventStrategy eStrategy;
+    switch (menu)
+    {
+        case DCMENU_PROGRAM_ITEM:
+            eStrategy = EDCEventStrategyPrograms;
+            break;
+            
+        case DCMENU_BOFS_ITEM:
+            eStrategy = EDCEventStrategyBofs;
+            break;
+            
+        default:
+            break;
+    }
+    DCEventStrategy * strategy = [[DCEventStrategy alloc] initWithStrategy:eStrategy];
+    return strategy;
+}
+
 @end

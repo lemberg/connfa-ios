@@ -7,7 +7,10 @@
 //
 
 #import "DCBaseViewController.h"
+#import "DCEventStrategy.h"
 
 @interface DCProgramViewController : DCBaseViewController<UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+
+@property (nonatomic, strong) DCEventStrategy * eventsStrategy;
 
 @end

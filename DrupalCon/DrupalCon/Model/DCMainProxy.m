@@ -7,6 +7,7 @@
 //
 
 #import "DCMainProxy.h"
+#import "DCEvent+DC.h"
 #import "DCProgram+DC.h"
 #import "DCBof.h"
 #import "DCType+DC.h"
@@ -17,7 +18,7 @@
 #import "DCTrack+DC.h"
 #import "DCLocation+DC.h"
 #import "DCFavoriteEvent.h"
-
+#import "NSDate+DC.h"
 #import "DCDataProvider.h"
 
 static NSString * kDCMainProxyModelName = @"main";
@@ -51,7 +52,34 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     [self updateTracks];
     [self updateProgram];
     [self updateLocation];
+    [self DC_addTestBof_TMP];
     [self synchrosizeFavoritePrograms];
+}
+
+- (void)DC_addTestBof_TMP
+{
+    [self removeItems:[self instancesOfClass:[DCBof class]
+                       filtredUsingPredicate:nil
+                                   inContext:self.managedObjectContext]
+            inContext:self.managedObjectContext];
+    DCBof * bof = [self createBofItem];
+
+    bof.date = [NSDate fabricateWithEventString:@"30-08-2014"];
+    bof.eventID = @(1005);
+    bof.name = @"test Bof";
+    bof.favorite = @NO;
+    bof.place = @"default place";
+    bof.desctiptText = @"Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.";
+    bof.timeRange = [[DCMainProxy sharedProxy] createTimeRange];
+    [bof.timeRange setFrom:@"10:35" to:@"11:46"];
+    
+    [bof addTypeForID:0];
+    [bof addSpeakersForIds:@[@(0)]];
+    [bof addLevelForID:0];
+    [bof addTrackForId:0];
+    
+    [self saveContext];
+    
 }
 
 - (void)synchrosizeFavoritePrograms
@@ -64,10 +92,10 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
         [favorteIDs addObjectsFromArray:[favorite allValues]];
     }
     NSPredicate * predicate = [NSPredicate predicateWithFormat:@"eventID IN %@", favorteIDs];
-    NSArray * results = [self instancesOfClass:[DCProgram class]
+    NSArray * results = [self instancesOfClass:[DCEvent class]
                          filtredUsingPredicate:predicate
                                      inContext:self.managedObjectContext];
-    for (DCProgram *program in results) {
+    for (DCEvent *program in results) {
         program.favorite = [NSNumber numberWithBool:YES];
     }
     [self saveContext];
