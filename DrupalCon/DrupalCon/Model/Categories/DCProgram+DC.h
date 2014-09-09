@@ -19,6 +19,4 @@ typedef NS_ENUM (int, DCEventType) {
 
 @interface DCProgram (DC)
 
-+ (void)parceFromJSONData:(NSData*)jsonData;
-
 @end

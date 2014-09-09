@@ -56,6 +56,7 @@
 		74F0340519B4A965007E4AB9 /* DCAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F0340419B4A965007E4AB9 /* DCAboutViewController.m */; };
 		74F0340819B4C821007E4AB9 /* About.html in Resources */ = {isa = PBXBuildFile; fileRef = 74F0340719B4C821007E4AB9 /* About.html */; };
 		74F159CB19B9DD750033B31F /* DCFavoriteSourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F159CA19B9DD750033B31F /* DCFavoriteSourceManager.m */; };
+		840C455519BF419700CC144B /* DCBof+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 840C455419BF419700CC144B /* DCBof+DC.m */; };
 		849AC4F119B7357F0093A29B /* DCProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 849AC4F019B7357F0093A29B /* DCProgram.m */; };
 		849AC4F419B735800093A29B /* DCEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 849AC4F319B735800093A29B /* DCEvent.m */; };
 		849AC4F719B735800093A29B /* DCTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 849AC4F619B735800093A29B /* DCTime.m */; };
@@ -197,6 +198,8 @@
 		74F0340719B4C821007E4AB9 /* About.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = About.html; sourceTree = "<group>"; };
 		74F159C919B9DD750033B31F /* DCFavoriteSourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCFavoriteSourceManager.h; path = Favorites/DCFavoriteSourceManager.h; sourceTree = "<group>"; };
 		74F159CA19B9DD750033B31F /* DCFavoriteSourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCFavoriteSourceManager.m; path = Favorites/DCFavoriteSourceManager.m; sourceTree = "<group>"; };
+		840C455319BF419700CC144B /* DCBof+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DCBof+DC.h"; path = "Model/Categories/DCBof+DC.h"; sourceTree = "<group>"; };
+		840C455419BF419700CC144B /* DCBof+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DCBof+DC.m"; path = "Model/Categories/DCBof+DC.m"; sourceTree = "<group>"; };
 		849AC4EF19B7357F0093A29B /* DCProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCProgram.h; path = Model/DCProgram.h; sourceTree = "<group>"; };
 		849AC4F019B7357F0093A29B /* DCProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCProgram.m; path = Model/DCProgram.m; sourceTree = "<group>"; };
 		849AC4F219B735800093A29B /* DCEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCEvent.h; path = Model/DCEvent.h; sourceTree = "<group>"; };
@@ -752,6 +755,8 @@
 				849EFE1D19A4EB2100C43E05 /* DCEvent+DC.m */,
 				849EFE1F19A4FB9600C43E05 /* DCProgram+DC.h */,
 				849EFE2019A4FB9600C43E05 /* DCProgram+DC.m */,
+				840C455319BF419700CC144B /* DCBof+DC.h */,
+				840C455419BF419700CC144B /* DCBof+DC.m */,
 				849EFE3F19A5067000C43E05 /* DCType+DC.h */,
 				849EFE4019A5067000C43E05 /* DCType+DC.m */,
 				84FAE10719A65FEA00DC9FF1 /* DCTime+DC.h */,
@@ -947,6 +952,7 @@
 				5D6449A71988E9DA00BC1775 /* DCMenuImage.m in Sources */,
 				5D6449AD1988ECA400BC1775 /* DCMenuStoryboardHelper.m in Sources */,
 				84FAE0E819A645E000DC9FF1 /* NSArray+DC.m in Sources */,
+				840C455519BF419700CC144B /* DCBof+DC.m in Sources */,
 				849D92E419AE2A6600977D67 /* DCDescriptionTextCell.m in Sources */,
 				5DC8C46F198658FF00BF5816 /* UIViewController+MFSideMenuAdditions.m in Sources */,
 				84FAE10C19A6600900DC9FF1 /* DCTimeRange+DC.m in Sources */,

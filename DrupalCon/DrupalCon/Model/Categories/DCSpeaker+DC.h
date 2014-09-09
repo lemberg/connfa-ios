@@ -10,6 +10,6 @@
 
 @interface DCSpeaker (DC)
 
-+ (void)parceFromJSONData:(NSData*)jsonData;
++ (void)parseFromJSONData:(NSData*)jsonData;
 
 @end

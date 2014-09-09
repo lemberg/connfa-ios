@@ -35,7 +35,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self addPageController];
     [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [self.activityIndicator startAnimating];
     [self showNetworkIndicator:YES];

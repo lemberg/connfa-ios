@@ -17,7 +17,7 @@ NSString * kDCLevel_levelOrder_key = @"levelOrder";
 
 @implementation DCLevel (DC)
 
-+ (void)parceFromJsonData:(NSData *)jsonData
++ (void)parseFromJsonData:(NSData *)jsonData
 {
     NSError * err = nil;
     NSDictionary * levels = [NSJSONSerialization JSONObjectWithData:jsonData

@@ -61,12 +61,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 
 - (void)dataReadyBlock:(void(^)(BOOL isDataReady))callback
 {
-    if (self.isDataReady) {
-        callback(self.isDataReady);
-    } else {
-        callback(self.isDataReady);
-    }
-   
+    callback(self.isDataReady);
 }
 
 - (void)startNetworkChecking
@@ -455,7 +450,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
              if (success && result)
              {
                  [self clearProgram];
-                 [DCProgram parceFromJSONData:result];
+                 [DCProgram parseFromJSONData:result];
                  [self saveContext];
              }
              else
@@ -476,7 +471,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
              if (success && result)
              {
                  [self clearBofs];
-//                 [DCBof parseFromJSONData:result];
+                 [DCBof parseFromJSONData:result];
                  [self saveContext];
              }
              else
@@ -496,7 +491,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
              if (success && result)
              {
                  [self clearTypes];
-                 [DCType parceFromJsonData:result];
+                 [DCType parseFromJsonData:result];
                  [self saveContext];
              }
              else
@@ -517,7 +512,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
              if (success && result)
              {
                  [self clearSpeakers];
-                 [DCSpeaker parceFromJSONData:result];
+                 [DCSpeaker parseFromJSONData:result];
                  [self saveContext];
              }
              else
@@ -537,7 +532,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
              if (success && result)
              {
                  [self clearLevels];
-                 [DCLevel parceFromJsonData:result];
+                 [DCLevel parseFromJsonData:result];
                  [self saveContext];
              }
              else
@@ -557,7 +552,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
              if (success && result)
              {
                  [self clearTracks];
-                 [DCTrack parceFromJsonData:result];
+                 [DCTrack parseFromJsonData:result];
                  [self saveContext];
              }
              else
@@ -576,7 +571,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
             if (success && result)
             {
                 [self clearLocation];
-                [DCLocation parceFromJsonData:result];
+                [DCLocation parseFromJsonData:result];
                 [self saveContext];
             }
             else

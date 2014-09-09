@@ -26,6 +26,9 @@ extern NSString * kDCEvent_place_key;
 - (NSInteger)getTypeID;
 - (NSArray*)speakersNames;
 
++ (void)parseEventFromDictionaty:(NSDictionary*)eventDict toObject:(DCEvent*)object forDate:(NSDate*)date;
++ (void)parseFromJSONData:(NSData*)jsonData;
+
 - (void)addTypeForID:(NSInteger)typeID;
 - (void)addSpeakersForIds:(NSArray*)speakerIds;
 - (void)addLevelForID:(NSInteger)levelID;

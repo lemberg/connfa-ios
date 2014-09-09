@@ -10,6 +10,6 @@
 
 @interface DCLevel (DC)
 
-+ (void)parceFromJsonData:(NSData *)jsonData;
++ (void)parseFromJsonData:(NSData *)jsonData;
 
 @end

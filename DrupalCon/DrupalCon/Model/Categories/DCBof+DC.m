@@ -1,20 +1,21 @@
 //
-//  DCProgram+DC.m
+//  DCBof+DC.m
 //  DrupalCon
 //
-//  Created by Volodymyr Hyrka on 8/20/14.
+//  Created by Volodymyr Hyrka on 9/9/14.
 //  Copyright (c) 2014 Lemberg Solution. All rights reserved.
 //
 
-#import "DCProgram+DC.h"
+#import "DCBof+DC.h"
 #import "DCEvent+DC.h"
 #import "NSDate+DC.h"
 #import "DCMainProxy.h"
 #import "NSDictionary+DC.h"
 
-const NSString * kDCProgram_programEvents_key = @"programEvents";
+const NSString * kDCBof_bofEvents_key = @"bofsEvents";
 
-@implementation DCProgram (DC)
+@implementation DCBof (DC)
+
 
 + (void)parseFromJSONData:(NSData *)jsonData
 {
@@ -32,13 +33,12 @@ const NSString * kDCProgram_programEvents_key = @"programEvents";
     for (NSDictionary * day in eventItems[kDCEvent_days_key])
     {
         NSDate * date = [NSDate fabricateWithEventString:day[kDCEvent_date_key]];
-        for (NSDictionary * event in day[kDCProgram_programEvents_key])
+        for (NSDictionary * event in day[kDCBof_bofEvents_key])
         {
-            DCProgram * programInstance = [[DCMainProxy sharedProxy] createProgramItem];
-            [DCProgram parseEventFromDictionaty:event toObject:programInstance forDate:date];
+            DCBof * bofInstance = [[DCMainProxy sharedProxy] createBofItem];
+            [DCBof parseEventFromDictionaty:event toObject:bofInstance forDate:date];
         }
     }
 }
-
 
 @end

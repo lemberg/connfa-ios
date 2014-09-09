@@ -20,7 +20,7 @@ const NSString * kDCSpeaker_charact_key = @"charact";
 
 @implementation DCSpeaker (DC)
 
-+ (void)parceFromJSONData:(NSData*)jsonData
++ (void)parseFromJSONData:(NSData*)jsonData
 {
     NSError * err = nil;
     NSDictionary * speakers = [NSJSONSerialization JSONObjectWithData:jsonData

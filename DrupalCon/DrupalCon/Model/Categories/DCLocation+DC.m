@@ -18,7 +18,7 @@ NSString *kDCLocationBuildNum = @"number";
 
 @implementation DCLocation (DC)
 
-+ (void)parceFromJsonData:(NSData *)jsonData {
++ (void)parseFromJsonData:(NSData *)jsonData {
 
     NSError *err = nil;
     NSDictionary *location = [NSJSONSerialization JSONObjectWithData:jsonData

@@ -16,7 +16,7 @@ const NSString * kDCType_typeName_key = @"typeName";
 
 @implementation DCType (DC)
 
-+ (void)parceFromJsonData:(NSData *)jsonData
++ (void)parseFromJsonData:(NSData *)jsonData
 {
     NSError * err = nil;
     NSDictionary * types = [NSJSONSerialization JSONObjectWithData:jsonData

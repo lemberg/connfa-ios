@@ -16,7 +16,7 @@ NSString * kDCTrack_trackName_key = @"trackName";
 
 @implementation DCTrack (DC)
 
-+ (void)parceFromJsonData:(NSData *)jsonData
++ (void)parseFromJsonData:(NSData *)jsonData
 {
     NSError * err = nil;
     NSDictionary * tracks = [NSJSONSerialization JSONObjectWithData:jsonData

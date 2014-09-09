@@ -30,7 +30,7 @@ const NSString * kDCEvent_place_key = @"place";
 @implementation DCEvent (DC)
 
 
-+ (void)parceFromJSONData:(NSData *)jsonData
++ (void)parseFromJSONData:(NSData *)jsonData
 {
 
 }
@@ -55,6 +55,22 @@ const NSString * kDCEvent_place_key = @"place";
     return [self.type.typeID integerValue];
 }
 
++ (void)parseEventFromDictionaty:(NSDictionary *)eventDict toObject:(DCEvent *)object forDate:(NSDate *)date
+{
+    object.date = date;
+    object.eventID = eventDict[kDCEvent_eventId_key];
+    object.name = eventDict[kDCEvent_name_key];
+    object.favorite = @NO;
+    object.place = eventDict[kDCEvent_place_key];
+    object.desctiptText = eventDict[kDCEvent_text_key];
+    object.timeRange = [[DCMainProxy sharedProxy] createTimeRange];
+    [object.timeRange setFrom:eventDict[kDCEvent_from_key] to:eventDict[kDCEvent_to_key]];
+    
+    [object addTypeForID:[eventDict[kDCEvent_type_key] integerValue]];
+    [object addSpeakersForIds:eventDict[kDCEvent_speakers_key]];
+    [object addLevelForID:[eventDict[kDCEvent_experienceLevel_key] integerValue]];
+    [object addTrackForId:[eventDict[kDCEvent_track_key] integerValue]];
+}
 
 - (void)addTypeForID:(NSInteger)typeID
 {
