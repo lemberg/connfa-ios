@@ -10,8 +10,10 @@
 #import "DCBaseViewController.h"
 
 @class DCSpeaker;
+typedef void(^CloseCallback) ();
+
 @interface DCSpeakersDetailViewController : DCBaseViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) DCSpeaker * speaker;
-
+- (void)didCloseWithCallback:(CloseCallback)callback;
 @end

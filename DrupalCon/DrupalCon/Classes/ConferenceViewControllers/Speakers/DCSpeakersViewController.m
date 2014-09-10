@@ -54,6 +54,12 @@
     cell = _cell;
     return _cell;
 }
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.speakersTbl reloadData];
+    
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -61,7 +67,11 @@
     DCSpeakersDetailViewController * detailController = [self.storyboard instantiateViewControllerWithIdentifier:@"SpeakersDetailViewController"];
     [detailController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     detailController.speaker = _speakers[indexPath.row];
+    [detailController didCloseWithCallback:^{
+        [self.speakersTbl reloadData];
+    }];
     [[(AppDelegate*)[[UIApplication sharedApplication] delegate] window].rootViewController presentViewController:detailController animated:YES completion:nil];
+
 }
 
 

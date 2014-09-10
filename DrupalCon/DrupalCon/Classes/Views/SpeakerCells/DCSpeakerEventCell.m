@@ -33,9 +33,10 @@
         [self setSelected:NO animated:YES];
         self.favorite = !self.isFavorite;
         [self DC_setStarImage];
-        self.favoriteBtnCallback(self, self.isFavorite);
+        if (self.favoriteBtnCallback) {
+           self.favoriteBtnCallback(self, self.isFavorite);
+        }
     }
-    
 }
 
 - (void)DC_setStarImage
@@ -45,6 +46,7 @@
 
     else
         [_starImg setImage:[UIImage imageNamed:@"star_off"]];
+
 }
 
 + (float)cellHeight

@@ -43,6 +43,7 @@
 		5DC8C47A19865C8400BF5816 /* DCSideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8C47919865C8400BF5816 /* DCSideMenuViewController.m */; };
 		74356D5219BEE1D90055F13D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74356D5119BEE1D90055F13D /* SystemConfiguration.framework */; };
 		74356D5819BEE4860055F13D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 74356D5719BEE4860055F13D /* Reachability.m */; };
+		74356D5B19BF3B290055F13D /* UIWebView+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 74356D5A19BF3B290055F13D /* UIWebView+DC.m */; };
 		74A43C6D19BDDE9200F7BFA0 /* NSDictionary+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A43C6C19BDDE9200F7BFA0 /* NSDictionary+DC.m */; };
 		74A470E119B5B21900B01BC5 /* about_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 74A470E019B5B21900B01BC5 /* about_img.png */; };
 		74A470E819B5EA3C00B01BC5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74A470E719B5EA3C00B01BC5 /* MapKit.framework */; };
@@ -177,6 +178,8 @@
 		74356D5119BEE1D90055F13D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		74356D5619BEE4860055F13D /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Classes/Helpers/Reachability.h; sourceTree = "<group>"; };
 		74356D5719BEE4860055F13D /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Classes/Helpers/Reachability.m; sourceTree = "<group>"; };
+		74356D5919BF3B290055F13D /* UIWebView+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIWebView+DC.h"; path = "Classes/Helpers/UIWebView+DC.h"; sourceTree = "<group>"; };
+		74356D5A19BF3B290055F13D /* UIWebView+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIWebView+DC.m"; path = "Classes/Helpers/UIWebView+DC.m"; sourceTree = "<group>"; };
 		74A43C6B19BDDE9200F7BFA0 /* NSDictionary+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+DC.h"; path = "Classes/Helpers/NSDictionary+DC.h"; sourceTree = "<group>"; };
 		74A43C6C19BDDE9200F7BFA0 /* NSDictionary+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+DC.m"; path = "Classes/Helpers/NSDictionary+DC.m"; sourceTree = "<group>"; };
 		74A470E019B5B21900B01BC5 /* about_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_img.png; sourceTree = "<group>"; };
@@ -462,6 +465,8 @@
 				74A43C6B19BDDE9200F7BFA0 /* NSDictionary+DC.h */,
 				74A43C6C19BDDE9200F7BFA0 /* NSDictionary+DC.m */,
 				84FAE0E619A645E000DC9FF1 /* NSArray+DC.h */,
+				74356D5919BF3B290055F13D /* UIWebView+DC.h */,
+				74356D5A19BF3B290055F13D /* UIWebView+DC.m */,
 				84FAE0E719A645E000DC9FF1 /* NSArray+DC.m */,
 				849D92C619ADF31D00977D67 /* UIImageView+DC.h */,
 				849D92C719ADF31D00977D67 /* UIImageView+DC.m */,
@@ -927,6 +932,7 @@
 				849AC50919B735810093A29B /* DCLevel.m in Sources */,
 				5DC8C46D198658FF00BF5816 /* MFSideMenuContainerViewController.m in Sources */,
 				849EFE1E19A4EB2100C43E05 /* DCEvent+DC.m in Sources */,
+				74356D5B19BF3B290055F13D /* UIWebView+DC.m in Sources */,
 				849AC4F419B735800093A29B /* DCEvent.m in Sources */,
 				84A06E3319ACBA0600104876 /* DCEventDetailViewController.m in Sources */,
 				849E84FF19AF385D006F43B3 /* DCSpeakerEventCell.m in Sources */,
@@ -1109,6 +1115,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DrupalCon/DrupalCon-Prefix.pch";
 				INFOPLIST_FILE = "DrupalCon/DrupalCon-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -1123,6 +1130,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DrupalCon/DrupalCon-Prefix.pch";
 				INFOPLIST_FILE = "DrupalCon/DrupalCon-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;

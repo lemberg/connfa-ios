@@ -96,7 +96,6 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 {
     self.isDataReady = NO;
     [self startNetworkChecking];
-
 }
 
 - (void)updateEvents
@@ -124,14 +123,12 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
         [userDefaults synchronize];
         return YES;
     }
-    return YES;
+    return NO;
     
 }
 
 - (void)timeStamp:(void(^)(NSString *timeStamp))callback
 {
-    // TODO: Remove time stamp hardcode
-    
     [DCDataProvider
      updateMainDataFromURI:TIME_STAMP_URI
      callBack:^(BOOL success, id result) {
@@ -140,9 +137,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
              NSDictionary * tracks = [NSJSONSerialization JSONObjectWithData:result
                                                                      options:kNilOptions
                                                                        error:&err];
-//             callback([tracks objectForKey:kTimeStampSynchronisation]);
-
-             callback(@"12341234");
+             callback([tracks objectForKey:kTimeStampSynchronisation]);
          }
          else {
              NSLog(@"%@", result);
@@ -463,7 +458,6 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 
 - (void)updateBofs
 {
-    // TODO: Add category to Bof and parser
     [self. managedObjectContext performBlock:^{
         [DCDataProvider
          updateMainDataFromURI:BOFS_URI

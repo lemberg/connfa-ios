@@ -698,18 +698,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" selectable="NO" id="JjP-2c-Jt8">
+                                                <webView contentMode="scaleToFill" id="Ppo-Rt-ITV">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                </textView>
+                                                </webView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="descriptionTxt" destination="JjP-2c-Jt8" id="Lsz-CY-mLA"/>
+                                            <outlet property="descriptionWebView" destination="Ppo-Rt-ITV" id="bah-xG-iiB"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -950,19 +947,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" selectable="NO" id="Nt1-ms-9HF">
+                                                <webView contentMode="scaleToFill" id="sxA-Ai-e4y">
                                                     <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                                    <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                </textView>
+                                                </webView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="descriptionTxt" destination="Nt1-ms-9HF" id="fPF-Tz-2MQ"/>
+                                            <outlet property="descriptionWebView" destination="sxA-Ai-e4y" id="jK7-iZ-rBC"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

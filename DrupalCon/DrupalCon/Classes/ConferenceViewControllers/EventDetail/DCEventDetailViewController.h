@@ -12,7 +12,7 @@
 
 typedef void(^CloseCallback) ();
 @class DCEvent, DCProgram, DCBof;
-@interface DCEventDetailViewController : DCBaseViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate, DCFacotiteDelegateProtocol>
+@interface DCEventDetailViewController : DCBaseViewController <UITableViewDataSource, UITableViewDelegate, UIWebViewDelegate,UIScrollViewDelegate, DCFacotiteDelegateProtocol>
 
 @property (nonatomic, weak) IBOutlet UITableView * detailTable;
 @property (nonatomic, weak) IBOutlet UIImageView * eventPictureImg;

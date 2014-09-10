@@ -18,12 +18,15 @@
 #import "DCDescriptionTextCell.h"
 #import "DCSpeakerHeaderCell.h"
 #import "DCSpeakerEventCell.h"
+#import "UIWebView+DC.h"
 
-@interface DCSpeakersDetailViewController ()
+@interface DCSpeakersDetailViewController ()<UIWebViewDelegate>
 
 @property (nonatomic, strong) NSArray * events;
 @property (nonatomic, weak) IBOutlet UITableView * speakerDetailTbl;
-
+@property (nonatomic, strong) CloseCallback closeCallback;
+@property (nonatomic, strong) NSIndexPath *lastIndexPath;
+@property (nonatomic, strong) NSMutableDictionary *cellsHeight;
 @end
 
 @implementation DCSpeakersDetailViewController
@@ -33,6 +36,8 @@
     [super viewDidLoad];
     self.navigatorBarStyle = EBaseViewControllerNatigatorBarStyleTransparrent;
     _events = [_speaker.events allObjects];
+    self.cellsHeight = [NSMutableDictionary dictionary];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -62,12 +67,24 @@
         [self.view addSubview:titleLbl];
         
         [_speakerDetailTbl setFrame:CGRectMake(0, 44, 320, self.view.bounds.size.height-44)];
-    }    
+    }
 }
 
 -(void)onBack
 {
+    
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    if (self.closeCallback) {
+        self.closeCallback();
+    }
+}
+- (void)didCloseWithCallback:(CloseCallback)callback
+{
+    self.closeCallback = callback;
 }
 
 #pragma mark - UITableView Delegate/DataSourse methods
@@ -83,10 +100,19 @@
         return [DCSpeakerHeaderCell cellHeight];
     
     else if ([self isLastRow:indexPath.row])
-        return [DCDescriptionTextCell cellHeightForText:_speaker.characteristic];
+        return [self heightForDescriptionTextCell];
     
     else
         return [DCSpeakerEventCell cellHeight];
+}
+
+- (float)heightForDescriptionTextCell
+{
+    float descriptionCellHeight = [DCDescriptionTextCell cellHeightForText:_speaker.characteristic];;
+    if (self.lastIndexPath && [self.cellsHeight objectForKey:self.lastIndexPath]) {
+        descriptionCellHeight = [[self.cellsHeight objectForKey:self.lastIndexPath] floatValue];
+    }
+    return descriptionCellHeight;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -110,7 +136,9 @@
     else if ([self isLastRow:indexPath.row])
     {
         DCDescriptionTextCell * _cell = (DCDescriptionTextCell*)[tableView dequeueReusableCellWithIdentifier:cellIdBottom];
-        [_cell.descriptionTxt setText:_speaker.characteristic];
+        _cell.descriptionWebView.delegate = self;
+        self.lastIndexPath = indexPath;
+        [_cell.descriptionWebView loadHTMLString:_speaker.characteristic];
         cell = _cell;
     }
     
@@ -118,7 +146,9 @@
     {
         DCEvent * event = _events[indexPath.row-1];
         DCSpeakerEventCell * _cell = (DCSpeakerEventCell*)[tableView dequeueReusableCellWithIdentifier:cellIdEvent];
-        _cell.favorite = [event.favorite boolValue];
+        
+        //        _cell.favorite = [event.favorite boolValue];
+        [_cell setSelected:[event.favorite boolValue]];
         [_cell favoriteButtonDidSelected:^(UITableViewCell *cell, BOOL isSelected) {
             [self updateFavoriteItemsInIndexPath:[self.speakerDetailTbl indexPathForCell:cell]
                                        withValue:isSelected];
@@ -130,14 +160,31 @@
         [_cell.eventLevelValueLbl setText:event.level.name];
         cell = _cell;
     }
-
+    
     return cell;
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    if (![self.cellsHeight objectForKey:self.lastIndexPath]) {
+        float height = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight;"] floatValue];
+        [self.cellsHeight setObject:[NSNumber numberWithFloat:height] forKey:self.lastIndexPath];
+        [self updateCellAtIndexPath];
+    }
+    
+}
+
+- (void)updateCellAtIndexPath
+{
+    [self.speakerDetailTbl beginUpdates];
+    [self.speakerDetailTbl reloadRowsAtIndexPaths:@[self.lastIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+    [self.speakerDetailTbl endUpdates];
 }
 
 
 - (void)updateFavoriteItemsInIndexPath:(NSIndexPath *)anIndexPath
                              withValue:(BOOL)isFavorite {
-    DCEvent * event = _events[anIndexPath.row-1];
+    DCEvent * event = [self eventFromIndexPath:anIndexPath];
     event.favorite = [NSNumber numberWithBool:isFavorite];
     if (isFavorite) {
         [[DCMainProxy sharedProxy]
@@ -146,10 +193,18 @@
         [[DCMainProxy sharedProxy]
          removeFavoriteEventWithID:event.eventID];
     }
-
+    
 }
 
-#pragma mark - 
+- (DCEvent *)eventFromIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row || [self isLastRow:indexPath.row]) {
+        return [self.events firstObject];
+    } else {
+        return [self.events objectAtIndex:indexPath.row];
+    }
+}
+#pragma mark -
 
 - (BOOL)isLastRow:(NSInteger)row
 {

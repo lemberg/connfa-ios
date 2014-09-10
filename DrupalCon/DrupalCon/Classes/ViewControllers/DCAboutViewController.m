@@ -7,6 +7,8 @@
 //
 
 #import "DCAboutViewController.h"
+#import "UIWebView+DC.h"
+#import "DCMainProxy.h"
 
 @interface DCAboutViewController ()
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
@@ -34,12 +36,13 @@
 }
 
 - (void)loadPage {
-    NSString *html = [NSString stringWithContentsOfURL:self.aboutURL
-                                              encoding:NSUTF8StringEncoding
-                                                 error:nil];
-    NSURL *resourcesURL = [self.aboutURL URLByDeletingLastPathComponent];
-    [self.webView loadHTMLString:html
-                         baseURL:resourcesURL];
+//    NSString *html = [NSString stringWithContentsOfURL:self.aboutURL
+//                                              encoding:NSUTF8StringEncoding
+//                                                 error:nil];
+    [[DCMainProxy sharedProxy] loadHtmlAboutInfo:^(NSString *html) {
+        [self.webView loadHTMLString:html];
+    }];
+    
 }
 
 - (void)viewDidLoad

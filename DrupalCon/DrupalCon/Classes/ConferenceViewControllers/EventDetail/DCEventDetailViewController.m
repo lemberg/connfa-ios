@@ -22,9 +22,12 @@
 #import "DCEventDetailHeader2Cell.h"
 #import "DCSpeakerCell.h"
 #import "DCDescriptionTextCell.h"
+#import "UIWebView+DC.h"
 
 @interface DCEventDetailViewController ()
 @property (nonatomic, strong) CloseCallback closeCallback;
+@property (nonatomic, strong) NSIndexPath *lastIndexPath;
+@property (nonatomic, strong) NSMutableDictionary *cellsHeight;
 @end
 @implementation DCEventDetailViewController
 
@@ -41,7 +44,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    self.cellsHeight = [NSMutableDictionary dictionary];
+
     self.title = [_event.timeRange stringValue];
     self.navigatorBarStyle = EBaseViewControllerNatigatorBarStyleTransparrent;
     self.speakers = [_event.speakers allObjects];
@@ -112,9 +116,18 @@
     }
     else if (indexPath.row == _speakers.count) // description cell is the last
     {
-        return [DCDescriptionTextCell cellHeightForText:_event.desctiptText];
+        return [self heightForDescriptionTextCell];
     }
     return [DCSpeakerCell cellHeight]; // rest should be in section#1 all rows exept last
+}
+
+- (float)heightForDescriptionTextCell
+{
+    float descriptionCellHeight = [DCDescriptionTextCell cellHeightForText:_event.desctiptText];;
+    if (self.lastIndexPath && [self.cellsHeight objectForKey:self.lastIndexPath]) {
+        descriptionCellHeight = [[self.cellsHeight objectForKey:self.lastIndexPath] floatValue];
+    }
+    return descriptionCellHeight;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -142,7 +155,10 @@
     else if (indexPath.row == _speakers.count) // description cell
     {
         DCDescriptionTextCell * _cell = (DCDescriptionTextCell*)[tableView dequeueReusableCellWithIdentifier:cellIdDescription];
-        [_cell.descriptionTxt setText:_event.desctiptText];
+//        [_cell.descriptionTxt setText:_event.desctiptText];
+        _cell.descriptionWebView.delegate = self;
+        self.lastIndexPath = indexPath;
+        [_cell.descriptionWebView loadHTMLString:_event.desctiptText];
         cell = _cell;
     }
     else
@@ -157,12 +173,32 @@
     return cell;
 }
 
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    if (![self.cellsHeight objectForKey:self.lastIndexPath]) {
+        float height = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight;"] floatValue];
+        [self.cellsHeight setObject:[NSNumber numberWithFloat:height] forKey:self.lastIndexPath];
+        [self updateCellAtIndexPath];
+    }
+
+}
+
+- (void)updateCellAtIndexPath
+{
+    [self.detailTable beginUpdates];
+    [self.detailTable reloadRowsAtIndexPaths:@[self.lastIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+    [self.detailTable endUpdates];
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     DCSpeakersDetailViewController * speakerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SpeakersDetailViewController"];
     speakerViewController.speaker = _speakers[indexPath.row];
+    [speakerViewController didCloseWithCallback:^{
+        [self.detailTable reloadData];
+    }];
     [self.navigationController pushViewController:speakerViewController animated:YES];
 }
 

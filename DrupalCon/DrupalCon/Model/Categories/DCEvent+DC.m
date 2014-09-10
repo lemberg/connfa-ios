@@ -23,7 +23,7 @@ const NSString * kDCEvent_name_key = @"name";
 const NSString * kDCEvent_speakers_key = @"speakers";
 const NSString * kDCEvent_track_key = @"track";
 const NSString * kDCEvent_experienceLevel_key = @"experience_level";
-const NSString * kDCEvent_eventId_key = @"event_id";
+const NSString * kDCEvent_eventId_key = @"eventID";
 const NSString * kDCEvent_text_key = @"text";
 const NSString * kDCEvent_place_key = @"place";
 
