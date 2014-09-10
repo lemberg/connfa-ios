@@ -42,7 +42,6 @@
     if(!isiPhone5)
         self.imageLockTopSpaceContraint.constant = 40;
 	// Do any additional setup after loading the view, typically from a nib.
-    
 }
 
 - (void)registerForKeyboardNotifications
@@ -72,7 +71,8 @@
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear: animated];
-    
+    // login screen is not actual for now!!
+    [self loginButtonCLicked:nil];
 }
 
 -(IBAction) loginButtonCLicked:(id)sender {
@@ -86,7 +86,7 @@
     
     [DCAppFacade shared].sideMenuController = container;
     UINavigationController *navigationController = self.navigationController;
-    [navigationController pushViewController:container  animated: YES];
+    [navigationController pushViewController:container  animated: (sender?YES:NO)];
 }
 
 - (UINavigationController *)menuNavigationController {

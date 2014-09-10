@@ -43,7 +43,7 @@ static NSString *const LOCATION_URI = @"getLocations";
 
 @interface DCMainProxy ()
 @property (nonatomic, strong) void(^dataReadyCallback)(BOOL isDataReady);
-@property (nonatomic) BOOL isDataReady;
+@property (nonatomic, getter = isDataReady) BOOL dataReady;
 @end
 
 @implementation DCMainProxy
@@ -87,7 +87,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     {
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([self savedValueForKey:kTimeStampSynchronisation]) {
-                self.isDataReady = YES;
+                self.dataReady = YES;
             }
         });
     };
@@ -100,7 +100,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 
 - (void)update
 {
-    self.isDataReady = NO;
+    self.dataReady = NO;
     [self startNetworkChecking];
 }
 
@@ -119,13 +119,14 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
             [self synchrosizeFavoritePrograms];
             [self saveObject:timeStamp forKey:kTimeStampSynchronisation];
         }
-        self.isDataReady = YES;
+        self.dataReady = YES;
     }];
 }
 - (void)showRootController
 {
+    // root in this case meens Side menu
     UINavigationController *navController = (UINavigationController *)[(AppDelegate*)[[UIApplication sharedApplication] delegate] window].rootViewController;
-    [navController popViewControllerAnimated:YES];
+    [navController popToViewController:navController.viewControllers[1] animated:NO];
                                                                        
 }
 
@@ -148,7 +149,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     if (!lastUpdateTime || ![lastUpdateTime isEqualToString: timeStamp]) {
         return YES;
     }
-    return YES;
+    return NO;
     
 }
 

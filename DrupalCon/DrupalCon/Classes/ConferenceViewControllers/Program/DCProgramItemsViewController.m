@@ -70,6 +70,11 @@
     UITableViewCell *cell;
     
     switch ([event getTypeID]) {
+        case DC_EVENT_NONE:
+        {
+            NSLog(@"WRONG! there is no Type for event: %@",event);
+        }
+            
         case DC_EVENT_SPEACH: {
             DCSpeechCell *_cell = (DCSpeechCell*)[tableView dequeueReusableCellWithIdentifier: cellIdSpeech];
             _cell.speakerLabel.text = [self DC_speakersTextForSpeakerNames:[event speakersNames]];

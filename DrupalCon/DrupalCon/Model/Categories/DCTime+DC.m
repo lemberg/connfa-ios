@@ -19,7 +19,12 @@
 {
     NSArray * components = [time componentsSeparatedByString:@":"];
     if (components.count != 2)
+    {
         NSLog(@"WRONG! time format");
+        self.hour = @(0);
+        self.minute = @(0);
+        return;
+    }
     
     self.hour = [self numberFromString:components[0]];
     self.minute = [self numberFromString:components[1]];

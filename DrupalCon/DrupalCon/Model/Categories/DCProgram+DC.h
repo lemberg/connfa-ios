@@ -11,10 +11,11 @@
 extern NSString * kDCProgram_programEvents_key;
 
 typedef NS_ENUM (int, DCEventType) {
-    DC_EVENT_SPEACH = 0,
-    DC_EVENT_SPEACH_OF_DAY = 1,
-    DC_EVENT_COFEE_BREAK = 2,
-    DC_EVENT_LUNCH = 3,
+    DC_EVENT_NONE = 0,
+    DC_EVENT_SPEACH = 1,
+    DC_EVENT_SPEACH_OF_DAY = 2,
+    DC_EVENT_COFEE_BREAK = 3,
+    DC_EVENT_LUNCH = 4,
 };
 
 @interface DCProgram (DC)
