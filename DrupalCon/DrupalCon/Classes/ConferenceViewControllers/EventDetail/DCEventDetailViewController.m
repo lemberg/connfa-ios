@@ -194,6 +194,9 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    if (![[tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[DCSpeakerCell class]])
+        return;
+    
     DCSpeakersDetailViewController * speakerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SpeakersDetailViewController"];
     speakerViewController.speaker = _speakers[indexPath.row];
     [speakerViewController didCloseWithCallback:^{

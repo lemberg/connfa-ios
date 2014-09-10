@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "rback_arrow2.png"
+      "filename" : "triangle.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "back_arrow@2x.1.png"
+      "filename" : "triangle@2x.png"
     }
   ],
   "info" : {

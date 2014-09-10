@@ -71,7 +71,7 @@
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear: animated];
-    // login screen is not actual for now!!
+    // Login Screen is not actual for now!!
     [self loginButtonCLicked:nil];
 }
 
@@ -86,7 +86,7 @@
     
     [DCAppFacade shared].sideMenuController = container;
     UINavigationController *navigationController = self.navigationController;
-    [navigationController pushViewController:container  animated: (sender?YES:NO)];
+    [navigationController pushViewController:container  animated: (sender? YES:NO)];
 }
 
 - (UINavigationController *)menuNavigationController {

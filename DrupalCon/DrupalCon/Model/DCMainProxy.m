@@ -42,7 +42,7 @@ static NSString *const ABOUT_INFO_URI = @"getAbout";
 static NSString *const LOCATION_URI = @"getLocations";
 
 @interface DCMainProxy ()
-@property (nonatomic, strong) void(^dataReadyCallback)(BOOL isDataReady);
+@property (nonatomic, copy) void(^dataReadyCallback)(BOOL isDataReady);
 @property (nonatomic, getter = isDataReady) BOOL dataReady;
 @end
 

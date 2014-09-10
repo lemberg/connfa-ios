@@ -19,6 +19,7 @@
 #import "DCSpeakerHeaderCell.h"
 #import "DCSpeakerEventCell.h"
 #import "UIWebView+DC.h"
+#import "UIConstants.h"
 
 @interface DCSpeakersDetailViewController ()<UIWebViewDelegate>
 
@@ -50,6 +51,11 @@
     }
     else
     {
+        //TODO: refactor!
+        UIView * navigatorsContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+        [navigatorsContainer setBackgroundColor:NAV_BAR_COLOR];
+        [self.view addSubview:navigatorsContainer];
+        
         UIButton* backButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [backButton addTarget:self action:@selector(onBack) forControlEvents:UIControlEventTouchUpInside];
         [backButton setFrame:CGRectMake(0, 0, 60, 64)];
@@ -57,14 +63,15 @@
         [backButton setImage:[UIImage imageNamed:@"back_arrow"] forState:UIControlStateNormal];
         [backButton setTitle:@"Back" forState:UIControlStateNormal];
         [backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self.view addSubview:backButton];
+        [backButton setTintColor:[UIColor whiteColor]];
+        [navigatorsContainer addSubview:backButton];
         
         UILabel * titleLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 64)];
         [titleLbl setTextAlignment:NSTextAlignmentCenter];
         [titleLbl setTextColor:[UIColor whiteColor]];
-        [titleLbl setText:@"Profile"];
+        [titleLbl setText:@"Speaker Profile"];
         [titleLbl setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:21]];
-        [self.view addSubview:titleLbl];
+        [navigatorsContainer addSubview:titleLbl];
         
         [_speakerDetailTbl setFrame:CGRectMake(0, 44, 320, self.view.bounds.size.height-44)];
     }

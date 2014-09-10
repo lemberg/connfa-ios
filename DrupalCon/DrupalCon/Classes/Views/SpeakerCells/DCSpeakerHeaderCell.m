@@ -15,12 +15,12 @@
 - (void)awakeFromNib
 {
     [_pictureImg cutCircle];
-    [_pictureImg addCircuitWidth:3.0 color:[UIColor whiteColor]];
+    [_pictureImg addCircuitWidth:2.0 color:[UIColor whiteColor]];
 }
 
 + (float)cellHeight
 {
-    return 200.0;
+    return 210.0;
 }
 
 @end

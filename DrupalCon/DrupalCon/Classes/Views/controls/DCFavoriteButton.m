@@ -40,7 +40,8 @@
     [self setBackgroundColor:[UIColor clearColor]];
     
     float imgSide = 25.0;
-    _starImg = [[UIImageView alloc] initWithFrame:CGRectMake(self.bounds.size.width - 3 * imgSide, (self.bounds.size.height - imgSide) / 2, imgSide, imgSide)];
+    _starImg = [[UIImageView alloc] initWithFrame:CGRectMake(16, (self.bounds.size.height - imgSide) / 2, imgSide, imgSide)];
+    [_starImg setContentMode:UIViewContentModeCenter];
     [_starImg setBackgroundColor:[UIColor clearColor]];
     
     UIButton * button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
