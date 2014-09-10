@@ -19,6 +19,12 @@
 @property (nonatomic, retain) NSString * organizationName;
 @property (nonatomic, retain) NSNumber * speakerId;
 @property (nonatomic, retain) NSSet *events;
+@property (nonatomic, retain) NSString * firstName;
+@property (nonatomic, retain) NSString * lastName;
+@property (nonatomic, retain) NSString * avatarPath;
+@property (nonatomic, retain) NSString * twitterName;
+@property (nonatomic, retain) NSString * webSite;
+
 @end
 
 @interface DCSpeaker (CoreDataGeneratedAccessors)

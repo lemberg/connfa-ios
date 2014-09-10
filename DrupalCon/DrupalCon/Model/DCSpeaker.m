@@ -18,5 +18,9 @@
 @dynamic organizationName;
 @dynamic speakerId;
 @dynamic events;
-
+@dynamic webSite;
+@dynamic firstName;
+@dynamic avatarPath;
+@dynamic lastName;
+@dynamic twitterName;
 @end

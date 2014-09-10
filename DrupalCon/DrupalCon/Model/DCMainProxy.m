@@ -88,6 +88,9 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([self savedValueForKey:kTimeStampSynchronisation]) {
                 self.dataReady = YES;
+                if (self.dataReadyCallback) {
+                    self.dataReadyCallback(self.isDataReady);
+                }
             }
         });
     };

@@ -12,7 +12,7 @@
 #import "DCSpeakerCell.h"
 #import "DCMainProxy+Additions.h"
 #import "DCSpeaker+DC.h"
-
+#import "UIImageView+WebCache.h"
 @interface DCSpeakersViewController ()
 
 @property (nonatomic, weak) IBOutlet UITableView * speakersTbl;
@@ -50,7 +50,14 @@
     
     [_cell.nameLbl setText:speaker.name];
     [_cell.positionTitleLbl setText:speaker.jobTitle];
-    [_cell.pictureImg setImage:[UIImage imageNamed:@"avatar_test_image"]];
+    [_cell.pictureImg sd_setImageWithURL:[NSURL URLWithString:speaker.avatarPath]
+                        placeholderImage:[UIImage imageNamed:@"avatar_placeholder"]
+                               completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                       [_cell setNeedsDisplay];
+                                   });
+                                   
+                               }];
     cell = _cell;
     return _cell;
 }

@@ -13,6 +13,7 @@
 #import "DCLevel+DC.h"
 #import "DCTrack+DC.h"
 #import "DCMainProxy+Additions.h"
+#import "NSString+HTML.h"
 
 const NSString * kDCEvent_days_key = @"days";
 const NSString * kDCEvent_date_key = @"date";
@@ -61,8 +62,8 @@ const NSString * kDCEvent_place_key = @"place";
     object.eventID = eventDict[kDCEvent_eventId_key];
     object.name = eventDict[kDCEvent_name_key];
     object.favorite = @NO;
-    object.place = eventDict[kDCEvent_place_key];
-    object.desctiptText = eventDict[kDCEvent_text_key];
+    object.place = [eventDict[kDCEvent_place_key] kv_decodeHTMLCharacterEntities];
+    object.desctiptText = eventDict[kDCEvent_text_key]; //kv_decodeHTMLCharacterEntities];
     object.timeRange = [[DCMainProxy sharedProxy] createTimeRange];
     [object.timeRange setFrom:eventDict[kDCEvent_from_key] to:eventDict[kDCEvent_to_key]];
     

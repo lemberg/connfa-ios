@@ -20,6 +20,7 @@
 #import "DCSpeakerEventCell.h"
 #import "UIWebView+DC.h"
 #import "UIConstants.h"
+#import "UIImageView+WebCache.h"
 
 @interface DCSpeakersDetailViewController ()<UIWebViewDelegate>
 
@@ -133,7 +134,17 @@
     if (indexPath.row == 0)
     {
         DCSpeakerHeaderCell *_cell = (DCSpeakerHeaderCell*)[tableView dequeueReusableCellWithIdentifier:cellIdHeader];
-        [_cell.pictureImg setImage:[UIImage imageNamed:@"avatar_test_image"]];
+
+        [_cell.pictureImg sd_setImageWithURL:[NSURL URLWithString:_speaker.avatarPath]
+                            placeholderImage:[UIImage imageNamed:@"avatar_placeholder"]
+                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                       dispatch_async(dispatch_get_main_queue(), ^{
+                                           [_cell setNeedsDisplay];
+                                       });
+                                       
+        }];
+
+        
         [_cell.nameLbl setText:_speaker.name];
         [_cell.organizationLbl setText:_speaker.organizationName];
         [_cell.jobTitleLbl setText:_speaker.jobTitle];
