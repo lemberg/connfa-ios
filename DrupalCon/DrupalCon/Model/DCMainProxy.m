@@ -22,6 +22,7 @@
 
 #import "Reachability.h"
 #import "DCDataProvider.h"
+#import "AppDelegate.h"
 
 static NSString * kDCMainProxyModelName = @"main";
 
@@ -38,6 +39,7 @@ static NSString *const PROGRAMS_URI = @"getPrograms";
 static NSString *const BOFS_URI = @"getBofs";
 static NSString *const TIME_STAMP_URI = @"getLastUpdate";
 static NSString *const ABOUT_INFO_URI = @"getAbout";
+static NSString *const LOCATION_URI = @"getLocations";
 
 @interface DCMainProxy ()
 @property (nonatomic, strong) void(^dataReadyCallback)(BOOL isDataReady);
@@ -62,6 +64,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 - (void)dataReadyBlock:(void(^)(BOOL isDataReady))callback
 {
     callback(self.isDataReady);
+    self.dataReadyCallback = callback;
 }
 
 - (void)startNetworkChecking
@@ -83,13 +86,16 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     reach.unreachableBlock = ^(Reachability * reachability)
     {
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"Internet connection unreachable");
+            if ([self savedValueForKey:kTimeStampSynchronisation]) {
+                self.isDataReady = YES;
+            }
         });
     };
     
     [reach startNotifier];
 
 }
+
 #pragma mark - public
 
 - (void)update
@@ -102,6 +108,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 {
     [self timeStamp:^(NSString *timeStamp) {
         if ([self updateTimeStampSynchronisation:timeStamp]) {
+            [self showRootController];
             [self updateTypes];
             [self updateSpeakers];
             [self updateLevels];
@@ -110,20 +117,38 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
             [self updateBofs];
             [self updateLocation];
             [self synchrosizeFavoritePrograms];
+            [self saveObject:timeStamp forKey:kTimeStampSynchronisation];
         }
         self.isDataReady = YES;
     }];
 }
-- (BOOL)updateTimeStampSynchronisation:(NSString *)timeStamp
+- (void)showRootController
+{
+    UINavigationController *navController = (UINavigationController *)[(AppDelegate*)[[UIApplication sharedApplication] delegate] window].rootViewController;
+    [navController popViewControllerAnimated:YES];
+                                                                       
+}
+
+- (void)saveObject:(NSObject *)obj forKey:(NSString *)key
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *lastUpdateTime = [userDefaults objectForKey:kTimeStampSynchronisation];
+    [userDefaults setObject:obj forKey:key];
+    [userDefaults synchronize];
+}
+
+- (id)savedValueForKey:(NSString *)key
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    return [userDefaults objectForKey:key];
+}
+
+- (BOOL)updateTimeStampSynchronisation:(NSString *)timeStamp
+{
+    NSString *lastUpdateTime = [self savedValueForKey:kTimeStampSynchronisation];
     if (!lastUpdateTime || ![lastUpdateTime isEqualToString: timeStamp]) {
-        [userDefaults setObject:timeStamp forKey:kTimeStampSynchronisation];
-        [userDefaults synchronize];
         return YES;
     }
-    return NO;
+    return YES;
     
 }
 
@@ -310,10 +335,16 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
                                                                          options:kNilOptions
                                                                            error:&error];
                  callback([about objectForKey:kAboutInfo]);
+                 [self saveObject:[about objectForKey:kAboutInfo] forKey:kAboutInfo];
              }
              else
              {
-                 callback(@"");
+                 if ([self savedValueForKey:kAboutInfo]) {
+                     callback([self savedValueForKey:kAboutInfo]);
+                 } else {
+                     callback(@"");
+                 }
+                 
                  NSLog(@"WRONG! %@", result);
              }
          }];
@@ -561,18 +592,21 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 - (void)updateLocation
 {
     [self.managedObjectContext performBlockAndWait:^{
-        [DCDataProvider updateMainDataFromFile:[self DC_fileNameForClass:[DCLocation class]] callBack:^(BOOL success, id result) {
-            if (success && result)
-            {
-                [self clearLocation];
-                [DCLocation parseFromJsonData:result];
-                [self saveContext];
-            }
-            else
-            {
-                NSLog(@"WRONG! %@", result);
-            }
-        }];
+
+        [DCDataProvider
+         updateMainDataFromURI:LOCATION_URI
+         callBack:^(BOOL success, id result) {
+             if (success && result)
+             {
+                 [self clearLocation];
+                 [DCLocation parseFromJsonData:result];
+                 [self saveContext];
+             }
+             else
+             {
+                 NSLog(@"WRONG! %@", result);
+             }
+         }];
     }];
 }
 
