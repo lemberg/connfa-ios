@@ -18,6 +18,10 @@
 {
 //    [super awakeFromNib];
     [self DC_setStarImage];
+    UIView *bgColorView = [[UIView alloc] init];
+    float value = 238./255.;
+    bgColorView.backgroundColor = [UIColor colorWithRed:value green:value blue:value alpha:1.0];
+    [self setSelectedBackgroundView:bgColorView];
 }
 
 

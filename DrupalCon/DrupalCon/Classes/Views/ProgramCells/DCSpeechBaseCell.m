@@ -23,6 +23,10 @@
 {
     // Initialization code
     self.favoriteButton.exclusiveTouch = YES;
+    UIView *bgColorView = [[UIView alloc] init];
+    float value = 238./255.;
+    bgColorView.backgroundColor = [UIColor colorWithRed:value green:value blue:value alpha:1.0];
+    [self setSelectedBackgroundView:bgColorView];
 }
 
 
@@ -45,8 +49,8 @@
     }
     else
     {
-        self.trackBlockNameLabel.hidden = YES;
-        self.trackLabel.hidden = YES;
+        self.trackBlockNameLabel.hidden = NO;
+        self.trackLabel.hidden = NO;
         self.trackLabel.text = trackStr;
     }
 

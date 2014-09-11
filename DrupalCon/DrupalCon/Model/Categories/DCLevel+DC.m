@@ -35,7 +35,7 @@ NSString * kDCLevel_levelOrder_key = @"levelOrder";
         DCLevel * level = [[DCMainProxy sharedProxy] createLevel];
         level.levelId = dictionary[kDCLevel_levelID_key];
         level.name = dictionary[kDCLevel_levelName_key];
-        level.order = dictionary[kDCLevel_levelOrder_key];
+        level.order = @([dictionary[kDCLevel_levelOrder_key] integerValue]);
     }
 
 }

@@ -33,7 +33,7 @@ static NSString * kAboutInfo = @"aboutHTML";
 
 static NSString *const TYPES_URI = @"getTypes";
 static NSString *const SPEKERS_URI = @"getSpeakers";
-static NSString *const LEVELS_URI = @"getTracks";
+static NSString *const LEVELS_URI = @"getLevels";
 static NSString *const TRACKS_URI = @"getTracks";
 static NSString *const PROGRAMS_URI = @"getPrograms";
 static NSString *const BOFS_URI = @"getBofs";

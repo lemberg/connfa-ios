@@ -11,7 +11,7 @@
 
 #define NAV_BAR_COLOR [UIColor colorWithRed:112./255. green:40./255. blue: 50./255. alpha: 1.0]
 
-#define MENU_SELECTION_COLOR [UIColor colorWithRed: 238./255. green: 238./255. blue: 238./255. alpha: 1.0]
+#define MENU_SELECTION_COLOR [UIColor colorWithRed:238./255. green:52./255. blue:58./255. alpha:1.0]
 
 #define NAV_BAR_TITLE_ATTRIBUTES [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,[UIColor whiteColor],NSBackgroundColorAttributeName, [UIFont fontWithName:@"HelveticaNeue-Light" size:21],NSFontAttributeName,nil]
 
