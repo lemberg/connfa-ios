@@ -1383,8 +1383,10 @@
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="addressHeader" destination="H00-wW-8nd" id="8Dn-Gi-pfH"/>
+                        <outlet property="addressHeader" destination="H00-wW-8nd" id="nKC-uF-SLw"/>
                         <outlet property="mapView" destination="RdW-sU-V58" id="2Hu-eF-GVW"/>
+                        <outlet property="numberLbl" destination="dhX-cX-mAg" id="xgD-Se-udo"/>
+                        <outlet property="streetLbl" destination="MFH-5u-QMc" id="hRf-QW-m1U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ptj-t8-hbe" userLabel="First Responder" sceneMemberID="firstResponder"/>
