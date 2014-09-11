@@ -12,8 +12,10 @@
 @class DCSpeaker;
 typedef void(^CloseCallback) ();
 
-@interface DCSpeakersDetailViewController : DCBaseViewController <UITableViewDataSource, UITableViewDelegate>
+@interface DCSpeakersDetailViewController : DCBaseViewController <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) DCSpeaker * speaker;
+
 - (void)didCloseWithCallback:(CloseCallback)callback;
+
 @end

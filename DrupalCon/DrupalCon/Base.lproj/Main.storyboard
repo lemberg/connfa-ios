@@ -807,14 +807,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" id="hXo-7f-e2n">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="230"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.43921568630000002" green="0.15686274510000001" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Rvm-Lp-Fs2">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="0.43921568630000002" green="0.15686274510000001" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="sectionIndexBackgroundColor" red="0.43921568630000002" green="0.15686274510000001" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellId_SpeakersHeader" rowHeight="210" id="IdW-D5-Kfh" customClass="DCSpeakerHeaderCell">
-                                        <rect key="frame" x="0.0" y="86" width="320" height="210"/>
+                                        <rect key="frame" x="0.0" y="22" width="320" height="210"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="IdW-D5-Kfh" id="vML-yi-9bJ">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="210"/>
@@ -886,7 +891,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellId_SpeakersEvent" rowHeight="95" id="URL-ca-cR2" customClass="DCSpeakerEventCell">
-                                        <rect key="frame" x="0.0" y="296" width="320" height="95"/>
+                                        <rect key="frame" x="0.0" y="232" width="320" height="95"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="URL-ca-cR2" id="iGg-yh-9U6">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="95"/>
@@ -967,7 +972,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellId_SpeakersBottom" id="lRu-W1-kKC" customClass="DCDescriptionTextCell">
-                                        <rect key="frame" x="0.0" y="391" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="327" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lRu-W1-kKC" id="CWh-dm-ugN">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -991,12 +996,13 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.56470588239999997" green="0.094117647060000004" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Profile" id="Q2I-3M-Zhm">
                         <barButtonItem key="backBarButtonItem" title="Back" id="nry-8t-xxq"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="bgView" destination="hXo-7f-e2n" id="272-sh-vsC"/>
                         <outlet property="speakerDetailTbl" destination="Rvm-Lp-Fs2" id="tpF-bS-hCf"/>
                     </connections>
                 </viewController>

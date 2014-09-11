@@ -26,6 +26,7 @@
 
 @property (nonatomic, strong) NSArray * events;
 @property (nonatomic, weak) IBOutlet UITableView * speakerDetailTbl;
+@property (nonatomic, weak) IBOutlet UIView * bgView;
 @property (nonatomic, strong) CloseCallback closeCallback;
 @property (nonatomic, strong) NSIndexPath *lastIndexPath;
 @property (nonatomic, strong) NSMutableDictionary *cellsHeight;
@@ -95,6 +96,19 @@
     self.closeCallback = callback;
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView == _speakerDetailTbl)
+    {
+        float stopPoint = 0;
+        float offsetPoint = scrollView.contentOffset.y;
+        _bgView.frame = CGRectMake(0,
+                                   (offsetPoint < stopPoint ? stopPoint : -1 * offsetPoint),
+                                   _bgView.frame.size.width,
+                                   _bgView.frame.size.height);
+    }
+}
+
 #pragma mark - UITableView Delegate/DataSourse methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -135,19 +149,6 @@
     {
         DCSpeakerHeaderCell *_cell = (DCSpeakerHeaderCell*)[tableView dequeueReusableCellWithIdentifier:cellIdHeader];
         [self fillSpeakerHeaderCell:_cell];
-//        [_cell.pictureImg sd_setImageWithURL:[NSURL URLWithString:_speaker.avatarPath]
-//                            placeholderImage:[UIImage imageNamed:@"avatar_placeholder"]
-//                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//                                       dispatch_async(dispatch_get_main_queue(), ^{
-//                                           [_cell setNeedsDisplay];
-//                                       });
-//                                       
-//        }];
-//
-//        
-//        [_cell.nameLbl setText:_speaker.name];
-//        [_cell.organizationLbl setText:_speaker.organizationName];
-//        [_cell.jobTitleLbl setText:_speaker.jobTitle];
         cell = _cell;
     }
     
