@@ -45,7 +45,7 @@
 - (void)updateLocation {
     [self setAnnotation];
     self.addressHeader.attributedText = [self DC_headerAttrString];
-    [self.streetLbl setText:self.location.streetName];
+    [self.streetLbl setText:[NSString stringWithFormat:@"%@,",self.location.streetName]];
     [self.numberLbl setText:self.location.number];
 }
 - (void)setLayout {

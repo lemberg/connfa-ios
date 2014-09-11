@@ -41,8 +41,9 @@
         
         self.navigationController.navigationBar.titleTextAttributes = textAttributes;
         self.navigationController.navigationBar.translucent = NO;
+        [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
         UIBarButtonItem * backBtn = [[UIBarButtonItem alloc] initWithTitle:@"Back"
-                                                                     style:UIBarButtonItemStyleBordered
+                                                                     style:UIBarButtonItemStylePlain
                                                                     target:self
                                                                     action:@selector(onBack)];
         self.navigationItem.backBarButtonItem = backBtn;
