@@ -32,7 +32,7 @@
 }
 
 - (NSURL *)aboutResourcePath {
-    return [[NSBundle mainBundle] URLForResource:@"About" withExtension:@"html"];
+    return [[NSBundle mainBundle] URLForResource:@"style" withExtension:@"css"];
 }
 
 - (void)loadPage {

@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+extern NSString * INVALID_JSON_EXCEPTION;
+
 @class DCProgram, DCBof, DCType, DCTime, DCTimeRange, DCSpeaker, DCLevel, DCTrack, DCLocation;
 
 @interface DCMainProxy : NSObject
@@ -16,6 +18,7 @@
 @property (nonatomic, strong, readonly) NSManagedObjectModel * managedObjectModel;
 @property (nonatomic, strong, readonly) NSManagedObjectContext * managedObjectContext;
 @property (nonatomic, strong, readonly) NSPersistentStoreCoordinator * persistentStoreCoordinator;
+
 
 + (DCMainProxy*)sharedProxy;
 

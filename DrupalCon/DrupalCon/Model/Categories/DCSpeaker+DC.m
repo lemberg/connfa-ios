@@ -35,6 +35,7 @@ const NSString * kDCSpeaker_avatarPath_key = @"avatarImageUrl";
     if (err)
     {
         NSLog(@"WRONG! json");
+        @throw [NSException exceptionWithName:INVALID_JSON_EXCEPTION reason:@"Problem in json structure" userInfo:nil];
         return;
     }
     

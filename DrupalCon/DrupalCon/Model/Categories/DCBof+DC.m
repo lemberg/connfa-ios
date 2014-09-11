@@ -27,6 +27,7 @@ const NSString * kDCBof_bofEvents_key = @"bofsEvents";
     if (err)
     {
         NSLog(@"WRONG! json");
+        @throw [NSException exceptionWithName:@"Invalid JSON" reason:@"Problem in json structure" userInfo:nil];
         return;
     }
     

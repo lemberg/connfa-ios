@@ -24,6 +24,7 @@
 #import "DCDataProvider.h"
 #import "AppDelegate.h"
 
+const NSString * INVALID_JSON_EXCEPTION = @"Invalid JSON";
 static NSString * kDCMainProxyModelName = @"main";
 
 static NSString * kDCMainProxyProgramFile = @"conference";
@@ -41,6 +42,7 @@ static NSString *const TIME_STAMP_URI = @"getLastUpdate";
 static NSString *const ABOUT_INFO_URI = @"getAbout";
 static NSString *const LOCATION_URI = @"getLocations";
 
+typedef void(^UpdateDataFail)(NSString *reason);
 @interface DCMainProxy ()
 @property (nonatomic, copy) void(^dataReadyCallback)(BOOL isDataReady);
 @property (nonatomic, getter = isDataReady) BOOL dataReady;
@@ -74,11 +76,14 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     
     reach.reachableBlock = ^(Reachability * reachability)
     {
+        
         dispatch_async(dispatch_get_main_queue(), ^{
+
             [self updateEvents];
             if (self.dataReadyCallback) {
                 self.dataReadyCallback(self.isDataReady);
             }
+
             
         });
     };
@@ -103,33 +108,54 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 
 - (void)update
 {
+
     self.dataReady = NO;
     [self startNetworkChecking];
+
 }
 
 - (void)updateEvents
 {
+
     [self timeStamp:^(NSString *timeStamp) {
+        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
         if ([self updateTimeStampSynchronisation:timeStamp]) {
+
             [self showRootController];
-            [self updateTypes];
-            [self updateSpeakers];
-            [self updateLevels];
-            [self updateTracks];
-            [self updateProgram];
-            [self updateBofs];
-            [self updateLocation];
+            __block BOOL isUpdateFail = NO;
+            UpdateDataFail updateFail = ^(NSString *reason){
+                isUpdateFail = YES;
+            };
+            [self updateTypesCallback:updateFail];
+            [self updateSpeakersCallback:updateFail];
+            [self updateLevelsCallback:updateFail];
+            [self updateTracksCallback:updateFail];
+            [self updateProgramCallback:updateFail];
+            [self updateBofsCallback:updateFail];
+            [self updateLocationCallback:updateFail];
             [self synchrosizeFavoritePrograms];
-            [self saveObject:timeStamp forKey:kTimeStampSynchronisation];
+            if (!isUpdateFail) {
+                [self saveObject:timeStamp forKey:kTimeStampSynchronisation];
+                self.dataReady = YES;
+            } else {
+                [self saveObject:@"" forKey:kTimeStampSynchronisation];
+                self.dataReady = NO;
+            }
+
+        } else {
+             self.dataReady = YES;
         }
-        self.dataReady = YES;
+        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     }];
 }
 - (void)showRootController
 {
     // root in this case meens Side menu
     UINavigationController *navController = (UINavigationController *)[(AppDelegate*)[[UIApplication sharedApplication] delegate] window].rootViewController;
-    [navController popToViewController:navController.viewControllers[1] animated:NO];
+    [[navController topViewController] dismissViewControllerAnimated:YES completion:nil];
+    [navController popToViewController:navController.viewControllers[0] animated:NO];
                                                                        
 }
 
@@ -471,7 +497,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 
 #pragma mark -
 
-- (void)updateProgram
+- (void)updateProgramCallback:(UpdateDataFail)callback
 {
     [self. managedObjectContext performBlock:^{
         [DCDataProvider
@@ -479,9 +505,14 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
          callBack:^(BOOL success, id result) {
              if (success && result)
              {
-                 [self clearProgram];
-                 [DCProgram parseFromJSONData:result];
-                 [self saveContext];
+                 @try {
+                     [self clearProgram];
+                     [DCProgram parseFromJSONData:result];
+                     [self saveContext];
+                 }
+                 @catch (NSException *exception) {
+                     callback([exception name]);
+                 }
              }
              else
              {
@@ -491,7 +522,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     }];
 }
 
-- (void)updateBofs
+- (void)updateBofsCallback:(UpdateDataFail)callback
 {
     [self. managedObjectContext performBlock:^{
         [DCDataProvider
@@ -499,9 +530,13 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
          callBack:^(BOOL success, id result) {
              if (success && result)
              {
-                 [self clearBofs];
-                 [DCBof parseFromJSONData:result];
-                 [self saveContext];
+                 @try {
+                     [self clearBofs];
+                     [DCBof parseFromJSONData:result];
+                     [self saveContext];                }
+                 @catch (NSException *exception) {
+                     callback([exception name]);
+                 }
              }
              else
              {
@@ -511,7 +546,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     }];
 }
 
-- (void)updateTypes
+- (void)updateTypesCallback:(UpdateDataFail)callback
 {
     [self.managedObjectContext performBlockAndWait:^{
         [DCDataProvider
@@ -519,9 +554,13 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
          callBack:^(BOOL success, id result) {
              if (success && result)
              {
-                 [self clearTypes];
-                 [DCType parseFromJsonData:result];
-                 [self saveContext];
+                 @try {
+                     [self clearTypes];
+                     [DCType parseFromJsonData:result];
+                     [self saveContext];                 }
+                 @catch (NSException *exception) {
+                     callback([exception name]);
+                 }
              }
              else
              {
@@ -532,7 +571,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 }
 
 
-- (void)updateSpeakers
+- (void)updateSpeakersCallback:(UpdateDataFail)callback
 {
     [self.managedObjectContext performBlockAndWait:^{
         [DCDataProvider
@@ -540,9 +579,13 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
          callBack:^(BOOL success, id result) {
              if (success && result)
              {
-                 [self clearSpeakers];
-                 [DCSpeaker parseFromJSONData:result];
-                 [self saveContext];
+                 @try {
+                     [self clearSpeakers];
+                     [DCSpeaker parseFromJSONData:result];
+                     [self saveContext];               }
+                 @catch (NSException *exception) {
+                     callback([exception name]);
+                 }
              }
              else
              {
@@ -552,7 +595,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     }];
 }
 
-- (void)updateLevels
+- (void)updateLevelsCallback:(UpdateDataFail)callback
 {
     [self.managedObjectContext performBlockAndWait:^{
         [DCDataProvider
@@ -560,9 +603,13 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
          callBack:^(BOOL success, id result) {
              if (success && result)
              {
-                 [self clearLevels];
-                 [DCLevel parseFromJsonData:result];
-                 [self saveContext];
+                 @try {
+                     [self clearLevels];
+                     [DCLevel parseFromJsonData:result];
+                     [self saveContext];           }
+                 @catch (NSException *exception) {
+                     callback([exception name]);
+                 }
              }
              else
              {
@@ -572,7 +619,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     }];
 }
 
-- (void)updateTracks
+- (void)updateTracksCallback:(UpdateDataFail)callback
 {
     [self.managedObjectContext performBlockAndWait:^{
         [DCDataProvider
@@ -580,9 +627,13 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
          callBack:^(BOOL success, id result) {
              if (success && result)
              {
-                 [self clearTracks];
-                 [DCTrack parseFromJsonData:result];
-                 [self saveContext];
+                 @try {
+                     [self clearTracks];
+                     [DCTrack parseFromJsonData:result];
+                     [self saveContext];         }
+                 @catch (NSException *exception) {
+                     callback([exception name]);
+                 }
              }
              else
              {
@@ -593,7 +644,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     }];
 }
 
-- (void)updateLocation
+- (void)updateLocationCallback:(UpdateDataFail)callback
 {
     [self.managedObjectContext performBlockAndWait:^{
 
@@ -602,9 +653,13 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
          callBack:^(BOOL success, id result) {
              if (success && result)
              {
-                 [self clearLocation];
-                 [DCLocation parseFromJsonData:result];
-                 [self saveContext];
+                 @try {
+                     [self clearLocation];
+                     [DCLocation parseFromJsonData:result];
+                     [self saveContext];     }
+                 @catch (NSException *exception) {
+                     callback([exception name]);
+                 }
              }
              else
              {
@@ -644,7 +699,6 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     [fetchRequest setEntity:entityDescription];
     [fetchRequest setReturnsObjectsAsFaults:NO];
     [fetchRequest setPredicate:predicate];
-    
     return [self executeFetchRequest:fetchRequest inContext:context];
 }
 

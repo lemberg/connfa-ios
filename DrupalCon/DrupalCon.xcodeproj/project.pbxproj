@@ -40,6 +40,7 @@
 		5DC8C46F198658FF00BF5816 /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8C46B198658FF00BF5816 /* UIViewController+MFSideMenuAdditions.m */; };
 		5DC8C4731986594400BF5816 /* DCBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8C4721986594400BF5816 /* DCBaseViewController.m */; };
 		5DC8C47A19865C8400BF5816 /* DCSideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8C47919865C8400BF5816 /* DCSideMenuViewController.m */; };
+		74086C6519C1E9F60018C825 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 74086C6419C1E9F60018C825 /* style.css */; };
 		74356D5219BEE1D90055F13D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74356D5119BEE1D90055F13D /* SystemConfiguration.framework */; };
 		74356D5819BEE4860055F13D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 74356D5719BEE4860055F13D /* Reachability.m */; };
 		74356D5B19BF3B290055F13D /* UIWebView+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 74356D5A19BF3B290055F13D /* UIWebView+DC.m */; };
@@ -183,6 +184,7 @@
 		5DC8C4721986594400BF5816 /* DCBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCBaseViewController.m; sourceTree = "<group>"; };
 		5DC8C47819865C8400BF5816 /* DCSideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCSideMenuViewController.h; sourceTree = "<group>"; };
 		5DC8C47919865C8400BF5816 /* DCSideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCSideMenuViewController.m; sourceTree = "<group>"; };
+		74086C6419C1E9F60018C825 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
 		74356D5119BEE1D90055F13D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		74356D5619BEE4860055F13D /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Classes/Helpers/Reachability.h; sourceTree = "<group>"; };
 		74356D5719BEE4860055F13D /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Classes/Helpers/Reachability.m; sourceTree = "<group>"; };
@@ -558,6 +560,7 @@
 		5DC8C41A198656DB00BF5816 /* DrupalCon */ = {
 			isa = PBXGroup;
 			children = (
+				74086C6319C1E9E20018C825 /* Resources */,
 				5DC8C44A1986571300BF5816 /* Classes */,
 				5DC8C426198656DB00BF5816 /* Main.storyboard */,
 				5DC8C42C198656DB00BF5816 /* Images.xcassets */,
@@ -679,6 +682,14 @@
 				5D6449A81988EA0800BC1775 /* DCSideMenuType.h */,
 			);
 			path = SideMenu;
+			sourceTree = "<group>";
+		};
+		74086C6319C1E9E20018C825 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				74086C6419C1E9F60018C825 /* style.css */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		74A470E219B5B5C400B01BC5 /* About */ = {
@@ -949,6 +960,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5DC8C42D198656DB00BF5816 /* Images.xcassets in Resources */,
+				74086C6519C1E9F60018C825 /* style.css in Resources */,
 				5DC8C41F198656DB00BF5816 /* InfoPlist.strings in Resources */,
 				5DC8C428198656DB00BF5816 /* Main.storyboard in Resources */,
 			);

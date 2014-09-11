@@ -35,24 +35,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
     [self.activityIndicator startAnimating];
-    [self showNetworkIndicator:YES];
     [[DCMainProxy sharedProxy] dataReadyBlock:^(BOOL isDataReady) {
         if (isDataReady) {
             _days = [[NSArray alloc] initWithArray:[_eventsStrategy days]];
             [self addPageController];
             [self.activityIndicator stopAnimating];
-            [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-            [self showNetworkIndicator:NO];
         }
     }];
 
-}
-- (void)showNetworkIndicator:(BOOL)shouldShow
-{
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = shouldShow;
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = shouldShow;
 }
 
 -(void) addPageController {

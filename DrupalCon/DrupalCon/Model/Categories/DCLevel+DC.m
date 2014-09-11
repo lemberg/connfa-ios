@@ -27,6 +27,8 @@ NSString * kDCLevel_levelOrder_key = @"levelOrder";
     if (err)
     {
         NSLog(@"WRONG! json");
+        @throw [NSException exceptionWithName:INVALID_JSON_EXCEPTION reason:@"Problem in json structure" userInfo:nil];
+
         return;
     }
     
