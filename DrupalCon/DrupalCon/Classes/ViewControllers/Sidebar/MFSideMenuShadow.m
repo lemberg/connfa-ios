@@ -37,7 +37,7 @@
         self.color = [UIColor blackColor];
         self.opacity = 0.75f;
         self.radius = 10.0f;
-        self.enabled = YES;
+        self.enabled = NO;
     }
     return self;
 }
