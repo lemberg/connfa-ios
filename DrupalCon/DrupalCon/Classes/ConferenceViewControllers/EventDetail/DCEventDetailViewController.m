@@ -23,6 +23,7 @@
 #import "DCSpeakerCell.h"
 #import "DCDescriptionTextCell.h"
 #import "UIWebView+DC.h"
+#import "DCTime+DC.h"
 
 @interface DCEventDetailViewController ()
 @property (nonatomic, strong) CloseCallback closeCallback;
@@ -45,8 +46,7 @@
 {
     [super viewDidLoad];
     self.cellsHeight = [NSMutableDictionary dictionary];
-
-    self.title = [_event.timeRange stringValue];
+    self.title = ([_event.timeRange.from isTimeValid])? [_event.timeRange stringValue] : @"";
     self.navigatorBarStyle = EBaseViewControllerNatigatorBarStyleTransparrent;
     self.speakers = [_event.speakers allObjects];
 }

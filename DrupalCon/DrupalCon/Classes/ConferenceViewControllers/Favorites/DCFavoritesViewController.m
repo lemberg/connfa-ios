@@ -167,6 +167,8 @@
     headerViewCell.startLabel.text = [timeslot.from stringValue];
     headerViewCell.endLabel.text = [timeslot.to stringValue];
     headerViewCell.dateLabel.text = [self.favoriteSourceMng dateForSection:section];
+    // Hide time slot section when time is invalid
+    [headerViewCell hideTimeSection:![timeslot.from isTimeValid]];
     return [headerViewCell contentView];
     
 }

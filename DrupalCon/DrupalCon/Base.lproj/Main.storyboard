@@ -249,6 +249,7 @@
                                             <outlet property="endLabel" destination="bqq-GL-J0c" id="5vk-mi-Brg"/>
                                             <outlet property="leftImageView" destination="SgH-JN-rob" id="QuH-zE-Nrf"/>
                                             <outlet property="startLabel" destination="BQt-df-vZ0" id="0qK-hV-gDq"/>
+                                            <outlet property="toLabel" destination="ZPZ-gN-OmY" id="inn-Uy-Bi4"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProgramCellIdentifierSpeech" rowHeight="97" id="snW-hx-x4E" customClass="DCSpeechCell">
@@ -1120,8 +1121,10 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="dateLabel" destination="q6s-lb-p6Q" id="qnh-N8-wki"/>
+                                            <outlet property="endLabel" destination="5qX-GC-S3R" id="BwD-G7-J8Q"/>
                                             <outlet property="leftImageView" destination="kYs-g7-sgO" id="NE7-QE-CZF"/>
                                             <outlet property="startLabel" destination="Rs9-5Z-Gkk" id="2gu-aZ-Y1e"/>
+                                            <outlet property="toLabel" destination="iya-tj-F6b" id="FJM-87-t9a"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProgramCellIdentifierSpeech" rowHeight="97" id="fxS-MP-2nI" customClass="DCSpeechCell">
@@ -1443,8 +1446,8 @@
         <image name="star_off" width="25" height="25"/>
         <image name="star_on" width="25" height="25"/>
         <image name="triangle" width="18" height="9"/>
-        <image name="twitter_icon" width="30" height="30"/>
-        <image name="website_icon" width="18" height="18"/>
+        <image name="twitter_icon" width="44" height="44"/>
+        <image name="website_icon" width="44" height="44"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

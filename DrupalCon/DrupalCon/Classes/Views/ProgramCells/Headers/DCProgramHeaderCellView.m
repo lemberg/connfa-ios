@@ -19,6 +19,14 @@
     return self;
 }
 
+- (void)hideTimeSection:(BOOL)isHide
+{
+    self.startLabel.hidden = isHide;
+    self.endLabel.hidden = isHide;
+    self.toLabel.hidden = isHide;
+    self.dateLabel.hidden = isHide;
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
