@@ -14,6 +14,8 @@
 
 @interface DCLocationViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *addressHeader;
+@property (weak, nonatomic) IBOutlet UILabel *streetLbl;
+@property (weak, nonatomic) IBOutlet UILabel *numberLbl;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic, strong) DCLocation *location;
 
@@ -42,7 +44,9 @@
 }
 - (void)updateLocation {
     [self setAnnotation];
-    self.addressHeader.attributedText = [self address];
+    self.addressHeader.attributedText = [self DC_headerAttrString];
+    [self.streetLbl setText:self.location.streetName];
+    [self.numberLbl setText:self.location.number];
 }
 - (void)setLayout {
     [self.view setBackgroundColor:NAV_BAR_COLOR];
@@ -92,38 +96,9 @@
 
 #pragma mark -
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (NSMutableAttributedString *)DC_headerAttrString
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-
-- (NSAttributedString *)streetAdress {
-    // Select street name
-    NSMutableAttributedString *streetName = [[NSMutableAttributedString alloc] initWithString:self.location.streetName];
-    [streetName addAttribute:NSFontAttributeName
-                       value:[UIFont fontWithName:@"HelveticaNeue-Light" size:32.0]
-                       range:NSMakeRange(0, self.location.streetName.length)];
-    // Select building number
-    NSMutableAttributedString *buildingNum = [[NSMutableAttributedString alloc] initWithString:self.location.number];
-    [buildingNum setAttributes:@{
-                                 NSFontAttributeName : [UIFont fontWithName:@"HelveticaNeue-Thin"
-                                                                       size:23.0],
-                                 NSBaselineOffsetAttributeName : @10
-                                 }
-                         range:NSMakeRange(0, self.location.number.length)];
-    
-    [streetName appendAttributedString:buildingNum];
-    return streetName;
-}
-
-- (NSMutableAttributedString *)placeName {
     // Select building name
     NSArray *buildingNames = [self.location.name componentsSeparatedByString:@" "];
     
@@ -135,8 +110,8 @@
         NSString *lastName = [buildingNames lastObject];
         suffixName = [[NSMutableAttributedString alloc] initWithString:lastName];
         [suffixName addAttribute:NSFontAttributeName
-                        value:[UIFont fontWithName:@"HelveticaNeue-UltraLight"
-                                              size:45.0]
+                        value:[UIFont fontWithName:@"HelveticaNeue-Thin"
+                                              size:44.0]
                     range:NSMakeRange(0, lastName.length)];
     }
 
@@ -144,29 +119,13 @@
     NSMutableAttributedString *buildingName = [[NSMutableAttributedString alloc] initWithString:firstName];
     [buildingName addAttribute:NSFontAttributeName
                          value:[UIFont fontWithName:@"HelveticaNeue-UltraLight"
-                                               size:45.0]
+                                               size:44.0]
                          range:NSMakeRange(0, firstName.length)];
     NSAttributedString *space = [[NSAttributedString alloc] initWithString:@" "];
     [buildingName appendAttributedString:space];
     [buildingName appendAttributedString:suffixName];
     
     return buildingName;
-}
-
-- (NSAttributedString *)address {
-    NSMutableAttributedString *adr = [self placeName];
-    
-    NSAttributedString *newLine = [[NSAttributedString alloc] initWithString:@"\n"];
-    [adr appendAttributedString:newLine];
-    
-    [adr appendAttributedString:[self streetAdress]];
-
-    [adr addAttribute:NSForegroundColorAttributeName
-                value:[UIColor whiteColor]
-                range:NSMakeRange(0, adr.length)];
-
-
-    return adr;
 }
 
 
