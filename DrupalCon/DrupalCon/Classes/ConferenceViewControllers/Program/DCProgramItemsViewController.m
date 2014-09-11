@@ -173,6 +173,8 @@
         DCTimeRange * timeslot = _timeslots[section];
         headerViewCell.startLabel.text = [timeslot.from stringValue];
         headerViewCell.endLabel.text = [timeslot.to stringValue];
+        // Hide time slot section when time is invalid
+        [headerViewCell hideTimeSection:![timeslot.from isTimeValid]];
         return headerViewCell;
     }
     UIView *v = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 320, 0.0)];

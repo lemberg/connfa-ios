@@ -21,7 +21,8 @@
     if (components.count != 2)
     {
         NSLog(@"WRONG! time format");
-        self.hour = @(0);
+       // FIXME: Set default time for event without time, add 25 to put this event in the end of the list
+        self.hour = @(25);
         self.minute = @(0);
         return;
     }
@@ -35,4 +36,8 @@
     return [NSNumber numberWithInteger:[string integerValue]];
 }
 
+- (BOOL)isTimeValid
+{
+    return ([self.hour integerValue] <= 24);
+}
 @end

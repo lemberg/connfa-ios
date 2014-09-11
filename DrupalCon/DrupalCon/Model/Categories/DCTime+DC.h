@@ -13,5 +13,5 @@
 - (void)setTime:(NSString*)time;
 
 - (NSString*)stringValue;
-
+- (BOOL)isTimeValid;
 @end
