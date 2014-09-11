@@ -134,20 +134,20 @@
     if (indexPath.row == 0)
     {
         DCSpeakerHeaderCell *_cell = (DCSpeakerHeaderCell*)[tableView dequeueReusableCellWithIdentifier:cellIdHeader];
-
-        [_cell.pictureImg sd_setImageWithURL:[NSURL URLWithString:_speaker.avatarPath]
-                            placeholderImage:[UIImage imageNamed:@"avatar_placeholder"]
-                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                       dispatch_async(dispatch_get_main_queue(), ^{
-                                           [_cell setNeedsDisplay];
-                                       });
-                                       
-        }];
-
-        
-        [_cell.nameLbl setText:_speaker.name];
-        [_cell.organizationLbl setText:_speaker.organizationName];
-        [_cell.jobTitleLbl setText:_speaker.jobTitle];
+        [self fillSpeakerHeaderCell:_cell];
+//        [_cell.pictureImg sd_setImageWithURL:[NSURL URLWithString:_speaker.avatarPath]
+//                            placeholderImage:[UIImage imageNamed:@"avatar_placeholder"]
+//                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//                                       dispatch_async(dispatch_get_main_queue(), ^{
+//                                           [_cell setNeedsDisplay];
+//                                       });
+//                                       
+//        }];
+//
+//        
+//        [_cell.nameLbl setText:_speaker.name];
+//        [_cell.organizationLbl setText:_speaker.organizationName];
+//        [_cell.jobTitleLbl setText:_speaker.jobTitle];
         cell = _cell;
     }
     
@@ -182,6 +182,51 @@
     return cell;
 }
 
+- (void)fillSpeakerHeaderCell:(DCSpeakerHeaderCell *)newCell
+{
+    
+    [newCell.pictureImg sd_setImageWithURL:[NSURL URLWithString:_speaker.avatarPath]
+                        placeholderImage:[UIImage imageNamed:@"avatar_placeholder"]
+                               completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                       [newCell setNeedsDisplay];
+                                   });
+                                   
+                               }];
+    
+    
+    [newCell.nameLbl setText:_speaker.name];
+    [newCell.organizationLbl setText:_speaker.organizationName];
+    [newCell.jobTitleLbl setText:_speaker.jobTitle];
+    if ([_speaker.webSite length]) {
+        [newCell.webButton setHidden:NO];
+        [newCell.webButton addTarget:self action:@selector(openWebSite:) forControlEvents:UIControlEventTouchUpInside];
+    } else {
+        [newCell.webButton setHidden:YES];
+    }
+    
+    if ([_speaker.twitterName length]) {
+        [newCell.twitterButton addTarget:self action:@selector(openTwitterSite:) forControlEvents:UIControlEventTouchUpInside];
+        [newCell.twitterButton setHidden:NO];
+    } else {
+         [newCell.twitterButton setHidden:YES];
+    }
+    
+}
+
+- (void)openWebSite:(id)sender
+{
+    [[UIApplication sharedApplication]
+     openURL:[NSURL URLWithString:_speaker.webSite]];
+}
+
+- (void)openTwitterSite:(id)sender
+{
+    NSString *twitter = [NSString stringWithFormat:@"http://twitter.com/%@", _speaker.twitterName];
+    [[UIApplication sharedApplication]
+     openURL:[NSURL URLWithString:twitter]];
+}
+
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     if (![self.cellsHeight objectForKey:self.lastIndexPath]) {
@@ -190,6 +235,15 @@
         [self updateCellAtIndexPath];
     }
     
+}
+
+-(BOOL) webView:(UIWebView *)inWeb shouldStartLoadWithRequest:(NSURLRequest *)inRequest navigationType:(UIWebViewNavigationType)inType {
+    if ( inType == UIWebViewNavigationTypeLinkClicked ) {
+        [[UIApplication sharedApplication] openURL:[inRequest URL]];
+        return NO;
+    }
+    
+    return YES;
 }
 
 - (void)updateCellAtIndexPath

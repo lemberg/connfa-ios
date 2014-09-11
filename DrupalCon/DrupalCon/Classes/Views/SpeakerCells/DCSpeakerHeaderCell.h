@@ -14,6 +14,8 @@
 @property (nonatomic, weak) IBOutlet UILabel * nameLbl;
 @property (nonatomic, weak) IBOutlet UILabel * organizationLbl;
 @property (nonatomic, weak) IBOutlet UILabel * jobTitleLbl;
+@property (weak, nonatomic) IBOutlet UIButton *webButton;
+@property (weak, nonatomic) IBOutlet UIButton *twitterButton;
 
 + (float)cellHeight;
 

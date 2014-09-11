@@ -673,7 +673,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="G5f-Fq-JFm">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="G5f-Fq-JFm">
                                                     <rect key="frame" x="16" y="13" width="40" height="40"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
@@ -756,7 +756,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Ldz-OW-mR3">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Ldz-OW-mR3">
                                                     <rect key="frame" x="16" y="12" width="40" height="41"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
@@ -819,7 +819,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="210"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="6zF-LG-GJa">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar_placeholder" id="6zF-LG-GJa">
                                                     <rect key="frame" x="115" y="14" width="90" height="90"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
@@ -858,6 +858,20 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="o1O-iS-y1M" userLabel="Button-web">
+                                                    <rect key="frame" x="33" y="37" width="44" height="44"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" backgroundImage="website_icon">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="rMS-hp-Ch4" userLabel="Button-twitter">
+                                                    <rect key="frame" x="239" y="40" width="49" height="37"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <state key="normal" backgroundImage="twitter_icon">
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.4392156862745098" green="0.15686274509803921" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
@@ -866,6 +880,8 @@
                                             <outlet property="nameLbl" destination="o7z-uj-dmL" id="eiA-QW-oT5"/>
                                             <outlet property="organizationLbl" destination="BKV-14-MhG" id="yeI-Jr-XxW"/>
                                             <outlet property="pictureImg" destination="6zF-LG-GJa" id="72K-rP-z0h"/>
+                                            <outlet property="twitterButton" destination="rMS-hp-Ch4" id="fPy-c2-w1Z"/>
+                                            <outlet property="webButton" destination="o1O-iS-y1M" id="THv-Xa-sWH"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellId_SpeakersEvent" rowHeight="95" id="URL-ca-cR2" customClass="DCSpeakerEventCell">
@@ -1414,6 +1430,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="avatar_placeholder" width="40" height="40"/>
         <image name="ic_program_back" width="23" height="23"/>
         <image name="ic_program_clock" width="40" height="40"/>
         <image name="ic_program_coffe" width="40" height="40"/>
@@ -1426,6 +1443,8 @@
         <image name="star_off" width="25" height="25"/>
         <image name="star_on" width="25" height="25"/>
         <image name="triangle" width="18" height="9"/>
+        <image name="twitter_icon" width="30" height="30"/>
+        <image name="website_icon" width="18" height="18"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
