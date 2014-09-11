@@ -73,7 +73,7 @@
     [self displayDateForDay: 0];
 }
 
--(void) displayDateForDay: (int) day {
+-(void) displayDateForDay: (NSInteger) day {
     NSDate * date = _days[day];
     self.dateLabel.text = [date pageViewDateString];
 }
@@ -94,7 +94,7 @@
     
     NSMutableArray *arrayOfViewController = [[NSMutableArray alloc] init];
     
-    for(int i = _days.count-1; i >= 0; i--) {
+    for(int i = (int)_days.count-1; i >= 0; i--) {
         if(i < self.currentIndex) {
             [arrayOfViewController addObject: [self viewControllerAtIndex:i]];
             break;

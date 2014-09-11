@@ -44,7 +44,6 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString * cellIdSpeaker = @"DetailCellIdentifierSpeaker";
-    UITableViewCell *cell;
     DCSpeakerCell *_cell = (DCSpeakerCell*)[tableView dequeueReusableCellWithIdentifier: cellIdSpeaker];
     
     DCSpeaker * speaker = _speakers[indexPath.row];
@@ -58,7 +57,6 @@
                                        [_cell setNeedsDisplay];
                                    });
                                }];
-    cell = _cell;
     return _cell;
 }
 - (void)viewWillAppear:(BOOL)animated

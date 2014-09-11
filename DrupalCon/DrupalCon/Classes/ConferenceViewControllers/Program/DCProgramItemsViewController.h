@@ -11,7 +11,7 @@
 
 @interface DCProgramItemsViewController : UIViewController
 
-@property (nonatomic) int pageIndex;
+@property (nonatomic) NSInteger pageIndex;
 @property (nonatomic, strong) NSArray* events;
 @property (nonatomic, strong) NSArray* timeslots;
 @property (nonatomic, strong) DCEventStrategy * eventsStrategy;

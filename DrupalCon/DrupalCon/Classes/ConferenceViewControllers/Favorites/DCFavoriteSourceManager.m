@@ -37,7 +37,7 @@ static NSString * const kTimeSection = @"time";
 
 - (int)numberOfSection
 {
-    return [self.sectionsItems count];
+    return (int)[self.sectionsItems count];
 }
 
 - (DCTimeRange *)timeRangeForSection:(int)aSection
@@ -57,7 +57,7 @@ static NSString * const kTimeSection = @"time";
 - (int)numberOfEventsInSection:(int)aSection
 {
     NSArray *events = self.sectionsItems[aSection][kEventSections];
-    return [events count];
+    return (int)[events count];
 }
 
 // Create special structure for favorite events ordering by date

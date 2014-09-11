@@ -64,7 +64,7 @@
     </entity>
     <elements>
         <element name="DCBof" positionX="-5427" positionY="-2142" width="128" height="45"/>
-        <element name="DCEvent" positionX="-5744" positionY="-2142" width="128" height="208"/>
+        <element name="DCEvent" positionX="-5744" positionY="-2142" width="128" height="28"/>
         <element name="DCFavoriteEvent" positionX="-5481" positionY="-1858" width="128" height="58"/>
         <element name="DCLevel" positionX="-5978" positionY="-2214" width="128" height="103"/>
         <element name="DCLocation" positionX="-6111" positionY="-1755" width="128" height="118"/>

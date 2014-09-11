@@ -69,7 +69,7 @@
 
 + (DCEventStrategy*)strategyForEventMenuType:(DCMenuSection)menu
 {
-    EDCEventStrategy eStrategy;
+    EDCEventStrategy eStrategy = EDCEventStrategyPrograms;
     switch (menu)
     {
         case DCMENU_PROGRAM_ITEM:

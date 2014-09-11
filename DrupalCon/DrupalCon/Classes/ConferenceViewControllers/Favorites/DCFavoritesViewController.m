@@ -140,10 +140,10 @@
 - (void)deleteCellAtIndexPath:(NSIndexPath *)indexPath
 {
     // If section has last event than remote them
-    if ([self.favoriteSourceMng numberOfEventsInSection:indexPath.section] == 1) {
+    if ([self.favoriteSourceMng numberOfEventsInSection:(int)indexPath.section] == 1) {
         
         [self.favoriteSourceMng deleteEventsAtIndexPath:indexPath];
-        [self.favoriteSourceMng deleteSectionAtIndex:indexPath.section];
+        [self.favoriteSourceMng deleteSectionAtIndex:(int)indexPath.section];
         [self.favoritesTableView beginUpdates];
         [self.favoritesTableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section]
                                withRowAnimation:UITableViewRowAnimationFade];
@@ -164,10 +164,10 @@
     
     DCProgramHeaderCellView *headerViewCell = (DCProgramHeaderCellView*)[tableView dequeueReusableCellWithIdentifier: @"ProgramCellHeaderCell"];
     
-    DCTimeRange * timeslot = [self.favoriteSourceMng timeRangeForSection:section];//_timeslots[section];
+    DCTimeRange * timeslot = [self.favoriteSourceMng timeRangeForSection:(int)section];//_timeslots[section];
     headerViewCell.startLabel.text = [timeslot.from stringValue];
     headerViewCell.endLabel.text = [timeslot.to stringValue];
-    headerViewCell.dateLabel.text = [self.favoriteSourceMng dateForSection:section];
+    headerViewCell.dateLabel.text = [self.favoriteSourceMng dateForSection:(int)section];
     // Hide time slot section when time is invalid
     [headerViewCell hideTimeSection:![timeslot.from isTimeValid]];
     return [headerViewCell contentView];
@@ -192,7 +192,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.favoriteSourceMng  numberOfEventsInSection:section];
+    return [self.favoriteSourceMng  numberOfEventsInSection:(int)section];
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -91,7 +91,7 @@
     DCSideMenuCell *cell = (DCSideMenuCell*)[tableView dequeueReusableCellWithIdentifier: cellIdentifier];
     
     
-    DCMenuImage *menuImage = [[DCMenuImage alloc] initWithMenuType: indexPath.row];
+    DCMenuImage *menuImage = [[DCMenuImage alloc] initWithMenuType: (int)indexPath.row];
     cell.leftImageView.image = menuImage;
     cell.captionLabel.text = [self.arrayOfCaptions objectAtIndex: indexPath.row];
     

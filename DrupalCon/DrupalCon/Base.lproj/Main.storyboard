@@ -103,13 +103,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Program" id="ap1-9z-DFn"/>
-                    <connections>
-                        <segue destination="KmN-kc-Ldr" kind="push" id="rak-yI-356"/>
-                        <segue destination="Lgd-Ji-07B" kind="push" id="tkx-oB-zGW"/>
-                        <segue destination="vHA-yp-h7f" kind="modal" id="nuS-sf-ZmA"/>
-                        <segue destination="HyN-5J-w0d" kind="modal" id="XEX-0X-nyt"/>
-                        <segue destination="zwv-E3-mMM" kind="modal" id="vXB-V1-DCz"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LUS-Ls-f9g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -265,7 +265,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
                          filtredUsingPredicate:predicate
                                      inContext:self.managedObjectContext];
     if (results.count>1)
-        NSLog(@"WRONG! too many speakers for id# %i", speakerId);
+        NSLog(@"WRONG! too many speakers for id# %li", (long)speakerId);
     
     return (results.count ? results.firstObject : nil);
 }
@@ -277,7 +277,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
                          filtredUsingPredicate:predicate
                                      inContext:self.managedObjectContext];
     if (results.count>1)
-        NSLog(@"WRONG! too many speakers for id# %i", levelId);
+        NSLog(@"WRONG! too many speakers for id# %li", (long)levelId);
     
     return (results.count ? results.firstObject : nil);
 }
@@ -289,7 +289,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
                          filtredUsingPredicate:predicate
                                      inContext:self.managedObjectContext];
     if (results.count>1)
-        NSLog(@"WRONG! too many speakers for id# %i", trackId);
+        NSLog(@"WRONG! too many speakers for id# %li", (long)trackId);
     
     return (results.count ? results.firstObject : nil);
 }
@@ -301,7 +301,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
                          filtredUsingPredicate:predicate
                                      inContext:self.managedObjectContext];
     if (results.count>1)
-        NSLog(@"WRONG! too many favorite events for id# %i", eventID);
+        NSLog(@"WRONG! too many favorite events for id# %li", (long)eventID);
     
     return (results.count ? results.firstObject : nil);
 }

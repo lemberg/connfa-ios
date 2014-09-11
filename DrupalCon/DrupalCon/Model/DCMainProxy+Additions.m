@@ -50,7 +50,7 @@
     return nil;
 }
 
-- (NSArray*)eventsForDayNum:(int)dayNum forClass:(__unsafe_unretained Class)eventClass
+- (NSArray*)eventsForDayNum:(NSInteger)dayNum forClass:(__unsafe_unretained Class)eventClass
 {
     @try {
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
