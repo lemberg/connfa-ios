@@ -65,7 +65,7 @@
     [self.pageViewController setViewControllers:self.viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     self.pageViewController.delegate = self;
     // Change the size of page view controller
-    self.pageViewController.view.frame = CGRectMake(0,  30, self.view.frame.size.width, self.view.frame.size.height - (30));
+    self.pageViewController.view.frame = CGRectMake(0,  35, self.view.frame.size.width, self.view.frame.size.height - (35));
     [self addChildViewController: _pageViewController];
     [self.view addSubview: _pageViewController.view];
     [self.pageViewController didMoveToParentViewController:self];
