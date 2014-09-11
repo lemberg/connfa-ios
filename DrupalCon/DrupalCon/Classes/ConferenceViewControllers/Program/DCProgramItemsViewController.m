@@ -16,7 +16,6 @@
 #import "DCLunchCell.h"
 #import "DCProgramHeaderCellView.h"
 
-//#import "DCProgram+DC.h"
 #import "DCEvent+DC.h"
 #import "DCType+DC.h"
 #import "DCTimeRange+DC.h"
@@ -77,9 +76,9 @@
             
         case DC_EVENT_SPEACH: {
             DCSpeechCell *_cell = (DCSpeechCell*)[tableView dequeueReusableCellWithIdentifier: cellIdSpeech];
-            _cell.speakerLabel.text = [self DC_speakersTextForSpeakerNames:[event speakersNames]];
-            _cell.experienceLevelLabel.text = event.level.name;
-            _cell.trackLabel.text = [[event.tracks allObjects].firstObject name];
+            [_cell setSpeakers:[self DC_speakersTextForSpeakerNames:[event speakersNames]]];
+            [_cell setLevel:event.level.name];
+            [_cell setTrack:[[event.tracks allObjects].firstObject name]];
             _cell.nameLabel.text = event.name;
             _cell.favoriteButton.selected = [event.favorite boolValue];
             [_cell favoriteButtonDidSelected:^(UITableViewCell *cell, BOOL isSelected) {
@@ -92,9 +91,10 @@
         }
         case DC_EVENT_SPEACH_OF_DAY: {
             DCSpeechOfDayCell *_cell = (DCSpeechOfDayCell*)[tableView dequeueReusableCellWithIdentifier: cellIdSpeechOfDay];
-            _cell.speakerLabel.text = [self DC_speakersTextForSpeakerNames:[event speakersNames]];
-            _cell.experienceLevelLabel.text = event.level.name;
-            _cell.trackLabel.text = [[event.tracks allObjects].firstObject name];
+            [_cell setSpeakers:[self DC_speakersTextForSpeakerNames:[event speakersNames]]];
+            [_cell setLevel:event.level.name];
+            [_cell setTrack:[[event.tracks allObjects].firstObject name]];
+
             _cell.nameLabel.text = event.name;
             _cell.favoriteButton.selected = [event.favorite boolValue];
             [_cell favoriteButtonDidSelected:^(UITableViewCell *cell, BOOL isSelected) {

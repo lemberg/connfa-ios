@@ -330,8 +330,11 @@
                                         <connections>
                                             <outlet property="experienceLevelLabel" destination="OHu-PL-IRD" id="bWz-m1-QeT"/>
                                             <outlet property="favoriteButton" destination="hWg-FS-ZWR" id="z8R-7S-xQ5"/>
+                                            <outlet property="levelBlockNameLabel" destination="fx4-dd-CL2" id="fIU-yw-klV"/>
                                             <outlet property="nameLabel" destination="IjA-DJ-zfS" id="jTP-BA-Y3s"/>
+                                            <outlet property="speakerBlockNameLabel" destination="8jd-kc-09N" id="Pcc-zV-s40"/>
                                             <outlet property="speakerLabel" destination="s3n-3k-VcW" id="Had-9i-ZLF"/>
+                                            <outlet property="trackBlockNameLabel" destination="MtB-Wb-Z5u" id="D3w-6e-XKC"/>
                                             <outlet property="trackLabel" destination="HPk-7w-gTe" id="2w9-zB-Kuu"/>
                                         </connections>
                                     </tableViewCell>
@@ -412,8 +415,11 @@
                                         <connections>
                                             <outlet property="experienceLevelLabel" destination="Mc6-Ny-xcI" id="leJ-I2-YXK"/>
                                             <outlet property="favoriteButton" destination="qml-pg-RWY" id="HRI-Ad-gmV"/>
+                                            <outlet property="levelBlockNameLabel" destination="yAV-5a-j2e" id="X6r-lK-Cgv"/>
                                             <outlet property="nameLabel" destination="KKt-0h-YdQ" id="2sM-bH-KWR"/>
+                                            <outlet property="speakerBlockNameLabel" destination="6KT-Iy-6st" id="pkC-tZ-wqc"/>
                                             <outlet property="speakerLabel" destination="cJk-ne-efz" id="x0Z-bs-kH9"/>
+                                            <outlet property="trackBlockNameLabel" destination="vbK-Zd-Bwc" id="ydq-lk-Qqa"/>
                                             <outlet property="trackLabel" destination="0um-wf-ejL" id="wL2-0G-8Mx"/>
                                         </connections>
                                     </tableViewCell>
@@ -613,8 +619,8 @@
                                                     <rect key="frame" x="0.0" y="63" width="320" height="39"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                                     <subviews>
-                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_place" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NWX-qM-sei">
-                                                            <rect key="frame" x="20" y="9" width="280" height="21"/>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_place" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="NWX-qM-sei">
+                                                            <rect key="frame" x="16" y="0.0" width="288" height="39"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -956,11 +962,13 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="eventDateValueLbl" destination="AdH-R1-Lmz" id="JsX-6X-Z5K"/>
-                                            <outlet property="eventLevelValueLbl" destination="OCg-8O-bHn" id="NdP-SF-ZMk"/>
-                                            <outlet property="eventNameValueLbl" destination="T5s-Z1-IAV" id="fTy-DW-Fsk"/>
                                             <outlet property="eventTimeValueLbl" destination="Jdg-wX-QVg" id="sZW-K3-ORf"/>
-                                            <outlet property="eventTrackValueLbl" destination="rhw-Jx-ly5" id="zM7-PZ-y9I"/>
+                                            <outlet property="experienceLevelLabel" destination="OCg-8O-bHn" id="O2F-cR-zjm"/>
+                                            <outlet property="levelBlockNameLabel" destination="P0M-kK-Ctx" id="0Du-Cp-l9e"/>
+                                            <outlet property="nameLabel" destination="T5s-Z1-IAV" id="ijM-QR-jtF"/>
                                             <outlet property="starImg" destination="u9U-CC-JI2" id="bZ6-UG-Nk1"/>
+                                            <outlet property="trackBlockNameLabel" destination="yQW-uk-UBd" id="Nys-YZ-rop"/>
+                                            <outlet property="trackLabel" destination="rhw-Jx-ly5" id="BMT-fv-i0t"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellId_SpeakersBottom" id="lRu-W1-kKC" customClass="DCDescriptionTextCell">
@@ -1203,8 +1211,11 @@
                                         <connections>
                                             <outlet property="experienceLevelLabel" destination="Mka-vW-Y5m" id="zEC-lA-HPQ"/>
                                             <outlet property="favoriteButton" destination="VCe-o1-cf1" id="JKi-A2-xQI"/>
+                                            <outlet property="levelBlockNameLabel" destination="7sr-0U-I0D" id="ckx-6v-yCD"/>
                                             <outlet property="nameLabel" destination="ifW-Bn-fFa" id="Gxm-qc-4AS"/>
+                                            <outlet property="speakerBlockNameLabel" destination="WnS-ux-m1C" id="nXG-Ry-ZvV"/>
                                             <outlet property="speakerLabel" destination="zFf-Hs-PsS" id="Tne-cF-6fm"/>
+                                            <outlet property="trackBlockNameLabel" destination="5fF-1w-Dia" id="P9f-aQ-iJv"/>
                                             <outlet property="trackLabel" destination="a9h-CR-QSe" id="ysT-IO-0t5"/>
                                         </connections>
                                     </tableViewCell>
@@ -1285,8 +1296,11 @@
                                         <connections>
                                             <outlet property="experienceLevelLabel" destination="6gN-Q0-Bda" id="SGs-ZR-ui6"/>
                                             <outlet property="favoriteButton" destination="t6o-AY-HH1" id="m9B-mq-7dk"/>
+                                            <outlet property="levelBlockNameLabel" destination="8VP-Zc-2PD" id="nu9-Jr-7gA"/>
                                             <outlet property="nameLabel" destination="RyO-PN-COg" id="IcB-8v-9lR"/>
+                                            <outlet property="speakerBlockNameLabel" destination="XkQ-t5-rQF" id="gic-Jq-dKt"/>
                                             <outlet property="speakerLabel" destination="aK9-An-rTG" id="gHg-Uz-aar"/>
+                                            <outlet property="trackBlockNameLabel" destination="vLo-lT-A1N" id="oUA-YX-LP2"/>
                                             <outlet property="trackLabel" destination="zYf-ZR-5Rj" id="WAO-Wm-wf5"/>
                                         </connections>
                                     </tableViewCell>

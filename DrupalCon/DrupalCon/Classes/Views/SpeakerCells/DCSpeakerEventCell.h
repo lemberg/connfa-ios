@@ -7,21 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DCSpeechBaseCell.h"
 
-typedef void(^FavoriteButtonPressedCallback)(UITableViewCell *cell, BOOL isSelected);
 
-@interface DCSpeakerEventCell : UITableViewCell
+@interface DCSpeakerEventCell : DCSpeechBaseCell
 
-@property (nonatomic, weak) IBOutlet UILabel * eventNameValueLbl;
 @property (nonatomic, weak) IBOutlet UILabel * eventDateValueLbl;
 @property (nonatomic, weak) IBOutlet UILabel * eventTimeValueLbl;
-@property (nonatomic, weak) IBOutlet UILabel * eventTrackValueLbl;
-@property (nonatomic, weak) IBOutlet UILabel * eventLevelValueLbl;
 @property (nonatomic, weak) IBOutlet UIImageView * starImg;
 
 @property (nonatomic, getter = isFavorite) BOOL favorite;
 
 + (float)cellHeight;
-- (void)favoriteButtonDidSelected:(FavoriteButtonPressedCallback )favoriteButtonPressed;
 
 @end

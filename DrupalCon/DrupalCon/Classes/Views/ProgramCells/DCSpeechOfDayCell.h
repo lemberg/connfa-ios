@@ -7,13 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-typedef void(^FavoriteButtonPressedCallback)(UITableViewCell *cell, BOOL isSelected);
-@interface DCSpeechOfDayCell : UITableViewCell
-@property (nonatomic, weak) IBOutlet UILabel *speakerLabel;
-@property (nonatomic, weak) IBOutlet UILabel *trackLabel;
-@property (nonatomic, weak) IBOutlet UILabel *experienceLevelLabel;
-@property (nonatomic, weak) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
+#import "DCSpeechBaseCell.h"
 
-- (void)favoriteButtonDidSelected:(FavoriteButtonPressedCallback )favoriteButtonPressed;
+@interface DCSpeechOfDayCell : DCSpeechBaseCell
+
 @end

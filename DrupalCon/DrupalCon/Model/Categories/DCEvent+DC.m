@@ -94,7 +94,7 @@ const NSString * kDCEvent_place_key = @"place";
         {
             speaker = [[DCMainProxy sharedProxy] createSpeaker];
             speaker.speakerId = speakerIdNum;
-            speaker.name = @"unknown speaker";
+            speaker.name = @"";
         }
         [speaker addEventsObject:self];
     }
@@ -107,7 +107,7 @@ const NSString * kDCEvent_place_key = @"place";
     {
         level = [[DCMainProxy sharedProxy] createLevel];
         level.levelId = @(levelID);
-        level.name = @"unknown";
+        level.name = @"";
         level.order = @(100);
     }
     [level addEventsObject:self];
@@ -120,7 +120,7 @@ const NSString * kDCEvent_place_key = @"place";
     {
         track = [[DCMainProxy sharedProxy] createTrack];
         track.trackId = @(trackId);
-        track.name = @"General";
+        track.name = @"";
     }
     [track addEventsObject:self];
 }

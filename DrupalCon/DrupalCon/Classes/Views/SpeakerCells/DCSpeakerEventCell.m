@@ -16,12 +16,8 @@
 
 - (void)awakeFromNib
 {
+//    [super awakeFromNib];
     [self DC_setStarImage];
-}
-
-- (void)favoriteButtonDidSelected:(FavoriteButtonPressedCallback )newFavoriteButtonPressed
-{
-    self.favoriteBtnCallback = newFavoriteButtonPressed;
 }
 
 

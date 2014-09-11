@@ -105,6 +105,7 @@
 		84A06E2B19ACA2F700104876 /* DCSpeakerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A06E2A19ACA2F700104876 /* DCSpeakerCell.m */; };
 		84A06E2F19ACA41100104876 /* DCFavoriteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A06E2E19ACA41100104876 /* DCFavoriteButton.m */; };
 		84A06E3319ACBA0600104876 /* DCEventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A06E3219ACBA0600104876 /* DCEventDetailViewController.m */; };
+		84A24FB519C1B254006EF17E /* DCSpeechBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A24FB419C1B254006EF17E /* DCSpeechBaseCell.m */; };
 		84ABE8F519BEEB8F0019D5DC /* DCEventStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ABE8F419BEEB8F0019D5DC /* DCEventStrategy.m */; };
 		84FAE0E819A645E000DC9FF1 /* NSArray+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAE0E719A645E000DC9FF1 /* NSArray+DC.m */; };
 		84FAE10919A65FEA00DC9FF1 /* DCTime+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAE10819A65FEA00DC9FF1 /* DCTime+DC.m */; };
@@ -308,6 +309,8 @@
 		84A06E2E19ACA41100104876 /* DCFavoriteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCFavoriteButton.m; path = Classes/Views/controls/DCFavoriteButton.m; sourceTree = "<group>"; };
 		84A06E3119ACBA0600104876 /* DCEventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCEventDetailViewController.h; path = EventDetail/DCEventDetailViewController.h; sourceTree = "<group>"; };
 		84A06E3219ACBA0600104876 /* DCEventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCEventDetailViewController.m; path = EventDetail/DCEventDetailViewController.m; sourceTree = "<group>"; };
+		84A24FB319C1B254006EF17E /* DCSpeechBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCSpeechBaseCell.h; path = Classes/Views/ProgramCells/DCSpeechBaseCell.h; sourceTree = "<group>"; };
+		84A24FB419C1B254006EF17E /* DCSpeechBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCSpeechBaseCell.m; path = Classes/Views/ProgramCells/DCSpeechBaseCell.m; sourceTree = "<group>"; };
 		84ABE8F319BEEB8F0019D5DC /* DCEventStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCEventStrategy.h; sourceTree = "<group>"; };
 		84ABE8F419BEEB8F0019D5DC /* DCEventStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCEventStrategy.m; sourceTree = "<group>"; };
 		84FAE0E619A645E000DC9FF1 /* NSArray+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+DC.h"; path = "Classes/Helpers/NSArray+DC.h"; sourceTree = "<group>"; };
@@ -454,6 +457,8 @@
 			isa = PBXGroup;
 			children = (
 				5D6449D4198A93BF00BC1775 /* Headers */,
+				84A24FB319C1B254006EF17E /* DCSpeechBaseCell.h */,
+				84A24FB419C1B254006EF17E /* DCSpeechBaseCell.m */,
 				5D6449C819893BAD00BC1775 /* DCSpeechCell.h */,
 				5D6449C919893BAD00BC1775 /* DCSpeechCell.m */,
 				5D6449CB19893BC300BC1775 /* DCSpeechOfDayCell.h */,
@@ -1000,6 +1005,7 @@
 				849AC4F719B735800093A29B /* DCTime.m in Sources */,
 				5D38E696198692E9006F7A59 /* DCSpeakersViewController.m in Sources */,
 				84A06E2F19ACA41100104876 /* DCFavoriteButton.m in Sources */,
+				84A24FB519C1B254006EF17E /* DCSpeechBaseCell.m in Sources */,
 				74E8381719C061CD000D2BE4 /* UIButton+WebCache.m in Sources */,
 				74E8381619C061CD000D2BE4 /* SDWebImagePrefetcher.m in Sources */,
 				84A06E2B19ACA2F700104876 /* DCSpeakerCell.m in Sources */,

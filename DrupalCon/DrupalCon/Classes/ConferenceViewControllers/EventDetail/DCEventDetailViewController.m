@@ -101,9 +101,12 @@
     else if (section == 1)
     {
         DCEventDetailHeader2Cell * infoPanel = (DCEventDetailHeader2Cell*)[tableView dequeueReusableCellWithIdentifier:@"DetailCellIdHeader2"];
-        [infoPanel.trackValueLbl setText:[[_event.tracks allObjects].firstObject name]];
-        [infoPanel.levelValueLbl setText:_event.level.name];
-        [infoPanel.placeValueLbl setText:_event.place];
+        NSString * track = [[_event.tracks allObjects].firstObject name];
+        NSString * place = _event.place;
+        NSString * level = _event.level.name;
+        [infoPanel.trackValueLbl setText:(track.length?track:@"-")];
+        [infoPanel.levelValueLbl setText:(level.length?level:@"-")];
+        [infoPanel.placeValueLbl setText:(place.length?place:@"-")];
         [infoPanel.favorBtn setDelegate:self];
         [infoPanel.favorBtn setSelected:[_event.favorite boolValue]];
         return infoPanel;
@@ -157,7 +160,6 @@
     else if (indexPath.row == _speakers.count) // description cell
     {
         DCDescriptionTextCell * _cell = (DCDescriptionTextCell*)[tableView dequeueReusableCellWithIdentifier:cellIdDescription];
-//        [_cell.descriptionTxt setText:_event.desctiptText];
         _cell.descriptionWebView.delegate = self;
         self.lastIndexPath = indexPath;
         [_cell.descriptionWebView loadHTMLString:_event.desctiptText];

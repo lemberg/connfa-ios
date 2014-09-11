@@ -79,9 +79,10 @@
     switch ([event getTypeID]) {
         case DC_EVENT_SPEACH: {
             DCSpeechCell *_cell = (DCSpeechCell*)[tableView dequeueReusableCellWithIdentifier: cellIdSpeech];
-            _cell.speakerLabel.text = [self DC_speakersTextForSpeakerNames:[event speakersNames]];
-            _cell.experienceLevelLabel.text = event.level.name;
-            _cell.trackLabel.text = [[event.tracks allObjects].firstObject name];
+            [_cell setSpeakers:[self DC_speakersTextForSpeakerNames:[event speakersNames]]];
+            [_cell setLevel:event.level.name];
+            [_cell setTrack:[[event.tracks allObjects].firstObject name]];
+
             _cell.nameLabel.text = event.name;
             _cell.favoriteButton.selected = [event.favorite boolValue];
             [_cell favoriteButtonDidSelected:
@@ -95,9 +96,9 @@
         }
         case DC_EVENT_SPEACH_OF_DAY: {
             DCSpeechOfDayCell *_cell = (DCSpeechOfDayCell*)[tableView dequeueReusableCellWithIdentifier: cellIdSpeechOfDay];
-            _cell.speakerLabel.text = [self DC_speakersTextForSpeakerNames:[event speakersNames]];
-            _cell.experienceLevelLabel.text = event.level.name;
-            _cell.trackLabel.text = [[event.tracks allObjects].firstObject name];
+            [_cell setSpeakers:[self DC_speakersTextForSpeakerNames:[event speakersNames]]];
+            [_cell setLevel:event.level.name];
+            [_cell setTrack:[[event.tracks allObjects].firstObject name]];
             _cell.nameLabel.text = event.name;
             _cell.favoriteButton.selected = [event.favorite boolValue];
             [_cell favoriteButtonDidSelected:

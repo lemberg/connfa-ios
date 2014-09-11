@@ -17,7 +17,7 @@
 @property (nonatomic, strong) NSArray *days;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
-@property (nonatomic) int currentIndex;
+@property (nonatomic) NSInteger currentIndex;
 @property (nonatomic, strong) IBOutlet UILabel *dateLabel;
 @end
 

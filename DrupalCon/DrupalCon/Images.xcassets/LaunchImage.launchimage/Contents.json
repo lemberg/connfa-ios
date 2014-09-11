@@ -22,7 +22,6 @@
       "idiom" : "ipad",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
-      "filename" : "splash&log_in_bg.png",
       "scale" : "1x"
     },
     {
@@ -37,7 +36,6 @@
       "idiom" : "ipad",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
-      "filename" : "splash&log_in_bg_2@2x-1.png",
       "scale" : "2x"
     },
     {

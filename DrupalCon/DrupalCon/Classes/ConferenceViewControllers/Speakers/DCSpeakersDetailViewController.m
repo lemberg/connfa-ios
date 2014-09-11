@@ -171,11 +171,11 @@
             [self updateFavoriteItemsInIndexPath:[self.speakerDetailTbl indexPathForCell:cell]
                                        withValue:isSelected];
         }];
-        [_cell.eventNameValueLbl setText:event.name];
+        [_cell.nameLabel setText:event.name];
         [_cell.eventDateValueLbl setText:[event.date stringForSpeakerEventCell]];
         [_cell.eventTimeValueLbl setText:[event.timeRange stringValue]];
-        [_cell.eventTrackValueLbl setText:[[event.tracks allObjects].firstObject name]];
-        [_cell.eventLevelValueLbl setText:event.level.name];
+        [_cell setTrack:[[event.tracks allObjects].firstObject name]];
+        [_cell setLevel:event.level.name];
         cell = _cell;
     }
     
