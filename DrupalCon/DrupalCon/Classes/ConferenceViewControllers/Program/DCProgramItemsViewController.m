@@ -73,7 +73,8 @@
         {
             NSLog(@"WRONG! there is no Type for event: %@",event);
         }
-            
+        case DC_EVENT_24h:
+        case DC_EVENT_GROUP:
         case DC_EVENT_SPEACH: {
             DCSpeechCell *_cell = (DCSpeechCell*)[tableView dequeueReusableCellWithIdentifier: cellIdSpeech];
             [_cell setSpeakers:[self DC_speakersTextForSpeakerNames:[event speakersNames]]];
@@ -104,6 +105,17 @@
             cell = _cell;
             break;
         }
+        case DC_EVENT_WALKING:
+        {
+            DCCofeeCell *_cell = (DCCofeeCell*)[tableView dequeueReusableCellWithIdentifier: cellIdCoffeBreak];
+            [_cell.leftImageView setImage:[UIImage imageNamed:@"program_walking_break"]];
+            _cell.startLabel.text = [event.timeRange.from stringValue];
+            _cell.endLabel.text = [event.timeRange.to stringValue];
+            [_cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            cell = _cell;
+            break;
+        }
+            
         case DC_EVENT_COFEE_BREAK: {
             DCCofeeCell *_cell = (DCCofeeCell*)[tableView dequeueReusableCellWithIdentifier: cellIdCoffeBreak];
             _cell.startLabel.text = [event.timeRange.from stringValue];
@@ -145,8 +157,6 @@
         [[DCMainProxy sharedProxy]
          removeFavoriteEventWithID:event.eventID];
     }
-    
-    
 }
 
 -(BOOL) headerNeededInSection: (NSInteger) section
@@ -155,14 +165,13 @@
     BOOL headerNeeded = NO;
     for(DCEvent *event in [_events eventsForTimeRange:_timeslots[section]])
     {
-        if([event getTypeID] == DC_EVENT_SPEACH || [event getTypeID] == DC_EVENT_SPEACH_OF_DAY)
+        if([event getTypeID] != DC_EVENT_LUNCH && [event getTypeID] != DC_EVENT_COFEE_BREAK && [event getTypeID] != DC_EVENT_WALKING)
         {
             headerNeeded = YES; break;
         }
     }
     return headerNeeded;
 }
-
 
 -(UIView*) tableView: (UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     
@@ -171,6 +180,7 @@
     BOOL headerNeeded = [self headerNeededInSection: section];
     if(headerNeeded) {
         DCTimeRange * timeslot = _timeslots[section];
+        [headerViewCell.leftImageView setImage:[(DCEvent*)[_events eventsForTimeRange:_timeslots[section]].firstObject imageForEvent]];
         headerViewCell.startLabel.text = [timeslot.from stringValue];
         headerViewCell.endLabel.text = [timeslot.to stringValue];
         // Hide time slot section when time is invalid
@@ -208,18 +218,15 @@
     DCEvent *event = [self DC_eventForIndexPath:indexPath];
     
     switch ([event getTypeID]) {
-        case DC_EVENT_SPEACH: {
-            return 97;
-            break;
-        }
+        case DC_EVENT_24h:
+        case DC_EVENT_GROUP:
+        case DC_EVENT_WALKING:
+        case DC_EVENT_SPEACH:
         case DC_EVENT_SPEACH_OF_DAY: {
             return 97;
             break;
         }
-        case DC_EVENT_COFEE_BREAK: {
-            return 94;
-            break;
-        }
+        case DC_EVENT_COFEE_BREAK:
         case DC_EVENT_LUNCH: {
             return 94;
             break;
@@ -233,13 +240,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    if(![self headerNeededInSection:indexPath.section])
+        return;
     
     DCEvent * event = [self DC_eventForIndexPath:indexPath];
-    if([event getTypeID] == DC_EVENT_LUNCH || [event getTypeID] == DC_EVENT_COFEE_BREAK)
-    {
-        return;
-    }
-    
+
     DCEventDetailViewController * detailController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
     [detailController didCloseWithCallback:^{
         [self.tablewView reloadData];

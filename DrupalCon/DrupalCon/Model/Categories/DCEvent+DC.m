@@ -125,4 +125,44 @@ const NSString * kDCEvent_place_key = @"place";
     [track addEventsObject:self];
 }
 
+- (UIImage*)imageForEvent
+{
+    NSString * icon_name = nil;
+
+    switch ([self.type.typeID integerValue]) {
+        case DC_EVENT_24h:
+            icon_name = @"program_24_hour";
+            break;
+            
+        case DC_EVENT_GROUP:
+            icon_name = @"program_group_photo";
+            break;
+            
+        case DC_EVENT_SPEACH_OF_DAY:
+            icon_name = @"program_key_event";
+            break;
+            
+        case DC_EVENT_NONE:
+        case DC_EVENT_SPEACH:
+            icon_name = @"ic_program_clock";
+            break;
+            
+        case DC_EVENT_WALKING:
+            icon_name = @"program_walking_break";
+            break;
+            
+        case DC_EVENT_LUNCH:
+            icon_name = @"ic_program_lunch";
+            break;
+            
+        case DC_EVENT_COFEE_BREAK:
+            icon_name = @"ic_program_coffe";
+            break;
+            
+        default:
+            break;
+    }
+    return [UIImage imageNamed:icon_name];
+}
+
 @end

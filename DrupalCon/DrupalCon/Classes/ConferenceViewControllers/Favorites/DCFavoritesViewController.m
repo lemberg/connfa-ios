@@ -77,6 +77,10 @@
     UITableViewCell *cell;
     
     switch ([event getTypeID]) {
+        case DC_EVENT_NONE:
+        case DC_EVENT_24h:
+        case DC_EVENT_GROUP:
+        case DC_EVENT_WALKING:
         case DC_EVENT_SPEACH: {
             DCSpeechCell *_cell = (DCSpeechCell*)[tableView dequeueReusableCellWithIdentifier: cellIdSpeech];
             [_cell setSpeakers:[self DC_speakersTextForSpeakerNames:[event speakersNames]]];
@@ -164,7 +168,8 @@
     
     DCProgramHeaderCellView *headerViewCell = (DCProgramHeaderCellView*)[tableView dequeueReusableCellWithIdentifier: @"ProgramCellHeaderCell"];
     
-    DCTimeRange * timeslot = [self.favoriteSourceMng timeRangeForSection:(int)section];//_timeslots[section];
+    DCTimeRange * timeslot = [self.favoriteSourceMng timeRangeForSection:(int)section];
+    [headerViewCell.leftImageView setImage:[[self DC_eventForIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]] imageForEvent]];
     headerViewCell.startLabel.text = [timeslot.from stringValue];
     headerViewCell.endLabel.text = [timeslot.to stringValue];
     headerViewCell.dateLabel.text = [self.favoriteSourceMng dateForSection:(int)section];
@@ -196,19 +201,8 @@
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    DCEvent *event = [self DC_eventForIndexPath:indexPath];
-    
-    switch ([event getTypeID]) {
-        case DC_EVENT_SPEACH: {
-            return 97;
-            break;
-        }
-        case DC_EVENT_SPEACH_OF_DAY: {
-            return 97;
-            break;
-        }
-    }
-    return 94;
+
+    return 97;
 }
 
 #pragma mark - uitableview delegate methods
