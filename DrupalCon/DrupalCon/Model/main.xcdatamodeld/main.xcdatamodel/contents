@@ -23,7 +23,7 @@
         <attribute name="order" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DCEvent" inverseName="level" inverseEntity="DCEvent" syncable="YES"/>
     </entity>
-    <entity name="DCLocation" syncable="YES">
+    <entity name="DCLocation" representedClassName="DCLocation" syncable="YES">
         <attribute name="latitude" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -59,6 +59,7 @@
     </entity>
     <entity name="DCType" representedClassName="DCType" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="typeIcon" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="typeID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DCEvent" inverseName="type" inverseEntity="DCEvent" syncable="YES"/>
     </entity>
@@ -73,6 +74,6 @@
         <element name="DCTime" positionX="-6165" positionY="-2106" width="128" height="73"/>
         <element name="DCTimeRange" positionX="-5978" positionY="-2088" width="128" height="73"/>
         <element name="DCTrack" positionX="-5994" positionY="-1998" width="128" height="88"/>
-        <element name="DCType" positionX="-5969" positionY="-1879" width="128" height="88"/>
+        <element name="DCType" positionX="-5969" positionY="-1879" width="128" height="103"/>
     </elements>
 </model>

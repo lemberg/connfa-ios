@@ -2,7 +2,7 @@
 //  DCEvent.m
 //  DrupalCon
 //
-//  Created by Volodymyr Hyrka on 9/3/14.
+//  Created by Volodymyr Hyrka on 9/11/14.
 //  Copyright (c) 2014 Lemberg Solution. All rights reserved.
 //
 
@@ -18,10 +18,10 @@
 
 @dynamic date;
 @dynamic desctiptText;
+@dynamic eventID;
 @dynamic favorite;
 @dynamic name;
 @dynamic place;
-@dynamic eventID;
 @dynamic level;
 @dynamic speakers;
 @dynamic timeRange;

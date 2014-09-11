@@ -2,7 +2,7 @@
 //  DCSpeaker.h
 //  DrupalCon
 //
-//  Created by Volodymyr Hyrka on 9/3/14.
+//  Created by Volodymyr Hyrka on 9/11/14.
 //  Copyright (c) 2014 Lemberg Solution. All rights reserved.
 //
 
@@ -13,18 +13,17 @@
 
 @interface DCSpeaker : NSManagedObject
 
+@property (nonatomic, retain) NSString * avatarPath;
 @property (nonatomic, retain) NSString * characteristic;
+@property (nonatomic, retain) NSString * firstName;
 @property (nonatomic, retain) NSString * jobTitle;
+@property (nonatomic, retain) NSString * lastName;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * organizationName;
 @property (nonatomic, retain) NSNumber * speakerId;
-@property (nonatomic, retain) NSSet *events;
-@property (nonatomic, retain) NSString * firstName;
-@property (nonatomic, retain) NSString * lastName;
-@property (nonatomic, retain) NSString * avatarPath;
 @property (nonatomic, retain) NSString * twitterName;
 @property (nonatomic, retain) NSString * webSite;
-
+@property (nonatomic, retain) NSSet *events;
 @end
 
 @interface DCSpeaker (CoreDataGeneratedAccessors)
