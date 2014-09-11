@@ -13,6 +13,7 @@
 #import "DCMainProxy+Additions.h"
 #import "DCSpeaker+DC.h"
 #import "UIImageView+WebCache.h"
+
 @interface DCSpeakersViewController ()
 
 @property (nonatomic, weak) IBOutlet UITableView * speakersTbl;
@@ -56,7 +57,6 @@
                                    dispatch_async(dispatch_get_main_queue(), ^{
                                        [_cell setNeedsDisplay];
                                    });
-                                   
                                }];
     cell = _cell;
     return _cell;
