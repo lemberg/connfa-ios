@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface DCEventDetailEmptyCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *triangleImageView;
 
 + (CGFloat)cellHeight;
 
