@@ -39,13 +39,13 @@
     [[DCMainProxy sharedProxy] dataReadyBlock:^(BOOL isDataReady, BOOL isUpdatedFromServer) {
         if (isDataReady && !isUpdatedFromServer && !self.viewControllers) {
             _days = [[NSArray alloc] initWithArray:[_eventsStrategy days]];
-            [self addPageController];
             
         } else if (isDataReady && isUpdatedFromServer) {
             [[[self pageViewController]view] removeFromSuperview];
             _days = [[NSArray alloc] initWithArray:[_eventsStrategy days]];
-            [self addPageController];
         }
+        self.viewControllers = [self DC_fillViewControllers];
+        [self addPageController];
         [self.activityIndicator stopAnimating];
     }];
 
@@ -54,11 +54,11 @@
 -(void) addPageController {
     self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
     self.pageViewController.dataSource = self;
-    DCProgramItemsViewController *eventItemsViewController = [self viewControllerAtIndex:0];
-    eventItemsViewController.eventsStrategy = self.eventsStrategy;
+//    DCProgramItemsViewController *eventItemsViewController = self.viewControllers[0];
+//    eventItemsViewController.eventsStrategy = self.eventsStrategy;
     
-    self.viewControllers = [[NSArray alloc] initWithObjects: eventItemsViewController, nil];
-    [self.pageViewController setViewControllers:self.viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+//    self.viewControllers = [[NSArray alloc] initWithObjects: eventItemsViewController, nil];
+    [self.pageViewController setViewControllers:@[self.viewControllers[0]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     self.pageViewController.delegate = self;
     // Change the size of page view controller
     self.pageViewController.view.frame = CGRectMake(0,  35, self.view.frame.size.width, self.view.frame.size.height - (35));
@@ -93,7 +93,7 @@
     
     for(int i = (int)_days.count-1; i >= 0; i--) {
         if(i < self.currentIndex) {
-            [arrayOfViewController addObject: [self viewControllerAtIndex:i]];
+            [arrayOfViewController addObject: self.viewControllers[i]];
             break;
         }
     }
@@ -112,7 +112,7 @@
     NSMutableArray *arrayOfViewController = [[NSMutableArray alloc] init];
     for(int i = 0; i < _days.count; i++) {
         if(i > self.currentIndex) {
-            [arrayOfViewController addObject: [self viewControllerAtIndex:i]];
+            [arrayOfViewController addObject: self.viewControllers[i]];
             break;
         }
 
@@ -136,6 +136,19 @@
     return eventItemsViewController;
 }
 
+- (NSArray*)DC_fillViewControllers
+{
+    NSMutableArray * controllers_ = [[NSMutableArray alloc] initWithCapacity:_days.count];
+    for (int i = 0; i<_days.count; i++)
+    {
+        DCProgramItemsViewController *eventItemsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgramItemsViewController"];
+        eventItemsViewController.pageIndex = i;
+        eventItemsViewController.eventsStrategy = self.eventsStrategy;
+        [controllers_ addObject:eventItemsViewController];
+    }
+    return controllers_;
+}
+
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
      NSUInteger index = ((DCProgramItemsViewController*) viewController).pageIndex;
@@ -145,7 +158,7 @@
     }
     
     index--;
-    return [self viewControllerAtIndex:index];
+    return self.viewControllers[index];
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
