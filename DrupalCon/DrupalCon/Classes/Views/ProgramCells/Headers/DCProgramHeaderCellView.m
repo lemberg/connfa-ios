@@ -23,7 +23,6 @@
 {
     self.startLabel.hidden = isHide;
     self.endLabel.hidden = isHide;
-    self.toLabel.hidden = isHide;
     self.dateLabel.hidden = isHide;
 }
 
