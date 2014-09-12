@@ -15,7 +15,7 @@
 {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
-    [[DCMainProxy sharedProxy] update];
+//    [[DCMainProxy sharedProxy] update];
     return YES;
 }
 							

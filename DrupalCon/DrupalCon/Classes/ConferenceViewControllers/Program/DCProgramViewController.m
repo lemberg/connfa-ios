@@ -54,10 +54,6 @@
 -(void) addPageController {
     self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
     self.pageViewController.dataSource = self;
-//    DCProgramItemsViewController *eventItemsViewController = self.viewControllers[0];
-//    eventItemsViewController.eventsStrategy = self.eventsStrategy;
-    
-//    self.viewControllers = [[NSArray alloc] initWithObjects: eventItemsViewController, nil];
     [self.pageViewController setViewControllers:@[self.viewControllers[0]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     self.pageViewController.delegate = self;
     // Change the size of page view controller
@@ -123,18 +119,6 @@
 }
 
 #pragma mark page view delegate and datasource
-- (DCProgramItemsViewController *)viewControllerAtIndex:(NSUInteger)index
-{
-    if ((_days.count == 0) || (index >= _days.count)) {
-        return nil;
-    }
-    
-    // Create a new view controller and pass suitable data.
-    DCProgramItemsViewController *eventItemsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgramItemsViewController"];
-    eventItemsViewController.pageIndex = index;
-    eventItemsViewController.eventsStrategy = self.eventsStrategy;
-    return eventItemsViewController;
-}
 
 - (NSArray*)DC_fillViewControllers
 {
@@ -173,7 +157,7 @@
     if (index == _days.count) {
         return nil;
     }
-    return [self viewControllerAtIndex:index];
+    return self.viewControllers[index];
 }
 
 - (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
