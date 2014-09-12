@@ -44,8 +44,9 @@ static NSString *const LOCATION_URI = @"getLocations";
 
 typedef void(^UpdateDataFail)(NSString *reason);
 @interface DCMainProxy ()
-@property (nonatomic, copy) void(^dataReadyCallback)(BOOL isDataReady);
+@property (nonatomic, copy) void(^dataReadyCallback)(BOOL isDataReady, BOOL isUpdatedFromServer);
 @property (nonatomic, getter = isDataReady) BOOL dataReady;
+@property (nonatomic, getter = isSyncronizeProcessStarted) BOOL syncronizeProcessStarted;
 @end
 
 @implementation DCMainProxy
@@ -63,9 +64,12 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     return sharedProxy;
 }
 
-- (void)dataReadyBlock:(void(^)(BOOL isDataReady))callback
+- (void)dataReadyBlock:(void(^)(BOOL isDataReady,  BOOL isUpdatedFromServer))callback
 {
-    callback(self.isDataReady);
+    if (self.isDataReady) {
+        callback(self.isDataReady, YES);
+    }
+    
     self.dataReadyCallback = callback;
 }
 
@@ -78,13 +82,13 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     {
         
         dispatch_async(dispatch_get_main_queue(), ^{
+            if (!self.syncronizeProcessStarted) {
+                self.syncronizeProcessStarted = YES;
+                [self updateEvents];
 
-            [self updateEvents];
-            if (self.dataReadyCallback) {
-                self.dataReadyCallback(self.isDataReady);
+                
+                
             }
-
-            
         });
     };
     
@@ -92,10 +96,9 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     {
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([self savedValueForKey:kTimeStampSynchronisation]) {
+                
                 self.dataReady = YES;
-                if (self.dataReadyCallback) {
-                    self.dataReadyCallback(self.isDataReady);
-                }
+                [self dataIsReady:self.dataReady updatedFromServer:NO];
             }
         });
     };
@@ -110,12 +113,22 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 {
 
     self.dataReady = NO;
+    self.syncronizeProcessStarted = NO;
     [self startNetworkChecking];
 
 }
 
+- (void)dataIsReady:(BOOL)ready
+  updatedFromServer:(BOOL)updateFromServer
+{
+    if (self.dataReadyCallback) {
+        self.dataReadyCallback(ready, updateFromServer);
+    }
+}
+
 - (void)updateEvents
 {
+    // FIXME: Create director pattern to observe and handle synchronisation proccess
 
     [self timeStamp:^(NSString *timeStamp) {
         [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
@@ -142,12 +155,15 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
                 [self saveObject:@"" forKey:kTimeStampSynchronisation];
                 self.dataReady = NO;
             }
+            [self dataIsReady:self.dataReady updatedFromServer:self.dataReady];
 
         } else {
              self.dataReady = YES;
+            [self dataIsReady:self.dataReady updatedFromServer:NO];
         }
         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        
     }];
 }
 - (void)showRootController
@@ -353,7 +369,6 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 
 - (void)loadHtmlAboutInfo:(void(^)(NSString *))callback
 {
-// FIXME: change ABOUT_INFO_URI value
     [self.managedObjectContext performBlockAndWait:^{
         [DCDataProvider
          updateMainDataFromURI:ABOUT_INFO_URI

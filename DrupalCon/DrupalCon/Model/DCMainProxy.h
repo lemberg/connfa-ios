@@ -22,7 +22,7 @@ extern NSString * INVALID_JSON_EXCEPTION;
 
 + (DCMainProxy*)sharedProxy;
 
-- (void)dataReadyBlock:(void(^)(BOOL isDataReady))callback;
+- (void)dataReadyBlock:(void(^)(BOOL isDataReady, BOOL isUpdatedFromServer))callback;
 
 - (void)update;
 - (NSArray*)programInstances;

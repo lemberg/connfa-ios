@@ -36,12 +36,17 @@
 {
     [super viewDidLoad];
     [self.activityIndicator startAnimating];
-    [[DCMainProxy sharedProxy] dataReadyBlock:^(BOOL isDataReady) {
-        if (isDataReady) {
+    [[DCMainProxy sharedProxy] dataReadyBlock:^(BOOL isDataReady, BOOL isUpdatedFromServer) {
+        if (isDataReady && !isUpdatedFromServer && !self.viewControllers) {
             _days = [[NSArray alloc] initWithArray:[_eventsStrategy days]];
             [self addPageController];
-            [self.activityIndicator stopAnimating];
+            
+        } else if (isDataReady && isUpdatedFromServer) {
+            [[[self pageViewController]view] removeFromSuperview];
+            _days = [[NSArray alloc] initWithArray:[_eventsStrategy days]];
+            [self addPageController];
         }
+        [self.activityIndicator stopAnimating];
     }];
 
 }
@@ -58,6 +63,7 @@
     // Change the size of page view controller
     self.pageViewController.view.frame = CGRectMake(0,  35, self.view.frame.size.width, self.view.frame.size.height - (35));
     [self addChildViewController: _pageViewController];
+    
     [self.view addSubview: _pageViewController.view];
     [self.pageViewController didMoveToParentViewController:self];
     
