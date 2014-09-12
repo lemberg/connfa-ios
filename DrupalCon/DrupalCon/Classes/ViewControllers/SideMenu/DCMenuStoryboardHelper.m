@@ -41,7 +41,7 @@
     NSString *title = nil;
     
     if(menu == DCMENU_PROGRAM_ITEM)
-        title = @"Programs";
+        title = @"Schedule";
     
     if (menu == DCMENU_BOFS_ITEM)
         title = @"BoFs";
@@ -50,7 +50,7 @@
         title = @"Speakers";
     
     if(menu == DCMENU_LOCATION_ITEM)
-        title = @"Locations";
+        title = @"Location";
     
     if(menu == DCMENU_ABOUT_ITEM)
         title = @"About";

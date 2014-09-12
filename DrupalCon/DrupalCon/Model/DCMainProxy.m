@@ -45,7 +45,6 @@ static NSString *const LOCATION_URI = @"getLocations";
 typedef void(^UpdateDataFail)(NSString *reason);
 @interface DCMainProxy ()
 @property (nonatomic, copy) void(^dataReadyCallback)(BOOL isDataReady, BOOL isUpdatedFromServer);
-@property (nonatomic, getter = isDataReady) BOOL dataReady;
 @property (nonatomic, getter = isSyncronizeProcessStarted) BOOL syncronizeProcessStarted;
 @end
 
@@ -77,34 +76,32 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 {
     
     Reachability * reach = [Reachability reachabilityWithHostname:@"google.com"];
-    
-    reach.reachableBlock = ^(Reachability * reachability)
+    if (reach.isReachable)
     {
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (!self.syncronizeProcessStarted) {
-                self.syncronizeProcessStarted = YES;
-                [self updateEvents];
-
-                
-                
-            }
-        });
-    };
-    
-    reach.unreachableBlock = ^(Reachability * reachability)
+        if (!self.syncronizeProcessStarted) {
+            self.syncronizeProcessStarted = YES;
+            [self updateEvents];
+        }
+    }
+    else
     {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if ([self savedValueForKey:kTimeStampSynchronisation]) {
-                
-                self.dataReady = YES;
-                [self dataIsReady:self.dataReady updatedFromServer:NO];
-            }
-        });
-    };
-    
-    [reach startNotifier];
-
+        if ([self savedValueForKey:kTimeStampSynchronisation])
+        {
+            self.dataReady = YES;
+            [self dataIsReady:self.dataReady updatedFromServer:NO];
+        }
+        else
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+            [[[UIAlertView alloc] initWithTitle:@"Attention"
+                                       message:@"Internet connection is not available at this moment. Please, try later"
+                                      delegate:nil
+                             cancelButtonTitle:@"Ok"
+                              otherButtonTitles:nil] show];
+            });
+        }
+    }
+    return;
 }
 
 #pragma mark - public

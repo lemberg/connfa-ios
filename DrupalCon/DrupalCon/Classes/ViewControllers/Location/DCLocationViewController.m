@@ -116,14 +116,17 @@
     }
 
     NSString *firstName = [buildingNames firstObject];
-    NSMutableAttributedString *buildingName = [[NSMutableAttributedString alloc] initWithString:firstName];
+    NSMutableAttributedString *buildingName = [[NSMutableAttributedString alloc] initWithString:(firstName?firstName:@" ")];
     [buildingName addAttribute:NSFontAttributeName
                          value:[UIFont fontWithName:@"HelveticaNeue-UltraLight"
                                                size:44.0]
                          range:NSMakeRange(0, firstName.length)];
     NSAttributedString *space = [[NSAttributedString alloc] initWithString:@" "];
     [buildingName appendAttributedString:space];
-    [buildingName appendAttributedString:suffixName];
+    if (suffixName)
+    {
+        [buildingName appendAttributedString:suffixName];
+    }
     
     return buildingName;
 }

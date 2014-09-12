@@ -43,7 +43,7 @@
 {
     [super viewDidLoad];
     if(!self.arrayOfCaptions) {
-        self.arrayOfCaptions = [NSArray arrayWithObjects: @"Program", @"BoFs", @"Speakers", @"Locations", @"About", @"My Schedule", nil];
+        self.arrayOfCaptions = [NSArray arrayWithObjects: @"Schedule", @"BoFs", @"Speakers", @"Location", @"About", @"My Schedule", nil];
     }
     
     if(!isiPhone5) {

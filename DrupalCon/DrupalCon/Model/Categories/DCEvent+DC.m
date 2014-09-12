@@ -78,9 +78,10 @@ const NSString * kDCEvent_place_key = @"place";
     DCType * type = [[DCMainProxy sharedProxy] typeForID:typeID];
     if (!type)
     {
-        type = [[DCMainProxy sharedProxy] createType];
-        type.name = @"noname";
-        type.typeID = @(typeID);
+        type = [[DCMainProxy sharedProxy] typeForID:0];
+//        type = [[DCMainProxy sharedProxy] createType];
+//        type.name = @"noname";
+//        type.typeID = @(typeID);
     }
     [type addEventsObject:self];
 }

@@ -19,6 +19,7 @@ extern NSString * INVALID_JSON_EXCEPTION;
 @property (nonatomic, strong, readonly) NSManagedObjectContext * managedObjectContext;
 @property (nonatomic, strong, readonly) NSPersistentStoreCoordinator * persistentStoreCoordinator;
 
+@property (nonatomic, getter = isDataReady) BOOL dataReady;
 
 + (DCMainProxy*)sharedProxy;
 

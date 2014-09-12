@@ -32,6 +32,9 @@
 
 @end
 
+static NSString * kDCTimeslotKEY = @"timeslot_key";
+static NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
+
 @implementation DCProgramItemsViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -49,15 +52,20 @@
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         NSArray * events_ = [self.eventsStrategy eventsForDayNum:self.pageIndex];
-        NSArray * timeslots_ = [self.eventsStrategy uniqueTimeRangesForDayNum:self.pageIndex];
+        NSMutableArray * timeslots_ = [[NSMutableArray alloc] initWithCapacity:events_.count];
+        NSArray * uniqueTimeranges_ = [self.eventsStrategy uniqueTimeRangesForDayNum:self.pageIndex];
+        for (DCTimeRange * timerange_ in uniqueTimeranges_)
+        {
+            NSArray * timeslotEvents_ = [events_ eventsForTimeRange:timerange_];
+            NSDictionary * timeslotDict = [[NSDictionary alloc] initWithObjects:@[timerange_, timeslotEvents_] forKeys:@[kDCTimeslotKEY, kDCTimeslotEventKEY]];
+            [timeslots_ addObject:timeslotDict];
+        }
         dispatch_async(dispatch_get_main_queue(), ^{
             __strong __typeof__(weakSelf) strongSelf = weakSelf;
-            strongSelf.events = events_;
             strongSelf.timeslots = timeslots_;
             [strongSelf.tablewView reloadData];
         });
     });
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,7 +77,6 @@
 #pragma mark - uitableview datasource methods
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     NSString *cellIdSpeech = @"ProgramCellIdentifierSpeech";
     NSString *cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
     NSString *cellIdCoffeBreak = @"ProgramCellIdentifierCoffeBreak";
@@ -144,8 +151,6 @@
         default:
             break;
     }
-    
-    
     return cell;
 }
 
@@ -166,7 +171,7 @@
 {
     /*lets check if this date range contains some events that need a time period header, DCSpeechCelll and DCSPeechofTheDayCell, if its only coffe breaks or lunch - we dont display a header*/
     BOOL headerNeeded = NO;
-    for(DCEvent *event in [_events eventsForTimeRange:_timeslots[section]])
+    for(DCEvent *event in [_timeslots[section] objectForKey:kDCTimeslotEventKEY])
     {
         if([event getTypeID] != DC_EVENT_LUNCH && [event getTypeID] != DC_EVENT_COFEE_BREAK && [event getTypeID] != DC_EVENT_WALKING)
         {
@@ -177,13 +182,12 @@
 }
 
 -(UIView*) tableView: (UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    
     DCProgramHeaderCellView *headerViewCell = (DCProgramHeaderCellView*)[tableView dequeueReusableCellWithIdentifier: @"ProgramCellHeaderCell"];
     //    lets check if this date range contains some events that need a time period header, DCSpeechCelll and DCSPeechofTheDayCell, if its only coffe breaks or lunch - we dont display a header
     BOOL headerNeeded = [self headerNeededInSection: section];
     if(headerNeeded) {
-        DCTimeRange * timeslot = _timeslots[section];
-        [headerViewCell.leftImageView setImage:[(DCEvent*)[_events eventsForTimeRange:_timeslots[section]].firstObject imageForEvent]];
+        DCTimeRange * timeslot = [_timeslots[section] objectForKey:kDCTimeslotKEY];
+        [headerViewCell.leftImageView setImage:[[[_timeslots[section] objectForKey:kDCTimeslotEventKEY] firstObject] imageForEvent]];
         headerViewCell.startLabel.text = [timeslot.from stringValue];
         headerViewCell.endLabel.text = [timeslot.to stringValue];
         // Hide time slot section when time is invalid
@@ -211,10 +215,10 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return _timeslots.count;
-}
+  }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_events eventsForTimeRange:(DCTimeRange*)_timeslots[section]].count;
+    return [[_timeslots[section] objectForKey:kDCTimeslotEventKEY] count];
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -263,7 +267,7 @@
 
 - (DCEvent*)DC_eventForIndexPath:(NSIndexPath *)indexPath
 {
-    return [[_events eventsForTimeRange:_timeslots[indexPath.section]] objectAtIndex:indexPath.row];
+    return [[_timeslots[indexPath.section] objectForKey:kDCTimeslotEventKEY] objectAtIndex:indexPath.row];
 }
 
 - (NSString*)DC_speakersTextForSpeakerNames:(NSArray*)speakerNames
