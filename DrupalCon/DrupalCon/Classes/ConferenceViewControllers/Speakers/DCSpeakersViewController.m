@@ -25,8 +25,29 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _speakers = [[DCMainProxy sharedProxy] speakerInstances];
+    _speakers = [self orderByLastName:[[DCMainProxy sharedProxy] speakerInstances]];
     [_speakersTbl reloadData];
+}
+
+- (NSArray *)orderByLastName:(NSArray *)array
+{
+     NSSortDescriptor *sortLastName = [NSSortDescriptor sortDescriptorWithKey:@"lastName" ascending:YES comparator:^NSComparisonResult(id obj1, id obj2) {
+         NSString *lastName1 = (NSString *)obj1;
+         NSString *lastName2 = (NSString *)obj2;
+         if ([lastName1 length] == 0 && [lastName2 length] == 0) {
+             return NSOrderedSame;
+         }
+         if ([lastName1 length] == 0) {
+             return NSOrderedDescending;
+         }
+         if ([lastName2 length] == 0) {
+             return NSOrderedAscending;
+         }
+
+         
+         return [lastName1 compare:lastName2 options:NSCaseInsensitiveSearch];
+     }];
+    return [array sortedArrayUsingDescriptors:@[sortLastName]];
 }
 
 #pragma mark - UITableView delegate/datasourse methods

@@ -160,6 +160,10 @@ const NSString * kDCEvent_place_key = @"place";
             icon_name = @"ic_program_coffe";
             break;
             
+        case DC_EVENT_REGISTRATION:
+            icon_name = @"program_check_in";
+            break;
+            
         default:
             break;
     }

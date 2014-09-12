@@ -43,7 +43,12 @@
     }
     return self;
 }
-
+- (BOOL)isHeaderEmpty
+{
+    NSString *track = [[_event.tracks allObjects].firstObject name];
+    NSString *level = _event.level.name;
+    return [level length] == 0 && [track length] == 0;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -87,7 +92,7 @@
     if (section == 0) // title
         return [DCEventDetailTitleCell cellHeight];
     
-    return [DCEventDetailHeader2Cell cellHeight];
+    return [self isHeaderEmpty] ? 75. : [DCEventDetailHeader2Cell cellHeight];
 }
 
 - (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -104,8 +109,9 @@
         NSString * track = [[_event.tracks allObjects].firstObject name];
         NSString * place = _event.place;
         NSString * level = _event.level.name;
-        [infoPanel.trackValueLbl setText:(track.length?track:@"-")];
-        [infoPanel.levelValueLbl setText:(level.length?level:@"-")];
+
+        [infoPanel.trackValueLbl setText:(track.length?track:@"")];
+        [infoPanel.levelValueLbl setText:(level.length?level:@"")];
         [infoPanel.placeValueLbl setText:(place.length?place:@"-")];
         [infoPanel.favorBtn setDelegate:self];
         [infoPanel.favorBtn setSelected:[_event.favorite boolValue]];
@@ -155,6 +161,10 @@
             NSLog(@"WRONG! event detail cells");
         }
         DCEventDetailEmptyCell * _cell = (DCEventDetailEmptyCell*)[tableView dequeueReusableCellWithIdentifier:cellIdEmpty];
+        if ([self isHeaderEmpty]) {
+            [_cell.triangleImageView removeFromSuperview];
+        }
+        
         cell = _cell;
     }
     else if (indexPath.row == _speakers.count) // description cell

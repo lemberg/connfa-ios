@@ -91,6 +91,7 @@ static NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
         }
         case DC_EVENT_24h:
         case DC_EVENT_GROUP:
+        case DC_EVENT_REGISTRATION:
         case DC_EVENT_SPEACH: {
             DCSpeechCell *_cell = (DCSpeechCell*)[tableView dequeueReusableCellWithIdentifier: cellIdSpeech];
             [_cell setSpeakers:[self DC_speakersTextForSpeakerNames:[event speakersNames]]];
@@ -227,6 +228,7 @@ static NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
     switch ([event getTypeID]) {
         case DC_EVENT_24h:
         case DC_EVENT_GROUP:
+        case DC_EVENT_REGISTRATION:
         case DC_EVENT_WALKING:
         case DC_EVENT_SPEACH:
         case DC_EVENT_SPEACH_OF_DAY: {
