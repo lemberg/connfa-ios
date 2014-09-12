@@ -927,9 +927,6 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Lemberg Solution";
 				TargetAttributes = {
-					5DC8C410198656DA00BF5816 = {
-						DevelopmentTeam = FN2T3UCV4E;
-					};
 					5DC8C431198656DB00BF5816 = {
 						TestTargetID = 5DC8C410198656DA00BF5816;
 					};

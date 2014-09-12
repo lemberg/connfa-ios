@@ -46,8 +46,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _events =  [self.eventsStrategy eventsForDayNum:self.pageIndex];
-    _timeslots = [self.eventsStrategy uniqueTimeRangesForDayNum:self.pageIndex];
+    __weak typeof(self) weakSelf = self;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        NSArray * events_ = [self.eventsStrategy eventsForDayNum:self.pageIndex];
+        NSArray * timeslots_ = [self.eventsStrategy uniqueTimeRangesForDayNum:self.pageIndex];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            __strong __typeof__(weakSelf) strongSelf = weakSelf;
+            strongSelf.events = events_;
+            strongSelf.timeslots = timeslots_;
+            [strongSelf.tablewView reloadData];
+        });
+    });
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,7 +74,6 @@
     NSString *cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
     NSString *cellIdCoffeBreak = @"ProgramCellIdentifierCoffeBreak";
     NSString *cellIdLunch = @"ProgramCellIdentifierLunch";
-    
     DCEvent * event = [self DC_eventForIndexPath:indexPath];
     UITableViewCell *cell;
     
@@ -137,12 +146,6 @@
     }
     
     
-    //Selection style
-    /*
-     UIView *selectedBackgroundView = [[UIView alloc] initWithFrame: cell.bounds];
-     selectedBackgroundView.backgroundColor = [UIColor colorWithRed: 52./255. green: 52./255. blue: 59./255. alpha: 1.0];
-     cell.selectedBackgroundView = selectedBackgroundView;
-     */
     return cell;
 }
 
