@@ -16,6 +16,8 @@
 @property (nonatomic, strong) NSArray *viewControllers;
 @property (nonatomic, strong) NSArray *days;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIButton * nextBtn;
+@property (weak, nonatomic) IBOutlet UIButton * prevBtn;
 
 @property (nonatomic) NSInteger currentIndex;
 @property (nonatomic, strong) IBOutlet UILabel *dateLabel;
@@ -65,19 +67,12 @@
     [self.pageViewController didMoveToParentViewController:self];
     
     [self displayDateForDay: 0];
+    [self DC_updateButtonsVisibility];
 }
 
 -(void) displayDateForDay: (NSInteger) day {
     NSDate * date = _days[day];
     self.dateLabel.text = [date pageViewDateString];
-}
-
-- (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed {
-    if(completed){
-       NSUInteger currentIndex = [[self.pageViewController.viewControllers lastObject] pageIndex];
-        self.currentIndex = currentIndex;
-        [self displayDateForDay: self.currentIndex];
-    }
 }
 
 
@@ -95,6 +90,7 @@
         }
     }
     self.currentIndex -= 1;
+    [self DC_updateButtonsVisibility];
     [self displayDateForDay: self.currentIndex];
 
     [self.pageViewController setViewControllers: arrayOfViewController direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:NULL];
@@ -115,11 +111,11 @@
 
     }
     self.currentIndex += 1;
+    [self DC_updateButtonsVisibility];
+
     [self displayDateForDay: self.currentIndex];
     [self.pageViewController setViewControllers: arrayOfViewController direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
 }
-
-#pragma mark page view delegate and datasource
 
 - (NSArray*)DC_fillViewControllers
 {
@@ -133,6 +129,15 @@
     }
     return controllers_;
 }
+
+- (void)DC_updateButtonsVisibility
+{
+    _prevBtn.hidden = (self.currentIndex == 0 ? YES : NO);
+    _nextBtn.hidden = (self.currentIndex == (_days.count-1) ? YES : NO);
+}
+
+#pragma mark page view delegate and datasource
+
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
@@ -171,15 +176,14 @@
     return 0;
 
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed {
+    if(completed){
+        NSUInteger currentIndex = [[self.pageViewController.viewControllers lastObject] pageIndex];
+        self.currentIndex = currentIndex;
+        [self displayDateForDay: self.currentIndex];
+        [self DC_updateButtonsVisibility];
+    }
 }
-*/
 
 @end

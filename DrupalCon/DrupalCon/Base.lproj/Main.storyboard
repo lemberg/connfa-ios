@@ -127,7 +127,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="CMJ-da-m4y" userLabel="Button Next">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="CMJ-da-m4y" userLabel="Button Next">
                                         <rect key="frame" x="271" y="0.0" width="35" height="35"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="ic_program_next">
@@ -137,7 +137,7 @@
                                             <action selector="nextDayClicked:" destination="KmN-kc-Ldr" eventType="touchUpInside" id="Enx-BA-nis"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JqP-6c-6ZB" userLabel="Button Previous">
+                                    <button hidden="YES" opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="JqP-6c-6ZB" userLabel="Button Previous">
                                         <rect key="frame" x="14" y="0.0" width="35" height="35"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="ic_program_back">
@@ -163,6 +163,8 @@
                     <connections>
                         <outlet property="activityIndicator" destination="Boo-MP-5Md" id="sMw-kJ-Se3"/>
                         <outlet property="dateLabel" destination="s3a-MF-dLy" id="yQY-eY-1jl"/>
+                        <outlet property="nextBtn" destination="CMJ-da-m4y" id="2Fv-gi-vcj"/>
+                        <outlet property="prevBtn" destination="JqP-6c-6ZB" id="Cli-dZ-1dL"/>
                         <segue destination="NFO-C4-091" kind="modal" id="lk3-fc-NXa"/>
                     </connections>
                 </viewController>
