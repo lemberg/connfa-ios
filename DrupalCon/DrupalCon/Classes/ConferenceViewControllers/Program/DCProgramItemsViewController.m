@@ -61,12 +61,9 @@ static NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
             [timeslots_ addObject:timeslotDict];
         }
         dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"s");
             __strong __typeof__(weakSelf) strongSelf = weakSelf;
             strongSelf.timeslots = timeslots_;
-            NSLog(@".");
             [strongSelf.tablewView reloadData];
-            NSLog(@"f");
         });
     });
 }
@@ -80,7 +77,6 @@ static NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
 #pragma mark - uitableview datasource methods
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"cell s");
     NSString *cellIdSpeech = @"ProgramCellIdentifierSpeech";
     NSString *cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
     NSString *cellIdCoffeBreak = @"ProgramCellIdentifierCoffeBreak";
@@ -155,8 +151,6 @@ static NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
         default:
             break;
     }
-    
-        NSLog(@"cell f");
     return cell;
 }
 
@@ -188,7 +182,6 @@ static NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
 }
 
 -(UIView*) tableView: (UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    NSLog(@"view s");
     DCProgramHeaderCellView *headerViewCell = (DCProgramHeaderCellView*)[tableView dequeueReusableCellWithIdentifier: @"ProgramCellHeaderCell"];
     //    lets check if this date range contains some events that need a time period header, DCSpeechCelll and DCSPeechofTheDayCell, if its only coffe breaks or lunch - we dont display a header
     BOOL headerNeeded = [self headerNeededInSection: section];
@@ -203,7 +196,6 @@ static NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
     }
     UIView *v = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 320, 0.0)];
     v.backgroundColor = [UIColor whiteColor];
-    NSLog(@"view f");
     return v;
 }
 
@@ -222,13 +214,10 @@ static NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    NSLog(@"sect");
     return _timeslots.count;
-        NSLog(@"sect f");
-}
+  }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-        NSLog(@"rows");
     return [[_timeslots[section] objectForKey:kDCTimeslotEventKEY] count];
 }
 
