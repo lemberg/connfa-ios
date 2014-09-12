@@ -611,7 +611,7 @@
                                                 </view>
                                                 <view contentMode="scaleToFill" id="Qxq-pS-K8g">
                                                     <rect key="frame" x="0.0" y="63" width="320" height="39"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_place" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="10" id="NWX-qM-sei">
                                                             <rect key="frame" x="16" y="0.0" width="288" height="39"/>
@@ -653,7 +653,7 @@
                                                 </label>
                                                 <view contentMode="scaleToFill" id="lQj-jY-YDG" customClass="DCFavoriteButton">
                                                     <rect key="frame" x="0.0" y="102" width="320" height="39"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                                     <color key="backgroundColor" red="0.93725490196078431" green="0.20392156862745098" blue="0.22745098039215686" alpha="1" colorSpace="calibratedRGB"/>
                                                 </view>
                                             </subviews>

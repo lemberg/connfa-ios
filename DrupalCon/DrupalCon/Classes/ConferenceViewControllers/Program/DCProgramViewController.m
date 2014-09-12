@@ -37,18 +37,19 @@
     [super viewDidLoad];
     [self.activityIndicator startAnimating];
     [[DCMainProxy sharedProxy] dataReadyBlock:^(BOOL isDataReady, BOOL isUpdatedFromServer) {
-        if (isDataReady && !isUpdatedFromServer && !self.viewControllers) {
+        dispatch_async(dispatch_get_main_queue(), ^{
             _days = [[NSArray alloc] initWithArray:[_eventsStrategy days]];
-            
-        } else if (isDataReady && isUpdatedFromServer) {
-            [[[self pageViewController]view] removeFromSuperview];
-            _days = [[NSArray alloc] initWithArray:[_eventsStrategy days]];
-        }
-        self.viewControllers = [self DC_fillViewControllers];
-        [self addPageController];
-        [self.activityIndicator stopAnimating];
+            self.viewControllers = [self DC_fillViewControllers];
+            [self addPageController];
+            [self.activityIndicator stopAnimating];
+        });
     }];
-
+    
+    if (![[DCMainProxy sharedProxy] isDataReady]) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            [[DCMainProxy sharedProxy] update];
+        });
+    }
 }
 
 -(void) addPageController {
