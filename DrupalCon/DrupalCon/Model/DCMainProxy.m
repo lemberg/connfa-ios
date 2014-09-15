@@ -145,6 +145,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
             [self updateBofsCallback:updateFail];
             [self updateLocationCallback:updateFail];
             [self synchrosizeFavoritePrograms];
+            [self loadHtmlAboutInfo:^(NSString *response) {}];
             if (!isUpdateFail) {
                 [self saveObject:timeStamp forKey:kTimeStampSynchronisation];
                 self.dataReady = YES;

@@ -1,20 +1,20 @@
  body {
-                  padding: 0 15px;
+                  padding: 0 5px;
                   font-family: "Helvetica-Regular", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-
+                text-align:justify;
               }
               
               p{
 
-               font-size: 20px;
+               font-size: 16px;
                color: #666;
-               line-height: 28px; 
-               margin: 25px 0;              
+               line-height: 22px; 
+               margin: 10px 0;              
               }   
               strong{
-               font-size: 20px;   
+               font-size: 16px;   
                color: #666;
-               line-height: 28px;
+               line-height: 22px;
               }           
               img{
                   display: block;
@@ -24,8 +24,8 @@
               }
               a{
 
-               font-size: 20px; 
-               line-height: 28px;
+               font-size: 16px; 
+               line-height: 22px;
                color: #ef262b;
                text-decoration: none;
               }
@@ -33,18 +33,18 @@
 
                color: #851b1d;
     font-weight: normal;
-    font-size: 26px;
-    line-height: 31px;
+    font-size: 22px;
+    line-height: 20px;
     margin-top: 0;
     margin-bottom: 26px;
               }
               h3{
 
-               font-size: 23px;
+               font-size: 21px;
                color: #851b1d;
                line-height: 27px;
                margin-top: 0;
-    margin-bottom: 23px;
+    margin-bottom: 20px;
               }
               blockquote {
 

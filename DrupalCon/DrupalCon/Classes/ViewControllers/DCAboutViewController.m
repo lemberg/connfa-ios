@@ -40,7 +40,9 @@
 //                                              encoding:NSUTF8StringEncoding
 //                                                 error:nil];
     [[DCMainProxy sharedProxy] loadHtmlAboutInfo:^(NSString *html) {
-        [self.webView loadHTMLString:html baseURL:[self.aboutURL URLByDeletingLastPathComponent]];
+        NSString *content = [NSString stringWithFormat:@" <!DOCTYPE html> <html> <head><meta http-equiv=\"content-type\" content=\"text/html; charset=ISO-8859-1\"><link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"></head><body>%@</body></html> ",
+                          html];
+        [self.webView loadHTMLString:content baseURL:[self.aboutURL URLByDeletingLastPathComponent]];
     }];
     
 }

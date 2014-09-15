@@ -31,7 +31,7 @@
 
 - (NSArray *)orderByLastName:(NSArray *)array
 {
-     NSSortDescriptor *sortLastName = [NSSortDescriptor sortDescriptorWithKey:@"lastName" ascending:YES comparator:^NSComparisonResult(id obj1, id obj2) {
+     NSSortDescriptor *sortLastName = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES comparator:^NSComparisonResult(id obj1, id obj2) {
          NSString *lastName1 = (NSString *)obj1;
          NSString *lastName2 = (NSString *)obj2;
          if ([lastName1 length] == 0 && [lastName2 length] == 0) {
@@ -70,7 +70,8 @@
     DCSpeaker * speaker = _speakers[indexPath.row];
     
     [_cell.nameLbl setText:speaker.name];
-    [_cell.positionTitleLbl setText:speaker.jobTitle];
+    
+    [_cell.positionTitleLbl setText: [self positionTitleForSpeaker:speaker]];
     [_cell.pictureImg sd_setImageWithURL:[NSURL URLWithString:speaker.avatarPath]
                         placeholderImage:[UIImage imageNamed:@"avatar_placeholder"]
                                completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
@@ -80,6 +81,21 @@
                                }];
     return _cell;
 }
+
+- (NSString *)positionTitleForSpeaker:(DCSpeaker *)speaker
+{
+    NSString *organisationName = speaker.organizationName;
+    NSString *jobTitle = speaker.jobTitle;
+    if ([jobTitle length] && [organisationName length]) {
+        return [NSString stringWithFormat:@"%@ / %@", organisationName, jobTitle];
+    }
+    if (![jobTitle length]) {
+        return organisationName;
+    }
+    
+    return jobTitle;
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

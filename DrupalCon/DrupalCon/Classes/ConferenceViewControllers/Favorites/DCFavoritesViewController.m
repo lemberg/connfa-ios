@@ -13,6 +13,7 @@
 #import "DCSpeechCell.h"
 #import "DCSpeechOfDayCell.h"
 #import "DCProgramHeaderCellView.h"
+#import "DCEventBaseCell.h"
 
 #import "DCProgram+DC.h"
 #import "DCEvent+DC.h"
@@ -25,9 +26,11 @@
 
 #import "NSArray+DC.h"
 #import "DCFavoriteSourceManager.h"
+#import "DCBof.h"
 
 @interface DCFavoritesViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *favoritesTableView;
+@property (weak, nonatomic) IBOutlet UIImageView *noDataImg;
 @property (nonatomic, strong) DCFavoriteSourceManager *favoriteSourceMng;
 @end
 
@@ -48,7 +51,24 @@
     [super viewDidLoad];
     self.favoriteSourceMng = [[DCFavoriteSourceManager alloc]
                             initWithSection:[[DCMainProxy sharedProxy] favoriteEvents]];
-    // Do any additional setup after loading the view.
+    [self registerCellsInTableView];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self DC_checkEmptyness];
+}
+
+static NSString *const cellIdSpeech = @"ProgramCellIdentifierSpeech";
+static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
+
+- (void)registerCellsInTableView
+{
+    [self.favoritesTableView registerClass:[DCSpeechCell class]
+            forCellReuseIdentifier:cellIdSpeech];
+    [self.favoritesTableView registerClass:[DCSpeechOfDayCell class]
+            forCellReuseIdentifier:cellIdSpeechOfDay];
 }
 
 - (void)didReceiveMemoryWarning
@@ -71,8 +91,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSString *cellIdSpeech = @"ProgramCellIdentifierSpeech";
-    NSString *cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
+//    NSString *cellIdSpeech = @"ProgramCellIdentifierSpeech";
+//    NSString *cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
     DCEvent * event = [self DC_eventForIndexPath:indexPath];
     UITableViewCell *cell;
     
@@ -84,34 +104,13 @@
         case DC_EVENT_REGISTRATION:
         case DC_EVENT_SPEACH: {
             DCSpeechCell *_cell = (DCSpeechCell*)[tableView dequeueReusableCellWithIdentifier: cellIdSpeech];
-            [_cell setSpeakers:[self DC_speakersTextForSpeakerNames:[event speakersNames]]];
-            [_cell setLevel:event.level.name];
-            [_cell setTrack:[[event.tracks allObjects].firstObject name]];
-
-            _cell.nameLabel.text = event.name;
-            _cell.favoriteButton.selected = [event.favorite boolValue];
-            [_cell favoriteButtonDidSelected:
-             ^(UITableViewCell *cell, BOOL isSelected) {
-                 [self updateFavoriteItemsInIndexPath:
-                  [self.favoritesTableView indexPathForCell:cell]
-                                            withValue:isSelected];
-             }];
+            [self updateCell:_cell witEvent:event];
             cell = _cell;
             break;
         }
         case DC_EVENT_SPEACH_OF_DAY: {
             DCSpeechOfDayCell *_cell = (DCSpeechOfDayCell*)[tableView dequeueReusableCellWithIdentifier: cellIdSpeechOfDay];
-            [_cell setSpeakers:[self DC_speakersTextForSpeakerNames:[event speakersNames]]];
-            [_cell setLevel:event.level.name];
-            [_cell setTrack:[[event.tracks allObjects].firstObject name]];
-            _cell.nameLabel.text = event.name;
-            _cell.favoriteButton.selected = [event.favorite boolValue];
-            [_cell favoriteButtonDidSelected:
-             ^(UITableViewCell *cell, BOOL isSelected) {
-                 [self updateFavoriteItemsInIndexPath:
-                  [self.favoritesTableView indexPathForCell:cell]
-                                            withValue:isSelected];
-             }];
+            [self updateCell:_cell witEvent:event];
             cell = _cell;
             break;
         }
@@ -119,14 +118,67 @@
             break;
     }
     
-    
-    //Selection style
-    /*
-     UIView *selectedBackgroundView = [[UIView alloc] initWithFrame: cell.bounds];
-     selectedBackgroundView.backgroundColor = [UIColor colorWithRed: 52./255. green: 52./255. blue: 59./255. alpha: 1.0];
-     cell.selectedBackgroundView = selectedBackgroundView;
-     */
     return cell;
+}
+
+- (BOOL)isEventDetailEmpty:(DCEvent *)event
+{
+    NSString *speakers = [self DC_speakersTextForSpeakerNames:[event speakersNames]];
+    NSString *level = event.level.name;
+    NSString *track = [[event.tracks allObjects].firstObject name];
+    if ([event isMemberOfClass:[DCBof class]]) return ![event.place length];
+    return ![level length] && ![speakers length] && ![track length];
+}
+
+- (void)updateCell:(DCEventBaseCell *)cell witEvent:(DCEvent *)event
+{
+    NSString *speakers = [self DC_speakersTextForSpeakerNames:[event speakersNames]];
+    NSString *level = event.level.name;
+    NSString *track = [[event.tracks allObjects].firstObject name];
+    NSString *title = event.name;
+    NSDictionary *values = nil;
+    BOOL displayEmptyDetailInfo = [self isEventDetailEmpty:event];
+    
+    if ([event isMemberOfClass:[DCBof class]]) {
+        values = @{
+                   kHeaderTitle:title,
+                   kLeftBlockTitle: ([event.place length])?@"Place":@"",
+                   kLeftBlockContent:event.place
+                   };
+    } else if (![level length] && ![speakers length] && [track length]) {
+        values = @{
+                   kHeaderTitle:title,
+                   kLeftBlockTitle: @"Track",
+                   kLeftBlockContent:track
+                   };
+    } else if (displayEmptyDetailInfo) {
+        values = @{
+                   kHeaderTitle:title,
+                   };
+    } else {
+        values = @{
+                   kHeaderTitle: title,
+                   kLeftBlockTitle: ([speakers length])?@"Speakers":@"",
+                   kLeftBlockContent: speakers,
+                   kMiddleBlockTitle: ([track length])?@"Track":@"",
+                   kMiddleBlockContent: track,
+                   kRightBlockTitle: ([level length])?@"Experience Level":@"",
+                   kRightBlockContent: level
+                   };
+        
+        
+    }
+    
+    
+    
+    [cell setValuesForCell: values];
+    cell.favoriteButton.selected = [event.favorite boolValue];
+    [cell favoriteButtonDidSelected:^(UITableViewCell *cell, BOOL isSelected) {
+        
+        [self updateFavoriteItemsInIndexPath:[self.favoritesTableView indexPathForCell:cell]
+                                   withValue:isSelected];
+    }];
+    
 }
 
 - (void)updateFavoriteItemsInIndexPath:(NSIndexPath *)anIndexPath
@@ -137,9 +189,8 @@
         [[DCMainProxy sharedProxy]
          removeFavoriteEventWithID:event.eventID];
         [self deleteCellAtIndexPath:anIndexPath];
-        
     }
-    
+    [self DC_checkEmptyness];
 }
 
 - (void)deleteCellAtIndexPath:(NSIndexPath *)indexPath
@@ -160,8 +211,8 @@
         [self.favoritesTableView deleteRowsAtIndexPaths:@[indexPath]
                                        withRowAnimation:UITableViewRowAnimationAutomatic];
         [self.favoritesTableView endUpdates];
-        
     }
+    
 }
 
 
@@ -176,9 +227,19 @@
     headerViewCell.dateLabel.text = [self.favoriteSourceMng dateForSection:(int)section];
     // Hide time slot section when time is invalid
     [headerViewCell hideTimeSection:![timeslot.from isTimeValid]];
+    [self removeGesturesFromView:headerViewCell.contentView];
     return [headerViewCell contentView];
     
 }
+
+- (void)removeGesturesFromView:(UIView *)view
+{
+    while (view.gestureRecognizers.count) {
+        [view removeGestureRecognizer:[view.gestureRecognizers objectAtIndex:0]];
+    }
+    
+}
+
 
 -(CGFloat) tableView: (UITableView*) tableView heightForHeaderInSection:(NSInteger)section {
     return  97;
@@ -202,8 +263,9 @@
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    DCEvent *event = [self DC_eventForIndexPath:indexPath];
+    return ([self isEventDetailEmpty:event])? 60 : 97;
 
-    return 97;
 }
 
 #pragma mark - uitableview delegate methods
@@ -255,6 +317,13 @@
         resultStr = [NSString stringWithFormat:@"%@\n...",speakerNames[0]];
     }
     return resultStr;
+}
+
+- (void)DC_checkEmptyness
+{
+    BOOL isEmpty = ([self.favoriteSourceMng numberOfSection] == 0);
+    _favoritesTableView.hidden = isEmpty;
+    _noDataImg.hidden = !isEmpty;
 }
 
 @end

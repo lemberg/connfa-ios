@@ -14,7 +14,7 @@
 
 - (NSString*)stringValue
 {
-    return [NSString stringWithFormat:@"%@ to %@", [self.from stringValue], [self.to stringValue]];
+    return [NSString stringWithFormat:@"%@ - %@", [self.from stringValue], [self.to stringValue]];
 }
 
 - (void)setFrom:(NSString *)from to:(NSString *)to

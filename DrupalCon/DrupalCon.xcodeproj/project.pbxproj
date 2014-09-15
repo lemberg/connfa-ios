@@ -40,13 +40,14 @@
 		5DC8C46F198658FF00BF5816 /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8C46B198658FF00BF5816 /* UIViewController+MFSideMenuAdditions.m */; };
 		5DC8C4731986594400BF5816 /* DCBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8C4721986594400BF5816 /* DCBaseViewController.m */; };
 		5DC8C47A19865C8400BF5816 /* DCSideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8C47919865C8400BF5816 /* DCSideMenuViewController.m */; };
-		74086C6519C1E9F60018C825 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 74086C6419C1E9F60018C825 /* style.css */; };
 		74356D5219BEE1D90055F13D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74356D5119BEE1D90055F13D /* SystemConfiguration.framework */; };
 		74356D5819BEE4860055F13D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 74356D5719BEE4860055F13D /* Reachability.m */; };
 		74356D5B19BF3B290055F13D /* UIWebView+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 74356D5A19BF3B290055F13D /* UIWebView+DC.m */; };
 		74A43C6D19BDDE9200F7BFA0 /* NSDictionary+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A43C6C19BDDE9200F7BFA0 /* NSDictionary+DC.m */; };
 		74A470E819B5EA3C00B01BC5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74A470E719B5EA3C00B01BC5 /* MapKit.framework */; };
 		74A6278819B8A37200B46B75 /* DCFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A6278719B8A37200B46B75 /* DCFavoritesViewController.m */; };
+		74E50CD419C6D9F9001FD11C /* about_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 74E50CD219C6D9F9001FD11C /* about_img.png */; };
+		74E50CD519C6D9F9001FD11C /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 74E50CD319C6D9F9001FD11C /* style.css */; };
 		74E67C7219B6FDF400DF9D71 /* DCLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E67C7119B6FDF400DF9D71 /* DCLocationViewController.m */; };
 		74E67C7519B6FE9800DF9D71 /* DCPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E67C7419B6FE9800DF9D71 /* DCPin.m */; };
 		74E67C7719B6FEF500DF9D71 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74E67C7619B6FEF500DF9D71 /* CoreLocation.framework */; };
@@ -111,6 +112,9 @@
 		84FAE0E819A645E000DC9FF1 /* NSArray+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAE0E719A645E000DC9FF1 /* NSArray+DC.m */; };
 		84FAE10919A65FEA00DC9FF1 /* DCTime+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAE10819A65FEA00DC9FF1 /* DCTime+DC.m */; };
 		84FAE10C19A6600900DC9FF1 /* DCTimeRange+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAE10B19A6600900DC9FF1 /* DCTimeRange+DC.m */; };
+		FA90B9A319C5893700873865 /* DCEventBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90B9A219C5893700873865 /* DCEventBaseCell.m */; };
+		FA90B9A619C589AE00873865 /* DCEventBaseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA90B9A519C589AE00873865 /* DCEventBaseCell.xib */; };
+		FA90B9A919C5A6C600873865 /* DCLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90B9A819C5A6C600873865 /* DCLabel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -184,7 +188,6 @@
 		5DC8C4721986594400BF5816 /* DCBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCBaseViewController.m; sourceTree = "<group>"; };
 		5DC8C47819865C8400BF5816 /* DCSideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCSideMenuViewController.h; sourceTree = "<group>"; };
 		5DC8C47919865C8400BF5816 /* DCSideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCSideMenuViewController.m; sourceTree = "<group>"; };
-		74086C6419C1E9F60018C825 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
 		74356D5119BEE1D90055F13D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		74356D5619BEE4860055F13D /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Classes/Helpers/Reachability.h; sourceTree = "<group>"; };
 		74356D5719BEE4860055F13D /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Classes/Helpers/Reachability.m; sourceTree = "<group>"; };
@@ -195,6 +198,8 @@
 		74A470E719B5EA3C00B01BC5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		74A6278619B8A37200B46B75 /* DCFavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCFavoritesViewController.h; path = Favorites/DCFavoritesViewController.h; sourceTree = "<group>"; };
 		74A6278719B8A37200B46B75 /* DCFavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCFavoritesViewController.m; path = Favorites/DCFavoritesViewController.m; sourceTree = "<group>"; };
+		74E50CD219C6D9F9001FD11C /* about_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = about_img.png; path = WebResources/about_img.png; sourceTree = "<group>"; };
+		74E50CD319C6D9F9001FD11C /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = style.css; path = WebResources/style.css; sourceTree = "<group>"; };
 		74E67C7019B6FDF400DF9D71 /* DCLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCLocationViewController.h; path = Location/DCLocationViewController.h; sourceTree = "<group>"; };
 		74E67C7119B6FDF400DF9D71 /* DCLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCLocationViewController.m; path = Location/DCLocationViewController.m; sourceTree = "<group>"; };
 		74E67C7319B6FE9800DF9D71 /* DCPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCPin.h; path = Location/DCPin.h; sourceTree = "<group>"; };
@@ -321,6 +326,11 @@
 		84FAE10819A65FEA00DC9FF1 /* DCTime+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DCTime+DC.m"; path = "Model/Categories/DCTime+DC.m"; sourceTree = "<group>"; };
 		84FAE10A19A6600900DC9FF1 /* DCTimeRange+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DCTimeRange+DC.h"; path = "Model/Categories/DCTimeRange+DC.h"; sourceTree = "<group>"; };
 		84FAE10B19A6600900DC9FF1 /* DCTimeRange+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DCTimeRange+DC.m"; path = "Model/Categories/DCTimeRange+DC.m"; sourceTree = "<group>"; };
+		FA90B9A119C5893700873865 /* DCEventBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCEventBaseCell.h; path = Classes/Views/ProgramCells/EventBaseCell/DCEventBaseCell.h; sourceTree = "<group>"; };
+		FA90B9A219C5893700873865 /* DCEventBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCEventBaseCell.m; path = Classes/Views/ProgramCells/EventBaseCell/DCEventBaseCell.m; sourceTree = "<group>"; };
+		FA90B9A519C589AE00873865 /* DCEventBaseCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DCEventBaseCell.xib; path = Classes/Views/ProgramCells/EventBaseCell/DCEventBaseCell.xib; sourceTree = "<group>"; };
+		FA90B9A719C5A6C600873865 /* DCLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCLabel.h; path = Classes/Views/CustomLabel/DCLabel.h; sourceTree = "<group>"; };
+		FA90B9A819C5A6C600873865 /* DCLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCLabel.m; path = Classes/Views/CustomLabel/DCLabel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -363,6 +373,7 @@
 		5D38E68719868BFE006F7A59 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FA90B9AA19C5A6CF00873865 /* DCLabel */,
 				849D92D519AE285700977D67 /* ProgramDetailCells */,
 				84A06E2C19ACA3D100104876 /* controls */,
 				84A06E2819ACA2B100104876 /* SpeakerCells */,
@@ -469,6 +480,7 @@
 				5D6449CF19893BD700BC1775 /* DCCofeeCell.m */,
 				5D6449D119893BEF00BC1775 /* DCLunchCell.h */,
 				5D6449D219893BEF00BC1775 /* DCLunchCell.m */,
+				FA90B9A419C5894200873865 /* EventBaseCell */,
 			);
 			name = ProgramCells;
 			sourceTree = "<group>";
@@ -687,7 +699,8 @@
 		74086C6319C1E9E20018C825 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				74086C6419C1E9F60018C825 /* style.css */,
+				74E50CD219C6D9F9001FD11C /* about_img.png */,
+				74E50CD319C6D9F9001FD11C /* style.css */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -879,6 +892,25 @@
 			name = EventDetail;
 			sourceTree = "<group>";
 		};
+		FA90B9A419C5894200873865 /* EventBaseCell */ = {
+			isa = PBXGroup;
+			children = (
+				FA90B9A519C589AE00873865 /* DCEventBaseCell.xib */,
+				FA90B9A119C5893700873865 /* DCEventBaseCell.h */,
+				FA90B9A219C5893700873865 /* DCEventBaseCell.m */,
+			);
+			name = EventBaseCell;
+			sourceTree = "<group>";
+		};
+		FA90B9AA19C5A6CF00873865 /* DCLabel */ = {
+			isa = PBXGroup;
+			children = (
+				FA90B9A719C5A6C600873865 /* DCLabel.h */,
+				FA90B9A819C5A6C600873865 /* DCLabel.m */,
+			);
+			name = DCLabel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -956,10 +988,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA90B9A619C589AE00873865 /* DCEventBaseCell.xib in Resources */,
 				5DC8C42D198656DB00BF5816 /* Images.xcassets in Resources */,
-				74086C6519C1E9F60018C825 /* style.css in Resources */,
+				74E50CD519C6D9F9001FD11C /* style.css in Resources */,
 				5DC8C41F198656DB00BF5816 /* InfoPlist.strings in Resources */,
 				5DC8C428198656DB00BF5816 /* Main.storyboard in Resources */,
+				74E50CD419C6D9F9001FD11C /* about_img.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1036,6 +1070,7 @@
 				5DC8C421198656DB00BF5816 /* main.m in Sources */,
 				5DC8C47A19865C8400BF5816 /* DCSideMenuViewController.m in Sources */,
 				74E8381B19C061CD000D2BE4 /* UIImageView+HighlightedWebCache.m in Sources */,
+				FA90B9A319C5893700873865 /* DCEventBaseCell.m in Sources */,
 				74E8381819C061CD000D2BE4 /* UIImage+GIF.m in Sources */,
 				5D38E69919869303006F7A59 /* DCProgramViewController.m in Sources */,
 				74E8381319C061CD000D2BE4 /* SDWebImageDownloader.m in Sources */,
@@ -1052,6 +1087,7 @@
 				5D38E6A11987A673006F7A59 /* DCTextField.m in Sources */,
 				74E8381919C061CD000D2BE4 /* UIImage+MultiFormat.m in Sources */,
 				74E8380F19C061CD000D2BE4 /* NSData+ImageContentType.m in Sources */,
+				FA90B9A919C5A6C600873865 /* DCLabel.m in Sources */,
 				849D92CB19ADF98600977D67 /* DCSpeakerHeaderCell.m in Sources */,
 				849D92C819ADF31D00977D67 /* UIImageView+DC.m in Sources */,
 				74E8381C19C061CD000D2BE4 /* UIImageView+WebCache.m in Sources */,
