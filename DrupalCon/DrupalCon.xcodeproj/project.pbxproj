@@ -960,7 +960,7 @@
 				ORGANIZATIONNAME = "Lemberg Solution";
 				TargetAttributes = {
 					5DC8C410198656DA00BF5816 = {
-						DevelopmentTeam = FN2T3UCV4E;
+						DevelopmentTeam = J7LBYY3B34;
 					};
 					5DC8C431198656DB00BF5816 = {
 						TestTargetID = 5DC8C410198656DA00BF5816;
