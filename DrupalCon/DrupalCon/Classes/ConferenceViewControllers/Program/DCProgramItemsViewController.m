@@ -25,6 +25,8 @@
 #import "DCMainProxy+Additions.h"
 
 #import "NSArray+DC.h"
+#import "DCLabel.h"
+#import "DCEventBaseCell.h"
 
 @interface DCProgramItemsViewController ()
 
@@ -66,6 +68,18 @@ static NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
             [strongSelf.tablewView reloadData];
         });
     });
+    [self registerCellsInTableView];
+}
+
+static NSString *const cellIdSpeech = @"ProgramCellIdentifierSpeech";
+static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
+
+- (void)registerCellsInTableView
+{
+    [self.tablewView registerClass:[DCSpeechCell class]
+            forCellReuseIdentifier:cellIdSpeech];
+    [self.tablewView registerClass:[DCSpeechOfDayCell class]
+            forCellReuseIdentifier:cellIdSpeechOfDay];
 }
 
 - (void)didReceiveMemoryWarning
@@ -77,8 +91,7 @@ static NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
 #pragma mark - uitableview datasource methods
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellIdSpeech = @"ProgramCellIdentifierSpeech";
-    NSString *cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
+    
     NSString *cellIdCoffeBreak = @"ProgramCellIdentifierCoffeBreak";
     NSString *cellIdLunch = @"ProgramCellIdentifierLunch";
     DCEvent * event = [self DC_eventForIndexPath:indexPath];
@@ -90,34 +103,16 @@ static NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
             NSLog(@"WRONG! there is no Type for event: %@",event);
         }
         case DC_EVENT_24h:
-        case DC_EVENT_GROUP:
+        
         case DC_EVENT_SPEACH: {
-            DCSpeechCell *_cell = (DCSpeechCell*)[tableView dequeueReusableCellWithIdentifier: cellIdSpeech];
-            [_cell setSpeakers:[self DC_speakersTextForSpeakerNames:[event speakersNames]]];
-            [_cell setLevel:event.level.name];
-            [_cell setTrack:[[event.tracks allObjects].firstObject name]];
-            _cell.nameLabel.text = event.name;
-            _cell.favoriteButton.selected = [event.favorite boolValue];
-            [_cell favoriteButtonDidSelected:^(UITableViewCell *cell, BOOL isSelected) {
-                
-                [self updateFavoriteItemsInIndexPath:[self.tablewView indexPathForCell:cell]
-                                           withValue:isSelected];
-            }];
+            DCSpeechCell *_cell = (DCSpeechCell *)[tableView dequeueReusableCellWithIdentifier: cellIdSpeech];
+            [self updateCell:_cell witEvent:event];
             cell = _cell;
             break;
         }
         case DC_EVENT_SPEACH_OF_DAY: {
             DCSpeechOfDayCell *_cell = (DCSpeechOfDayCell*)[tableView dequeueReusableCellWithIdentifier: cellIdSpeechOfDay];
-            [_cell setSpeakers:[self DC_speakersTextForSpeakerNames:[event speakersNames]]];
-            [_cell setLevel:event.level.name];
-            [_cell setTrack:[[event.tracks allObjects].firstObject name]];
-
-            _cell.nameLabel.text = event.name;
-            _cell.favoriteButton.selected = [event.favorite boolValue];
-            [_cell favoriteButtonDidSelected:^(UITableViewCell *cell, BOOL isSelected) {
-                [self updateFavoriteItemsInIndexPath:[self.tablewView indexPathForCell:cell]
-                                           withValue:isSelected];
-            }];
+            [self updateCell:_cell witEvent:event];
             cell = _cell;
             break;
         }
@@ -140,6 +135,7 @@ static NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
             cell = _cell;
             break;
         }
+        case DC_EVENT_GROUP:
         case DC_EVENT_LUNCH: {
             DCLunchCell *_cell = (DCLunchCell*)[tableView dequeueReusableCellWithIdentifier: cellIdLunch];
             _cell.startLabel.text = [event.timeRange.from stringValue];
@@ -152,6 +148,66 @@ static NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
             break;
     }
     return cell;
+}
+
+- (BOOL)isEventDetailEmpty:(DCEvent *)event
+{
+    NSString *speakers = [self DC_speakersTextForSpeakerNames:[event speakersNames]];
+    NSString *level = event.level.name;
+    NSString *track = [[event.tracks allObjects].firstObject name];
+    if ([event isMemberOfClass:[DCBof class]]) return NO;
+    return ![level length] && ![speakers length] && ![track length];
+}
+
+- (void)updateCell:(DCEventBaseCell *)cell witEvent:(DCEvent *)event
+{
+    NSString *speakers = [self DC_speakersTextForSpeakerNames:[event speakersNames]];
+    NSString *level = event.level.name;
+    NSString *track = [[event.tracks allObjects].firstObject name];
+    NSString *title = event.name;
+    NSDictionary *values = nil;
+    BOOL displayEmptyDetailInfo = [self isEventDetailEmpty:event];
+    
+    if ([event isMemberOfClass:[DCBof class]]) {
+        values = @{
+                   kHeaderTitle:title,
+                   kLeftBlockTitle: @"Place",
+                   kLeftBlockContent:event.place
+                   };
+    } else if (![level length] && ![speakers length] && [track length]) {
+        values = @{
+                   kHeaderTitle:title,
+                   kLeftBlockTitle: @"Track",
+                   kLeftBlockContent:track
+                   };
+    } else if (displayEmptyDetailInfo) {
+        values = @{
+                   kHeaderTitle:title,
+                   };
+    } else {
+        values = @{
+                   kHeaderTitle: title,
+                   kLeftBlockTitle: ([speakers length])?@"Speakers":@"",
+                   kLeftBlockContent: speakers,
+                   kMiddleBlockTitle: ([track length])?@"Track":@"",
+                   kMiddleBlockContent: track,
+                   kRightBlockTitle: ([level length])?@"Experience Level":@"",
+                   kRightBlockContent: level
+                   };
+    
+    
+    }
+
+    
+    
+    [cell setValuesForCell: values];
+    cell.favoriteButton.selected = [event.favorite boolValue];
+    [cell favoriteButtonDidSelected:^(UITableViewCell *cell, BOOL isSelected) {
+        
+        [self updateFavoriteItemsInIndexPath:[self.tablewView indexPathForCell:cell]
+                                   withValue:isSelected];
+    }];
+    
 }
 
 - (void)updateFavoriteItemsInIndexPath:(NSIndexPath *)anIndexPath
@@ -226,13 +282,15 @@ static NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
     
     switch ([event getTypeID]) {
         case DC_EVENT_24h:
-        case DC_EVENT_GROUP:
         case DC_EVENT_WALKING:
-        case DC_EVENT_SPEACH:
-        case DC_EVENT_SPEACH_OF_DAY: {
             return 97;
             break;
+        case DC_EVENT_SPEACH:
+        case DC_EVENT_SPEACH_OF_DAY: {
+            return ([self isEventDetailEmpty:event])? 60 : 97;
+            break;
         }
+        case DC_EVENT_GROUP:
         case DC_EVENT_COFEE_BREAK:
         case DC_EVENT_LUNCH: {
             return 94;

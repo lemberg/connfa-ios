@@ -53,6 +53,7 @@
         self.trackLabel.hidden = NO;
         self.trackLabel.text = trackStr;
     }
+    
 
 }
 

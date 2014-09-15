@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DCSpeechBaseCell.h"
+#import "DCEventBaseCell.h"
 
-@interface DCSpeechOfDayCell : DCSpeechBaseCell
+@interface DCSpeechOfDayCell : DCEventBaseCell
 
 @end

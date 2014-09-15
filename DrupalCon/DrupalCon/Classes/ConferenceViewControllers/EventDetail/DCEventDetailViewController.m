@@ -31,6 +31,7 @@
 @property (nonatomic, strong) CloseCallback closeCallback;
 @property (nonatomic, strong) NSIndexPath *lastIndexPath;
 @property (nonatomic, strong) NSMutableDictionary *cellsHeight;
+
 @end
 @implementation DCEventDetailViewController
 
@@ -188,10 +189,24 @@
                                    }];
     
         [_cell.nameLbl setText:speaker.name];
-        [_cell.positionTitleLbl setText:speaker.jobTitle];
+        [_cell.positionTitleLbl setText:[self positionTitleForSpeaker:speaker]];
         cell = _cell;
     }
     return cell;
+}
+
+- (NSString *)positionTitleForSpeaker:(DCSpeaker *)speaker
+{
+    NSString *organisationName = speaker.organizationName;
+    NSString *jobTitle = speaker.jobTitle;
+    if ([jobTitle length] && [organisationName length]) {
+        return [NSString stringWithFormat:@"%@ / %@", organisationName, jobTitle];
+    }
+    if (![jobTitle length]) {
+        return organisationName;
+    }
+    
+    return jobTitle;
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView

@@ -7,16 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DCSpeechBaseCell.h"
+#import "DCEventBaseCell.h"
 
 
-@interface DCSpeakerEventCell : DCSpeechBaseCell
-
-@property (nonatomic, weak) IBOutlet UILabel * eventDateValueLbl;
-@property (nonatomic, weak) IBOutlet UILabel * eventTimeValueLbl;
-@property (nonatomic, weak) IBOutlet UIImageView * starImg;
-
-@property (nonatomic, getter = isFavorite) BOOL favorite;
+@interface DCSpeakerEventCell : DCEventBaseCell
 
 + (float)cellHeight;
 

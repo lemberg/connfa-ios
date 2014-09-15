@@ -40,9 +40,16 @@
     self.navigatorBarStyle = EBaseViewControllerNatigatorBarStyleTransparrent;
     _events = [_speaker.events allObjects];
     self.cellsHeight = [NSMutableDictionary dictionary];
-
+    [self registerCellsInTableView];
 }
 
+static NSString *cellIdEvent = @"cellId_SpeakersEvent";
+
+- (void)registerCellsInTableView
+{
+    [self.speakerDetailTbl registerClass:[DCSpeakerEventCell class]
+            forCellReuseIdentifier:cellIdEvent];
+}
 - (void)viewWillAppear:(BOOL)animated
 {
     if (self.navigationController)
@@ -139,7 +146,7 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdEvent = @"cellId_SpeakersEvent";
+    
     static NSString *cellIdHeader = @"cellId_SpeakersHeader";
     static NSString *cellIdBottom = @"cellId_SpeakersBottom";
     
@@ -165,24 +172,39 @@
     {
         DCEvent * event = _events[indexPath.row-1];
         DCSpeakerEventCell * _cell = (DCSpeakerEventCell*)[tableView dequeueReusableCellWithIdentifier:cellIdEvent];
-        
-        //        _cell.favorite = [event.favorite boolValue];
-        [_cell setSelected:[event.favorite boolValue]];
-        [_cell favoriteButtonDidSelected:^(UITableViewCell *cell, BOOL isSelected) {
-            [self updateFavoriteItemsInIndexPath:[self.speakerDetailTbl indexPathForCell:cell]
-                                       withValue:isSelected];
-        }];
-        [_cell.nameLabel setText:event.name];
-        [_cell.eventDateValueLbl setText:[event.date stringForSpeakerEventCell]];
-        [_cell.eventTimeValueLbl setText:[event.timeRange stringValue]];
-        [_cell setTrack:[[event.tracks allObjects].firstObject name]];
-        [_cell setLevel:event.level.name];
+        [self updateCell:_cell witEvent:event];
         cell = _cell;
     }
     
     return cell;
 }
+- (void)updateCell:(DCEventBaseCell *)cell witEvent:(DCEvent *)event
+{
+    NSString *level = event.level.name;
+    NSString *track = [[event.tracks allObjects].firstObject name];
+    NSString *title = event.name;
+    
+    NSString *time = [NSString stringWithFormat:@"%@\n%@",[event.date stringForSpeakerEventCell],[event.timeRange stringValue] ];
+    NSDictionary *values = nil;
 
+    values = @{
+               kHeaderTitle: title,
+               kLeftBlockTitle: @"Date",
+               kLeftBlockContent: time,
+               kMiddleBlockTitle: @"Track",
+               kMiddleBlockContent: track,
+               kRightBlockTitle: @"Experience Level",
+               kRightBlockContent: level
+               };
+
+    [cell setValuesForCell: values];
+    cell.favoriteButton.selected = [event.favorite boolValue];
+    [cell favoriteButtonDidSelected:^(UITableViewCell *cell, BOOL isSelected) {
+        [self updateFavoriteItemsInIndexPath:[self.speakerDetailTbl indexPathForCell:cell]
+                                   withValue:isSelected];
+    }];
+    
+}
 - (void)fillSpeakerHeaderCell:(DCSpeakerHeaderCell *)newCell
 {
     
