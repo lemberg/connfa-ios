@@ -58,9 +58,9 @@
         [fetchRequest setEntity:entity];
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"date = %@", [[self daysForClass:eventClass] objectAtIndex:dayNum]];
         [fetchRequest setPredicate:predicate];
-        //    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@""
-        //                                                                   ascending:YES];
-        //    [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"eventID"
+                                                                       ascending:YES];
+        [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
         
         NSError *error = nil;
         NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
