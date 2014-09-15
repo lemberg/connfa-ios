@@ -127,7 +127,7 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
     NSString *speakers = [self DC_speakersTextForSpeakerNames:[event speakersNames]];
     NSString *level = event.level.name;
     NSString *track = [[event.tracks allObjects].firstObject name];
-    if ([event isMemberOfClass:[DCBof class]]) return NO;
+    if ([event isMemberOfClass:[DCBof class]]) return ![event.place length];
     return ![level length] && ![speakers length] && ![track length];
 }
 
@@ -143,7 +143,7 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
     if ([event isMemberOfClass:[DCBof class]]) {
         values = @{
                    kHeaderTitle:title,
-                   kLeftBlockTitle: @"Place",
+                   kLeftBlockTitle: ([event.place length])?@"Place":@"",
                    kLeftBlockContent:event.place
                    };
     } else if (![level length] && ![speakers length] && [track length]) {
@@ -229,9 +229,19 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
     headerViewCell.dateLabel.text = [self.favoriteSourceMng dateForSection:(int)section];
     // Hide time slot section when time is invalid
     [headerViewCell hideTimeSection:![timeslot.from isTimeValid]];
+    [self removeGesturesFromView:headerViewCell.contentView];
     return [headerViewCell contentView];
     
 }
+
+- (void)removeGesturesFromView:(UIView *)view
+{
+    while (view.gestureRecognizers.count) {
+        [view removeGestureRecognizer:[view.gestureRecognizers objectAtIndex:0]];
+    }
+    
+}
+
 
 -(CGFloat) tableView: (UITableView*) tableView heightForHeaderInSection:(NSInteger)section {
     return  97;

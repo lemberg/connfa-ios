@@ -889,9 +889,11 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.4392156862745098" green="0.15686274509803921" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
+                                            <outlet property="jobTitleLabel" destination="al1-KC-S2N" id="Nip-1K-ICt"/>
                                             <outlet property="jobTitleLbl" destination="Lsg-ZK-XeG" id="IA4-9A-nwS"/>
                                             <outlet property="nameLbl" destination="o7z-uj-dmL" id="eiA-QW-oT5"/>
                                             <outlet property="organizationLbl" destination="BKV-14-MhG" id="yeI-Jr-XxW"/>
+                                            <outlet property="organizationTitleLabel" destination="qvU-KF-CEI" id="TC6-QO-Ltt"/>
                                             <outlet property="pictureImg" destination="6zF-LG-GJa" id="72K-rP-z0h"/>
                                             <outlet property="twitterButton" destination="rMS-hp-Ch4" id="fPy-c2-w1Z"/>
                                             <outlet property="webButton" destination="o1O-iS-y1M" id="THv-Xa-sWH"/>

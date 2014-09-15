@@ -103,7 +103,6 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
             NSLog(@"WRONG! there is no Type for event: %@",event);
         }
         case DC_EVENT_24h:
-        case DC_EVENT_REGISTRATION:
         case DC_EVENT_SPEACH: {
             DCSpeechCell *_cell = (DCSpeechCell *)[tableView dequeueReusableCellWithIdentifier: cellIdSpeech];
             [self updateCell:_cell witEvent:event];
@@ -135,6 +134,7 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
             cell = _cell;
             break;
         }
+        case DC_EVENT_REGISTRATION:
         case DC_EVENT_GROUP:
         case DC_EVENT_LUNCH: {
             DCLunchCell *_cell = (DCLunchCell*)[tableView dequeueReusableCellWithIdentifier: cellIdLunch];
@@ -155,7 +155,7 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
     NSString *speakers = [self DC_speakersTextForSpeakerNames:[event speakersNames]];
     NSString *level = event.level.name;
     NSString *track = [[event.tracks allObjects].firstObject name];
-    if ([event isMemberOfClass:[DCBof class]]) return NO;
+    if ([event isMemberOfClass:[DCBof class]]) return ![event.place length];
     return ![level length] && ![speakers length] && ![track length];
 }
 
@@ -171,7 +171,7 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
     if ([event isMemberOfClass:[DCBof class]]) {
         values = @{
                    kHeaderTitle:title,
-                   kLeftBlockTitle: @"Place",
+                   kLeftBlockTitle: ([event.place length])?@"Place":@"",
                    kLeftBlockContent:event.place
                    };
     } else if (![level length] && ![speakers length] && [track length]) {
@@ -194,10 +194,10 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
                    kRightBlockTitle: ([level length])?@"Experience Level":@"",
                    kRightBlockContent: level
                    };
-    
-    
+        
+        
     }
-
+    
     
     
     [cell setValuesForCell: values];
@@ -209,6 +209,7 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
     }];
     
 }
+
 
 - (void)updateFavoriteItemsInIndexPath:(NSIndexPath *)anIndexPath
                              withValue:(BOOL)isFavorite {
@@ -248,11 +249,20 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
         headerViewCell.endLabel.text = [timeslot.to stringValue];
         // Hide time slot section when time is invalid
         [headerViewCell hideTimeSection:![timeslot.from isTimeValid]];
-        return headerViewCell;
+        [self removeGesturesFromView:headerViewCell.contentView];
+        return [headerViewCell contentView];
     }
     UIView *v = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 320, 0.0)];
     v.backgroundColor = [UIColor whiteColor];
     return v;
+}
+
+- (void)removeGesturesFromView:(UIView *)view
+{
+    while (view.gestureRecognizers.count) {
+        [view removeGestureRecognizer:[view.gestureRecognizers objectAtIndex:0]];
+    }
+
 }
 
 -(CGFloat) tableView: (UITableView*) tableView heightForHeaderInSection:(NSInteger)section {
@@ -285,12 +295,13 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
         case DC_EVENT_WALKING:
             return 97;
             break;
-        case DC_EVENT_REGISTRATION:
+        
         case DC_EVENT_SPEACH:
         case DC_EVENT_SPEACH_OF_DAY: {
             return ([self isEventDetailEmpty:event])? 60 : 97;
             break;
         }
+        case DC_EVENT_REGISTRATION:
         case DC_EVENT_GROUP:
         case DC_EVENT_COFEE_BREAK:
         case DC_EVENT_LUNCH: {
@@ -309,8 +320,10 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
 
     if(![self headerNeededInSection:indexPath.section])
         return;
-    
     DCEvent * event = [self DC_eventForIndexPath:indexPath];
+    if ([self isClickEnableForEvent:event]) {
+        return;
+    }
 
     DCEventDetailViewController * detailController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
     [detailController didCloseWithCallback:^{
@@ -320,6 +333,14 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
     UINavigationController * navContainer = [[UINavigationController alloc] initWithRootViewController:detailController];
     [navContainer setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     [[(AppDelegate*)[[UIApplication sharedApplication] delegate] window].rootViewController presentViewController:navContainer animated:YES completion:nil];
+}
+
+- (BOOL)isClickEnableForEvent:(DCEvent *)event
+{
+    int type = [event getTypeID];
+    return !(type != DC_EVENT_GROUP &&
+            type != DC_EVENT_REGISTRATION &&
+            type != DC_EVENT_LUNCH);
 }
 
 #pragma mark - private

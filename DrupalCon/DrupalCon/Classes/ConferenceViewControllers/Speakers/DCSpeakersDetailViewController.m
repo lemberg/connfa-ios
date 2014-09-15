@@ -178,6 +178,7 @@ static NSString *cellIdEvent = @"cellId_SpeakersEvent";
     
     return cell;
 }
+
 - (void)updateCell:(DCEventBaseCell *)cell witEvent:(DCEvent *)event
 {
     NSString *level = event.level.name;
@@ -216,8 +217,20 @@ static NSString *cellIdEvent = @"cellId_SpeakersEvent";
                                    });
                                    
                                }];
-    
-    
+    // Hide label name when organisation is empty
+    if (![_speaker.organizationName length]) {
+        newCell.organizationTitleLabel.hidden = YES;
+    } else {
+        newCell.organizationTitleLabel.hidden = NO;
+
+    }
+    // Hide label name when job is empty
+    if (![_speaker.jobTitle length]) {
+        newCell.jobTitleLabel.hidden = YES;
+    } else {
+        newCell.jobTitleLabel.hidden = NO;
+        
+    }
     [newCell.nameLbl setText:_speaker.name];
     [newCell.organizationLbl setText:_speaker.organizationName];
     [newCell.jobTitleLbl setText:_speaker.jobTitle];

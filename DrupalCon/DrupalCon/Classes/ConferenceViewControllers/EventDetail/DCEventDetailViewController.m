@@ -73,6 +73,7 @@
     [backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     UIBarButtonItem *backMenuBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
     self.navigationItem.leftBarButtonItem = backMenuBarButton;
+    self.title = ([_event.timeRange.from isTimeValid])? [_event.timeRange stringValue] : @"";
     
 }
 
