@@ -30,6 +30,7 @@ typedef NS_ENUM (int, DCEventType) {
     DC_EVENT_24h = 5,
     DC_EVENT_GROUP = 6,
     DC_EVENT_WALKING = 7,
+    DC_EVENT_REGISTRATION = 8
 };
 
 @interface DCEvent (DC)

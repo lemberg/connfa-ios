@@ -103,7 +103,7 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
             NSLog(@"WRONG! there is no Type for event: %@",event);
         }
         case DC_EVENT_24h:
-        
+        case DC_EVENT_REGISTRATION:
         case DC_EVENT_SPEACH: {
             DCSpeechCell *_cell = (DCSpeechCell *)[tableView dequeueReusableCellWithIdentifier: cellIdSpeech];
             [self updateCell:_cell witEvent:event];
@@ -285,6 +285,7 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
         case DC_EVENT_WALKING:
             return 97;
             break;
+        case DC_EVENT_REGISTRATION:
         case DC_EVENT_SPEACH:
         case DC_EVENT_SPEACH_OF_DAY: {
             return ([self isEventDetailEmpty:event])? 60 : 97;

@@ -95,6 +95,7 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
         case DC_EVENT_24h:
         case DC_EVENT_GROUP:
         case DC_EVENT_WALKING:
+        case DC_EVENT_REGISTRATION:
         case DC_EVENT_SPEACH: {
             DCSpeechCell *_cell = (DCSpeechCell*)[tableView dequeueReusableCellWithIdentifier: cellIdSpeech];
             [self updateCell:_cell witEvent:event];
