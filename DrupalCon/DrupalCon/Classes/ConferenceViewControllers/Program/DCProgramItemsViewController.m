@@ -102,6 +102,7 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
         {
             NSLog(@"WRONG! there is no Type for event: %@",event);
         }
+        
         case DC_EVENT_24h:
         case DC_EVENT_SPEACH: {
             DCSpeechCell *_cell = (DCSpeechCell *)[tableView dequeueReusableCellWithIdentifier: cellIdSpeech];
@@ -125,7 +126,16 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
             cell = _cell;
             break;
         }
-            
+        case DC_EVENT_REGISTRATION:
+        {
+            DCCofeeCell *_cell = (DCCofeeCell*)[tableView dequeueReusableCellWithIdentifier: cellIdCoffeBreak];
+            [_cell.leftImageView setImage:[UIImage imageNamed:@"program_check_in"]];
+            _cell.startLabel.text = [event.timeRange.from stringValue];
+            _cell.endLabel.text = [event.timeRange.to stringValue];
+            [_cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+            cell = _cell;
+            break;
+        }
         case DC_EVENT_COFEE_BREAK: {
             DCCofeeCell *_cell = (DCCofeeCell*)[tableView dequeueReusableCellWithIdentifier: cellIdCoffeBreak];
             _cell.startLabel.text = [event.timeRange.from stringValue];
@@ -134,7 +144,7 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
             cell = _cell;
             break;
         }
-        case DC_EVENT_REGISTRATION:
+        
         case DC_EVENT_GROUP:
         case DC_EVENT_LUNCH: {
             DCLunchCell *_cell = (DCLunchCell*)[tableView dequeueReusableCellWithIdentifier: cellIdLunch];
@@ -230,7 +240,10 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
     BOOL headerNeeded = NO;
     for(DCEvent *event in [_timeslots[section] objectForKey:kDCTimeslotEventKEY])
     {
-        if([event getTypeID] != DC_EVENT_LUNCH && [event getTypeID] != DC_EVENT_COFEE_BREAK && [event getTypeID] != DC_EVENT_WALKING)
+        if([event getTypeID] != DC_EVENT_LUNCH &&
+           [event getTypeID] != DC_EVENT_COFEE_BREAK &&
+           [event getTypeID] != DC_EVENT_WALKING &&
+           [event getTypeID] != DC_EVENT_REGISTRATION)
         {
             headerNeeded = YES; break;
         }
