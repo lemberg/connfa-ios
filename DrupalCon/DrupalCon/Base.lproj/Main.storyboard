@@ -1075,6 +1075,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty_icon" id="3az-7b-ho3">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Sjw-a6-nep">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1317,6 +1321,7 @@
                     </view>
                     <connections>
                         <outlet property="favoritesTableView" destination="Sjw-a6-nep" id="iQD-l3-O4g"/>
+                        <outlet property="noDataImg" destination="3az-7b-ho3" id="vRx-EA-aR0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y8g-bM-LaS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1447,6 +1452,7 @@
     </scenes>
     <resources>
         <image name="avatar_placeholder" width="40" height="40"/>
+        <image name="empty_icon" width="168" height="170"/>
         <image name="ic_program_back" width="23" height="23"/>
         <image name="ic_program_clock" width="40" height="40"/>
         <image name="ic_program_coffe" width="40" height="40"/>

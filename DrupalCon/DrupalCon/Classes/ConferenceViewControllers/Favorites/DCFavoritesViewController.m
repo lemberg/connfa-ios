@@ -30,6 +30,7 @@
 
 @interface DCFavoritesViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *favoritesTableView;
+@property (weak, nonatomic) IBOutlet UIImageView *noDataImg;
 @property (nonatomic, strong) DCFavoriteSourceManager *favoriteSourceMng;
 @end
 
@@ -51,7 +52,12 @@
     self.favoriteSourceMng = [[DCFavoriteSourceManager alloc]
                             initWithSection:[[DCMainProxy sharedProxy] favoriteEvents]];
     [self registerCellsInTableView];
-    // Do any additional setup after loading the view.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self DC_checkEmptyness];
 }
 
 static NSString *const cellIdSpeech = @"ProgramCellIdentifierSpeech";
@@ -112,13 +118,6 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
             break;
     }
     
-    
-    //Selection style
-    /*
-     UIView *selectedBackgroundView = [[UIView alloc] initWithFrame: cell.bounds];
-     selectedBackgroundView.backgroundColor = [UIColor colorWithRed: 52./255. green: 52./255. blue: 59./255. alpha: 1.0];
-     cell.selectedBackgroundView = selectedBackgroundView;
-     */
     return cell;
 }
 
@@ -190,9 +189,8 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
         [[DCMainProxy sharedProxy]
          removeFavoriteEventWithID:event.eventID];
         [self deleteCellAtIndexPath:anIndexPath];
-        
     }
-    
+    [self DC_checkEmptyness];
 }
 
 - (void)deleteCellAtIndexPath:(NSIndexPath *)indexPath
@@ -213,8 +211,8 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
         [self.favoritesTableView deleteRowsAtIndexPaths:@[indexPath]
                                        withRowAnimation:UITableViewRowAnimationAutomatic];
         [self.favoritesTableView endUpdates];
-        
     }
+    
 }
 
 
@@ -319,6 +317,13 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
         resultStr = [NSString stringWithFormat:@"%@\n...",speakerNames[0]];
     }
     return resultStr;
+}
+
+- (void)DC_checkEmptyness
+{
+    BOOL isEmpty = ([self.favoriteSourceMng numberOfSection] == 0);
+    _favoritesTableView.hidden = isEmpty;
+    _noDataImg.hidden = !isEmpty;
 }
 
 @end
