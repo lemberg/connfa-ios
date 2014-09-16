@@ -669,8 +669,10 @@
                                         <color key="backgroundColor" red="0.63921568627450975" green="0.16078431372549018" blue="0.21176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="favorBtn" destination="lQj-jY-YDG" id="opi-WZ-eK6"/>
+                                            <outlet property="levelTitleLbl" destination="rpE-7N-hJQ" id="fGI-h0-df0"/>
                                             <outlet property="levelValueLbl" destination="joe-2q-Hk5" id="eq9-B7-eHg"/>
                                             <outlet property="placeValueLbl" destination="NWX-qM-sei" id="oTH-U9-nM0"/>
+                                            <outlet property="trackTitleLbl" destination="zDI-bz-otg" id="l4Y-3r-jPW"/>
                                             <outlet property="trackValueLbl" destination="k5O-QE-7QM" id="OMb-Vv-Wyc"/>
                                         </connections>
                                     </tableViewCell>

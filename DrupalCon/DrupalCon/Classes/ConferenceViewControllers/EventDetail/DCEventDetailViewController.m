@@ -113,8 +113,11 @@
         NSString * level = _event.level.name;
 
         [infoPanel.trackValueLbl setText:(track.length?track:@"")];
+        infoPanel.levelTitleLbl.hidden = !level.length;
+        infoPanel.trackTitleLbl.hidden = !track.length;
         [infoPanel.levelValueLbl setText:(level.length?level:@"")];
-        [infoPanel.placeValueLbl setText:(place.length?place:@"-")];
+        [infoPanel.placeValueLbl setText:(place.length?place:@"")];
+        
         [infoPanel.favorBtn setDelegate:self];
         [infoPanel.favorBtn setSelected:[_event.favorite boolValue]];
         return infoPanel;

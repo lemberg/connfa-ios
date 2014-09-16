@@ -15,6 +15,8 @@
 @property (nonatomic, weak) IBOutlet UILabel * levelValueLbl;
 @property (nonatomic, weak) IBOutlet UILabel * placeValueLbl;
 @property (nonatomic, weak) IBOutlet DCFavoriteButton * favorBtn;
+@property (weak, nonatomic) IBOutlet UILabel *levelTitleLbl;
+@property (weak, nonatomic) IBOutlet UILabel *trackTitleLbl;
 
 + (CGFloat)cellHeight;
 
