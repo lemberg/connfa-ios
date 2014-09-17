@@ -11,6 +11,7 @@
 #import "MFSideMenu.h"
 #import "DCMenuContainerViewController.h"
 #import "DCAppFacade.h"
+#import "DCFavoritesViewController.h"
 
 #define isiPhone5  ([[UIScreen mainScreen] bounds].size.height == 568)?TRUE:FALSE
 
@@ -62,7 +63,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:self];
 }
 
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -93,7 +93,12 @@
     return [[UINavigationController alloc]
             initWithRootViewController:[self containerController]];
 }
-
+- (void)openEventFromFavoriteController:(DCEvent *)event
+{
+    [self loginButtonCLicked:nil];
+    [(DCSideMenuViewController *)[DCAppFacade shared].sideMenuController.leftMenuViewController openEventFromFavorite:event];
+    
+}
 - (DCMenuContainerViewController *)containerController {
     DCMenuContainerViewController *container = [self.storyboard instantiateViewControllerWithIdentifier: @"SideMenuContainer"];
     

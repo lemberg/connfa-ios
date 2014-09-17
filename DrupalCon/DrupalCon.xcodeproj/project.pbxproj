@@ -46,6 +46,7 @@
 		74A43C6D19BDDE9200F7BFA0 /* NSDictionary+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A43C6C19BDDE9200F7BFA0 /* NSDictionary+DC.m */; };
 		74A470E819B5EA3C00B01BC5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74A470E719B5EA3C00B01BC5 /* MapKit.framework */; };
 		74A6278819B8A37200B46B75 /* DCFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A6278719B8A37200B46B75 /* DCFavoritesViewController.m */; };
+		74BA6EF119C87C04000E2FBA /* DCLocalNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 74BA6EF019C87C04000E2FBA /* DCLocalNotificationManager.m */; };
 		74E50CD419C6D9F9001FD11C /* about_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 74E50CD219C6D9F9001FD11C /* about_img.png */; };
 		74E50CD519C6D9F9001FD11C /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 74E50CD319C6D9F9001FD11C /* style.css */; };
 		74E67C7219B6FDF400DF9D71 /* DCLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E67C7119B6FDF400DF9D71 /* DCLocationViewController.m */; };
@@ -198,6 +199,8 @@
 		74A470E719B5EA3C00B01BC5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		74A6278619B8A37200B46B75 /* DCFavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCFavoritesViewController.h; path = Favorites/DCFavoritesViewController.h; sourceTree = "<group>"; };
 		74A6278719B8A37200B46B75 /* DCFavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCFavoritesViewController.m; path = Favorites/DCFavoritesViewController.m; sourceTree = "<group>"; };
+		74BA6EEF19C87C04000E2FBA /* DCLocalNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCLocalNotificationManager.h; path = Model/DCLocalNotificationManager.h; sourceTree = "<group>"; };
+		74BA6EF019C87C04000E2FBA /* DCLocalNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCLocalNotificationManager.m; path = Model/DCLocalNotificationManager.m; sourceTree = "<group>"; };
 		74E50CD219C6D9F9001FD11C /* about_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = about_img.png; path = WebResources/about_img.png; sourceTree = "<group>"; };
 		74E50CD319C6D9F9001FD11C /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = style.css; path = WebResources/style.css; sourceTree = "<group>"; };
 		74E67C7019B6FDF400DF9D71 /* DCLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCLocationViewController.h; path = Location/DCLocationViewController.h; sourceTree = "<group>"; };
@@ -798,6 +801,8 @@
 				849CF82319A62F8600C84675 /* DCMainProxy+Additions.m */,
 				849CF80219A5EFEC00C84675 /* DCMainProxy.h */,
 				849CF80319A5EFEC00C84675 /* DCMainProxy.m */,
+				74BA6EEF19C87C04000E2FBA /* DCLocalNotificationManager.h */,
+				74BA6EF019C87C04000E2FBA /* DCLocalNotificationManager.m */,
 				849EFDD819A4AAC600C43E05 /* DOCategories */,
 				849EFDD719A4AAA800C43E05 /* DataObjects */,
 				849EFDA119A49FB600C43E05 /* main.xcdatamodeld */,
@@ -1027,6 +1032,7 @@
 				5D6449D319893BEF00BC1775 /* DCLunchCell.m in Sources */,
 				5DC8C46D198658FF00BF5816 /* MFSideMenuContainerViewController.m in Sources */,
 				849EFE1E19A4EB2100C43E05 /* DCEvent+DC.m in Sources */,
+				74BA6EF119C87C04000E2FBA /* DCLocalNotificationManager.m in Sources */,
 				74356D5B19BF3B290055F13D /* UIWebView+DC.m in Sources */,
 				84A06E3319ACBA0600104876 /* DCEventDetailViewController.m in Sources */,
 				849E84FF19AF385D006F43B3 /* DCSpeakerEventCell.m in Sources */,

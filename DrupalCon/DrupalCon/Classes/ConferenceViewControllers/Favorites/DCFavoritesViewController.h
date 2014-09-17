@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "DCBaseViewController.h"
 
+@class DCEvent;
+
 @interface DCFavoritesViewController : DCBaseViewController
+- (void)openEvent:(DCEvent *)event;
 
 @end

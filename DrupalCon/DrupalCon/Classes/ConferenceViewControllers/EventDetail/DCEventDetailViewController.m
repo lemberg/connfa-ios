@@ -279,7 +279,7 @@
     self.event.favorite = [NSNumber numberWithBool:isSelected];
     if (isSelected) {
         [[DCMainProxy sharedProxy]
-         addToFavoriteEventWithID:self.event.eventID];
+         addToFavoriteEvent:self.event];
     } else {
         [[DCMainProxy sharedProxy]
          removeFavoriteEventWithID:self.event.eventID];

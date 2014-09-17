@@ -15,8 +15,10 @@
 #import "DCMenuStoryboardHelper.h"
 #import "DCProgramViewController.h"
 #import "UIConstants.h"
+#import "DCFavoritesViewController.h"
 
 #define isiPhone5  ([[UIScreen mainScreen] bounds].size.height == 568)?TRUE:FALSE
+@class DCEvent;
 
 @interface DCSideMenuViewController ()
 @property (nonatomic, strong) NSArray *arrayOfCaptions;
@@ -26,6 +28,7 @@
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *avatarTopSpaceConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *tableViewTopContraint;
+@property (nonatomic, strong) DCEvent *event;
 @end
 
 @implementation DCSideMenuViewController
@@ -80,6 +83,22 @@
     [[DCAppFacade shared].sideMenuController setMenuState: MFSideMenuStateClosed completion: nil];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (self.event) {
+        [self placeViewControllerAssociatedWithMenuItem:DCMENU_MYSCHEDULE_ITEM];
+        if ([self.presentedController isMemberOfClass:[DCFavoritesViewController class]]) {
+            [(DCFavoritesViewController *)self.presentedController openEvent:self.event];
+        }
+        self.event = nil;
+    }
+}
+
+- (void)openEventFromFavorite:(DCEvent *)event
+{
+    self.event = event;
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

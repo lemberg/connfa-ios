@@ -296,7 +296,7 @@ static NSString *cellIdEvent = @"cellId_SpeakersEvent";
     event.favorite = [NSNumber numberWithBool:isFavorite];
     if (isFavorite) {
         [[DCMainProxy sharedProxy]
-         addToFavoriteEventWithID:event.eventID];
+         addToFavoriteEvent:event];
     } else {
         [[DCMainProxy sharedProxy]
          removeFavoriteEventWithID:event.eventID];

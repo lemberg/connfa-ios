@@ -9,12 +9,20 @@
 #import "AppDelegate.h"
 #import "DCMainProxy.h"
 
+@interface AppDelegate ()
+@property (nonatomic, strong) UILocalNotification *localNotification;
+@end
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[DCMainProxy sharedProxy] setDataReady:NO];
+    UILocalNotification *locationNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+    if (locationNotification) {
+        self.localNotification = locationNotification;
+    }
+    
     return YES;
 }
 							
@@ -37,15 +45,41 @@
         UINavigationController * natigator = (UINavigationController*)self.window.rootViewController;
         [natigator popToRootViewControllerAnimated:NO];
     }
+
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
-{    
+{
+    if (self.localNotification) {
+        [[DCMainProxy sharedProxy] openLocalNotification:self.localNotification];
+        self.localNotification = nil;
+        application.applicationIconBadgeNumber = 0;
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    UIApplicationState state = [application applicationState];
+    if (state == UIApplicationStateActive) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reminder"
+                                                        message:notification.alertBody
+                                                       delegate:self cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+    } else {
+        self.localNotification = notification;
+    }
+    
+    NSLog(@"Push notification come");
+    application.applicationIconBadgeNumber = 0;
+}
+
+
+
 
 @end

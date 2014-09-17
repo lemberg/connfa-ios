@@ -23,6 +23,8 @@
 #import "Reachability.h"
 #import "DCDataProvider.h"
 #import "AppDelegate.h"
+#import "DCLocalNotificationManager.h"
+#import "DCLoginViewController.h"
 
 const NSString * INVALID_JSON_EXCEPTION = @"Invalid JSON";
 static NSString * kDCMainProxyModelName = @"main";
@@ -170,9 +172,22 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     UINavigationController *navController = (UINavigationController *)[(AppDelegate*)[[UIApplication sharedApplication] delegate] window].rootViewController;
     [[navController topViewController] dismissViewControllerAnimated:YES completion:nil];
     [navController popToViewController:navController.viewControllers[0] animated:NO];
+    
                                                                        
 }
 
+- (void)openLocalNotification:(UILocalNotification *)localNotification
+{
+// FIXME: Rewrite this code. It create stack with favorite controller and event detail controller.
+    [self showRootController];
+    [self setDataReady:NO];
+    UINavigationController *navigation = (UINavigationController *)[(AppDelegate*)[[UIApplication sharedApplication] delegate] window].rootViewController;
+    [navigation popToRootViewControllerAnimated:NO];
+    NSNumber *eventID = localNotification.userInfo[@"EventID"];
+    NSArray *event = [[DCMainProxy sharedProxy] eventsWithIDs:@[eventID]];
+    [(DCLoginViewController *)[navigation topViewController] openEventFromFavoriteController:[event firstObject]];
+    
+}
 - (void)saveObject:(NSObject *)obj forKey:(NSString *)key
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -223,15 +238,21 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     for (NSDictionary *favorite in favoriteEventIDs) {
         [favorteIDs addObjectsFromArray:[favorite allValues]];
     }
-    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"eventID IN %@", favorteIDs];
-    NSArray * results = [self instancesOfClass:[DCEvent class]
-                         filtredUsingPredicate:predicate
-                                     inContext:self.managedObjectContext];
-    for (DCEvent *program in results) {
+    NSArray *events = [self eventsWithIDs:favorteIDs];
+    for (DCEvent *program in events) {
         program.favorite = [NSNumber numberWithBool:YES];
     }
     [self saveContext];
     
+}
+
+- (NSArray *)eventsWithIDs:(NSArray *)iDs
+{
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"eventID IN %@", iDs];
+    NSArray *results = [self instancesOfClass:[DCEvent class]
+                         filtredUsingPredicate:predicate
+                                     inContext:self.managedObjectContext];
+    return results;
 }
 
 - (NSArray *)favoriteInstanceIDs
@@ -348,10 +369,11 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 
 #pragma mark - Operation with favorites
 
-- (void)addToFavoriteEventWithID:(NSNumber *)eventID
+- (void)addToFavoriteEvent:(DCEvent *)event
 {
     DCFavoriteEvent *favoriteEvent = [self createFavoriteEvent];
-    favoriteEvent.eventID = eventID;
+    favoriteEvent.eventID = event.eventID;
+    [DCLocalNotificationManager scheduleNotificationWithItem:event interval:10];
     [self saveContext];
 }
 
@@ -359,8 +381,10 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 {
     DCFavoriteEvent *event = [self favoriteEventFromID:[eventID integerValue]];
     if (event) {
+        [DCLocalNotificationManager cancelLocalNotificationWithId:event.eventID];
         [self removeItems:@[event]
                 inContext:self.managedObjectContext];
+        
     }
     [self saveContext];
 }

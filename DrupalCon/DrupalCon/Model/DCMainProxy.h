@@ -11,7 +11,7 @@
 
 extern NSString * INVALID_JSON_EXCEPTION;
 
-@class DCProgram, DCBof, DCType, DCTime, DCTimeRange, DCSpeaker, DCLevel, DCTrack, DCLocation;
+@class DCProgram, DCBof, DCType, DCTime, DCTimeRange, DCSpeaker, DCLevel, DCTrack, DCLocation, DCEvent;
 
 @interface DCMainProxy : NSObject
 
@@ -50,6 +50,8 @@ extern NSString * INVALID_JSON_EXCEPTION;
 - (DCTrack*)createTrack;
 - (DCLocation*)createLocation;
 
-- (void)addToFavoriteEventWithID:(NSNumber *)eventID;
+- (void)addToFavoriteEvent:(DCEvent *)event;
 - (void)removeFavoriteEventWithID:(NSNumber *)eventID;
+- (NSArray *)eventsWithIDs:(NSArray *)iDs;
+- (void)openLocalNotification:(UILocalNotification *)localNotification;
 @end

@@ -32,6 +32,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *favoritesTableView;
 @property (weak, nonatomic) IBOutlet UIImageView *noDataImg;
 @property (nonatomic, strong) DCFavoriteSourceManager *favoriteSourceMng;
+@property (nonatomic, strong) DCEvent *openEvent;
 @end
 
 @implementation DCFavoritesViewController
@@ -52,6 +53,10 @@
     self.favoriteSourceMng = [[DCFavoriteSourceManager alloc]
                             initWithSection:[[DCMainProxy sharedProxy] favoriteEvents]];
     [self registerCellsInTableView];
+    if (self.openEvent) {
+        [self openEvent:self.openEvent];
+        self.openEvent = nil;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -275,17 +280,30 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     __block DCEvent * event = [self DC_eventForIndexPath:indexPath];
-    if([event getTypeID] == DC_EVENT_LUNCH || [event getTypeID] == DC_EVENT_COFEE_BREAK)
-    {
-        return;
-    }
+
+    [self openEvent:event withIndexPath:indexPath];
+}
+
+- (void)openEvent:(DCEvent *)newEvent
+{
+    [self openEvent:newEvent withIndexPath:nil];
+}
+
+- (void)openEvent:(DCEvent *)newEvent withIndexPath:(NSIndexPath *)indexPath
+{
+    __block DCEvent * event = newEvent;
     
     DCEventDetailViewController * detailController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
     [detailController setEvent:event];
     __block NSIndexPath *tmpIndex = indexPath;
     [detailController didCloseWithCallback:^{
         if (![event.favorite boolValue]) {
-            [self deleteCellAtIndexPath:tmpIndex];
+            if (tmpIndex) {
+                [self deleteCellAtIndexPath:tmpIndex];
+            } else {
+                [self.favoritesTableView reloadData];
+            }
+            
         }
         
     }];
