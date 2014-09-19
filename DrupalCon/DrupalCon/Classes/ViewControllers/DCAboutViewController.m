@@ -40,13 +40,26 @@
 //                                              encoding:NSUTF8StringEncoding
 //                                                 error:nil];
     [[DCMainProxy sharedProxy] loadHtmlAboutInfo:^(NSString *html) {
+        html = (IsEmpty(html))? @"": html;
         NSString *content = [NSString stringWithFormat:@" <!DOCTYPE html> <html> <head><meta http-equiv=\"content-type\" content=\"text/html; charset=ISO-8859-1\"><link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"></head><body>%@</body></html> ",
                           html];
         [self.webView loadHTMLString:content baseURL:[self.aboutURL URLByDeletingLastPathComponent]];
     }];
     
 }
-
+static inline BOOL IsEmpty(id thing) {
+    
+    return thing == nil
+    
+    || ([thing respondsToSelector:@selector(length)]
+        
+        && [(NSData *)thing length] == 0)
+    
+    || ([thing respondsToSelector:@selector(count)]
+        
+        && [(NSArray *)thing count] == 0);
+    
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
