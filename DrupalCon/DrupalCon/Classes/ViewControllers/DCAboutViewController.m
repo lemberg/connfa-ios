@@ -10,7 +10,7 @@
 #import "UIWebView+DC.h"
 #import "DCMainProxy.h"
 
-@interface DCAboutViewController ()
+@interface DCAboutViewController ()<UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (strong, nonatomic) NSURL *aboutURL;
 @end
@@ -28,7 +28,7 @@
     return self;
 }
 - (void)awakeFromNib {
-     self.aboutURL = [self aboutResourcePath];
+    self.aboutURL = [self aboutResourcePath];
 }
 
 - (NSURL *)aboutResourcePath {
@@ -84,5 +84,14 @@ static inline BOOL IsEmpty(id thing) {
     // Pass the selected object to the new view controller.
 }
 */
+
+- (BOOL)webView:(UIWebView *)inWeb shouldStartLoadWithRequest:(NSURLRequest *)inRequest navigationType:(UIWebViewNavigationType)inType {
+    if ( inType == UIWebViewNavigationTypeLinkClicked ) {
+        [[UIApplication sharedApplication] openURL:[inRequest URL]];
+        return NO;
+    }
+    
+    return YES;
+}
 
 @end
