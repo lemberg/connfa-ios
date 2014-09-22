@@ -306,11 +306,10 @@ static NSString *cellIdEvent = @"cellId_SpeakersEvent";
 
 - (DCEvent *)eventFromIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row || [self isLastRow:indexPath.row]) {
-        return [self.events firstObject];
-    } else {
-        return [self.events objectAtIndex:indexPath.row];
+    if (indexPath.row && ![self isLastRow:indexPath.row]) {
+        return [self.events objectAtIndex:indexPath.row - 1];
     }
+    return nil;
 }
 #pragma mark -
 
