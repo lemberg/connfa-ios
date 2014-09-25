@@ -1,20 +1,36 @@
 {
   "images" : [
     {
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    },
+    {
       "idiom" : "iphone",
       "scale" : "1x",
-      "filename" : "program_lanch.png"
+      "filename" : "program_lanch-1.png"
     },
     {
       "idiom" : "iphone",
       "scale" : "2x",
-      "filename" : "program_lanch@2x.png"
+      "filename" : "program_lanch@2x-1.png"
     },
     {
       "idiom" : "iphone",
-      "filename" : "program_lanch_586h@2x .png",
+      "filename" : "program_lanch_586h@2x.png",
       "subtype" : "retina4",
       "scale" : "2x"
+    },
+    {
+      "idiom" : "iphone",
+      "scale" : "3x"
     }
   ],
   "info" : {

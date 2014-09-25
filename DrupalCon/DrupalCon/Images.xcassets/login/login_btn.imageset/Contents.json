@@ -15,6 +15,10 @@
       "filename" : "log_in_btn_568h@2x .png",
       "subtype" : "retina4",
       "scale" : "2x"
+    },
+    {
+      "idiom" : "iphone",
+      "scale" : "3x"
     }
   ],
   "info" : {

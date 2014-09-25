@@ -15,6 +15,10 @@
       "filename" : "ic_program_next_586h@2x.png",
       "subtype" : "retina4",
       "scale" : "2x"
+    },
+    {
+      "idiom" : "iphone",
+      "scale" : "3x"
     }
   ],
   "info" : {
