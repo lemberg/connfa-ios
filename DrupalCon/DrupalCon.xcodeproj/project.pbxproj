@@ -964,6 +964,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Lemberg Solution";
 				TargetAttributes = {
+					5DC8C410198656DA00BF5816 = {
+						DevelopmentTeam = J7LBYY3B34;
+					};
 					5DC8C431198656DB00BF5816 = {
 						TestTargetID = 5DC8C410198656DA00BF5816;
 					};
@@ -1233,11 +1236,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DrupalCon/DrupalCon-Prefix.pch";
 				INFOPLIST_FILE = "DrupalCon/DrupalCon-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1249,11 +1254,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DrupalCon/DrupalCon-Prefix.pch";
 				INFOPLIST_FILE = "DrupalCon/DrupalCon-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
