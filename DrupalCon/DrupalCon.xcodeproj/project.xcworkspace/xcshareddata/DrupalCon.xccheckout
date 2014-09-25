@@ -10,24 +10,36 @@
 	<string>DrupalCon</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>75C3126922E7896526A76D250262E4D5713CCDB2</key>
+		<string>codebasehq.com:lemberg/drupalcon-app/ios.git</string>
 		<key>E95A63C2-1858-4E3C-AB3C-482065011F03</key>
 		<string>ssh://codebasehq.com/lemberg/drupalcon-app/ios.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>DrupalCon/DrupalCon.xcodeproj/project.xcworkspace</string>
+	<string>DrupalCon/DrupalCon.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>E95A63C2-1858-4E3C-AB3C-482065011F03</key>
+		<key>75C3126922E7896526A76D250262E4D5713CCDB2</key>
 		<string>../../..</string>
+		<key>E95A63C2-1858-4E3C-AB3C-482065011F03</key>
+		<string>../../../../DrupalCon</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://codebasehq.com/lemberg/drupalcon-app/ios.git</string>
+	<string>codebasehq.com:lemberg/drupalcon-app/ios.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>E95A63C2-1858-4E3C-AB3C-482065011F03</string>
+	<string>75C3126922E7896526A76D250262E4D5713CCDB2</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>75C3126922E7896526A76D250262E4D5713CCDB2</string>
+			<key>IDESourceControlWCCName</key>
+			<string>DropalCon</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
