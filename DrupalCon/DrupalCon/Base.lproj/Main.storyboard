@@ -732,6 +732,10 @@
                                     <outlet property="delegate" destination="6Ac-rd-t6g" id="8kz-oj-irc"/>
                                 </connections>
                             </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_details" id="Wwc-vF-Rh2">
+                                <rect key="frame" x="31" y="341" width="260" height="126"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -739,6 +743,7 @@
                     <connections>
                         <outlet property="detailTable" destination="Efz-0r-0h0" id="DB6-JQ-b89"/>
                         <outlet property="eventPictureImg" destination="O7Z-7c-yht" id="PFm-ey-FLl"/>
+                        <outlet property="noDetailImageView" destination="Wwc-vF-Rh2" id="o8L-Fc-2AS"/>
                         <segue destination="mhH-N1-zUD" kind="push" id="iLd-Ui-Eme"/>
                     </connections>
                 </viewController>
@@ -1466,6 +1471,7 @@
         <image name="login_bg" width="320" height="480"/>
         <image name="login_btn" width="189" height="39"/>
         <image name="login_lock" width="112" height="147"/>
+        <image name="no_details" width="90" height="95"/>
         <image name="program_details_default" width="320" height="246"/>
         <image name="star_off" width="25" height="25"/>
         <image name="star_on" width="25" height="25"/>

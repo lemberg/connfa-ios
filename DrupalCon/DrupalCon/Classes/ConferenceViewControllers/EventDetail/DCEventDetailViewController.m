@@ -31,6 +31,7 @@
 @property (nonatomic, strong) CloseCallback closeCallback;
 @property (nonatomic, strong) NSIndexPath *lastIndexPath;
 @property (nonatomic, strong) NSMutableDictionary *cellsHeight;
+@property (weak, nonatomic) IBOutlet UIImageView *noDetailImageView;
 
 @end
 @implementation DCEventDetailViewController
@@ -57,6 +58,9 @@
     self.title = ([_event.timeRange.from isTimeValid])? [_event.timeRange stringValue] : @"";
     self.navigatorBarStyle = EBaseViewControllerNatigatorBarStyleTransparrent;
     self.speakers = [_event.speakers allObjects];
+
+    self.noDetailImageView.hidden = ![self hideEmptyDetailIcon];
+    self.detailTable.scrollEnabled = ![self hideEmptyDetailIcon];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -76,7 +80,13 @@
     self.title = ([_event.timeRange.from isTimeValid])? [_event.timeRange stringValue] : @"";
     
 }
-
+- (BOOL)hideEmptyDetailIcon
+{
+    BOOL isHeaderEmpty = [self isHeaderEmpty];
+    BOOL isNoSpeakers = ![_speakers count];
+    BOOL isDescriptionEmpty = _event.desctiptText.length == 0;
+    return isHeaderEmpty && isNoSpeakers && isDescriptionEmpty;
+}
 - (void)didCloseWithCallback:(CloseCallback)callback
 {
     self.closeCallback = callback;
