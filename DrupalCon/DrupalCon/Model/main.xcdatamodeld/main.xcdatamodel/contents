@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13E28" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6244" systemVersion="13E28" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="DCBof" representedClassName="DCBof" parentEntity="DCEvent" syncable="YES"/>
     <entity name="DCEvent" representedClassName="DCEvent" isAbstract="YES" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
@@ -64,12 +64,12 @@
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DCEvent" inverseName="type" inverseEntity="DCEvent" syncable="YES"/>
     </entity>
     <elements>
-        <element name="DCBof" positionX="-5427" positionY="-2142" width="128" height="45"/>
+        <element name="DCBof" positionX="-5427" positionY="-2142" width="128" height="43"/>
         <element name="DCEvent" positionX="-5744" positionY="-2142" width="128" height="28"/>
         <element name="DCFavoriteEvent" positionX="-5481" positionY="-1858" width="128" height="58"/>
         <element name="DCLevel" positionX="-5978" positionY="-2214" width="128" height="103"/>
         <element name="DCLocation" positionX="-6111" positionY="-1755" width="128" height="118"/>
-        <element name="DCProgram" positionX="-5571" positionY="-2142" width="128" height="45"/>
+        <element name="DCProgram" positionX="-5571" positionY="-2142" width="128" height="43"/>
         <element name="DCSpeaker" positionX="-5733" positionY="-1744" width="128" height="208"/>
         <element name="DCTime" positionX="-6165" positionY="-2106" width="128" height="73"/>
         <element name="DCTimeRange" positionX="-5978" positionY="-2088" width="128" height="73"/>
