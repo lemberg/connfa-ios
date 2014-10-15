@@ -29,6 +29,9 @@ typedef void (^DataProviderCallBack)(BOOL success, id result);
 
 @interface DCDataProvider : NSObject
 
+// method used for test feeds localy
 + (void)updateMainDataFromFile:(NSString*)fileName callBack:(DataProviderCallBack)callBack;
+
 + (void)updateMainDataFromURI:(NSString *)uri callBack:(DataProviderCallBack)callBack;
+
 @end

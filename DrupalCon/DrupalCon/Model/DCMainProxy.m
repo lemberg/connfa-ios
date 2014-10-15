@@ -43,8 +43,6 @@
 const NSString * INVALID_JSON_EXCEPTION = @"Invalid JSON";
 static NSString * kDCMainProxyModelName = @"main";
 
-static NSString * kDCMainProxyProgramFile = @"conference";
-static NSString * kDCMainProxyTypesFile = @"types";
 static NSString * kTimeStampSynchronisation = @"lastUpdate";
 static NSString * kAboutInfo = @"aboutHTML";
 
@@ -58,13 +56,23 @@ static NSString *const TIME_STAMP_URI = @"getLastUpdate";
 static NSString *const ABOUT_INFO_URI = @"getAbout";
 static NSString *const LOCATION_URI = @"getLocations";
 
+#pragma mark - block declaration
+
 typedef void(^UpdateDataFail)(NSString *reason);
+
+#pragma mark -
+
 @interface DCMainProxy ()
-@property (nonatomic, copy) void(^dataReadyCallback)(BOOL isDataReady, BOOL isUpdatedFromServer);
-@property (nonatomic, getter = isSyncronizeProcessStarted) BOOL syncronizeProcessStarted;
+
+@property (nonatomic, copy) void(^dataReadyCallback)(DCMainProxyState mainProxyState);
+
 @end
 
+#pragma mark -
+#pragma mark -
+
 @implementation DCMainProxy
+
 @synthesize managedObjectModel=_managedObjectModel,
 managedObjectContext=_managedObjectContext,
 persistentStoreCoordinator=_persistentStoreCoordinator;
@@ -75,46 +83,46 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     static dispatch_once_t disp;
     dispatch_once(&disp, ^{
         sharedProxy = [[super alloc] init];
+        [sharedProxy setState:([sharedProxy savedValueForKey:kTimeStampSynchronisation]?DCMainProxyStateDataReady:DCMainProxyStateNoData)];
     });
     return sharedProxy;
 }
 
-- (void)dataReadyBlock:(void(^)(BOOL isDataReady,  BOOL isUpdatedFromServer))callback
+- (void)setDataReadyCallback:(void (^)(DCMainProxyState))dataReadyCallback
 {
-    if (self.isDataReady) {
-        callback(self.isDataReady, YES);
+    if (self.state == DCMainProxyStateDataReady)
+    {
+        dataReadyCallback(self.state);
     }
     
-    self.dataReadyCallback = callback;
+    _dataReadyCallback = dataReadyCallback;
 }
 
 - (void)startNetworkChecking
 {
-    
-    Reachability * reach = [Reachability reachabilityWithHostname:SERVER_URL];
+//    Reachability * reach = [Reachability reachabilityWithHostname:SERVER_URL];
+    Reachability * reach = [Reachability reachabilityWithHostname:@"google.com"];
     if (reach.isReachable)
     {
-        if (!self.syncronizeProcessStarted) {
-            self.syncronizeProcessStarted = YES;
-            [self updateEvents];
-        }
+        [self updateEvents];
     }
     else
     {
-        if ([self savedValueForKey:kTimeStampSynchronisation])
+        if (self.state == DCMainProxyStateInitDataLoading)
         {
-            self.dataReady = YES;
-            [self dataIsReady:self.dataReady updatedFromServer:NO];
+            [self setState:DCMainProxyStateNoData];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[[UIAlertView alloc] initWithTitle:@"Attention"
+                                            message:@"Internet connection is not available at this moment. Please, try later"
+                                           delegate:nil
+                                  cancelButtonTitle:@"Ok"
+                                  otherButtonTitles:nil] show];
+            });
         }
         else
         {
-            dispatch_async(dispatch_get_main_queue(), ^{
-            [[[UIAlertView alloc] initWithTitle:@"Attention"
-                                       message:@"Internet connection is not available at this moment. Please, try later"
-                                      delegate:nil
-                             cancelButtonTitle:@"Ok"
-                              otherButtonTitles:nil] show];
-            });
+            [self setState:DCMainProxyStateLoadingFail];
+            [self dataIsReady];
         }
     }
     return;
@@ -124,18 +132,28 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 
 - (void)update
 {
-
-    self.dataReady = NO;
-    self.syncronizeProcessStarted = NO;
+    if (self.state == DCMainProxyStateInitDataLoading ||
+        self.state == DCMainProxyStateDataLoading)
+    {
+        NSLog(@"data is already in loading progress");
+        return;
+    }
+    else if (self.state == DCMainProxyStateNoData)
+    {
+        [self setState:DCMainProxyStateInitDataLoading];
+    }
+    else
+    {
+        [self setState:DCMainProxyStateDataLoading];
+    }
+    
     [self startNetworkChecking];
-
 }
 
-- (void)dataIsReady:(BOOL)ready
-  updatedFromServer:(BOOL)updateFromServer
+- (void)dataIsReady
 {
     if (self.dataReadyCallback) {
-        self.dataReadyCallback(ready, updateFromServer);
+        self.dataReadyCallback(self.state);
     }
 }
 
@@ -144,11 +162,9 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     // FIXME: Create director pattern to observe and handle synchronisation proccess
 
     [self timeStamp:^(NSString *timeStamp) {
-        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-        if ([self updateTimeStampSynchronisation:timeStamp]) {
-
-            [self showRootController];
+        if ([self updateTimeStampSynchronisation:timeStamp])
+        {
             __block BOOL isUpdateFail = NO;
             UpdateDataFail updateFail = ^(NSString *reason){
                 isUpdateFail = YES;
@@ -162,39 +178,28 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
             [self updateLocationCallback:updateFail];
             [self synchrosizeFavoritePrograms];
             [self loadHtmlAboutInfo:^(NSString *response) {}];
-            if (!isUpdateFail) {
+            
+            if (!isUpdateFail)
+            {
+                [self setState:DCMainProxyStateDataReady];
                 [self saveObject:timeStamp forKey:kTimeStampSynchronisation];
-                self.dataReady = YES;
-            } else {
-                [self saveObject:@"" forKey:kTimeStampSynchronisation];
-                self.dataReady = NO;
             }
-            [self dataIsReady:self.dataReady updatedFromServer:self.dataReady];
-
-        } else {
-             self.dataReady = YES;
-            [self dataIsReady:self.dataReady updatedFromServer:NO];
+            else
+            {
+                [self setState:DCMainProxyStateLoadingFail];
+            }
         }
+        
+        [self dataIsReady];
         [[UIApplication sharedApplication] endIgnoringInteractionEvents];
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
     }];
 }
-- (void)showRootController
-{
-    // root in this case meens Side menu
-    UINavigationController *navController = (UINavigationController *)[(AppDelegate*)[[UIApplication sharedApplication] delegate] window].rootViewController;
-    [[navController topViewController] dismissViewControllerAnimated:YES completion:nil];
-    [navController popToViewController:navController.viewControllers[0] animated:NO];
-    
-                                                                       
-}
 
 - (void)openLocalNotification:(UILocalNotification *)localNotification
 {
 // FIXME: Rewrite this code. It create stack with favorite controller and event detail controller.
-    [self showRootController];
-    [self setDataReady:NO];
     UINavigationController *navigation = (UINavigationController *)[(AppDelegate*)[[UIApplication sharedApplication] delegate] window].rootViewController;
     [navigation popToRootViewControllerAnimated:NO];
     NSNumber *eventID = localNotification.userInfo[@"EventID"];
@@ -232,10 +237,10 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
      callBack:^(BOOL success, id result) {
          if (success && result) {
              NSError *err;
-             NSDictionary * tracks = [NSJSONSerialization JSONObjectWithData:result
+             NSDictionary * stamp = [NSJSONSerialization JSONObjectWithData:result
                                                                      options:kNilOptions
                                                                        error:&err];
-             callback([tracks objectForKey:kTimeStampSynchronisation]);
+             callback([stamp objectForKey:kTimeStampSynchronisation]);
          }
          else {
              NSLog(@"%@", result);

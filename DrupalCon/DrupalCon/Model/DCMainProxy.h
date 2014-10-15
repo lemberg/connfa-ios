@@ -27,13 +27,24 @@ extern NSString * INVALID_JSON_EXCEPTION;
 
 @class DCProgram, DCBof, DCType, DCTime, DCTimeRange, DCSpeaker, DCLevel, DCTrack, DCLocation, DCEvent;
 
+typedef enum {
+    DCMainProxyStateNone = 0,
+    DCMainProxyStateNoData,
+    DCMainProxyStateLoadingFail,
+    DCMainProxyStateInitDataLoading,
+    DCMainProxyStateDataLoading,
+    DCMainProxyStateUpdatesWaiting,
+    DCMainProxyStateDataReady
+}DCMainProxyState;
+
 @interface DCMainProxy : NSObject
 
 @property (nonatomic, strong, readonly) NSManagedObjectModel * managedObjectModel;
 @property (nonatomic, strong, readonly) NSManagedObjectContext * managedObjectContext;
 @property (nonatomic, strong, readonly) NSPersistentStoreCoordinator * persistentStoreCoordinator;
 
-@property (nonatomic, getter = isDataReady) BOOL dataReady;
+@property (nonatomic) DCMainProxyState state;
+
 
 + (DCMainProxy*)sharedProxy;
 
