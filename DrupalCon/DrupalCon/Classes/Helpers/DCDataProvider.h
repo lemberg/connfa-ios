@@ -22,7 +22,8 @@
 
 #import <Foundation/Foundation.h>
 
-#define SERVER_URL  @"http://amsterdam2014.uat.link/api/"
+#define SERVER_URL  @"http://amsterdam2014.uat.link"
+#define BASE_URL [NSString stringWithFormat:@"%@/api/",SERVER_URL]
 
 typedef void (^DataProviderCallBack)(BOOL success, id result);
 

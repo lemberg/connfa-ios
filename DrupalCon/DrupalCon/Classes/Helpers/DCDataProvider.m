@@ -51,7 +51,7 @@
 
 + (void)updateMainDataFromURI:(NSString *)uri callBack:(DataProviderCallBack)callBack
 {
-    NSURL *requestURL = [NSURL URLWithString:uri relativeToURL:[NSURL URLWithString:SERVER_URL]];
+    NSURL *requestURL = [NSURL URLWithString:uri relativeToURL:[NSURL URLWithString:BASE_URL]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setHTTPMethod:@"GET"];
     [request setURL:requestURL];

@@ -91,7 +91,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 - (void)startNetworkChecking
 {
     
-    Reachability * reach = [Reachability reachabilityWithHostname:@"google.com"];
+    Reachability * reach = [Reachability reachabilityWithHostname:SERVER_URL];
     if (reach.isReachable)
     {
         if (!self.syncronizeProcessStarted) {
