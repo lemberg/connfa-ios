@@ -21,9 +21,8 @@
 //
 
 #import "DCTrack.h"
+#import "DCParseProtocol.h"
 
-@interface DCTrack (DC)
-
-+ (void)parseFromJsonData:(NSData *)jsonData;
+@interface DCTrack (DC) <parseProtocol>
 
 @end

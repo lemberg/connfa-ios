@@ -21,10 +21,9 @@
 //
 
 #import "DCLocation.h"
-#import "DCMainProxy.h"
+#import "DCParseProtocol.h"
 
-@interface DCLocation (DC)
+@interface DCLocation (DC) <parseProtocol>
 
-+ (void)parseFromJsonData:(NSData *)jsonData;
 
 @end

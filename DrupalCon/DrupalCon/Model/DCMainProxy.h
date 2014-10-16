@@ -48,9 +48,12 @@ typedef enum {
 
 + (DCMainProxy*)sharedProxy;
 
-- (void)dataReadyBlock:(void(^)(BOOL isDataReady, BOOL isUpdatedFromServer))callback;
+#pragma mark - public
 
 - (void)update;
+
+#pragma mark - getting instances
+
 - (NSArray*)programInstances;
 - (NSArray*)bofInstances;
 - (NSArray*)typeInstances;
@@ -65,6 +68,8 @@ typedef enum {
 - (DCLevel*)levelForId:(NSInteger)levelId;
 - (DCTrack*)trackForId:(NSInteger)trackId;
 
+#pragma mark - creating
+
 - (DCProgram*)createProgramItem;
 - (DCBof*)createBofItem;
 - (DCType*)createType;
@@ -75,8 +80,13 @@ typedef enum {
 - (DCTrack*)createTrack;
 - (DCLocation*)createLocation;
 
+#pragma mark - favorites 
+
+//FIXME: separate Favorites to favoriteManager
+
 - (void)addToFavoriteEvent:(DCEvent *)event;
 - (void)removeFavoriteEventWithID:(NSNumber *)eventID;
 - (NSArray *)eventsWithIDs:(NSArray *)iDs;
 - (void)openLocalNotification:(UILocalNotification *)localNotification;
+
 @end

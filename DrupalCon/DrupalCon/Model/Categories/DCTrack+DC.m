@@ -30,26 +30,48 @@ NSString * kDCTrack_trackName_key = @"trackName";
 
 @implementation DCTrack (DC)
 
-+ (void)parseFromJsonData:(NSData *)jsonData
+#pragma mark - parseProtocol
+
++ (BOOL)successParceJSONData:(NSData *)jsonData idsForRemove:(NSArray *__autoreleasing *)idsForRemove
 {
     NSError * err = nil;
     NSDictionary * tracks = [NSJSONSerialization JSONObjectWithData:jsonData
                                                             options:kNilOptions
                                                               error:&err];
     tracks = [tracks dictionaryByReplacingNullsWithStrings];
+    
     if (err)
     {
-        NSLog(@"WRONG! json");
         @throw [NSException exceptionWithName:INVALID_JSON_EXCEPTION reason:@"Problem in json structure" userInfo:nil];
-        return;
+        return NO;
     }
     
-    for (NSDictionary * dictionary in tracks[kDCTrack_traks_key])
+    //adding
+    for (NSDictionary * dictionary in tracks[kDCParcesObjectsToAdd])
     {
         DCTrack * track = [[DCMainProxy sharedProxy] createTrack];
         track.trackId = dictionary[kDCTrack_trackID_key];
         track.name = dictionary[kDCTrack_trackName_key];
     }
     
+    
+    //colelct objects ids for removing
+    if (tracks[kDCParcesObjectsToRemove])
+    {
+        NSMutableArray * idsForRemoveMut = [[NSMutableArray alloc] initWithCapacity:[(NSArray*)tracks[kDCParcesObjectsToRemove] count]];
+        for (NSDictionary * idDictiuonary in tracks[kDCParcesObjectsToRemove])
+        {
+            [idsForRemoveMut addObject:idDictiuonary[kDCTrack_trackID_key]];
+        }
+        * idsForRemove  = [[NSArray alloc] initWithArray:idsForRemoveMut];
+    }
+    
+    return YES;
 }
+
++ (NSString*)idKey
+{
+    return (NSString*)kDCTrack_trackID_key;
+}
+
 @end

@@ -30,6 +30,7 @@ const NSString * kDCType_typeName_key = @"typeName";
 
 @implementation DCType (DC)
 
+//FIXME: remove implementation of this method
 + (void)parseFromJsonData:(NSData *)jsonData
 {
     NSError * err = nil;
@@ -51,6 +52,50 @@ const NSString * kDCType_typeName_key = @"typeName";
         type.typeID = typeDictionary[kDCType_typeID_key];
         type.name = typeDictionary[kDCType_typeName_key];
     }
+}
+
+#pragma mark - parce protocol
+
++ (BOOL)successParceJSONData:(NSData *)jsonData idsForRemove:(NSArray *__autoreleasing *)idsForRemove
+{
+    NSError * err = nil;
+    NSDictionary * types = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                           options:kNilOptions
+                                                             error:&err];
+    types = [types dictionaryByReplacingNullsWithStrings];
+    
+    if (err)
+    {
+        @throw [NSException exceptionWithName:INVALID_JSON_EXCEPTION reason:@"Problem in json structure" userInfo:nil];
+        return NO;
+    }
+    
+    //adding
+    for (NSDictionary * typeDictionary in types[kDCParcesObjectsToAdd])
+    {
+        DCType * type = [[DCMainProxy sharedProxy] createType];
+        type.typeID = typeDictionary[kDCType_typeID_key];
+        type.name = typeDictionary[kDCType_typeName_key];
+    }
+    
+    
+    //colelct objects ids for removing
+    if (types[kDCParcesObjectsToRemove])
+    {
+        NSMutableArray * idsForRemoveMut = [[NSMutableArray alloc] initWithCapacity:[(NSArray*)types[kDCParcesObjectsToRemove] count]];
+        for (NSDictionary * idDictiuonary in types[kDCParcesObjectsToRemove])
+        {
+            [idsForRemoveMut addObject:idDictiuonary[kDCType_typeID_key]];
+        }
+        * idsForRemove  = [[NSArray alloc] initWithArray:idsForRemoveMut];
+    }
+    
+    return YES;
+}
+
++ (NSString*)idKey
+{
+    return (NSString*)kDCType_typeID_key;
 }
 
 @end

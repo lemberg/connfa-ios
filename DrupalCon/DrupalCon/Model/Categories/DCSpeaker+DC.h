@@ -21,9 +21,11 @@
 //
 
 #import "DCSpeaker.h"
+#import "DCParseProtocol.h"
 
-@interface DCSpeaker (DC)
+@interface DCSpeaker (DC) <parseProtocol>
 
+//FIXME: remove this method
 + (void)parseFromJSONData:(NSData*)jsonData;
 
 @end

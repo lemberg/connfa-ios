@@ -31,21 +31,24 @@ const NSString * kDCBof_bofEvents_key = @"bofsEvents";
 @implementation DCBof (DC)
 
 
-+ (void)parseFromJSONData:(NSData *)jsonData
+#pragma mark - parseProtocol
+
++ (BOOL)successParceJSONData:(NSData *)jsonData idsForRemove:(NSArray *__autoreleasing *)idsForRemove
 {
     NSError * err = nil;
-    NSDictionary * eventItems = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                                options:kNilOptions
-                                                                  error:&err];
-    eventItems = [eventItems dictionaryByReplacingNullsWithStrings];
+    NSDictionary * events = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                            options:kNilOptions
+                                                              error:&err];
+    events = [events dictionaryByReplacingNullsWithStrings];
+    
     if (err)
     {
-        NSLog(@"WRONG! json");
-        @throw [NSException exceptionWithName:@"Invalid JSON" reason:@"Problem in json structure" userInfo:nil];
-        return;
+        @throw [NSException exceptionWithName:INVALID_JSON_EXCEPTION reason:@"Problem in json structure" userInfo:nil];
+        return NO;
     }
     
-    for (NSDictionary * day in eventItems[kDCEvent_days_key])
+    //adding
+    for (NSDictionary * day in events[kDCParcesObjectsToAdd])
     {
         NSDate * date = [NSDate fabricateWithEventString:day[kDCEvent_date_key]];
         for (NSDictionary * event in day[kDCBof_bofEvents_key])
@@ -54,6 +57,19 @@ const NSString * kDCBof_bofEvents_key = @"bofsEvents";
             [DCBof parseEventFromDictionaty:event toObject:bofInstance forDate:date];
         }
     }
+    
+    //colelct objects ids for removing
+    if (events[kDCParcesObjectsToRemove])
+    {
+        NSMutableArray * idsForRemoveMut = [[NSMutableArray alloc] initWithCapacity:[(NSArray*)events[kDCParcesObjectsToRemove] count]];
+        for (NSDictionary * idDictiuonary in events[kDCParcesObjectsToRemove])
+        {
+            [idsForRemoveMut addObject:idDictiuonary[kDCEvent_eventId_key]];
+        }
+        * idsForRemove  = [[NSArray alloc] initWithArray:idsForRemoveMut];
+    }
+    
+    return YES;
 }
 
 @end

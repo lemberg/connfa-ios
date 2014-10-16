@@ -22,8 +22,10 @@
 
 #import "DCLocation+DC.h"
 #import "NSDictionary+DC.h"
+#import "DCMainProxy.h"
 
 NSString *kDCLocation = @"locations";
+NSString *kDCLocationID = @"loactionID";
 NSString *kDCLocationLongitude = @"longitude";
 NSString *kDCLocationLatitude  = @"latitude";
 NSString *kDCLocationPlaceName = @"locationName";
@@ -55,8 +57,52 @@ NSString *kDCLocationBuildNum = @"number";
         locationData.streetName = venue[kDCLocationStreetName];
         locationData.number = venue[kDCLocationBuildNum];
     }
-
-    
-
 }
+
+#pragma mark - parseProtocol
+
++ (BOOL)successParceJSONData:(NSData *)jsonData idsForRemove:(NSArray *__autoreleasing *)idsForRemove
+{
+    NSError * err = nil;
+    NSDictionary * location = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                                options:kNilOptions
+                                                                error:&err];
+    location = [location dictionaryByReplacingNullsWithStrings];
+    
+    if (err)
+    {
+        @throw [NSException exceptionWithName:INVALID_JSON_EXCEPTION reason:@"Problem in json structure" userInfo:nil];
+        return NO;
+    }
+    
+    //adding
+    for (NSDictionary *venue in location[kDCLocation]) {
+        DCLocation * locationData = [[DCMainProxy sharedProxy] createLocation];
+        locationData.latitude = venue[kDCLocationLatitude];
+        locationData.longitude = venue[kDCLocationLongitude];
+        locationData.name = venue[kDCLocationPlaceName];
+        locationData.streetName = venue[kDCLocationStreetName];
+        locationData.number = venue[kDCLocationBuildNum];
+    }
+    
+    
+    //colelct objects ids for removing
+    if (location[kDCParcesObjectsToRemove])
+    {
+        NSMutableArray * idsForRemoveMut = [[NSMutableArray alloc] initWithCapacity:[(NSArray*)location[kDCParcesObjectsToRemove] count]];
+        for (NSDictionary * idDictiuonary in location[kDCParcesObjectsToRemove])
+        {
+            [idsForRemoveMut addObject:idDictiuonary[kDCLocationID]];
+        }
+        * idsForRemove  = [[NSArray alloc] initWithArray:idsForRemoveMut];
+    }
+    
+    return YES;
+}
+
++ (NSString*)idKey
+{
+    return (NSString*)kDCLocationID;
+}
+
 @end

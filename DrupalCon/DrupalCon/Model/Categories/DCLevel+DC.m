@@ -31,29 +31,49 @@ NSString * kDCLevel_levelOrder_key = @"levelOrder";
 
 @implementation DCLevel (DC)
 
-+ (void)parseFromJsonData:(NSData *)jsonData
+#pragma mark - parseProtocol
+
++ (BOOL)successParceJSONData:(NSData *)jsonData idsForRemove:(NSArray *__autoreleasing *)idsForRemove
 {
     NSError * err = nil;
     NSDictionary * levels = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                              options:kNilOptions
-                                                                error:&err];
+                                                            options:kNilOptions
+                                                              error:&err];
     levels = [levels dictionaryByReplacingNullsWithStrings];
+    
     if (err)
     {
-        NSLog(@"WRONG! json");
         @throw [NSException exceptionWithName:INVALID_JSON_EXCEPTION reason:@"Problem in json structure" userInfo:nil];
-
-        return;
+        return NO;
     }
     
-    for (NSDictionary * dictionary in levels[kDCLevel_levels_key])
+    //adding
+    for (NSDictionary * dictionary in levels[kDCParcesObjectsToAdd])
     {
         DCLevel * level = [[DCMainProxy sharedProxy] createLevel];
         level.levelId = dictionary[kDCLevel_levelID_key];
         level.name = dictionary[kDCLevel_levelName_key];
         level.order = @([dictionary[kDCLevel_levelOrder_key] integerValue]);
     }
+    
+    
+    //colelct objects ids for removing
+    if (levels[kDCParcesObjectsToRemove])
+    {
+        NSMutableArray * idsForRemoveMut = [[NSMutableArray alloc] initWithCapacity:[(NSArray*)levels[kDCParcesObjectsToRemove] count]];
+        for (NSDictionary * idDictiuonary in levels[kDCParcesObjectsToRemove])
+        {
+            [idsForRemoveMut addObject:idDictiuonary[kDCLevel_levelID_key]];
+        }
+        * idsForRemove  = [[NSArray alloc] initWithArray:idsForRemoveMut];
+    }
+    
+    return YES;
+}
 
++ (NSString*)idKey
+{
+    return (NSString*)kDCLevel_levelID_key;
 }
 
 @end

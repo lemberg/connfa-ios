@@ -21,9 +21,8 @@
 //
 
 #import "DCLevel.h"
+#import "DCParseProtocol.h"
 
-@interface DCLevel (DC)
-
-+ (void)parseFromJsonData:(NSData *)jsonData;
+@interface DCLevel (DC) <parseProtocol>
 
 @end

@@ -27,6 +27,7 @@
 #import "DCLevel+DC.h"
 #import "DCTrack+DC.h"
 #import "DCMainProxy+Additions.h"
+
 #import "NSString+HTML.h"
 
 const NSString * kDCEvent_days_key = @"days";
@@ -183,5 +184,19 @@ const NSString * kDCEvent_place_key = @"place";
     }
     return [UIImage imageNamed:icon_name];
 }
+
+#pragma mark - parseProtocol
+
++ (BOOL)successParceJSONData:(NSData *)jsonData idsForRemove:(NSArray *__autoreleasing *)idsForRemove
+{
+    // implementation is in child
+    return NO;
+}
+
++ (NSString*)idKey
+{
+    return (NSString*)kDCEvent_eventId_key;
+}
+
 
 @end

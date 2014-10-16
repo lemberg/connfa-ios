@@ -104,6 +104,7 @@
 		84A24FD019C1F609006EF17E /* DCSpeaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A24FCF19C1F609006EF17E /* DCSpeaker.m */; };
 		84A24FD319C1F609006EF17E /* DCTimeRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A24FD219C1F609006EF17E /* DCTimeRange.m */; };
 		84A24FD619C1F609006EF17E /* DCType.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A24FD519C1F609006EF17E /* DCType.m */; };
+		84A25A8919F01C6E0051C466 /* NSUserDefaults+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A25A8819F01C6E0051C466 /* NSUserDefaults+DC.m */; };
 		84ABE8F519BEEB8F0019D5DC /* DCEventStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ABE8F419BEEB8F0019D5DC /* DCEventStrategy.m */; };
 		84FAE0E819A645E000DC9FF1 /* NSArray+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAE0E719A645E000DC9FF1 /* NSArray+DC.m */; };
 		84FAE10919A65FEA00DC9FF1 /* DCTime+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAE10819A65FEA00DC9FF1 /* DCTime+DC.m */; };
@@ -301,6 +302,9 @@
 		84A24FD219C1F609006EF17E /* DCTimeRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCTimeRange.m; path = Model/DCTimeRange.m; sourceTree = "<group>"; };
 		84A24FD419C1F609006EF17E /* DCType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCType.h; path = Model/DCType.h; sourceTree = "<group>"; };
 		84A24FD519C1F609006EF17E /* DCType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCType.m; path = Model/DCType.m; sourceTree = "<group>"; };
+		84A25A8519EFFB4D0051C466 /* DCParseProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCParseProtocol.h; path = Model/Categories/DCParseProtocol.h; sourceTree = "<group>"; };
+		84A25A8719F01C6E0051C466 /* NSUserDefaults+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSUserDefaults+DC.h"; path = "Classes/Helpers/NSUserDefaults+DC.h"; sourceTree = "<group>"; };
+		84A25A8819F01C6E0051C466 /* NSUserDefaults+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSUserDefaults+DC.m"; path = "Classes/Helpers/NSUserDefaults+DC.m"; sourceTree = "<group>"; };
 		84ABE8F319BEEB8F0019D5DC /* DCEventStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCEventStrategy.h; sourceTree = "<group>"; };
 		84ABE8F419BEEB8F0019D5DC /* DCEventStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCEventStrategy.m; sourceTree = "<group>"; };
 		84FAE0E619A645E000DC9FF1 /* NSArray+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+DC.h"; path = "Classes/Helpers/NSArray+DC.h"; sourceTree = "<group>"; };
@@ -485,6 +489,8 @@
 				849D92C719ADF31D00977D67 /* UIImageView+DC.m */,
 				74E8381E19C09371000D2BE4 /* NSString+HTML.h */,
 				74E8381F19C09371000D2BE4 /* NSString+HTML.m */,
+				84A25A8719F01C6E0051C466 /* NSUserDefaults+DC.h */,
+				84A25A8819F01C6E0051C466 /* NSUserDefaults+DC.m */,
 				74356D5619BEE4860055F13D /* Reachability.h */,
 				74356D5719BEE4860055F13D /* Reachability.m */,
 			);
@@ -791,6 +797,7 @@
 		849EFDD819A4AAC600C43E05 /* DOCategories */ = {
 			isa = PBXGroup;
 			children = (
+				84A25A8519EFFB4D0051C466 /* DCParseProtocol.h */,
 				849EFE1C19A4EB2100C43E05 /* DCEvent+DC.h */,
 				849EFE1D19A4EB2100C43E05 /* DCEvent+DC.m */,
 				849EFE1F19A4FB9600C43E05 /* DCProgram+DC.h */,
@@ -1007,6 +1014,7 @@
 				74A6278819B8A37200B46B75 /* DCFavoritesViewController.m in Sources */,
 				74F0340519B4A965007E4AB9 /* DCAboutViewController.m in Sources */,
 				84A24FBB19C1F608006EF17E /* DCLocation.m in Sources */,
+				84A25A8919F01C6E0051C466 /* NSUserDefaults+DC.m in Sources */,
 				74E8381519C061CD000D2BE4 /* SDWebImageManager.m in Sources */,
 				5DC8C46C198658FF00BF5816 /* DCLoginViewController.m in Sources */,
 				849D92C219ADCCDD00977D67 /* DCNavViewController.m in Sources */,

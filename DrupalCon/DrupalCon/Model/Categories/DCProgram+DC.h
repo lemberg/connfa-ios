@@ -26,6 +26,4 @@ extern NSString * kDCProgram_programEvents_key;
 
 @interface DCProgram (DC)
 
-
-
 @end

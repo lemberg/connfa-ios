@@ -21,9 +21,11 @@
 //
 
 #import "DCType.h"
+#import "DCParseProtocol.h"
 
-@interface DCType (DC)
+@interface DCType (DC) <parseProtocol>
 
+//FIXME: remove this method
 + (void)parseFromJsonData:(NSData*)jsonData;
 
 @end
