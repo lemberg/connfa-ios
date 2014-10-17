@@ -8,34 +8,34 @@
 
 #import "NSUserDefaults+DC.h"
 
-static NSString * kTimeStampSynchronisation = @"lastUpdate";
-static NSString * kAboutInfo = @"aboutHTML";
+const NSString * kTimeStampSynchronisation = @"lastUpdate";
+const NSString * kAboutInfo = @"aboutHTML";
 
 @implementation NSUserDefaults (DC)
 
-#pragma mark - timeStamp
+#pragma mark - last modified timestamp
 
-+ (void)updateTimestampString:(NSString *)timestamp
++ (void)updateTimestampString:(NSString *)timestamp ForClass:(Class)aClass
 {
-    [NSUserDefaults DC_saveObject:timestamp forKey:kTimeStampSynchronisation];
+    [NSUserDefaults DC_savedValueForKey:[NSUserDefaults DC_LastModifiedKeyStringForClass:aClass]];
 }
 
-+ (NSString*)lastUpdates
++ (NSString*)lastUpdateForClass:(Class)aClass
 {
-    return [NSUserDefaults DC_savedValueForKey:kTimeStampSynchronisation];
+    NSString * result = [NSUserDefaults DC_savedValueForKey:[NSUserDefaults DC_LastModifiedKeyStringForClass:aClass]];
+    return (result?result:@"0");
 }
-
 
 #pragma mark - about
 
 + (void)saveAbout:(NSString*)aboutString
 {
-    [NSUserDefaults DC_saveObject:aboutString forKey:kAboutInfo];
+    [NSUserDefaults DC_saveObject:aboutString forKey:(NSString*)kAboutInfo];
 }
 
 + (NSString*)aboutString
 {
-    return [NSUserDefaults DC_savedValueForKey:kAboutInfo];
+    return [NSUserDefaults DC_savedValueForKey:(NSString*)kAboutInfo];
 }
 
 
@@ -52,6 +52,11 @@ static NSString * kAboutInfo = @"aboutHTML";
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     return [userDefaults objectForKey:key];
+}
+
++ (NSString*)DC_LastModifiedKeyStringForClass:(Class)aClass
+{
+    return [NSString stringWithFormat:@"%@_%@", NSStringFromClass(aClass), kTimeStampSynchronisation];
 }
 
 @end

@@ -205,8 +205,7 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
     DCEvent * event = [self DC_eventForIndexPath:anIndexPath];
     event.favorite = [NSNumber numberWithBool:isFavorite];
     if (!isFavorite) {
-        [[DCMainProxy sharedProxy]
-         removeFavoriteEventWithID:event.eventID];
+        [[DCMainProxy sharedProxy] removeFavoriteEventWithID:event.eventID];
         [self deleteCellAtIndexPath:anIndexPath];
     }
     [self DC_checkEmptyness];

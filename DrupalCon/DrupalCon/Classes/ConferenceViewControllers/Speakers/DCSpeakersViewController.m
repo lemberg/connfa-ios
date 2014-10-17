@@ -39,7 +39,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _speakers = [self orderByLastName:[[DCMainProxy sharedProxy] speakerInstances]];
+    _speakers = [self orderByLastName:[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCSpeaker class] inMainQueue:YES]];
     [_speakersTbl reloadData];
 }
 

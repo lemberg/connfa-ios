@@ -56,10 +56,10 @@ typedef NS_ENUM (int, DCEventType) {
 
 + (void)parseEventFromDictionaty:(NSDictionary*)eventDict toObject:(DCEvent*)object forDate:(NSDate*)date;
 
-- (void)addTypeForID:(NSInteger)typeID;
+- (void)addTypeForID:(int)typeID;
 - (void)addSpeakersForIds:(NSArray*)speakerIds;
-- (void)addLevelForID:(NSInteger)levelID;
-- (void)addTrackForId:(NSInteger)trackId;
+- (void)addLevelForID:(int)levelID;
+- (void)addTrackForId:(int)trackId;
 
 - (UIImage*)imageForEvent;
 

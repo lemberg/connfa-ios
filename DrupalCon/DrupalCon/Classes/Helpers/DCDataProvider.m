@@ -36,38 +36,50 @@
                                                  options:NSDataReadingUncached
                                                    error:&err];
         if (err) {
-            callBack(NO, err);
+            callBack(NO, err, @"");
         }
         else
         {
-            callBack(YES, result);
+            callBack(YES, result, @"");
         }
     }
     else
     {
-        callBack(NO, @"no json file");
+        callBack(NO, @"no json file", @"");
     }
 }
 
-+ (void)updateMainDataFromURI:(NSString *)uri callBack:(DataProviderCallBack)callBack
++ (void)updateMainDataFromURI:(NSString *)uri lastModified:(NSString *)lastModified callBack:(DataProviderCallBack)callBack
 {
     NSURL *requestURL = [NSURL URLWithString:uri relativeToURL:[NSURL URLWithString:BASE_URL]];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setValue:lastModified forHTTPHeaderField:@"If-Modified-Since"];
     [request setHTTPMethod:@"GET"];
     [request setURL:requestURL];
     NSError * error = nil;
-    NSURLResponse* response;
+    NSHTTPURLResponse* response = nil;
     //Capturing server response
     NSData *data = [NSURLConnection sendSynchronousRequest:request  returningResponse:&response error:&error];
-    
-    if (error == nil)
+    BOOL success = YES;
+    NSString * lastModifiedResponce = nil;
+    if (error)
     {
-        // Parse data here
-        callBack(YES, data);
-    } else {
-        callBack (NO, data);
+        callBack (!success, data, lastModifiedResponce);
     }
     
+    else if (response.statusCode == 304) // there is no modify
+    {
+        callBack (success, data, lastModifiedResponce);
+    }
+    else if (response.statusCode == 200)
+    {
+        lastModifiedResponce = [NSString stringWithFormat:@"%@", [[(NSHTTPURLResponse *)response allHeaderFields] objectForKey:@"Last-Modified"]];
+        callBack(success, data, lastModifiedResponce);
+    }
+    else
+    {
+        callBack (!success, data, lastModifiedResponce);
+    }
 }
 
 

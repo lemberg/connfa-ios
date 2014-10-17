@@ -55,7 +55,7 @@ const NSString * kDCSpeaker_avatarPath_key = @"avatarImageUrl";
     
     for (NSDictionary * speakerDict in speakers[kDCSpeaker_speakers_key])
     {
-        DCSpeaker * speaker = [[DCMainProxy sharedProxy] createSpeaker];
+        DCSpeaker * speaker = (DCSpeaker*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCSpeaker class]];
         speaker.speakerId = speakerDict[kDCSpeaker_speakerId_key];
         speaker.firstName = speakerDict[kDCSpeaker_firstName_key];
         speaker.lastName = speakerDict[kDCSpeaker_lastName_key];
@@ -71,7 +71,7 @@ const NSString * kDCSpeaker_avatarPath_key = @"avatarImageUrl";
 
 #pragma mark - parseProtocol
 
-+ (BOOL)successParceJSONData:(NSData *)jsonData idsForRemove:(NSArray *__autoreleasing *)idsForRemove
++ (BOOL)successParceJSONData:(NSData *)jsonData
 {
     NSError * err = nil;
     NSDictionary * speakers = [NSJSONSerialization JSONObjectWithData:jsonData
@@ -85,34 +85,33 @@ const NSString * kDCSpeaker_avatarPath_key = @"avatarImageUrl";
         return NO;
     }
     
-    //adding
-    for (NSDictionary * speakerDict in speakers[kDCParcesObjectsToAdd])
+    for (NSDictionary * dictionary in speakers[kDCSpeaker_speakers_key])
     {
-        DCSpeaker * speaker = [[DCMainProxy sharedProxy] createSpeaker];
-        speaker.speakerId = speakerDict[kDCSpeaker_speakerId_key];
-        speaker.firstName = speakerDict[kDCSpeaker_firstName_key];
-        speaker.lastName = speakerDict[kDCSpeaker_lastName_key];
-        speaker.avatarPath = speakerDict[kDCSpeaker_avatarPath_key];
-        speaker.twitterName = speakerDict[kDCSpeaker_twitterName_key];
-        speaker.webSite = speakerDict[kDCSpeaker_webSite_key];
-        speaker.name = [NSString stringWithFormat:@"%@ %@", speaker.firstName, speaker.lastName];
-        speaker.organizationName = speakerDict[kDCSpeaker_organization_key];
-        speaker.jobTitle = speakerDict[kDCSpeaker_jobTitle_key];
-        speaker.characteristic = [speakerDict[kDCSpeaker_charact_key] kv_decodeHTMLCharacterEntities];
-    }
-    
-    
-    //colelct objects ids for removing
-    if (speakers[kDCParcesObjectsToRemove])
-    {
-        NSMutableArray * idsForRemoveMut = [[NSMutableArray alloc] initWithCapacity:[(NSArray*)speakers[kDCParcesObjectsToRemove] count]];
-        for (NSDictionary * idDictiuonary in speakers[kDCParcesObjectsToRemove])
+        DCSpeaker * speaker = (DCSpeaker*)[[DCMainProxy sharedProxy] objectForID:[dictionary[kDCSpeaker_speakerId_key] intValue] ofClass:[DCSpeaker class] inMainQueue:NO];
+        
+        if (!speaker) // then create
         {
-            [idsForRemoveMut addObject:idDictiuonary[kDCSpeaker_speakerId_key]];
+            speaker = (DCSpeaker*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCSpeaker class]];
         }
-        * idsForRemove  = [[NSArray alloc] initWithArray:idsForRemoveMut];
+        
+        if ([dictionary[kDCParseObjectDeleted] intValue]==1) // remove
+        {
+            [[DCMainProxy sharedProxy] removeItem:speaker];
+        }
+        else // update
+        {
+            speaker.speakerId = dictionary[kDCSpeaker_speakerId_key];
+            speaker.firstName = dictionary[kDCSpeaker_firstName_key];
+            speaker.lastName = dictionary[kDCSpeaker_lastName_key];
+            speaker.avatarPath = dictionary[kDCSpeaker_avatarPath_key];
+            speaker.twitterName = dictionary[kDCSpeaker_twitterName_key];
+            speaker.webSite = dictionary[kDCSpeaker_webSite_key];
+            speaker.name = [NSString stringWithFormat:@"%@ %@", speaker.firstName, speaker.lastName];
+            speaker.organizationName = dictionary[kDCSpeaker_organization_key];
+            speaker.jobTitle = dictionary[kDCSpeaker_jobTitle_key];
+            speaker.characteristic = [dictionary[kDCSpeaker_charact_key] kv_decodeHTMLCharacterEntities];
+        }
     }
-    
     return YES;
 }
 

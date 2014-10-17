@@ -23,6 +23,7 @@
 #import "DCProgram+DC.h"
 #import "DCEvent+DC.h"
 #import "NSDate+DC.h"
+#import "DCFavoriteEvent+DC.h"
 #import "DCMainProxy.h"
 
 const NSString * kDCProgram_programEvents_key = @"programEvents";
@@ -45,26 +46,36 @@ const NSString * kDCProgram_programEvents_key = @"programEvents";
         return NO;
     }
     
-    //adding
-    for (NSDictionary * day in events[kDCParcesObjectsToAdd])
+    for (NSDictionary * day in events[kDCEvent_days_key])
     {
         NSDate * date = [NSDate fabricateWithEventString:day[kDCEvent_date_key]];
         for (NSDictionary * event in day[kDCProgram_programEvents_key])
         {
-            DCProgram * programInstance = [[DCMainProxy sharedProxy] createProgramItem];
-            [DCProgram parseEventFromDictionaty:event toObject:programInstance forDate:date];
+            DCProgram * programInstance = (DCProgram*)[[DCMainProxy sharedProxy] objectForID:[event[kDCEvent_eventId_key] intValue]
+                                                                                     ofClass:[DCProgram class]
+                                                                                 inMainQueue:NO];
+
+            if (!programInstance) // create
+            {
+                programInstance = (DCProgram*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCProgram class]];
+            }
+            
+            if ([event[kDCParseObjectDeleted] intValue]==1) // remove
+            {
+                [[DCMainProxy sharedProxy] removeItem:programInstance];
+                DCFavoriteEvent * favorite = (DCFavoriteEvent*)[[DCMainProxy sharedProxy] objectForID:[event[kDCEvent_eventId_key] intValue]
+                                                                            ofClass:[DCFavoriteEvent class]
+                                                                        inMainQueue:NO];
+                if (favorite) // in case when event was in favorites - remove from there
+                {
+                    [[DCMainProxy sharedProxy] removeItem:favorite];
+                }
+            }
+            else // update
+            {
+                [DCProgram parseEventFromDictionaty:event toObject:programInstance forDate:date];
+            }
         }
-    }
-    
-    //colelct objects ids for removing
-    if (events[kDCParcesObjectsToRemove])
-    {
-        NSMutableArray * idsForRemoveMut = [[NSMutableArray alloc] initWithCapacity:[(NSArray*)events[kDCParcesObjectsToRemove] count]];
-        for (NSDictionary * idDictiuonary in events[kDCParcesObjectsToRemove])
-        {
-            [idsForRemoveMut addObject:idDictiuonary[kDCEvent_eventId_key]];
-        }
-        * idsForRemove  = [[NSArray alloc] initWithArray:idsForRemoveMut];
     }
     
     return YES;

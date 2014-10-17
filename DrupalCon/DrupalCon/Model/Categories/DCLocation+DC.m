@@ -50,7 +50,7 @@ NSString *kDCLocationBuildNum = @"number";
     }
     
     for (NSDictionary *venue in location[kDCLocation]) {
-        DCLocation * locationData = [[DCMainProxy sharedProxy] createLocation];
+        DCLocation * locationData = (DCLocation*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCLocation class]];
         locationData.latitude = venue[kDCLocationLatitude];
         locationData.longitude = venue[kDCLocationLongitude];
         locationData.name = venue[kDCLocationPlaceName];
@@ -61,7 +61,7 @@ NSString *kDCLocationBuildNum = @"number";
 
 #pragma mark - parseProtocol
 
-+ (BOOL)successParceJSONData:(NSData *)jsonData idsForRemove:(NSArray *__autoreleasing *)idsForRemove
++ (BOOL)successParceJSONData:(NSData *)jsonData
 {
     NSError * err = nil;
     NSDictionary * location = [NSJSONSerialization JSONObjectWithData:jsonData
@@ -76,25 +76,26 @@ NSString *kDCLocationBuildNum = @"number";
     }
     
     //adding
-    for (NSDictionary *venue in location[kDCLocation]) {
-        DCLocation * locationData = [[DCMainProxy sharedProxy] createLocation];
-        locationData.latitude = venue[kDCLocationLatitude];
-        locationData.longitude = venue[kDCLocationLongitude];
-        locationData.name = venue[kDCLocationPlaceName];
-        locationData.streetName = venue[kDCLocationStreetName];
-        locationData.number = venue[kDCLocationBuildNum];
-    }
-    
-    
-    //colelct objects ids for removing
-    if (location[kDCParcesObjectsToRemove])
-    {
-        NSMutableArray * idsForRemoveMut = [[NSMutableArray alloc] initWithCapacity:[(NSArray*)location[kDCParcesObjectsToRemove] count]];
-        for (NSDictionary * idDictiuonary in location[kDCParcesObjectsToRemove])
+    for (NSDictionary *dictionary in location[kDCLocation]) {
+        DCLocation * location = (DCLocation*)[[DCMainProxy sharedProxy] objectForID:[dictionary[kDCLocationID] intValue] ofClass:[DCLocation class] inMainQueue:NO];
+        
+        if (!location) // then create
         {
-            [idsForRemoveMut addObject:idDictiuonary[kDCLocationID]];
+            location = (DCLocation*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCLocation class]];
         }
-        * idsForRemove  = [[NSArray alloc] initWithArray:idsForRemoveMut];
+        
+        if ([dictionary[kDCParseObjectDeleted] intValue]==1) // remove
+        {
+            [[DCMainProxy sharedProxy] removeItem:location];
+        }
+        else // update
+        {
+            location.latitude = dictionary[kDCLocationLatitude];
+            location.longitude = dictionary[kDCLocationLongitude];
+            location.name = dictionary[kDCLocationPlaceName];
+            location.streetName = dictionary[kDCLocationStreetName];
+            location.number = dictionary[kDCLocationBuildNum];
+        }
     }
     
     return YES;

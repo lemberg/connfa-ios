@@ -39,46 +39,32 @@ typedef enum {
 
 @interface DCMainProxy : NSObject
 
+@property (nonatomic, strong, readonly) NSManagedObjectContext * defaultPrivateContext;
+@property (nonatomic, strong, readonly) NSManagedObjectContext * workContext;
 @property (nonatomic, strong, readonly) NSManagedObjectModel * managedObjectModel;
-@property (nonatomic, strong, readonly) NSManagedObjectContext * managedObjectContext;
 @property (nonatomic, strong, readonly) NSPersistentStoreCoordinator * persistentStoreCoordinator;
 
 @property (nonatomic) DCMainProxyState state;
 
 
 + (DCMainProxy*)sharedProxy;
+- (NSManagedObjectContext*)newMainQueueContext;
+- (void)setDataReadyCallback:(void (^)(DCMainProxyState mainProxyState))dataReadyCallback;
 
 #pragma mark - public
 
 - (void)update;
 
-#pragma mark - getting instances
+#pragma mark - work with instances
 
-- (NSArray*)programInstances;
-- (NSArray*)bofInstances;
-- (NSArray*)typeInstances;
-- (NSArray*)speakerInstances;
-- (NSArray*)levelInstances;
-- (NSArray*)trackInstances;
-- (NSArray *)locationInstances;
+- (NSArray*)getAllInstancesOfClass:(Class)aClass inMainQueue:(BOOL)mainQueue;
+- (NSManagedObject*)objectForID:(int)ID ofClass:(Class)aClass inMainQueue:(BOOL)mainQueue;
+- (NSManagedObject*)createObjectOfClass:(Class)aClass;
+- (void)removeItem:(NSManagedObject*)item;
+
+#pragma mark -
+
 - (void)loadHtmlAboutInfo:(void(^)(NSString *))callback;
-
-- (DCType*)typeForID:(int)typeID;
-- (DCSpeaker*)speakerForId:(NSInteger)speakerId;
-- (DCLevel*)levelForId:(NSInteger)levelId;
-- (DCTrack*)trackForId:(NSInteger)trackId;
-
-#pragma mark - creating
-
-- (DCProgram*)createProgramItem;
-- (DCBof*)createBofItem;
-- (DCType*)createType;
-- (DCTime*)createTime;
-- (DCSpeaker*)createSpeaker;
-- (DCTimeRange*)createTimeRange;
-- (DCLevel*)createLevel;
-- (DCTrack*)createTrack;
-- (DCLocation*)createLocation;
 
 #pragma mark - favorites 
 

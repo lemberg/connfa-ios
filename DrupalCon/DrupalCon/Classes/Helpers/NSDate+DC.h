@@ -24,6 +24,7 @@
 
 @interface NSDate (DC)
 
++ (NSString*)currentUnixTimeString;
 + (NSDate*)fabricateWithEventString:(NSString*)string;
 - (NSString*)pageViewDateString;
 - (NSString*)stringForSpeakerEventCell;

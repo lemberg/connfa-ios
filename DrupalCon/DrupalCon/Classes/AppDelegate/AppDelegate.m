@@ -31,7 +31,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    [[DCMainProxy sharedProxy] setDataReady:NO];
+    [[DCMainProxy sharedProxy] update];
     UILocalNotification *locationNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (locationNotification) {
         self.localNotification = locationNotification;
@@ -55,7 +55,7 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     if ([self.window.rootViewController isKindOfClass:[UINavigationController class]]) {
-        [[DCMainProxy sharedProxy] setDataReady:NO];
+        [[DCMainProxy sharedProxy] update];
         UINavigationController * natigator = (UINavigationController*)self.window.rootViewController;
         [natigator popToRootViewControllerAnimated:NO];
     }

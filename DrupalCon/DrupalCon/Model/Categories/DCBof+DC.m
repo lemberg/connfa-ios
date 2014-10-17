@@ -23,6 +23,7 @@
 #import "DCBof+DC.h"
 #import "DCEvent+DC.h"
 #import "NSDate+DC.h"
+#import "DCFavoriteEvent+DC.h"
 #import "DCMainProxy.h"
 #import "NSDictionary+DC.h"
 
@@ -47,26 +48,35 @@ const NSString * kDCBof_bofEvents_key = @"bofsEvents";
         return NO;
     }
     
-    //adding
-    for (NSDictionary * day in events[kDCParcesObjectsToAdd])
+    for (NSDictionary * day in events[kDCEvent_days_key])
     {
         NSDate * date = [NSDate fabricateWithEventString:day[kDCEvent_date_key]];
         for (NSDictionary * event in day[kDCBof_bofEvents_key])
         {
-            DCBof * bofInstance = [[DCMainProxy sharedProxy] createBofItem];
-            [DCBof parseEventFromDictionaty:event toObject:bofInstance forDate:date];
+            DCBof * bofInstance = (DCBof*)[[DCMainProxy sharedProxy] objectForID:[event[kDCEvent_eventId_key] intValue]
+                                                                         ofClass:[DCBof class]
+                                                                     inMainQueue:NO];
+            
+            if (!bofInstance) // create
+            {
+                bofInstance = (DCBof*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCBof class]];
+            }
+            if ([event[kDCParseObjectDeleted] intValue]==1) // remove
+            {
+                [[DCMainProxy sharedProxy] removeItem:bofInstance];
+                DCFavoriteEvent * favorite = (DCFavoriteEvent*)[[DCMainProxy sharedProxy] objectForID:[event[kDCEvent_eventId_key] intValue]
+                                                                                              ofClass:[DCFavoriteEvent class]
+                                                                                          inMainQueue:NO];
+                if (favorite) // in case when event was in favorites - remove from there
+                {
+                    [[DCMainProxy sharedProxy] removeItem:favorite];
+                }
+            }
+            else // update
+            {
+                [DCBof parseEventFromDictionaty:event toObject:bofInstance forDate:date];
+            }
         }
-    }
-    
-    //colelct objects ids for removing
-    if (events[kDCParcesObjectsToRemove])
-    {
-        NSMutableArray * idsForRemoveMut = [[NSMutableArray alloc] initWithCapacity:[(NSArray*)events[kDCParcesObjectsToRemove] count]];
-        for (NSDictionary * idDictiuonary in events[kDCParcesObjectsToRemove])
-        {
-            [idsForRemoveMut addObject:idDictiuonary[kDCEvent_eventId_key]];
-        }
-        * idsForRemove  = [[NSArray alloc] initWithArray:idsForRemoveMut];
     }
     
     return YES;

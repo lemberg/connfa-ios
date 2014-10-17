@@ -32,7 +32,9 @@
 #import "DCTrack+DC.h"
 #import "DCLocation+DC.h"
 #import "DCFavoriteEvent.h"
+
 #import "NSDate+DC.h"
+#import "NSUserDefaults+DC.h"
 
 #import "Reachability.h"
 #import "DCDataProvider.h"
@@ -75,7 +77,8 @@ typedef void(^UpdateDataFail)(NSString *reason);
 @implementation DCMainProxy
 
 @synthesize managedObjectModel=_managedObjectModel,
-managedObjectContext=_managedObjectContext,
+workContext=_workContext,
+defaultPrivateContext=_defaultPrivateContext,
 persistentStoreCoordinator=_persistentStoreCoordinator;
 
 #pragma mark - initialization
@@ -86,7 +89,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     static dispatch_once_t disp;
     dispatch_once(&disp, ^{
         sharedProxy = [[super alloc] init];
-        [sharedProxy setState:([sharedProxy savedValueForKey:kTimeStampSynchronisation]?DCMainProxyStateDataReady:DCMainProxyStateNoData)];
+        [sharedProxy setState:([(NSString*)[NSUserDefaults lastUpdateForClass:[DCType class]] integerValue]!=0?DCMainProxyStateDataReady:DCMainProxyStateNoData)];
     });
     return sharedProxy;
 }
@@ -105,6 +108,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 
 - (void)update
 {
+    _workContext = [self newMainQueueContext];
     if (self.state == DCMainProxyStateInitDataLoading ||
         self.state == DCMainProxyStateDataLoading)
     {
@@ -157,35 +161,43 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 
 - (void)updateEvents
 {
-    [self timeStamp:^(NSString *timeStamp) {
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-        if ([self updateTimeStampSynchronisation:timeStamp])
-        {
-            UpdateDataFail updateFail = ^(NSString *reason){
-                [self setState:DCMainProxyStateLoadingFail];
-                @throw [NSException exceptionWithName:@"loading" reason:reason userInfo:nil];
-                return;
-            };
-            
-            [self updateClass:[DCType class] withURI:TYPES_URI failCallBack:updateFail];
-            [self updateClass:[DCSpeaker class] withURI:SPEKERS_URI failCallBack:updateFail];
-            [self updateClass:[DCLevel class] withURI:LEVELS_URI failCallBack:updateFail];
-            [self updateClass:[DCTrack class] withURI:TRACKS_URI failCallBack:updateFail];
-            [self updateClass:[DCProgram class] withURI:PROGRAMS_URI failCallBack:updateFail];
-            [self updateClass:[DCBof class] withURI:BOFS_URI failCallBack:updateFail];
-            [self updateClass:[DCLocation class] withURI:LOCATION_URI failCallBack:updateFail];
-            [self synchrosizeFavoritePrograms];
-            [self loadHtmlAboutInfo:^(NSString *response) {}];
-            
-            [self setState:DCMainProxyStateDataReady];
-            [self saveObject:timeStamp forKey:kTimeStampSynchronisation];
-        }
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    
+    UpdateDataFail updateFail = ^(NSString *reason){
+        [self setState:DCMainProxyStateLoadingFail];
+        @throw [NSException exceptionWithName:@"loading" reason:reason userInfo:nil];
+        return;
+    };
+    
+    NSString * typesLastModified = [self updateClass:[DCType class] withURI:TYPES_URI failCallBack:updateFail];
+    NSString * speakersLastModified = [self updateClass:[DCSpeaker class] withURI:SPEKERS_URI failCallBack:updateFail];
+    NSString * levelsLastModified = [self updateClass:[DCLevel class] withURI:LEVELS_URI failCallBack:updateFail];
+    NSString * tracksLastModified = [self updateClass:[DCTrack class] withURI:TRACKS_URI failCallBack:updateFail];
+    NSString * programsLastModified = [self updateClass:[DCProgram class] withURI:PROGRAMS_URI failCallBack:updateFail];
+    NSString * bofsLastModified = [self updateClass:[DCBof class] withURI:BOFS_URI failCallBack:updateFail];
+    NSString * locationsLastModified = [self updateClass:[DCLocation class] withURI:LOCATION_URI failCallBack:updateFail];
+    [self loadHtmlAboutInfo:^(NSString *response) {}];
+    
+    if (self.state != DCMainProxyStateLoadingFail) {
+        [self setState:DCMainProxyStateDataReady];
+        [self saveContext];
+        _workContext = [self newMainQueueContext];
+        
+        [NSUserDefaults updateTimestampString:typesLastModified ForClass:[DCType class]];
+        [NSUserDefaults updateTimestampString:speakersLastModified ForClass:[DCSpeaker class]];
+        [NSUserDefaults updateTimestampString:levelsLastModified ForClass:[DCLevel class]];
+        [NSUserDefaults updateTimestampString:tracksLastModified ForClass:[DCTrack class]];
+        [NSUserDefaults updateTimestampString:programsLastModified ForClass:[DCProgram class]];
+        [NSUserDefaults updateTimestampString:bofsLastModified ForClass:[DCBof class]];
+        [NSUserDefaults updateTimestampString:locationsLastModified ForClass:[DCLocation class]];
         
         [self dataIsReady];
-        [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-        
-    }];
+    }
+    else
+    {
+        [self rollbackUpdates];
+    }
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 
@@ -196,142 +208,66 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     }
 }
 
-- (BOOL)updateTimeStampSynchronisation:(NSString *)timeStamp
-{
-    NSString *lastUpdateTime = [self savedValueForKey:kTimeStampSynchronisation];
-    if (!lastUpdateTime || ![lastUpdateTime isEqualToString: timeStamp]) {
-        return YES;
-    }
-    return NO;
-    
-}
-
-- (void)timeStamp:(void(^)(NSString *timeStamp))callback
-{
-    [DCDataProvider
-     updateMainDataFromURI:TIME_STAMP_URI
-     callBack:^(BOOL success, id result) {
-         if (success && result) {
-             NSError *err;
-             NSDictionary * stamp = [NSJSONSerialization JSONObjectWithData:result
-                                                                     options:kNilOptions
-                                                                       error:&err];
-             callback([stamp objectForKey:kTimeStampSynchronisation]);
-         }
-         else {
-             NSLog(@"%@", result);
-         }
-     }];
-}
+#pragma mark - getting instances
 
 - (NSArray *)eventsWithIDs:(NSArray *)iDs
+#warning this method used by LocalNotification process. Can be obsolated
 {
     NSPredicate * predicate = [NSPredicate predicateWithFormat:@"eventID IN %@", iDs];
     NSArray *results = [self instancesOfClass:[DCEvent class]
                          filtredUsingPredicate:predicate
-                                     inContext:self.managedObjectContext];
+                                     inContext:self.defaultPrivateContext];
     return results;
 }
 
-- (NSArray *)favoriteInstanceIDs
+- (NSArray*)getAllInstancesOfClass:(Class)aClass inMainQueue:(BOOL)mainQueue
 {
-    return [self valuesFromProperties:@[@"eventID"]
-                   forInstanceOfClass:[DCFavoriteEvent class]
-                            inContext:self.managedObjectContext];
-}
-- (NSArray*)programInstances
-{
-    return [self instancesOfClass:[DCProgram class]
-            filtredUsingPredicate:nil
-                        inContext:self.managedObjectContext];
+    return [self instancesOfClass:aClass filtredUsingPredicate:nil inContext:(mainQueue?self.workContext:self.defaultPrivateContext)];
 }
 
-- (NSArray*)bofInstances
+- (NSManagedObject*)objectForID:(int)ID ofClass:(Class)aClass inMainQueue:(BOOL)mainQueue
 {
-    return [self instancesOfClass:[DCBof class]
-            filtredUsingPredicate:nil
-                        inContext:self.managedObjectContext];
+    if ([aClass conformsToProtocol:@protocol(parseProtocol)]) {
+        return [self getObjectOfClass:aClass forID:ID whereIdKey:[aClass idKey] inMainQueue:mainQueue];
+    }
+    else
+    {
+        @throw [NSException exceptionWithName:[NSString stringWithFormat:@"%@",NSStringFromClass(aClass)]
+                                       reason:@"Do not conform protocol"
+                                     userInfo:nil];
+        return nil;
+    }
 }
 
-- (NSArray*)typeInstances
+- (NSManagedObject*)createObjectOfClass:(Class)aClass
 {
-    return [self instancesOfClass:[DCType class]
-            filtredUsingPredicate:nil
-                        inContext:self.managedObjectContext];
+    return [self createInstanceOfClass:aClass inContext:self.defaultPrivateContext];
 }
 
-- (NSArray*)speakerInstances
-{
-    return [self instancesOfClass:[DCSpeaker class]
-            filtredUsingPredicate:nil
-                        inContext:self.managedObjectContext];
-}
+#pragma mark -
 
-- (NSArray*)levelInstances
-{
-    return [self instancesOfClass:[DCLevel class]
-            filtredUsingPredicate:nil
-                        inContext:self.managedObjectContext];
-}
-
-- (NSArray*)trackInstances
-{
-    return [self instancesOfClass:[DCTrack class]
-            filtredUsingPredicate:nil
-                        inContext:self.managedObjectContext];
-}
-
-- (NSArray *)locationInstances
-{
-    return [self instancesOfClass:[DCLocation class]
-            filtredUsingPredicate:nil
-                        inContext:self.managedObjectContext];
-}
-
-
-#pragma mark - getObject for ID
-
-- (NSManagedObject*)getObjectOfClass:(Class)class forID:(NSInteger)ID whereIdKey:(NSString*)idKey
+- (NSManagedObject*)getObjectOfClass:(Class)class forID:(NSInteger)ID whereIdKey:(NSString*)idKey inMainQueue:(BOOL)mainQueue
 {
     NSPredicate * predicate = [NSPredicate predicateWithFormat:@"%@ == %i", idKey, ID];
     NSArray * results = [self instancesOfClass:class
                          filtredUsingPredicate:predicate
-                                     inContext:self.managedObjectContext];
+                                     inContext:(mainQueue?self.workContext:self.defaultPrivateContext)];
     if (results.count > 1)
     {
         @throw [NSException exceptionWithName:[NSString stringWithFormat:@"%@",class]
-                                       reason:[NSString stringWithFormat:@"too many favorite events for id# %li",ID]
+                                       reason:[NSString stringWithFormat:@"too many objects id# %li",ID]
                                      userInfo:nil];
     }
     return (results.count ? [results firstObject] : nil);
 }
 
-- (DCFavoriteEvent *)favoriteEventFromID:(NSInteger)eventID
-{
-    return (DCFavoriteEvent*)[self getObjectOfClass:[DCFavoriteEvent class] forID:eventID whereIdKey:(NSString*)kDCEvent_eventId_key];
-}
+
 
 #pragma mark - Operation with favorites
 
-- (void)synchrosizeFavoritePrograms
-{
-    //    synchronize
-    NSArray *favoriteEventIDs = [self favoriteInstanceIDs];
-    if (!favoriteEventIDs) return;
-    NSMutableArray *favorteIDs = [NSMutableArray array];
-    for (NSDictionary *favorite in favoriteEventIDs) {
-        [favorteIDs addObjectsFromArray:[favorite allValues]];
-    }
-    NSArray *events = [self eventsWithIDs:favorteIDs];
-    for (DCEvent *program in events) {
-        program.favorite = [NSNumber numberWithBool:YES];
-    }
-    [self saveContext];
-    
-}
 - (void)addToFavoriteEvent:(DCEvent *)event
 {
-    DCFavoriteEvent *favoriteEvent = [self createFavoriteEvent];
+    DCFavoriteEvent *favoriteEvent = (DCFavoriteEvent*)[self createObjectOfClass:[DCFavoriteEvent class]];
     favoriteEvent.eventID = event.eventID;
     [DCLocalNotificationManager scheduleNotificationWithItem:event interval:10];
     [self saveContext];
@@ -339,12 +275,11 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 
 - (void)removeFavoriteEventWithID:(NSNumber *)eventID
 {
-    DCFavoriteEvent *favoriteEvent = [self favoriteEventFromID:[eventID integerValue]];
+    DCFavoriteEvent *favoriteEvent = (DCFavoriteEvent*)[self objectForID:[eventID intValue] ofClass:[DCFavoriteEvent class] inMainQueue:NO];
     if (favoriteEvent) {
         [DCLocalNotificationManager cancelLocalNotificationWithId:favoriteEvent.eventID];
-        [self removeItem:favoriteEvent inContext:self.managedObjectContext];
+        [self removeItem:favoriteEvent];
     }
-    [self saveContext];
 }
 
 - (void)openLocalNotification:(UILocalNotification *)localNotification
@@ -362,126 +297,95 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 
 - (void)loadHtmlAboutInfo:(void(^)(NSString *))callback
 {
-    [self.managedObjectContext performBlockAndWait:^{
-        [DCDataProvider
-         updateMainDataFromURI:ABOUT_INFO_URI
-         callBack:^(BOOL success, id result) {
-             if (success && result)
-             {
-                 NSError *error;
-                 NSDictionary * about  = [NSJSONSerialization JSONObjectWithData:result
-                                                                         options:kNilOptions
-                                                                           error:&error];
-                 callback([about objectForKey:kAboutInfo]);
-                 [self saveObject:[about objectForKey:kAboutInfo] forKey:kAboutInfo];
-             }
-             else
-             {
-                 if ([self savedValueForKey:kAboutInfo]) {
-                     callback([self savedValueForKey:kAboutInfo]);
-                 } else {
-                     callback(@"");
-                 }
-                 
-                 NSLog(@"WRONG! %@", result);
-             }
-         }];
+    [self.defaultPrivateContext performBlockAndWait:^{
+        [DCDataProvider updateMainDataFromURI:ABOUT_INFO_URI lastModified:@"" callBack:^(BOOL success, id result, id lastModifiedResponce) {
+            if (success && result && lastModifiedResponce)
+            {
+                NSError *error;
+                NSDictionary * about  = [NSJSONSerialization JSONObjectWithData:result
+                                                                        options:kNilOptions
+                                                                          error:&error];
+                [NSUserDefaults saveAbout:[about objectForKey:kAboutInfo]];
+                callback([NSUserDefaults aboutString]);
+            }
+            else
+            {
+                if ([NSUserDefaults aboutString])
+                {
+                    callback([NSUserDefaults aboutString]);
+                }
+                else
+                {
+                    callback(@"");
+                }
+                
+                NSLog(@"WRONG! %@", result);
+            }
+        }];
     }];
 }
-#pragma mark - DO creation
 
-- (DCProgram*)createProgramItem
-{
-    return [self createInstanceOfClass:[DCProgram class] inContext:self.managedObjectContext];
-}
-
-- (DCBof*)createBofItem
-{
-    return [self createInstanceOfClass:[DCBof class] inContext:self.managedObjectContext];
-}
-
-- (DCType*)createType
-{
-    return [self createInstanceOfClass:[DCType class] inContext:self.managedObjectContext];
-}
-
-- (DCTime*)createTime
-{
-    return [self createInstanceOfClass:[DCTime class] inContext:self.managedObjectContext];
-}
-
-- (DCTimeRange*)createTimeRange
-{
-    return [self createInstanceOfClass:[DCTimeRange class] inContext:self.managedObjectContext];
-}
-
-- (DCSpeaker*)createSpeaker
-{
-    return [self createInstanceOfClass:[DCSpeaker class] inContext:self.managedObjectContext];
-}
-
-- (DCLevel*)createLevel
-{
-    return [self createInstanceOfClass:[DCLevel class] inContext:self.managedObjectContext];
-}
-
-- (DCTrack*)createTrack
-{
-    return [self createInstanceOfClass:[DCTrack class] inContext:self.managedObjectContext];
-}
-
-- (DCLocation*)createLocation
-{
-    return [self createInstanceOfClass:[DCLocation class] inContext:self.managedObjectContext];
-}
-
-- (DCFavoriteEvent *)createFavoriteEvent
-{
-    return [self createInstanceOfClass:[DCFavoriteEvent class] inContext:self.managedObjectContext];
-}
-
-#pragma mark - clearing
-
-- (void)removeItem:(NSManagedObject*)item inContext:(NSManagedObjectContext*)context
-{
-    [context deleteObject:item];
-}
-
-#pragma mark - DO save
+#pragma mark - DO save/not save/delete
 
 - (void)saveContext
 {
     NSError * err = nil;
-    [self.managedObjectContext save:&err];
+    [self.defaultPrivateContext save:&err];
     if (err)
     {
         NSLog(@"WRONG! context save");
     }
 }
 
+- (void)removeItem:(NSManagedObject*)item
+{
+    [self.defaultPrivateContext deleteObject:item];
+}
+
+- (void)rollbackUpdates
+{
+    [self.defaultPrivateContext rollback];
+}
+
 #pragma mark - update data
 
-- (void)updateClass:(Class)class withURI:(NSString*)uri failCallBack:(UpdateDataFail)callBack
+// returns new last-modified timestamp
+- (NSString*)updateClass:(Class)class withURI:(NSString*)uri failCallBack:(UpdateDataFail)callBack
 {
-    [self.managedObjectContext performBlockAndWait:^{
-        [DCDataProvider updateMainDataFromURI:uri callBack:^(BOOL success, id result) {
-            if ([class conformsToProtocol:@protocol(parseProtocol)])
-            {
-                BOOL success = [class successParceJSONData:result
-                                              idsForRemove:nil];
+    if ([class conformsToProtocol:@protocol(parseProtocol)])
+    {
+        __block NSString * lastModifiedResult = nil;
+        [self.defaultPrivateContext performBlockAndWait:^{
+            [DCDataProvider updateMainDataFromURI:uri lastModified:[NSUserDefaults lastUpdateForClass:class] callBack:^(BOOL success, id result, id lastModifiedResponce) {
+                
                 if (!success)
                 {
                     callBack(@"update fail");
                 }
-            }
-            else
-            {
-                @throw [NSException exceptionWithName:[NSString stringWithFormat:@"%@",class]
-                                               reason:@"not conform the Parse protocol"
-                                             userInfo:nil];
-            }
+                
+                //PARSING ...
+                BOOL successParse = [class successParceJSONData:result];
+                if (successParse && lastModifiedResult)
+                {
+                    lastModifiedResult = (NSString*)lastModifiedResponce;
+                }
+                else if (!successParse)
+                {
+                    callBack(@"parse fail");
+                }
+                
+                // ELSE: no change, no need to parse
+
+            }];
         }];
-    }];
+        return lastModifiedResult;
+    }
+    else
+    {
+        @throw [NSException exceptionWithName:[NSString stringWithFormat:@"%@",class]
+                                       reason:@"not conform the parse protocol"
+                                     userInfo:nil];
+    }
 }
 
 #pragma mark - Core Data stack
@@ -519,20 +423,28 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     return _persistentStoreCoordinator;
 }
 
-- (NSManagedObjectContext*)managedObjectContext
+- (NSManagedObjectContext*)defaultPrivateContext
 {
-    if (!_managedObjectModel)
+    if (!_defaultPrivateContext)
     {
         NSPersistentStoreCoordinator * coordinator = [self persistentStoreCoordinator];
         if (coordinator)
         {
-            _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-            [_managedObjectContext setPersistentStoreCoordinator:coordinator];
+            _defaultPrivateContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+            [_defaultPrivateContext setPersistentStoreCoordinator:coordinator];
         }
         
     }
-    return _managedObjectContext;
+    return _defaultPrivateContext;
 }
+
+-(NSManagedObjectContext*)newMainQueueContext
+{
+    NSManagedObjectContext* context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    context.parentContext = self.defaultPrivateContext;
+    return context;
+}
+
 #pragma mark -
 
 - (NSArray *)executeFetchRequest:(NSFetchRequest *)fetchRequest inContext:(NSManagedObjectContext *)context

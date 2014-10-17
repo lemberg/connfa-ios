@@ -52,7 +52,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setLayout];
-    self.location = [[[DCMainProxy sharedProxy] locationInstances] lastObject];
+    self.location = [[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCLocation class] inMainQueue:YES] lastObject];
     [self updateLocation];
 
 }

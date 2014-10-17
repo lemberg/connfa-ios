@@ -8,15 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString * kTimeStampSynchronisation;
+extern NSString * kAboutInfo;
+
 @interface NSUserDefaults (DC)
 
+#pragma mark - last modified timestamp
 
-+ (void)updateTimestampString:(NSString*)timestamp;
-+ (NSString*)lastUpdates;
++ (void)updateTimestampString:(NSString *)timestamp ForClass:(Class)aClass;
++ (NSString*)lastUpdateForClass:(Class)aClass;
 
 #pragma mark - about
 //TODO: shift About to dababase
 + (void)saveAbout:(NSString*)aboutString;
 + (NSString*)aboutString;
+
 
 @end

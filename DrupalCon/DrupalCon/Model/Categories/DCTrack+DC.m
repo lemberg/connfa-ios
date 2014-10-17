@@ -32,7 +32,7 @@ NSString * kDCTrack_trackName_key = @"trackName";
 
 #pragma mark - parseProtocol
 
-+ (BOOL)successParceJSONData:(NSData *)jsonData idsForRemove:(NSArray *__autoreleasing *)idsForRemove
++ (BOOL)successParceJSONData:(NSData *)jsonData
 {
     NSError * err = nil;
     NSDictionary * tracks = [NSJSONSerialization JSONObjectWithData:jsonData
@@ -47,23 +47,24 @@ NSString * kDCTrack_trackName_key = @"trackName";
     }
     
     //adding
-    for (NSDictionary * dictionary in tracks[kDCParcesObjectsToAdd])
+    for (NSDictionary * dictionary in tracks[kDCTrack_traks_key])
     {
-        DCTrack * track = [[DCMainProxy sharedProxy] createTrack];
-        track.trackId = dictionary[kDCTrack_trackID_key];
-        track.name = dictionary[kDCTrack_trackName_key];
-    }
-    
-    
-    //colelct objects ids for removing
-    if (tracks[kDCParcesObjectsToRemove])
-    {
-        NSMutableArray * idsForRemoveMut = [[NSMutableArray alloc] initWithCapacity:[(NSArray*)tracks[kDCParcesObjectsToRemove] count]];
-        for (NSDictionary * idDictiuonary in tracks[kDCParcesObjectsToRemove])
+        DCTrack * track = (DCTrack*)[[DCMainProxy sharedProxy] objectForID:[dictionary[kDCTrack_trackID_key] intValue] ofClass:[DCTrack class] inMainQueue:NO];
+        
+        if (!track) // then create
         {
-            [idsForRemoveMut addObject:idDictiuonary[kDCTrack_trackID_key]];
+            track = (DCTrack*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCTrack class]];
         }
-        * idsForRemove  = [[NSArray alloc] initWithArray:idsForRemoveMut];
+        
+        if ([dictionary[kDCParseObjectDeleted] intValue]==1) // remove
+        {
+            [[DCMainProxy sharedProxy] removeItem:track];
+        }
+        else // update
+        {
+            track.trackId = dictionary[kDCTrack_trackID_key];
+            track.name = dictionary[kDCTrack_trackName_key];
+        }
     }
     
     return YES;

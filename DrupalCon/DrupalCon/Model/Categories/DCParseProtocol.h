@@ -8,13 +8,12 @@
 
 @protocol parseProtocol <NSObject>
 
-+ (BOOL)successParceJSONData:(NSData*)jsonData idsForRemove:(NSArray**)idsForRemove;
++ (BOOL)successParceJSONData:(NSData*)jsonData;
 + (NSString*)idKey;
 
 @end
 
-static NSString * kDCParcesObjectsToAdd = @"objectsToAdd";
-static NSString * kDCParcesObjectsToRemove = @"objectsToRemove";
+static NSString * kDCParseObjectDeleted = @"objectDeleted";
 
 @interface DCParseProtocol : NSObject;
 

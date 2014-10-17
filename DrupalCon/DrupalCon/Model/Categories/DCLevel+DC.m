@@ -33,7 +33,7 @@ NSString * kDCLevel_levelOrder_key = @"levelOrder";
 
 #pragma mark - parseProtocol
 
-+ (BOOL)successParceJSONData:(NSData *)jsonData idsForRemove:(NSArray *__autoreleasing *)idsForRemove
++ (BOOL)successParceJSONData:(NSData *)jsonData
 {
     NSError * err = nil;
     NSDictionary * levels = [NSJSONSerialization JSONObjectWithData:jsonData
@@ -48,24 +48,25 @@ NSString * kDCLevel_levelOrder_key = @"levelOrder";
     }
     
     //adding
-    for (NSDictionary * dictionary in levels[kDCParcesObjectsToAdd])
+    for (NSDictionary * dictionary in levels[kDCLevel_levels_key])
     {
-        DCLevel * level = [[DCMainProxy sharedProxy] createLevel];
-        level.levelId = dictionary[kDCLevel_levelID_key];
-        level.name = dictionary[kDCLevel_levelName_key];
-        level.order = @([dictionary[kDCLevel_levelOrder_key] integerValue]);
-    }
-    
-    
-    //colelct objects ids for removing
-    if (levels[kDCParcesObjectsToRemove])
-    {
-        NSMutableArray * idsForRemoveMut = [[NSMutableArray alloc] initWithCapacity:[(NSArray*)levels[kDCParcesObjectsToRemove] count]];
-        for (NSDictionary * idDictiuonary in levels[kDCParcesObjectsToRemove])
+        DCLevel * level = (DCLevel*)[[DCMainProxy sharedProxy] objectForID:[dictionary[kDCLevel_levelID_key] intValue] ofClass:[DCLevel class] inMainQueue:NO];
+        
+        if (!level) // then create
         {
-            [idsForRemoveMut addObject:idDictiuonary[kDCLevel_levelID_key]];
+            level = (DCLevel*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCLevel class]];
         }
-        * idsForRemove  = [[NSArray alloc] initWithArray:idsForRemoveMut];
+        
+        if ([dictionary[kDCParseObjectDeleted] intValue]==1) // remove
+        {
+            [[DCMainProxy sharedProxy] removeItem:level];
+        }
+        else // update
+        {
+            level.levelId = dictionary[kDCLevel_levelID_key];
+            level.name = dictionary[kDCLevel_levelName_key];
+            level.order = @([dictionary[kDCLevel_levelOrder_key] integerValue]);
+        }
     }
     
     return YES;

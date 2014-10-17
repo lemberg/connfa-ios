@@ -48,7 +48,7 @@ const NSString * kDCType_typeName_key = @"typeName";
     
     for (NSDictionary * typeDictionary in types[kDCType_types_key])
     {
-        DCType * type = [[DCMainProxy sharedProxy] createType];
+        DCType * type = (DCType*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCType class]];
         type.typeID = typeDictionary[kDCType_typeID_key];
         type.name = typeDictionary[kDCType_typeName_key];
     }
@@ -56,7 +56,7 @@ const NSString * kDCType_typeName_key = @"typeName";
 
 #pragma mark - parce protocol
 
-+ (BOOL)successParceJSONData:(NSData *)jsonData idsForRemove:(NSArray *__autoreleasing *)idsForRemove
++ (BOOL)successParceJSONData:(NSData *)jsonData
 {
     NSError * err = nil;
     NSDictionary * types = [NSJSONSerialization JSONObjectWithData:jsonData
@@ -71,25 +71,26 @@ const NSString * kDCType_typeName_key = @"typeName";
     }
     
     //adding
-    for (NSDictionary * typeDictionary in types[kDCParcesObjectsToAdd])
+    for (NSDictionary * dictionary in types[kDCType_types_key])
     {
-        DCType * type = [[DCMainProxy sharedProxy] createType];
-        type.typeID = typeDictionary[kDCType_typeID_key];
-        type.name = typeDictionary[kDCType_typeName_key];
-    }
-    
-    
-    //colelct objects ids for removing
-    if (types[kDCParcesObjectsToRemove])
-    {
-        NSMutableArray * idsForRemoveMut = [[NSMutableArray alloc] initWithCapacity:[(NSArray*)types[kDCParcesObjectsToRemove] count]];
-        for (NSDictionary * idDictiuonary in types[kDCParcesObjectsToRemove])
+        DCType * type = (DCType*)[[DCMainProxy sharedProxy] objectForID:[dictionary[kDCType_typeID_key] intValue] ofClass:[DCType class] inMainQueue:NO];
+        
+        if (!type) // then create
         {
-            [idsForRemoveMut addObject:idDictiuonary[kDCType_typeID_key]];
+            type = (DCType*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCType class]];
         }
-        * idsForRemove  = [[NSArray alloc] initWithArray:idsForRemoveMut];
+        
+        if ([dictionary[kDCParseObjectDeleted] intValue]==1) // remove
+        {
+            [[DCMainProxy sharedProxy] removeItem:type];
+        }
+        else // update
+        {
+            type.typeID = dictionary[kDCType_typeID_key];
+            type.name = dictionary[kDCType_typeName_key];
+        }
     }
-    
+
     return YES;
 }
 

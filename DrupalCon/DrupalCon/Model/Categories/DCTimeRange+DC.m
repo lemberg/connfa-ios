@@ -33,9 +33,9 @@
 
 - (void)setFrom:(NSString *)from to:(NSString *)to
 {
-    self.from = [[DCMainProxy sharedProxy] createTime];
+    self.from = (DCTime*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCTime class]];
     [self.from setTime:from];
-    self.to = [[DCMainProxy sharedProxy] createTime];
+    self.to = (DCTime*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCTime class]];
     [self.to setTime:to];
 }
 

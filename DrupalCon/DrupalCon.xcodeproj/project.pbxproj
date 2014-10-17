@@ -106,6 +106,7 @@
 		84A24FD619C1F609006EF17E /* DCType.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A24FD519C1F609006EF17E /* DCType.m */; };
 		84A25A8919F01C6E0051C466 /* NSUserDefaults+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A25A8819F01C6E0051C466 /* NSUserDefaults+DC.m */; };
 		84ABE8F519BEEB8F0019D5DC /* DCEventStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ABE8F419BEEB8F0019D5DC /* DCEventStrategy.m */; };
+		84B6204519F1487C00468F4F /* DCFavoriteEvent+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84B6204419F1487C00468F4F /* DCFavoriteEvent+DC.m */; };
 		84FAE0E819A645E000DC9FF1 /* NSArray+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAE0E719A645E000DC9FF1 /* NSArray+DC.m */; };
 		84FAE10919A65FEA00DC9FF1 /* DCTime+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAE10819A65FEA00DC9FF1 /* DCTime+DC.m */; };
 		84FAE10C19A6600900DC9FF1 /* DCTimeRange+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAE10B19A6600900DC9FF1 /* DCTimeRange+DC.m */; };
@@ -307,6 +308,8 @@
 		84A25A8819F01C6E0051C466 /* NSUserDefaults+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSUserDefaults+DC.m"; path = "Classes/Helpers/NSUserDefaults+DC.m"; sourceTree = "<group>"; };
 		84ABE8F319BEEB8F0019D5DC /* DCEventStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCEventStrategy.h; sourceTree = "<group>"; };
 		84ABE8F419BEEB8F0019D5DC /* DCEventStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCEventStrategy.m; sourceTree = "<group>"; };
+		84B6204319F1487C00468F4F /* DCFavoriteEvent+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DCFavoriteEvent+DC.h"; path = "Model/Categories/DCFavoriteEvent+DC.h"; sourceTree = "<group>"; };
+		84B6204419F1487C00468F4F /* DCFavoriteEvent+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DCFavoriteEvent+DC.m"; path = "Model/Categories/DCFavoriteEvent+DC.m"; sourceTree = "<group>"; };
 		84FAE0E619A645E000DC9FF1 /* NSArray+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+DC.h"; path = "Classes/Helpers/NSArray+DC.h"; sourceTree = "<group>"; };
 		84FAE0E719A645E000DC9FF1 /* NSArray+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+DC.m"; path = "Classes/Helpers/NSArray+DC.m"; sourceTree = "<group>"; };
 		84FAE10719A65FEA00DC9FF1 /* DCTime+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DCTime+DC.h"; path = "Model/Categories/DCTime+DC.h"; sourceTree = "<group>"; };
@@ -818,6 +821,8 @@
 				849E851F19AF679F006F43B3 /* DCTrack+DC.m */,
 				74E67C7E19B7133C00DF9D71 /* DCLocation+DC.h */,
 				74E67C7F19B7133C00DF9D71 /* DCLocation+DC.m */,
+				84B6204319F1487C00468F4F /* DCFavoriteEvent+DC.h */,
+				84B6204419F1487C00468F4F /* DCFavoriteEvent+DC.m */,
 			);
 			name = DOCategories;
 			sourceTree = "<group>";
@@ -1038,6 +1043,7 @@
 				849EFDA319A49FB600C43E05 /* main.xcdatamodeld in Sources */,
 				74356D5819BEE4860055F13D /* Reachability.m in Sources */,
 				5D6449D7198A93E400BC1775 /* DCProgramHeaderCellView.m in Sources */,
+				84B6204519F1487C00468F4F /* DCFavoriteEvent+DC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

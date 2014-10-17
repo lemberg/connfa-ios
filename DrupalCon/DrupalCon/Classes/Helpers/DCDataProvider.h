@@ -25,13 +25,13 @@
 #define SERVER_URL  @"http://amsterdam2014.uat.link"
 #define BASE_URL [NSString stringWithFormat:@"%@/api/",SERVER_URL]
 
-typedef void (^DataProviderCallBack)(BOOL success, id result);
+typedef void (^DataProviderCallBack)(BOOL success, id result, id lastModifiedResponce);
 
 @interface DCDataProvider : NSObject
 
 // method used for test feeds localy
 + (void)updateMainDataFromFile:(NSString*)fileName callBack:(DataProviderCallBack)callBack;
 
-+ (void)updateMainDataFromURI:(NSString *)uri callBack:(DataProviderCallBack)callBack;
++ (void)updateMainDataFromURI:(NSString *)uri lastModified:(NSString*)lastModified callBack:(DataProviderCallBack)callBack;
 
 @end
