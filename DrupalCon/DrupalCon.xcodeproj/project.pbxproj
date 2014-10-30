@@ -35,6 +35,10 @@
 		5DC8C46F198658FF00BF5816 /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8C46B198658FF00BF5816 /* UIViewController+MFSideMenuAdditions.m */; };
 		5DC8C4731986594400BF5816 /* DCBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8C4721986594400BF5816 /* DCBaseViewController.m */; };
 		5DC8C47A19865C8400BF5816 /* DCSideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DC8C47919865C8400BF5816 /* DCSideMenuViewController.m */; };
+		741A4E5F1A024FE90065FDB6 /* DCCoreDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 741A4E5E1A024FE90065FDB6 /* DCCoreDataStore.m */; };
+		741A4E621A026B120065FDB6 /* NSFileManager+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 741A4E611A026B120065FDB6 /* NSFileManager+DC.m */; };
+		741A4E651A0285A40065FDB6 /* NSManagedObject+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 741A4E641A0285A40065FDB6 /* NSManagedObject+DC.m */; };
+		741A4E681A0296410065FDB6 /* DCWebService.m in Sources */ = {isa = PBXBuildFile; fileRef = 741A4E671A0296410065FDB6 /* DCWebService.m */; };
 		74356D5219BEE1D90055F13D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74356D5119BEE1D90055F13D /* SystemConfiguration.framework */; };
 		74356D5819BEE4860055F13D /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 74356D5719BEE4860055F13D /* Reachability.m */; };
 		74356D5B19BF3B290055F13D /* UIWebView+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 74356D5A19BF3B290055F13D /* UIWebView+DC.m */; };
@@ -171,6 +175,14 @@
 		5DC8C4721986594400BF5816 /* DCBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCBaseViewController.m; sourceTree = "<group>"; };
 		5DC8C47819865C8400BF5816 /* DCSideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCSideMenuViewController.h; sourceTree = "<group>"; };
 		5DC8C47919865C8400BF5816 /* DCSideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCSideMenuViewController.m; sourceTree = "<group>"; };
+		741A4E5D1A024FE90065FDB6 /* DCCoreDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCCoreDataStore.h; path = Model/DCCoreDataStore.h; sourceTree = "<group>"; };
+		741A4E5E1A024FE90065FDB6 /* DCCoreDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCCoreDataStore.m; path = Model/DCCoreDataStore.m; sourceTree = "<group>"; };
+		741A4E601A026B120065FDB6 /* NSFileManager+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSFileManager+DC.h"; path = "Classes/Helpers/NSFileManager+DC.h"; sourceTree = "<group>"; };
+		741A4E611A026B120065FDB6 /* NSFileManager+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSFileManager+DC.m"; path = "Classes/Helpers/NSFileManager+DC.m"; sourceTree = "<group>"; };
+		741A4E631A0285A40065FDB6 /* NSManagedObject+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSManagedObject+DC.h"; path = "Classes/Helpers/NSManagedObject+DC.h"; sourceTree = "<group>"; };
+		741A4E641A0285A40065FDB6 /* NSManagedObject+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSManagedObject+DC.m"; path = "Classes/Helpers/NSManagedObject+DC.m"; sourceTree = "<group>"; };
+		741A4E661A0296410065FDB6 /* DCWebService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCWebService.h; path = Model/DCWebService.h; sourceTree = "<group>"; };
+		741A4E671A0296410065FDB6 /* DCWebService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCWebService.m; path = Model/DCWebService.m; sourceTree = "<group>"; };
 		74356D5119BEE1D90055F13D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		74356D5619BEE4860055F13D /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Classes/Helpers/Reachability.h; sourceTree = "<group>"; };
 		74356D5719BEE4860055F13D /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Classes/Helpers/Reachability.m; sourceTree = "<group>"; };
@@ -496,6 +508,10 @@
 				84A25A8819F01C6E0051C466 /* NSUserDefaults+DC.m */,
 				74356D5619BEE4860055F13D /* Reachability.h */,
 				74356D5719BEE4860055F13D /* Reachability.m */,
+				741A4E601A026B120065FDB6 /* NSFileManager+DC.h */,
+				741A4E611A026B120065FDB6 /* NSFileManager+DC.m */,
+				741A4E631A0285A40065FDB6 /* NSManagedObject+DC.h */,
+				741A4E641A0285A40065FDB6 /* NSManagedObject+DC.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -759,6 +775,10 @@
 				849CF82319A62F8600C84675 /* DCMainProxy+Additions.m */,
 				849CF80219A5EFEC00C84675 /* DCMainProxy.h */,
 				849CF80319A5EFEC00C84675 /* DCMainProxy.m */,
+				741A4E5D1A024FE90065FDB6 /* DCCoreDataStore.h */,
+				741A4E5E1A024FE90065FDB6 /* DCCoreDataStore.m */,
+				741A4E661A0296410065FDB6 /* DCWebService.h */,
+				741A4E671A0296410065FDB6 /* DCWebService.m */,
 				74BA6EEF19C87C04000E2FBA /* DCLocalNotificationManager.h */,
 				74BA6EF019C87C04000E2FBA /* DCLocalNotificationManager.m */,
 				849EFDD819A4AAC600C43E05 /* DOCategories */,
@@ -957,6 +977,7 @@
 				5D6449DF198ABA4E00BC1775 /* DCAppFacade.m in Sources */,
 				74E8380E19C061CD000D2BE4 /* MKAnnotationView+WebCache.m in Sources */,
 				84FAE10919A65FEA00DC9FF1 /* DCTime+DC.m in Sources */,
+				741A4E651A0285A40065FDB6 /* NSManagedObject+DC.m in Sources */,
 				849D92D119AE07D200977D67 /* DCSpeakersDetailViewController.m in Sources */,
 				5DC8C459198658BF00BF5816 /* AppDelegate.m in Sources */,
 				74E67C8019B7133C00DF9D71 /* DCLocation+DC.m in Sources */,
@@ -964,6 +985,7 @@
 				849CF80419A5EFEC00C84675 /* DCMainProxy.m in Sources */,
 				74E8381419C061CD000D2BE4 /* SDWebImageDownloaderOperation.m in Sources */,
 				5D6449D319893BEF00BC1775 /* DCLunchCell.m in Sources */,
+				741A4E5F1A024FE90065FDB6 /* DCCoreDataStore.m in Sources */,
 				5DC8C46D198658FF00BF5816 /* MFSideMenuContainerViewController.m in Sources */,
 				849EFE1E19A4EB2100C43E05 /* DCEvent+DC.m in Sources */,
 				74BA6EF119C87C04000E2FBA /* DCLocalNotificationManager.m in Sources */,
@@ -984,6 +1006,7 @@
 				5D38E69D1987A631006F7A59 /* DCSideMenuCell.m in Sources */,
 				5DC8C46E198658FF00BF5816 /* MFSideMenuShadow.m in Sources */,
 				5D38E696198692E9006F7A59 /* DCSpeakersViewController.m in Sources */,
+				741A4E681A0296410065FDB6 /* DCWebService.m in Sources */,
 				84A06E2F19ACA41100104876 /* DCFavoriteButton.m in Sources */,
 				84A24FB519C1B254006EF17E /* DCSpeechBaseCell.m in Sources */,
 				74E8381719C061CD000D2BE4 /* UIButton+WebCache.m in Sources */,
@@ -1007,6 +1030,7 @@
 				84FAE10C19A6600900DC9FF1 /* DCTimeRange+DC.m in Sources */,
 				849D92D819AE295200977D67 /* DCEventDetailTitleCell.m in Sources */,
 				5D6449CD19893BC300BC1775 /* DCSpeechOfDayCell.m in Sources */,
+				741A4E621A026B120065FDB6 /* NSFileManager+DC.m in Sources */,
 				5DC8C421198656DB00BF5816 /* main.m in Sources */,
 				5DC8C47A19865C8400BF5816 /* DCSideMenuViewController.m in Sources */,
 				74E8381B19C061CD000D2BE4 /* UIImageView+HighlightedWebCache.m in Sources */,
