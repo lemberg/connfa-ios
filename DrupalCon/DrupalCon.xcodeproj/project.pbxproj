@@ -196,6 +196,7 @@
 		74A6278719B8A37200B46B75 /* DCFavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCFavoritesViewController.m; path = Favorites/DCFavoritesViewController.m; sourceTree = "<group>"; };
 		74BA6EEF19C87C04000E2FBA /* DCLocalNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCLocalNotificationManager.h; path = Model/DCLocalNotificationManager.h; sourceTree = "<group>"; };
 		74BA6EF019C87C04000E2FBA /* DCLocalNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCLocalNotificationManager.m; path = Model/DCLocalNotificationManager.m; sourceTree = "<group>"; };
+		74C725501A07725E00F48F9D /* DCManagedObjectUpdateProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DCManagedObjectUpdateProtocol.h; path = Model/Categories/DCManagedObjectUpdateProtocol.h; sourceTree = "<group>"; };
 		74CFD51E1A03F0F60041B2DF /* DCParserService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCParserService.h; path = Model/DCParserService.h; sourceTree = "<group>"; };
 		74CFD51F1A03F0F60041B2DF /* DCParserService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCParserService.m; path = Model/DCParserService.m; sourceTree = "<group>"; };
 		74E50CD219C6D9F9001FD11C /* about_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = about_img.png; path = WebResources/about_img.png; sourceTree = "<group>"; };
@@ -318,7 +319,6 @@
 		84A24FD219C1F609006EF17E /* DCTimeRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCTimeRange.m; path = Model/DCTimeRange.m; sourceTree = "<group>"; };
 		84A24FD419C1F609006EF17E /* DCType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCType.h; path = Model/DCType.h; sourceTree = "<group>"; };
 		84A24FD519C1F609006EF17E /* DCType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCType.m; path = Model/DCType.m; sourceTree = "<group>"; };
-		84A25A8519EFFB4D0051C466 /* DCParseProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCParseProtocol.h; path = Model/Categories/DCParseProtocol.h; sourceTree = "<group>"; };
 		84A25A8719F01C6E0051C466 /* NSUserDefaults+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSUserDefaults+DC.h"; path = "Classes/Helpers/NSUserDefaults+DC.h"; sourceTree = "<group>"; };
 		84A25A8819F01C6E0051C466 /* NSUserDefaults+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSUserDefaults+DC.m"; path = "Classes/Helpers/NSUserDefaults+DC.m"; sourceTree = "<group>"; };
 		84ABE8F319BEEB8F0019D5DC /* DCEventStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCEventStrategy.h; sourceTree = "<group>"; };
@@ -825,7 +825,7 @@
 		849EFDD819A4AAC600C43E05 /* DOCategories */ = {
 			isa = PBXGroup;
 			children = (
-				84A25A8519EFFB4D0051C466 /* DCParseProtocol.h */,
+				74C725501A07725E00F48F9D /* DCManagedObjectUpdateProtocol.h */,
 				849EFE1C19A4EB2100C43E05 /* DCEvent+DC.h */,
 				849EFE1D19A4EB2100C43E05 /* DCEvent+DC.m */,
 				849EFE1F19A4FB9600C43E05 /* DCProgram+DC.h */,

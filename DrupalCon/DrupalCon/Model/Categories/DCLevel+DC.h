@@ -21,8 +21,9 @@
 //
 
 #import "DCLevel.h"
-#import "DCParseProtocol.h"
+#import "DCManagedObjectUpdateProtocol.h"
 
-@interface DCLevel (DC) <parseProtocol>
+
+@interface DCLevel (DC) <ManagedObjectUpdateProtocol>
 
 @end

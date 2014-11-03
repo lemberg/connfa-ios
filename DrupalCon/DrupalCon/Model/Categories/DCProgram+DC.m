@@ -22,6 +22,8 @@
 
 #import "DCProgram+DC.h"
 #import "DCEvent+DC.h"
+#import "NSManagedObject+DC.h"
+
 #import "NSDate+DC.h"
 #import "DCFavoriteEvent+DC.h"
 #import "DCMainProxy.h"
@@ -30,22 +32,10 @@ const NSString * kDCProgram_programEvents_key = @"programEvents";
 
 @implementation DCProgram (DC)
 
-#pragma mark - parseProtocol
+#pragma mark - ManagedObjectUpdateProtocol
 
-+ (BOOL)successParceJSONData:(NSData *)jsonData idsForRemove:(NSArray *__autoreleasing *)idsForRemove
++ (void)updateFromDictionary:(NSDictionary *)events inContext:(NSManagedObjectContext *)context;
 {
-    NSError * err = nil;
-    NSDictionary * events = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                            options:kNilOptions
-                                                              error:&err];
-    events = [events dictionaryByReplacingNullsWithStrings];
-    
-    if (err)
-    {
-        @throw [NSException exceptionWithName:INVALID_JSON_EXCEPTION reason:@"Problem in json structure" userInfo:nil];
-        return NO;
-    }
-    
     for (NSDictionary * day in events[kDCEvent_days_key])
     {
         NSDate * date = [NSDate fabricateWithEventString:day[kDCEvent_date_key]];
@@ -53,19 +43,20 @@ const NSString * kDCProgram_programEvents_key = @"programEvents";
         {
             DCProgram * programInstance = (DCProgram*)[[DCMainProxy sharedProxy] objectForID:[event[kDCEvent_eventId_key] intValue]
                                                                                      ofClass:[DCProgram class]
-                                                                                 inMainQueue:NO];
-
+                                                                                 inContext:context];
+            
             if (!programInstance) // create
             {
-                programInstance = (DCProgram*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCProgram class]];
+                programInstance = [DCProgram createManagedObjectInContext:context];
+                //(DCProgram*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCProgram class]];
             }
             
             if ([event[kDCParseObjectDeleted] intValue]==1) // remove
             {
                 [[DCMainProxy sharedProxy] removeItem:programInstance];
                 DCFavoriteEvent * favorite = (DCFavoriteEvent*)[[DCMainProxy sharedProxy] objectForID:[event[kDCEvent_eventId_key] intValue]
-                                                                            ofClass:[DCFavoriteEvent class]
-                                                                        inMainQueue:NO];
+                                                                                              ofClass:[DCFavoriteEvent class]
+                                                                                            inContext:context];
                 if (favorite) // in case when event was in favorites - remove from there
                 {
                     [[DCMainProxy sharedProxy] removeItem:favorite];
@@ -73,12 +64,11 @@ const NSString * kDCProgram_programEvents_key = @"programEvents";
             }
             else // update
             {
-                [DCProgram parseEventFromDictionaty:event toObject:programInstance forDate:date];
+                [programInstance updateFromDictionary:event forData:date];
             }
         }
     }
-    
-    return YES;
 }
+
 
 @end

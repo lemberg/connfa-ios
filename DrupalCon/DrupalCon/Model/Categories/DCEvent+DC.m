@@ -27,6 +27,7 @@
 #import "DCLevel+DC.h"
 #import "DCTrack+DC.h"
 #import "DCMainProxy+Additions.h"
+#import "NSManagedObject+DC.h"
 
 #import "NSString+HTML.h"
 
@@ -46,10 +47,6 @@ const NSString * kDCEvent_place_key = @"place";
 @implementation DCEvent (DC)
 
 
-+ (void)parseFromJSONData:(NSData *)jsonData
-{
-
-}
 
 - (NSArray*)speakersNames
 {
@@ -71,29 +68,36 @@ const NSString * kDCEvent_place_key = @"place";
     return [self.type.typeID integerValue];
 }
 
-+ (void)parseEventFromDictionaty:(NSDictionary *)eventDict toObject:(DCEvent *)object forDate:(NSDate *)date
+#pragma mark - Update protocol method
+// Overload this method in child objects
++ (void)updateFromDictionary:(NSDictionary *)dictionary inContext:(NSManagedObjectContext *)context;
+{}
+
+- (void)updateFromDictionary:(NSDictionary *)eventDict forData:(NSDate *)date
 {
-    object.date = date;
-    object.eventID = eventDict[kDCEvent_eventId_key];
-    object.name = eventDict[kDCEvent_name_key];
-    object.favorite = @NO;
-    object.place = [eventDict[kDCEvent_place_key] kv_decodeHTMLCharacterEntities];
-    object.desctiptText = eventDict[kDCEvent_text_key]; //kv_decodeHTMLCharacterEntities];
-    object.timeRange = (DCTimeRange*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCTimeRange class]];
-    [object.timeRange setFrom:eventDict[kDCEvent_from_key] to:eventDict[kDCEvent_to_key]];
+    self.date = date;
+    self.eventID = eventDict[kDCEvent_eventId_key];
+    self.name = eventDict[kDCEvent_name_key];
+    self.favorite = @NO;
+    self.place = [eventDict[kDCEvent_place_key] kv_decodeHTMLCharacterEntities];
+    self.desctiptText = eventDict[kDCEvent_text_key]; //kv_decodeHTMLCharacterEntities];
+    self.timeRange = [DCTimeRange createManagedObjectInContext:self.managedObjectContext];//(DCTimeRange*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCTimeRange class]];
+    [self.timeRange setFrom:eventDict[kDCEvent_from_key] to:eventDict[kDCEvent_to_key]];
     
-    [object addTypeForID:[eventDict[kDCEvent_type_key] intValue]];
-    [object addSpeakersForIds:eventDict[kDCEvent_speakers_key]];
-    [object addLevelForID:[eventDict[kDCEvent_experienceLevel_key] intValue]];
-    [object addTrackForId:[eventDict[kDCEvent_track_key] intValue]];
+    [self addTypeForID:[eventDict[kDCEvent_type_key] intValue]];
+    [self addSpeakersForIds:eventDict[kDCEvent_speakers_key]];
+    [self addLevelForID:[eventDict[kDCEvent_experienceLevel_key] intValue]];
+    [self addTrackForId:[eventDict[kDCEvent_track_key] intValue]];
 }
+
+
 
 - (void)addTypeForID:(int)typeID
 {
-    DCType * type = (DCType*)[[DCMainProxy sharedProxy] objectForID:typeID ofClass:[DCType class] inMainQueue:NO];
+    DCType * type = (DCType*)[[DCMainProxy sharedProxy] objectForID:typeID ofClass:[DCType class] inContext:self.managedObjectContext];
     if (!type)
     {
-        type = (DCType*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCType class]];
+        type = [DCType createManagedObjectInContext:self.managedObjectContext];//(DCType*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCType class]];
 //        type = [[DCMainProxy sharedProxy] createType];
 //        type.name = @"noname";
 //        type.typeID = @(typeID);
@@ -105,10 +109,12 @@ const NSString * kDCEvent_place_key = @"place";
 {
     for (NSNumber* speakerIdNum in speakerIds)
     {
-        DCSpeaker * speaker = (DCSpeaker*)[[DCMainProxy sharedProxy] objectForID:[speakerIdNum intValue] ofClass:[DCSpeaker class] inMainQueue:NO];
+        DCSpeaker * speaker = (DCSpeaker*)[[DCMainProxy sharedProxy] objectForID:[speakerIdNum intValue]
+                                                                         ofClass:[DCSpeaker class]
+                                                                       inContext:self.managedObjectContext];
         if (!speaker)
         {
-            speaker = (DCSpeaker*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCSpeaker class]];
+            speaker = [DCSpeaker createManagedObjectInContext:self.managedObjectContext];
             speaker.speakerId = speakerIdNum;
             speaker.name = @"";
         }
@@ -118,10 +124,12 @@ const NSString * kDCEvent_place_key = @"place";
 
 - (void)addLevelForID:(int)levelID
 {
-    DCLevel * level = (DCLevel*)[[DCMainProxy sharedProxy] objectForID:levelID ofClass:[DCLevel class] inMainQueue:NO];
+    DCLevel * level = (DCLevel*)[[DCMainProxy sharedProxy] objectForID:levelID
+                                                               ofClass:[DCLevel class]
+                                                             inContext:self.managedObjectContext];
     if (!level)
     {
-        level = (DCLevel*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCLevel class]];
+        level = [DCLevel createManagedObjectInContext:self.managedObjectContext];
         level.levelId = @(levelID);
         level.name = @"";
         level.order = @(100);
@@ -131,10 +139,12 @@ const NSString * kDCEvent_place_key = @"place";
 
 -(void)addTrackForId:(int)trackId
 {
-    DCTrack * track = (DCTrack*)[[DCMainProxy sharedProxy] objectForID:trackId ofClass:[DCTrack class] inMainQueue:NO];
+    DCTrack * track = (DCTrack*)[[DCMainProxy sharedProxy] objectForID:trackId
+                                                               ofClass:[DCTrack class]
+                                                             inContext:self.managedObjectContext];
     if (!track)
     {
-        track = (DCTrack*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCTrack class]];
+        track = [DCTrack createManagedObjectInContext:self.managedObjectContext];
         track.trackId = @(trackId);
         track.name = @"";
     }
@@ -185,13 +195,6 @@ const NSString * kDCEvent_place_key = @"place";
     return [UIImage imageNamed:icon_name];
 }
 
-#pragma mark - parseProtocol
-
-+ (BOOL)successParceJSONData:(NSData *)jsonData
-{
-    // implementation is in child
-    return NO;
-}
 
 + (NSString*)idKey
 {

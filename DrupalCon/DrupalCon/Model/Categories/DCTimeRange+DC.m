@@ -22,6 +22,8 @@
 
 #import "DCTimeRange+DC.h"
 #import "DCTime+DC.h"
+#import "NSManagedObject+DC.h"
+
 #import "DCMainProxy.h"
 
 @implementation DCTimeRange (DC)
@@ -33,9 +35,9 @@
 
 - (void)setFrom:(NSString *)from to:(NSString *)to
 {
-    self.from = (DCTime*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCTime class]];
+    self.from = [DCTime createManagedObjectInContext:self.managedObjectContext];//(DCTime*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCTime class]];
     [self.from setTime:from];
-    self.to = (DCTime*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCTime class]];
+    self.to = [DCTime createManagedObjectInContext:self.managedObjectContext];//(DCTime*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCTime class]];
     [self.to setTime:to];
 }
 

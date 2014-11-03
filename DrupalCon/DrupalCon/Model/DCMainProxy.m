@@ -38,13 +38,18 @@
 
 #import "Reachability.h"
 #import "DCDataProvider.h"
+#import "DCWebService.h"
+#import "DCParserService.h"
+#import "NSManagedObject+DC.h"
+#import "DCCoreDataStore.h"
+
+#import "DCManagedObjectUpdateProtocol.h"
+
 //TODO: remove import after calendar will be intagrated
 #import "AppDelegate.h"
 #import "DCLocalNotificationManager.h"
 #import "DCLoginViewController.h"
 //
-
-#import "DCParseProtocol.h"
 
 const NSString * INVALID_JSON_EXCEPTION = @"Invalid JSON";
 static NSString * kDCMainProxyModelName = @"main";
@@ -59,6 +64,8 @@ static NSString *const TIME_STAMP_URI = @"getLastUpdate";
 static NSString *const ABOUT_INFO_URI = @"getAbout";
 static NSString *const LOCATION_URI = @"getLocations";
 
+
+
 #pragma mark - block declaration
 
 typedef void(^UpdateDataFail)(NSString *reason);
@@ -68,6 +75,9 @@ typedef void(^UpdateDataFail)(NSString *reason);
 @interface DCMainProxy ()
 
 @property (nonatomic, copy) void(^dataReadyCallback)(DCMainProxyState mainProxyState);
+
+@property (nonatomic, strong) DCWebService *webService;
+@property (nonatomic, strong) NSDictionary *classesMap;
 
 @end
 
@@ -83,15 +93,51 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 
 #pragma mark - initialization
 
+
+
 + (DCMainProxy*)sharedProxy
 {
     static id sharedProxy = nil;
     static dispatch_once_t disp;
     dispatch_once(&disp, ^{
-        sharedProxy = [[super alloc] init];
-        [sharedProxy setState:([(NSString*)[NSUserDefaults lastUpdateForClass:[DCType class]] integerValue]!=0?DCMainProxyStateDataReady:DCMainProxyStateNoData)];
+        sharedProxy = [[self alloc] init];
+        [sharedProxy initialise];
     });
     return sharedProxy;
+}
+
+// Resources URI are orders according to Core Data update
+static NSArray  *RESOURCES_URI;
+
+- (void)initialise
+{
+    // Initialise web service
+    self.webService = [[DCWebService alloc] init];
+    
+    // Set default data
+    [self setState:([self timeStampValue])? DCMainProxyStateDataReady : DCMainProxyStateNoData];
+    
+    // URI are orders according to Core Data update
+    RESOURCES_URI = [NSArray arrayWithObjects:TYPES_URI, SPEKERS_URI,
+                     LEVELS_URI, TRACKS_URI,
+                     PROGRAMS_URI, BOFS_URI,
+                     LOCATION_URI, ABOUT_INFO_URI, nil];
+    
+}
+
+//  TODO:  Move this methods in separate class call ImportService
+
+#pragma mark - TimeStampValue get/set
+
+// Save time stamp in NSUserDefaults with key [DCMainProxy class]
+- (NSInteger)timeStampValue
+{
+    return [[NSUserDefaults lastUpdateForClass:[DCMainProxy class]] integerValue];
+}
+
+- (void)updateTimeStampValue:(NSString *)value
+{
+    [NSUserDefaults updateTimestampString:value ForClass:[DCMainProxy class]];
 }
 
 - (void)setDataReadyCallback:(void (^)(DCMainProxyState))dataReadyCallback
@@ -159,53 +205,142 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     return;
 }
 
+
+- (NSDictionary *)classesMap
+{
+    if  (!_classesMap) {
+        _classesMap =  @{ TYPES_URI: [DCType class],
+                          SPEKERS_URI: [DCSpeaker class],
+                          LEVELS_URI: [DCLevel class],
+                          TRACKS_URI: [DCTrack class],
+                          PROGRAMS_URI: [DCProgram class],
+                          BOFS_URI: [DCBof class],
+                          LOCATION_URI: [DCLocation class]
+                          };
+    }
+    return _classesMap;
+}
+
+
+#pragma mark Import data from server
+
+
 - (void)updateEvents
 {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
-    UpdateDataFail updateFail = ^(NSString *reason){
-        [self setState:DCMainProxyStateLoadingFail];
-        @throw [NSException exceptionWithName:@"loading" reason:reason userInfo:nil];
-        return;
-    };
-    
-    NSString * typesLastModified = [self updateClass:[DCType class] withURI:TYPES_URI failCallBack:updateFail];
-    NSString * speakersLastModified = [self updateClass:[DCSpeaker class] withURI:SPEKERS_URI failCallBack:updateFail];
-    NSString * levelsLastModified = [self updateClass:[DCLevel class] withURI:LEVELS_URI failCallBack:updateFail];
-    NSString * tracksLastModified = [self updateClass:[DCTrack class] withURI:TRACKS_URI failCallBack:updateFail];
-    NSString * programsLastModified = [self updateClass:[DCProgram class] withURI:PROGRAMS_URI failCallBack:updateFail];
-    NSString * bofsLastModified = [self updateClass:[DCBof class] withURI:BOFS_URI failCallBack:updateFail];
-    NSString * locationsLastModified = [self updateClass:[DCLocation class] withURI:LOCATION_URI failCallBack:updateFail];
-    [self loadHtmlAboutInfo:^(NSString *response) {}];
-    
-    if (self.state != DCMainProxyStateLoadingFail) {
-        [self setState:DCMainProxyStateDataReady];
-        [self saveContext];
-        _workContext = [self newMainQueueContext];
-        
-        [NSUserDefaults updateTimestampString:typesLastModified ForClass:[DCType class]];
-        [NSUserDefaults updateTimestampString:speakersLastModified ForClass:[DCSpeaker class]];
-        [NSUserDefaults updateTimestampString:levelsLastModified ForClass:[DCLevel class]];
-        [NSUserDefaults updateTimestampString:tracksLastModified ForClass:[DCTrack class]];
-        [NSUserDefaults updateTimestampString:programsLastModified ForClass:[DCProgram class]];
-        [NSUserDefaults updateTimestampString:bofsLastModified ForClass:[DCBof class]];
-        [NSUserDefaults updateTimestampString:locationsLastModified ForClass:[DCLocation class]];
-        
-        [self dataIsReady];
+    //  TODO: Make request to server due to update time stamp and get the response with latest changes
+    if (![self timeStampValue]) {
+        [self.webService fetchesDataFromURLRequests:[self requestsForUpdateFromURIs:RESOURCES_URI]
+                                           callBack:^(BOOL success, NSDictionary *result) {
+                                               [self parseData:result withSuccessAction:@selector(updateCoreDataWithDictionary:)];
+                                           }];
+    } else {
+        [self updateSuccess];
     }
-    else
-    {
-        [self rollbackUpdates];
-    }
+
+}
+
+- (void)updateSuccess
+{
+    [self setState:DCMainProxyStateDataReady];
+    [self dataIsReady];
+    //  TODO: Don't update time stamp this way need condition
+    [self updateTimeStampValue:@"11111111111"];
+
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+}
+
+- (void)updateFailed
+{
+    [self rollbackUpdates];
+    [self setState:DCMainProxyStateLoadingFail];
+    NSLog(@"Update failed");
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 
+- (NSArray *)requestsForUpdateFromURIs:(NSArray *)uris
+{
+    NSMutableArray *requestsPlaceHolder = [NSMutableArray array];
+    for (NSString *uri in uris) {
+        NSURLRequest *request = [DCWebService urlRequestForURI:uri
+                                                withHTTPMethod:@"GET"
+                                             withHeaderOptions:nil];
+        [requestsPlaceHolder addObject:request];
+    }
+    return requestsPlaceHolder;
+}
+
+
+- (void)updateCoreDataWithDictionary:(NSDictionary *)newDict
+{
+    NSDictionary *dict = newDict;
+    
+    // TODO: Create model for this information, now I don't know what todo
+    [NSUserDefaults saveAbout:dict[ABOUT_INFO_URI][kAboutInfo]];
+    
+    // Update core data
+    NSManagedObjectContext *backgroundContext =  [DCCoreDataStore privateQueueContext];
+    [backgroundContext  performBlock:^{
+        [self fillInModelsFromDictionary:dict inContext:backgroundContext];
+        if ([[DCCoreDataStore defaultStore] save]) {
+            [self updateSuccess];
+        } else {
+            [self updateFailed];
+        }
+
+    }];
+
+}
+
+
+- (void)fillInModelsFromDictionary:(NSDictionary *)dict inContext:(NSManagedObjectContext *)context
+{
+    //  FIXME: Remove hard code because this URI resources will come from server repsonse
+    for (NSString *keyUri in RESOURCES_URI) {
+        // Get class map to URI
+        Class model = self.classesMap[keyUri];
+        // Check is model can update with dictionary
+        if ([model conformsToProtocol:@protocol(ManagedObjectUpdateProtocol)]) {
+            [model updateFromDictionary:dict[keyUri] inContext:context];
+        } else if (model) {
+            NSAssert(NO, @"Model cann't be updated because it doesn't have ManagedObjectUpdateProtocol");
+        }
+    }
+    
+}
+
+
+- (void)parseData:(NSDictionary *)data withSuccessAction:(SEL)successSelector
+{
+    DCParserService *parserService = [[DCParserService alloc] init];
+    [parserService  parseJSONDataFromDictionary:data
+                                   withCallBack:[self parseCallBackWithSuccessAction:successSelector]];
+}
+
+- (CompleteParseCallback)parseCallBackWithSuccessAction:(SEL)successSelector;
+{
+    CompleteParseCallback callback = ^(NSError *error, NSDictionary *result) {
+        if (!error) {
+            [self performSelectorOnMainThread:successSelector withObject:result waitUntilDone:NO];
+        } else {
+            NSLog(@"Parse failed");
+            [self updateFailed];
+        }
+        
+    };
+    return callback;
+}
+
 - (void)dataIsReady
 {
-    if (self.dataReadyCallback) {
-        self.dataReadyCallback(self.state);
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.dataReadyCallback) {
+            self.dataReadyCallback(self.state);
+        }
+    });
+
 }
 
 #pragma mark - getting instances
@@ -222,13 +357,13 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 
 - (NSArray*)getAllInstancesOfClass:(Class)aClass inMainQueue:(BOOL)mainQueue
 {
-    return [self instancesOfClass:aClass filtredUsingPredicate:nil inContext:(mainQueue?self.workContext:self.defaultPrivateContext)];
+    return [self instancesOfClass:aClass filtredUsingPredicate:nil inContext:self.newMainQueueContext];
 }
 
-- (NSManagedObject*)objectForID:(int)ID ofClass:(Class)aClass inMainQueue:(BOOL)mainQueue
+- (NSManagedObject*)objectForID:(int)ID ofClass:(Class)aClass inContext:(NSManagedObjectContext *)context
 {
-    if ([aClass conformsToProtocol:@protocol(parseProtocol)]) {
-        return [self getObjectOfClass:aClass forID:ID whereIdKey:[aClass idKey] inMainQueue:mainQueue];
+    if ([aClass conformsToProtocol:@protocol(ManagedObjectUpdateProtocol)]) {
+        return [self getObjectOfClass:aClass forID:ID whereIdKey:[aClass idKey] inContext:context];
     }
     else
     {
@@ -239,19 +374,15 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     }
 }
 
-- (NSManagedObject*)createObjectOfClass:(Class)aClass
-{
-    return [self createInstanceOfClass:aClass inContext:self.defaultPrivateContext];
-}
 
 #pragma mark -
 
-- (NSManagedObject*)getObjectOfClass:(Class)class forID:(NSInteger)ID whereIdKey:(NSString*)idKey inMainQueue:(BOOL)mainQueue
+- (NSManagedObject*)getObjectOfClass:(Class)class forID:(NSInteger)ID whereIdKey:(NSString*)idKey inContext:(NSManagedObjectContext *)context
 {
     NSPredicate * predicate = [NSPredicate predicateWithFormat:@"%@ == %i", idKey, ID];
     NSArray * results = [self instancesOfClass:class
                          filtredUsingPredicate:predicate
-                                     inContext:(mainQueue?self.workContext:self.defaultPrivateContext)];
+                                     inContext:context];
     if (results.count > 1)
     {
         @throw [NSException exceptionWithName:[NSString stringWithFormat:@"%@",class]
@@ -267,7 +398,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 
 - (void)addToFavoriteEvent:(DCEvent *)event
 {
-    DCFavoriteEvent *favoriteEvent = (DCFavoriteEvent*)[self createObjectOfClass:[DCFavoriteEvent class]];
+    DCFavoriteEvent *favoriteEvent = [DCFavoriteEvent createManagedObjectInContext:self.newMainQueueContext];//(DCFavoriteEvent*)[self createObjectOfClass:[DCFavoriteEvent class]];
     favoriteEvent.eventID = event.eventID;
     [DCLocalNotificationManager scheduleNotificationWithItem:event interval:10];
     [self saveContext];
@@ -275,7 +406,9 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 
 - (void)removeFavoriteEventWithID:(NSNumber *)eventID
 {
-    DCFavoriteEvent *favoriteEvent = (DCFavoriteEvent*)[self objectForID:[eventID intValue] ofClass:[DCFavoriteEvent class] inMainQueue:NO];
+    DCFavoriteEvent *favoriteEvent = (DCFavoriteEvent*)[self objectForID:[eventID intValue]
+                                                                 ofClass:[DCFavoriteEvent class]
+                                                               inContext:self.defaultPrivateContext];
     if (favoriteEvent) {
         [DCLocalNotificationManager cancelLocalNotificationWithId:favoriteEvent.eventID];
         [self removeItem:favoriteEvent];
@@ -293,36 +426,9 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     
 }
 
-#pragma mark -
-
 - (void)loadHtmlAboutInfo:(void(^)(NSString *))callback
 {
-    [self.defaultPrivateContext performBlockAndWait:^{
-        [DCDataProvider updateMainDataFromURI:ABOUT_INFO_URI lastModified:@"" callBack:^(BOOL success, id result, id lastModifiedResponce) {
-            if (success && result && lastModifiedResponce)
-            {
-                NSError *error;
-                NSDictionary * about  = [NSJSONSerialization JSONObjectWithData:result
-                                                                        options:kNilOptions
-                                                                          error:&error];
-                [NSUserDefaults saveAbout:[about objectForKey:kAboutInfo]];
-                callback([NSUserDefaults aboutString]);
-            }
-            else
-            {
-                if ([NSUserDefaults aboutString])
-                {
-                    callback([NSUserDefaults aboutString]);
-                }
-                else
-                {
-                    callback(@"");
-                }
-                
-                NSLog(@"WRONG! %@", result);
-            }
-        }];
-    }];
+    callback([NSUserDefaults aboutString]);
 }
 
 #pragma mark - DO save/not save/delete
@@ -347,102 +453,22 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     [self.defaultPrivateContext rollback];
 }
 
-#pragma mark - update data
 
-// returns new last-modified timestamp
-- (NSString*)updateClass:(Class)class withURI:(NSString*)uri failCallBack:(UpdateDataFail)callBack
-{
-    if ([class conformsToProtocol:@protocol(parseProtocol)])
-    {
-        __block NSString * lastModifiedResult = nil;
-        [self.defaultPrivateContext performBlockAndWait:^{
-            [DCDataProvider updateMainDataFromURI:uri lastModified:[NSUserDefaults lastUpdateForClass:class] callBack:^(BOOL success, id result, id lastModifiedResponce) {
-                
-                if (!success)
-                {
-                    callBack(@"update fail");
-                }
-                
-                //PARSING ...
-                BOOL successParse = [class successParceJSONData:result];
-                if (successParse && lastModifiedResult)
-                {
-                    lastModifiedResult = (NSString*)lastModifiedResponce;
-                }
-                else if (!successParse)
-                {
-                    callBack(@"parse fail");
-                }
-                
-                // ELSE: no change, no need to parse
 
-            }];
-        }];
-        return lastModifiedResult;
-    }
-    else
-    {
-        @throw [NSException exceptionWithName:[NSString stringWithFormat:@"%@",class]
-                                       reason:@"not conform the parse protocol"
-                                     userInfo:nil];
-    }
-}
 
 #pragma mark - Core Data stack
 
-- (NSManagedObjectModel*)managedObjectModel
-{
-    if (!_managedObjectModel)
-    {
-        NSURL * modelURL = [[NSBundle mainBundle] URLForResource:kDCMainProxyModelName withExtension:@"momd"];
-        _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-    }
-    return _managedObjectModel;
-}
-
-- (NSPersistentStoreCoordinator*)persistentStoreCoordinator
-{
-    if (!_persistentStoreCoordinator)
-    {
-        NSString * dbName = [NSString stringWithFormat:@"%@.sqlite",kDCMainProxyModelName];
-        NSURL * cachURL = [[[NSFileManager defaultManager] URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] lastObject];
-        NSURL *storeURL = [cachURL URLByAppendingPathComponent:dbName];
-        
-        NSError * err = nil;
-        _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-        if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
-                                                       configuration:nil
-                                                                 URL:storeURL
-                                                             options:nil
-                                                               error:&err])
-        {
-            NSLog(@"Unresolved error %@, %@", err, [err userInfo]);
-            abort();
-        }
-    }
-    return _persistentStoreCoordinator;
-}
 
 - (NSManagedObjectContext*)defaultPrivateContext
 {
-    if (!_defaultPrivateContext)
-    {
-        NSPersistentStoreCoordinator * coordinator = [self persistentStoreCoordinator];
-        if (coordinator)
-        {
-            _defaultPrivateContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-            [_defaultPrivateContext setPersistentStoreCoordinator:coordinator];
-        }
-        
-    }
-    return _defaultPrivateContext;
+
+    return [DCCoreDataStore privateQueueContext];
 }
 
 -(NSManagedObjectContext*)newMainQueueContext
 {
-    NSManagedObjectContext* context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    context.parentContext = self.defaultPrivateContext;
-    return context;
+
+    return [DCCoreDataStore mainQueueContext];
 }
 
 #pragma mark -

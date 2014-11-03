@@ -21,7 +21,8 @@
 //
 
 #import "DCEvent.h"
-#import "DCParseProtocol.h"
+#import "DCManagedObjectUpdateProtocol.h"
+
 #import "NSDictionary+DC.h"
 
 extern NSString * kDCEvent_days_key;
@@ -49,12 +50,15 @@ typedef NS_ENUM (int, DCEventType) {
     DC_EVENT_REGISTRATION = 8
 };
 
-@interface DCEvent (DC) <parseProtocol>
+@interface DCEvent (DC) <ManagedObjectUpdateProtocol>
 
 - (NSInteger)getTypeID;
 - (NSArray*)speakersNames;
 
-+ (void)parseEventFromDictionaty:(NSDictionary*)eventDict toObject:(DCEvent*)object forDate:(NSDate*)date;
+
++ (void)updateFromDictionary:(NSDictionary *)dictionary inContext:(NSManagedObjectContext *)context;
+- (void)updateFromDictionary:(NSDictionary *)eventDict forData:(NSDate *)date;
+
 
 - (void)addTypeForID:(int)typeID;
 - (void)addSpeakersForIds:(NSArray*)speakerIds;

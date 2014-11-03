@@ -48,7 +48,7 @@
 
 #pragma mark - PUBLIC
 
-- (NSURLRequest *)urlRequestForURI:(NSString *)uri
++ (NSURLRequest *)urlRequestForURI:(NSString *)uri
                     withHTTPMethod:(NSString *)httpMethod
                  withHeaderOptions:(NSDictionary *)options
 {
@@ -69,7 +69,7 @@
 }
 
 
-- (void)fetchDataFromURLRequest:(NSURLRequest *)urlRequest
++ (void)fetchDataFromURLRequest:(NSURLRequest *)urlRequest
                       onSuccess:(SuccessResponseCallback)successCallback
                         onError:(FailureResponseCallback)failureCallback {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
@@ -103,9 +103,9 @@
 }
 
 
-#pragma mark - PRIVATE:
 
-- (void)dataFromURLRequest:(NSURLRequest *)urlRequest
+
++ (void)dataFromURLRequest:(NSURLRequest *)urlRequest
                  onSuccess:(SuccessResponseCallback)successCallback
                    onError:(FailureResponseCallback)failureCallback
 {
@@ -123,6 +123,7 @@
     
 }
 
+#pragma mark - PRIVATE:
 
 #pragma mark  Create operation objects
 - (NSArray *)operationsFromUrlRequests:(NSArray *)requests
@@ -133,7 +134,7 @@
     for (NSURLRequest *request in requests) {
         // Create block operation with url request
         NSBlockOperation *requestOperation = [NSBlockOperation blockOperationWithBlock:^{
-            [self dataFromURLRequest:request
+            [DCWebService dataFromURLRequest:request
                            onSuccess:[self successResponseCallback]
                              onError:[self failureResponseCallback]];
         }];

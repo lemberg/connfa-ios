@@ -31,8 +31,9 @@ static NSString *const DCCoreDataModelFileName = @"main";
 @property (strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @property (strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 
-@property (strong, nonatomic) NSManagedObjectContext *mainQueueContext;
-@property (strong, nonatomic) NSManagedObjectContext *privateQueueContext;
+@property (strong, nonatomic) NSManagedObjectContext *privateWriterContext;
+@property (strong, nonatomic) NSManagedObjectContext *mainContext;
+@property (strong, nonatomic) NSManagedObjectContext *workerContext;
 
 @end
 
@@ -53,40 +54,90 @@ static NSString *const DCCoreDataModelFileName = @"main";
 
 + (NSManagedObjectContext *)mainQueueContext
 {
-    return [[self defaultStore] mainQueueContext];
+    return [[self defaultStore] mainContext];
 }
 
 + (NSManagedObjectContext *)privateQueueContext
 {
-    return [[self defaultStore] privateQueueContext];
+    return [[self defaultStore] workerContext];
 }
 
+#pragma mark - Public Access
+
+- (void)saveMainContext
+{
+    [self.mainContext performBlock:^{
+        
+        // push to parent
+        NSError *error;
+        if (![self.mainContext save:&error]) {
+            // handle error
+             NSLog(@"Error saving context %@: %@", self.mainContext, [error localizedDescription]);
+        }
+        
+        // save parent to disk asynchronously
+        [self.privateWriterContext performBlock:^{
+            NSError *error;
+            if (![self.privateWriterContext save:&error]) {
+                // handle error
+                 NSLog(@"Error saving context %@: %@", self.privateWriterContext, [error localizedDescription]);
+            }
+        }];
+    }];
+
+}
+
+- (BOOL)save
+{
+    __block NSError *error = nil;
+    [self.workerContext performBlockAndWait:^{
+        
+        // push to parent
+        if (![self.workerContext save:&error]) {
+            // handle error
+            NSLog(@"Error saving context %@: %@", self.workerContext, [error localizedDescription]);
+        }
+        [self saveMainContext];
+    }];
+    return !error;
+}
 
 #pragma mark - Getters
 
-- (NSManagedObjectContext *)mainQueueContext
+- (NSManagedObjectContext *)privateWriterContext
 {
-    if (!_mainQueueContext) {
-        _mainQueueContext = [self newMocWithConcurrencyType:NSMainQueueConcurrencyType];
+    if (!_privateWriterContext) {
+        _privateWriterContext = [self newMocWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        _privateWriterContext.persistentStoreCoordinator = self.persistentStoreCoordinator;
     }
-    
-    return _mainQueueContext;
+    return _privateWriterContext;
 }
 
-- (NSManagedObjectContext *)privateQueueContext
+- (NSManagedObjectContext *)mainContext
 {
-    if (!_privateQueueContext) {
-        _privateQueueContext = [self newMocWithConcurrencyType:NSPrivateQueueConcurrencyType];
-        _privateQueueContext.parentContext = self.mainQueueContext;
+    if (!_mainContext) {
+        _mainContext = [self newMocWithConcurrencyType:NSMainQueueConcurrencyType];
+        _mainContext.parentContext = self.privateWriterContext;
     }
     
-    return _privateQueueContext;
+    return _mainContext;
 }
+
+- (NSManagedObjectContext *)workerContext
+{
+    if (!_workerContext) {
+        _workerContext = [self newMocWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        _workerContext.parentContext = self.mainContext;
+    }
+    
+    return _workerContext;
+}
+
+
 
 - (NSManagedObjectContext *)newMocWithConcurrencyType:(NSManagedObjectContextConcurrencyType)type
 {
     NSManagedObjectContext *moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:type];
-    moc.persistentStoreCoordinator = self.persistentStoreCoordinator;
     return moc;
 }
 

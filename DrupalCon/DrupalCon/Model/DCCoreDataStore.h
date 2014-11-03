@@ -35,10 +35,34 @@
 
 @interface DCCoreDataStore : NSObject
 
-//      !!!: Maybe this class doesn't do as singleton 
+
 + (instancetype)defaultStore;
 
+
+/**
+ *  Save value from all contexts on disk
+ *
+ *  @return BOOL if save is success
+ */
+- (BOOL)save;
+
+/**
+ *  Save main context on disk
+ */
+- (void)saveMainContext;
+
+/**
+ *  Context that works on main Queue
+ *
+ *  @return NSManagedObjectContext which works with NSFetchResultController
+ */
 + (NSManagedObjectContext *)mainQueueContext;
+
+/**
+ *  Context that works on background Queue
+ *
+ *  @return  NSManagedObjectContext for backround working
+ */
 + (NSManagedObjectContext *)privateQueueContext;
 
 

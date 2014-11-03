@@ -23,6 +23,7 @@
 #import "DCType+DC.h"
 #import "DCMainProxy.h"
 #import "NSDictionary+DC.h"
+#import "NSManagedObject+DC.h"
 
 const NSString * kDCType_types_key = @"types";
 const NSString * kDCType_typeID_key = @"typeID";
@@ -30,54 +31,18 @@ const NSString * kDCType_typeName_key = @"typeName";
 
 @implementation DCType (DC)
 
-//FIXME: remove implementation of this method
-+ (void)parseFromJsonData:(NSData *)jsonData
+
+#pragma mark - Update protocol method
++ (void)updateFromDictionary:(NSDictionary *)types inContext:(NSManagedObjectContext *)context
 {
-    NSError * err = nil;
-    NSDictionary * types = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                                options:kNilOptions
-                                                                  error:&err];
-    types = [types dictionaryByReplacingNullsWithStrings];
-
-    if (err)
-    {
-        NSLog(@"WRONG! json");
-        @throw [NSException exceptionWithName:INVALID_JSON_EXCEPTION reason:@"Problem in json structure" userInfo:nil];
-        return;
-    }
-    
-    for (NSDictionary * typeDictionary in types[kDCType_types_key])
-    {
-        DCType * type = (DCType*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCType class]];
-        type.typeID = typeDictionary[kDCType_typeID_key];
-        type.name = typeDictionary[kDCType_typeName_key];
-    }
-}
-
-#pragma mark - parce protocol
-
-+ (BOOL)successParceJSONData:(NSData *)jsonData
-{
-    NSError * err = nil;
-    NSDictionary * types = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                           options:kNilOptions
-                                                             error:&err];
-    types = [types dictionaryByReplacingNullsWithStrings];
-    
-    if (err)
-    {
-        @throw [NSException exceptionWithName:INVALID_JSON_EXCEPTION reason:@"Problem in json structure" userInfo:nil];
-        return NO;
-    }
-    
     //adding
     for (NSDictionary * dictionary in types[kDCType_types_key])
     {
-        DCType * type = (DCType*)[[DCMainProxy sharedProxy] objectForID:[dictionary[kDCType_typeID_key] intValue] ofClass:[DCType class] inMainQueue:NO];
+        DCType * type = (DCType*)[[DCMainProxy sharedProxy] objectForID:[dictionary[kDCType_typeID_key] intValue] ofClass:[DCType class] inContext:context];
         
         if (!type) // then create
         {
-            type = (DCType*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCType class]];
+            type = [DCType createManagedObjectInContext:context];
         }
         
         if ([dictionary[kDCParseObjectDeleted] intValue]==1) // remove
@@ -90,9 +55,10 @@ const NSString * kDCType_typeName_key = @"typeName";
             type.name = dictionary[kDCType_typeName_key];
         }
     }
-
-    return YES;
 }
+
+#pragma mark - parce protocol
+
 
 + (NSString*)idKey
 {

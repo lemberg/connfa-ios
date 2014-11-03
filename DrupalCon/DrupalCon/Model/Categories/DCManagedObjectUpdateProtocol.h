@@ -20,11 +20,15 @@
 //  SOFTWARE.
 //
 
-#import "DCSpeaker.h"
-#import "DCManagedObjectUpdateProtocol.h"
+@protocol ManagedObjectUpdateProtocol <NSObject>
 
++ (void)updateFromDictionary:(NSDictionary *)dictionary inContext:(NSManagedObjectContext *)context;
++ (NSString*)idKey;
 
-@interface DCSpeaker (DC) <ManagedObjectUpdateProtocol>
+@end
 
+static NSString * kDCParseObjectDeleted = @"objectDeleted";
+
+@interface ManagedObjectUpdateProtocol : NSObject;
 
 @end

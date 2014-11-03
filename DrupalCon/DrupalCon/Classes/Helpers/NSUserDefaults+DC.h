@@ -18,6 +18,7 @@ extern NSString * kAboutInfo;
 + (void)updateTimestampString:(NSString *)timestamp ForClass:(Class)aClass;
 + (NSString*)lastUpdateForClass:(Class)aClass;
 
+
 #pragma mark - about
 //TODO: shift About to dababase
 + (void)saveAbout:(NSString*)aboutString;

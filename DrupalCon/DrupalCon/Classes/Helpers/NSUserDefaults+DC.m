@@ -17,7 +17,7 @@ const NSString * kAboutInfo = @"aboutHTML";
 
 + (void)updateTimestampString:(NSString *)timestamp ForClass:(Class)aClass
 {
-    [NSUserDefaults DC_savedValueForKey:[NSUserDefaults DC_LastModifiedKeyStringForClass:aClass]];
+    [NSUserDefaults DC_saveObject:timestamp forKey:[NSUserDefaults DC_LastModifiedKeyStringForClass:aClass]];
 }
 
 + (NSString*)lastUpdateForClass:(Class)aClass
@@ -30,6 +30,7 @@ const NSString * kAboutInfo = @"aboutHTML";
 
 + (void)saveAbout:(NSString*)aboutString
 {
+    
     [NSUserDefaults DC_saveObject:aboutString forKey:(NSString*)kAboutInfo];
 }
 

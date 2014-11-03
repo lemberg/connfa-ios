@@ -21,8 +21,9 @@
 //
 
 #import "DCTrack.h"
-#import "DCParseProtocol.h"
+#import "DCManagedObjectUpdateProtocol.h"
 
-@interface DCTrack (DC) <parseProtocol>
+
+@interface DCTrack (DC) <ManagedObjectUpdateProtocol>
 
 @end

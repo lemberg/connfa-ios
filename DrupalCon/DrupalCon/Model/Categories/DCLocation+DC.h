@@ -21,9 +21,9 @@
 //
 
 #import "DCLocation.h"
-#import "DCParseProtocol.h"
+#import "DCManagedObjectUpdateProtocol.h"
 
-@interface DCLocation (DC) <parseProtocol>
+@interface DCLocation (DC) <ManagedObjectUpdateProtocol>
 
 
 @end

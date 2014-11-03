@@ -23,6 +23,7 @@
 #import "DCTrack+DC.h"
 #import "DCMainProxy.h"
 #import "NSDictionary+DC.h"
+#import "NSManagedObject+DC.h"
 
 NSString * kDCTrack_traks_key = @"tracks";
 NSString * kDCTrack_trackID_key = @"trackID";
@@ -30,30 +31,19 @@ NSString * kDCTrack_trackName_key = @"trackName";
 
 @implementation DCTrack (DC)
 
-#pragma mark - parseProtocol
-
-+ (BOOL)successParceJSONData:(NSData *)jsonData
+#pragma mark - ManagedObjectUpdateProtocol
++ (void)updateFromDictionary:(NSDictionary *)tracks inContext:(NSManagedObjectContext *)context
 {
-    NSError * err = nil;
-    NSDictionary * tracks = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                            options:kNilOptions
-                                                              error:&err];
-    tracks = [tracks dictionaryByReplacingNullsWithStrings];
-    
-    if (err)
-    {
-        @throw [NSException exceptionWithName:INVALID_JSON_EXCEPTION reason:@"Problem in json structure" userInfo:nil];
-        return NO;
-    }
-    
     //adding
     for (NSDictionary * dictionary in tracks[kDCTrack_traks_key])
     {
-        DCTrack * track = (DCTrack*)[[DCMainProxy sharedProxy] objectForID:[dictionary[kDCTrack_trackID_key] intValue] ofClass:[DCTrack class] inMainQueue:NO];
+        DCTrack * track = (DCTrack*)[[DCMainProxy sharedProxy] objectForID:[dictionary[kDCTrack_trackID_key] intValue]
+                                                                   ofClass:[DCTrack class]
+                                                                 inContext:context];
         
         if (!track) // then create
         {
-            track = (DCTrack*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCTrack class]];
+            track = [DCTrack createManagedObjectInContext:context];//(DCTrack*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCTrack class]];
         }
         
         if ([dictionary[kDCParseObjectDeleted] intValue]==1) // remove
@@ -66,9 +56,8 @@ NSString * kDCTrack_trackName_key = @"trackName";
             track.name = dictionary[kDCTrack_trackName_key];
         }
     }
-    
-    return YES;
 }
+
 
 + (NSString*)idKey
 {

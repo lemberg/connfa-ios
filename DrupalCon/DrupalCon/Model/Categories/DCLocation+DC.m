@@ -23,6 +23,8 @@
 #import "DCLocation+DC.h"
 #import "NSDictionary+DC.h"
 #import "DCMainProxy.h"
+#import "NSManagedObject+DC.h"
+
 
 NSString *kDCLocation = @"locations";
 NSString *kDCLocationID = @"loactionID";
@@ -34,54 +36,17 @@ NSString *kDCLocationBuildNum = @"number";
 
 @implementation DCLocation (DC)
 
-+ (void)parseFromJsonData:(NSData *)jsonData {
+#pragma mark - ManagedObjectUpdateProtocol
 
-    NSError *err = nil;
-    NSDictionary *location = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                            options:kNilOptions
-                                                              error:&err];
-    location = [location dictionaryByReplacingNullsWithStrings];
-
-    if (err)
-    {
-        NSLog(@"WRONG! json");
-        @throw [NSException exceptionWithName:INVALID_JSON_EXCEPTION reason:@"Problem in json structure" userInfo:nil];
-        return;
-    }
-    
-    for (NSDictionary *venue in location[kDCLocation]) {
-        DCLocation * locationData = (DCLocation*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCLocation class]];
-        locationData.latitude = venue[kDCLocationLatitude];
-        locationData.longitude = venue[kDCLocationLongitude];
-        locationData.name = venue[kDCLocationPlaceName];
-        locationData.streetName = venue[kDCLocationStreetName];
-        locationData.number = venue[kDCLocationBuildNum];
-    }
-}
-
-#pragma mark - parseProtocol
-
-+ (BOOL)successParceJSONData:(NSData *)jsonData
++ (void)updateFromDictionary:(NSDictionary *)location inContext:(NSManagedObjectContext *)context
 {
-    NSError * err = nil;
-    NSDictionary * location = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                                options:kNilOptions
-                                                                error:&err];
-    location = [location dictionaryByReplacingNullsWithStrings];
-    
-    if (err)
-    {
-        @throw [NSException exceptionWithName:INVALID_JSON_EXCEPTION reason:@"Problem in json structure" userInfo:nil];
-        return NO;
-    }
-    
     //adding
     for (NSDictionary *dictionary in location[kDCLocation]) {
-        DCLocation * location = (DCLocation*)[[DCMainProxy sharedProxy] objectForID:[dictionary[kDCLocationID] intValue] ofClass:[DCLocation class] inMainQueue:NO];
+        DCLocation * location = (DCLocation*)[[DCMainProxy sharedProxy] objectForID:[dictionary[kDCLocationID] intValue] ofClass:[DCLocation class] inContext:context];
         
         if (!location) // then create
         {
-            location = (DCLocation*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCLocation class]];
+            location = [DCLocation createManagedObjectInContext:context];
         }
         
         if ([dictionary[kDCParseObjectDeleted] intValue]==1) // remove
@@ -97,8 +62,6 @@ NSString *kDCLocationBuildNum = @"number";
             location.number = dictionary[kDCLocationBuildNum];
         }
     }
-    
-    return YES;
 }
 
 + (NSString*)idKey

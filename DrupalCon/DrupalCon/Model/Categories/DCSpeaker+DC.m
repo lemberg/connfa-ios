@@ -24,6 +24,7 @@
 #import "DCMainProxy.h"
 #import "NSDictionary+DC.h"
 #import "NSString+HTML.h"
+#import "NSManagedObject+DC.h"
 
 const NSString * kDCSpeaker_speakers_key = @"speakers";
 const NSString * kDCSpeaker_speakerId_key = @"speakerID";
@@ -39,59 +40,19 @@ const NSString * kDCSpeaker_avatarPath_key = @"avatarImageUrl";
 
 @implementation DCSpeaker (DC)
 
-+ (void)parseFromJSONData:(NSData*)jsonData
-{
-    NSError * err = nil;
-    NSDictionary * speakers = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                           options:kNilOptions
-                                                             error:&err];
-    speakers = [speakers dictionaryByReplacingNullsWithStrings];
-    if (err)
-    {
-        NSLog(@"WRONG! json");
-        @throw [NSException exceptionWithName:INVALID_JSON_EXCEPTION reason:@"Problem in json structure" userInfo:nil];
-        return;
-    }
-    
-    for (NSDictionary * speakerDict in speakers[kDCSpeaker_speakers_key])
-    {
-        DCSpeaker * speaker = (DCSpeaker*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCSpeaker class]];
-        speaker.speakerId = speakerDict[kDCSpeaker_speakerId_key];
-        speaker.firstName = speakerDict[kDCSpeaker_firstName_key];
-        speaker.lastName = speakerDict[kDCSpeaker_lastName_key];
-        speaker.avatarPath = speakerDict[kDCSpeaker_avatarPath_key];
-        speaker.twitterName = speakerDict[kDCSpeaker_twitterName_key];
-        speaker.webSite = speakerDict[kDCSpeaker_webSite_key];
-        speaker.name = [NSString stringWithFormat:@"%@ %@", speaker.firstName, speaker.lastName];
-        speaker.organizationName = speakerDict[kDCSpeaker_organization_key];
-        speaker.jobTitle = speakerDict[kDCSpeaker_jobTitle_key];
-        speaker.characteristic = [speakerDict[kDCSpeaker_charact_key] kv_decodeHTMLCharacterEntities];
-    }
-}
+#pragma mark - ManagedObjectUpdateProtocol 
 
-#pragma mark - parseProtocol
-
-+ (BOOL)successParceJSONData:(NSData *)jsonData
++ (void)updateFromDictionary:(NSDictionary *)speakers inContext:(NSManagedObjectContext *)context
 {
-    NSError * err = nil;
-    NSDictionary * speakers = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                           options:kNilOptions
-                                                             error:&err];
-    speakers = [speakers dictionaryByReplacingNullsWithStrings];
-    
-    if (err)
-    {
-        @throw [NSException exceptionWithName:INVALID_JSON_EXCEPTION reason:@"Problem in json structure" userInfo:nil];
-        return NO;
-    }
-    
     for (NSDictionary * dictionary in speakers[kDCSpeaker_speakers_key])
     {
-        DCSpeaker * speaker = (DCSpeaker*)[[DCMainProxy sharedProxy] objectForID:[dictionary[kDCSpeaker_speakerId_key] intValue] ofClass:[DCSpeaker class] inMainQueue:NO];
+        DCSpeaker * speaker = (DCSpeaker*)[[DCMainProxy sharedProxy] objectForID:[dictionary[kDCSpeaker_speakerId_key] intValue]
+                                                                         ofClass:[DCSpeaker class]
+                                                                       inContext:context];
         
         if (!speaker) // then create
         {
-            speaker = (DCSpeaker*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCSpeaker class]];
+            speaker = [DCSpeaker createManagedObjectInContext:context];
         }
         
         if ([dictionary[kDCParseObjectDeleted] intValue]==1) // remove
@@ -112,8 +73,8 @@ const NSString * kDCSpeaker_avatarPath_key = @"avatarImageUrl";
             speaker.characteristic = [dictionary[kDCSpeaker_charact_key] kv_decodeHTMLCharacterEntities];
         }
     }
-    return YES;
 }
+
 
 + (NSString*)idKey
 {

@@ -58,8 +58,7 @@ typedef enum {
 #pragma mark - work with instances
 
 - (NSArray*)getAllInstancesOfClass:(Class)aClass inMainQueue:(BOOL)mainQueue;
-- (NSManagedObject*)objectForID:(int)ID ofClass:(Class)aClass inMainQueue:(BOOL)mainQueue;
-- (NSManagedObject*)createObjectOfClass:(Class)aClass;
+- (NSManagedObject*)objectForID:(int)ID ofClass:(Class)aClass inContext:(NSManagedObjectContext *)context;
 - (void)removeItem:(NSManagedObject*)item;
 
 #pragma mark -
