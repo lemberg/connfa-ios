@@ -72,6 +72,7 @@
 		74E8382019C09371000D2BE4 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E8381F19C09371000D2BE4 /* NSString+HTML.m */; };
 		74F0340519B4A965007E4AB9 /* DCAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F0340419B4A965007E4AB9 /* DCAboutViewController.m */; };
 		74F159CB19B9DD750033B31F /* DCFavoriteSourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F159CA19B9DD750033B31F /* DCFavoriteSourceManager.m */; };
+		74FF4BE51A15FC5A0093C557 /* DCImportDataSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FF4BE41A15FC5A0093C557 /* DCImportDataSevice.m */; };
 		840C455519BF419700CC144B /* DCBof+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 840C455419BF419700CC144B /* DCBof+DC.m */; };
 		849CF80419A5EFEC00C84675 /* DCMainProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 849CF80319A5EFEC00C84675 /* DCMainProxy.m */; };
 		849CF82119A6246A00C84675 /* NSDate+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 849CF82019A6246A00C84675 /* NSDate+DC.m */; };
@@ -247,6 +248,8 @@
 		74F0340419B4A965007E4AB9 /* DCAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCAboutViewController.m; sourceTree = "<group>"; };
 		74F159C919B9DD750033B31F /* DCFavoriteSourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCFavoriteSourceManager.h; path = Favorites/DCFavoriteSourceManager.h; sourceTree = "<group>"; };
 		74F159CA19B9DD750033B31F /* DCFavoriteSourceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCFavoriteSourceManager.m; path = Favorites/DCFavoriteSourceManager.m; sourceTree = "<group>"; };
+		74FF4BE31A15FC5A0093C557 /* DCImportDataSevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCImportDataSevice.h; path = Model/DCImportDataSevice.h; sourceTree = "<group>"; };
+		74FF4BE41A15FC5A0093C557 /* DCImportDataSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCImportDataSevice.m; path = Model/DCImportDataSevice.m; sourceTree = "<group>"; };
 		840C455319BF419700CC144B /* DCBof+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DCBof+DC.h"; path = "Model/Categories/DCBof+DC.h"; sourceTree = "<group>"; };
 		840C455419BF419700CC144B /* DCBof+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DCBof+DC.m"; path = "Model/Categories/DCBof+DC.m"; sourceTree = "<group>"; };
 		849CF80219A5EFEC00C84675 /* DCMainProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCMainProxy.h; path = Model/DCMainProxy.h; sourceTree = "<group>"; };
@@ -782,6 +785,8 @@
 				741A4E5E1A024FE90065FDB6 /* DCCoreDataStore.m */,
 				741A4E661A0296410065FDB6 /* DCWebService.h */,
 				741A4E671A0296410065FDB6 /* DCWebService.m */,
+				74FF4BE31A15FC5A0093C557 /* DCImportDataSevice.h */,
+				74FF4BE41A15FC5A0093C557 /* DCImportDataSevice.m */,
 				74CFD51E1A03F0F60041B2DF /* DCParserService.h */,
 				74CFD51F1A03F0F60041B2DF /* DCParserService.m */,
 				74BA6EEF19C87C04000E2FBA /* DCLocalNotificationManager.h */,
@@ -1001,6 +1006,7 @@
 				84A24FC119C1F608006EF17E /* DCFavoriteEvent.m in Sources */,
 				849D92DE19AE29B000977D67 /* DCEventDetailHeader2Cell.m in Sources */,
 				849EFE4119A5067000C43E05 /* DCType+DC.m in Sources */,
+				74FF4BE51A15FC5A0093C557 /* DCImportDataSevice.m in Sources */,
 				849EFE2119A4FB9600C43E05 /* DCProgram+DC.m in Sources */,
 				74E67C7219B6FDF400DF9D71 /* DCLocationViewController.m in Sources */,
 				84ABE8F519BEEB8F0019D5DC /* DCEventStrategy.m in Sources */,

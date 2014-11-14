@@ -51,18 +51,9 @@
 #import "DCLoginViewController.h"
 //
 
-const NSString * INVALID_JSON_EXCEPTION = @"Invalid JSON";
-static NSString * kDCMainProxyModelName = @"main";
+#import "DCImportDataSevice.h"
 
-static NSString *const TYPES_URI = @"getTypes";
-static NSString *const SPEKERS_URI = @"getSpeakers";
-static NSString *const LEVELS_URI = @"getLevels";
-static NSString *const TRACKS_URI = @"getTracks";
-static NSString *const PROGRAMS_URI = @"getPrograms";
-static NSString *const BOFS_URI = @"getBofs";
-static NSString *const TIME_STAMP_URI = @"getLastUpdate";
-static NSString *const ABOUT_INFO_URI = @"getAbout";
-static NSString *const LOCATION_URI = @"getLocations";
+const NSString * INVALID_JSON_EXCEPTION = @"Invalid JSON";
 
 
 
@@ -72,12 +63,11 @@ typedef void(^UpdateDataFail)(NSString *reason);
 
 #pragma mark -
 
-@interface DCMainProxy ()
+@interface DCMainProxy () <DCImportDataSeviceDelegate>
 
 @property (nonatomic, copy) void(^dataReadyCallback)(DCMainProxyState mainProxyState);
-
-@property (nonatomic, strong) DCWebService *webService;
-@property (nonatomic, strong) NSDictionary *classesMap;
+//
+@property (strong, nonatomic) DCImportDataSevice *importDataService;
 
 @end
 
@@ -106,39 +96,16 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     return sharedProxy;
 }
 
-// Resources URI are orders according to Core Data update
-static NSArray  *RESOURCES_URI;
-
 - (void)initialise
 {
-    // Initialise web service
-    self.webService = [[DCWebService alloc] init];
     
+    // Initialise import data service
+    
+    self.importDataService = [[DCImportDataSevice alloc] initWithManagedObjectContext:[DCCoreDataStore defaultStore] andDelegate:self];
     // Set default data
-    [self setState:([self timeStampValue])? DCMainProxyStateDataReady : DCMainProxyStateNoData];
-    
-    // URI are orders according to Core Data update
-    RESOURCES_URI = [NSArray arrayWithObjects:TYPES_URI, SPEKERS_URI,
-                     LEVELS_URI, TRACKS_URI,
-                     PROGRAMS_URI, BOFS_URI,
-                     LOCATION_URI, ABOUT_INFO_URI, nil];
-    
+    [self setState:(![self.importDataService isInitDataImport])? DCMainProxyStateDataReady : DCMainProxyStateNoData];
 }
 
-//  TODO:  Move this methods in separate class call ImportService
-
-#pragma mark - TimeStampValue get/set
-
-// Save time stamp in NSUserDefaults with key [DCMainProxy class]
-- (NSInteger)timeStampValue
-{
-    return [[NSUserDefaults lastUpdateForClass:[DCMainProxy class]] integerValue];
-}
-
-- (void)updateTimeStampValue:(NSString *)value
-{
-    [NSUserDefaults updateTimestampString:value ForClass:[DCMainProxy class]];
-}
 
 - (void)setDataReadyCallback:(void (^)(DCMainProxyState))dataReadyCallback
 {
@@ -206,131 +173,37 @@ static NSArray  *RESOURCES_URI;
 }
 
 
-- (NSDictionary *)classesMap
-{
-    if  (!_classesMap) {
-        _classesMap =  @{ TYPES_URI: [DCType class],
-                          SPEKERS_URI: [DCSpeaker class],
-                          LEVELS_URI: [DCLevel class],
-                          TRACKS_URI: [DCTrack class],
-                          PROGRAMS_URI: [DCProgram class],
-                          BOFS_URI: [DCBof class],
-                          LOCATION_URI: [DCLocation class]
-                          };
-    }
-    return _classesMap;
-}
-
 
 #pragma mark Import data from server
-
 
 - (void)updateEvents
 {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    
-    //  TODO: Make request to server due to update time stamp and get the response with latest changes
-    if (![self timeStampValue]) {
-        [self.webService fetchesDataFromURLRequests:[self requestsForUpdateFromURIs:RESOURCES_URI]
-                                           callBack:^(BOOL success, NSDictionary *result) {
-                                               [self parseData:result withSuccessAction:@selector(updateCoreDataWithDictionary:)];
-                                           }];
-    } else {
-        [self updateSuccess];
-    }
+    //  Import data from the external storage
 
+    [self.importDataService importData];
 }
 
-- (void)updateSuccess
+#pragma mark
+- (void)importDataServiceFinishedImport:(DCImportDataSevice *)importDataService withStatus:(DCImportDataSeviceImportStatus)status
 {
-    [self setState:DCMainProxyStateDataReady];
-    [self dataIsReady];
-    //  TODO: Don't update time stamp this way need condition
-    [self updateTimeStampValue:@"11111111111"];
-
+    switch (status) {
+        case DCDataUpdateFailed: {
+            [self setState:DCMainProxyStateLoadingFail];
+            NSLog(@"Update failed");
+            break;
+        }
+        case DCDataNotChanged:
+        case DCDataUpdateSuccess: {
+            [self setState:DCMainProxyStateDataReady];
+            [self dataIsReady];
+            break;
+        }
+            
+        default:
+            break;
+    }
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-}
-
-- (void)updateFailed
-{
-    [self rollbackUpdates];
-    [self setState:DCMainProxyStateLoadingFail];
-    NSLog(@"Update failed");
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-}
-
-
-- (NSArray *)requestsForUpdateFromURIs:(NSArray *)uris
-{
-    NSMutableArray *requestsPlaceHolder = [NSMutableArray array];
-    for (NSString *uri in uris) {
-        NSURLRequest *request = [DCWebService urlRequestForURI:uri
-                                                withHTTPMethod:@"GET"
-                                             withHeaderOptions:nil];
-        [requestsPlaceHolder addObject:request];
-    }
-    return requestsPlaceHolder;
-}
-
-
-- (void)updateCoreDataWithDictionary:(NSDictionary *)newDict
-{
-    NSDictionary *dict = newDict;
-    
-    // TODO: Create model for this information, now I don't know what todo
-    [NSUserDefaults saveAbout:dict[ABOUT_INFO_URI][kAboutInfo]];
-    
-    // Update core data
-    NSManagedObjectContext *backgroundContext =  [DCCoreDataStore privateQueueContext];
-    [backgroundContext  performBlock:^{
-        [self fillInModelsFromDictionary:dict inContext:backgroundContext];
-        if ([[DCCoreDataStore defaultStore] save]) {
-            [self updateSuccess];
-        } else {
-            [self updateFailed];
-        }
-
-    }];
-
-}
-
-
-- (void)fillInModelsFromDictionary:(NSDictionary *)dict inContext:(NSManagedObjectContext *)context
-{
-    //  FIXME: Remove hard code because this URI resources will come from server repsonse
-    for (NSString *keyUri in RESOURCES_URI) {
-        // Get class map to URI
-        Class model = self.classesMap[keyUri];
-        // Check is model can update with dictionary
-        if ([model conformsToProtocol:@protocol(ManagedObjectUpdateProtocol)]) {
-            [model updateFromDictionary:dict[keyUri] inContext:context];
-        } else if (model) {
-            NSAssert(NO, @"Model cann't be updated because it doesn't have ManagedObjectUpdateProtocol");
-        }
-    }
-    
-}
-
-
-- (void)parseData:(NSDictionary *)data withSuccessAction:(SEL)successSelector
-{
-    DCParserService *parserService = [[DCParserService alloc] init];
-    [parserService  parseJSONDataFromDictionary:data
-                                   withCallBack:[self parseCallBackWithSuccessAction:successSelector]];
-}
-
-- (CompleteParseCallback)parseCallBackWithSuccessAction:(SEL)successSelector;
-{
-    CompleteParseCallback callback = ^(NSError *error, NSDictionary *result) {
-        if (!error) {
-            [self performSelectorOnMainThread:successSelector withObject:result waitUntilDone:NO];
-        } else {
-            NSLog(@"Parse failed");
-            [self updateFailed];
-        }
-        
-    };
-    return callback;
 }
 
 - (void)dataIsReady

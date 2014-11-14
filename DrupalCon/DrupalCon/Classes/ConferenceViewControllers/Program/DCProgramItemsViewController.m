@@ -362,7 +362,7 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
 
 - (BOOL)isClickEnableForEvent:(DCEvent *)event
 {
-    int type = [event getTypeID];
+    NSInteger type = [event getTypeID];
     return !(type != DC_EVENT_GROUP &&
             type != DC_EVENT_REGISTRATION &&
             type != DC_EVENT_LUNCH);

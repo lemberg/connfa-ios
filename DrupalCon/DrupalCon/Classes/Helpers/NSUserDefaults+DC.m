@@ -23,7 +23,7 @@ const NSString * kAboutInfo = @"aboutHTML";
 + (NSString*)lastUpdateForClass:(Class)aClass
 {
     NSString * result = [NSUserDefaults DC_savedValueForKey:[NSUserDefaults DC_LastModifiedKeyStringForClass:aClass]];
-    return (result?result:@"0");
+    return (result?result:@"");
 }
 
 #pragma mark - about

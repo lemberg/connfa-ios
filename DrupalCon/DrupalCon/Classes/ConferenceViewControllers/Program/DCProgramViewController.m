@@ -54,7 +54,11 @@
     [self.activityIndicator startAnimating];
     [[DCMainProxy sharedProxy] setDataReadyCallback:^(DCMainProxyState mainProxyState) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            _days = [[NSArray alloc] initWithArray:[_eventsStrategy days]];
+            if ([_eventsStrategy days]) {
+                 _days = [[NSArray alloc] initWithArray:[_eventsStrategy days]];
+            } else {
+                _days = nil;
+            }
             self.viewControllers = [self DC_fillViewControllers];
             [self addPageController];
             [self.activityIndicator stopAnimating];
@@ -134,6 +138,7 @@
 
 - (NSArray*)DC_fillViewControllers
 {
+    
     NSMutableArray * controllers_ = [[NSMutableArray alloc] initWithCapacity:_days.count];
     for (int i = 0; i<_days.count; i++)
     {
