@@ -21,7 +21,9 @@
 //
 
 #import "DCCoreDataStore.h"
+#import "DCMainProxy.h"
 #import "NSFileManager+DC.h"
+#import "NSUserDefaults+DC.h"
 
 static NSString *const DCCoreDataModelFileName = @"main";
 
@@ -45,6 +47,8 @@ static NSString *const DCCoreDataModelFileName = @"main";
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         defaultCoreDataStore = [[DCCoreDataStore alloc] init];
+        // init persistent store - need to be updated if new version of application
+        [defaultCoreDataStore persistentStoreCoordinator];
     });
     
     return defaultCoreDataStore;
@@ -145,9 +149,20 @@ static NSString *const DCCoreDataModelFileName = @"main";
 
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator
 {
-    if (!_persistentStoreCoordinator) {
+    if (!_persistentStoreCoordinator)
+    {
         _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.managedObjectModel];
         NSError *error              = nil;
+        
+        if ([self DC_isNewVersion])
+        {
+            [[NSFileManager defaultManager] removeItemAtPath:[self persistentStoreURL].path error:&error];
+            [[NSFileManager defaultManager] removeItemAtPath:[[self persistentStoreURL].path stringByAppendingString:@"-shm"] error:&error];
+            [[NSFileManager defaultManager] removeItemAtPath:[[self persistentStoreURL].path stringByAppendingString:@"-wal"] error:&error];
+//            [[DCMainProxy sharedProxy] setState:DCMainProxyStateNoData];
+            [NSUserDefaults updateLastModify:@""];
+        }
+        
         BOOL isPesistentStoreAdded  = [_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType
                                                                                configuration:nil
                                                                                          URL:[self persistentStoreURL]
@@ -182,6 +197,28 @@ static NSString *const DCCoreDataModelFileName = @"main";
 - (NSDictionary *)persistentStoreOptions
 {
     return @{NSInferMappingModelAutomaticallyOption: @YES, NSMigratePersistentStoresAutomaticallyOption: @YES, NSSQLitePragmasOption: @{@"synchronous": @"OFF"}};
+}
+
+#pragma mark - 
+
+- (BOOL)DC_isNewVersion
+{
+    BOOL result = NO;
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString *majorVersion = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    NSString *minorVersion = [infoDictionary objectForKey:@"CFBundleVersion"];
+
+    if ([majorVersion isEqualToString:[NSUserDefaults bundleVersionMajor]] && [minorVersion isEqualToString:[NSUserDefaults bundleVersionMinor]])
+    {
+        result = NO;
+    }
+    else
+    {
+        result = YES;
+    }
+    [NSUserDefaults saveBundleVersionMajor:majorVersion minor:minorVersion];
+    
+    return result;
 }
 
 @end

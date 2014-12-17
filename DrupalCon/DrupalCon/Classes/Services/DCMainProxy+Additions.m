@@ -44,7 +44,12 @@
         [fetchRequest setResultType:NSDictionaryResultType];
         [fetchRequest setReturnsDistinctResults:YES];
         [fetchRequest setPredicate:nil];
-        NSArray *result = [self.workContext executeFetchRequest:fetchRequest error:nil];
+        NSError * err = nil;
+        NSArray *result = [self.workContext executeFetchRequest:fetchRequest error:&err];
+        if (err)
+        {
+            NSLog(@"error - %@", err);
+        }
         if(result && [result count])
         {
             return [[result objectsFromDictionaries] sortedDates];

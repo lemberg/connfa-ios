@@ -181,7 +181,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     //  Import data from the external storage
 
-    [self.importDataService importData];
+    [self.importDataService chechUpdates];
 }
 
 #pragma mark

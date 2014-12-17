@@ -26,6 +26,7 @@
 #import "DCMenuContainerViewController.h"
 #import "DCAppFacade.h"
 #import "DCFavoritesViewController.h"
+#import "DCMainProxy.h"
 
 #define isiPhone5  ([[UIScreen mainScreen] bounds].size.height == 568)?TRUE:FALSE
 
@@ -85,8 +86,16 @@
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear: animated];
-    // Login Screen is not actual for now!!
-    [self loginButtonCLicked:nil];
+    // Login Screen is not actual for now!! But on this point we have a triger for initial loading screen;
+    
+    if ([DCMainProxy sharedProxy].state == DCMainProxyStateInitDataLoading)
+    {
+        [self performSegueWithIdentifier:@"toFirstLoading" sender:self];
+    }
+    else
+    {
+        [self loginButtonCLicked:nil];
+    }
 }
 
 -(IBAction) loginButtonCLicked:(id)sender {

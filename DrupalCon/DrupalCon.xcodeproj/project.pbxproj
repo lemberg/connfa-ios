@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1ACFD6ED1A41D7D700F8EE57 /* DCFirstLoadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACFD6EC1A41D7D700F8EE57 /* DCFirstLoadViewController.m */; };
 		5D38E68219867062006F7A59 /* DCMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D38E68119867062006F7A59 /* DCMenuContainerViewController.m */; };
 		5D38E696198692E9006F7A59 /* DCSpeakersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D38E695198692E9006F7A59 /* DCSpeakersViewController.m */; };
 		5D38E69919869303006F7A59 /* DCProgramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D38E69819869303006F7A59 /* DCProgramViewController.m */; };
@@ -122,6 +123,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1ACFD6EB1A41D7D700F8EE57 /* DCFirstLoadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCFirstLoadViewController.h; sourceTree = "<group>"; };
+		1ACFD6EC1A41D7D700F8EE57 /* DCFirstLoadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCFirstLoadViewController.m; sourceTree = "<group>"; };
 		5D38E68019867062006F7A59 /* DCMenuContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCMenuContainerViewController.h; path = MenuContainer/DCMenuContainerViewController.h; sourceTree = "<group>"; };
 		5D38E68119867062006F7A59 /* DCMenuContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCMenuContainerViewController.m; path = MenuContainer/DCMenuContainerViewController.m; sourceTree = "<group>"; };
 		5D38E694198692E9006F7A59 /* DCSpeakersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCSpeakersViewController.h; sourceTree = "<group>"; };
@@ -391,7 +394,7 @@
 				74A6278919B8A3AC00B46B75 /* Favorites */,
 			);
 			name = ConferenceViewControllers;
-			path = Classes/ConferenceViewControllers;
+			path = ../ConferenceViewControllers;
 			sourceTree = "<group>";
 		};
 		5D38E692198692E9006F7A59 /* Programs&BoFs */ = {
@@ -599,7 +602,6 @@
 				5D6449DC198ABA3C00BC1775 /* AppFacade */,
 				5DC8C453198658BF00BF5816 /* AppDelegate */,
 				849EFDA019A49F8600C43E05 /* Model */,
-				5D38E691198692E9006F7A59 /* ConferenceViewControllers */,
 				74FF4BE61A164F320093C557 /* Services */,
 				5D6449D8198AA9E100BC1775 /* Helpers */,
 				5D6449E0198ABD4C00BC1775 /* UIConstants */,
@@ -622,6 +624,7 @@
 		5DC8C460198658FF00BF5816 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				5D38E691198692E9006F7A59 /* ConferenceViewControllers */,
 				5D38E67F1986703D006F7A59 /* MenuContainer */,
 				5DC8C47719865C8400BF5816 /* SideMenu */,
 				5DC8C4701986592400BF5816 /* Base */,
@@ -639,6 +642,8 @@
 			children = (
 				5DC8C462198658FF00BF5816 /* DCLoginViewController.h */,
 				5DC8C463198658FF00BF5816 /* DCLoginViewController.m */,
+				1ACFD6EB1A41D7D700F8EE57 /* DCFirstLoadViewController.h */,
+				1ACFD6EC1A41D7D700F8EE57 /* DCFirstLoadViewController.m */,
 			);
 			path = LoginViewController;
 			sourceTree = "<group>";
@@ -990,6 +995,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1ACFD6ED1A41D7D700F8EE57 /* DCFirstLoadViewController.m in Sources */,
 				74E8381D19C061CD000D2BE4 /* UIView+WebCacheOperation.m in Sources */,
 				74E8382019C09371000D2BE4 /* NSString+HTML.m in Sources */,
 				74E8381019C061CD000D2BE4 /* SDImageCache.m in Sources */,

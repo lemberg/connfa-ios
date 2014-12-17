@@ -40,15 +40,18 @@
 
 #import "NSUserDefaults+DC.h"
 
+static NSString *const CHECK_UPDATES_URI   = @"checkUpdates";
 static NSString *const TYPES_URI      = @"getTypes";
-static NSString *const SPEKERS_URI    = @"getSpeakers";
 static NSString *const LEVELS_URI     = @"getLevels";
 static NSString *const TRACKS_URI     = @"getTracks";
-static NSString *const PROGRAMS_URI   = @"getPrograms";
+static NSString *const SPEAKERS_URI    = @"getSpeakers";
+static NSString *const LOCATIONS_URI  = @"getLocations";
+static NSString *const SESSIONS_URI   = @"getSessions";
 static NSString *const BOFS_URI       = @"getBofs";
-static NSString *const TIME_STAMP_URI = @"getLastUpdate";
-static NSString *const ABOUT_INFO_URI = @"getAbout";
-static NSString *const LOCATION_URI   = @"getLocations";
+static NSString *const SOCIAL_EVENTS_URI = @"getSocialEvents";
+static NSString *const POI_URI        = @"getPOI";
+static NSString *const INFO_URI       = @"getInfo";
+static NSString *const TWITTER_URI    = @"getTwitter";
 
 
 
@@ -62,9 +65,6 @@ static NSString *const LOCATION_URI   = @"getLocations";
 @implementation DCImportDataSevice
 
 
-// Resources URI are orders according to Core Data update
-static NSArray  *RESOURCES_URI;
-
 - (instancetype)initWithManagedObjectContext:(DCCoreDataStore *)coreDataStore
                                  andDelegate:(id<DCImportDataSeviceDelegate>)delegate
 {
@@ -74,11 +74,6 @@ static NSArray  *RESOURCES_URI;
         self.delegate       = delegate;
         // Initialise web service
         self.webService = [[DCWebService alloc] init];
-        // URI are orders according to Core Data update
-        RESOURCES_URI = [NSArray arrayWithObjects:TYPES_URI, SPEKERS_URI,
-                         LEVELS_URI, TRACKS_URI,
-                         PROGRAMS_URI, BOFS_URI,
-                         LOCATION_URI, ABOUT_INFO_URI, nil];
     }
     return self;
 }
@@ -100,12 +95,12 @@ static NSArray  *RESOURCES_URI;
 {
     if  (!_classesMap) {
         _classesMap =  @{ TYPES_URI: [DCType class],
-                          SPEKERS_URI: [DCSpeaker class],
+                          SPEAKERS_URI: [DCSpeaker class],
                           LEVELS_URI: [DCLevel class],
                           TRACKS_URI: [DCTrack class],
-                          PROGRAMS_URI: [DCProgram class],
+                          SESSIONS_URI: [DCProgram class],
                           BOFS_URI: [DCBof class],
-                          LOCATION_URI: [DCLocation class]
+                          LOCATIONS_URI: [DCLocation class]
                           };
     }
     return _classesMap;
@@ -116,12 +111,12 @@ static NSArray  *RESOURCES_URI;
 // Save time stamp in NSUserDefaults with key [DCImportDataSevice class]
 - (NSString *)timeStampValue
 {
-    return [NSUserDefaults lastUpdateForClass:[DCImportDataSevice class]];
+    return [NSUserDefaults lastModify];
 }
 
-- (void)updateTimeStampValue:(NSString *)value
+- (void)updatelastModify:(NSString *)value
 {
-    [NSUserDefaults updateTimestampString:value ForClass:[DCImportDataSevice class]];
+    [NSUserDefaults updateLastModify:value];
 }
 
 # pragma mark - Import operations status callbacks
@@ -130,7 +125,7 @@ static NSArray  *RESOURCES_URI;
     //  Update time stamp
     if (status == DCDataUpdateSuccess) {
         
-        [self updateTimeStampValue:@"11111111111"];
+        [self updatelastModify:@"11111111111"];
     }
     
     if ([self.delegate conformsToProtocol:@protocol(DCImportDataSeviceDelegate)]) {
@@ -152,19 +147,19 @@ static NSArray  *RESOURCES_URI;
 
 #pragma mark - Start point for import data process
 
-- (void)importData
+- (void)chechUpdates
 {
     //  TODO: Make request to server due to update time stamp and get the response with latest changes
-    if ([self isStringEmpty:[self timeStampValue]]) {
-        [self.webService fetchesDataFromURLRequests:[self requestsForUpdateFromURIs:RESOURCES_URI]
-                                           callBack:^(BOOL success, NSDictionary *result) {
-                                               [self parseData:result withSuccessAction:@selector(updateCoreDataWithDictionary:)];
-                                           }];
-    } else {
-        [self importFinishedWithStatus:DCDataNotChanged];
-    }
+    [self.webService fetchesDataFromURLRequests:[self requestsForUpdateFromURIs:@[CHECK_UPDATES_URI]] callBack:^(BOOL success, NSDictionary *result) {
+        
+    }];
+    
 }
 
+- (void)importDataForURIs:(NSArray*)URIs
+{
+    
+}
 
 
 
@@ -245,6 +240,75 @@ static NSArray  *RESOURCES_URI;
 }
 
 
+#pragma mark - private
 
+- (NSArray*)DC_URIsFromIds:(NSArray*)Ids
+{
+    NSMutableArray * result = [[NSMutableArray alloc] initWithCapacity:Ids.count];
+    for (NSString * Id in Ids)
+    {
+        [result addObject:[self DC_URIFromId:Id]];
+    }
+    return result;
+}
+
+- (NSString*)DC_URIFromId:(NSString*)Id
+{
+    NSInteger intId = [Id integerValue];
+    if (!intId)
+        @throw [[NSException alloc] initWithName:@"API" reason:@"method id can't be 0" userInfo:nil];
+    
+    NSString * result = @"";
+    switch (intId) {
+        case 1:
+            result = TYPES_URI;
+            break;
+
+        case 2:
+            result = LEVELS_URI;
+            break;
+            
+        case 3:
+            result = TRACKS_URI;
+            break;
+            
+        case 4:
+            result = SPEAKERS_URI;
+            break;
+            
+        case 5:
+            result = LOCATIONS_URI;
+            break;
+            
+        case 6:
+            result = SESSIONS_URI;
+            break;
+            
+        case 7:
+            result = BOFS_URI;
+            break;
+            
+        case 8:
+            result = SOCIAL_EVENTS_URI;
+            break;
+            
+        case 9:
+            result = POI_URI;
+            break;
+            
+        case 10:
+            result = INFO_URI;
+            break;
+            
+        case 11:
+            result = TWITTER_URI;
+            break;
+            
+        default:
+            break;
+    }
+    
+    return result;
+}
 
 @end

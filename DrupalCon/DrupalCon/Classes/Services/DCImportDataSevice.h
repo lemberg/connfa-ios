@@ -49,7 +49,7 @@ typedef enum {
 // Insert and update data in current context,
 - (instancetype)initWithManagedObjectContext:(DCCoreDataStore *)coreDataStore
                                  andDelegate:(id<DCImportDataSeviceDelegate>)delegate;
-- (void)importData;
+- (void)chechUpdates;
 - (BOOL)isInitDataImport;
 
 @end

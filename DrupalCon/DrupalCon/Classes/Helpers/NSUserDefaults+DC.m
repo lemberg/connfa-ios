@@ -9,7 +9,11 @@
 #import "NSUserDefaults+DC.h"
 
 const NSString * kTimeStampSynchronisation = @"lastUpdate";
+const NSString * kLastModify = @"kLastModify";
 const NSString * kAboutInfo = @"aboutHTML";
+const NSString * kBundleVersionMajor = @"kBundleVersionMajor";
+const NSString * kBundleVersionMinor = @"kBundleVersionMinor";
+
 
 @implementation NSUserDefaults (DC)
 
@@ -25,6 +29,19 @@ const NSString * kAboutInfo = @"aboutHTML";
     NSString * result = [NSUserDefaults DC_savedValueForKey:[NSUserDefaults DC_LastModifiedKeyStringForClass:aClass]];
     return (result?result:@"");
 }
+
+#pragma mark - last-modify
+
++ (void)updateLastModify:(NSString*)lastModify
+{
+    [self DC_saveObject:lastModify forKey:(NSString*)kLastModify];
+}
+
++ (NSString*)lastModify
+{
+    return [NSUserDefaults DC_savedValueForKey:(NSString*)kLastModify];
+}
+
 
 #pragma mark - about
 
@@ -59,5 +76,27 @@ const NSString * kAboutInfo = @"aboutHTML";
 {
     return [NSString stringWithFormat:@"%@_%@", NSStringFromClass(aClass), kTimeStampSynchronisation];
 }
+
+#pragma mark - bundle version
+
++ (void)saveBundleVersionMajor:(NSString*)major minor:(NSString*)minor
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:major forKey:(NSString*)kBundleVersionMajor];
+    [userDefaults setObject:minor forKey:(NSString*)kBundleVersionMinor];
+    [userDefaults synchronize];
+}
+
++ (NSString*)bundleVersionMajor
+{
+    return [NSUserDefaults DC_savedValueForKey:(NSString *)kBundleVersionMajor];
+}
+
++ (NSString*)bundleVersionMinor
+{
+    return [NSUserDefaults DC_savedValueForKey:(NSString *)kBundleVersionMinor];
+}
+
+
 
 @end
