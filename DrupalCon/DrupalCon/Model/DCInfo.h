@@ -20,15 +20,22 @@
 //  SOFTWARE.
 //
 
-#import "DCTrack.h"
-#import "DCEvent.h"
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
 
-@implementation DCTrack
+@interface DCInfo : NSManagedObject
 
-@dynamic name;
-@dynamic trackId;
-@dynamic order;
-@dynamic events;
+@property (nonatomic, retain) NSString * titleMajor;
+@property (nonatomic, retain) NSString * titleMinor;
+@property (nonatomic, retain) NSSet *infoCategory;
+@end
+
+@interface DCInfo (CoreDataGeneratedAccessors)
+
+- (void)addInfoCategoryObject:(NSManagedObject *)value;
+- (void)removeInfoCategoryObject:(NSManagedObject *)value;
+- (void)addInfoCategory:(NSSet *)values;
+- (void)removeInfoCategory:(NSSet *)values;
 
 @end

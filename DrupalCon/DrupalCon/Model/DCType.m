@@ -27,8 +27,9 @@
 @implementation DCType
 
 @dynamic name;
-@dynamic typeID;
 @dynamic typeIcon;
+@dynamic typeID;
+@dynamic order;
 @dynamic events;
 
 @end

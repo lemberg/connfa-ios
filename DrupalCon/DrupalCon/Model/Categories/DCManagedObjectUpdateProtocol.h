@@ -28,6 +28,7 @@
 @end
 
 static NSString * kDCParseObjectDeleted = @"objectDeleted";
+static NSString * kDCParseObjectOrderKey = @"order";
 
 @interface ManagedObjectUpdateProtocol : NSObject;
 

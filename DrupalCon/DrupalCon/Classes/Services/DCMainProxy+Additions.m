@@ -22,7 +22,7 @@
 
 #import "DCMainProxy+Additions.h"
 #import "DCEvent+DC.h"
-#import "DCProgram+DC.h"
+#import "DCMainEvent+DC.h"
 #import "DCBof.h"
 #import "DCTimeRange+DC.h"
 
@@ -180,7 +180,7 @@
 - (NSArray*)DC_filterUniqueTimeRangeFromEvents:(NSArray*)events
 {
     NSMutableArray * ranges = [[NSMutableArray alloc] initWithCapacity:events.count];
-    for (DCProgram * event in events)
+    for (DCMainEvent * event in events)
     {
         BOOL isUnique = YES;
         for (DCTimeRange* range in ranges)

@@ -36,6 +36,7 @@
 @dynamic speakerId;
 @dynamic twitterName;
 @dynamic webSite;
+@dynamic order;
 @dynamic events;
 
 @end

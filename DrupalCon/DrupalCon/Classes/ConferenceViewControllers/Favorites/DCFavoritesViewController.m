@@ -29,7 +29,7 @@
 #import "DCProgramHeaderCellView.h"
 #import "DCEventBaseCell.h"
 
-#import "DCProgram+DC.h"
+#import "DCMainEvent+DC.h"
 #import "DCEvent+DC.h"
 #import "DCType+DC.h"
 #import "DCTimeRange+DC.h"

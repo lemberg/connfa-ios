@@ -20,12 +20,11 @@
 //  SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
-#import "DCEvent.h"
+#import "DCTwitter.h"
 
 
-@interface DCProgram : DCEvent
+@implementation DCTwitter
 
+@dynamic widgetHTML;
 
 @end

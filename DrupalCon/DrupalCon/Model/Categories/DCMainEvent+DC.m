@@ -20,7 +20,7 @@
 //  SOFTWARE.
 //
 
-#import "DCProgram+DC.h"
+#import "DCMainEvent+DC.h"
 #import "DCEvent+DC.h"
 #import "NSManagedObject+DC.h"
 
@@ -30,8 +30,7 @@
 
 const NSString * kDCProgram_programEvents_key = @"programEvents";
 
-@implementation DCProgram (DC)
-
+@implementation DCMainEvent (DC)
 #pragma mark - ManagedObjectUpdateProtocol
 
 + (void)updateFromDictionary:(NSDictionary *)events inContext:(NSManagedObjectContext *)context;
@@ -41,19 +40,19 @@ const NSString * kDCProgram_programEvents_key = @"programEvents";
         NSDate * date = [NSDate fabricateWithEventString:day[kDCEvent_date_key]];
         for (NSDictionary * event in day[kDCProgram_programEvents_key])
         {
-            DCProgram * programInstance = (DCProgram*)[[DCMainProxy sharedProxy] objectForID:[event[kDCEvent_eventId_key] intValue]
-                                                                                     ofClass:[DCProgram class]
-                                                                                 inContext:context];
+            DCMainEvent * mainEventInstance = (DCMainEvent*)[[DCMainProxy sharedProxy] objectForID:[event[kDCEvent_eventId_key] intValue]
+                                                                                     ofClass:[DCMainEvent class]
+                                                                                   inContext:context];
             
-            if (!programInstance) // create
+            if (!mainEventInstance) // create
             {
-                programInstance = [DCProgram createManagedObjectInContext:context];
+                mainEventInstance = [DCMainEvent createManagedObjectInContext:context];
                 //(DCProgram*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCProgram class]];
             }
             
             if ([event[kDCParseObjectDeleted] intValue]==1) // remove
             {
-                [[DCMainProxy sharedProxy] removeItem:programInstance];
+                [[DCMainProxy sharedProxy] removeItem:mainEventInstance];
                 DCFavoriteEvent * favorite = (DCFavoriteEvent*)[[DCMainProxy sharedProxy] objectForID:[event[kDCEvent_eventId_key] intValue]
                                                                                               ofClass:[DCFavoriteEvent class]
                                                                                             inContext:context];
@@ -64,7 +63,7 @@ const NSString * kDCProgram_programEvents_key = @"programEvents";
             }
             else // update
             {
-                [programInstance updateFromDictionary:event forData:date];
+                [mainEventInstance updateFromDictionary:event forData:date];
             }
         }
     }

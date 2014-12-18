@@ -25,7 +25,7 @@
 
 #import "DCMainProxy.h"
 #import "DCEvent+DC.h"
-#import "DCProgram+DC.h"
+#import "DCMainEvent+DC.h"
 #import "DCBof+DC.h"
 #import "DCType+DC.h"
 #import "DCTime+DC.h"
@@ -41,6 +41,7 @@
 #import "NSUserDefaults+DC.h"
 
 static NSString *const CHECK_UPDATES_URI   = @"checkUpdates";
+static NSString *const IDS_FOR_UPDATE = @"idsForUpdate";
 static NSString *const TYPES_URI      = @"getTypes";
 static NSString *const LEVELS_URI     = @"getLevels";
 static NSString *const TRACKS_URI     = @"getTracks";
@@ -60,7 +61,9 @@ static NSString *const TWITTER_URI    = @"getTwitter";
 @property (nonatomic, strong) DCWebService *webService;
 @property (nonatomic, strong) NSDictionary *classesMap;
 @property (nonatomic, strong) NSArray * resourceURIs;
-@property (nonatomic, strong) NSString * lastModified;
+
+// buffer parameter for Last-Modified, stored after transaction finish successfuly
+@property (nonatomic, strong) NSString * preLastModified;
 
 @end
 
@@ -100,7 +103,7 @@ static NSString *const TWITTER_URI    = @"getTwitter";
                           SPEAKERS_URI: [DCSpeaker class],
                           LEVELS_URI: [DCLevel class],
                           TRACKS_URI: [DCTrack class],
-                          SESSIONS_URI: [DCProgram class],
+                          SESSIONS_URI: [DCMainEvent class],
                           BOFS_URI: [DCBof class],
                           LOCATIONS_URI: [DCLocation class]
                           };
@@ -127,7 +130,7 @@ static NSString *const TWITTER_URI    = @"getTwitter";
     //  Update time stamp
     if (status == DCDataUpdateSuccess)
     {
-        [self updatelastModify:self.lastModified];
+        [self updatelastModify:self.preLastModified];
     }
     
     if ([self.delegate conformsToProtocol:@protocol(DCImportDataSeviceDelegate)]) {
@@ -161,14 +164,21 @@ static NSString *const TWITTER_URI    = @"getTwitter";
                                 onSuccess:^(NSHTTPURLResponse *response, id data) {
                                     if ([response.allHeaderFields objectForKey:@"Last-Modified"])
                                     {
-                                        self.lastModified = [response.allHeaderFields objectForKey:@"Last-Modified"];
+                                        self.preLastModified = [response.allHeaderFields objectForKey:@"Last-Modified"];
                                     }
                                     NSError * err = nil;
-                                    NSArray * ids = [NSJSONSerialization JSONObjectWithData:data
-                                                                                    options:kNilOptions
-                                                                                      error:&err];
-                                    if (err) NSLog(@"err-%@",err);
-                                    [self importDataForURIs:[self DC_URIsFromIds:ids]];
+                                    NSDictionary * dictionary = [NSJSONSerialization JSONObjectWithData:data
+                                                                                                options:kNilOptions
+                                                                                                  error:&err];
+                                    dictionary = [dictionary dictionaryByReplacingNullsWithStrings];
+                                    if ([dictionary[IDS_FOR_UPDATE] isKindOfClass:[NSArray class]] || err)
+                                    {
+                                        [self importDataForURIs:[self DC_URIsFromIds:dictionary[IDS_FOR_UPDATE]]];
+                                    }
+                                    else
+                                    {
+                                        NSAssert(NO, @"WRONG! API data");
+                                    }
                                 }
                                   onError:^(NSHTTPURLResponse *response, id data, NSError *error) {
                                       NSLog(@"err-%@",error);
@@ -192,11 +202,6 @@ static NSString *const TWITTER_URI    = @"getTwitter";
 {
     NSDictionary *dict = newDict;
     
-    [self importFinishedWithStatus:DCDataUpdateSuccess];
-    return;
-    // TODO: Create model for this information, now I don't know what todo
-    [NSUserDefaults saveAbout:dict[INFO_URI][kAboutInfo]];
-    
     // Update core data
     NSManagedObjectContext *backgroundContext = [[self.coreDataStore class] privateQueueContext];
     [backgroundContext  performBlock:^{
@@ -218,9 +223,14 @@ static NSString *const TWITTER_URI    = @"getTwitter";
 {
     NSMutableArray *requestsPlaceHolder = [NSMutableArray array];
     for (NSString *uri in uris) {
+        NSDictionary * headerParams = nil;
+        if (![self isStringEmpty:[self timeStampValue]])
+        {
+            headerParams = [NSDictionary dictionaryWithObject:[self timeStampValue] forKey:@"If-Modified-Since"];
+        }
         NSURLRequest *request = [DCWebService urlRequestForURI:uri
                                                 withHTTPMethod:@"GET"
-                                             withHeaderOptions:nil];
+                                             withHeaderOptions:headerParams];
         [requestsPlaceHolder addObject:request];
     }
     return requestsPlaceHolder;
@@ -275,6 +285,7 @@ static NSString *const TWITTER_URI    = @"getTwitter";
     {
         [result addObject:[self DC_URIFromId:Id]];
     }
+    self.resourceURIs = result;
     return result;
 }
 

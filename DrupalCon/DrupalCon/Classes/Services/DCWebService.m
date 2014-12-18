@@ -56,7 +56,7 @@
     
     NSURL *requestURL = [NSURL URLWithString:uri relativeToURL:[NSURL URLWithString:BASE_URL]];
     [request setURL:requestURL];
-    
+    request.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
     [request setHTTPMethod:httpMethod];
     
     if (options) {

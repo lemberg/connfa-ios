@@ -20,10 +20,14 @@
 //  SOFTWARE.
 //
 
-#import "DCProgram.h"
+#import "DCHousePlan.h"
 
-extern NSString * kDCProgram_programEvents_key;
 
-@interface DCProgram (DC)
+@implementation DCHousePlan
+
+@dynamic housePlanId;
+@dynamic name;
+@dynamic imageURL;
+@dynamic order;
 
 @end

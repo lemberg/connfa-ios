@@ -20,15 +20,12 @@
 //  SOFTWARE.
 //
 
-#import "DCTrack.h"
-#import "DCEvent.h"
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
 
-@implementation DCTrack
+@interface DCTwitter : NSManagedObject
 
-@dynamic name;
-@dynamic trackId;
-@dynamic order;
-@dynamic events;
+@property (nonatomic, retain) NSString * widgetHTML;
 
 @end

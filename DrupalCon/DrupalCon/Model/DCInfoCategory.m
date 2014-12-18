@@ -20,15 +20,13 @@
 //  SOFTWARE.
 //
 
-#import "DCTrack.h"
-#import "DCEvent.h"
+#import "DCInfoCategory.h"
 
 
-@implementation DCTrack
+@implementation DCInfoCategory
 
 @dynamic name;
-@dynamic trackId;
+@dynamic html;
 @dynamic order;
-@dynamic events;
 
 @end

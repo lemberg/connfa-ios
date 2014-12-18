@@ -20,15 +20,12 @@
 //  SOFTWARE.
 //
 
-#import "DCTrack.h"
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 #import "DCEvent.h"
 
 
-@implementation DCTrack
+@interface DCSocialEvent : DCEvent
 
-@dynamic name;
-@dynamic trackId;
-@dynamic order;
-@dynamic events;
 
 @end

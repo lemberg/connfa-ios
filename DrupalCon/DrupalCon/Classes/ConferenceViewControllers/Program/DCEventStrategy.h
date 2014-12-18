@@ -22,7 +22,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DCEvent+DC.h"
-#import "DCProgram+DC.h"
+#import "DCMainEvent+DC.h"
 #import "DCBof.h"
 
 typedef enum {

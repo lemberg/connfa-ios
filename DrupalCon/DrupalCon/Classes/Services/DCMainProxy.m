@@ -22,7 +22,7 @@
 
 #import "DCMainProxy.h"
 #import "DCEvent+DC.h"
-#import "DCProgram+DC.h"
+#import "DCMainEvent+DC.h"
 #import "DCBof+DC.h"
 #import "DCType+DC.h"
 #import "DCTime+DC.h"

@@ -26,17 +26,16 @@
 #import "NSString+HTML.h"
 #import "NSManagedObject+DC.h"
 
-const NSString * kDCSpeaker_speakers_key = @"speakers";
-const NSString * kDCSpeaker_speakerId_key = @"speakerID";
-const NSString * kDCSpeaker_name_key = @"name";
-const NSString * kDCSpeaker_organization_key = @"organization";
-const NSString * kDCSpeaker_jobTitle_key = @"jobTitle";
-const NSString * kDCSpeaker_charact_key = @"charact";
-const NSString * kDCSpeaker_firstName_key = @"firstName";
-const NSString * kDCSpeaker_lastName_key = @"lastName";
-const NSString * kDCSpeaker_twitterName_key = @"twitterName";
-const NSString * kDCSpeaker_webSite_key = @"webSite";
-const NSString * kDCSpeaker_avatarPath_key = @"avatarImageUrl";
+const NSString * kDCSpeakersKey = @"speakers";
+const NSString * kDCSpeakerIdKey = @"speakerId";
+const NSString * kDCSpeakerOrganizationKey = @"organizationName";
+const NSString * kDCSpeakerJobTitleKey = @"jobTitle";
+const NSString * kDCSpeakerCharactKey = @"characteristic";
+const NSString * kDCSpeakerFirstNameKey = @"firstName";
+const NSString * kDCSpeakerLastNameKey = @"lastName";
+const NSString * kDCSpeakerTwitterNameKey = @"twitterName";
+const NSString * kDCSpeakerWebSiteKey = @"webSite";
+const NSString * kDCSpeakerAvatarImageURLKey = @"avatarImageURL";
 
 @implementation DCSpeaker (DC)
 
@@ -44,9 +43,9 @@ const NSString * kDCSpeaker_avatarPath_key = @"avatarImageUrl";
 
 + (void)updateFromDictionary:(NSDictionary *)speakers inContext:(NSManagedObjectContext *)context
 {
-    for (NSDictionary * dictionary in speakers[kDCSpeaker_speakers_key])
+    for (NSDictionary * dictionary in speakers[kDCSpeakersKey])
     {
-        DCSpeaker * speaker = (DCSpeaker*)[[DCMainProxy sharedProxy] objectForID:[dictionary[kDCSpeaker_speakerId_key] intValue]
+        DCSpeaker * speaker = (DCSpeaker*)[[DCMainProxy sharedProxy] objectForID:[dictionary[kDCSpeakerIdKey] intValue]
                                                                          ofClass:[DCSpeaker class]
                                                                        inContext:context];
         
@@ -61,16 +60,17 @@ const NSString * kDCSpeaker_avatarPath_key = @"avatarImageUrl";
         }
         else // update
         {
-            speaker.speakerId = dictionary[kDCSpeaker_speakerId_key];
-            speaker.firstName = dictionary[kDCSpeaker_firstName_key];
-            speaker.lastName = dictionary[kDCSpeaker_lastName_key];
-            speaker.avatarPath = dictionary[kDCSpeaker_avatarPath_key];
-            speaker.twitterName = dictionary[kDCSpeaker_twitterName_key];
-            speaker.webSite = dictionary[kDCSpeaker_webSite_key];
+            speaker.speakerId = dictionary[kDCSpeakerIdKey];
+            speaker.firstName = dictionary[kDCSpeakerFirstNameKey];
+            speaker.lastName = dictionary[kDCSpeakerLastNameKey];
+            speaker.avatarPath = dictionary[kDCSpeakerAvatarImageURLKey];
+            speaker.twitterName = dictionary[kDCSpeakerTwitterNameKey];
+            speaker.webSite = dictionary[kDCSpeakerWebSiteKey];
             speaker.name = [NSString stringWithFormat:@"%@ %@", speaker.firstName, speaker.lastName];
-            speaker.organizationName = dictionary[kDCSpeaker_organization_key];
-            speaker.jobTitle = dictionary[kDCSpeaker_jobTitle_key];
-            speaker.characteristic = [dictionary[kDCSpeaker_charact_key] kv_decodeHTMLCharacterEntities];
+            speaker.organizationName = dictionary[kDCSpeakerOrganizationKey];
+            speaker.jobTitle = dictionary[kDCSpeakerJobTitleKey];
+            speaker.characteristic = [dictionary[kDCSpeakerCharactKey] kv_decodeHTMLCharacterEntities];
+            speaker.order = [NSNumber numberWithFloat:[dictionary[kDCParseObjectOrderKey] floatValue]];
         }
     }
 }
@@ -78,7 +78,7 @@ const NSString * kDCSpeaker_avatarPath_key = @"avatarImageUrl";
 
 + (NSString*)idKey
 {
-    return (NSString*)kDCSpeaker_speakerId_key;
+    return (NSString*)kDCSpeakerIdKey;
 }
 
 @end

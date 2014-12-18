@@ -20,15 +20,15 @@
 //  SOFTWARE.
 //
 
-#import "DCTrack.h"
-#import "DCEvent.h"
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
 
-@implementation DCTrack
+@interface DCHousePlan : NSManagedObject
 
-@dynamic name;
-@dynamic trackId;
-@dynamic order;
-@dynamic events;
+@property (nonatomic, retain) NSNumber * housePlanId;
+@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString * imageURL;
+@property (nonatomic, retain) NSNumber * order;
 
 @end

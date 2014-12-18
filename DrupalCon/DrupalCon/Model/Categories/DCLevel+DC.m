@@ -25,10 +25,9 @@
 #import "NSDictionary+DC.h"
 #import "NSManagedObject+DC.h"
 
-NSString * kDCLevel_levels_key = @"levels";
-NSString * kDCLevel_levelID_key = @"levelID";
-NSString * kDCLevel_levelName_key = @"levelName";
-NSString * kDCLevel_levelOrder_key = @"levelOrder";
+NSString * kDCLevelsKey = @"levels";
+NSString * kDCLevelIdKey = @"levelId";
+NSString * kDCLevelNameKey = @"levelName";
 
 @implementation DCLevel (DC)
 
@@ -37,9 +36,9 @@ NSString * kDCLevel_levelOrder_key = @"levelOrder";
 + (void)updateFromDictionary:(NSDictionary *)levels inContext:(NSManagedObjectContext *)context
 {
     //adding
-    for (NSDictionary * dictionary in levels[kDCLevel_levels_key])
+    for (NSDictionary * dictionary in levels[kDCLevelsKey])
     {
-        DCLevel * level = (DCLevel*)[[DCMainProxy sharedProxy] objectForID:[dictionary[kDCLevel_levelID_key] intValue]
+        DCLevel * level = (DCLevel*)[[DCMainProxy sharedProxy] objectForID:[dictionary[kDCLevelIdKey] intValue]
                                                                    ofClass:[DCLevel class]
                                                                  inContext:context];
         
@@ -54,9 +53,9 @@ NSString * kDCLevel_levelOrder_key = @"levelOrder";
         }
         else // update
         {
-            level.levelId = dictionary[kDCLevel_levelID_key];
-            level.name = dictionary[kDCLevel_levelName_key];
-            level.order = @([dictionary[kDCLevel_levelOrder_key] integerValue]);
+            level.levelId = dictionary[kDCLevelIdKey];
+            level.name = dictionary[kDCLevelNameKey];
+            level.order = [NSNumber numberWithFloat:[dictionary[kDCParseObjectOrderKey] floatValue]];
         }
     }
 
@@ -65,7 +64,7 @@ NSString * kDCLevel_levelOrder_key = @"levelOrder";
 
 + (NSString*)idKey
 {
-    return (NSString*)kDCLevel_levelID_key;
+    return (NSString*)kDCLevelIdKey;
 }
 
 @end

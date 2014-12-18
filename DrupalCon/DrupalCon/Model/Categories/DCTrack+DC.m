@@ -25,9 +25,9 @@
 #import "NSDictionary+DC.h"
 #import "NSManagedObject+DC.h"
 
-NSString * kDCTrack_traks_key = @"tracks";
-NSString * kDCTrack_trackID_key = @"trackID";
-NSString * kDCTrack_trackName_key = @"trackName";
+NSString * kDCTracksKey = @"tracks";
+NSString * kDCTrackIdKey = @"trackId";
+NSString * kDCTrackNameKey = @"trackName";
 
 @implementation DCTrack (DC)
 
@@ -35,9 +35,9 @@ NSString * kDCTrack_trackName_key = @"trackName";
 + (void)updateFromDictionary:(NSDictionary *)tracks inContext:(NSManagedObjectContext *)context
 {
     //adding
-    for (NSDictionary * dictionary in tracks[kDCTrack_traks_key])
+    for (NSDictionary * dictionary in tracks[kDCTracksKey])
     {
-        DCTrack * track = (DCTrack*)[[DCMainProxy sharedProxy] objectForID:[dictionary[kDCTrack_trackID_key] intValue]
+        DCTrack * track = (DCTrack*)[[DCMainProxy sharedProxy] objectForID:[dictionary[kDCTrackIdKey] intValue]
                                                                    ofClass:[DCTrack class]
                                                                  inContext:context];
         
@@ -52,8 +52,9 @@ NSString * kDCTrack_trackName_key = @"trackName";
         }
         else // update
         {
-            track.trackId = dictionary[kDCTrack_trackID_key];
-            track.name = dictionary[kDCTrack_trackName_key];
+            track.trackId = dictionary[kDCTrackIdKey];
+            track.name = dictionary[kDCTrackNameKey];
+            track.order = [NSNumber numberWithFloat:[dictionary[kDCParseObjectOrderKey] floatValue]];
         }
     }
 }
@@ -61,7 +62,7 @@ NSString * kDCTrack_trackName_key = @"trackName";
 
 + (NSString*)idKey
 {
-    return (NSString*)kDCTrack_trackID_key;
+    return (NSString*)kDCTrackIdKey;
 }
 
 @end

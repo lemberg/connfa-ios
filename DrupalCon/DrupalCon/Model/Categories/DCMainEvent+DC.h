@@ -20,15 +20,10 @@
 //  SOFTWARE.
 //
 
-#import "DCTrack.h"
-#import "DCEvent.h"
+#import "DCMainEvent.h"
 
+extern NSString * kDCProgram_programEvents_key;
 
-@implementation DCTrack
-
-@dynamic name;
-@dynamic trackId;
-@dynamic order;
-@dynamic events;
+@interface DCMainEvent (DC)
 
 @end

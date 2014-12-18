@@ -28,8 +28,9 @@
 @interface DCType : NSManagedObject
 
 @property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSNumber * typeID;
 @property (nonatomic, retain) NSString * typeIcon;
+@property (nonatomic, retain) NSNumber * typeID;
+@property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSSet *events;
 @end
 

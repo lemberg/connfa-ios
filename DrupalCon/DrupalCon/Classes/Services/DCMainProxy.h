@@ -25,7 +25,7 @@
 
 extern NSString * INVALID_JSON_EXCEPTION;
 
-@class DCProgram, DCBof, DCType, DCTime, DCTimeRange, DCSpeaker, DCLevel, DCTrack, DCLocation, DCEvent;
+@class DCMainEvent, DCBof, DCType, DCTime, DCTimeRange, DCSpeaker, DCLevel, DCTrack, DCLocation, DCEvent;
 
 typedef enum {
     DCMainProxyStateNone = 0,

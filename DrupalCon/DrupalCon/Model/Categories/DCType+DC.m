@@ -25,9 +25,10 @@
 #import "NSDictionary+DC.h"
 #import "NSManagedObject+DC.h"
 
-const NSString * kDCType_types_key = @"types";
-const NSString * kDCType_typeID_key = @"typeID";
-const NSString * kDCType_typeName_key = @"typeName";
+const NSString * kDCTypesKey = @"types";
+const NSString * kDCTypeIdKey = @"typeId";
+const NSString * kDCTypeNameKey = @"typeName";
+const NSString * kDCTypeIconURLKey = @"typeIconURL";
 
 @implementation DCType (DC)
 
@@ -36,9 +37,9 @@ const NSString * kDCType_typeName_key = @"typeName";
 + (void)updateFromDictionary:(NSDictionary *)types inContext:(NSManagedObjectContext *)context
 {
     //adding
-    for (NSDictionary * dictionary in types[kDCType_types_key])
+    for (NSDictionary * dictionary in types[kDCTypesKey])
     {
-        DCType * type = (DCType*)[[DCMainProxy sharedProxy] objectForID:[dictionary[kDCType_typeID_key] intValue] ofClass:[DCType class] inContext:context];
+        DCType * type = (DCType*)[[DCMainProxy sharedProxy] objectForID:[dictionary[kDCTypeIdKey] intValue] ofClass:[DCType class] inContext:context];
         
         if (!type) // then create
         {
@@ -51,8 +52,10 @@ const NSString * kDCType_typeName_key = @"typeName";
         }
         else // update
         {
-            type.typeID = dictionary[kDCType_typeID_key];
-            type.name = dictionary[kDCType_typeName_key];
+            type.typeID = dictionary[kDCTypeIdKey];
+            type.name = dictionary[kDCTypeNameKey];
+            type.order = [NSNumber numberWithFloat:[dictionary[kDCParseObjectOrderKey] floatValue]];
+            type.typeIcon = dictionary[kDCTypeIconURLKey];
         }
     }
 }
@@ -62,7 +65,7 @@ const NSString * kDCType_typeName_key = @"typeName";
 
 + (NSString*)idKey
 {
-    return (NSString*)kDCType_typeID_key;
+    return (NSString*)kDCTypeIdKey;
 }
 
 @end
