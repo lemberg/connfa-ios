@@ -59,6 +59,8 @@ static NSString *const TWITTER_URI    = @"getTwitter";
 
 @property (nonatomic, strong) DCWebService *webService;
 @property (nonatomic, strong) NSDictionary *classesMap;
+@property (nonatomic, strong) NSArray * resourceURIs;
+@property (nonatomic, strong) NSString * lastModified;
 
 @end
 
@@ -123,9 +125,9 @@ static NSString *const TWITTER_URI    = @"getTwitter";
 - (void)importFinishedWithStatus:(DCImportDataSeviceImportStatus)status
 {
     //  Update time stamp
-    if (status == DCDataUpdateSuccess) {
-        
-        [self updatelastModify:@"11111111111"];
+    if (status == DCDataUpdateSuccess)
+    {
+        [self updatelastModify:self.lastModified];
     }
     
     if ([self.delegate conformsToProtocol:@protocol(DCImportDataSeviceDelegate)]) {
@@ -149,27 +151,51 @@ static NSString *const TWITTER_URI    = @"getTwitter";
 
 - (void)chechUpdates
 {
-    //  TODO: Make request to server due to update time stamp and get the response with latest changes
-    [self.webService fetchesDataFromURLRequests:[self requestsForUpdateFromURIs:@[CHECK_UPDATES_URI]] callBack:^(BOOL success, NSDictionary *result) {
-        
-    }];
-    
+    NSDictionary * headerParams = nil;
+    if (![self isStringEmpty:[self timeStampValue]])
+    {
+        headerParams = [NSDictionary dictionaryWithObject:[self timeStampValue] forKey:@"If-Modified-Since"];
+    }
+
+    [DCWebService fetchDataFromURLRequest:[DCWebService urlRequestForURI:CHECK_UPDATES_URI withHTTPMethod:@"GET" withHeaderOptions:headerParams]
+                                onSuccess:^(NSHTTPURLResponse *response, id data) {
+                                    if ([response.allHeaderFields objectForKey:@"Last-Modified"])
+                                    {
+                                        self.lastModified = [response.allHeaderFields objectForKey:@"Last-Modified"];
+                                    }
+                                    NSError * err = nil;
+                                    NSArray * ids = [NSJSONSerialization JSONObjectWithData:data
+                                                                                    options:kNilOptions
+                                                                                      error:&err];
+                                    if (err) NSLog(@"err-%@",err);
+                                    [self importDataForURIs:[self DC_URIsFromIds:ids]];
+                                }
+                                  onError:^(NSHTTPURLResponse *response, id data, NSError *error) {
+                                      NSLog(@"err-%@",error);
+                                  }];
+//        else {
+//            [self importFinishedWithStatus:DCDataNotChanged];
+//        }
 }
+
 
 - (void)importDataForURIs:(NSArray*)URIs
 {
-    
+    [self.webService fetchesDataFromURLRequests:[self requestsForUpdateFromURIs:URIs]
+                                           callBack:^(BOOL success, NSDictionary *result) {
+                                               [self parseData:result withSuccessAction:@selector(updateCoreDataWithDictionary:)];
+                                           }];
 }
-
-
 
 
 - (void)updateCoreDataWithDictionary:(NSDictionary *)newDict
 {
     NSDictionary *dict = newDict;
     
+    [self importFinishedWithStatus:DCDataUpdateSuccess];
+    return;
     // TODO: Create model for this information, now I don't know what todo
-    [NSUserDefaults saveAbout:dict[ABOUT_INFO_URI][kAboutInfo]];
+    [NSUserDefaults saveAbout:dict[INFO_URI][kAboutInfo]];
     
     // Update core data
     NSManagedObjectContext *backgroundContext = [[self.coreDataStore class] privateQueueContext];
@@ -204,7 +230,7 @@ static NSString *const TWITTER_URI    = @"getTwitter";
 - (void)fillInModelsFromDictionary:(NSDictionary *)dict inContext:(NSManagedObjectContext *)context
 {
     //  FIXME: Remove hard code because this URI resources will come from server repsonse
-    for (NSString *keyUri in RESOURCES_URI) {
+    for (NSString *keyUri in _resourceURIs) {
         // Get class map to URI
         Class model = self.classesMap[keyUri];
         // Check is model can update with dictionary
