@@ -25,18 +25,19 @@
 
 #import "NSDictionary+DC.h"
 
-extern NSString * kDCEvent_days_key;
-extern NSString * kDCEvent_date_key;
-extern NSString * kDCEvent_from_key;
-extern NSString * kDCEvent_to_key;
-extern NSString * kDCEvent_type_key;
-extern NSString * kDCEvent_name_key;
-extern NSString * kDCEvent_speakers_key;
-extern NSString * kDCEvent_track_key;
-extern NSString * kDCEvent_experienceLevel_key;
-extern NSString * kDCEvent_eventId_key;
-extern NSString * kDCEvent_text_key;
-extern NSString * kDCEvent_place_key;
+extern NSString * kDCEventsKey;
+extern NSString * kDCEventDaysKey;
+extern NSString * kDCEventDateKey;
+extern NSString * kDCEventFromKey;
+extern NSString * kDCEventToKey;
+extern NSString * kDCEventTypeKey;
+extern NSString * kDCEventNameKey;
+extern NSString * kDCEventSpeakersKey;
+extern NSString * kDCEventTrackKey;
+extern NSString * kDCEventExperienceLevelKey;
+extern NSString * kDCEventIdKey;
+extern NSString * kDCEventTextKey;
+extern NSString * kDCEventPlaceKey;
 
 typedef NS_ENUM (int, DCEventType) {
     DC_EVENT_NONE = 0,

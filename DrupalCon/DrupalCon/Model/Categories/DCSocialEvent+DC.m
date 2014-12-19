@@ -20,7 +20,7 @@
 //  SOFTWARE.
 //
 
-#import "DCMainEvent+DC.h"
+#import "DCSocialEvent+DC.h"
 #import "DCEvent+DC.h"
 #import "NSManagedObject+DC.h"
 
@@ -28,7 +28,7 @@
 #import "DCFavoriteEvent+DC.h"
 #import "DCMainProxy.h"
 
-@implementation DCMainEvent (DC)
+@implementation DCSocialEvent (DC)
 #pragma mark - ManagedObjectUpdateProtocol
 
 + (void)updateFromDictionary:(NSDictionary *)events inContext:(NSManagedObjectContext *)context;
@@ -38,19 +38,18 @@
         NSDate * date = [NSDate fabricateWithEventString:day[kDCEventDateKey]];
         for (NSDictionary * event in day[kDCEventsKey])
         {
-            DCMainEvent * mainEventInstance = (DCMainEvent*)[[DCMainProxy sharedProxy] objectForID:[event[kDCEventIdKey] intValue]
-                                                                                     ofClass:[DCMainEvent class]
-                                                                                   inContext:context];
+            DCSocialEvent * socialEventInstance = (DCSocialEvent*)[[DCMainProxy sharedProxy] objectForID:[event[kDCEventIdKey] intValue]
+                                                                                           ofClass:[DCSocialEvent class]
+                                                                                         inContext:context];
             
-            if (!mainEventInstance) // create
+            if (!socialEventInstance) // create
             {
-                mainEventInstance = [DCMainEvent createManagedObjectInContext:context];
-                //(DCProgram*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCProgram class]];
+                socialEventInstance = [DCSocialEvent createManagedObjectInContext:context];
             }
             
             if ([event[kDCParseObjectDeleted] intValue]==1) // remove
             {
-                [[DCMainProxy sharedProxy] removeItem:mainEventInstance];
+                [[DCMainProxy sharedProxy] removeItem:socialEventInstance];
                 DCFavoriteEvent * favorite = (DCFavoriteEvent*)[[DCMainProxy sharedProxy] objectForID:[event[kDCEventIdKey] intValue]
                                                                                               ofClass:[DCFavoriteEvent class]
                                                                                             inContext:context];
@@ -61,7 +60,7 @@
             }
             else // update
             {
-                [mainEventInstance updateFromDictionary:event forData:date];
+                [socialEventInstance updateFromDictionary:event forData:date];
             }
         }
     }

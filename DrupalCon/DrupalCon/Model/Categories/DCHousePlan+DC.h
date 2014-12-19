@@ -20,18 +20,9 @@
 //  SOFTWARE.
 //
 
-@protocol ManagedObjectUpdateProtocol <NSObject>
+#import "DCHousePlan.h"
+#import "DCManagedObjectUpdateProtocol.h"
 
-+ (void)updateFromDictionary:(NSDictionary *)dictionary inContext:(NSManagedObjectContext *)context;
-
-@optional
-+ (NSString*)idKey;
-
-@end
-
-static NSString * kDCParseObjectDeleted = @"objectDeleted";
-static NSString * kDCParseObjectOrderKey = @"order";
-
-@interface ManagedObjectUpdateProtocol : NSObject;
+@interface DCHousePlan (DC) <ManagedObjectUpdateProtocol>
 
 @end

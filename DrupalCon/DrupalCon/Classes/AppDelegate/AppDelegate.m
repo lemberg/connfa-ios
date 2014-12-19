@@ -22,6 +22,7 @@
 
 #import "AppDelegate.h"
 #import "DCMainProxy.h"
+#import "UIConstants.h"
 
 @interface AppDelegate ()
 @property (nonatomic, strong) UILocalNotification *localNotification;
@@ -36,6 +37,12 @@
     if (locationNotification) {
         self.localNotification = locationNotification;
     }
+    
+#ifdef DEBUG_MODE
+    NSLog(@"====================");
+    NSLog(@"====DEBUG MODE======");
+    NSLog(@"====================");
+#endif
     
     return YES;
 }

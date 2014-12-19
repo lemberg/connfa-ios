@@ -22,8 +22,6 @@
 
 #import "DCMainEvent.h"
 
-extern NSString * kDCProgram_programEvents_key;
-
 @interface DCMainEvent (DC)
 
 @end

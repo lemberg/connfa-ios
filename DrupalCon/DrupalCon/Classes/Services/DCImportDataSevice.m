@@ -27,6 +27,7 @@
 #import "DCEvent+DC.h"
 #import "DCMainEvent+DC.h"
 #import "DCBof+DC.h"
+#import "DCSocialEvent+DC.h"
 #import "DCType+DC.h"
 #import "DCTime+DC.h"
 #import "DCTimeRange+DC.h"
@@ -34,6 +35,10 @@
 #import "DCLevel+DC.h"
 #import "DCTrack+DC.h"
 #import "DCLocation+DC.h"
+#import "DCHousePlan+DC.h"
+#import "DCPoi+DC.h"
+#import "DCInfo+DC.h"
+#import "DCTwitter+DC.h"
 
 #import "DCWebService.h"
 #import "DCParserService.h"
@@ -47,6 +52,7 @@ static NSString *const LEVELS_URI     = @"getLevels";
 static NSString *const TRACKS_URI     = @"getTracks";
 static NSString *const SPEAKERS_URI    = @"getSpeakers";
 static NSString *const LOCATIONS_URI  = @"getLocations";
+static NSString *const HOUSEPLANS_URI  = @"getHousePlans";
 static NSString *const SESSIONS_URI   = @"getSessions";
 static NSString *const BOFS_URI       = @"getBofs";
 static NSString *const SOCIAL_EVENTS_URI = @"getSocialEvents";
@@ -102,10 +108,15 @@ static NSString *const TWITTER_URI    = @"getTwitter";
         _classesMap =  @{ TYPES_URI: [DCType class],
                           SPEAKERS_URI: [DCSpeaker class],
                           LEVELS_URI: [DCLevel class],
+                          HOUSEPLANS_URI: [DCHousePlan class],
                           TRACKS_URI: [DCTrack class],
                           SESSIONS_URI: [DCMainEvent class],
                           BOFS_URI: [DCBof class],
-                          LOCATIONS_URI: [DCLocation class]
+                          SOCIAL_EVENTS_URI: [DCSocialEvent class],
+                          LOCATIONS_URI: [DCLocation class],
+                          POI_URI: [DCPoi class],
+                          INFO_URI: [DCInfo class],
+                          TWITTER_URI: [DCTwitter class]
                           };
     }
     return _classesMap;
@@ -166,6 +177,12 @@ static NSString *const TWITTER_URI    = @"getTwitter";
                                     {
                                         self.preLastModified = [response.allHeaderFields objectForKey:@"Last-Modified"];
                                     }
+                                    if (response.statusCode == 304) // no changes
+                                    {
+                                        [self importFinishedWithStatus:DCDataNotChanged];
+                                        return;
+                                    }
+                                    
                                     NSError * err = nil;
                                     NSDictionary * dictionary = [NSJSONSerialization JSONObjectWithData:data
                                                                                                 options:kNilOptions
@@ -183,9 +200,6 @@ static NSString *const TWITTER_URI    = @"getTwitter";
                                   onError:^(NSHTTPURLResponse *response, id data, NSError *error) {
                                       NSLog(@"err-%@",error);
                                   }];
-//        else {
-//            [self importFinishedWithStatus:DCDataNotChanged];
-//        }
 }
 
 
@@ -239,7 +253,6 @@ static NSString *const TWITTER_URI    = @"getTwitter";
 
 - (void)fillInModelsFromDictionary:(NSDictionary *)dict inContext:(NSManagedObjectContext *)context
 {
-    //  FIXME: Remove hard code because this URI resources will come from server repsonse
     for (NSString *keyUri in _resourceURIs) {
         // Get class map to URI
         Class model = self.classesMap[keyUri];
@@ -316,28 +329,32 @@ static NSString *const TWITTER_URI    = @"getTwitter";
         case 5:
             result = LOCATIONS_URI;
             break;
-            
+
         case 6:
-            result = SESSIONS_URI;
+            result = HOUSEPLANS_URI;
             break;
             
         case 7:
-            result = BOFS_URI;
+            result = SESSIONS_URI;
             break;
             
         case 8:
-            result = SOCIAL_EVENTS_URI;
+            result = BOFS_URI;
             break;
             
         case 9:
-            result = POI_URI;
+            result = SOCIAL_EVENTS_URI;
             break;
             
         case 10:
-            result = INFO_URI;
+            result = POI_URI;
             break;
             
         case 11:
+            result = INFO_URI;
+            break;
+            
+        case 12:
             result = TWITTER_URI;
             break;
             

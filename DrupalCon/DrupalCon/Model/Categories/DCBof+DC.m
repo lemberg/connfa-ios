@@ -28,7 +28,6 @@
 #import "DCMainProxy.h"
 #import "NSDictionary+DC.h"
 
-const NSString * kDCBof_bofEvents_key = @"bofsEvents";
 
 @implementation DCBof (DC)
 
@@ -37,24 +36,23 @@ const NSString * kDCBof_bofEvents_key = @"bofsEvents";
 + (void)updateFromDictionary:(NSDictionary *)events inContext:(NSManagedObjectContext *)context;
 {
     
-    for (NSDictionary * day in events[kDCEvent_days_key])
+    for (NSDictionary * day in events[kDCEventDaysKey])
     {
-        NSDate * date = [NSDate fabricateWithEventString:day[kDCEvent_date_key]];
-        for (NSDictionary * event in day[kDCBof_bofEvents_key])
+        NSDate * date = [NSDate fabricateWithEventString:day[kDCEventDateKey]];
+        for (NSDictionary * event in day[kDCEventsKey])
         {
-            DCBof * bofInstance = (DCBof*)[[DCMainProxy sharedProxy] objectForID:[event[kDCEvent_eventId_key] intValue]
+            DCBof * bofInstance = (DCBof*)[[DCMainProxy sharedProxy] objectForID:[event[kDCEventIdKey] intValue]
                                                                          ofClass:[DCBof class]
                                                                        inContext:context];
             
             if (!bofInstance) // create
             {
                 bofInstance = [DCBof createManagedObjectInContext:context];
-                //(DCBof*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCBof class]];
             }
             if ([event[kDCParseObjectDeleted] intValue]==1) // remove
             {
                 [[DCMainProxy sharedProxy] removeItem:bofInstance];
-                DCFavoriteEvent * favorite = (DCFavoriteEvent*)[[DCMainProxy sharedProxy] objectForID:[event[kDCEvent_eventId_key] intValue]
+                DCFavoriteEvent * favorite = (DCFavoriteEvent*)[[DCMainProxy sharedProxy] objectForID:[event[kDCEventIdKey] intValue]
                                                                                               ofClass:[DCFavoriteEvent class]
                                                                                             inContext:context];
                 if (favorite) // in case when event was in favorites - remove from there

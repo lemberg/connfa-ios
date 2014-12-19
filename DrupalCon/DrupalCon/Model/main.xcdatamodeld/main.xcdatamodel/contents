@@ -35,6 +35,7 @@
     </entity>
     <entity name="DCInfoCategory" representedClassName="DCInfoCategory" syncable="YES">
         <attribute name="html" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="infoId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="order" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
     </entity>
@@ -116,7 +117,7 @@
         <element name="DCSocialEvent" positionX="-5499" positionY="-2016" width="128" height="43"/>
         <element name="DCPoi" positionX="-5301" positionY="-1654" width="128" height="133"/>
         <element name="DCInfo" positionX="-5330" positionY="-1989" width="128" height="88"/>
-        <element name="DCInfoCategory" positionX="-5141" positionY="-1917" width="128" height="88"/>
+        <element name="DCInfoCategory" positionX="-5141" positionY="-1917" width="128" height="103"/>
         <element name="DCTwitter" positionX="-5373" positionY="-1827" width="128" height="58"/>
     </elements>
 </model>

@@ -21,9 +21,6 @@
 //
 
 #import "DCBof.h"
-#import "DCEvent+DC.h"
-
-extern NSString * kDCBof_bofEvents_key;
 
 @interface DCBof (DC)
 

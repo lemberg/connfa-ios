@@ -31,18 +31,19 @@
 
 #import "NSString+HTML.h"
 
-const NSString * kDCEvent_days_key = @"days";
-const NSString * kDCEvent_date_key = @"date";
-const NSString * kDCEvent_from_key = @"from";
-const NSString * kDCEvent_to_key = @"to";
-const NSString * kDCEvent_type_key = @"type";
-const NSString * kDCEvent_name_key = @"name";
-const NSString * kDCEvent_speakers_key = @"speakers";
-const NSString * kDCEvent_track_key = @"track";
-const NSString * kDCEvent_experienceLevel_key = @"experienceLevel";
-const NSString * kDCEvent_eventId_key = @"eventID";
-const NSString * kDCEvent_text_key = @"text";
-const NSString * kDCEvent_place_key = @"place";
+const NSString * kDCEventsKey = @"events";
+const NSString * kDCEventDaysKey = @"days";
+const NSString * kDCEventDateKey = @"date";
+const NSString * kDCEventFromKey = @"from";
+const NSString * kDCEventToKey = @"to";
+const NSString * kDCEventTypeKey = @"type";
+const NSString * kDCEventNameKey = @"name";
+const NSString * kDCEventSpeakersKey = @"speakers";
+const NSString * kDCEventTrackKey = @"track";
+const NSString * kDCEventExperienceLevelKey = @"experienceLevel";
+const NSString * kDCEventIdKey = @"eventID";
+const NSString * kDCEventTextKey = @"text";
+const NSString * kDCEventPlaceKey = @"place";
 
 @implementation DCEvent (DC)
 
@@ -76,18 +77,18 @@ const NSString * kDCEvent_place_key = @"place";
 - (void)updateFromDictionary:(NSDictionary *)eventDict forData:(NSDate *)date
 {
     self.date = date;
-    self.eventID = eventDict[kDCEvent_eventId_key];
-    self.name = eventDict[kDCEvent_name_key];
+    self.eventID = eventDict[kDCEventIdKey];
+    self.name = eventDict[kDCEventNameKey];
     self.favorite = @NO;
-    self.place = [eventDict[kDCEvent_place_key] kv_decodeHTMLCharacterEntities];
-    self.desctiptText = eventDict[kDCEvent_text_key]; //kv_decodeHTMLCharacterEntities];
+    self.place = [eventDict[kDCEventPlaceKey] kv_decodeHTMLCharacterEntities];
+    self.desctiptText = eventDict[kDCEventTextKey]; //kv_decodeHTMLCharacterEntities];
     self.timeRange = [DCTimeRange createManagedObjectInContext:self.managedObjectContext];//(DCTimeRange*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCTimeRange class]];
-    [self.timeRange setFrom:eventDict[kDCEvent_from_key] to:eventDict[kDCEvent_to_key]];
+    [self.timeRange setFrom:eventDict[kDCEventFromKey] to:eventDict[kDCEventToKey]];
     
-    [self addTypeForID:[eventDict[kDCEvent_type_key] intValue]];
-    [self addSpeakersForIds:eventDict[kDCEvent_speakers_key]];
-    [self addLevelForID:[eventDict[kDCEvent_experienceLevel_key] intValue]];
-    [self addTrackForId:[eventDict[kDCEvent_track_key] intValue]];
+    [self addTypeForID:[eventDict[kDCEventTypeKey] intValue]];
+    [self addSpeakersForIds:eventDict[kDCEventSpeakersKey]];
+    [self addLevelForID:[eventDict[kDCEventExperienceLevelKey] intValue]];
+    [self addTrackForId:[eventDict[kDCEventTrackKey] intValue]];
 }
 
 
@@ -198,7 +199,7 @@ const NSString * kDCEvent_place_key = @"place";
 
 + (NSString*)idKey
 {
-    return (NSString*)kDCEvent_eventId_key;
+    return (NSString*)kDCEventIdKey;
 }
 
 

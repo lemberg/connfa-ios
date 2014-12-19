@@ -23,6 +23,8 @@
 #ifndef DrupalCon_UIConstants_h
 #define DrupalCon_UIConstants_h
 
+#define DEBUG_MODE
+
 #define NAV_BAR_COLOR [UIColor colorWithRed:112./255. green:40./255. blue: 50./255. alpha: 1.0]
 
 #define MENU_SELECTION_COLOR [UIColor colorWithRed:238./255. green:52./255. blue:58./255. alpha:1.0]
