@@ -62,4 +62,7 @@ typedef NS_ENUM (int, DCEventType) {
 
 - (UIImage*)imageForEvent;
 
+- (NSDate *)startDate;
+- (NSDate *)endDate;
+
 @end
