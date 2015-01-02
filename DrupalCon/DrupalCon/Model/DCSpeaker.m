@@ -37,5 +37,6 @@
 @dynamic twitterName;
 @dynamic webSite;
 @dynamic events;
+@dynamic sectionKey;
 
 @end

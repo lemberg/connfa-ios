@@ -31,6 +31,8 @@
 @interface DCSpeakersViewController ()
 
 @property (nonatomic, weak) IBOutlet UITableView * speakersTbl;
+@property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
 @end
 
@@ -39,41 +41,64 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _speakers = [self orderByLastName:[[DCMainProxy sharedProxy] speakerInstances]];
-    [_speakersTbl reloadData];
+    [self reload];
+
 }
 
-- (NSArray *)orderByLastName:(NSArray *)array
-{
-     NSSortDescriptor *sortLastName = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES comparator:^NSComparisonResult(id obj1, id obj2) {
-         NSString *lastName1 = (NSString *)obj1;
-         NSString *lastName2 = (NSString *)obj2;
-         if ([lastName1 length] == 0 && [lastName2 length] == 0) {
-             return NSOrderedSame;
-         }
-         if ([lastName1 length] == 0) {
-             return NSOrderedDescending;
-         }
-         if ([lastName2 length] == 0) {
-             return NSOrderedAscending;
-         }
 
-         
-         return [lastName1 compare:lastName2 options:NSCaseInsensitiveSearch];
-     }];
-    return [array sortedArrayUsingDescriptors:@[sortLastName]];
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    [searchBar setShowsCancelButton:YES animated:YES];
+}
+
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+    [searchBar setShowsCancelButton:NO animated:YES];
+}
+
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    [self reload];
+}
+
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+}
+
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
 }
 
 #pragma mark - UITableView delegate/datasourse methods
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return [DCSpeakerCell cellHeight];
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return [[self.fetchedResultsController sections] count];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return _speakers.count;
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+    return [self.fetchedResultsController sectionIndexTitles];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
+    return [self.fetchedResultsController sectionForSectionIndexTitle:title atIndex:index];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo numberOfObjects];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultsController sections] objectAtIndex:section];
+    return [sectionInfo name];
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -81,7 +106,7 @@
     static NSString * cellIdSpeaker = @"DetailCellIdentifierSpeaker";
     DCSpeakerCell *_cell = (DCSpeakerCell*)[tableView dequeueReusableCellWithIdentifier: cellIdSpeaker];
     
-    DCSpeaker * speaker = _speakers[indexPath.row];
+    DCSpeaker * speaker = [self.fetchedResultsController objectAtIndexPath:indexPath];//_speakers[indexPath.row];
     
     [_cell.nameLbl setText:speaker.name];
     
@@ -113,7 +138,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.speakersTbl reloadData];
     
 }
 
@@ -128,6 +152,55 @@
     }];
     [[(AppDelegate*)[[UIApplication sharedApplication] delegate] window].rootViewController presentViewController:detailController animated:YES completion:nil];
 
+}
+
+- (NSSortDescriptor *)sortDescriptor {
+    NSSortDescriptor *sortLastName = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES comparator:^NSComparisonResult(id obj1, id obj2) {
+        NSString *lastName1 = (NSString *)obj1;
+        NSString *lastName2 = (NSString *)obj2;
+        if ([lastName1 length] == 0 && [lastName2 length] == 0) {
+            return NSOrderedSame;
+        }
+        if ([lastName1 length] == 0) {
+            return NSOrderedDescending;
+        }
+        if ([lastName2 length] == 0) {
+            return NSOrderedAscending;
+        }
+        
+        
+        return [lastName1 compare:lastName2 options:NSCaseInsensitiveSearch];
+    }];
+    return sortLastName;
+}
+
+- (void)reload
+{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"DCSpeaker"];
+     NSSortDescriptor *sectionKeyDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"sectionKey" ascending:YES] ;
+    NSSortDescriptor *firstNameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"firstName" ascending:YES] ;
+    NSSortDescriptor *lastNameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"lastName" ascending:YES];
+    
+    request.sortDescriptors = @[sectionKeyDescriptor, firstNameDescriptor, lastNameDescriptor];
+    
+    NSPredicate *predicate = nil;
+    if (self.searchBar.text.length)
+        predicate = [NSPredicate predicateWithFormat:@"name CONTAINS[cd] %@", self.searchBar.text];
+    
+    request.predicate = predicate;
+    
+    _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
+                                                                    managedObjectContext:[DCMainProxy sharedProxy].managedObjectContext
+                                                                      sectionNameKeyPath:@"sectionKey"
+                                                                               cacheName:nil];
+//    _fetchedResultsController.delegate = self;
+    
+    NSError *error = nil;
+    [self.fetchedResultsController performFetch:&error];
+    if (error)
+        NSLog(@"%@", error);
+    
+    [self.speakersTbl reloadData];
 }
 
 

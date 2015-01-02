@@ -66,7 +66,16 @@ const NSString * kDCSpeaker_avatarPath_key = @"avatarImageUrl";
         speaker.organizationName = speakerDict[kDCSpeaker_organization_key];
         speaker.jobTitle = speakerDict[kDCSpeaker_jobTitle_key];
         speaker.characteristic = [speakerDict[kDCSpeaker_charact_key] kv_decodeHTMLCharacterEntities];
+        speaker.sectionKey = [self firstUpperLetter:speakerDict[kDCSpeaker_firstName_key]];
     }
 }
 
++ (NSString *)firstUpperLetter:(NSString *)source
+{
+    NSString *upperCaseSource = [source uppercaseString];
+    
+    // support UTF-16:
+    NSString *firstLetter = [upperCaseSource substringWithRange:NSMakeRange(0, 1)];
+    return firstLetter;
+}
 @end

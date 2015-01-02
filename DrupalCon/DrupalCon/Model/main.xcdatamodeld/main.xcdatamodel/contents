@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6244" systemVersion="13E28" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="14A389" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="DCBof" representedClassName="DCBof" parentEntity="DCEvent" syncable="YES"/>
     <entity name="DCEvent" representedClassName="DCEvent" isAbstract="YES" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
@@ -39,6 +39,7 @@
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="organizationName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sectionKey" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="speakerId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="twitterName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="webSite" optional="YES" attributeType="String" syncable="YES"/>
@@ -70,7 +71,7 @@
         <element name="DCLevel" positionX="-5978" positionY="-2214" width="128" height="103"/>
         <element name="DCLocation" positionX="-6111" positionY="-1755" width="128" height="118"/>
         <element name="DCProgram" positionX="-5571" positionY="-2142" width="128" height="43"/>
-        <element name="DCSpeaker" positionX="-5733" positionY="-1744" width="128" height="208"/>
+        <element name="DCSpeaker" positionX="-5715" positionY="-1755" width="128" height="223"/>
         <element name="DCTime" positionX="-6165" positionY="-2106" width="128" height="73"/>
         <element name="DCTimeRange" positionX="-5978" positionY="-2088" width="128" height="73"/>
         <element name="DCTrack" positionX="-5994" positionY="-1998" width="128" height="88"/>
