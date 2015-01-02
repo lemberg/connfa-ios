@@ -38,6 +38,7 @@
 #import "DCDataProvider.h"
 #import "AppDelegate.h"
 #import "DCLocalNotificationManager.h"
+#import "DCCalendarManager.h"
 #import "DCLoginViewController.h"
 
 const NSString * INVALID_JSON_EXCEPTION = @"Invalid JSON";
@@ -386,8 +387,9 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 - (void)addToFavoriteEvent:(DCEvent *)event
 {
     DCFavoriteEvent *favoriteEvent = [self createFavoriteEvent];
-    favoriteEvent.eventID = event.eventID;
-    [DCLocalNotificationManager scheduleNotificationWithItem:event interval:10];
+    favoriteEvent.eventID          = event.eventID;
+    [DCCalendarManager addEventWithItem:event];
+//    [DCLocalNotificationManager scheduleNotificationWithItem:event interval:10];
     [self saveContext];
 }
 
@@ -395,7 +397,9 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 {
     DCFavoriteEvent *event = [self favoriteEventFromID:[eventID integerValue]];
     if (event) {
-        [DCLocalNotificationManager cancelLocalNotificationWithId:event.eventID];
+        DCEvent *e = [[self eventsWithIDs:@[ eventID ]] firstObject];
+        [DCCalendarManager removeEventOfItem:e];
+//        [DCLocalNotificationManager cancelLocalNotificationWithId:event.eventID];
         [self removeItems:@[event]
                 inContext:self.managedObjectContext];
         

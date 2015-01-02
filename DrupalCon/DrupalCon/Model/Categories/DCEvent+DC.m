@@ -22,6 +22,7 @@
 
 #import "DCEvent+DC.h"
 #import "DCTimeRange+DC.h"
+#import "DCTime+DC.h"
 #import "DCType+DC.h"
 #import "DCSpeaker+DC.h"
 #import "DCLevel+DC.h"
@@ -182,6 +183,28 @@ const NSString * kDCEvent_place_key = @"place";
             break;
     }
     return [UIImage imageNamed:icon_name];
+}
+
+- (NSDate *)startDate {
+    unsigned unitFlags      = NSCalendarUnitYear | NSCalendarUnitMonth |  NSCalendarUnitDay;
+    NSCalendar *calendar    = [NSCalendar currentCalendar];
+    NSDateComponents *comps = [calendar components:unitFlags fromDate:self.date];
+    comps.hour              = [self.timeRange.from.hour integerValue];
+    comps.minute            = [self.timeRange.from.minute integerValue];
+    comps.second            = 0;
+    
+    return [calendar dateFromComponents:comps];
+}
+
+- (NSDate *)endDate {
+    unsigned unitFlags      = NSCalendarUnitYear | NSCalendarUnitMonth |  NSCalendarUnitDay;
+    NSCalendar *calendar    = [NSCalendar currentCalendar];
+    NSDateComponents *comps = [calendar components:unitFlags fromDate:self.date];
+    comps.hour              = [self.timeRange.to.hour integerValue];
+    comps.minute            = [self.timeRange.to.minute integerValue];
+    comps.second            = 0;
+    
+    return [calendar dateFromComponents:comps];
 }
 
 @end

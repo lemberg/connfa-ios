@@ -108,6 +108,7 @@
 		84FAE0E819A645E000DC9FF1 /* NSArray+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAE0E719A645E000DC9FF1 /* NSArray+DC.m */; };
 		84FAE10919A65FEA00DC9FF1 /* DCTime+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAE10819A65FEA00DC9FF1 /* DCTime+DC.m */; };
 		84FAE10C19A6600900DC9FF1 /* DCTimeRange+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAE10B19A6600900DC9FF1 /* DCTimeRange+DC.m */; };
+		9E18FA441A56D0BE001475A7 /* DCCalendarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E18FA431A56D0BE001475A7 /* DCCalendarManager.m */; };
 		FA90B9A319C5893700873865 /* DCEventBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90B9A219C5893700873865 /* DCEventBaseCell.m */; };
 		FA90B9A619C589AE00873865 /* DCEventBaseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA90B9A519C589AE00873865 /* DCEventBaseCell.xib */; };
 		FA90B9A919C5A6C600873865 /* DCLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90B9A819C5A6C600873865 /* DCLabel.m */; };
@@ -309,6 +310,8 @@
 		84FAE10819A65FEA00DC9FF1 /* DCTime+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DCTime+DC.m"; path = "Model/Categories/DCTime+DC.m"; sourceTree = "<group>"; };
 		84FAE10A19A6600900DC9FF1 /* DCTimeRange+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DCTimeRange+DC.h"; path = "Model/Categories/DCTimeRange+DC.h"; sourceTree = "<group>"; };
 		84FAE10B19A6600900DC9FF1 /* DCTimeRange+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DCTimeRange+DC.m"; path = "Model/Categories/DCTimeRange+DC.m"; sourceTree = "<group>"; };
+		9E18FA421A56D0BE001475A7 /* DCCalendarManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCalendarManager.h; sourceTree = "<group>"; };
+		9E18FA431A56D0BE001475A7 /* DCCalendarManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCalendarManager.m; sourceTree = "<group>"; };
 		FA90B9A119C5893700873865 /* DCEventBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCEventBaseCell.h; path = Classes/Views/ProgramCells/EventBaseCell/DCEventBaseCell.h; sourceTree = "<group>"; };
 		FA90B9A219C5893700873865 /* DCEventBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCEventBaseCell.m; path = Classes/Views/ProgramCells/EventBaseCell/DCEventBaseCell.m; sourceTree = "<group>"; };
 		FA90B9A519C589AE00873865 /* DCEventBaseCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DCEventBaseCell.xib; path = Classes/Views/ProgramCells/EventBaseCell/DCEventBaseCell.xib; sourceTree = "<group>"; };
@@ -746,6 +749,8 @@
 		849EFDA019A49F8600C43E05 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9E18FA421A56D0BE001475A7 /* DCCalendarManager.h */,
+				9E18FA431A56D0BE001475A7 /* DCCalendarManager.m */,
 				849CF82219A62F8600C84675 /* DCMainProxy+Additions.h */,
 				849CF82319A62F8600C84675 /* DCMainProxy+Additions.m */,
 				849CF80219A5EFEC00C84675 /* DCMainProxy.h */,
@@ -965,6 +970,7 @@
 				849EFE2119A4FB9600C43E05 /* DCProgram+DC.m in Sources */,
 				74E67C7219B6FDF400DF9D71 /* DCLocationViewController.m in Sources */,
 				84ABE8F519BEEB8F0019D5DC /* DCEventStrategy.m in Sources */,
+				9E18FA441A56D0BE001475A7 /* DCCalendarManager.m in Sources */,
 				84A24FB819C1F607006EF17E /* DCBof.m in Sources */,
 				84A24FCD19C1F609006EF17E /* DCEvent.m in Sources */,
 				5D38E68219867062006F7A59 /* DCMenuContainerViewController.m in Sources */,
