@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <scenes>
+        <!--Speakers View Controller-->
+        <scene sceneID="dS5-dM-NME">
+            <objects>
+                <viewController storyboardIdentifier="SpeakersViewController" id="SQY-AD-QPu" customClass="DCSpeakersViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="o0k-Pg-xTf"/>
+                        <viewControllerLayoutGuide type="bottom" id="qWf-aw-BGy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xTa-JX-2Bu">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="coi-og-QUw">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="SQY-AD-QPu" id="mi4-iN-I9m"/>
+                                </connections>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="65" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Rtg-Kq-JJf">
+                                <rect key="frame" x="0.0" y="44" width="320" height="371"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DetailCellIdentifierSpeaker" id="7fo-QL-KrG" customClass="DCSpeakerCell">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="65"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7fo-QL-KrG" id="khG-Ya-ywT">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RuN-Fu-GRM">
+                                                    <rect key="frame" x="16" y="12" width="40" height="41"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="41" id="FbK-jk-bSg"/>
+                                                        <constraint firstAttribute="width" constant="40" id="nYp-Vk-uoH"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_speakerNameLbl" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="POK-Wp-NGL">
+                                                    <rect key="frame" x="74" y="12" width="226" height="18"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_positionTitleLbl asdfasdf asd as as dasd as da df a dasd asdf asd asd fasdf asd " lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QSW-2j-Sfq" customClass="DCLabel">
+                                                    <rect key="frame" x="74" y="33" width="226" height="24"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
+                                                    <color key="textColor" red="0.60000002379999995" green="0.60000002379999995" blue="0.60000002379999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerX" secondItem="RuN-Fu-GRM" secondAttribute="centerX" constant="124" id="6ax-B4-lGY"/>
+                                                <constraint firstItem="QSW-2j-Sfq" firstAttribute="leading" secondItem="RuN-Fu-GRM" secondAttribute="trailing" constant="18" id="6dm-Zn-Jej"/>
+                                                <constraint firstItem="POK-Wp-NGL" firstAttribute="leading" secondItem="RuN-Fu-GRM" secondAttribute="trailing" constant="18" id="E0p-ae-UA5"/>
+                                                <constraint firstAttribute="trailing" secondItem="QSW-2j-Sfq" secondAttribute="trailing" constant="20" id="L6M-d5-kI6"/>
+                                                <constraint firstAttribute="centerY" secondItem="RuN-Fu-GRM" secondAttribute="centerY" id="TNH-aq-UV3"/>
+                                                <constraint firstItem="QSW-2j-Sfq" firstAttribute="top" secondItem="POK-Wp-NGL" secondAttribute="bottom" constant="3" id="Zjk-ga-kWQ"/>
+                                                <constraint firstItem="POK-Wp-NGL" firstAttribute="top" secondItem="khG-Ya-ywT" secondAttribute="top" constant="12" id="k0G-BT-E6I"/>
+                                                <constraint firstAttribute="trailing" secondItem="POK-Wp-NGL" secondAttribute="trailing" constant="20" id="oXP-EP-Oya"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="nameLbl" destination="POK-Wp-NGL" id="Tzd-E0-iOZ"/>
+                                            <outlet property="pictureImg" destination="RuN-Fu-GRM" id="vzx-Vf-hqB"/>
+                                            <outlet property="positionTitleLbl" destination="QSW-2j-Sfq" id="AEg-8D-Fx5"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="SQY-AD-QPu" id="I2n-Xm-N4g"/>
+                                    <outlet property="delegate" destination="SQY-AD-QPu" id="hfD-mK-dpK"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="coi-og-QUw" firstAttribute="leading" secondItem="xTa-JX-2Bu" secondAttribute="leading" id="1Ug-rx-aVi"/>
+                            <constraint firstItem="coi-og-QUw" firstAttribute="top" secondItem="xTa-JX-2Bu" secondAttribute="top" id="3dB-h4-YOJ"/>
+                            <constraint firstAttribute="trailing" secondItem="Rtg-Kq-JJf" secondAttribute="trailing" id="GGV-ce-sdR"/>
+                            <constraint firstAttribute="trailing" secondItem="coi-og-QUw" secondAttribute="trailing" id="KRG-Cb-c8K"/>
+                            <constraint firstItem="Rtg-Kq-JJf" firstAttribute="leading" secondItem="xTa-JX-2Bu" secondAttribute="leading" id="gNL-A9-cvH"/>
+                            <constraint firstItem="Rtg-Kq-JJf" firstAttribute="top" secondItem="coi-og-QUw" secondAttribute="bottom" id="kff-BM-wXd"/>
+                            <constraint firstItem="qWf-aw-BGy" firstAttribute="top" secondItem="Rtg-Kq-JJf" secondAttribute="bottom" constant="65" id="qiF-Zl-IfG"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="k4l-of-SUN"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="searchBar" destination="coi-og-QUw" id="t8t-Rw-pDQ"/>
+                        <outlet property="speakersTbl" destination="Rtg-Kq-JJf" id="B0Y-mk-aPj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="feL-zO-fou" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1738" y="208"/>
+        </scene>
+    </scenes>
+</document>

@@ -12,6 +12,8 @@
 	<dict>
 		<key>75C3126922E7896526A76D250262E4D5713CCDB2</key>
 		<string>codebasehq.com:lemberg/drupalcon-app/ios.git</string>
+		<key>E95A63C2-1858-4E3C-AB3C-482065011F03</key>
+		<string>ssh://codebasehq.com/lemberg/drupalcon-app/ios.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>DrupalCon/DrupalCon.xcodeproj</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>75C3126922E7896526A76D250262E4D5713CCDB2</key>
 		<string>../../..</string>
+		<key>E95A63C2-1858-4E3C-AB3C-482065011F03</key>
+		<string>../../../../DrupalCon</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>codebasehq.com:lemberg/drupalcon-app/ios.git</string>
@@ -33,6 +37,14 @@
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>75C3126922E7896526A76D250262E4D5713CCDB2</string>
+			<key>IDESourceControlWCCName</key>
+			<string>DropalCon</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E95A63C2-1858-4E3C-AB3C-482065011F03</string>
 			<key>IDESourceControlWCCName</key>
 			<string>DrupalCon</string>
 		</dict>
