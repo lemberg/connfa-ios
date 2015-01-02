@@ -38,6 +38,8 @@
 @property (nonatomic, retain) NSString * twitterName;
 @property (nonatomic, retain) NSString * webSite;
 @property (nonatomic, retain) NSSet *events;
+@property (nonatomic, retain) NSString *sectionKey;
+
 @end
 
 @interface DCSpeaker (CoreDataGeneratedAccessors)
