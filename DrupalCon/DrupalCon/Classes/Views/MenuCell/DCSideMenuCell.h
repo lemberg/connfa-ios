@@ -23,6 +23,9 @@
 #import <UIKit/UIKit.h>
 
 @interface DCSideMenuCell : UITableViewCell
-@property (nonatomic, weak) IBOutlet UILabel *captionLabel;
+
+@property (nonatomic, weak) IBOutlet UILabel     *captionLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *leftImageView;
+@property (nonatomic, weak) IBOutlet UIView      *separatorView;
+
 @end

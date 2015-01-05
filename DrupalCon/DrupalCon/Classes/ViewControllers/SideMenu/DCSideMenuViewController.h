@@ -21,7 +21,11 @@
 //
 
 #import <UIKit/UIKit.h>
+
 @class DCEvent;
-@interface DCSideMenuViewController : UIViewController<UITableViewDelegate>
+
+@interface DCSideMenuViewController: UIViewController <UITableViewDelegate>
+
 - (void)openEventFromFavorite:(DCEvent *)event;
+
 @end

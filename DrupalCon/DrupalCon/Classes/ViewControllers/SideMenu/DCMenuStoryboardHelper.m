@@ -23,58 +23,6 @@
 #import "DCMenuStoryboardHelper.h"
 
 @implementation DCMenuStoryboardHelper
-+(NSString*) viewControllerStoryboardIDFromMenuType: (DCMenuSection) menu {
-    
-    NSString *storyboardControllerID = nil;
-    
-    if(menu == DCMENU_PROGRAM_ITEM)
-        storyboardControllerID = @"ProgramViewController";
-    
-    if (menu == DCMENU_BOFS_ITEM)
-        storyboardControllerID = @"ProgramViewController";
-    
-    if(menu == DCMENU_SPEAKERS_ITEM)
-        storyboardControllerID = @"SpeakersViewController";
-    
-    
-    if(menu == DCMENU_LOCATION_ITEM) {
-        storyboardControllerID = @"LocationViewController";
-    }
-    if(menu == DCMENU_ABOUT_ITEM) {
-        storyboardControllerID = @"AboutViewController";
-        
-    }
-    if(menu == DCMENU_MYSCHEDULE_ITEM) {
-        storyboardControllerID = @"FavoritesViewController";
-    }
-    
-    return storyboardControllerID;
-}
-
-+(NSString*) titleForMenuType: (DCMenuSection) menu {
-    NSString *title = nil;
-    
-    if(menu == DCMENU_PROGRAM_ITEM)
-        title = @"Schedule";
-    
-    if (menu == DCMENU_BOFS_ITEM)
-        title = @"BoFs";
-    
-    if(menu == DCMENU_SPEAKERS_ITEM)
-        title = @"Speakers";
-    
-    if(menu == DCMENU_LOCATION_ITEM)
-        title = @"Location";
-    
-    if(menu == DCMENU_ABOUT_ITEM)
-        title = @"About";
-    
-    if(menu == DCMENU_MYSCHEDULE_ITEM)
-        title = @"My Schedule";
-    
-    
-    return title;
-}
 
 + (BOOL)isProgramOrBof:(DCMenuSection)menu
 {

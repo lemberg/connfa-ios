@@ -999,12 +999,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="login_bg" translatesAutoresizingMaskIntoConstraints="NO" id="66g-GI-8tF">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                            </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="rA1-f8-M65">
-                                <rect key="frame" x="0.0" y="40" width="320" height="538"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="rA1-f8-M65">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="rWm-HL-cEi">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="135"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_bg" translatesAutoresizingMaskIntoConstraints="NO" id="66g-GI-8tF">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="135"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="clipsToBounds" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="66g-GI-8tF" secondAttribute="trailing" id="Qjy-aL-qFY"/>
+                                        <constraint firstItem="66g-GI-8tF" firstAttribute="leading" secondItem="rWm-HL-cEi" secondAttribute="leading" id="dDL-7K-LhK"/>
+                                        <constraint firstItem="66g-GI-8tF" firstAttribute="top" secondItem="rWm-HL-cEi" secondAttribute="top" id="dG9-7I-16f"/>
+                                        <constraint firstAttribute="bottom" secondItem="66g-GI-8tF" secondAttribute="bottom" id="tlz-iZ-rPk"/>
+                                    </constraints>
+                                </view>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SideMenuCellIdentifier" rowHeight="50" id="5x6-J4-yNI" customClass="DCSideMenuCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="50"/>
@@ -1016,19 +1032,24 @@
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Program" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xGY-TI-Ty0">
                                                     <rect key="frame" x="72" y="14" width="177" height="21"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pir-cP-Fbl">
                                                     <rect key="frame" x="20" y="8" width="33" height="33"/>
                                                 </imageView>
+                                                <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H3i-fz-axR">
+                                                    <rect key="frame" x="0.0" y="49" width="320" height="1"/>
+                                                    <color key="backgroundColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="captionLabel" destination="xGY-TI-Ty0" id="T01-Bg-MJz"/>
                                             <outlet property="leftImageView" destination="Pir-cP-Fbl" id="Z9J-2b-df9"/>
+                                            <outlet property="separatorView" destination="H3i-fz-axR" id="cZs-Ex-etQ"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1038,7 +1059,13 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.43921568630000002" green="0.15686274510000001" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="rA1-f8-M65" firstAttribute="leading" secondItem="kbZ-NQ-H3b" secondAttribute="leading" id="GU5-h2-S8J"/>
+                            <constraint firstItem="rA1-f8-M65" firstAttribute="top" secondItem="kbZ-NQ-H3b" secondAttribute="top" constant="20" id="Sh8-Uw-oY9"/>
+                            <constraint firstItem="7ug-0R-lnP" firstAttribute="top" secondItem="rA1-f8-M65" secondAttribute="bottom" id="fvZ-wz-9Hz"/>
+                            <constraint firstAttribute="trailing" secondItem="rA1-f8-M65" secondAttribute="trailing" id="jTg-aY-41a"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kDh-P7-wMR" userLabel="First Responder" sceneMemberID="firstResponder"/>

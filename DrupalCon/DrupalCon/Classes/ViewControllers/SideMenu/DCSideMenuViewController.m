@@ -25,81 +25,110 @@
 #import "DCBaseViewController.h"
 #import "DCAppFacade.h"
 #import "DCSideMenuType.h"
-#import "DCMenuImage.h"
 #import "DCMenuStoryboardHelper.h"
 #import "DCProgramViewController.h"
 #import "UIConstants.h"
 #import "DCFavoritesViewController.h"
 
-#define isiPhone5  ([[UIScreen mainScreen] bounds].size.height == 568)?TRUE:FALSE
 @class DCEvent;
 
+#define kMenuItemTitle              @"MenuItemTitle"
+#define kMenuItemIcon               @"MenuItemIcon"
+#define kMenuItemControllerId       @"MenuItemControllerId"
+
 @interface DCSideMenuViewController ()
+
 @property (nonatomic, strong) NSArray *arrayOfCaptions;
 
 // This stores the view controller instance which is placed on the menu container
 @property (nonatomic, strong) DCBaseViewController *presentedController;
-
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint *avatarTopSpaceConstraint;
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint *tableViewTopContraint;
 @property (nonatomic, strong) DCEvent *event;
+
 @end
 
 @implementation DCSideMenuViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    if(!self.arrayOfCaptions) {
-        self.arrayOfCaptions = [NSArray arrayWithObjects: @"Schedule", @"BoFs", @"Speakers", @"Location", @"About", @"My Schedule", nil];
-    }
     
-    if(!isiPhone5) {
-        self.tableViewTopContraint.constant = 0;
-        self.avatarTopSpaceConstraint.constant = 6;
-    }
+    self.arrayOfCaptions = @[
+                                @{ kMenuItemTitle: @"Schedule",
+                                   kMenuItemIcon: @"",
+                                   kMenuItemControllerId: @"ProgramViewController"
+                                   },
+                                @{
+                                    kMenuItemTitle: @"BoFs",
+                                    kMenuItemIcon: @"",
+                                    kMenuItemControllerId: @"ProgramViewController"
+                                    },
+                                @{
+                                    kMenuItemTitle: @"Social Events",
+                                    kMenuItemIcon: @"",
+                                    kMenuItemControllerId: @""
+                                    },
+                                @{
+                                    kMenuItemTitle: @"Speakers",
+                                    kMenuItemIcon: @"",
+                                    kMenuItemControllerId: @"SpeakersViewController"
+                                    },
+                                @{
+                                    kMenuItemTitle: @"My Schedule",
+                                    kMenuItemIcon: @"",
+                                    kMenuItemControllerId: @"FavoritesViewController"
+                                    },
+                                @{
+                                    kMenuItemTitle: @"Location",
+                                    kMenuItemIcon: @"",
+                                    kMenuItemControllerId: @"LocationViewController"
+                                    },
+                                @{
+                                    kMenuItemTitle: @"Twitter",
+                                    kMenuItemIcon: @"",
+                                    kMenuItemControllerId: @""
+                                    },
+                                @{
+                                    kMenuItemTitle: @"Points of Interest",
+                                    kMenuItemIcon: @"",
+                                    kMenuItemControllerId: @""
+                                    },
+                                @{
+                                    kMenuItemTitle: @"Info",
+                                    kMenuItemIcon: @"",
+                                    kMenuItemControllerId: @"AboutViewController"
+                                    }
+                             ];
     
     //our first menu item is Program, this is actually the screen that we should see right after the login page, thats why lets just add it on top as if the user alerady selected it
-    
-    [self placeViewControllerAssociatedWithMenuItem: DCMENU_PROGRAM_ITEM];
+    [self placeViewControllerAssociatedWithMenuItem:DCMENU_PROGRAM_ITEM];
 }
 
--(void) placeViewControllerAssociatedWithMenuItem: (DCMenuSection) menuItem {
-    NSString *storyboardControllerID = [DCMenuStoryboardHelper viewControllerStoryboardIDFromMenuType: menuItem];
+- (void)placeViewControllerAssociatedWithMenuItem:(DCMenuSection)menuItem {
+    NSDictionary *itemDict           = self.arrayOfCaptions[menuItem];
+    NSString *storyboardControllerID = itemDict[kMenuItemControllerId];
+    NSString *title                  = itemDict[kMenuItemTitle];
     
-    NSString *title = [DCMenuStoryboardHelper titleForMenuType: menuItem];
-    
-    if(storyboardControllerID) {
-        DCBaseViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier: storyboardControllerID];
-        if ([viewController isKindOfClass:[DCProgramViewController class]])
-        {
+    if(storyboardControllerID && storyboardControllerID.length) {
+        DCBaseViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:storyboardControllerID];
+        if ([viewController isKindOfClass:[DCProgramViewController class]]) {
             [(DCProgramViewController*)viewController setEventsStrategy:[DCMenuStoryboardHelper strategyForEventMenuType:menuItem]];
         }
         
         if(self.presentedController)
             [self.presentedController.view removeFromSuperview];
-
         
-        [[DCAppFacade shared].menuContainerViewController.view addSubview: viewController.view];
-        [[DCAppFacade shared].menuContainerViewController setTitle: title];
+        [[DCAppFacade shared].menuContainerViewController.view addSubview:viewController.view];
+        [[DCAppFacade shared].menuContainerViewController setTitle:title];
         self.presentedController = viewController;
     }
     
-    [[DCAppFacade shared].sideMenuController setMenuState: MFSideMenuStateClosed completion: nil];
+    [[DCAppFacade shared].sideMenuController setMenuState:MFSideMenuStateClosed completion:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     if (self.event) {
         [self placeViewControllerAssociatedWithMenuItem:DCMENU_MYSCHEDULE_ITEM];
         if ([self.presentedController isMemberOfClass:[DCFavoritesViewController class]]) {
@@ -113,20 +142,15 @@
 {
     self.event = event;
 }
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cellIdentifier = @"SideMenuCellIdentifier";
     
     DCSideMenuCell *cell = (DCSideMenuCell*)[tableView dequeueReusableCellWithIdentifier: cellIdentifier];
     
-    
-    DCMenuImage *menuImage = [[DCMenuImage alloc] initWithMenuType: (int)indexPath.row];
-    cell.leftImageView.image = menuImage;
-    cell.captionLabel.text = [self.arrayOfCaptions objectAtIndex: indexPath.row];
+    NSDictionary *itemDict   = [self.arrayOfCaptions objectAtIndex: indexPath.row];
+    cell.captionLabel.text   = itemDict[kMenuItemTitle];
+    cell.leftImageView.image = [UIImage imageNamed:itemDict[kMenuItemIcon]];
     
     //Selection style
     
@@ -134,28 +158,19 @@
     selectedBackgroundView.backgroundColor = MENU_SELECTION_COLOR;
     cell.selectedBackgroundView = selectedBackgroundView;
     
+    cell.separatorView.hidden = !(indexPath.row % 3 == 2);
+    
     return cell;
     
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    [self placeViewControllerAssociatedWithMenuItem: (DCMenuSection)indexPath.row];
+    [self placeViewControllerAssociatedWithMenuItem:(DCMenuSection)indexPath.row];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return DCMENU_ITEMS_COUNT;
 }
-
--(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 50;
-}
-
-
 
 @end

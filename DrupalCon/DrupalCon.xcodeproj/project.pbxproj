@@ -12,7 +12,6 @@
 		5D38E69919869303006F7A59 /* DCProgramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D38E69819869303006F7A59 /* DCProgramViewController.m */; };
 		5D38E69D1987A631006F7A59 /* DCSideMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D38E69C1987A631006F7A59 /* DCSideMenuCell.m */; };
 		5D38E6A11987A673006F7A59 /* DCTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D38E6A01987A673006F7A59 /* DCTextField.m */; };
-		5D6449A71988E9DA00BC1775 /* DCMenuImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D6449A61988E9DA00BC1775 /* DCMenuImage.m */; };
 		5D6449AD1988ECA400BC1775 /* DCMenuStoryboardHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D6449AC1988ECA400BC1775 /* DCMenuStoryboardHelper.m */; };
 		5D6449B1198908C600BC1775 /* DCProgramItemsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D6449B0198908C600BC1775 /* DCProgramItemsViewController.m */; };
 		5D6449CA19893BAD00BC1775 /* DCSpeechCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D6449C919893BAD00BC1775 /* DCSpeechCell.m */; };
@@ -128,8 +127,6 @@
 		5D38E69C1987A631006F7A59 /* DCSideMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCSideMenuCell.m; sourceTree = "<group>"; };
 		5D38E69F1987A673006F7A59 /* DCTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCTextField.h; path = Classes/Views/CustomTextField/DCTextField.h; sourceTree = "<group>"; };
 		5D38E6A01987A673006F7A59 /* DCTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCTextField.m; path = Classes/Views/CustomTextField/DCTextField.m; sourceTree = "<group>"; };
-		5D6449A51988E9DA00BC1775 /* DCMenuImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCMenuImage.h; sourceTree = "<group>"; };
-		5D6449A61988E9DA00BC1775 /* DCMenuImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCMenuImage.m; sourceTree = "<group>"; };
 		5D6449A81988EA0800BC1775 /* DCSideMenuType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DCSideMenuType.h; sourceTree = "<group>"; };
 		5D6449AB1988ECA400BC1775 /* DCMenuStoryboardHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCMenuStoryboardHelper.h; sourceTree = "<group>"; };
 		5D6449AC1988ECA400BC1775 /* DCMenuStoryboardHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCMenuStoryboardHelper.m; sourceTree = "<group>"; };
@@ -421,15 +418,6 @@
 			name = DCtextField;
 			sourceTree = "<group>";
 		};
-		5D6449A91988EC6800BC1775 /* MenuImage */ = {
-			isa = PBXGroup;
-			children = (
-				5D6449A51988E9DA00BC1775 /* DCMenuImage.h */,
-				5D6449A61988E9DA00BC1775 /* DCMenuImage.m */,
-			);
-			name = MenuImage;
-			sourceTree = "<group>";
-		};
 		5D6449AA1988EC7A00BC1775 /* MenuStoryboardHelper */ = {
 			isa = PBXGroup;
 			children = (
@@ -647,7 +635,6 @@
 			isa = PBXGroup;
 			children = (
 				5D6449AA1988EC7A00BC1775 /* MenuStoryboardHelper */,
-				5D6449A91988EC6800BC1775 /* MenuImage */,
 				5DC8C47819865C8400BF5816 /* DCSideMenuViewController.h */,
 				5DC8C47919865C8400BF5816 /* DCSideMenuViewController.m */,
 				5D6449A81988EA0800BC1775 /* DCSideMenuType.h */,
@@ -1019,7 +1006,6 @@
 				74E8381219C061CD000D2BE4 /* SDWebImageDecoder.m in Sources */,
 				5D6449B1198908C600BC1775 /* DCProgramItemsViewController.m in Sources */,
 				74E67C7519B6FE9800DF9D71 /* DCPin.m in Sources */,
-				5D6449A71988E9DA00BC1775 /* DCMenuImage.m in Sources */,
 				5D6449AD1988ECA400BC1775 /* DCMenuStoryboardHelper.m in Sources */,
 				84FAE0E819A645E000DC9FF1 /* NSArray+DC.m in Sources */,
 				840C455519BF419700CC144B /* DCBof+DC.m in Sources */,
