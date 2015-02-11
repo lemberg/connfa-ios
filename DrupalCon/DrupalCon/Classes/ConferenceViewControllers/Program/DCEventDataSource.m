@@ -121,21 +121,19 @@ const NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
     for (NSDictionary *sectionInfo in array) {
         
         DCTimeRange *timeRange = sectionInfo[kDCTimeslotKEY];
-        DCTimeRange *nextTimeRange = [array indexOfObject:sectionInfo] < array.count-1 ? [(NSDictionary*)[array objectAtIndex:[array indexOfObject:sectionInfo]+1] objectForKey:kDCTimeslotKEY] : nil;
         
-        float from = [NSDate hoursFromDate:timeRange.from];//timeRange.from.hour.integerValue + timeRange.from.minute.integerValue/60;
-        float to =  [NSDate hoursFromDate:timeRange.to];//timeRange.to.hour.integerValue + timeRange.to.minute.integerValue/60;
-        float fromInNext = nextTimeRange ? [NSDate hoursFromDate:nextTimeRange.from]: -1;
+        float from = [NSDate hoursFromDate:timeRange.from];
+        float to =  [NSDate hoursFromDate:timeRange.to];
         
-            // if Current hour is in time range, return this time range
-        if (from <= currentHour && currentHour <= to) {
+            // if Current hour is before Current time range, return Current time range
+        if (currentHour < from)
+        {
             self.actualEventIndexPath = [NSIndexPath indexPathForItem:0 inSection:sectionNumber];
             return;
         }
         
-            // if Current hour is between time ranges, return Next time range
-        if (currentHour < fromInNext)
-        {
+            // if Current hour is in time range, return this time range
+        if (from <= currentHour && currentHour <= to) {
             self.actualEventIndexPath = [NSIndexPath indexPathForItem:0 inSection:sectionNumber];
             return;
         }
