@@ -25,4 +25,7 @@
 @interface DCMenuContainerViewController : DCBaseViewController
 
 -(void) setTitle: (NSString*) title;
+-(void) setRightBarButtons:(NSArray *)rightBarButtons;
+
+
 @end

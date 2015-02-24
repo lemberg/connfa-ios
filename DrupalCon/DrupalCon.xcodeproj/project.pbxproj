@@ -107,6 +107,10 @@
 		84A24FD319C1F609006EF17E /* DCTimeRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A24FD219C1F609006EF17E /* DCTimeRange.m */; };
 		84A24FD619C1F609006EF17E /* DCType.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A24FD519C1F609006EF17E /* DCType.m */; };
 		84ABE8F519BEEB8F0019D5DC /* DCEventStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ABE8F419BEEB8F0019D5DC /* DCEventStrategy.m */; };
+		84F601451A9B970B0077BA85 /* DCFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F601441A9B970B0077BA85 /* DCFilterViewController.m */; };
+		84F601491A9C87D70077BA85 /* DCEventFilterHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F601481A9C87D70077BA85 /* DCEventFilterHeaderCell.m */; };
+		84F6014C1A9C88170077BA85 /* DCEventFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F6014B1A9C88170077BA85 /* DCEventFilterCell.m */; };
+		84F601811A9C8E3D0077BA85 /* DCFilterCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F601801A9C8E3D0077BA85 /* DCFilterCheckBox.m */; };
 		84FAE0E819A645E000DC9FF1 /* NSArray+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAE0E719A645E000DC9FF1 /* NSArray+DC.m */; };
 		84FAE10919A65FEA00DC9FF1 /* DCTime+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAE10819A65FEA00DC9FF1 /* DCTime+DC.m */; };
 		84FAE10C19A6600900DC9FF1 /* DCTimeRange+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAE10B19A6600900DC9FF1 /* DCTimeRange+DC.m */; };
@@ -307,6 +311,14 @@
 		84A24FD519C1F609006EF17E /* DCType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCType.m; path = Model/DCType.m; sourceTree = "<group>"; };
 		84ABE8F319BEEB8F0019D5DC /* DCEventStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCEventStrategy.h; sourceTree = "<group>"; };
 		84ABE8F419BEEB8F0019D5DC /* DCEventStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCEventStrategy.m; sourceTree = "<group>"; };
+		84F601431A9B970B0077BA85 /* DCFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCFilterViewController.h; path = EventFilter/DCFilterViewController.h; sourceTree = "<group>"; };
+		84F601441A9B970B0077BA85 /* DCFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCFilterViewController.m; path = EventFilter/DCFilterViewController.m; sourceTree = "<group>"; };
+		84F601471A9C87D70077BA85 /* DCEventFilterHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCEventFilterHeaderCell.h; path = EventFilter/DCEventFilterHeaderCell.h; sourceTree = "<group>"; };
+		84F601481A9C87D70077BA85 /* DCEventFilterHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCEventFilterHeaderCell.m; path = EventFilter/DCEventFilterHeaderCell.m; sourceTree = "<group>"; };
+		84F6014A1A9C88170077BA85 /* DCEventFilterCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCEventFilterCell.h; path = EventFilter/DCEventFilterCell.h; sourceTree = "<group>"; };
+		84F6014B1A9C88170077BA85 /* DCEventFilterCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCEventFilterCell.m; path = EventFilter/DCEventFilterCell.m; sourceTree = "<group>"; };
+		84F6017F1A9C8E3D0077BA85 /* DCFilterCheckBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCFilterCheckBox.h; path = Classes/Views/controls/DCFilterCheckBox.h; sourceTree = "<group>"; };
+		84F601801A9C8E3D0077BA85 /* DCFilterCheckBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCFilterCheckBox.m; path = Classes/Views/controls/DCFilterCheckBox.m; sourceTree = "<group>"; };
 		84FAE0E619A645E000DC9FF1 /* NSArray+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+DC.h"; path = "Classes/Helpers/NSArray+DC.h"; sourceTree = "<group>"; };
 		84FAE0E719A645E000DC9FF1 /* NSArray+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+DC.m"; path = "Classes/Helpers/NSArray+DC.m"; sourceTree = "<group>"; };
 		84FAE10719A65FEA00DC9FF1 /* DCTime+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DCTime+DC.h"; path = "Model/Categories/DCTime+DC.h"; sourceTree = "<group>"; };
@@ -585,6 +597,7 @@
 		5DC8C460198658FF00BF5816 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				84F601421A9B82050077BA85 /* EventFilter */,
 				5D38E67F1986703D006F7A59 /* MenuContainer */,
 				5DC8C47719865C8400BF5816 /* SideMenu */,
 				5DC8C4701986592400BF5816 /* Base */,
@@ -850,6 +863,8 @@
 			children = (
 				84A06E2D19ACA41100104876 /* DCFavoriteButton.h */,
 				84A06E2E19ACA41100104876 /* DCFavoriteButton.m */,
+				84F6017F1A9C8E3D0077BA85 /* DCFilterCheckBox.h */,
+				84F601801A9C8E3D0077BA85 /* DCFilterCheckBox.m */,
 			);
 			name = controls;
 			sourceTree = "<group>";
@@ -861,6 +876,19 @@
 				84A06E3219ACBA0600104876 /* DCEventDetailViewController.m */,
 			);
 			name = EventDetail;
+			sourceTree = "<group>";
+		};
+		84F601421A9B82050077BA85 /* EventFilter */ = {
+			isa = PBXGroup;
+			children = (
+				84F601431A9B970B0077BA85 /* DCFilterViewController.h */,
+				84F601441A9B970B0077BA85 /* DCFilterViewController.m */,
+				84F601471A9C87D70077BA85 /* DCEventFilterHeaderCell.h */,
+				84F601481A9C87D70077BA85 /* DCEventFilterHeaderCell.m */,
+				84F6014A1A9C88170077BA85 /* DCEventFilterCell.h */,
+				84F6014B1A9C88170077BA85 /* DCEventFilterCell.m */,
+			);
+			name = EventFilter;
 			sourceTree = "<group>";
 		};
 		FA90B9A419C5894200873865 /* EventBaseCell */ = {
@@ -994,6 +1022,7 @@
 				5DC8C46E198658FF00BF5816 /* MFSideMenuShadow.m in Sources */,
 				5D38E696198692E9006F7A59 /* DCSpeakersViewController.m in Sources */,
 				84A06E2F19ACA41100104876 /* DCFavoriteButton.m in Sources */,
+				84F601451A9B970B0077BA85 /* DCFilterViewController.m in Sources */,
 				84A24FB519C1B254006EF17E /* DCSpeechBaseCell.m in Sources */,
 				74E8381719C061CD000D2BE4 /* UIButton+WebCache.m in Sources */,
 				74E8381619C061CD000D2BE4 /* SDWebImagePrefetcher.m in Sources */,
@@ -1001,6 +1030,7 @@
 				84A24FD319C1F609006EF17E /* DCTimeRange.m in Sources */,
 				84A24FCA19C1F609006EF17E /* DCTrack.m in Sources */,
 				84A24FD019C1F609006EF17E /* DCSpeaker.m in Sources */,
+				84F601811A9C8E3D0077BA85 /* DCFilterCheckBox.m in Sources */,
 				84A24FBE19C1F608006EF17E /* DCLevel.m in Sources */,
 				84A24FC419C1F608006EF17E /* DCProgram.m in Sources */,
 				74E8381219C061CD000D2BE4 /* SDWebImageDecoder.m in Sources */,
@@ -1008,6 +1038,7 @@
 				74E67C7519B6FE9800DF9D71 /* DCPin.m in Sources */,
 				5D6449AD1988ECA400BC1775 /* DCMenuStoryboardHelper.m in Sources */,
 				84FAE0E819A645E000DC9FF1 /* NSArray+DC.m in Sources */,
+				84F601491A9C87D70077BA85 /* DCEventFilterHeaderCell.m in Sources */,
 				840C455519BF419700CC144B /* DCBof+DC.m in Sources */,
 				849D92E419AE2A6600977D67 /* DCDescriptionTextCell.m in Sources */,
 				84A24FC719C1F608006EF17E /* DCTime.m in Sources */,
@@ -1042,6 +1073,7 @@
 				74E8381119C061CD000D2BE4 /* SDWebImageCompat.m in Sources */,
 				849CF82119A6246A00C84675 /* NSDate+DC.m in Sources */,
 				849D92E119AE29D100977D67 /* DCEventDetailEmptyCell.m in Sources */,
+				84F6014C1A9C88170077BA85 /* DCEventFilterCell.m in Sources */,
 				849E851D19AF677A006F43B3 /* DCLevel+DC.m in Sources */,
 				74F159CB19B9DD750033B31F /* DCFavoriteSourceManager.m in Sources */,
 				849EFE1219A4D63500C43E05 /* DCDataProvider.m in Sources */,

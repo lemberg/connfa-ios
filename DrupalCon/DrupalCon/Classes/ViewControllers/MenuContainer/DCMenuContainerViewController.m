@@ -23,10 +23,18 @@
 #import "DCMenuContainerViewController.h"
 #import "MFSideMenu.h"
 #import "DCAppFacade.h"
+
+
 @interface DCMenuContainerViewController ()
+
+@property (nonatomic, strong) NSArray* rightBarButtons;
+
 @end
 
+
+
 @implementation DCMenuContainerViewController
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -76,8 +84,6 @@
     return item;
 }
 
-
-
 - (UIBarButtonItem *)backBarButtonItem {
     return [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back-arrow"]
                                             style:UIBarButtonItemStyleBordered
@@ -98,21 +104,13 @@
     }];
 }
 
-
 -(void) setTitle: (NSString*) title {
     self.navigationItem.title = title;
 }
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void) setRightBarButtons:(NSArray *)rightBarButtons {
+    self.navigationItem.rightBarButtonItems = rightBarButtons;
 }
-*/
+
 
 @end

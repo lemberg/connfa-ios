@@ -110,8 +110,13 @@
     
     if(storyboardControllerID && storyboardControllerID.length) {
         DCBaseViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:storyboardControllerID];
+        NSArray* navigationBarRightItems = nil;
+        
         if ([viewController isKindOfClass:[DCProgramViewController class]]) {
             [(DCProgramViewController*)viewController setEventsStrategy:[DCMenuStoryboardHelper strategyForEventMenuType:menuItem]];
+            
+            UIBarButtonItem* filterButton = [self getFilterBarButton: (DCProgramViewController*)viewController];
+            navigationBarRightItems = @[filterButton];
         }
         
         if(self.presentedController)
@@ -119,10 +124,21 @@
         
         [[DCAppFacade shared].menuContainerViewController.view addSubview:viewController.view];
         [[DCAppFacade shared].menuContainerViewController setTitle:title];
+        [[DCAppFacade shared].menuContainerViewController setRightBarButtons: navigationBarRightItems];
+        
         self.presentedController = viewController;
     }
     
     [[DCAppFacade shared].sideMenuController setMenuState:MFSideMenuStateClosed completion:nil];
+}
+
+- (UIBarButtonItem*) getFilterBarButton:(DCProgramViewController*)aController
+{
+    UIImage *image = [UIImage imageNamed:@"menu-icon"];
+    UIButton *button = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, image.size.width, image.size.height)];
+    [button setBackgroundImage: image forState: UIControlStateNormal];
+    [button addTarget:aController action:@selector(onFilterButtonClick) forControlEvents: UIControlEventTouchUpInside];
+    return [[UIBarButtonItem alloc] initWithCustomView: button];
 }
 
 - (void)viewWillAppear:(BOOL)animated

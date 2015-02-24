@@ -24,6 +24,7 @@
 #import "DCProgramItemsViewController.h"
 #import "DCMainProxy+Additions.h"
 #import "NSDate+DC.h"
+#import "DCFilterViewController.h"
 
 @interface DCProgramViewController ()
 @property (nonatomic, strong) UIPageViewController *pageViewController;
@@ -51,7 +52,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+        
     [self.activityIndicator startAnimating];
+    
     [[DCMainProxy sharedProxy] dataReadyBlock:^(BOOL isDataReady, BOOL isUpdatedFromServer) {
         dispatch_async(dispatch_get_main_queue(), ^{
             _days = [[NSArray alloc] initWithArray:[_eventsStrategy days]];
@@ -66,6 +69,17 @@
             [[DCMainProxy sharedProxy] update];
         });
     }
+}
+
+- (void) onFilterButtonClick
+{
+    UINavigationController *filterController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventFilterviewController"];
+    //[filterController setNavigationBarHidden:YES];
+    
+    [self presentViewController:filterController animated:YES completion:^{
+        //[filterController setNavigationBarHidden:NO animated:YES];
+
+    }];
 }
 
 -(void) addPageController {
