@@ -26,25 +26,30 @@
 #import "NSDate+DC.h"
 #import "DCFilterViewController.h"
 
+
 @interface DCProgramViewController ()
+
 @property (nonatomic, strong) UIPageViewController *pageViewController;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UIButton *nextDayButton;
+@property (weak, nonatomic) IBOutlet UIButton *previousDayButton;
+@property (nonatomic, strong) IBOutlet UILabel *dateLabel;
+
 @property (nonatomic, strong) NSArray *viewControllers;
 @property (nonatomic, strong) NSArray *days;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-@property (weak, nonatomic) IBOutlet UIButton * nextBtn;
-@property (weak, nonatomic) IBOutlet UIButton * prevBtn;
+@property (nonatomic) NSInteger currentDayIndex;
 
-@property (nonatomic) NSInteger currentIndex;
-@property (nonatomic, strong) IBOutlet UILabel *dateLabel;
 @end
 
 @implementation DCProgramViewController
+
+#pragma mark - Lifecycle
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.currentDayIndex = 0;
     }
     return self;
 }
@@ -57,9 +62,10 @@
     
     [[DCMainProxy sharedProxy] dataReadyBlock:^(BOOL isDataReady, BOOL isUpdatedFromServer) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            _days = [[NSArray alloc] initWithArray:[_eventsStrategy days]];
-            self.viewControllers = [self DC_fillViewControllers];
-            [self addPageController];
+            self.days = [[NSArray alloc] initWithArray:[self.eventsStrategy days]];
+            self.viewControllers = [self createViewControllersForDays: self.days];
+            [self updatePageController];
+            [self updateButtonsVisibility];
             [self.activityIndicator stopAnimating];
         });
     }];
@@ -71,101 +77,83 @@
     }
 }
 
-- (void) onFilterButtonClick
+#pragma mark - Private
+
+-(void) updatePageController
 {
-    UINavigationController *filterController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventFilterviewController"];
-    //[filterController setNavigationBarHidden:YES];
-    
-    [self presentViewController:filterController animated:YES completion:^{
-        //[filterController setNavigationBarHidden:NO animated:YES];
+    [self.pageViewController setViewControllers:@[self.viewControllers[self.currentDayIndex]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
 
-    }];
+    [self displayDateForDay: self.currentDayIndex];
 }
 
--(void) addPageController {
-    self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
-    self.pageViewController.dataSource = self;
-    [self.pageViewController setViewControllers:@[self.viewControllers[0]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-    self.pageViewController.delegate = self;
-    // Change the size of page view controller
-    self.pageViewController.view.frame = CGRectMake(0,  35, self.view.frame.size.width, self.view.frame.size.height - (35));
-    [self addChildViewController: _pageViewController];
-    
-    [self.view addSubview: _pageViewController.view];
-    [self.pageViewController didMoveToParentViewController:self];
-    
-    [self displayDateForDay: 0];
-    [self DC_updateButtonsVisibility];
-}
-
--(void) displayDateForDay: (NSInteger) day {
+-(void) displayDateForDay: (NSInteger) day
+{
     NSDate * date = _days[day];
     self.dateLabel.text = [date pageViewDateString];
 }
 
+- (NSArray*)createViewControllersForDays:(NSArray*)aDays
+{
+    NSMutableArray * controllers = [[NSMutableArray alloc] initWithCapacity: aDays.count];
+    
+    for (int i = 0; i < aDays.count; i++)
+    {
+        DCProgramItemsViewController *dayViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgramItemsViewController"];
+        dayViewController.pageIndex = i;
+        dayViewController.eventsStrategy = self.eventsStrategy;
+        [controllers addObject:dayViewController];
+    }
+    
+    return controllers;
+}
+
+- (void)updateButtonsVisibility
+{
+    _previousDayButton.hidden = (self.currentDayIndex == 0 ? YES : NO);
+    _nextDayButton.hidden = (self.currentDayIndex == (_days.count-1) ? YES : NO);
+}
+
+
+
+#pragma mark - User actions
+
+- (void) onFilterButtonClick
+{
+    UINavigationController *filterController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventFilterviewController"];
+    [self presentViewController:filterController animated:YES completion:nil];
+}
 
 -(IBAction) previousDayClicked:(id)sender
 {
-    if(self.currentIndex == 0)
+    if(self.currentDayIndex == 0)
         return;
-    
-    NSMutableArray *arrayOfViewController = [[NSMutableArray alloc] init];
-    
-    for(int i = (int)_days.count-1; i >= 0; i--) {
-        if(i < self.currentIndex) {
-            [arrayOfViewController addObject: self.viewControllers[i]];
-            break;
-        }
-    }
-    self.currentIndex -= 1;
-    [self DC_updateButtonsVisibility];
-    [self displayDateForDay: self.currentIndex];
 
-    [self.pageViewController setViewControllers: arrayOfViewController direction:UIPageViewControllerNavigationDirectionReverse animated:YES completion:NULL];
+    self.currentDayIndex--;
+    
+    [self updateButtonsVisibility];
+    [self displayDateForDay: self.currentDayIndex];
+    [self.pageViewController setViewControllers: @[self.viewControllers[self.currentDayIndex]]
+                                      direction: UIPageViewControllerNavigationDirectionReverse
+                                       animated: YES
+                                     completion: nil];
 }
-
 
 -(IBAction) nextDayClicked:(id)sender
 {
-    if(self.currentIndex >= _days.count-1)
+    if(self.currentDayIndex >= self.days.count-1)
         return;
     
-    NSMutableArray *arrayOfViewController = [[NSMutableArray alloc] init];
-    for(int i = 0; i < _days.count; i++) {
-        if(i > self.currentIndex) {
-            [arrayOfViewController addObject: self.viewControllers[i]];
-            break;
-        }
-
-    }
-    self.currentIndex += 1;
-    [self DC_updateButtonsVisibility];
-
-    [self displayDateForDay: self.currentIndex];
-    [self.pageViewController setViewControllers: arrayOfViewController direction:UIPageViewControllerNavigationDirectionForward animated:YES completion:NULL];
+    self.currentDayIndex++;
+    
+    [self updateButtonsVisibility];
+    [self displayDateForDay: self.currentDayIndex];
+    [self.pageViewController setViewControllers: @[self.viewControllers[self.currentDayIndex]]
+                                      direction: UIPageViewControllerNavigationDirectionForward
+                                       animated: YES
+                                     completion: nil];
 }
 
-- (NSArray*)DC_fillViewControllers
-{
-    NSMutableArray * controllers_ = [[NSMutableArray alloc] initWithCapacity:_days.count];
-    for (int i = 0; i<_days.count; i++)
-    {
-        DCProgramItemsViewController *eventItemsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgramItemsViewController"];
-        eventItemsViewController.pageIndex = i;
-        eventItemsViewController.eventsStrategy = self.eventsStrategy;
-        [controllers_ addObject:eventItemsViewController];
-    }
-    return controllers_;
-}
-
-- (void)DC_updateButtonsVisibility
-{
-    _prevBtn.hidden = (self.currentIndex == 0 ? YES : NO);
-    _nextBtn.hidden = (self.currentIndex == (_days.count-1) ? YES : NO);
-}
-
-#pragma mark page view delegate and datasource
-
+#pragma mark - UIPageViewController delegate and datasource
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
@@ -208,9 +196,21 @@
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed {
     if(completed){
         NSUInteger currentIndex = [[self.pageViewController.viewControllers lastObject] pageIndex];
-        self.currentIndex = currentIndex;
-        [self displayDateForDay: self.currentIndex];
-        [self DC_updateButtonsVisibility];
+        self.currentDayIndex = currentIndex;
+        [self displayDateForDay: self.currentDayIndex];
+        [self updateButtonsVisibility];
+    }
+}
+
+#pragma mark - UIStoryboardSegue delegate
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"EmbeddedDaysPageVC"])
+    {
+        self.pageViewController = [segue destinationViewController];
+        self.pageViewController.dataSource = self;
+        self.pageViewController.delegate = self;
     }
 }
 
