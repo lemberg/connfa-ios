@@ -10,6 +10,14 @@
 #import "DCBaseViewController.h"
 #import "DCEventFilterCell.h"
 
-@interface DCFilterViewController : UITableViewController<DCFilterCheckboxDelegateProtocol>
+@protocol DCFilterViewControllerDelegate <NSObject>
+
+- (void) filterControllerWillDismissWithResult:(NSArray*)selectedLevelsIds tracks:(NSArray*)selectetTracksIds;
+
+@end
+
+
+
+@interface DCFilterViewController : UITableViewController<DCEventFilterCellDelegate>
 
 @end

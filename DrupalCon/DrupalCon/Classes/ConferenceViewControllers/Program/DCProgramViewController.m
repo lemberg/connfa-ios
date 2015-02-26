@@ -24,7 +24,6 @@
 #import "DCProgramItemsViewController.h"
 #import "DCMainProxy+Additions.h"
 #import "NSDate+DC.h"
-#import "DCFilterViewController.h"
 
 
 @interface DCProgramViewController ()
@@ -49,7 +48,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.currentDayIndex = 0;
     }
     return self;
 }
@@ -57,15 +55,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-        
+    
+    self.currentDayIndex = 0;
+    self.eventsStrategy.predicate = nil;
+    
     [self.activityIndicator startAnimating];
     
     [[DCMainProxy sharedProxy] dataReadyBlock:^(BOOL isDataReady, BOOL isUpdatedFromServer) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.days = [[NSArray alloc] initWithArray:[self.eventsStrategy days]];
-            self.viewControllers = [self createViewControllersForDays: self.days];
-            [self updatePageController];
-            [self updateButtonsVisibility];
+            [self reloadData];
             [self.activityIndicator stopAnimating];
         });
     }];
@@ -78,6 +76,15 @@
 }
 
 #pragma mark - Private
+
+- (void) reloadData
+{
+    self.days = [[NSArray alloc] initWithArray:[self.eventsStrategy days]];
+    self.viewControllers = [self createViewControllersForDays: self.days];
+    if (self.days.count)
+        [self updatePageController];
+    [self updateButtonsVisibility];
+}
 
 -(void) updatePageController
 {
@@ -113,14 +120,24 @@
     _nextDayButton.hidden = (self.currentDayIndex == (_days.count-1) ? YES : NO);
 }
 
-
-
 #pragma mark - User actions
 
 - (void) onFilterButtonClick
 {
     UINavigationController *filterController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventFilterviewController"];
     [self presentViewController:filterController animated:YES completion:nil];
+}
+
+- (void) filterControllerWillDismissWithResult:(NSArray *)selectedLevelsIds tracks:(NSArray *)selectetTracksIds
+{
+    if (!selectedLevelsIds && !selectetTracksIds)
+        return;
+    else
+    {
+            // TODO: add predicate making
+        self.eventsStrategy.predicate = nil;//[NSPredicate predicateWithFormat:@"level.levelId IN %@", selectedLevelsIds];
+        [self reloadData];
+    }
 }
 
 -(IBAction) previousDayClicked:(id)sender

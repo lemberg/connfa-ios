@@ -18,6 +18,9 @@
 @property (nonatomic, strong) NSArray* levels;
 @property (nonatomic, strong) NSArray* tracks;
 
+@property (nonatomic, strong) NSMutableArray* selectedLevels;
+@property (nonatomic, strong) NSMutableArray* selectedTracks;
+
 @property (nonatomic, strong) IBOutlet UIBarButtonItem* cancelButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem* doneButton;
 
@@ -34,6 +37,9 @@
     {
         self.navigationItem.leftBarButtonItem = nil;
         self.navigationItem.rightBarButtonItem = nil;
+        
+        self.selectedLevels = [NSMutableArray new];
+        self.selectedTracks = [NSMutableArray new];
     }
     return self;
 }
@@ -200,7 +206,9 @@
     
     FilterCellType cellType = [self getCellType:indexPath.section];
     
-    cell.checkBox.selected = YES;
+    cell.checkBox.selected = NO;
+    cell.checkBox.delegate = cell;
+    cell.delegate = self;
     cell.type = cellType;
     cell.relatedObjectId = [self getCellId:cellType row:indexPath.row];
     cell.title.text = [self getCellTitle:cellType row:indexPath.row];
@@ -218,19 +226,54 @@
 
 #pragma mark - User actions handling
 
-- (void) DCFilterCheckBox:(DCFilterCheckBox *)checkBox didChangedState:(BOOL)isSelected
+- (void) cellCheckBoxDidSelected:(BOOL)aSelected cellType:(FilterCellType)aType relatedObjectId:(NSNumber *)aId
 {
+    NSMutableArray* idArray = nil;
     
+    switch (aType)
+    {
+        case FilterCellTypeLevel:
+            idArray = self.selectedLevels;
+            break;
+            
+        case FilterCellTypeTrack:
+            idArray = self.selectedTracks;
+            break;
+    }
+    
+    NSAssert(idArray != nil, @"incorrect filter type");
+    
+    if (aSelected)
+    {
+        [idArray addObject:aId];
+    }
+    else
+    {
+        [idArray removeObject:aId];
+    }
 }
 
 - (IBAction)onBackButtonClick:(id)sender
 {
+    if ([self.presentingViewController conformsToProtocol:@protocol(DCFilterViewControllerDelegate)])
+    {
+        id delegate = self.presentingViewController;
+        [delegate filterControllerWillDismissWithResult:nil tracks:nil];
+    }
+    
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)onDoneButtonClick:(id)sender
 {
+    if ([self.presentingViewController conformsToProtocol:@protocol(DCFilterViewControllerDelegate)])
+    {
+        id delegate = self.presentingViewController;
+        [delegate filterControllerWillDismissWithResult:self.selectedLevels.count ? self.selectedLevels : nil
+                                                 tracks:self.selectedTracks.count ? self.selectedTracks : nil];
+    }
     
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

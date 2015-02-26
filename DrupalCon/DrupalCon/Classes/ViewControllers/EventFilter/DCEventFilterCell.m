@@ -10,14 +10,16 @@
 
 @implementation DCEventFilterCell
 
-- (void)awakeFromNib {
-    // Initialization code
+- (void)awakeFromNib
+{
+    self.checkBox.delegate = self;
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (void)DCFilterCheckBox:(DCFilterCheckBox*)checkBox didChangedState:(BOOL)isSelected
+{
+    [self.delegate cellCheckBoxDidSelected: isSelected
+                                  cellType: self.type
+                           relatedObjectId: self.relatedObjectId];
 }
 
 @end

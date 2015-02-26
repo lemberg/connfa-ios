@@ -36,6 +36,8 @@
     self = [super init];
     if (self)
     {
+        _predicate = nil;
+        
         _strategy = strategy;
         switch (_strategy)
         {
@@ -54,19 +56,24 @@
     return self;
 }
 
+- (void) dealloc
+{
+    self.predicate = nil;
+}
+
 - (NSArray*)days
 {
-    return [[DCMainProxy sharedProxy] daysForClass:_eventClass];
+    return [[DCMainProxy sharedProxy] daysForClass:_eventClass predicate:self.predicate];
 }
 
 - (NSArray*)eventsForDayNum:(NSInteger)dayNumber
 {
-    return [[DCMainProxy sharedProxy] eventsForDayNum:dayNumber forClass:_eventClass];
+    return [[DCMainProxy sharedProxy] eventsForDayNum:dayNumber forClass:_eventClass predicate:self.predicate];
 }
 
 - (NSArray*)uniqueTimeRangesForDayNum:(NSInteger)dayNumber
 {
-    return [[DCMainProxy sharedProxy] uniqueTimeRangesForDayNum:dayNumber forClass:_eventClass];
+    return [[DCMainProxy sharedProxy] uniqueTimeRangesForDayNum:dayNumber forClass:_eventClass predicate:self.predicate];
 }
 
 @end

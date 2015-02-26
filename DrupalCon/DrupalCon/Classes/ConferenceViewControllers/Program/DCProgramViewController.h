@@ -22,8 +22,9 @@
 
 #import "DCBaseViewController.h"
 #import "DCEventStrategy.h"
+#import "DCFilterViewController.h"
 
-@interface DCProgramViewController : DCBaseViewController<UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+@interface DCProgramViewController : DCBaseViewController<UIPageViewControllerDataSource, UIPageViewControllerDelegate, DCFilterViewControllerDelegate>
 
 @property (nonatomic, strong) DCEventStrategy * eventsStrategy;
 

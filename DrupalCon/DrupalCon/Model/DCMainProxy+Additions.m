@@ -35,6 +35,11 @@
 
 - (NSArray*)daysForClass:(Class)eventClass
 {
+    return [self daysForClass:eventClass predicate:nil];
+}
+
+- (NSArray*)daysForClass:(Class)eventClass predicate:(NSPredicate *)aPredicate
+{
     @try {
         NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass(eventClass) inManagedObjectContext:self.managedObjectContext];
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -43,7 +48,7 @@
         [fetchRequest setPropertiesToFetch:@[@"date"]];
         [fetchRequest setResultType:NSDictionaryResultType];
         [fetchRequest setReturnsDistinctResults:YES];
-        [fetchRequest setPredicate:nil];
+        [fetchRequest setPredicate:aPredicate];
         NSArray *result = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
         if(result && [result count])
         {
@@ -65,6 +70,11 @@
 }
 
 - (NSArray*)eventsForDayNum:(NSInteger)dayNum forClass:(__unsafe_unretained Class)eventClass
+{
+    return [self eventsForDayNum:dayNum forClass:eventClass predicate:nil];
+}
+
+- (NSArray*)eventsForDayNum:(NSInteger)dayNum forClass:(__unsafe_unretained Class)eventClass predicate:(NSPredicate *)aPredicate
 {
     @try {
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -100,6 +110,12 @@
 
 - (NSArray*)uniqueTimeRangesForDayNum:(NSInteger)dayNum forClass:(__unsafe_unretained Class)eventClass
 {
+    return [self uniqueTimeRangesForDayNum:dayNum forClass:eventClass predicate:nil];
+}
+
+
+- (NSArray*)uniqueTimeRangesForDayNum:(NSInteger)dayNum forClass:(__unsafe_unretained Class)eventClass predicate:(NSPredicate *)aPredicate
+{
     @try {
         NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass(eventClass) inManagedObjectContext:self.managedObjectContext];
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
@@ -128,6 +144,11 @@
 }
 
 - (NSArray *)favoriteEvents
+{
+    return [self favoriteEventsWithPredicate:nil];
+}
+
+- (NSArray *)favoriteEventsWithPredicate:(NSPredicate *)aPredicate
 {
     @try {
         NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass([DCEvent class]) inManagedObjectContext:self.managedObjectContext];

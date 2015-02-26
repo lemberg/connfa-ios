@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DCFilterCheckBox.h"
 
+
 #define FilterCellTypeCount 2
 
 typedef enum {
@@ -16,7 +17,16 @@ typedef enum {
     FilterCellTypeTrack
 } FilterCellType;
 
-@interface DCEventFilterCell : UITableViewCell
+
+@protocol DCEventFilterCellDelegate <NSObject>
+
+- (void) cellCheckBoxDidSelected:(BOOL)aSelected cellType:(FilterCellType)aType relatedObjectId:(NSNumber*)aId;
+
+@end
+
+
+
+@interface DCEventFilterCell : UITableViewCell<DCFilterCheckboxDelegateProtocol>
 
 @property (nonatomic, weak) IBOutlet UILabel *title;
 @property (nonatomic, weak) IBOutlet DCFilterCheckBox *checkBox;
@@ -25,4 +35,8 @@ typedef enum {
 @property (nonatomic) FilterCellType type;
 @property (nonatomic, weak) NSNumber* relatedObjectId;
 
+@property (nonatomic, weak) id<DCEventFilterCellDelegate> delegate;
+
 @end
+
+
