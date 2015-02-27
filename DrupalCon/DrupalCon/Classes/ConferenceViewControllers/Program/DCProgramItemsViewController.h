@@ -25,7 +25,7 @@
 
 @interface DCProgramItemsViewController : UIViewController
 
-@property (nonatomic) NSInteger pageIndex;
+@property (nonatomic, strong) NSDate* date;
 
 @property (nonatomic, strong) NSArray* timeslots;
 // timeslot element : dictionary "time slot value" : NSArray of events;

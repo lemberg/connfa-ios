@@ -38,7 +38,7 @@ typedef enum {
 - (instancetype)initWithStrategy:(EDCEventStrategy)strategy;
 
 - (NSArray*)days;
-- (NSArray*)eventsForDayNum:(NSInteger)dayNumber;
-- (NSArray*)uniqueTimeRangesForDayNum:(NSInteger)dayNumber;
+- (NSArray*)eventsForDay:(NSDate*)day;
+- (NSArray*)uniqueTimeRangesForDay:(NSDate*)day;
 
 @end

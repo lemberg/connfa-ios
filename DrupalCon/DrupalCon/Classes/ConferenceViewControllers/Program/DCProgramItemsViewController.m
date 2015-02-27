@@ -68,9 +68,9 @@ static NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
     
     __weak typeof(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        NSArray * events_ = [self.eventsStrategy eventsForDayNum:self.pageIndex];
+        NSArray * events_ = [self.eventsStrategy eventsForDay:self.date];
         NSMutableArray * timeslots_ = [[NSMutableArray alloc] initWithCapacity:events_.count];
-        NSArray * uniqueTimeranges_ = [self.eventsStrategy uniqueTimeRangesForDayNum:self.pageIndex];
+        NSArray * uniqueTimeranges_ = [self.eventsStrategy uniqueTimeRangesForDay:self.date];
         for (DCTimeRange * timerange_ in uniqueTimeranges_)
         {
             NSArray * timeslotEvents_ = [events_ eventsForTimeRange:timerange_];

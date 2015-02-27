@@ -245,22 +245,16 @@
     
     if (aSelected)
     {
-        [idArray addObject:aId];
+        [idArray addObject:aId.stringValue];
     }
     else
     {
-        [idArray removeObject:aId];
+        [idArray removeObject:aId.stringValue];
     }
 }
 
 - (IBAction)onBackButtonClick:(id)sender
 {
-    if ([self.presentingViewController conformsToProtocol:@protocol(DCFilterViewControllerDelegate)])
-    {
-        id delegate = self.presentingViewController;
-        [delegate filterControllerWillDismissWithResult:nil tracks:nil];
-    }
-    
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 

@@ -61,7 +61,7 @@
 -(void)setSelected:(BOOL)selected
 {
     _selected = selected;
-    [self setImage:[UIImage imageNamed:(_selected ? @"star_on" : @"star_off_v2")]];
+    [self setImage:[UIImage imageNamed:(_selected ? @"filter_sessions" : @"filter_sessions_2")]];
 }
 
 @end

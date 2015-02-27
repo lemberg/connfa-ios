@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="q81-Jd-j9t">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
@@ -594,21 +595,21 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mVm-wl-gXo" userLabel="Separator">
-                                            <rect key="frame" x="72" y="55" width="248" height="1"/>
+                                            <rect key="frame" x="61" y="55" width="259" height="1"/>
                                             <color key="backgroundColor" red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="1" id="B6g-Ax-hlb"/>
                                             </constraints>
                                         </view>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_on" translatesAutoresizingMaskIntoConstraints="NO" id="LlB-8T-UD5" customClass="DCFilterCheckBox">
-                                            <rect key="frame" x="20" y="12" width="32" height="32"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="filter_sessions" translatesAutoresizingMaskIntoConstraints="NO" id="LlB-8T-UD5" customClass="DCFilterCheckBox">
+                                            <rect key="frame" x="20" y="18" width="21" height="21"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="32" id="Y8F-Jf-J4U"/>
-                                                <constraint firstAttribute="height" constant="32" id="ZQZ-ft-MDX"/>
+                                                <constraint firstAttribute="width" constant="21" id="Y8F-Jf-J4U"/>
+                                                <constraint firstAttribute="height" constant="21" id="ZQZ-ft-MDX"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Beginner" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r6p-5n-AO8">
-                                            <rect key="frame" x="72" y="16" width="233" height="24"/>
+                                            <rect key="frame" x="61" y="16" width="244" height="24"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
@@ -1615,6 +1616,7 @@
     <resources>
         <image name="avatar_placeholder" width="40" height="40"/>
         <image name="empty_icon" width="168" height="170"/>
+        <image name="filter_sessions" width="21" height="21"/>
         <image name="ic_program_back" width="23" height="23"/>
         <image name="ic_program_clock" width="40" height="40"/>
         <image name="ic_program_coffe" width="40" height="40"/>

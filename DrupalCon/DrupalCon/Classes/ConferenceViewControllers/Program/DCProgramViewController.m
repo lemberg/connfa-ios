@@ -79,10 +79,11 @@
 
 - (void) reloadData
 {
-    self.days = [[NSArray alloc] initWithArray:[self.eventsStrategy days]];
+    self.days = [self.eventsStrategy days];
+    
     self.viewControllers = [self createViewControllersForDays: self.days];
-    if (self.days.count)
-        [self updatePageController];
+
+    [self updatePageController];
     [self updateButtonsVisibility];
 }
 
@@ -103,10 +104,10 @@
 {
     NSMutableArray * controllers = [[NSMutableArray alloc] initWithCapacity: aDays.count];
     
-    for (int i = 0; i < aDays.count; i++)
+    for (NSDate* date in self.days)
     {
         DCProgramItemsViewController *dayViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgramItemsViewController"];
-        dayViewController.pageIndex = i;
+        dayViewController.date = date;
         dayViewController.eventsStrategy = self.eventsStrategy;
         [controllers addObject:dayViewController];
     }
@@ -131,11 +132,29 @@
 - (void) filterControllerWillDismissWithResult:(NSArray *)selectedLevelsIds tracks:(NSArray *)selectetTracksIds
 {
     if (!selectedLevelsIds && !selectetTracksIds)
-        return;
+    {
+        if (self.eventsStrategy.predicate != nil)
+        {
+                // User clicked Done with empty filter, show all events if needed
+            self.eventsStrategy.predicate = nil;
+            [self reloadData];
+        }
+    }
     else
     {
-            // TODO: add predicate making
-        self.eventsStrategy.predicate = nil;//[NSPredicate predicateWithFormat:@"level.levelId IN %@", selectedLevelsIds];
+            // User has set Filter
+        NSPredicate* levelPredicate = selectedLevelsIds ? [NSPredicate predicateWithFormat:@"level.levelId IN %@",selectedLevelsIds] : nil;
+        NSPredicate* trackPredicate = selectetTracksIds ? [NSPredicate predicateWithFormat:@"ANY tracks.trackId IN %@",selectetTracksIds] : nil;
+
+        NSPredicate* mergedPredicate;
+        
+        if (levelPredicate && trackPredicate)
+            mergedPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[levelPredicate,trackPredicate]];
+        else
+            mergedPredicate = levelPredicate ? levelPredicate : trackPredicate;
+        
+        self.eventsStrategy.predicate = mergedPredicate;
+        
         [self reloadData];
     }
 }
@@ -174,7 +193,7 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
-     NSUInteger index = ((DCProgramItemsViewController*) viewController).pageIndex;
+     NSUInteger index = [self.days indexOfObject: ((DCProgramItemsViewController*) viewController).date];
     
     if ((index == 0) || (index == NSNotFound)) {
         return nil;
@@ -186,8 +205,7 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
-    NSUInteger index = ((DCProgramItemsViewController*) viewController).pageIndex;
-    
+     NSUInteger index = [self.days indexOfObject: ((DCProgramItemsViewController*) viewController).date];
     if (index == NSNotFound) {
         return nil;
     }
@@ -212,7 +230,7 @@
 
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed {
     if(completed){
-        NSUInteger currentIndex = [[self.pageViewController.viewControllers lastObject] pageIndex];
+        NSUInteger currentIndex = [self.days indexOfObject:[(DCProgramItemsViewController*)[self.pageViewController.viewControllers lastObject] date]];
         self.currentDayIndex = currentIndex;
         [self displayDateForDay: self.currentDayIndex];
         [self updateButtonsVisibility];

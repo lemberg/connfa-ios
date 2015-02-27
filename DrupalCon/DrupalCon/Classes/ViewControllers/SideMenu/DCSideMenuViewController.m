@@ -134,11 +134,8 @@
 
 - (UIBarButtonItem*) getFilterBarButton:(DCProgramViewController*)aController
 {
-    UIImage *image = [UIImage imageNamed:@"menu-icon"];
-    UIButton *button = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, image.size.width, image.size.height)];
-    [button setBackgroundImage: image forState: UIControlStateNormal];
-    [button addTarget:aController action:@selector(onFilterButtonClick) forControlEvents: UIControlEventTouchUpInside];
-    return [[UIBarButtonItem alloc] initWithCustomView: button];
+    UIBarButtonItem* button = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStylePlain target:aController action:@selector(onFilterButtonClick)];
+    return button;
 }
 
 - (void)viewWillAppear:(BOOL)animated

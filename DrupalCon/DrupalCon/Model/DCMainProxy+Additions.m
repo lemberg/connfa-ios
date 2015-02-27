@@ -48,6 +48,7 @@
         [fetchRequest setPropertiesToFetch:@[@"date"]];
         [fetchRequest setResultType:NSDictionaryResultType];
         [fetchRequest setReturnsDistinctResults:YES];
+        
         [fetchRequest setPredicate:aPredicate];
         NSArray *result = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
         if(result && [result count])
@@ -69,19 +70,23 @@
     return nil;
 }
 
-- (NSArray*)eventsForDayNum:(NSInteger)dayNum forClass:(__unsafe_unretained Class)eventClass
+- (NSArray*)eventsForDay:(NSDate*)day forClass:(__unsafe_unretained Class)eventClass
 {
-    return [self eventsForDayNum:dayNum forClass:eventClass predicate:nil];
+    return [self eventsForDay:day forClass:eventClass predicate:nil];
 }
 
-- (NSArray*)eventsForDayNum:(NSInteger)dayNum forClass:(__unsafe_unretained Class)eventClass predicate:(NSPredicate *)aPredicate
+- (NSArray*)eventsForDay:(NSDate*)day forClass:(__unsafe_unretained Class)eventClass predicate:(NSPredicate *)aPredicate
 {
     @try {
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         NSEntityDescription *entity = [NSEntityDescription entityForName:NSStringFromClass(eventClass) inManagedObjectContext:self.managedObjectContext];
         [fetchRequest setEntity:entity];
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"date = %@", [[self daysForClass:eventClass] objectAtIndex:dayNum]];
-        [fetchRequest setPredicate:predicate];
+        
+        NSPredicate *datePredicate = [NSPredicate predicateWithFormat:@"date = %@", day];
+        NSPredicate *mergedPredicate = aPredicate ? [NSCompoundPredicate andPredicateWithSubpredicates:@[datePredicate, aPredicate]] : datePredicate;
+            
+        [fetchRequest setPredicate:mergedPredicate];
+        
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"eventID"
                                                                        ascending:YES];
         [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
@@ -108,21 +113,24 @@
     return nil;
 }
 
-- (NSArray*)uniqueTimeRangesForDayNum:(NSInteger)dayNum forClass:(__unsafe_unretained Class)eventClass
+- (NSArray*)uniqueTimeRangesForDay:(NSDate*)day forClass:(__unsafe_unretained Class)eventClass
 {
-    return [self uniqueTimeRangesForDayNum:dayNum forClass:eventClass predicate:nil];
+    return [self uniqueTimeRangesForDay:day forClass:eventClass predicate:nil];
 }
 
 
-- (NSArray*)uniqueTimeRangesForDayNum:(NSInteger)dayNum forClass:(__unsafe_unretained Class)eventClass predicate:(NSPredicate *)aPredicate
+- (NSArray*)uniqueTimeRangesForDay:(NSDate*)day forClass:(__unsafe_unretained Class)eventClass predicate:(NSPredicate *)aPredicate
 {
     @try {
         NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass(eventClass) inManagedObjectContext:self.managedObjectContext];
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         [fetchRequest setEntity:entityDescription];
         [fetchRequest setReturnsObjectsAsFaults:NO];
-        NSPredicate * predicate = [NSPredicate predicateWithFormat:@"date = %@", [[self daysForClass:eventClass] objectAtIndex:dayNum]];
-        [fetchRequest setPredicate:predicate];
+        
+        NSPredicate * datePredicate = [NSPredicate predicateWithFormat:@"date = %@", day];
+        NSPredicate *mergedPredicate = aPredicate ? [NSCompoundPredicate andPredicateWithSubpredicates:@[datePredicate, aPredicate]] : datePredicate;
+        [fetchRequest setPredicate:mergedPredicate];
+        
         NSArray *result = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
         if(result && [result count])
         {

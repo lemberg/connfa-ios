@@ -28,10 +28,10 @@
 
 - (NSArray*)daysForClass:(Class)eventClass;
 - (NSArray*)daysForClass:(Class)eventClass predicate:(NSPredicate*)aPredicate;
-- (NSArray*)eventsForDayNum:(NSInteger)dayNum forClass:(Class)eventClass;
-- (NSArray*)eventsForDayNum:(NSInteger)dayNum forClass:(Class)eventClass predicate:(NSPredicate*)aPredicate;
-- (NSArray*)uniqueTimeRangesForDayNum:(NSInteger)dayNum forClass:(Class)eventClass;
-- (NSArray*)uniqueTimeRangesForDayNum:(NSInteger)dayNum forClass:(Class)eventClass predicate:(NSPredicate*)aPredicate;
+- (NSArray*)eventsForDay:(NSDate*)day forClass:(Class)eventClass;
+- (NSArray*)eventsForDay:(NSDate*)day forClass:(Class)eventClass predicate:(NSPredicate*)aPredicate;
+- (NSArray*)uniqueTimeRangesForDay:(NSDate*)day forClass:(Class)eventClass;
+- (NSArray*)uniqueTimeRangesForDay:(NSDate*)day forClass:(Class)eventClass predicate:(NSPredicate*)aPredicate;
 - (NSArray *)favoriteEvents;
 - (NSArray *)favoriteEventsWithPredicate:(NSPredicate*)aPredicate;
 

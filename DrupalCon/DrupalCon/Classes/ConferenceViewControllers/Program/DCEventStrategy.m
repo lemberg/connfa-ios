@@ -66,14 +66,14 @@
     return [[DCMainProxy sharedProxy] daysForClass:_eventClass predicate:self.predicate];
 }
 
-- (NSArray*)eventsForDayNum:(NSInteger)dayNumber
+- (NSArray*)eventsForDay:(NSDate*)day
 {
-    return [[DCMainProxy sharedProxy] eventsForDayNum:dayNumber forClass:_eventClass predicate:self.predicate];
+    return [[DCMainProxy sharedProxy] eventsForDay:day forClass:_eventClass predicate:self.predicate];
 }
 
-- (NSArray*)uniqueTimeRangesForDayNum:(NSInteger)dayNumber
+- (NSArray*)uniqueTimeRangesForDay:(NSDate*)day
 {
-    return [[DCMainProxy sharedProxy] uniqueTimeRangesForDayNum:dayNumber forClass:_eventClass predicate:self.predicate];
+    return [[DCMainProxy sharedProxy] uniqueTimeRangesForDay:day forClass:_eventClass predicate:self.predicate];
 }
 
 @end
