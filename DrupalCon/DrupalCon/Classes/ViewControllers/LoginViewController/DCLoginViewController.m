@@ -23,7 +23,6 @@
 #import "DCLoginViewController.h"
 #import "DCSideMenuViewController.h"
 #import "MFSideMenu.h"
-#import "DCMenuContainerViewController.h"
 #import "DCAppFacade.h"
 #import "DCFavoritesViewController.h"
 
@@ -89,35 +88,9 @@
     [self loginButtonCLicked:nil];
 }
 
--(IBAction) loginButtonCLicked:(id)sender {
-    DCSideMenuViewController *sideMenuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SideMenuViewController"];
-    
-    UINavigationController *containerController = [self menuNavigationController];
-    MFSideMenuContainerViewController *container = [MFSideMenuContainerViewController
-                                                    containerWithCenterViewController:containerController
-                                                    leftMenuViewController: sideMenuViewController
-                                                    rightMenuViewController: nil];
-    
-    [DCAppFacade shared].sideMenuController = container;
-    UINavigationController *navigationController = self.navigationController;
-    [navigationController pushViewController:container  animated: (sender? YES:NO)];
-}
-
-- (UINavigationController *)menuNavigationController {
-    return [[UINavigationController alloc]
-            initWithRootViewController:[self containerController]];
-}
-- (void)openEventFromFavoriteController:(DCEvent *)event
+-(IBAction) loginButtonCLicked:(id)sender
 {
-    [self loginButtonCLicked:nil];
-    [(DCSideMenuViewController *)[DCAppFacade shared].sideMenuController.leftMenuViewController openEventFromFavorite:event];
-    
-}
-- (DCMenuContainerViewController *)containerController {
-    DCMenuContainerViewController *container = [self.storyboard instantiateViewControllerWithIdentifier: @"SideMenuContainer"];
-    
-    [DCAppFacade shared].menuContainerViewController = container;
-    return container;
+    [[DCAppFacade shared].mainNavigationController goToSideMenuContainer: sender];
 }
 
 #pragma mark text fields delegate

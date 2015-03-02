@@ -32,4 +32,6 @@ typedef enum {
 
 @property (nonatomic) EBaseViewControllerNatigatorBarStyle navigatorBarStyle;
 
+- (void) arrangeNavigationBar;
+
 @end

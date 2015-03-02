@@ -36,17 +36,19 @@
 #define kMenuItemIcon               @"MenuItemIcon"
 #define kMenuItemControllerId       @"MenuItemControllerId"
 
+
 @interface DCSideMenuViewController ()
 
 @property (nonatomic, strong) NSArray *arrayOfCaptions;
 
-// This stores the view controller instance which is placed on the menu container
-@property (nonatomic, strong) DCBaseViewController *presentedController;
 @property (nonatomic, strong) DCEvent *event;
 
 @end
 
+
 @implementation DCSideMenuViewController
+
+#pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
@@ -100,42 +102,7 @@
                              ];
     
     //our first menu item is Program, this is actually the screen that we should see right after the login page, thats why lets just add it on top as if the user alerady selected it
-    [self placeViewControllerAssociatedWithMenuItem:DCMENU_PROGRAM_ITEM];
-}
-
-- (void)placeViewControllerAssociatedWithMenuItem:(DCMenuSection)menuItem {
-    NSDictionary *itemDict           = self.arrayOfCaptions[menuItem];
-    NSString *storyboardControllerID = itemDict[kMenuItemControllerId];
-    NSString *title                  = itemDict[kMenuItemTitle];
-    
-    if(storyboardControllerID && storyboardControllerID.length) {
-        DCBaseViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:storyboardControllerID];
-        NSArray* navigationBarRightItems = nil;
-        
-        if ([viewController isKindOfClass:[DCProgramViewController class]]) {
-            [(DCProgramViewController*)viewController setEventsStrategy:[DCMenuStoryboardHelper strategyForEventMenuType:menuItem]];
-            
-            UIBarButtonItem* filterButton = [self getFilterBarButton: (DCProgramViewController*)viewController];
-            navigationBarRightItems = @[filterButton];
-        }
-        
-        if(self.presentedController)
-            [self.presentedController.view removeFromSuperview];
-        
-        [[DCAppFacade shared].menuContainerViewController.view addSubview:viewController.view];
-        [[DCAppFacade shared].menuContainerViewController setTitle:title];
-        [[DCAppFacade shared].menuContainerViewController setRightBarButtons: navigationBarRightItems];
-        
-        self.presentedController = viewController;
-    }
-    
-    [[DCAppFacade shared].sideMenuController setMenuState:MFSideMenuStateClosed completion:nil];
-}
-
-- (UIBarButtonItem*) getFilterBarButton:(DCProgramViewController*)aController
-{
-    UIBarButtonItem* button = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStylePlain target:aController action:@selector(onFilterButtonClick)];
-    return button;
+    [self showViewControllerAssociatedWithMenuItem:DCMENU_PROGRAM_ITEM];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -143,18 +110,69 @@
     [super viewWillAppear:animated];
     
     if (self.event) {
-        [self placeViewControllerAssociatedWithMenuItem:DCMENU_MYSCHEDULE_ITEM];
-        if ([self.presentedController isMemberOfClass:[DCFavoritesViewController class]]) {
-            [(DCFavoritesViewController *)self.presentedController openEvent:self.event];
+        [self showViewControllerAssociatedWithMenuItem:DCMENU_MYSCHEDULE_ITEM];
+        if ([self.sideMenuContainer.centerViewController isMemberOfClass:[DCFavoritesViewController class]]) {
+            [(DCFavoritesViewController *)self.sideMenuContainer.centerViewController openEvent:self.event];
         }
         self.event = nil;
     }
+}
+
+#pragma mark - Private
+
+- (void) showViewControllerAssociatedWithMenuItem:(DCMenuSection)menuItem
+{
+    NSString *storyboardControllerID = self.arrayOfCaptions[menuItem][kMenuItemControllerId];
+    NSAssert(storyboardControllerID.length, @"No Storyboard ID for Menu item view controller");
+    
+    DCBaseViewController* rootMenuVC = [self getViewController:menuItem];
+    UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController: rootMenuVC];
+    [self arrangeNavigationBarForController: rootMenuVC menuItem:menuItem];
+    
+    self.sideMenuContainer.centerViewController = navigationController;
+    [self.sideMenuContainer setMenuState:MFSideMenuStateClosed completion:nil];
+}
+
+- (void) arrangeNavigationBarForController:(DCBaseViewController*)aController menuItem:(DCMenuSection)menuItem
+{
+        // add proper Title
+    NSString *title = self.arrayOfCaptions[menuItem][kMenuItemTitle];
+    aController.navigationItem.title = title;
+    
+        // add left Menu button to all Controllers
+    UIImage *image = [UIImage imageNamed:@"menu-icon"];
+    UIButton *button = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, image.size.width, image.size.height)];
+    [button setBackgroundImage: image forState: UIControlStateNormal];
+    [button addTarget: self action:@selector(leftSideMenuButtonPressed:) forControlEvents: UIControlEventTouchUpInside];
+    aController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView: button];
 }
 
 - (void)openEventFromFavorite:(DCEvent *)event
 {
     self.event = event;
 }
+
+#pragma mark - User actions
+
+- (void)leftSideMenuButtonPressed:(id)sender
+{
+    [self.sideMenuContainer toggleLeftSideMenuCompletion:nil];
+}
+
+- (DCBaseViewController*) getViewController:(DCMenuSection)menuItem
+{
+    NSString *storyboardId = self.arrayOfCaptions[menuItem][kMenuItemControllerId];
+    DCBaseViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier: storyboardId];
+
+    if ([viewController isKindOfClass:[DCProgramViewController class]])
+    {
+        [(DCProgramViewController*)viewController setEventsStrategy:[DCMenuStoryboardHelper strategyForEventMenuType:menuItem]];
+    }
+
+    return viewController;
+}
+
+#pragma mark - UITableView delegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cellIdentifier = @"SideMenuCellIdentifier";
@@ -178,7 +196,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self placeViewControllerAssociatedWithMenuItem:(DCMenuSection)indexPath.row];
+    [self showViewControllerAssociatedWithMenuItem:(DCMenuSection)indexPath.row];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 

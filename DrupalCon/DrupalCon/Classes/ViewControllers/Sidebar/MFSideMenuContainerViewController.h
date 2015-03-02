@@ -32,7 +32,7 @@ typedef enum {
 } MFSideMenuStateEvent;
 
 
-@interface MFSideMenuContainerViewController : DCBaseViewController <UIGestureRecognizerDelegate>
+@interface MFSideMenuContainerViewController : UIViewController <UIGestureRecognizerDelegate>
 
 + (MFSideMenuContainerViewController *)containerWithCenterViewController:(id)centerViewController
                                                   leftMenuViewController:(id)leftMenuViewController

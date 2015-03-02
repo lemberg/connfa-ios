@@ -21,13 +21,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DCMenuContainerViewController.h"
-#import "MFSideMenu.h"
+#import "DCMainNavigationController.h"
 
 @interface DCAppFacade : NSObject
 
-@property (nonatomic, weak) DCMenuContainerViewController *menuContainerViewController;
-@property (nonatomic, weak) MFSideMenuContainerViewController *sideMenuController;
+
+@property (nonatomic, weak) DCMainNavigationController *mainNavigationController;
+
 +(instancetype)shared;
 
 @end

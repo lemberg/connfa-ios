@@ -23,6 +23,9 @@
 #import <UIKit/UIKit.h>
 #import "DCBaseViewController.h"
 
+
 @interface DCLoginViewController : UIViewController
+
 - (void)openEventFromFavoriteController:(DCEvent *)event;
+
 @end

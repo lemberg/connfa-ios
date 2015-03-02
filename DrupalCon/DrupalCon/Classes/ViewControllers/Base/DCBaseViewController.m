@@ -24,49 +24,30 @@
 #import "UIConstants.h"
 
 @interface DCBaseViewController ()
-
 @end
+
 
 @implementation DCBaseViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 -(void)viewDidLoad
 {
     [super viewDidLoad];
     
+    [self arrangeNavigationBar];
 }
 
--(void) viewWillAppear:(BOOL)animated {
-    [super viewWillAppear: animated];
-
+- (void) arrangeNavigationBar
+{
     if (self.navigatorBarStyle == EBaseViewControllerNatigatorBarStyleNormal)
     {
         self.navigationController.navigationBar.barTintColor = NAV_BAR_COLOR;
         NSDictionary *textAttributes = NAV_BAR_TITLE_ATTRIBUTES;
         
-        
         self.navigationController.navigationBar.titleTextAttributes = textAttributes;
         self.navigationController.navigationBar.translucent = NO;
-        [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-        UIBarButtonItem * backBtn = [[UIBarButtonItem alloc] initWithTitle:@"Back"
-                                                                     style:UIBarButtonItemStylePlain
-                                                                    target:self
-                                                                    action:@selector(onBack)];
-        self.navigationItem.backBarButtonItem = backBtn;
         
-        if (self.navigationController.viewControllers.count != 1)
-        // for all root view controllers 'topItem' is Title not Back Button
-        {
-            self.navigationController.navigationBar.topItem.title = @"Back";
-        }
+        [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     }
     else if (self.navigatorBarStyle == EBaseViewControllerNatigatorBarStyleTransparrent)
     {
@@ -75,19 +56,26 @@
                                                       forBarMetrics:UIBarMetricsDefault];
         self.navigationController.navigationBar.shadowImage = [UIImage new];
         self.navigationController.navigationBar.translucent = YES;
-
+        
     }
-    [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init]
-                                      forBarPosition:UIBarPositionAny
-                                          barMetrics:UIBarMetricsDefault];
     
-    [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
-
+        // hide annoying 1 px stripe between NavigationBar and controller View
+    UIImageView* stripeUnderNavigationBar = [self findHairlineImageViewUnder:self.navigationController.navigationBar];
+    stripeUnderNavigationBar.hidden = YES;
 }
 
-- (void)onBack
+- (UIImageView *)findHairlineImageViewUnder:(UIView *)view
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    if ([view isKindOfClass:UIImageView.class] && view.bounds.size.height <= 1.0) {
+        return (UIImageView *)view;
+    }
+    for (UIView *subview in view.subviews) {
+        UIImageView *imageView = [self findHairlineImageViewUnder:subview];
+        if (imageView) {
+            return imageView;
+        }
+    }
+    return nil;
 }
 
 @end

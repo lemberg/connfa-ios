@@ -28,6 +28,5 @@
 
 @property (nonatomic, strong) DCEventStrategy * eventsStrategy;
 
-- (void) onFilterButtonClick;
 
 @end

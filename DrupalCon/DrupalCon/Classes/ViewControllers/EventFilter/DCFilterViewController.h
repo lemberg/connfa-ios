@@ -20,4 +20,6 @@
 
 @interface DCFilterViewController : UITableViewController<DCEventFilterCellDelegate>
 
+@property(nonatomic, weak) id<DCFilterViewControllerDelegate> delegate;
+
 @end

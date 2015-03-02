@@ -260,10 +260,9 @@
 
 - (IBAction)onDoneButtonClick:(id)sender
 {
-    if ([self.presentingViewController conformsToProtocol:@protocol(DCFilterViewControllerDelegate)])
+    if (self.delegate)
     {
-        id delegate = self.presentingViewController;
-        [delegate filterControllerWillDismissWithResult:self.selectedLevels.count ? self.selectedLevels : nil
+        [self.delegate filterControllerWillDismissWithResult:self.selectedLevels.count ? self.selectedLevels : nil
                                                  tracks:self.selectedTracks.count ? self.selectedTracks : nil];
     }
     

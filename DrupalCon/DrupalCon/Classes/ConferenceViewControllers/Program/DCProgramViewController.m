@@ -25,7 +25,6 @@
 #import "DCMainProxy+Additions.h"
 #import "NSDate+DC.h"
 
-
 @interface DCProgramViewController ()
 
 @property (nonatomic, strong) UIPageViewController *pageViewController;
@@ -56,6 +55,8 @@
 {
     [super viewDidLoad];
     
+    [self arrangeNavigationBar];
+    
     self.currentDayIndex = 0;
     self.eventsStrategy.predicate = nil;
     
@@ -76,6 +77,14 @@
 }
 
 #pragma mark - Private
+
+- (void) arrangeNavigationBar
+{
+    [super arrangeNavigationBar];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStylePlain target:self action:@selector(onFilterButtonClick)];
+    self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
+}
 
 - (void) reloadData
 {
@@ -126,6 +135,7 @@
 - (void) onFilterButtonClick
 {
     UINavigationController *filterController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventFilterviewController"];
+    [(DCFilterViewController*)filterController.viewControllers[0] setDelegate:self];
     [self presentViewController:filterController animated:YES completion:nil];
 }
 
@@ -215,17 +225,6 @@
         return nil;
     }
     return self.viewControllers[index];
-}
-
-- (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
-{
-    return _days.count;
-}
-
-- (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController
-{
-    return 0;
-
 }
 
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed {
