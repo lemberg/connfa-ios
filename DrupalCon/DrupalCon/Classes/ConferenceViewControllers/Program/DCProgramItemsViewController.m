@@ -41,6 +41,8 @@
 #import "NSArray+DC.h"
 #import "DCLabel.h"
 #import "DCEventBaseCell.h"
+#import "DCLimitedNavigationController.h"
+#import "DCAppFacade.h"
 
 @interface DCProgramItemsViewController ()
 
@@ -109,7 +111,7 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
     
     NSString *cellIdCoffeBreak = @"ProgramCellIdentifierCoffeBreak";
     NSString *cellIdLunch = @"ProgramCellIdentifierLunch";
-    DCEvent * event = [self DC_eventForIndexPath:indexPath];
+    DCEvent * event = [self eventForIndexPath:indexPath];
     UITableViewCell *cell;
     
     switch ([event getTypeID]) {
@@ -177,7 +179,7 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
 
 - (BOOL)isEventDetailEmpty:(DCEvent *)event
 {
-    NSString *speakers = [self DC_speakersTextForSpeakerNames:[event speakersNames]];
+    NSString *speakers = [self speakersTextForSpeakerNames:[event speakersNames]];
     NSString *level = event.level.name;
     NSString *track = [[event.tracks allObjects].firstObject name];
     if ([event isMemberOfClass:[DCBof class]]) return ![event.place length];
@@ -186,7 +188,7 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
 
 - (void)updateCell:(DCEventBaseCell *)cell witEvent:(DCEvent *)event
 {
-    NSString *speakers = [self DC_speakersTextForSpeakerNames:[event speakersNames]];
+    NSString *speakers = [self speakersTextForSpeakerNames:[event speakersNames]];
     NSString *level = event.level.name;
     NSString *track = [[event.tracks allObjects].firstObject name];
     NSString *title = event.name;
@@ -238,7 +240,7 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
 
 - (void)updateFavoriteItemsInIndexPath:(NSIndexPath *)anIndexPath
                              withValue:(BOOL)isFavorite {
-    DCEvent * event = [self DC_eventForIndexPath:anIndexPath];
+    DCEvent * event = [self eventForIndexPath:anIndexPath];
     event.favorite = [NSNumber numberWithBool:isFavorite];
     if (isFavorite) {
         [[DCMainProxy sharedProxy]
@@ -316,7 +318,7 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    DCEvent *event = [self DC_eventForIndexPath:indexPath];
+    DCEvent *event = [self eventForIndexPath:indexPath];
     
     switch ([event getTypeID]) {
         case DC_EVENT_24h:
@@ -348,19 +350,21 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
 
     if(![self headerNeededInSection:indexPath.section])
         return;
-    DCEvent * event = [self DC_eventForIndexPath:indexPath];
+    
+    DCEvent * event = [self eventForIndexPath:indexPath];
     if ([self isClickEnableForEvent:event]) {
         return;
     }
 
     DCEventDetailViewController * detailController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
-    [detailController didCloseWithCallback:^{
+    [detailController setEvent:event];
+    
+    DCLimitedNavigationController * navContainer = [[DCLimitedNavigationController alloc] initWithRootViewController:detailController completion:^{
         [self.tablewView reloadData];
     }];
-    [detailController setEvent:event];
-    UINavigationController * navContainer = [[UINavigationController alloc] initWithRootViewController:detailController];
     [navContainer setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-    [[(AppDelegate*)[[UIApplication sharedApplication] delegate] window].rootViewController presentViewController:navContainer animated:YES completion:nil];
+    
+    [[DCAppFacade shared].mainNavigationController presentViewController: navContainer animated:YES completion:nil];
 }
 
 - (BOOL)isClickEnableForEvent:(DCEvent *)event
@@ -373,12 +377,12 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
 
 #pragma mark - private
 
-- (DCEvent*)DC_eventForIndexPath:(NSIndexPath *)indexPath
+- (DCEvent*)eventForIndexPath:(NSIndexPath *)indexPath
 {
     return [[_timeslots[indexPath.section] objectForKey:kDCTimeslotEventKEY] objectAtIndex:indexPath.row];
 }
 
-- (NSString*)DC_speakersTextForSpeakerNames:(NSArray*)speakerNames
+- (NSString*)speakersTextForSpeakerNames:(NSArray*)speakerNames
 {
     NSString * resultStr = @"";
     if (speakerNames.count == 1)

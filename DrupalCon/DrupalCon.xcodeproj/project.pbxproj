@@ -72,7 +72,6 @@
 		849CF80419A5EFEC00C84675 /* DCMainProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 849CF80319A5EFEC00C84675 /* DCMainProxy.m */; };
 		849CF82119A6246A00C84675 /* NSDate+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 849CF82019A6246A00C84675 /* NSDate+DC.m */; };
 		849CF82419A62F8600C84675 /* DCMainProxy+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 849CF82319A62F8600C84675 /* DCMainProxy+Additions.m */; };
-		849D92C219ADCCDD00977D67 /* DCNavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849D92C119ADCCDD00977D67 /* DCNavViewController.m */; };
 		849D92C519ADEA8700977D67 /* DCSpeaker+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 849D92C419ADEA8700977D67 /* DCSpeaker+DC.m */; };
 		849D92C819ADF31D00977D67 /* UIImageView+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 849D92C719ADF31D00977D67 /* UIImageView+DC.m */; };
 		849D92CB19ADF98600977D67 /* DCSpeakerHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 849D92CA19ADF98600977D67 /* DCSpeakerHeaderCell.m */; };
@@ -106,6 +105,7 @@
 		84A24FD319C1F609006EF17E /* DCTimeRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A24FD219C1F609006EF17E /* DCTimeRange.m */; };
 		84A24FD619C1F609006EF17E /* DCType.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A24FD519C1F609006EF17E /* DCType.m */; };
 		84ABE8F519BEEB8F0019D5DC /* DCEventStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ABE8F419BEEB8F0019D5DC /* DCEventStrategy.m */; };
+		84D1CB521AA5FE5A00EEF33A /* DCLimitedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D1CB511AA5FE5A00EEF33A /* DCLimitedNavigationController.m */; };
 		84DCDB291AA0BB8D00BA0097 /* DCMainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DCDB281AA0BB8D00BA0097 /* DCMainNavigationController.m */; };
 		84F601451A9B970B0077BA85 /* DCFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F601441A9B970B0077BA85 /* DCFilterViewController.m */; };
 		84F601491A9C87D70077BA85 /* DCEventFilterHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F601481A9C87D70077BA85 /* DCEventFilterHeaderCell.m */; };
@@ -243,8 +243,6 @@
 		849CF82019A6246A00C84675 /* NSDate+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDate+DC.m"; path = "Classes/Helpers/NSDate+DC.m"; sourceTree = "<group>"; };
 		849CF82219A62F8600C84675 /* DCMainProxy+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DCMainProxy+Additions.h"; path = "Model/DCMainProxy+Additions.h"; sourceTree = "<group>"; };
 		849CF82319A62F8600C84675 /* DCMainProxy+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DCMainProxy+Additions.m"; path = "Model/DCMainProxy+Additions.m"; sourceTree = "<group>"; };
-		849D92C019ADCCDD00977D67 /* DCNavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCNavViewController.h; sourceTree = "<group>"; };
-		849D92C119ADCCDD00977D67 /* DCNavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCNavViewController.m; sourceTree = "<group>"; };
 		849D92C319ADEA8700977D67 /* DCSpeaker+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DCSpeaker+DC.h"; path = "Model/Categories/DCSpeaker+DC.h"; sourceTree = "<group>"; };
 		849D92C419ADEA8700977D67 /* DCSpeaker+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DCSpeaker+DC.m"; path = "Model/Categories/DCSpeaker+DC.m"; sourceTree = "<group>"; };
 		849D92C619ADF31D00977D67 /* UIImageView+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImageView+DC.h"; path = "Classes/Helpers/UIImageView+DC.h"; sourceTree = "<group>"; };
@@ -309,6 +307,8 @@
 		84A24FD519C1F609006EF17E /* DCType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCType.m; path = Model/DCType.m; sourceTree = "<group>"; };
 		84ABE8F319BEEB8F0019D5DC /* DCEventStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCEventStrategy.h; sourceTree = "<group>"; };
 		84ABE8F419BEEB8F0019D5DC /* DCEventStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCEventStrategy.m; sourceTree = "<group>"; };
+		84D1CB501AA5FE5A00EEF33A /* DCLimitedNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCLimitedNavigationController.h; sourceTree = "<group>"; };
+		84D1CB511AA5FE5A00EEF33A /* DCLimitedNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCLimitedNavigationController.m; sourceTree = "<group>"; };
 		84DCDB271AA0BB8D00BA0097 /* DCMainNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCMainNavigationController.h; path = MainNavigation/DCMainNavigationController.h; sourceTree = "<group>"; };
 		84DCDB281AA0BB8D00BA0097 /* DCMainNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCMainNavigationController.m; path = MainNavigation/DCMainNavigationController.m; sourceTree = "<group>"; };
 		84F601431A9B970B0077BA85 /* DCFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCFilterViewController.h; path = EventFilter/DCFilterViewController.h; sourceTree = "<group>"; };
@@ -627,10 +627,10 @@
 		5DC8C4701986592400BF5816 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				84D1CB501AA5FE5A00EEF33A /* DCLimitedNavigationController.h */,
+				84D1CB511AA5FE5A00EEF33A /* DCLimitedNavigationController.m */,
 				5DC8C4711986594400BF5816 /* DCBaseViewController.h */,
 				5DC8C4721986594400BF5816 /* DCBaseViewController.m */,
-				849D92C019ADCCDD00977D67 /* DCNavViewController.h */,
-				849D92C119ADCCDD00977D67 /* DCNavViewController.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -1048,6 +1048,7 @@
 				5D6449CD19893BC300BC1775 /* DCSpeechOfDayCell.m in Sources */,
 				5DC8C421198656DB00BF5816 /* main.m in Sources */,
 				5DC8C47A19865C8400BF5816 /* DCSideMenuViewController.m in Sources */,
+				84D1CB521AA5FE5A00EEF33A /* DCLimitedNavigationController.m in Sources */,
 				74E8381B19C061CD000D2BE4 /* UIImageView+HighlightedWebCache.m in Sources */,
 				FA90B9A319C5893700873865 /* DCEventBaseCell.m in Sources */,
 				74E8381819C061CD000D2BE4 /* UIImage+GIF.m in Sources */,
@@ -1060,7 +1061,6 @@
 				84A24FBB19C1F608006EF17E /* DCLocation.m in Sources */,
 				74E8381519C061CD000D2BE4 /* SDWebImageManager.m in Sources */,
 				5DC8C46C198658FF00BF5816 /* DCLoginViewController.m in Sources */,
-				849D92C219ADCCDD00977D67 /* DCNavViewController.m in Sources */,
 				74A43C6D19BDDE9200F7BFA0 /* NSDictionary+DC.m in Sources */,
 				849E852019AF679F006F43B3 /* DCTrack+DC.m in Sources */,
 				5D38E6A11987A673006F7A59 /* DCTextField.m in Sources */,

@@ -77,23 +77,6 @@
     self.detailTable.scrollEnabled = ![self hideEmptyDetailIcon];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
-    UIButton* backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [backButton addTarget:self action:@selector(onBack) forControlEvents:UIControlEventTouchUpInside];
-    [backButton setFrame:CGRectMake(0, 0, 100, 40)];
-    [backButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
-    [backButton setExclusiveTouch:YES];
-    [backButton setImage:[UIImage imageNamed:@"back_arrow"] forState:UIControlStateNormal];
-    [backButton setTitle:@"Back" forState:UIControlStateNormal];
-    [backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    UIBarButtonItem *backMenuBarButton = [[UIBarButtonItem alloc] initWithCustomView:backButton];
-    self.navigationItem.leftBarButtonItem = backMenuBarButton;
-    self.title = ([_event.timeRange.from isTimeValid])? [_event.timeRange stringValue] : @"";
-    
-}
 - (BOOL)hideEmptyDetailIcon
 {
     BOOL isHeaderEmpty = [self isHeaderEmpty];
