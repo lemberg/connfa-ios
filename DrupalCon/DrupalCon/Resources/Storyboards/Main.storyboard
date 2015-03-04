@@ -654,21 +654,6 @@
             </objects>
             <point key="canvasLocation" x="3884" y="-1278"/>
         </scene>
-        <!--Nav View Controller-->
-        <scene sceneID="xuD-cc-4rv">
-            <objects>
-                <navigationController storyboardIdentifier="NavViewController" definesPresentationContext="YES" id="bBF-wY-pRY" customClass="DCNavViewController" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bze-5M-S0J">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="6Ac-rd-t6g" kind="relationship" relationship="rootViewController" id="O7L-rV-l4i"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Sqb-Ks-X2P" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3475" y="-284"/>
-        </scene>
         <!--Event Detail View Controller-->
         <scene sceneID="WT6-gv-wI2">
             <objects>
