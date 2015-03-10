@@ -69,12 +69,13 @@
 {
     [super viewDidLoad];
     self.cellsHeight = [NSMutableDictionary dictionary];
-    self.title = ([_event.timeRange.from isTimeValid])? [_event.timeRange stringValue] : @"";
-    self.navigatorBarStyle = EBaseViewControllerNatigatorBarStyleTransparrent;
     self.speakers = [_event.speakers allObjects];
 
     self.noDetailImageView.hidden = ![self hideEmptyDetailIcon];
     self.detailTable.scrollEnabled = ![self hideEmptyDetailIcon];
+    
+    [self.navigationController.navigationBar setBackgroundImage:nil
+                                                  forBarMetrics:UIBarMetricsDefault];
 }
 
 - (BOOL)hideEmptyDetailIcon
@@ -114,7 +115,7 @@
     }
     else if (section == 1)
     {
-        DCEventDetailHeader2Cell * infoPanel = (DCEventDetailHeader2Cell*)[tableView dequeueReusableCellWithIdentifier:@"DetailCellIdHeader2"];
+        DCEventDetailHeader2Cell * infoPanel = (DCEventDetailHeader2Cell*)[tableView dequeueReusableCellWithIdentifier:@"EventDetailTrackCellId"];
         NSString * track = [[_event.tracks allObjects].firstObject name];
         NSString * place = _event.place;
         NSString * level = _event.level.name;
@@ -268,12 +269,12 @@
         if (scrollView.contentOffset.y < 0) {
             [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0) animated:NO];
         }
-        float stopPoint = -1 * (_eventPictureImg.frame.size.height - 64);
+        float stopPoint = -1 * (_topBackgroundImage.frame.size.height - 64);
         float offsetPoint = -1 * (scrollView.contentOffset.y/2);
-        _eventPictureImg.frame = CGRectMake(0,
+        _topBackgroundImage.frame = CGRectMake(0,
                                             (offsetPoint > stopPoint ? offsetPoint : stopPoint),
-                                            _eventPictureImg.frame.size.width,
-                                            _eventPictureImg.frame.size.height);
+                                            _topBackgroundImage.frame.size.width,
+                                            _topBackgroundImage.frame.size.height);
     }
 }
 

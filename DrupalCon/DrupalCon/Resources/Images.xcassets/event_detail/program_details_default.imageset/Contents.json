@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "program_details_bg.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "program_details_bg@2x.png"
+      "filename" : "Bofs_Events_detalise_header@2x.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "Bofs_Events_detalise_header@3x.png"
     }
   ],
   "info" : {

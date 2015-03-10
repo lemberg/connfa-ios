@@ -29,7 +29,7 @@ typedef void(^CloseCallback) ();
 @interface DCEventDetailViewController : DCBaseViewController <UITableViewDataSource, UITableViewDelegate, UIWebViewDelegate,UIScrollViewDelegate, DCFacotiteDelegateProtocol>
 
 @property (nonatomic, weak) IBOutlet UITableView * detailTable;
-@property (nonatomic, weak) IBOutlet UIImageView * eventPictureImg;
+@property (nonatomic, weak) IBOutlet UIImageView * topBackgroundImage;
 
 @property (nonatomic, strong) DCEvent * event;
 @property (nonatomic, strong) NSArray * speakers;
