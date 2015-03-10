@@ -1,10 +1,20 @@
-DrupalCon/DrupalCon.xcodeproj/project.xcworkspace/xcuserdata/admin.xcuserdatad/UserInterfaceState.xcuserstate
-DrupalCon/DrupalCon.xcodeproj/project.xcworkspace/xcuserdata/admin.xcuserdatad/WorkspaceSettings.xcsettings
-DrupalCon/DrupalCon.xcodeproj/xcuserdata/admin.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
-DrupalCon/DrupalCon.xcodeproj/xcuserdata/admin.xcuserdatad/xcschemes/DrupalCon.xcscheme
-DrupalCon/DrupalCon.xcodeproj/xcuserdata/admin.xcuserdatad/xcschemes/xcschememanagement.plist
-DrupalCon/DrupalCon.xcodeproj/project.xcworkspace/xcuserdata/opoburynnyi.xcuserdatad/UserInterfaceState.xcuserstate
-DrupalCon/DrupalCon.xcodeproj/xcuserdata/opoburynnyi.xcuserdatad/xcschemes/DrupalCon.xcscheme
-DrupalCon/DrupalCon.xcodeproj/xcuserdata/opoburynnyi.xcuserdatad/xcschemes/xcschememanagement.plist
-DrupalCon/DrupalCon/Classes/ConferenceViewControllers/Program/DCProgramViewController.m.orig
-DrupalCon/DrupalCon/Model/DCMainProxy.m.orig
+# Xcode
+.DS_Store
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+profile
+*.xccheckout
+*.moved-aside
+DerivedData
+.idea/
+# Pods - for those of you who use CocoaPods
+Pods
+
