@@ -28,7 +28,8 @@
 @dynamic latitude;
 @dynamic longitude;
 @dynamic name;
-@dynamic number;
-@dynamic streetName;
+@dynamic address;
+@dynamic locationId;
+@dynamic order;
 
 @end

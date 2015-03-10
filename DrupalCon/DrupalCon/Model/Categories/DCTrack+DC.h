@@ -21,9 +21,9 @@
 //
 
 #import "DCTrack.h"
+#import "DCManagedObjectUpdateProtocol.h"
 
-@interface DCTrack (DC)
 
-+ (void)parseFromJsonData:(NSData *)jsonData;
+@interface DCTrack (DC) <ManagedObjectUpdateProtocol>
 
 @end

@@ -25,7 +25,7 @@
 #import "DCBaseViewController.h"
 
 typedef void(^CloseCallback) ();
-@class DCEvent, DCProgram, DCBof;
+@class DCEvent, DCMainEvent, DCBof;
 @interface DCEventDetailViewController : DCBaseViewController <UITableViewDataSource, UITableViewDelegate, UIWebViewDelegate,UIScrollViewDelegate, DCFacotiteDelegateProtocol>
 
 @property (nonatomic, weak) IBOutlet UITableView * detailTable;

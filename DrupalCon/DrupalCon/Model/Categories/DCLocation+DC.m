@@ -22,41 +22,51 @@
 
 #import "DCLocation+DC.h"
 #import "NSDictionary+DC.h"
+#import "DCMainProxy.h"
+#import "NSManagedObject+DC.h"
 
-NSString *kDCLocation = @"locations";
-NSString *kDCLocationLongitude = @"longitude";
-NSString *kDCLocationLatitude  = @"latitude";
-NSString *kDCLocationPlaceName = @"locationName";
-NSString *kDCLocationStreetName = @"streetName";
-NSString *kDCLocationBuildNum = @"number";
+
+NSString *kDCLocationsKey = @"locations";
+NSString *kDCLocationIdKey = @"locationId";
+NSString *kDCLocationLongitudeKey = @"longitude";
+NSString *kDCLocationLatitudeKey  = @"latitude";
+NSString *kDCLocationPlaceNameKey = @"locationName";
+NSString *kDCLocationAddressKey = @"address";
 
 @implementation DCLocation (DC)
 
-+ (void)parseFromJsonData:(NSData *)jsonData {
+#pragma mark - ManagedObjectUpdateProtocol
 
-    NSError *err = nil;
-    NSDictionary *location = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                            options:kNilOptions
-                                                              error:&err];
-    location = [location dictionaryByReplacingNullsWithStrings];
-
-    if (err)
-    {
-        NSLog(@"WRONG! json");
-        @throw [NSException exceptionWithName:INVALID_JSON_EXCEPTION reason:@"Problem in json structure" userInfo:nil];
-        return;
++ (void)updateFromDictionary:(NSDictionary *)location inContext:(NSManagedObjectContext *)context
+{
+    //adding
+    for (NSDictionary *dictionary in location[kDCLocationsKey]) {
+        DCLocation * location = (DCLocation*)[[DCMainProxy sharedProxy] objectForID:[dictionary[kDCLocationIdKey] intValue] ofClass:[DCLocation class] inContext:context];
+        
+        if (!location) // then create
+        {
+            location = [DCLocation createManagedObjectInContext:context];
+        }
+        
+        if ([dictionary[kDCParseObjectDeleted] intValue]==1) // remove
+        {
+            [[DCMainProxy sharedProxy] removeItem:location];
+        }
+        else // update
+        {
+            location.locationId = dictionary[kDCLocationIdKey];
+            location.latitude = dictionary[kDCLocationLatitudeKey];
+            location.longitude = dictionary[kDCLocationLongitudeKey];
+            location.name = dictionary[kDCLocationPlaceNameKey];
+            location.address = dictionary[kDCLocationAddressKey];
+            location.order = [NSNumber numberWithFloat:[dictionary[kDCParseObjectOrderKey] floatValue]];
+        }
     }
-    
-    for (NSDictionary *venue in location[kDCLocation]) {
-        DCLocation * locationData = [[DCMainProxy sharedProxy] createLocation];
-        locationData.latitude = venue[kDCLocationLatitude];
-        locationData.longitude = venue[kDCLocationLongitude];
-        locationData.name = venue[kDCLocationPlaceName];
-        locationData.streetName = venue[kDCLocationStreetName];
-        locationData.number = venue[kDCLocationBuildNum];
-    }
-
-    
-
 }
+
++ (NSString*)idKey
+{
+    return (NSString*)kDCLocationIdKey;
+}
+
 @end

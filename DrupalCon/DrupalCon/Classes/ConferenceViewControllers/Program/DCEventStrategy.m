@@ -42,7 +42,7 @@
         switch (_strategy)
         {
             case EDCEventStrategyPrograms:
-                _eventClass = [DCProgram class];
+                _eventClass = [DCMainEvent class];
                 break;
                 
             case EDCEventStrategyBofs:

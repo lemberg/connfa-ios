@@ -30,6 +30,13 @@ static NSString * kDCSpeakerEventCellFormat = @"dd LLLL";
 
 @implementation NSDate (DC)
 
++ (NSString*)currentUnixTimeString
+{
+    NSDate * now  = [NSDate date];
+    NSTimeInterval interval = [now timeIntervalSince1970];
+    return [NSString stringWithFormat:@"%f",interval];
+}
+
 + (NSDate*)fabricateWithEventString:(NSString*)string
 {
     NSDate * result = [[NSDate eventDateFormatter] dateFromString:string];

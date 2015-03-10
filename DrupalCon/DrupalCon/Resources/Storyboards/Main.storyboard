@@ -5,6 +5,20 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
+        <!--First Load View Controller-->
+        <scene sceneID="Ep0-QR-gGr">
+            <objects>
+                <viewController id="7w6-Ae-ZC0" customClass="DCFirstLoadViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="AfV-oq-yUP">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Iub-Yg-yDP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="720" y="-452"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
@@ -82,6 +96,8 @@
                         <outlet property="loginTextField" destination="fTs-bK-Wy9" id="9pE-9B-v8X"/>
                         <outlet property="passwordTextField" destination="9Mp-9Q-e2f" id="oFu-RX-Deb"/>
                         <outlet property="scrollView" destination="JHz-Di-zQs" id="T7Z-79-dsO"/>
+                        <segue destination="oKH-QJ-OgM" kind="push" identifier="ToMenu" id="qpU-UL-oMn"/>
+                        <segue destination="7w6-Ae-ZC0" kind="modal" identifier="toFirstLoading" animates="NO" id="O68-6T-AJB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

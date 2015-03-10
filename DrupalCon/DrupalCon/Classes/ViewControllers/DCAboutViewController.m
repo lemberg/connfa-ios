@@ -22,7 +22,11 @@
 
 #import "DCAboutViewController.h"
 #import "UIWebView+DC.h"
+#import "UIConstants.h"
+
 #import "DCMainProxy.h"
+#import "DCInfo+DC.h"
+#import "DCInfoCategory+DC.h"
 
 @interface DCAboutViewController ()<UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
@@ -80,6 +84,10 @@ static inline BOOL IsEmpty(id thing) {
     [self loadPage];
     
     // Do any additional setup after loading the view.
+#ifdef DEBUG_MODE
+    DCInfo * info = [[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCInfo class] inMainQueue:YES] lastObject];
+    NSLog(@"info - %@",info);
+#endif
 }
 
 - (void)didReceiveMemoryWarning

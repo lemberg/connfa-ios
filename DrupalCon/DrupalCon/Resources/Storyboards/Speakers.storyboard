@@ -25,7 +25,7 @@
                                 </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="65" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Rtg-Kq-JJf">
-                                <rect key="frame" x="0.0" y="44" width="320" height="371"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="436"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DetailCellIdentifierSpeaker" id="7fo-QL-KrG" customClass="DCSpeakerCell">
@@ -86,7 +86,7 @@
                             <constraint firstAttribute="trailing" secondItem="coi-og-QUw" secondAttribute="trailing" id="KRG-Cb-c8K"/>
                             <constraint firstItem="Rtg-Kq-JJf" firstAttribute="leading" secondItem="xTa-JX-2Bu" secondAttribute="leading" id="gNL-A9-cvH"/>
                             <constraint firstItem="Rtg-Kq-JJf" firstAttribute="top" secondItem="coi-og-QUw" secondAttribute="bottom" id="kff-BM-wXd"/>
-                            <constraint firstItem="qWf-aw-BGy" firstAttribute="top" secondItem="Rtg-Kq-JJf" secondAttribute="bottom" constant="65" id="qiF-Zl-IfG"/>
+                            <constraint firstItem="qWf-aw-BGy" firstAttribute="top" secondItem="Rtg-Kq-JJf" secondAttribute="bottom" id="qiF-Zl-IfG"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="k4l-of-SUN"/>

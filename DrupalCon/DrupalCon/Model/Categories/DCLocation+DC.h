@@ -21,10 +21,9 @@
 //
 
 #import "DCLocation.h"
-#import "DCMainProxy.h"
+#import "DCManagedObjectUpdateProtocol.h"
 
-@interface DCLocation (DC)
+@interface DCLocation (DC) <ManagedObjectUpdateProtocol>
 
-+ (void)parseFromJsonData:(NSData *)jsonData;
 
 @end

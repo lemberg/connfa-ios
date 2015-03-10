@@ -21,9 +21,8 @@
 //
 
 #import "DCType.h"
+#import "DCManagedObjectUpdateProtocol.h"
 
-@interface DCType (DC)
-
-+ (void)parseFromJsonData:(NSData*)jsonData;
+@interface DCType (DC) <ManagedObjectUpdateProtocol>
 
 @end

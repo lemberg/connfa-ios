@@ -22,38 +22,52 @@
 
 #import "DCBof+DC.h"
 #import "DCEvent+DC.h"
+#import "NSManagedObject+DC.h"
 #import "NSDate+DC.h"
+#import "DCFavoriteEvent+DC.h"
 #import "DCMainProxy.h"
 #import "NSDictionary+DC.h"
 
-const NSString * kDCBof_bofEvents_key = @"bofsEvents";
 
 @implementation DCBof (DC)
 
+#pragma mark - ManagedObjectUpdateProtocol
 
-+ (void)parseFromJSONData:(NSData *)jsonData
++ (void)updateFromDictionary:(NSDictionary *)events inContext:(NSManagedObjectContext *)context;
 {
-    NSError * err = nil;
-    NSDictionary * eventItems = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                                options:kNilOptions
-                                                                  error:&err];
-    eventItems = [eventItems dictionaryByReplacingNullsWithStrings];
-    if (err)
-    {
-        NSLog(@"WRONG! json");
-        @throw [NSException exceptionWithName:@"Invalid JSON" reason:@"Problem in json structure" userInfo:nil];
-        return;
-    }
     
-    for (NSDictionary * day in eventItems[kDCEvent_days_key])
+    for (NSDictionary * day in events[kDCEventDaysKey])
     {
-        NSDate * date = [NSDate fabricateWithEventString:day[kDCEvent_date_key]];
-        for (NSDictionary * event in day[kDCBof_bofEvents_key])
+        NSDate * date = [NSDate fabricateWithEventString:day[kDCEventDateKey]];
+        for (NSDictionary * event in day[kDCEventsKey])
         {
-            DCBof * bofInstance = [[DCMainProxy sharedProxy] createBofItem];
-            [DCBof parseEventFromDictionaty:event toObject:bofInstance forDate:date];
+            DCBof * bofInstance = (DCBof*)[[DCMainProxy sharedProxy] objectForID:[event[kDCEventIdKey] intValue]
+                                                                         ofClass:[DCBof class]
+                                                                       inContext:context];
+            
+            if (!bofInstance) // create
+            {
+                bofInstance = [DCBof createManagedObjectInContext:context];
+            }
+            if ([event[kDCParseObjectDeleted] intValue]==1) // remove
+            {
+                [[DCMainProxy sharedProxy] removeItem:bofInstance];
+                DCFavoriteEvent * favorite = (DCFavoriteEvent*)[[DCMainProxy sharedProxy] objectForID:[event[kDCEventIdKey] intValue]
+                                                                                              ofClass:[DCFavoriteEvent class]
+                                                                                            inContext:context];
+                if (favorite) // in case when event was in favorites - remove from there
+                {
+                    [[DCMainProxy sharedProxy] removeItem:favorite];
+                }
+            }
+            else // update
+            {
+                [bofInstance updateFromDictionary:event forData:date];//DCBof parseEventFromDictionaty:event toObject:bofInstance forDate:date];
+            }
         }
     }
+
 }
+
 
 @end

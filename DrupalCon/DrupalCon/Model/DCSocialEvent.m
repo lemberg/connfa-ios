@@ -20,12 +20,10 @@
 //  SOFTWARE.
 //
 
-#import "DCProgram.h"
+#import "DCSocialEvent.h"
 
-extern NSString * kDCProgram_programEvents_key;
 
-@interface DCProgram (DC)
-
+@implementation DCSocialEvent
 
 
 @end

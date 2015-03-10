@@ -28,6 +28,7 @@
 
 @dynamic name;
 @dynamic trackId;
+@dynamic order;
 @dynamic events;
 
 @end

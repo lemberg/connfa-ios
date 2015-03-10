@@ -11,7 +11,7 @@
 #import "DCTrack.h"
 #import "DCMainProxy.h"
 #import "DCEventFilterHeaderCell.h"
-
+#import "NSManagedObject+DC.h"
 
 @interface DCFilterViewController ()
 
@@ -48,8 +48,8 @@
 {
     [super viewDidLoad];
     
-    self.levels = [[DCMainProxy sharedProxy] levelInstances];
-    self.tracks = [[DCMainProxy sharedProxy] trackInstances];
+    self.levels = [[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCLevel class] inMainQueue:YES];
+    self.tracks = [[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCTrack class] inMainQueue:YES];
     
     [self.tableView reloadData];
 }

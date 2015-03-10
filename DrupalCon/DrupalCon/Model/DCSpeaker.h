@@ -37,6 +37,7 @@
 @property (nonatomic, retain) NSNumber * speakerId;
 @property (nonatomic, retain) NSString * twitterName;
 @property (nonatomic, retain) NSString * webSite;
+@property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) NSSet *events;
 @property (nonatomic, retain) NSString *sectionKey;
 

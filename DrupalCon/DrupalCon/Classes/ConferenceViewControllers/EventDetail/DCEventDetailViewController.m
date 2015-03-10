@@ -24,7 +24,7 @@
 #import "DCSpeakersDetailViewController.h"
 
 #import "DCEvent+DC.h"
-#import "DCProgram+DC.h"
+#import "DCMainEvent+DC.h"
 #import "DCTimeRange+DC.h"
 #import "DCSpeaker+DC.h"
 #import "DCLevel+DC.h"

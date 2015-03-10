@@ -20,12 +20,18 @@
 //  SOFTWARE.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
-#import "DCEvent.h"
+@protocol ManagedObjectUpdateProtocol <NSObject>
 
++ (void)updateFromDictionary:(NSDictionary *)dictionary inContext:(NSManagedObjectContext *)context;
 
-@interface DCProgram : DCEvent
+@optional
++ (NSString*)idKey;
 
+@end
+
+static NSString * kDCParseObjectDeleted = @"objectDeleted";
+static NSString * kDCParseObjectOrderKey = @"order";
+
+@interface ManagedObjectUpdateProtocol : NSObject;
 
 @end

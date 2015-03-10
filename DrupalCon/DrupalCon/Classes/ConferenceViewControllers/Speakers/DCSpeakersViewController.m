@@ -190,7 +190,7 @@
     request.predicate = predicate;
     
     _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                                                    managedObjectContext:[DCMainProxy sharedProxy].managedObjectContext
+                                                                    managedObjectContext:[DCMainProxy sharedProxy].workContext
                                                                       sectionNameKeyPath:@"sectionKey"
                                                                                cacheName:nil];
 //    _fetchedResultsController.delegate = self;

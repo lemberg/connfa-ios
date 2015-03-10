@@ -23,33 +23,46 @@
 #import "DCTrack+DC.h"
 #import "DCMainProxy.h"
 #import "NSDictionary+DC.h"
+#import "NSManagedObject+DC.h"
 
-NSString * kDCTrack_traks_key = @"tracks";
-NSString * kDCTrack_trackID_key = @"trackID";
-NSString * kDCTrack_trackName_key = @"trackName";
+NSString * kDCTracksKey = @"tracks";
+NSString * kDCTrackIdKey = @"trackId";
+NSString * kDCTrackNameKey = @"trackName";
 
 @implementation DCTrack (DC)
 
-+ (void)parseFromJsonData:(NSData *)jsonData
+#pragma mark - ManagedObjectUpdateProtocol
++ (void)updateFromDictionary:(NSDictionary *)tracks inContext:(NSManagedObjectContext *)context
 {
-    NSError * err = nil;
-    NSDictionary * tracks = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                            options:kNilOptions
-                                                              error:&err];
-    tracks = [tracks dictionaryByReplacingNullsWithStrings];
-    if (err)
+    //adding
+    for (NSDictionary * dictionary in tracks[kDCTracksKey])
     {
-        NSLog(@"WRONG! json");
-        @throw [NSException exceptionWithName:INVALID_JSON_EXCEPTION reason:@"Problem in json structure" userInfo:nil];
-        return;
+        DCTrack * track = (DCTrack*)[[DCMainProxy sharedProxy] objectForID:[dictionary[kDCTrackIdKey] intValue]
+                                                                   ofClass:[DCTrack class]
+                                                                 inContext:context];
+        
+        if (!track) // then create
+        {
+            track = [DCTrack createManagedObjectInContext:context];//(DCTrack*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCTrack class]];
+        }
+        
+        if ([dictionary[kDCParseObjectDeleted] intValue]==1) // remove
+        {
+            [[DCMainProxy sharedProxy] removeItem:track];
+        }
+        else // update
+        {
+            track.trackId = dictionary[kDCTrackIdKey];
+            track.name = dictionary[kDCTrackNameKey];
+            track.order = [NSNumber numberWithFloat:[dictionary[kDCParseObjectOrderKey] floatValue]];
+        }
     }
-    
-    for (NSDictionary * dictionary in tracks[kDCTrack_traks_key])
-    {
-        DCTrack * track = [[DCMainProxy sharedProxy] createTrack];
-        track.trackId = dictionary[kDCTrack_trackID_key];
-        track.name = dictionary[kDCTrack_trackName_key];
-    }
-    
 }
+
+
++ (NSString*)idKey
+{
+    return (NSString*)kDCTrackIdKey;
+}
+
 @end

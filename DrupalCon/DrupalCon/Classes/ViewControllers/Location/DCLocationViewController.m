@@ -52,15 +52,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setLayout];
-    self.location = [[[DCMainProxy sharedProxy] locationInstances] lastObject];
+    self.location = [[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCLocation class] inMainQueue:YES] lastObject];
     [self updateLocation];
 
 }
 - (void)updateLocation {
     [self setAnnotation];
     self.addressHeader.attributedText = [self DC_headerAttrString];
-    [self.streetLbl setText:[NSString stringWithFormat:@"%@,",self.location.streetName]];
-    [self.numberLbl setText:self.location.number];
+    // TODO: use new DB
+//    [self.streetLbl setText:[NSString stringWithFormat:@"%@,",self.location.streetName]];
+//    [self.numberLbl setText:self.location.number];
 }
 - (void)setLayout {
     [self.view setBackgroundColor:NAV_BAR_COLOR];

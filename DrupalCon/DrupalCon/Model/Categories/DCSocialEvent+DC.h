@@ -20,10 +20,8 @@
 //  SOFTWARE.
 //
 
-#import "DCProgram.h"
+#import "DCSocialEvent.h"
 
-
-@implementation DCProgram
-
+@interface DCSocialEvent (DC)
 
 @end

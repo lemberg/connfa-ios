@@ -61,19 +61,26 @@
     self.eventsStrategy.predicate = nil;
     
     [self.activityIndicator startAnimating];
-    
-    [[DCMainProxy sharedProxy] dataReadyBlock:^(BOOL isDataReady, BOOL isUpdatedFromServer) {
+    [[DCMainProxy sharedProxy] setDataReadyCallback:^(DCMainProxyState mainProxyState) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            if ([_eventsStrategy days]) {
+                 _days = [[NSArray alloc] initWithArray:[_eventsStrategy days]];
+            } else {
+                _days = nil;
+            }
+//            self.viewControllers = [self DC_fillViewControllers];
+//            [self addPageController];
             [self reloadData];
             [self.activityIndicator stopAnimating];
         });
     }];
-    
+    /*
     if (![[DCMainProxy sharedProxy] isDataReady]) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             [[DCMainProxy sharedProxy] update];
         });
     }
+     */
 }
 
 #pragma mark - Private
@@ -167,6 +174,20 @@
         
         [self reloadData];
     }
+}
+
+- (NSArray*)DC_fillViewControllers
+{
+    
+    NSMutableArray * controllers_ = [[NSMutableArray alloc] initWithCapacity:_days.count];
+    for (int i = 0; i<_days.count; i++)
+    {
+        DCProgramItemsViewController *eventItemsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgramItemsViewController"];
+//        eventItemsViewController.pageIndex = i;
+        eventItemsViewController.eventsStrategy = self.eventsStrategy;
+        [controllers_ addObject:eventItemsViewController];
+    }
+    return controllers_;
 }
 
 -(IBAction) previousDayClicked:(id)sender

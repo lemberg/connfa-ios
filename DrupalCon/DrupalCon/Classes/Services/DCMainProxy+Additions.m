@@ -22,7 +22,7 @@
 
 #import "DCMainProxy+Additions.h"
 #import "DCEvent+DC.h"
-#import "DCProgram+DC.h"
+#import "DCMainEvent+DC.h"
 #import "DCBof.h"
 #import "DCTimeRange+DC.h"
 
@@ -41,7 +41,7 @@
 - (NSArray*)daysForClass:(Class)eventClass predicate:(NSPredicate *)aPredicate
 {
     @try {
-        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass(eventClass) inManagedObjectContext:self.managedObjectContext];
+        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass(eventClass) inManagedObjectContext:self.workContext];
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         [fetchRequest setEntity:entityDescription];
         [fetchRequest setReturnsObjectsAsFaults:NO];
@@ -50,7 +50,7 @@
         [fetchRequest setReturnsDistinctResults:YES];
         
         [fetchRequest setPredicate:aPredicate];
-        NSArray *result = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
+        NSArray *result = [self.workContext executeFetchRequest:fetchRequest error:nil];
         if(result && [result count])
         {
             return [[result objectsFromDictionaries] sortedDates];
@@ -58,10 +58,10 @@
     }
     @catch (NSException *exception) {
         NSLog(@"%@", NSStringFromClass([self class]));
-        NSLog(@"%@", [self.managedObjectContext description]);
-        NSLog(@"%@", [self.managedObjectContext.persistentStoreCoordinator description]);
-        NSLog(@"%@", [self.managedObjectContext.persistentStoreCoordinator.managedObjectModel description]);
-        NSLog(@"%@", [self.managedObjectContext.persistentStoreCoordinator.managedObjectModel.entities description]);
+        NSLog(@"%@", [self.workContext description]);
+        NSLog(@"%@", [self.workContext.persistentStoreCoordinator description]);
+        NSLog(@"%@", [self.workContext.persistentStoreCoordinator.managedObjectModel description]);
+        NSLog(@"%@", [self.workContext.persistentStoreCoordinator.managedObjectModel.entities description]);
         @throw exception;
     }
     @finally {
@@ -79,7 +79,7 @@
 {
     @try {
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription entityForName:NSStringFromClass(eventClass) inManagedObjectContext:self.managedObjectContext];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:NSStringFromClass(eventClass) inManagedObjectContext:self.workContext];
         [fetchRequest setEntity:entity];
         
         NSPredicate *datePredicate = [NSPredicate predicateWithFormat:@"date = %@", day];
@@ -92,7 +92,7 @@
         [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
         
         NSError *error = nil;
-        NSArray *fetchedObjects = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        NSArray *fetchedObjects = [self.workContext executeFetchRequest:fetchRequest error:&error];
         if (error || !fetchedObjects)
         {
             NSLog(@"WRONG! program events fetch: %@", error);
@@ -101,10 +101,10 @@
     }
     @catch (NSException *exception) {
         NSLog(@"%@", NSStringFromClass([self class]));
-        NSLog(@"%@", [self.managedObjectContext description]);
-        NSLog(@"%@", [self.managedObjectContext.persistentStoreCoordinator description]);
-        NSLog(@"%@", [self.managedObjectContext.persistentStoreCoordinator.managedObjectModel description]);
-        NSLog(@"%@", [self.managedObjectContext.persistentStoreCoordinator.managedObjectModel.entities description]);
+        NSLog(@"%@", [self.workContext description]);
+        NSLog(@"%@", [self.workContext.persistentStoreCoordinator description]);
+        NSLog(@"%@", [self.workContext.persistentStoreCoordinator.managedObjectModel description]);
+        NSLog(@"%@", [self.workContext.persistentStoreCoordinator.managedObjectModel.entities description]);
         @throw exception;
     }
     @finally {
@@ -122,7 +122,7 @@
 - (NSArray*)uniqueTimeRangesForDay:(NSDate*)day forClass:(__unsafe_unretained Class)eventClass predicate:(NSPredicate *)aPredicate
 {
     @try {
-        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass(eventClass) inManagedObjectContext:self.managedObjectContext];
+        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass(eventClass) inManagedObjectContext:self.workContext];
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         [fetchRequest setEntity:entityDescription];
         [fetchRequest setReturnsObjectsAsFaults:NO];
@@ -131,7 +131,7 @@
         NSPredicate *mergedPredicate = aPredicate ? [NSCompoundPredicate andPredicateWithSubpredicates:@[datePredicate, aPredicate]] : datePredicate;
         [fetchRequest setPredicate:mergedPredicate];
         
-        NSArray *result = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
+        NSArray *result = [self.workContext executeFetchRequest:fetchRequest error:nil];
         if(result && [result count])
         {
             return [[self DC_filterUniqueTimeRangeFromEvents:result] sortedByStartHour];
@@ -139,10 +139,10 @@
     }
     @catch (NSException *exception) {
         NSLog(@"%@", NSStringFromClass([self class]));
-        NSLog(@"%@", [self.managedObjectContext description]);
-        NSLog(@"%@", [self.managedObjectContext.persistentStoreCoordinator description]);
-        NSLog(@"%@", [self.managedObjectContext.persistentStoreCoordinator.managedObjectModel description]);
-        NSLog(@"%@", [self.managedObjectContext.persistentStoreCoordinator.managedObjectModel.entities description]);
+        NSLog(@"%@", [self.workContext description]);
+        NSLog(@"%@", [self.workContext.persistentStoreCoordinator description]);
+        NSLog(@"%@", [self.workContext.persistentStoreCoordinator.managedObjectModel description]);
+        NSLog(@"%@", [self.workContext.persistentStoreCoordinator.managedObjectModel.entities description]);
         @throw exception;
     }
     @finally {
@@ -159,14 +159,14 @@
 - (NSArray *)favoriteEventsWithPredicate:(NSPredicate *)aPredicate
 {
     @try {
-        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass([DCEvent class]) inManagedObjectContext:self.managedObjectContext];
+        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:NSStringFromClass([DCEvent class]) inManagedObjectContext:self.workContext];
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         [fetchRequest setEntity:entityDescription];
         [fetchRequest setReturnsObjectsAsFaults:NO];
         NSPredicate * predicate = [NSPredicate predicateWithFormat:@"favorite=%@", [NSNumber numberWithBool:YES]];
         [fetchRequest setPredicate:predicate];
         
-        NSArray *result = [self.managedObjectContext executeFetchRequest:fetchRequest error:nil];
+        NSArray *result = [self.workContext executeFetchRequest:fetchRequest error:nil];
         NSArray *uniqueDates = [result valueForKeyPath:@"@distinctUnionOfObjects.date"];
         NSArray *sortDates = [uniqueDates sortedDates];
         NSMutableArray *eventsByDate = [NSMutableArray array];
@@ -186,10 +186,10 @@
     }
     @catch (NSException *exception) {
         NSLog(@"%@", NSStringFromClass([self class]));
-        NSLog(@"%@", [self.managedObjectContext description]);
-        NSLog(@"%@", [self.managedObjectContext.persistentStoreCoordinator description]);
-        NSLog(@"%@", [self.managedObjectContext.persistentStoreCoordinator.managedObjectModel description]);
-        NSLog(@"%@", [self.managedObjectContext.persistentStoreCoordinator.managedObjectModel.entities description]);
+        NSLog(@"%@", [self.workContext description]);
+        NSLog(@"%@", [self.workContext.persistentStoreCoordinator description]);
+        NSLog(@"%@", [self.workContext.persistentStoreCoordinator.managedObjectModel description]);
+        NSLog(@"%@", [self.workContext.persistentStoreCoordinator.managedObjectModel.entities description]);
         @throw exception;
     }
     @finally {
@@ -204,7 +204,7 @@
 - (NSArray*)DC_filterUniqueTimeRangeFromEvents:(NSArray*)events
 {
     NSMutableArray * ranges = [[NSMutableArray alloc] initWithCapacity:events.count];
-    for (DCProgram * event in events)
+    for (DCMainEvent * event in events)
     {
         BOOL isUnique = YES;
         for (DCTimeRange* range in ranges)

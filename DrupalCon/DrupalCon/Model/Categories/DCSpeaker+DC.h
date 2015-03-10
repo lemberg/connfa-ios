@@ -21,9 +21,10 @@
 //
 
 #import "DCSpeaker.h"
+#import "DCManagedObjectUpdateProtocol.h"
 
-@interface DCSpeaker (DC)
 
-+ (void)parseFromJSONData:(NSData*)jsonData;
+@interface DCSpeaker (DC) <ManagedObjectUpdateProtocol>
+
 
 @end

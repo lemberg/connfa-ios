@@ -23,37 +23,48 @@
 #import "DCLevel+DC.h"
 #import "DCMainProxy.h"
 #import "NSDictionary+DC.h"
+#import "NSManagedObject+DC.h"
 
-NSString * kDCLevel_levels_key = @"levels";
-NSString * kDCLevel_levelID_key = @"levelID";
-NSString * kDCLevel_levelName_key = @"levelName";
-NSString * kDCLevel_levelOrder_key = @"levelOrder";
+NSString * kDCLevelsKey = @"levels";
+NSString * kDCLevelIdKey = @"levelId";
+NSString * kDCLevelNameKey = @"levelName";
 
 @implementation DCLevel (DC)
 
-+ (void)parseFromJsonData:(NSData *)jsonData
+#pragma mark - ManagedObjectUpdateProtocol
+
++ (void)updateFromDictionary:(NSDictionary *)levels inContext:(NSManagedObjectContext *)context
 {
-    NSError * err = nil;
-    NSDictionary * levels = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                              options:kNilOptions
-                                                                error:&err];
-    levels = [levels dictionaryByReplacingNullsWithStrings];
-    if (err)
+    //adding
+    for (NSDictionary * dictionary in levels[kDCLevelsKey])
     {
-        NSLog(@"WRONG! json");
-        @throw [NSException exceptionWithName:INVALID_JSON_EXCEPTION reason:@"Problem in json structure" userInfo:nil];
-
-        return;
+        DCLevel * level = (DCLevel*)[[DCMainProxy sharedProxy] objectForID:[dictionary[kDCLevelIdKey] intValue]
+                                                                   ofClass:[DCLevel class]
+                                                                 inContext:context];
+        
+        if (!level) // then create
+        {
+            level = [DCLevel createManagedObjectInContext:context];//(DCLevel*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCLevel class]];
+        }
+        
+        if ([dictionary[kDCParseObjectDeleted] intValue]==1) // remove
+        {
+            [[DCMainProxy sharedProxy] removeItem:level];
+        }
+        else // update
+        {
+            level.levelId = dictionary[kDCLevelIdKey];
+            level.name = dictionary[kDCLevelNameKey];
+            level.order = [NSNumber numberWithFloat:[dictionary[kDCParseObjectOrderKey] floatValue]];
+        }
     }
-    
-    for (NSDictionary * dictionary in levels[kDCLevel_levels_key])
-    {
-        DCLevel * level = [[DCMainProxy sharedProxy] createLevel];
-        level.levelId = dictionary[kDCLevel_levelID_key];
-        level.name = dictionary[kDCLevel_levelName_key];
-        level.order = @([dictionary[kDCLevel_levelOrder_key] integerValue]);
-    }
 
+}
+
+
++ (NSString*)idKey
+{
+    return (NSString*)kDCLevelIdKey;
 }
 
 @end

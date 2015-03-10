@@ -25,47 +25,53 @@
 
 extern NSString * INVALID_JSON_EXCEPTION;
 
-@class DCProgram, DCBof, DCType, DCTime, DCTimeRange, DCSpeaker, DCLevel, DCTrack, DCLocation, DCEvent;
+@class DCMainEvent, DCBof, DCType, DCTime, DCTimeRange, DCSpeaker, DCLevel, DCTrack, DCLocation, DCEvent;
+
+typedef enum {
+    DCMainProxyStateNone = 0,
+    DCMainProxyStateNoData,
+    DCMainProxyStateLoadingFail,
+    DCMainProxyStateInitDataLoading,
+    DCMainProxyStateDataLoading,
+    DCMainProxyStateUpdatesWaiting,
+    DCMainProxyStateDataReady
+}DCMainProxyState;
 
 @interface DCMainProxy : NSObject
 
+@property (nonatomic, strong, readonly) NSManagedObjectContext * defaultPrivateContext;
+@property (nonatomic, strong, readonly) NSManagedObjectContext * workContext;
 @property (nonatomic, strong, readonly) NSManagedObjectModel * managedObjectModel;
-@property (nonatomic, strong, readonly) NSManagedObjectContext * managedObjectContext;
 @property (nonatomic, strong, readonly) NSPersistentStoreCoordinator * persistentStoreCoordinator;
 
-@property (nonatomic, getter = isDataReady) BOOL dataReady;
+@property (nonatomic) DCMainProxyState state;
+
 
 + (DCMainProxy*)sharedProxy;
+- (NSManagedObjectContext*)newMainQueueContext;
+- (void)setDataReadyCallback:(void (^)(DCMainProxyState mainProxyState))dataReadyCallback;
 
-- (void)dataReadyBlock:(void(^)(BOOL isDataReady, BOOL isUpdatedFromServer))callback;
+#pragma mark - public
 
 - (void)update;
-- (NSArray*)programInstances;
-- (NSArray*)bofInstances;
-- (NSArray*)typeInstances;
-- (NSArray*)speakerInstances;
-- (NSArray*)levelInstances;
-- (NSArray*)trackInstances;
-- (NSArray *)locationInstances;
+
+#pragma mark - work with instances
+
+- (NSArray*)getAllInstancesOfClass:(Class)aClass inMainQueue:(BOOL)mainQueue;
+- (NSManagedObject*)objectForID:(int)ID ofClass:(Class)aClass inContext:(NSManagedObjectContext *)context;
+- (void)removeItem:(NSManagedObject*)item;
+
+#pragma mark -
+
 - (void)loadHtmlAboutInfo:(void(^)(NSString *))callback;
 
-- (DCType*)typeForID:(int)typeID;
-- (DCSpeaker*)speakerForId:(NSInteger)speakerId;
-- (DCLevel*)levelForId:(NSInteger)levelId;
-- (DCTrack*)trackForId:(NSInteger)trackId;
+#pragma mark - favorites 
 
-- (DCProgram*)createProgramItem;
-- (DCBof*)createBofItem;
-- (DCType*)createType;
-- (DCTime*)createTime;
-- (DCSpeaker*)createSpeaker;
-- (DCTimeRange*)createTimeRange;
-- (DCLevel*)createLevel;
-- (DCTrack*)createTrack;
-- (DCLocation*)createLocation;
+//FIXME: separate Favorites to favoriteManager
 
 - (void)addToFavoriteEvent:(DCEvent *)event;
 - (void)removeFavoriteEventWithID:(NSNumber *)eventID;
 - (NSArray *)eventsWithIDs:(NSArray *)iDs;
 - (void)openLocalNotification:(UILocalNotification *)localNotification;
+
 @end

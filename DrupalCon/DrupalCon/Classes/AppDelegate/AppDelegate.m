@@ -22,6 +22,7 @@
 
 #import "AppDelegate.h"
 #import "DCMainProxy.h"
+#import "UIConstants.h"
 
 @interface AppDelegate ()
 @property (nonatomic, strong) UILocalNotification *localNotification;
@@ -31,11 +32,17 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    [[DCMainProxy sharedProxy] setDataReady:NO];
+    [[DCMainProxy sharedProxy] update];
     UILocalNotification *locationNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (locationNotification) {
         self.localNotification = locationNotification;
     }
+    
+#ifdef DEBUG_MODE
+    NSLog(@"====================");
+    NSLog(@"====DEBUG MODE======");
+    NSLog(@"====================");
+#endif
     
     return YES;
 }
@@ -55,7 +62,7 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     if ([self.window.rootViewController isKindOfClass:[UINavigationController class]]) {
-        [[DCMainProxy sharedProxy] setDataReady:NO];
+        [[DCMainProxy sharedProxy] update];
         UINavigationController * natigator = (UINavigationController*)self.window.rootViewController;
         [natigator popToRootViewControllerAnimated:NO];
     }

@@ -36,6 +36,7 @@
 @dynamic favorite;
 @dynamic name;
 @dynamic place;
+@dynamic order;
 @dynamic level;
 @dynamic speakers;
 @dynamic timeRange;
