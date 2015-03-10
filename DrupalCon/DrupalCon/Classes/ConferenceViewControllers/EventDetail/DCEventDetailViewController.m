@@ -40,14 +40,35 @@
 #import "DCTime+DC.h"
 
 #import "UIImageView+WebCache.h"
+#import "UIConstants.h"
 
 @interface DCEventDetailViewController ()
+
+@property (nonatomic, weak) IBOutlet UITableView * detailTable;
+@property (weak, nonatomic) IBOutlet UIImageView *noDetailImageView;
+
+@property (nonatomic, weak) IBOutlet UILabel* titleLabel;
+@property (nonatomic, weak) IBOutlet UILabel* dateLabel;
+@property (nonatomic, weak) IBOutlet UILabel* placeLabel;
+@property (nonatomic, weak) IBOutlet UILabel* trackLabel;
+@property (nonatomic, weak) IBOutlet UILabel* experienceLabel;
+@property (nonatomic, weak) IBOutlet UIImageView* experienceIcon;
+
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint* topBackgroundTop;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint* headerViewTop;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint* tableViewHeight;
+
+
+@property (nonatomic, strong) DCEvent * event;
+@property (nonatomic, strong) NSArray * speakers;
 @property (nonatomic, strong) CloseCallback closeCallback;
 @property (nonatomic, strong) NSIndexPath *lastIndexPath;
 @property (nonatomic, strong) NSMutableDictionary *cellsHeight;
-@property (weak, nonatomic) IBOutlet UIImageView *noDetailImageView;
 
 @end
+
+
+
 @implementation DCEventDetailViewController
 
 - (instancetype)initWithEvent:(DCEvent *)event
@@ -74,8 +95,21 @@
     self.noDetailImageView.hidden = ![self hideEmptyDetailIcon];
     self.detailTable.scrollEnabled = ![self hideEmptyDetailIcon];
     
-    [self.navigationController.navigationBar setBackgroundImage:nil
-                                                  forBarMetrics:UIBarMetricsDefault];
+    [self setNavigationBarTransparent:YES];
+}
+
+- (void) setNavigationBarTransparent: (BOOL) isTransparent
+{
+    self.navigationController.navigationBar.translucent = NO;
+    
+    if (isTransparent)
+    {
+        [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+    }
+    else
+    {
+        self.navigationController.navigationBar.barTintColor = NAV_BAR_COLOR;
+    }
 }
 
 - (BOOL)hideEmptyDetailIcon
@@ -94,47 +128,43 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 1;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    if (section == 0) // title
-        return [DCEventDetailTitleCell cellHeight];
-    
-    return [self isHeaderEmpty] ? 75. : [DCEventDetailHeader2Cell cellHeight];
-}
-
-- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    if (section == 0)
-    {
-        DCEventDetailTitleCell * titleCell = (DCEventDetailTitleCell*)[tableView dequeueReusableCellWithIdentifier:@"DetailCellIdTitle"];
-        [titleCell.titleLbl setText:_event.name];
-        return titleCell;
-    }
-    else if (section == 1)
-    {
-        DCEventDetailHeader2Cell * infoPanel = (DCEventDetailHeader2Cell*)[tableView dequeueReusableCellWithIdentifier:@"EventDetailTrackCellId"];
-        NSString * track = [[_event.tracks allObjects].firstObject name];
-        NSString * place = _event.place;
-        NSString * level = _event.level.name;
-
-        [infoPanel.trackValueLbl setText:(track.length?track:@"")];
-        infoPanel.levelTitleLbl.hidden = !level.length;
-        infoPanel.trackTitleLbl.hidden = !track.length;
-        [infoPanel.levelValueLbl setText:(level.length?level:@"")];
-        [infoPanel.placeValueLbl setText:(place.length?place:@"")];
-        
-        [infoPanel.favorBtn setDelegate:self];
-        [infoPanel.favorBtn setSelected:[_event.favorite boolValue]];
-        return infoPanel;
-    }
-    return [[UIView alloc] initWithFrame:CGRectZero];
-}
+//- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    if (section == 0)
+//    {
+//        DCEventDetailTitleCell * titleCell = (DCEventDetailTitleCell*)[tableView dequeueReusableCellWithIdentifier:@"DetailCellIdTitle"];
+//        [titleCell.titleLbl setText:_event.name];
+//        return titleCell;
+//    }
+//    else if (section == 1)
+//    {
+//        DCEventDetailHeader2Cell * infoPanel = (DCEventDetailHeader2Cell*)[tableView dequeueReusableCellWithIdentifier:@"EventDetailTrackCellId"];
+//        NSString * track = [[_event.tracks allObjects].firstObject name];
+//        NSString * place = _event.place;
+//        NSString * level = _event.level.name;
+//
+//        [infoPanel.trackValueLbl setText:(track.length?track:@"")];
+//        infoPanel.levelTitleLbl.hidden = !level.length;
+//        infoPanel.trackTitleLbl.hidden = !track.length;
+//        [infoPanel.levelValueLbl setText:(level.length?level:@"")];
+//        [infoPanel.placeValueLbl setText:(place.length?place:@"")];
+//        
+//        [infoPanel.favorBtn setDelegate:self];
+//        [infoPanel.favorBtn setSelected:[_event.favorite boolValue]];
+//        return infoPanel;
+//    }
+//    return [[UIView alloc] initWithFrame:CGRectZero];
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    
+    
+    
     if (indexPath.section == 0) {
         return [DCEventDetailEmptyCell cellHeight];
     }
@@ -156,9 +186,6 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0)
-        return 1;
-    
     return _speakers.count+1; // speakers + description
 }
 
@@ -262,21 +289,21 @@
     [self.navigationController pushViewController:speakerViewController animated:YES];
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    if (scrollView == _detailTable)
-    {
-        if (scrollView.contentOffset.y < 0) {
-            [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0) animated:NO];
-        }
-        float stopPoint = -1 * (_topBackgroundImage.frame.size.height - 64);
-        float offsetPoint = -1 * (scrollView.contentOffset.y/2);
-        _topBackgroundImage.frame = CGRectMake(0,
-                                            (offsetPoint > stopPoint ? offsetPoint : stopPoint),
-                                            _topBackgroundImage.frame.size.width,
-                                            _topBackgroundImage.frame.size.height);
-    }
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+//{
+//    if (scrollView == _detailTable)
+//    {
+//        if (scrollView.contentOffset.y < 0) {
+//            [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0) animated:NO];
+//        }
+//        float stopPoint = -1 * (_topBackgroundImage.frame.size.height - 64);
+//        float offsetPoint = -1 * (scrollView.contentOffset.y/2);
+//        _topBackgroundImage.frame = CGRectMake(0,
+//                                            (offsetPoint > stopPoint ? offsetPoint : stopPoint),
+//                                            _topBackgroundImage.frame.size.width,
+//                                            _topBackgroundImage.frame.size.height);
+//    }
+//}
 
 #pragma mark - FavorBtn delegate
 
