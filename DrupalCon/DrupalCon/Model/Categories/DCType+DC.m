@@ -26,7 +26,7 @@
 #import "NSManagedObject+DC.h"
 
 const NSString * kDCTypesKey = @"types";
-const NSString * kDCTypeIdKey = @"typeId";
+const NSString * kDCTypeIdKey = @"typeID";
 const NSString * kDCTypeNameKey = @"typeName";
 const NSString * kDCTypeIconURLKey = @"typeIconURL";
 

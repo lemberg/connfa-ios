@@ -252,7 +252,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 
 - (NSManagedObject*)getObjectOfClass:(Class)class forID:(NSInteger)ID whereIdKey:(NSString*)idKey inContext:(NSManagedObjectContext *)context
 {
-    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"%@ == %i", idKey, ID];
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"%K = %i", idKey, ID];
     NSArray * results = [self instancesOfClass:class
                          filtredUsingPredicate:predicate
                                      inContext:context];
