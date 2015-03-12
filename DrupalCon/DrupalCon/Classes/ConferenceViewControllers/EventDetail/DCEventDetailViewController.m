@@ -31,9 +31,6 @@
 #import "DCTrack+DC.h"
 #import "DCBof.h"
 
-#import "DCEventDetailTitleCell.h"
-#import "DCEventDetailEmptyCell.h"
-#import "DCEventDetailHeader2Cell.h"
 #import "DCSpeakerCell.h"
 #import "DCDescriptionTextCell.h"
 #import "UIWebView+DC.h"
@@ -41,27 +38,32 @@
 
 #import "UIImageView+WebCache.h"
 #import "UIConstants.h"
+#import "UIImage+Extension.h"
+
+
+static NSString * cellIdSpeaker = @"DetailCellIdSpeaker";
+static NSString * cellIdDescription = @"DetailCellIdDescription";
 
 @interface DCEventDetailViewController ()
 
 @property (nonatomic, weak) IBOutlet UITableView * detailTable;
 @property (weak, nonatomic) IBOutlet UIImageView *noDetailImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *topBackgroundView;
+@property (weak, nonatomic) IBOutlet UIView *topBackgroundShadowView;
 
 @property (nonatomic, weak) IBOutlet UILabel* titleLabel;
-@property (nonatomic, weak) IBOutlet UILabel* dateLabel;
-@property (nonatomic, weak) IBOutlet UILabel* placeLabel;
+@property (nonatomic, weak) IBOutlet UILabel* dateAndPlaceLabel;
 @property (nonatomic, weak) IBOutlet UILabel* trackLabel;
 @property (nonatomic, weak) IBOutlet UILabel* experienceLabel;
 @property (nonatomic, weak) IBOutlet UIImageView* experienceIcon;
+@property (nonatomic, weak) IBOutlet UIView* TrackAndLevelView;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint* topBackgroundTop;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint* headerViewTop;
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint* tableViewHeight;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint* trackAndLevelViewHeight;
 
+@property (nonatomic, weak, readonly) NSArray* speakers;
 
-@property (nonatomic, strong) DCEvent * event;
-@property (nonatomic, strong) NSArray * speakers;
-@property (nonatomic, strong) CloseCallback closeCallback;
 @property (nonatomic, strong) NSIndexPath *lastIndexPath;
 @property (nonatomic, strong) NSMutableDictionary *cellsHeight;
 
@@ -71,167 +73,123 @@
 
 @implementation DCEventDetailViewController
 
+#pragma mark - View livecycle
+
 - (instancetype)initWithEvent:(DCEvent *)event
 {
     self = [super init];
     if (self)
     {
+        _closeCallback = nil;
         _event = event;
     }
     return self;
 }
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [self arrangeNavigationBar];
+    
+    self.cellsHeight = [NSMutableDictionary dictionary];
+
+    self.noDetailImageView.hidden = ![self hideEmptyDetailIcon];
+    self.detailTable.scrollEnabled = ![self hideEmptyDetailIcon];
+    
+    [self updateEventDetailsData];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    if (self.closeCallback)
+        self.closeCallback();
+}
+
+#pragma mark - UI initialization
+
+- (void) updateEventDetailsData
+{
+    self.titleLabel.text = self.event.name;
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat: @"MM-dd HH:mm"];
+    NSString *date = self.event.date ? [formatter stringFromDate: self.event.date] : @"";
+    NSString *place = self.event.place ? self.event.place : @"";
+    
+    if (date.length && place.length)
+        self.dateAndPlaceLabel.text = [NSString stringWithFormat: @"%@ in %@", date, place];
+    else
+        self.dateAndPlaceLabel.text = [NSString stringWithFormat: @"%@%@", date, place];
+    
+    
+    DCTrack* track = [self.event.tracks anyObject];
+    DCLevel* level = self.event.level;
+    
+    BOOL shouldHideTrackAndLevelView = (track.trackId.integerValue == 0 && level.levelId.integerValue == 0);
+    
+    if (!shouldHideTrackAndLevelView)
+    {
+        self.trackLabel.text = [(DCTrack*)[self.event.tracks anyObject] name];
+        self.experienceLabel.text = self.event.level.name ? [NSString stringWithFormat:@"Experience level: %@", self.event.level.name] : nil;
+        
+        UIImage* icon = nil;
+        switch (self.event.level.levelId.integerValue)
+        {
+            case 1:
+                icon = [UIImage imageNamed:@"ic_experience_beginner"];
+                break;
+            case 2:
+                icon = [UIImage imageNamed:@"ic_experience_intermediate"];
+                break;
+            case 3:
+                icon = [UIImage imageNamed:@"ic_experience_advanced"];
+                break;
+            default:
+                break;
+        }
+        self.experienceIcon.image = icon;
+    }
+    else
+    {
+        self.trackAndLevelViewHeight.priority = 1000;
+        self.TrackAndLevelView.hidden = YES;
+    }
+}
+
 - (BOOL)isHeaderEmpty
 {
     NSString *track = [[_event.tracks allObjects].firstObject name];
     NSString *level = _event.level.name;
     return [level length] == 0 && [track length] == 0;
 }
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    self.cellsHeight = [NSMutableDictionary dictionary];
-    self.speakers = [_event.speakers allObjects];
 
-    self.noDetailImageView.hidden = ![self hideEmptyDetailIcon];
-    self.detailTable.scrollEnabled = ![self hideEmptyDetailIcon];
+- (void) arrangeNavigationBar
+{
+    [super arrangeNavigationBar];
     
-    [self setNavigationBarTransparent:YES];
+    [self.navigationController.navigationBar setBackgroundImage: [UIImage imageWithColor:[UIColor clearColor]]
+                                                  forBarMetrics: UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
+    
+    UIBarButtonItem* favoriteButton = [[UIBarButtonItem alloc] initWithImage: self.event.favorite.boolValue ? [UIImage imageNamed:@"star_on"] : [UIImage imageNamed:@"ic_experience_beginner"]
+                                                                       style:UIBarButtonItemStylePlain
+                                                                      target:self
+                                                                      action:@selector(favoriteButtonDidClick:)];
+    // tag 1: unselected state
+    // tag 2: selected state
+    favoriteButton.tag = self.event.favorite.boolValue ? 2 : 1;
+    self.navigationItem.rightBarButtonItem = favoriteButton;
 }
 
-- (void) setNavigationBarTransparent: (BOOL) isTransparent
-{
-    self.navigationController.navigationBar.translucent = NO;
-    
-    if (isTransparent)
-    {
-        [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-    }
-    else
-    {
-        self.navigationController.navigationBar.barTintColor = NAV_BAR_COLOR;
-    }
-}
-
-- (BOOL)hideEmptyDetailIcon
+- (BOOL) hideEmptyDetailIcon
 {
     BOOL isHeaderEmpty = [self isHeaderEmpty];
-    BOOL isNoSpeakers = ![_speakers count];
+    BOOL isNoSpeakers = ![self.speakers count];
     BOOL isDescriptionEmpty = _event.desctiptText.length == 0;
     return isHeaderEmpty && isNoSpeakers && isDescriptionEmpty;
-}
-- (void)didCloseWithCallback:(CloseCallback)callback
-{
-    self.closeCallback = callback;
-}
-
-#pragma mark - UITableView DataSource/Delegate methods
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-//- (UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    if (section == 0)
-//    {
-//        DCEventDetailTitleCell * titleCell = (DCEventDetailTitleCell*)[tableView dequeueReusableCellWithIdentifier:@"DetailCellIdTitle"];
-//        [titleCell.titleLbl setText:_event.name];
-//        return titleCell;
-//    }
-//    else if (section == 1)
-//    {
-//        DCEventDetailHeader2Cell * infoPanel = (DCEventDetailHeader2Cell*)[tableView dequeueReusableCellWithIdentifier:@"EventDetailTrackCellId"];
-//        NSString * track = [[_event.tracks allObjects].firstObject name];
-//        NSString * place = _event.place;
-//        NSString * level = _event.level.name;
-//
-//        [infoPanel.trackValueLbl setText:(track.length?track:@"")];
-//        infoPanel.levelTitleLbl.hidden = !level.length;
-//        infoPanel.trackTitleLbl.hidden = !track.length;
-//        [infoPanel.levelValueLbl setText:(level.length?level:@"")];
-//        [infoPanel.placeValueLbl setText:(place.length?place:@"")];
-//        
-//        [infoPanel.favorBtn setDelegate:self];
-//        [infoPanel.favorBtn setSelected:[_event.favorite boolValue]];
-//        return infoPanel;
-//    }
-//    return [[UIView alloc] initWithFrame:CGRectZero];
-//}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    
-    
-    
-    if (indexPath.section == 0) {
-        return [DCEventDetailEmptyCell cellHeight];
-    }
-    else if (indexPath.row == _speakers.count) // description cell is the last
-    {
-        return [self heightForDescriptionTextCell];
-    }
-    return [DCSpeakerCell cellHeight]; // rest should be in section#1 all rows exept last
-}
-
-- (float)heightForDescriptionTextCell
-{
-    float descriptionCellHeight = [DCDescriptionTextCell cellHeightForText:_event.desctiptText];;
-    if (self.lastIndexPath && [self.cellsHeight objectForKey:self.lastIndexPath]) {
-        descriptionCellHeight = [[self.cellsHeight objectForKey:self.lastIndexPath] floatValue];
-    }
-    return descriptionCellHeight;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return _speakers.count+1; // speakers + description
-}
-
-- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString * cellIdEmpty = @"DetailCellIdEmpty";
-    static NSString * cellIdSpeaker = @"DetailCellIdSpeaker";
-    static NSString * cellIdDescription = @"DetailCellIdDescription";
-    UITableViewCell *cell;
-    if (indexPath.section==0)
-    {
-        if (indexPath.row != 0) {
-            NSLog(@"WRONG! event detail cells");
-        }
-        DCEventDetailEmptyCell * _cell = (DCEventDetailEmptyCell*)[tableView dequeueReusableCellWithIdentifier:cellIdEmpty];
-        if ([self isHeaderEmpty]) {
-            [_cell.triangleImageView removeFromSuperview];
-        }
-        
-        cell = _cell;
-    }
-    else if (indexPath.row == _speakers.count) // description cell
-    {
-        DCDescriptionTextCell * _cell = (DCDescriptionTextCell*)[tableView dequeueReusableCellWithIdentifier:cellIdDescription];
-        _cell.descriptionWebView.delegate = self;
-        self.lastIndexPath = indexPath;
-        [_cell.descriptionWebView loadHTMLString:_event.desctiptText];
-        cell = _cell;
-    }
-    else
-    {
-        DCSpeaker * speaker = _speakers[indexPath.row];
-        DCSpeakerCell * _cell = (DCSpeakerCell*)[tableView dequeueReusableCellWithIdentifier:cellIdSpeaker];
-        [_cell.pictureImg sd_setImageWithURL:[NSURL URLWithString:speaker.avatarPath]
-                            placeholderImage:[UIImage imageNamed:@"avatar_placeholder"]
-                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                       dispatch_async(dispatch_get_main_queue(), ^{
-                                           [_cell setNeedsDisplay];
-                                       });
-                                   }];
-    
-        [_cell.nameLbl setText:speaker.name];
-        [_cell.positionTitleLbl setText:[self positionTitleForSpeaker:speaker]];
-        cell = _cell;
-    }
-    return cell;
 }
 
 - (NSString *)positionTitleForSpeaker:(DCSpeaker *)speaker
@@ -248,6 +206,106 @@
     return jobTitle;
 }
 
+#pragma mark - Private
+
+- (NSArray*) speakers
+{
+    return [self.event.speakers allObjects];
+}
+
+- (void)updateCellAtIndexPath
+{
+    [self.detailTable beginUpdates];
+    [self.detailTable reloadRowsAtIndexPaths:@[self.lastIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+    [self.detailTable endUpdates];
+}
+
+- (CGFloat) getSpeakerCellHeight
+{
+    DCSpeakerCell *cell = [self.detailTable dequeueReusableCellWithIdentifier: cellIdSpeaker];
+    return cell.frame.size.height;
+}
+
+- (float)heightForDescriptionTextCell
+{
+    float descriptionCellHeight = [DCDescriptionTextCell cellHeightForText:_event.desctiptText];;
+    if (self.lastIndexPath && [self.cellsHeight objectForKey:self.lastIndexPath]) {
+        descriptionCellHeight = [[self.cellsHeight objectForKey:self.lastIndexPath] floatValue];
+    }
+    return descriptionCellHeight;
+}
+
+#pragma mark - UITableView DataSource/Delegate methods
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == self.speakers.count) // description cell is the last
+    {
+        return [self heightForDescriptionTextCell];
+    }
+    return [self getSpeakerCellHeight];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+        // speakers + description
+    return self.speakers.count+1;
+}
+
+- (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell;
+
+        // description cell
+    if (indexPath.row == self.speakers.count)
+    {
+        DCDescriptionTextCell * _cell = (DCDescriptionTextCell*)[tableView dequeueReusableCellWithIdentifier:cellIdDescription];
+        _cell.descriptionWebView.delegate = self;
+        self.lastIndexPath = indexPath;
+        [_cell.descriptionWebView loadHTMLString:_event.desctiptText];
+        cell = _cell;
+    }
+    else // speaker cell
+    {
+        DCSpeaker * speaker = self.speakers[indexPath.row];
+        DCSpeakerCell * _cell = (DCSpeakerCell*)[tableView dequeueReusableCellWithIdentifier:cellIdSpeaker];
+        [_cell.pictureImg sd_setImageWithURL:[NSURL URLWithString:speaker.avatarPath]
+                            placeholderImage:[UIImage imageNamed:@"avatar_placeholder"]
+                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                       dispatch_async(dispatch_get_main_queue(), ^{
+                                           [_cell setNeedsDisplay];
+                                       });
+                                   }];
+    
+        [_cell.nameLbl setText:speaker.name];
+        [_cell.positionTitleLbl setText:[self positionTitleForSpeaker:speaker]];
+        cell = _cell;
+    }
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    if (![[tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[DCSpeakerCell class]])
+        return;
+    
+    DCSpeakersDetailViewController * speakerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SpeakersDetailViewController"];
+    speakerViewController.speaker = self.speakers[indexPath.row];
+    [speakerViewController didCloseWithCallback:^{
+        [self.detailTable reloadData];
+    }];
+    [self.navigationController pushViewController:speakerViewController animated:YES];
+}
+
+#pragma mark - UIWebView delegate
+
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     if (![self.cellsHeight objectForKey:self.lastIndexPath]) {
@@ -255,7 +313,7 @@
         [self.cellsHeight setObject:[NSNumber numberWithFloat:height] forKey:self.lastIndexPath];
         [self updateCellAtIndexPath];
     }
-
+    
 }
 
 -(BOOL) webView:(UIWebView *)inWeb shouldStartLoadWithRequest:(NSURLRequest *)inRequest navigationType:(UIWebViewNavigationType)inType {
@@ -267,73 +325,85 @@
     return YES;
 }
 
-- (void)updateCellAtIndexPath
+#pragma mark - UIScroll view delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    [self.detailTable beginUpdates];
-    [self.detailTable reloadRowsAtIndexPaths:@[self.lastIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-    [self.detailTable endUpdates];
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    if (![[tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[DCSpeakerCell class]])
-        return;
-    
-    DCSpeakersDetailViewController * speakerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SpeakersDetailViewController"];
-    speakerViewController.speaker = _speakers[indexPath.row];
-    [speakerViewController didCloseWithCallback:^{
-        [self.detailTable reloadData];
-    }];
-    [self.navigationController pushViewController:speakerViewController animated:YES];
-}
-
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-//{
-//    if (scrollView == _detailTable)
-//    {
-//        if (scrollView.contentOffset.y < 0) {
-//            [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0) animated:NO];
-//        }
-//        float stopPoint = -1 * (_topBackgroundImage.frame.size.height - 64);
-//        float offsetPoint = -1 * (scrollView.contentOffset.y/2);
-//        _topBackgroundImage.frame = CGRectMake(0,
-//                                            (offsetPoint > stopPoint ? offsetPoint : stopPoint),
-//                                            _topBackgroundImage.frame.size.width,
-//                                            _topBackgroundImage.frame.size.height);
-//    }
-//}
-
-#pragma mark - FavorBtn delegate
-
-- (void)DCFavoriteButton:(DCFavoriteButton *)favoriteButton didChangedState:(BOOL)isSelected
-{
-    NSLog(@"%@added", (isSelected ? @"" : @"not "));
-    
-    self.event.favorite = [NSNumber numberWithBool:isSelected];
-    if (isSelected) {
-        [[DCMainProxy sharedProxy]
-         addToFavoriteEvent:self.event];
-    } else {
-        [[DCMainProxy sharedProxy]
-         removeFavoriteEventWithID:self.event.eventID];
+    if (scrollView == _detailTable)
+    {
+        float topStopPoint = (self.topBackgroundView.frame.size.height - 20 - 44);
+        float offset = scrollView.contentOffset.y;
+        
+        BOOL shouldMoveToTop = (offset > 0) && (-self.topBackgroundTop.constant*2 < topStopPoint);
+        BOOL shouldMoveToBottom = (offset < 0) && (self.topBackgroundTop.constant < 0);
+        
+        self.topBackgroundShadowView.alpha = (self.topBackgroundTop.constant / (-topStopPoint/2)) * 0.7;
+        
+        if (shouldMoveToTop)
+        {
+            self.topBackgroundTop.constant -= scrollView.contentOffset.y/2;
+            self.headerViewTop.constant -= scrollView.contentOffset.y/2;
+            
+                // don't move to Top more it is needed
+            if (self.topBackgroundTop.constant < -topStopPoint/2)
+                self.topBackgroundTop.constant = -topStopPoint/2;
+            
+            if (self.headerViewTop.constant < -topStopPoint/2)
+                self.headerViewTop.constant = -topStopPoint/2;
+            
+            [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0) animated:NO];
+        }
+        
+        if (shouldMoveToBottom)
+        {
+            self.topBackgroundTop.constant -= scrollView.contentOffset.y/2;
+            self.headerViewTop.constant -= scrollView.contentOffset.y/2;
+            
+                // don't move to Bottom more then it is needed
+            if (self.topBackgroundTop.constant >= 0)
+                self.topBackgroundTop.constant = 0;
+            
+            if (self.headerViewTop.constant > 0)
+                self.headerViewTop.constant = 0;
+            
+                // after bounce animatically move to bottom point
+            if (scrollView.isDecelerating && scrollView.contentOffset.y <= 0)
+            {
+                [self.view layoutIfNeeded];
+            
+                self.topBackgroundTop.constant = 0;
+                self.headerViewTop.constant = 0;
+                
+                [UIView animateWithDuration: 0.3f
+                                 animations:^{
+                                     self.topBackgroundShadowView.alpha = 0;
+                                     [self.view layoutIfNeeded];
+                                 }];
+            }
+            
+            [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0) animated:NO];
+        }
     }
 }
 
-#pragma mark - IBActions
+#pragma mark - User actions
 
-- (void)onBack
+- (void) favoriteButtonDidClick: (UIBarButtonItem*)sender
 {
-    self.closeCallback();
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-#pragma mark - private
-
-- (NSArray*)DC_speakers_tmp:(NSString*)string
-{
-    return [string componentsSeparatedByString:@", "];
+    sender.tag = sender.tag == 1 ? 2 : 1;
+    
+    BOOL isSelected = (sender.tag == 2);
+    
+    sender.image = isSelected ? [UIImage imageNamed:@"star_on"] : [UIImage imageNamed:@"ic_experience_beginner"];
+    
+    self.event.favorite = [NSNumber numberWithBool:isSelected];
+    
+    if (isSelected)
+    {
+       // [[DCMainProxy sharedProxy] addToFavoriteEvent:self.event];
+    } else {
+      //  [[DCMainProxy sharedProxy] removeFavoriteEventWithID:self.event.eventID];
+    }
 }
 
 @end

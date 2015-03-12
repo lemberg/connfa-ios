@@ -309,7 +309,7 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
     DCEventDetailViewController * detailController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
     [detailController setEvent:event];
     __block NSIndexPath *tmpIndex = indexPath;
-    [detailController didCloseWithCallback:^{
+    [detailController setCloseCallback:^{
         if (![event.favorite boolValue]) {
             if (tmpIndex) {
                 [self deleteCellAtIndexPath:tmpIndex];
