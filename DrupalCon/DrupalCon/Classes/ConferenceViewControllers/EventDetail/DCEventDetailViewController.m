@@ -337,7 +337,7 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
         BOOL shouldMoveToTop = (offset > 0) && (-self.topBackgroundTop.constant*2 < topStopPoint);
         BOOL shouldMoveToBottom = (offset < 0) && (self.topBackgroundTop.constant < 0);
         
-        self.topBackgroundShadowView.alpha = (self.topBackgroundTop.constant / (-topStopPoint/2)) * 0.7;
+        self.topBackgroundShadowView.alpha = (self.topBackgroundTop.constant / (-topStopPoint/2)) * 0.85;
         
         if (shouldMoveToTop)
         {
