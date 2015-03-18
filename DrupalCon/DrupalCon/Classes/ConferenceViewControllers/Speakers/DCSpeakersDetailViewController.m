@@ -32,304 +32,234 @@
 #import "DCDescriptionTextCell.h"
 #import "DCSpeakerHeaderCell.h"
 #import "DCSpeakerEventCell.h"
+#import "DCSpeakerDetailButtonsCell.h"
+
 #import "UIWebView+DC.h"
 #import "UIConstants.h"
 #import "UIImageView+WebCache.h"
+#import "UIImage+Extension.h"
+#import "DCEventDetailViewController.h"
+
+static NSString *headerCellId = @"SpeakerDetailHeaderCellId";
+static NSString *buttonsCellId = @"SpeakerDetailButtonsCellId";
+static NSString *descriptionCellId = @"SpeakerDetailDescriptionCellId";
+static NSString *eventCellId = @"SpeakerEventCellId";
+
+
 
 @interface DCSpeakersDetailViewController ()<UIWebViewDelegate>
 
-@property (nonatomic, strong) NSArray * events;
-@property (nonatomic, weak) IBOutlet UITableView * speakerDetailTbl;
-@property (nonatomic, weak) IBOutlet UIView * bgView;
-@property (nonatomic, strong) CloseCallback closeCallback;
-@property (nonatomic, strong) NSIndexPath *lastIndexPath;
+@property (nonatomic, weak) IBOutlet UITableView * speakerTable;
+@property (nonatomic, weak) IBOutlet UIImageView * backgroundView;
+
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *backgroundViewHeight;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *backgroundViewTop;
+
+@property (nonatomic, strong) NSIndexPath *descriptionCellIndexPath;
 @property (nonatomic, strong) NSMutableDictionary *cellsHeight;
+
+@property (nonatomic, strong) NSDictionary* cellPrototypes;
+
 @end
 
+
 @implementation DCSpeakersDetailViewController
+
+#pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigatorBarStyle = EBaseViewControllerNatigatorBarStyleTransparrent;
-    _events = [_speaker.events allObjects];
+
     self.cellsHeight = [NSMutableDictionary dictionary];
-    [self registerCellsInTableView];
-}
-
-static NSString *cellIdEvent = @"cellId_SpeakersEvent";
-
-- (void)registerCellsInTableView
-{
-    [self.speakerDetailTbl registerClass:[DCSpeakerEventCell class]
-            forCellReuseIdentifier:cellIdEvent];
-}
-- (void)viewWillAppear:(BOOL)animated
-{
-    if (self.navigationController)
-    {
-        self.navigatorBarStyle = EBaseViewControllerNatigatorBarStyleNormal;
-        [super viewWillAppear:animated];
-        self.title = @"Speaker Profile";
-    }
-    else
-    {
-        //TODO: refactor!
-        UIView * navigatorsContainer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
-        [navigatorsContainer setBackgroundColor:NAV_BAR_COLOR];
-        [self.view addSubview:navigatorsContainer];
-        
-        UIButton* backButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        [backButton addTarget:self action:@selector(onBack) forControlEvents:UIControlEventTouchUpInside];
-        [backButton setFrame:CGRectMake(0, 0, 60, 64)];
-        [backButton setExclusiveTouch:YES];
-        [backButton setImage:[UIImage imageNamed:@"back_arrow"] forState:UIControlStateNormal];
-        [backButton setTitle:@"Back" forState:UIControlStateNormal];
-        [backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [backButton setTintColor:[UIColor whiteColor]];
-        [navigatorsContainer addSubview:backButton];
-        
-        UILabel * titleLbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 320, 64)];
-        [titleLbl setTextAlignment:NSTextAlignmentCenter];
-        [titleLbl setTextColor:[UIColor whiteColor]];
-        [titleLbl setText:@"Speaker Profile"];
-        [titleLbl setFont:[UIFont fontWithName:@"HelveticaNeue-Light" size:21]];
-        [navigatorsContainer addSubview:titleLbl];
-        
-        [_speakerDetailTbl setFrame:CGRectMake(0, 44, 320, self.view.bounds.size.height-44)];
-    }
-}
-
--(void)onBack
-{
     
-    [self dismissViewControllerAnimated:YES completion:nil];
+    self.cellPrototypes = @{eventCellId : [self.speakerTable dequeueReusableCellWithIdentifier:eventCellId],
+                            headerCellId : [self.speakerTable dequeueReusableCellWithIdentifier:headerCellId]};
 }
+
+- (void) arrangeNavigationBar
+{
+    [super arrangeNavigationBar];
+    
+    [self.navigationController.navigationBar setBackgroundImage: [UIImage imageWithColor:[UIColor clearColor]]
+                                                  forBarMetrics: UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
+    self.navigationController.navigationBar.translucent = YES;
+    self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-    if (self.closeCallback) {
+    
+    if (self.closeCallback)
+    {
         self.closeCallback();
     }
 }
-- (void)didCloseWithCallback:(CloseCallback)callback
+
+#pragma mark - Private
+
+- (DCEvent*) eventForIndexPath:(NSIndexPath*)indexPath
 {
-    self.closeCallback = callback;
+    return [self.speaker.events allObjects][indexPath.row - 3];
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+- (BOOL) isFirstEvent:(NSIndexPath*)indexPath
 {
-    if (scrollView == _speakerDetailTbl)
-    {
-        float stopPoint = 0;
-        float offsetPoint = scrollView.contentOffset.y;
-        _bgView.frame = CGRectMake(0,
-                                   (offsetPoint < stopPoint ? stopPoint : -1 * offsetPoint),
-                                   _bgView.frame.size.width,
-                                   _bgView.frame.size.height);
-    }
+    return (indexPath.row == 3);
 }
 
 #pragma mark - UITableView Delegate/DataSourse methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _events.count + 2;
+    return self.speaker.events.count + 3;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0)
-        return [DCSpeakerHeaderCell cellHeight];
-    
-    else if ([self isLastRow:indexPath.row])
-        return [self heightForDescriptionTextCell];
-    
-    else
-        return [DCSpeakerEventCell cellHeight];
-}
-
-- (float)heightForDescriptionTextCell
-{
-    float descriptionCellHeight = [DCDescriptionTextCell cellHeightForText:_speaker.characteristic];;
-    if (self.lastIndexPath && [self.cellsHeight objectForKey:self.lastIndexPath]) {
-        descriptionCellHeight = [[self.cellsHeight objectForKey:self.lastIndexPath] floatValue];
+    switch (indexPath.row)
+    {
+        case 0: // header cell
+        {
+            DCSpeakerHeaderCell * cellPrototype = self.cellPrototypes[headerCellId];
+            [cellPrototype initData:self.speaker];
+            [cellPrototype layoutSubviews];
+            
+            CGFloat height = [cellPrototype.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+            
+            self.backgroundViewHeight.constant = height;
+            
+            return height;
+        }
+        case 1: //buttons cell
+        {
+            DCSpeakerDetailButtonsCell* cellPrototype = [tableView dequeueReusableCellWithIdentifier:buttonsCellId];
+            [cellPrototype initData:self.speaker];
+            return cellPrototype.frame.size.height;
+        }
+        case 2: // description cell
+        {
+            if (self.speaker.characteristic.length)
+            {
+                if (self.descriptionCellIndexPath && [self.cellsHeight objectForKey:self.descriptionCellIndexPath])
+                {
+                        // saved accurate value, estimated after data loading to WebView
+                    return [[self.cellsHeight objectForKey:self.descriptionCellIndexPath] floatValue];
+                }
+                else
+                {
+                        // inaccurate value, used to set cell height before WebView has loaded data, will be replaced after load
+                    return [DCDescriptionTextCell cellHeightForText: self.speaker.characteristic];
+                }
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        default: // speaker event cell
+        {
+            DCSpeakerEventCell* cellPrototype = self.cellPrototypes[eventCellId];
+            [cellPrototype initData: [self eventForIndexPath:indexPath]];
+            [cellPrototype layoutSubviews];
+            
+            return [cellPrototype.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        }
     }
-    return descriptionCellHeight;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    static NSString *cellIdHeader = @"cellId_SpeakersHeader";
-    static NSString *cellIdBottom = @"cellId_SpeakersBottom";
-    
     UITableViewCell *cell;
     
-    if (indexPath.row == 0)
+    switch (indexPath.row)
     {
-        DCSpeakerHeaderCell *_cell = (DCSpeakerHeaderCell*)[tableView dequeueReusableCellWithIdentifier:cellIdHeader];
-        [self fillSpeakerHeaderCell:_cell];
-        cell = _cell;
+        case 0: // header cell
+        {
+            cell = [tableView dequeueReusableCellWithIdentifier:headerCellId];
+            [(DCSpeakerHeaderCell*)cell initData:self.speaker];
+            break;
+        }
+        case 1: // cell with Share buttons (Web and Twitter)
+        {
+            cell = [tableView dequeueReusableCellWithIdentifier:buttonsCellId];
+            [(DCSpeakerDetailButtonsCell*)cell initData:self.speaker];
+            break;
+        }
+        case 2: // description cell
+        {
+            cell = [tableView dequeueReusableCellWithIdentifier:descriptionCellId];
+            [(DCDescriptionTextCell*)cell descriptionWebView].delegate = self;
+            self.descriptionCellIndexPath = indexPath;
+            [[(DCDescriptionTextCell*)cell descriptionWebView] loadHTMLString: self.speaker.characteristic];
+            break;
+        }
+        default: // speaker's event cell
+        {
+            DCEvent * event = [self eventForIndexPath:indexPath];
+            cell = [tableView dequeueReusableCellWithIdentifier:eventCellId];
+            [(DCSpeakerEventCell*)cell initData: event];
+            
+            if (!self.speaker.characteristic.length && [self isFirstEvent: indexPath])
+                [(DCSpeakerEventCell*)cell separator].hidden = YES;
+            
+            break;
+        }
     }
-    
-    else if ([self isLastRow:indexPath.row])
-    {
-        DCDescriptionTextCell * _cell = (DCDescriptionTextCell*)[tableView dequeueReusableCellWithIdentifier:cellIdBottom];
-        _cell.descriptionWebView.delegate = self;
-        self.lastIndexPath = indexPath;
-        [_cell.descriptionWebView loadHTMLString:_speaker.characteristic];
-        cell = _cell;
-    }
-    
-    else // all events cells
-    {
-        DCEvent * event = _events[indexPath.row-1];
-        DCSpeakerEventCell * _cell = (DCSpeakerEventCell*)[tableView dequeueReusableCellWithIdentifier:cellIdEvent];
-        [self updateCell:_cell witEvent:event];
-        cell = _cell;
-    }
-    
+
     return cell;
 }
 
-- (void)updateCell:(DCEventBaseCell *)cell witEvent:(DCEvent *)event
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *level = event.level.name;
-    NSString *track = [[event.tracks allObjects].firstObject name];
-    NSString *title = event.name;
-    
-    NSString *time = [NSString stringWithFormat:@"%@\n%@",[event.date stringForSpeakerEventCell],[event.timeRange stringValue] ];
-    NSDictionary *values = nil;
-
-    values = @{
-               kHeaderTitle: title,
-               kLeftBlockTitle: @"Date",
-               kLeftBlockContent: time,
-               kMiddleBlockTitle: @"Track",
-               kMiddleBlockContent: track,
-               kRightBlockTitle: @"Experience Level",
-               kRightBlockContent: level
-               };
-
-    [cell setValuesForCell: values];
-    cell.favoriteButton.selected = [event.favorite boolValue];
-    [cell favoriteButtonDidSelected:^(UITableViewCell *cell, BOOL isSelected) {
-        [self updateFavoriteItemsInIndexPath:[self.speakerDetailTbl indexPathForCell:cell]
-                                   withValue:isSelected];
-    }];
-    
-}
-- (void)fillSpeakerHeaderCell:(DCSpeakerHeaderCell *)newCell
-{
-    
-    [newCell.pictureImg sd_setImageWithURL:[NSURL URLWithString:_speaker.avatarPath]
-                        placeholderImage:[UIImage imageNamed:@"avatar_placeholder"]
-                               completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                   dispatch_async(dispatch_get_main_queue(), ^{
-                                       [newCell setNeedsDisplay];
-                                   });
-                                   
-                               }];
-    // Hide label name when organisation is empty
-    if (![_speaker.organizationName length]) {
-        newCell.organizationTitleLabel.hidden = YES;
-    } else {
-        newCell.organizationTitleLabel.hidden = NO;
-
-    }
-    // Hide label name when job is empty
-    if (![_speaker.jobTitle length]) {
-        newCell.jobTitleLabel.hidden = YES;
-    } else {
-        newCell.jobTitleLabel.hidden = NO;
+    if (indexPath.row >= 3)
+    {
+        DCEvent *event = [self eventForIndexPath:indexPath];
         
+        DCEventDetailViewController * detailController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
+        [detailController setEvent:event];
+        [self.navigationController pushViewController:detailController animated:YES];
     }
-    [newCell.nameLbl setText:_speaker.name];
-    [newCell.organizationLbl setText:_speaker.organizationName];
-    [newCell.jobTitleLbl setText:_speaker.jobTitle];
-    if ([_speaker.webSite length]) {
-        [newCell.webButton setHidden:NO];
-        [newCell.webButton addTarget:self action:@selector(openWebSite:) forControlEvents:UIControlEventTouchUpInside];
-    } else {
-        [newCell.webButton setHidden:YES];
-    }
-    
-    if ([_speaker.twitterName length]) {
-        [newCell.twitterButton addTarget:self action:@selector(openTwitterSite:) forControlEvents:UIControlEventTouchUpInside];
-        [newCell.twitterButton setHidden:NO];
-    } else {
-         [newCell.twitterButton setHidden:YES];
-    }
-    
 }
 
-- (void)openWebSite:(id)sender
+#pragma mark - User actions
+
+- (IBAction) buttonWebDidClick:(id)sender
 {
-    [[UIApplication sharedApplication]
-     openURL:[NSURL URLWithString:_speaker.webSite]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:_speaker.webSite]];
 }
 
-- (void)openTwitterSite:(id)sender
+- (IBAction) buttonTwitterDidClick:(id)sender
 {
     NSString *twitter = [NSString stringWithFormat:@"http://twitter.com/%@", _speaker.twitterName];
-    [[UIApplication sharedApplication]
-     openURL:[NSURL URLWithString:twitter]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:twitter]];
 }
+
+#pragma mark - UIWebViewDelegate
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    if (![self.cellsHeight objectForKey:self.lastIndexPath]) {
+    if (![self.cellsHeight objectForKey:self.descriptionCellIndexPath]) {
         float height = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight;"] floatValue];
-        [self.cellsHeight setObject:[NSNumber numberWithFloat:height] forKey:self.lastIndexPath];
-        [self updateCellAtIndexPath];
+        [self.cellsHeight setObject:[NSNumber numberWithFloat:height] forKey:self.descriptionCellIndexPath];
+        
+        [self.speakerTable beginUpdates];
+        [self.speakerTable reloadRowsAtIndexPaths:@[self.descriptionCellIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+        [self.speakerTable endUpdates];
     }
-    
 }
 
--(BOOL) webView:(UIWebView *)inWeb shouldStartLoadWithRequest:(NSURLRequest *)inRequest navigationType:(UIWebViewNavigationType)inType {
-    if ( inType == UIWebViewNavigationTypeLinkClicked ) {
+-(BOOL) webView:(UIWebView *)inWeb shouldStartLoadWithRequest:(NSURLRequest *)inRequest navigationType:(UIWebViewNavigationType)inType
+{
+    if ( inType == UIWebViewNavigationTypeLinkClicked )
+    {
         [[UIApplication sharedApplication] openURL:[inRequest URL]];
         return NO;
     }
     
     return YES;
-}
-
-- (void)updateCellAtIndexPath
-{
-    [self.speakerDetailTbl beginUpdates];
-    [self.speakerDetailTbl reloadRowsAtIndexPaths:@[self.lastIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-    [self.speakerDetailTbl endUpdates];
-}
-
-
-- (void)updateFavoriteItemsInIndexPath:(NSIndexPath *)anIndexPath
-                             withValue:(BOOL)isFavorite {
-    DCEvent * event = [self eventFromIndexPath:anIndexPath];
-    event.favorite = [NSNumber numberWithBool:isFavorite];
-    if (isFavorite) {
-        [[DCMainProxy sharedProxy]
-         addToFavoriteEvent:event];
-    } else {
-        [[DCMainProxy sharedProxy]
-         removeFavoriteEventWithID:event.eventID];
-    }
-    
-}
-
-- (DCEvent *)eventFromIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row && ![self isLastRow:indexPath.row]) {
-        return [self.events objectAtIndex:indexPath.row - 1];
-    }
-    return nil;
-}
-#pragma mark -
-
-- (BOOL)isLastRow:(NSInteger)row
-{
-    return (row == _events.count + 1);
 }
 
 @end

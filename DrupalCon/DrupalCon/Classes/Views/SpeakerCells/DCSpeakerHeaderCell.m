@@ -21,20 +21,37 @@
 //
 
 #import "DCSpeakerHeaderCell.h"
+#import "UIImageView+WebCache.h"
 #import "UIImageView+DC.h"
+#import "DCSpeaker.h"
 
 @implementation DCSpeakerHeaderCell
 
-
 - (void)awakeFromNib
 {
-    [_pictureImg cutCircle];
-    [_pictureImg addCircuitWidth:2.0 color:[UIColor whiteColor]];
+    [self.photoImageView cutCircle];
 }
 
-+ (float)cellHeight
+- (void) initData:(DCSpeaker *)speaker
 {
-    return 210.0;
+        // Photo image
+    [self.photoImageView sd_setImageWithURL:[NSURL URLWithString:speaker.avatarPath]
+                          placeholderImage: [UIImage imageNamed:@"avatar_placeholder"]
+                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                     dispatch_async(dispatch_get_main_queue(), ^{
+                                         [self setNeedsDisplay];
+                                     });
+                                     
+                                 }];
+    
+        // Name text
+    self.nameLabel.text = speaker.name;
+    
+        // Job and Company text
+    NSMutableString *jobAndCompany = speaker.jobTitle.length ? [speaker.jobTitle mutableCopy] : @"";
+    if (speaker.organizationName.length)
+        [jobAndCompany appendString:[NSString stringWithFormat:@" at %@", speaker.organizationName]];
+    self.jobAndCompanyLabel.text = jobAndCompany;
 }
 
 @end

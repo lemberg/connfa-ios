@@ -21,18 +21,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DCSpeaker.h"
 
 @interface DCSpeakerHeaderCell : UITableViewCell
 
-@property (nonatomic, weak) IBOutlet UIImageView * pictureImg;
-@property (nonatomic, weak) IBOutlet UILabel * nameLbl;
-@property (nonatomic, weak) IBOutlet UILabel * organizationLbl;
-@property (nonatomic, weak) IBOutlet UILabel * jobTitleLbl;
-@property (weak, nonatomic) IBOutlet UIButton *webButton;
-@property (weak, nonatomic) IBOutlet UIButton *twitterButton;
-@property (weak, nonatomic) IBOutlet UILabel *organizationTitleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *jobTitleLabel;
+@property (nonatomic, weak) IBOutlet UIImageView * photoImageView;
+@property (nonatomic, weak) IBOutlet UILabel * nameLabel;
+@property (nonatomic, weak) IBOutlet UILabel * jobAndCompanyLabel;
 
-+ (float)cellHeight;
+- (void) initData:(DCSpeaker*)speaker;
 
 @end

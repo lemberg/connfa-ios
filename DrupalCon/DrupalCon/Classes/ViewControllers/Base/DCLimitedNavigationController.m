@@ -64,9 +64,11 @@ CompletionBlock completion;
 {
     self.backPressCount++;
     
+    return YES;
+    
     if ((self.backPressCount == MAX_DEPTH) || (self.viewControllers.count == 2))
     {
-        [self dismissViewControllerAnimated:YES completion:completion];
+        [self dismissViewControllerAnimated:YES completion:nil];
         return NO;
     }
     else

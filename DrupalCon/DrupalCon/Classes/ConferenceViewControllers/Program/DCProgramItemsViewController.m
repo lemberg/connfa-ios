@@ -360,6 +360,7 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
     DCLimitedNavigationController * navContainer = [[DCLimitedNavigationController alloc] initWithRootViewController:detailController completion:^{
         [self.tablewView reloadData];
     }];
+    //UINavigationController* navContainer = [[UINavigationController alloc] initWithRootViewController:detailController];
     [navContainer setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     
     [[DCAppFacade shared].mainNavigationController presentViewController: navContainer animated:YES completion:nil];

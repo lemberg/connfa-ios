@@ -21,22 +21,17 @@
 //
 
 #import "DCSpeakerEventCell.h"
+#import "DCTrack.h"
+#import "DCLevel.h"
+
 @interface DCSpeakerEventCell ()
 
-@property (strong, nonatomic) FavoriteButtonPressedCallback favoriteBtnCallback;
-
 @end
+
+
+
 @implementation DCSpeakerEventCell
 
-//- (void)awakeFromNib
-//{
-////    [super awakeFromNib];
-//    [self DC_setStarImage];
-//    UIView *bgColorView = [[UIView alloc] init];
-//    float value = 238./255.;
-//    bgColorView.backgroundColor = [UIColor colorWithRed:value green:value blue:value alpha:1.0];
-//    [self setSelectedBackgroundView:bgColorView];
-//}
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -45,28 +40,60 @@
     if (selected)
     {
         [self setSelected:NO animated:YES];
-//        self.favorite = !self.isFavorite;
-//        [self DC_setStarImage];
-//        if (self.favoriteBtnCallback) {
-//           self.favoriteBtnCallback(self, self.isFavorite);
-//        }
-        [self favoriteBtnPress:self.favoriteButton];
+
+        // favorite button press handle
     }
 }
 
-//- (void)DC_setStarImage
-//{
-//    if (self.isFavorite)
-//        [_starImg setImage:[UIImage imageNamed:@"star_on"]];
-//
-//    else
-//        [_starImg setImage:[UIImage imageNamed:@"star_off"]];
-//
-//}
-
-+ (float)cellHeight
+- (void) initData:(DCEvent*)event
 {
-    return 95;
+        // event Name
+    self.eventNameLabel.text = event.name;
+    
+        // event Date
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat: @"MM-dd HH:mm"];
+    NSString *date = event.date ? [formatter stringFromDate: event.date] : @"";
+    NSString *place = event.place ? event.place : @"";
+    
+    if (date.length && place.length)
+        self.eventTimeLabel.text = [NSString stringWithFormat: @"%@ in %@", date, place];
+    else
+        self.eventTimeLabel.text = [NSString stringWithFormat: @"%@%@", date, place];
+    
+        // event Track
+    self.eventTrackLabel.text = [(DCTrack*)[event.tracks anyObject] name];
+    
+        // event experience Level
+    
+    if (event.level.name.length)
+    {
+        self.eventLevelLabel.text = [NSString stringWithFormat:@"Experience level: %@", event.level.name];
+        UIImage* icon = nil;
+        switch (event.level.levelId.integerValue)
+        {
+            case 1:
+                icon = [UIImage imageNamed:@"ic_experience_beginner"];
+                break;
+            case 2:
+                icon = [UIImage imageNamed:@"ic_experience_intermediate"];
+                break;
+            case 3:
+                icon = [UIImage imageNamed:@"ic_experience_advanced"];
+                break;
+            default:
+                break;
+        }
+        self.experienceIcon.image = icon;
+    } else
+    {
+        self.eventLevelLabel.text = nil;
+        self.experienceIcon.hidden = YES;
+        self.experienceIcon.frame = CGRectZero;
+    }
+
 }
+
+
 
 @end

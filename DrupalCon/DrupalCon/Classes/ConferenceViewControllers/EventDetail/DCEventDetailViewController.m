@@ -298,9 +298,9 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
     
     DCSpeakersDetailViewController * speakerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SpeakersDetailViewController"];
     speakerViewController.speaker = self.speakers[indexPath.row];
-    [speakerViewController didCloseWithCallback:^{
+    speakerViewController.closeCallback = ^{
         [self.detailTable reloadData];
-    }];
+    };
     [self.navigationController pushViewController:speakerViewController animated:YES];
 }
 

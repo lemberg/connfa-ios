@@ -147,9 +147,9 @@
     DCSpeakersDetailViewController * detailController = [self.storyboard instantiateViewControllerWithIdentifier:@"SpeakersDetailViewController"];
     [detailController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     detailController.speaker = _speakers[indexPath.row];
-    [detailController didCloseWithCallback:^{
+    detailController.closeCallback = ^{
         [self.speakersTbl reloadData];
-    }];
+    };
     [[(AppDelegate*)[[UIApplication sharedApplication] delegate] window].rootViewController presentViewController:detailController animated:YES completion:nil];
 
 }
