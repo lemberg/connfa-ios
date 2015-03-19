@@ -34,13 +34,16 @@
 
 #define kMenuItemTitle              @"MenuItemTitle"
 #define kMenuItemIcon               @"MenuItemIcon"
+#define kMenuItemSelectedIcon       @"MenuItemSelectedIcon"
 #define kMenuItemControllerId       @"MenuItemControllerId"
 
 
 @interface DCSideMenuViewController ()
 
-@property (nonatomic, strong) NSArray *arrayOfCaptions;
+@property (nonatomic, weak) IBOutlet UITableView* tableView;
 
+@property (nonatomic, strong) NSArray *arrayOfCaptions;
+@property (nonatomic, strong) NSIndexPath* activeCellPath;
 @property (nonatomic, strong) DCEvent *event;
 
 @end
@@ -55,54 +58,59 @@
     [super viewDidLoad];
     
     self.arrayOfCaptions = @[
-                                @{ kMenuItemTitle: @"Schedule",
-                                   kMenuItemIcon: @"",
+                                @{ kMenuItemTitle: @"Sessions",
+                                   kMenuItemIcon: @"menu_icon_program",
+                                   kMenuItemSelectedIcon: @"menu_icon_program_sel",
                                    kMenuItemControllerId: @"ProgramViewController"
                                    },
                                 @{
                                     kMenuItemTitle: @"BoFs",
-                                    kMenuItemIcon: @"",
+                                    kMenuItemIcon: @"menu_icon_bofs",
+                                    kMenuItemSelectedIcon: @"menu_icon_bofs_sel",
                                     kMenuItemControllerId: @"ProgramViewController"
                                     },
                                 @{
                                     kMenuItemTitle: @"Social Events",
-                                    kMenuItemIcon: @"",
+                                    kMenuItemIcon: @"menu_icon_social",
+                                    kMenuItemSelectedIcon: @"menu_icon_social_sel",
                                     kMenuItemControllerId: @""
                                     },
                                 @{
                                     kMenuItemTitle: @"Speakers",
-                                    kMenuItemIcon: @"",
+                                    kMenuItemIcon: @"menu_icon_speakers",
+                                    kMenuItemSelectedIcon: @"menu_icon_speakers_sel",
                                     kMenuItemControllerId: @"SpeakersViewController"
                                     },
                                 @{
                                     kMenuItemTitle: @"My Schedule",
-                                    kMenuItemIcon: @"",
+                                    kMenuItemIcon: @"menu_icon_my_schedule",
+                                    kMenuItemSelectedIcon: @"menu_icon_my_schedule_sel",
                                     kMenuItemControllerId: @"FavoritesViewController"
                                     },
                                 @{
                                     kMenuItemTitle: @"Location",
-                                    kMenuItemIcon: @"",
+                                    kMenuItemIcon: @"menu_icon_location",
+                                    kMenuItemSelectedIcon: @"menu_icon_location_sel",
                                     kMenuItemControllerId: @"LocationViewController"
                                     },
                                 @{
-                                    kMenuItemTitle: @"Twitter",
-                                    kMenuItemIcon: @"",
-                                    kMenuItemControllerId: @""
-                                    },
-                                @{
                                     kMenuItemTitle: @"Points of Interest",
-                                    kMenuItemIcon: @"",
+                                    kMenuItemIcon: @"menu_icon_points",
+                                    kMenuItemSelectedIcon: @"menu_icon_points_sel",
                                     kMenuItemControllerId: @""
                                     },
                                 @{
                                     kMenuItemTitle: @"Info",
-                                    kMenuItemIcon: @"",
+                                    kMenuItemIcon: @"menu_icon_about",
+                                    kMenuItemSelectedIcon: @"menu_icon_about_sel",
                                     kMenuItemControllerId: @"AboutViewController"
                                     }
                              ];
     
     //our first menu item is Program, this is actually the screen that we should see right after the login page, thats why lets just add it on top as if the user alerady selected it
-    [self showViewControllerAssociatedWithMenuItem:DCMENU_PROGRAM_ITEM];
+    
+    self.activeCellPath = [NSIndexPath indexPathForRow:DCMENU_PROGRAM_ITEM inSection:0];
+    [self tableView:self.tableView didSelectRowAtIndexPath:self.activeCellPath];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -174,6 +182,16 @@
 
 #pragma mark - UITableView delegate
 
+- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return [tableView dequeueReusableCellWithIdentifier: @"SideMenuHeaderId"];
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return [UIImage imageNamed:@"nav_header"].size.height;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cellIdentifier = @"SideMenuCellIdentifier";
     
@@ -181,13 +199,13 @@
     
     NSDictionary *itemDict   = [self.arrayOfCaptions objectAtIndex: indexPath.row];
     cell.captionLabel.text   = itemDict[kMenuItemTitle];
-    cell.leftImageView.image = [UIImage imageNamed:itemDict[kMenuItemIcon]];
     
-    //Selection style
+    BOOL isActiveCell = indexPath.row == self.activeCellPath.row;
+    cell.leftImageView.image = [UIImage imageNamed:itemDict[isActiveCell ? kMenuItemSelectedIcon : kMenuItemIcon]];
+    cell.captionLabel.textColor = isActiveCell ? NAV_BAR_COLOR : MENU_DESELECTED_ITEM_TITLE_COLOR;
     
-    UIView *selectedBackgroundView = [[UIView alloc] initWithFrame: cell.bounds];
-    selectedBackgroundView.backgroundColor = MENU_SELECTION_COLOR;
-    cell.selectedBackgroundView = selectedBackgroundView;
+        //Selection style
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     cell.separatorView.hidden = !(indexPath.row % 3 == 2);
     
@@ -195,13 +213,30 @@
     
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+        // Change cells view to display Selection 
+    DCSideMenuCell* lastSelected = (DCSideMenuCell*)[tableView cellForRowAtIndexPath:self.activeCellPath];
+    DCSideMenuCell* newSelected = (DCSideMenuCell*)[tableView cellForRowAtIndexPath:indexPath];
+    
+    lastSelected.leftImageView.image = [UIImage imageNamed:[self.arrayOfCaptions objectAtIndex: self.activeCellPath.row][kMenuItemIcon]];
+    lastSelected.captionLabel.textColor = MENU_DESELECTED_ITEM_TITLE_COLOR;
+    
+    newSelected.leftImageView.image = [UIImage imageNamed:[self.arrayOfCaptions objectAtIndex: indexPath.row][kMenuItemSelectedIcon]];
+    newSelected.captionLabel.textColor = NAV_BAR_COLOR;
+    
+    self.activeCellPath = indexPath;
+    
     [self showViewControllerAssociatedWithMenuItem:(DCMenuSection)indexPath.row];
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return DCMENU_ITEMS_COUNT;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
 }
 
 @end

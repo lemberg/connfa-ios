@@ -259,7 +259,6 @@ static NSString *eventCellId = @"SpeakerEventCellId";
         }
         else
         {
-            NSLog(@"offset: %f", offset);
             self.backgroundViewTop.constant = -offset/2;
 
             float delta = 50;
