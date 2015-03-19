@@ -21,12 +21,13 @@
 //
 
 #import "DCSpeakersViewController.h"
-#import "AppDelegate.h"
+#import "DCAppFacade.h"
 #import "DCSpeakersDetailViewController.h"
 #import "DCSpeakerCell.h"
 #import "DCMainProxy+Additions.h"
 #import "DCSpeaker+DC.h"
 #import "UIImageView+WebCache.h"
+#import "DCLimitedNavigationController.h"
 
 @interface DCSpeakersViewController ()
 
@@ -42,9 +43,7 @@
 {
     [super viewDidLoad];
     [self reload];
-
 }
-
 
 #pragma mark - UISearchBarDelegate
 
@@ -106,7 +105,7 @@
     static NSString * cellIdSpeaker = @"DetailCellIdentifierSpeaker";
     DCSpeakerCell *_cell = (DCSpeakerCell*)[tableView dequeueReusableCellWithIdentifier: cellIdSpeaker];
     
-    DCSpeaker * speaker = [self.fetchedResultsController objectAtIndexPath:indexPath];//_speakers[indexPath.row];
+    DCSpeaker * speaker = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     [_cell.nameLbl setText:speaker.name];
     
@@ -144,14 +143,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     DCSpeakersDetailViewController * detailController = [self.storyboard instantiateViewControllerWithIdentifier:@"SpeakersDetailViewController"];
-    [detailController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-    detailController.speaker = _speakers[indexPath.row];
-    detailController.closeCallback = ^{
+    detailController.speaker = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    DCLimitedNavigationController * navContainer = [[DCLimitedNavigationController alloc] initWithRootViewController:detailController completion:^{
         [self.speakersTbl reloadData];
-    };
-    [[(AppDelegate*)[[UIApplication sharedApplication] delegate] window].rootViewController presentViewController:detailController animated:YES completion:nil];
-
+    }];
+    [navContainer setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+    
+    [[DCAppFacade shared].mainNavigationController presentViewController: navContainer animated:YES completion:nil];
 }
 
 - (NSSortDescriptor *)sortDescriptor {

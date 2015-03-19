@@ -57,23 +57,26 @@ CompletionBlock completion;
 
 - (void) navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    self.backPressCount = 0;
+    if (![self.viewControllers containsObject:viewController])
+        self.backPressCount = 0;
 }
 
 - (BOOL)navigationBar:(UINavigationBar *)navigationBar shouldPopItem:(UINavigationItem *)item
 {
     self.backPressCount++;
     
-    return YES;
-    
     if ((self.backPressCount == MAX_DEPTH) || (self.viewControllers.count == 2))
     {
         [self dismissViewControllerAnimated:YES completion:nil];
         return NO;
     }
-    else
+    else // just do as usual...
     {
-        return YES;
+            //  UINavigationController doesn't declare it's a delegate, so we
+            //  have to do this ugliness…
+        BOOL (*f)(id, SEL, ...) = [UINavigationController instanceMethodForSelector: _cmd];
+        BOOL shouldPop = f(self, _cmd, navigationBar, item);
+        return shouldPop;
     }
 }
 
