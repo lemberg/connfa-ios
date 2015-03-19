@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--First Load View Controller-->
@@ -1060,8 +1061,8 @@
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Senior Developer Engineer at Global Logic" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="BKV-14-MhG" userLabel="Job and Company label">
-                                                    <rect key="frame" x="20" y="150" width="280" height="17"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Senior Developer Engineer at Global Logic" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="BKV-14-MhG" userLabel="Job and Company label">
+                                                    <rect key="frame" x="20" y="150" width="280" height="19"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -1234,15 +1235,36 @@
                                     <outlet property="delegate" destination="mhH-N1-zUD" id="j9p-hk-FD7"/>
                                 </connections>
                             </tableView>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yAB-x7-NVo" userLabel="nav bar background">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vesa Palmu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="viA-4Q-gbV" userLabel="Speaker name">
+                                        <rect key="frame" x="50" y="30" width="220" height="24"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.11372549019607843" green="0.18431372549019609" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="viA-4Q-gbV" secondAttribute="trailing" constant="50" id="8a7-oB-MXj"/>
+                                    <constraint firstItem="viA-4Q-gbV" firstAttribute="leading" secondItem="yAB-x7-NVo" secondAttribute="leading" constant="50" id="Hin-Ut-uWK"/>
+                                    <constraint firstAttribute="height" constant="64" id="XkE-g8-Svo"/>
+                                    <constraint firstAttribute="centerY" secondItem="viA-4Q-gbV" secondAttribute="centerY" constant="-10" id="eUl-HR-IgO"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="yAB-x7-NVo" firstAttribute="left" secondItem="2K9-Ec-kxO" secondAttribute="left" id="7Qd-Pa-HuB"/>
                             <constraint firstItem="fTr-RI-DFn" firstAttribute="top" secondItem="2K9-Ec-kxO" secondAttribute="top" id="7fz-6w-COx"/>
                             <constraint firstItem="Rvm-Lp-Fs2" firstAttribute="leading" secondItem="2K9-Ec-kxO" secondAttribute="leading" id="ATb-yF-XZy"/>
                             <constraint firstItem="fTr-RI-DFn" firstAttribute="leading" secondItem="2K9-Ec-kxO" secondAttribute="leading" id="BcS-dj-BGR"/>
                             <constraint firstAttribute="bottom" secondItem="Rvm-Lp-Fs2" secondAttribute="bottom" id="Hoj-p6-pLM"/>
                             <constraint firstItem="Rvm-Lp-Fs2" firstAttribute="top" secondItem="2K9-Ec-kxO" secondAttribute="top" id="M3y-DD-yuZ"/>
+                            <constraint firstItem="yAB-x7-NVo" firstAttribute="top" secondItem="2K9-Ec-kxO" secondAttribute="topMargin" id="Tah-w8-alZ"/>
                             <constraint firstAttribute="trailing" secondItem="fTr-RI-DFn" secondAttribute="trailing" id="aYs-ze-s9F"/>
+                            <constraint firstAttribute="right" secondItem="yAB-x7-NVo" secondAttribute="right" id="gVB-3z-QQt"/>
                             <constraint firstAttribute="trailing" secondItem="Rvm-Lp-Fs2" secondAttribute="trailing" id="wec-DM-LeD"/>
                         </constraints>
                     </view>
@@ -1250,6 +1272,8 @@
                         <outlet property="backgroundView" destination="fTr-RI-DFn" id="xCr-Q6-eTR"/>
                         <outlet property="backgroundViewHeight" destination="lZg-vr-eEn" id="4M3-N9-rSz"/>
                         <outlet property="backgroundViewTop" destination="7fz-6w-COx" id="kvP-R5-fdn"/>
+                        <outlet property="navBarBackgroundTitleLabel" destination="viA-4Q-gbV" id="Ig5-4t-HMl"/>
+                        <outlet property="navBarBackgroundView" destination="yAB-x7-NVo" id="WTd-Tb-lVx"/>
                         <outlet property="speakerTable" destination="Rvm-Lp-Fs2" id="mZP-Q5-0ny"/>
                     </connections>
                 </viewController>

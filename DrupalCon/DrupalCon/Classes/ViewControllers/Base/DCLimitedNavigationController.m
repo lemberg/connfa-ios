@@ -52,14 +52,14 @@ CompletionBlock completion;
     self.navigationBar.translucent = YES;
 }
 
-#pragma mark - UINavigationController delegate
-
-
-- (void) navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+- (void) pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    if (![self.viewControllers containsObject:viewController])
-        self.backPressCount = 0;
+    [super pushViewController:viewController animated:animated];
+    
+    self.backPressCount = 0;
 }
+
+#pragma mark - UINavigationController delegate
 
 - (BOOL)navigationBar:(UINavigationBar *)navigationBar shouldPopItem:(UINavigationItem *)item
 {

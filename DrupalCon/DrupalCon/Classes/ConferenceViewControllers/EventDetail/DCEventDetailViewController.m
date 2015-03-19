@@ -337,8 +337,23 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
         BOOL shouldMoveToTop = (offset > 0) && (-self.topBackgroundTop.constant*2 < topStopPoint);
         BOOL shouldMoveToBottom = (offset < 0) && (self.topBackgroundTop.constant < 0);
         
-        self.topBackgroundShadowView.alpha = (self.topBackgroundTop.constant / (-topStopPoint/2)) * 0.85;
+            // Nav bar background alpha setting
+        float delta = 5;
+        float maxAlpha = 0.8;
+        float alpha;
         
+        if ((-self.topBackgroundTop.constant <= topStopPoint/2) &&
+            (-self.topBackgroundTop.constant >= topStopPoint/2-delta))
+        {
+            alpha = (1 - (topStopPoint/2 + self.topBackgroundTop.constant)/delta) * maxAlpha;
+        }
+        else
+        {
+            alpha = (-self.topBackgroundTop.constant >= topStopPoint/2) ? maxAlpha : 0;
+        }
+        self.topBackgroundShadowView.alpha = alpha;
+        
+            // constraints setting
         if (shouldMoveToTop)
         {
             self.topBackgroundTop.constant -= scrollView.contentOffset.y/2;

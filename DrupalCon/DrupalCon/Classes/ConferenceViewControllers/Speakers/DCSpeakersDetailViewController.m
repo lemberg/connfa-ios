@@ -51,6 +51,8 @@ static NSString *eventCellId = @"SpeakerEventCellId";
 
 @property (nonatomic, weak) IBOutlet UITableView * speakerTable;
 @property (nonatomic, weak) IBOutlet UIImageView * backgroundView;
+@property (nonatomic, weak) IBOutlet UIView * navBarBackgroundView;
+@property (nonatomic, weak) IBOutlet UILabel * navBarBackgroundTitleLabel;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *backgroundViewHeight;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *backgroundViewTop;
@@ -86,6 +88,9 @@ static NSString *eventCellId = @"SpeakerEventCellId";
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
+    
+    self.navBarBackgroundView.alpha = 0;
+    self.navBarBackgroundTitleLabel.text = self.speaker.name;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -129,6 +134,7 @@ static NSString *eventCellId = @"SpeakerEventCellId";
             
             CGFloat height = [cellPrototype.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
             
+            [self.cellsHeight setObject:[NSNumber numberWithFloat:height] forKey:headerCellId];
             self.backgroundViewHeight.constant = height;
             
             return height;
@@ -235,6 +241,43 @@ static NSString *eventCellId = @"SpeakerEventCellId";
 {
     NSString *twitter = [NSString stringWithFormat:@"http://twitter.com/%@", _speaker.twitterName];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:twitter]];
+}
+
+#pragma mark - UIScrollView delegate
+
+- (void) scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView == self.speakerTable)
+    {
+        float showNavBarPoint = [[self.cellsHeight objectForKey:headerCellId] floatValue];
+        float offset = scrollView.contentOffset.y;
+        
+
+        if (offset < 0)
+        {
+            [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0) animated:NO];
+        }
+        else
+        {
+            NSLog(@"offset: %f", offset);
+            self.backgroundViewTop.constant = -offset/2;
+
+            float delta = 50;
+            float maxAlpha = 0.8;
+            float alpha;
+            
+            if ((offset <= showNavBarPoint) && (offset >= showNavBarPoint-delta))
+            {
+                alpha = (1 - (showNavBarPoint - offset)/delta) * maxAlpha;
+            }
+            else
+            {
+                alpha = (offset >= showNavBarPoint) ? maxAlpha : 0;
+            }
+            self.navBarBackgroundView.alpha = alpha;
+        }
+    }
+
 }
 
 #pragma mark - UIWebViewDelegate
