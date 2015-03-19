@@ -1103,6 +1103,9 @@
                                                     <state key="normal" image="website">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="buttonWebDidClick:" destination="mhH-N1-zUD" eventType="touchUpInside" id="McQ-XR-yCu"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rMS-hp-Ch4" userLabel="Button-twitter">
                                                     <rect key="frame" x="122" y="0.0" width="90" height="31"/>
@@ -1113,6 +1116,9 @@
                                                     <state key="normal" image="twitter">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="buttonTwitterDidClick:" destination="mhH-N1-zUD" eventType="touchUpInside" id="RmT-8M-VpW"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
