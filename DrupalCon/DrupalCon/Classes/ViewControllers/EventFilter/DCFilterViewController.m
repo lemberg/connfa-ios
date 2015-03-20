@@ -48,6 +48,9 @@
 {
     [super viewDidLoad];
     
+        // this done to make Status bar white; status bar depends on Navigation bar style, because this VC is inside Navigation controller
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+    
     self.levels = [[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCLevel class] inMainQueue:YES];
     self.tracks = [[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCTrack class] inMainQueue:YES];
     
@@ -61,6 +64,12 @@
         // show buttons just now to avoid "jump" affect
     [self.navigationItem setLeftBarButtonItem:self.cancelButton animated:YES];
     [self.navigationItem setRightBarButtonItem:self.doneButton animated:YES];
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+        // this method is called when NavController is dismissed; status bar of previous controller will be white
+    return UIStatusBarStyleLightContent;
 }
 
 #pragma mark - Private

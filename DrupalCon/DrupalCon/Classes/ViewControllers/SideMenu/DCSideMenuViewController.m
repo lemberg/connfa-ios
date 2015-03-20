@@ -29,6 +29,7 @@
 #import "DCProgramViewController.h"
 #import "UIConstants.h"
 #import "DCFavoritesViewController.h"
+#import "DCLimitedNavigationController.h"
 
 @class DCEvent;
 
@@ -93,24 +94,33 @@
                                     kMenuItemSelectedIcon: @"menu_icon_location_sel",
                                     kMenuItemControllerId: @"LocationViewController"
                                     },
-                                @{
-                                    kMenuItemTitle: @"Points of Interest",
-                                    kMenuItemIcon: @"menu_icon_points",
-                                    kMenuItemSelectedIcon: @"menu_icon_points_sel",
-                                    kMenuItemControllerId: @""
-                                    },
+//                                @{
+//                                    kMenuItemTitle: @"Points of Interest",
+//                                    kMenuItemIcon: @"menu_icon_points",
+//                                    kMenuItemSelectedIcon: @"menu_icon_points_sel",
+//                                    kMenuItemControllerId: @""
+//                                    },
                                 @{
                                     kMenuItemTitle: @"Info",
                                     kMenuItemIcon: @"menu_icon_about",
                                     kMenuItemSelectedIcon: @"menu_icon_about_sel",
-                                    kMenuItemControllerId: @"AboutViewController"
+                                    kMenuItemControllerId: @"InfoViewController"
                                     }
                              ];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuStateDidChange:)
+                                                 name:MFSideMenuStateNotificationEvent
+                                               object:nil];
     
     //our first menu item is Program, this is actually the screen that we should see right after the login page, thats why lets just add it on top as if the user alerady selected it
     
     self.activeCellPath = [NSIndexPath indexPathForRow:DCMENU_PROGRAM_ITEM inSection:0];
     [self tableView:self.tableView didSelectRowAtIndexPath:self.activeCellPath];
+}
+
+- (void) dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -128,14 +138,41 @@
 
 #pragma mark - Private
 
+- (void) menuStateDidChange:(NSNotification*)notification
+{
+    NSDictionary *dict = [notification userInfo];
+    MFSideMenuStateEvent eventType = (MFSideMenuStateEvent)[dict[@"eventType"] integerValue];
+    
+    if (eventType == MFSideMenuStateEventMenuDidClose)
+        [self.sideMenuContainer.leftMenuViewController setNeedsStatusBarAppearanceUpdate];
+    else if (eventType == MFSideMenuStateEventMenuDidOpen)
+        [self setNeedsStatusBarAppearanceUpdate];
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleDefault;
+}
+
 - (void) showViewControllerAssociatedWithMenuItem:(DCMenuSection)menuItem
 {
     NSString *storyboardControllerID = self.arrayOfCaptions[menuItem][kMenuItemControllerId];
     NSAssert(storyboardControllerID.length, @"No Storyboard ID for Menu item view controller");
     
     DCBaseViewController* rootMenuVC = [self getViewController:menuItem];
-    UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController: rootMenuVC];
-    [self arrangeNavigationBarForController: rootMenuVC menuItem:menuItem];
+    UINavigationController* navigationController;
+    
+    if (menuItem == DCMENU_INFO_ITEM)
+    {
+        navigationController = [[DCLimitedNavigationController alloc] initWithRootViewController:rootMenuVC dismissAction:^{
+            [self leftSideMenuButtonPressed:nil];
+        } depth:-1];
+    }
+    else
+    {
+        navigationController = [[UINavigationController alloc] initWithRootViewController: rootMenuVC];
+        [self arrangeNavigationBarForController: rootMenuVC menuItem:menuItem];
+    }
     
     self.sideMenuContainer.centerViewController = navigationController;
     [self.sideMenuContainer setMenuState:MFSideMenuStateClosed completion:nil];
@@ -231,7 +268,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return DCMENU_ITEMS_COUNT;
+    return self.arrayOfCaptions.count;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

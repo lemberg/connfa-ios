@@ -48,9 +48,9 @@
     self.nameLabel.text = speaker.name;
     
         // Job and Company text
-    NSMutableString *jobAndCompany = speaker.jobTitle.length ? [speaker.jobTitle mutableCopy] : @"";
+    NSMutableString *jobAndCompany = speaker.jobTitle.length ? [speaker.jobTitle mutableCopy] : [@"" mutableCopy];
     if (speaker.organizationName.length)
-        [jobAndCompany appendString:[NSString stringWithFormat:@" at %@", speaker.organizationName]];
+        [jobAndCompany appendString: speaker.jobTitle.length ? [NSString stringWithFormat:@" at %@", speaker.organizationName] : speaker.organizationName];
     self.jobAndCompanyLabel.text = jobAndCompany;
 }
 

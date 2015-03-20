@@ -358,6 +358,7 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
     [detailController setEvent:event];
     
     DCLimitedNavigationController * navContainer = [[DCLimitedNavigationController alloc] initWithRootViewController:detailController completion:^{
+        [self setNeedsStatusBarAppearanceUpdate];
         [self.tablewView reloadData];
     }];
     [navContainer setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];

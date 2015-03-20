@@ -10,7 +10,7 @@
 #import "DCSideMenuViewController.h"
 #import "MFSideMenuContainerViewController.h"
 #import "DCAppFacade.h"
-
+#import "DCLimitedNavigationController.h"
 
 @interface DCMainNavigationController ()
 
@@ -41,6 +41,40 @@
                                                                                              leftMenuViewController: sideMenuViewController
                                                                                             rightMenuViewController: nil];
     [self pushViewController:sideMenuViewController.sideMenuContainer animated: animated];
+}
+
+-(UIViewController *)childViewControllerForStatusBarStyle
+{
+    if ([self.visibleViewController isKindOfClass:[MFSideMenuContainerViewController class]])
+    {
+        MFSideMenuContainerViewController* topController = (MFSideMenuContainerViewController*)self.visibleViewController;
+        
+        UIViewController* menuController = topController.leftMenuViewController;
+        UIViewController* sideController = topController.centerViewController;
+        
+            // asks for Statur Bar for SideMenuController
+        if (menuController && [sideController isKindOfClass:[NSNull class]])
+            return menuController;
+
+        if (topController.menuState == MFSideMenuStateClosed)
+        {
+            if ([sideController isKindOfClass:[UINavigationController class]])
+            {
+                // asks for Statur Bar for SideMenu Item viewController
+                return [(UINavigationController*)sideController visibleViewController];
+            }
+        }
+        else
+        {
+            return menuController;
+        }
+    }
+    else
+    {
+        return self.visibleViewController;
+    }
+    
+    return self.visibleViewController;
 }
 
 @end

@@ -85,6 +85,11 @@
 
 #pragma mark - Private
 
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
 - (void) arrangeNavigationBar
 {
     [super arrangeNavigationBar];

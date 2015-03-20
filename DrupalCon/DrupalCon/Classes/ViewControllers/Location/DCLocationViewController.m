@@ -54,8 +54,13 @@
     [self setLayout];
     self.location = [[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCLocation class] inMainQueue:YES] lastObject];
     [self updateLocation];
-
 }
+
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
 - (void)updateLocation {
     [self setAnnotation];
     self.addressHeader.attributedText = [self DC_headerAttrString];

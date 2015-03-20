@@ -79,6 +79,11 @@
     [self DC_checkEmptyness];
 }
 
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
 static NSString *const cellIdSpeech = @"ProgramCellIdentifierSpeech";
 static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
 

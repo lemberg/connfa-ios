@@ -72,7 +72,7 @@ static NSString *eventCellId = @"SpeakerEventCellId";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     self.cellsHeight = [NSMutableDictionary dictionary];
     
     self.cellPrototypes = @{eventCellId : [self.speakerTable dequeueReusableCellWithIdentifier:eventCellId],
@@ -101,6 +101,11 @@ static NSString *eventCellId = @"SpeakerEventCellId";
     {
         self.closeCallback();
     }
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleDefault;
 }
 
 #pragma mark - Private

@@ -140,6 +140,11 @@
     
 }
 
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -148,6 +153,7 @@
     detailController.speaker = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     DCLimitedNavigationController * navContainer = [[DCLimitedNavigationController alloc] initWithRootViewController:detailController completion:^{
+        [self setNeedsStatusBarAppearanceUpdate];
         [self.speakersTbl reloadData];
     }];
     [navContainer setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];

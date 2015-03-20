@@ -106,6 +106,11 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
         self.closeCallback();
 }
 
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleDefault;
+}
+
 #pragma mark - UI initialization
 
 - (void) updateEventDetailsData

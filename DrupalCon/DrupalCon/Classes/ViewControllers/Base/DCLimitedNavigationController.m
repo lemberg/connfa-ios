@@ -8,9 +8,14 @@
 
 #import "DCLimitedNavigationController.h"
 
-#define MAX_DEPTH 2
+#define DEFAULT_MAX_DEPTH 2
 
+    // block that performs after NavigationController Dismisses
 CompletionBlock completion;
+
+    // block that performs when NavigationController should dismiss. If it isn't nil, developer is responsible for
+    // hiding NavigationController. CompletionBlock won't be performed in this case
+BackButtonBlock dismissAction;
 
 
 @interface DCLimitedNavigationController ()
@@ -22,12 +27,33 @@ CompletionBlock completion;
 
 @implementation DCLimitedNavigationController
 
-- (instancetype) initWithRootViewController:(UIViewController *)rootViewController completion:(CompletionBlock)aBlock
+- (instancetype) initWithRootViewController:(UIViewController *)rootViewController completion:(CompletionBlock)aBlock depth:(NSInteger)maxDepth
 {
     self = [super initWithRootViewController:rootViewController];
     if (self)
     {
         completion = aBlock;
+        dismissAction = nil;
+        
+        self.maxDepth = (maxDepth >= 2) ? maxDepth : DEFAULT_MAX_DEPTH;
+    }
+    return self;
+}
+
+- (instancetype) initWithRootViewController:(UIViewController *)rootViewController
+                                 completion:(CompletionBlock)aBlock
+{
+    return [self initWithRootViewController:rootViewController completion:aBlock depth:-1];
+}
+
+- (instancetype) initWithRootViewController:(UIViewController *)rootViewController
+                              dismissAction:(BackButtonBlock)aBlock
+                                      depth:(NSInteger)maxDepth
+{
+    self = [self initWithRootViewController:rootViewController completion:nil depth:maxDepth];
+    if (self)
+    {
+        dismissAction = aBlock;
     }
     return self;
 }
@@ -65,9 +91,18 @@ CompletionBlock completion;
 {
     self.backPressCount++;
     
-    if ((self.backPressCount == MAX_DEPTH) || (self.viewControllers.count == 2))
+    if ((self.backPressCount == self.maxDepth) || (self.viewControllers.count == 2))
     {
-        [self dismissViewControllerAnimated:YES completion:nil];
+        if (dismissAction)
+        {
+                // custom dismiss action
+            dismissAction();
+        }
+        else
+        {
+                // usual dismiss. In this case NavigationController mus te shown modally
+            [self dismissViewControllerAnimated:YES completion:completion];
+        }
         return NO;
     }
     else // just do as usual...
@@ -78,6 +113,11 @@ CompletionBlock completion;
         BOOL shouldPop = f(self, _cmd, navigationBar, item);
         return shouldPop;
     }
+}
+
+-(UIViewController *)childViewControllerForStatusBarStyle
+{
+    return self.visibleViewController;
 }
 
 @end

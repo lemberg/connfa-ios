@@ -34,6 +34,7 @@
 {
     [super viewDidLoad];
     
+    [self setNeedsStatusBarAppearanceUpdate];
     [self arrangeNavigationBar];
 }
 
@@ -62,6 +63,11 @@
         // hide annoying 1 px stripe between NavigationBar and controller View
     UIImageView* stripeUnderNavigationBar = [self findHairlineImageViewUnder:self.navigationController.navigationBar];
     stripeUnderNavigationBar.hidden = YES;
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleDefault;
 }
 
 - (UIImageView *)findHairlineImageViewUnder:(UIView *)view
