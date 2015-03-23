@@ -46,6 +46,7 @@ NSString * kDCLevelSelectedInFilterKey = @"levelSelectedInFilter";
         if (!level) // then create
         {
             level = [DCLevel createManagedObjectInContext:context];//(DCLevel*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCLevel class]];
+            level.selectedInFilter = [NSNumber numberWithBool:YES];
         }
         
         if ([dictionary[kDCParseObjectDeleted] intValue]==1) // remove
@@ -57,7 +58,6 @@ NSString * kDCLevelSelectedInFilterKey = @"levelSelectedInFilter";
             level.levelId = dictionary[kDCLevelIdKey];
             level.name = dictionary[kDCLevelNameKey];
             level.order = [NSNumber numberWithFloat:[dictionary[kDCParseObjectOrderKey] floatValue]];
-            level.selectedInFilter = [NSNumber numberWithBool:YES];
         }
     }
 }
