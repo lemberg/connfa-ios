@@ -26,17 +26,25 @@
 #import "DCPin.h"
 #import "DCLocation.h"
 
+
 @interface DCLocationViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *addressHeader;
-@property (weak, nonatomic) IBOutlet UILabel *streetLbl;
-@property (weak, nonatomic) IBOutlet UILabel *numberLbl;
+
+@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
+@property (weak, nonatomic) IBOutlet UILabel *streetAndNumberLabel;
+@property (weak, nonatomic) IBOutlet UILabel *cityAndProvinceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *stateLabel;
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
+
 @property (nonatomic, strong) DCLocation *location;
+@property (nonatomic, strong) CLGeocoder *geocoder;
 
 @end
 
+
+
 @implementation DCLocationViewController
 
+#pragma mark - View lifecycle
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -50,10 +58,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    [self setLayout];
+    
     self.location = [[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCLocation class] inMainQueue:YES] lastObject];
     [self updateLocation];
+    
+        // geocoder isn't used now because we use the ready data from local DB
+        // if you want to use geocode just uncomment the proper code
+//    self.geocoder = [[CLGeocoder alloc] init];
+//    [self updateLocation: CLLocationCoordinate2DMake([self.location.latitude doubleValue],
+//                                                     [self.location.longitude doubleValue])];
+}
+
+#pragma mark - View appearance
+
+- (void) arrangeNavigationBar
+{
+    [super arrangeNavigationBar];
+    
+    self.navigationController.navigationBar.barTintColor = MENU_SELECTION_COLOR;
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle
@@ -61,27 +83,74 @@
     return UIStatusBarStyleLightContent;
 }
 
-- (void)updateLocation {
-    [self setAnnotation];
-    self.addressHeader.attributedText = [self DC_headerAttrString];
-    // TODO: use new DB
-//    [self.streetLbl setText:[NSString stringWithFormat:@"%@,",self.location.streetName]];
-//    [self.numberLbl setText:self.location.number];
-}
-- (void)setLayout {
-    [self.view setBackgroundColor:NAV_BAR_COLOR];
-}
+#pragma mark - Private
 
-
-- (void)didReceiveMemoryWarning
+- (void) updateLocation
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [self setAnnotation];
+    
+    NSArray *parts;
+    
+    if (self.location.address)
+        parts = [self.location.address componentsSeparatedByString:@", "];
+    
+    if (parts.count)
+    {
+        NSString *streetAndHouse = parts[0];
+        NSString *state = (parts.count > 1) ? parts.lastObject : @"";
+        NSMutableString* cityAndProvince = [@"" mutableCopy];
+        
+        if (parts.count > 2)
+        {
+            [cityAndProvince appendString: parts[1]];
+            
+            for (int i = 2; i<parts.count-1; i++)
+                [cityAndProvince appendFormat:@", %@", parts[i]];
+        }
+    
+        self.addressLabel.text = self.location.name;
+        self.streetAndNumberLabel.text = streetAndHouse;
+        self.cityAndProvinceLabel.text = cityAndProvince;
+        self.stateLabel.text = state;
+    }
 }
+
+//- (void) updateLocationWithGeocoding: (CLLocationCoordinate2D)location
+//{
+//    [self setAnnotation];
+//    
+//    CLLocation* startLocation = [[CLLocation alloc] initWithLatitude:location.latitude longitude:location.longitude];
+//    
+//    if (!self.geocoder)
+//        self.geocoder = [[CLGeocoder alloc] init];
+//    
+//    [self.geocoder reverseGeocodeLocation:startLocation completionHandler:^(NSArray *placemarks, NSError *error)
+//        {
+//            if ([placemarks count] > 0)
+//            {
+//                CLPlacemark *placemark = [placemarks objectAtIndex:0];
+//                CLLocation *location = placemark.location;
+//                CLLocationCoordinate2D coordinate = location.coordinate;
+//                
+//                NSString* house = placemark.subThoroughfare;
+//                NSString* street = placemark.thoroughfare;
+//                NSString* city = placemark.locality;
+//                NSString* province = placemark.country;
+//                NSString* state = placemark.administrativeArea;
+//                NSString* businessName = placemark.name;
+//                
+//                self.addressLabel.text = businessName;
+//                self.streetAndNumberLabel.text = [NSString stringWithFormat: @"%@ # %@", street, house];
+//                self.cityAndProvinceLabel.text = [NSString stringWithFormat:@"%@, %@", city, province];
+//                self.stateLabel.text = state;
+//            }
+//        }];
+//}
 
 #define METERS_PER_MILE 1609.344
 
-- (void)setAnnotation {
+- (void)setAnnotation
+{
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([self.location.latitude doubleValue],
                                                                    [self.location.longitude doubleValue]);
     DCPin *pinAnnotation = [[DCPin alloc] initWithCoordinate:coordinate title:@""];
@@ -114,43 +183,4 @@
     return annotationView;
 }
 
-#pragma mark -
-
-
-- (NSMutableAttributedString *)DC_headerAttrString
-{
-    // Select building name
-    NSArray *buildingNames = [self.location.name componentsSeparatedByString:@" "];
-    
-    NSMutableAttributedString *suffixName = nil;
-    // If place name has suffix
-    if ([buildingNames count] > 1) {
-
-        // Select building name suffix
-        NSString *lastName = [buildingNames lastObject];
-        suffixName = [[NSMutableAttributedString alloc] initWithString:lastName];
-        [suffixName addAttribute:NSFontAttributeName
-                        value:[UIFont fontWithName:@"HelveticaNeue-Thin"
-                                              size:44.0]
-                    range:NSMakeRange(0, lastName.length)];
-    }
-
-    NSString *firstName = [buildingNames firstObject];
-    NSMutableAttributedString *buildingName = [[NSMutableAttributedString alloc] initWithString:(firstName?firstName:@" ")];
-    [buildingName addAttribute:NSFontAttributeName
-                         value:[UIFont fontWithName:@"HelveticaNeue-UltraLight"
-                                               size:44.0]
-                         range:NSMakeRange(0, firstName.length)];
-    NSAttributedString *space = [[NSAttributedString alloc] initWithString:@" "];
-    [buildingName appendAttributedString:space];
-    if (suffixName)
-    {
-        [buildingName appendAttributedString:suffixName];
-    }
-    
-    return buildingName;
-}
-
-
-    
 @end
