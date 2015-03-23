@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="14B25" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="14A389" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="DCBof" representedClassName="DCBof" parentEntity="DCEvent" syncable="YES">
         <fetchedProperty name="fetchedProperty" optional="YES" syncable="YES">
             <fetchRequest name="fetchedPropertyFetchRequest" entity="DCBof"/>
@@ -43,6 +43,7 @@
         <attribute name="levelId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="order" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="selectedInFilter" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DCEvent" inverseName="level" inverseEntity="DCEvent" syncable="YES"/>
     </entity>
     <entity name="DCLocation" representedClassName="DCLocation" syncable="YES">
@@ -89,6 +90,7 @@
     <entity name="DCTrack" representedClassName="DCTrack" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="order" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="selectedInFilter" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="trackId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DCEvent" inverseName="tracks" inverseEntity="DCEvent" syncable="YES"/>
     </entity>
@@ -106,19 +108,19 @@
         <element name="DCBof" positionX="-5427" positionY="-2142" width="128" height="74"/>
         <element name="DCEvent" positionX="-5744" positionY="-2142" width="128" height="223"/>
         <element name="DCFavoriteEvent" positionX="-5231" positionY="-2205" width="128" height="58"/>
-        <element name="DCLevel" positionX="-5978" positionY="-2214" width="128" height="103"/>
+        <element name="DCHousePlan" positionX="-5141" positionY="-1626" width="128" height="103"/>
+        <element name="DCInfo" positionX="-5330" positionY="-1989" width="128" height="88"/>
+        <element name="DCInfoCategory" positionX="-5141" positionY="-1917" width="128" height="103"/>
+        <element name="DCLevel" positionX="-5978" positionY="-2214" width="128" height="120"/>
         <element name="DCLocation" positionX="-5465" positionY="-1645" width="128" height="133"/>
         <element name="DCMainEvent" positionX="-5571" positionY="-2142" width="128" height="43"/>
+        <element name="DCPoi" positionX="-5301" positionY="-1654" width="128" height="133"/>
+        <element name="DCSocialEvent" positionX="-5499" positionY="-2016" width="128" height="43"/>
         <element name="DCSpeaker" positionX="-5733" positionY="-1744" width="128" height="223"/>
         <element name="DCTime" positionX="-6192" positionY="-2061" width="128" height="73"/>
         <element name="DCTimeRange" positionX="-5978" positionY="-2088" width="128" height="73"/>
-        <element name="DCTrack" positionX="-5994" positionY="-1998" width="128" height="103"/>
-        <element name="DCType" positionX="-5969" positionY="-1879" width="128" height="118"/>
-        <element name="DCHousePlan" positionX="-5141" positionY="-1626" width="128" height="103"/>
-        <element name="DCSocialEvent" positionX="-5499" positionY="-2016" width="128" height="43"/>
-        <element name="DCPoi" positionX="-5301" positionY="-1654" width="128" height="133"/>
-        <element name="DCInfo" positionX="-5330" positionY="-1989" width="128" height="88"/>
-        <element name="DCInfoCategory" positionX="-5141" positionY="-1917" width="128" height="103"/>
+        <element name="DCTrack" positionX="-5994" positionY="-1998" width="128" height="120"/>
         <element name="DCTwitter" positionX="-5373" positionY="-1827" width="128" height="58"/>
+        <element name="DCType" positionX="-5969" positionY="-1879" width="128" height="118"/>
     </elements>
 </model>

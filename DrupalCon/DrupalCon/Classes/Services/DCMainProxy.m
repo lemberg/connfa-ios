@@ -230,7 +230,12 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 
 - (NSArray*)getAllInstancesOfClass:(Class)aClass inMainQueue:(BOOL)mainQueue
 {
-    return [self instancesOfClass:aClass filtredUsingPredicate:nil inContext:self.newMainQueueContext];
+    return [self getAllInstancesOfClass:aClass predicate:nil inMainQueue:mainQueue];
+}
+
+- (NSArray*)getAllInstancesOfClass:(Class)aClass predicate:(NSPredicate*)aPredicate inMainQueue:(BOOL)mainQueue
+{
+    return [self instancesOfClass:aClass filtredUsingPredicate:aPredicate inContext:self.newMainQueueContext];
 }
 
 - (NSManagedObject*)objectForID:(int)ID ofClass:(Class)aClass inContext:(NSManagedObjectContext *)context

@@ -28,6 +28,7 @@
 NSString * kDCLevelsKey = @"levels";
 NSString * kDCLevelIdKey = @"levelId";
 NSString * kDCLevelNameKey = @"levelName";
+NSString * kDCLevelSelectedInFilterKey = @"levelSelectedInFilter";
 
 @implementation DCLevel (DC)
 
@@ -56,11 +57,10 @@ NSString * kDCLevelNameKey = @"levelName";
             level.levelId = dictionary[kDCLevelIdKey];
             level.name = dictionary[kDCLevelNameKey];
             level.order = [NSNumber numberWithFloat:[dictionary[kDCParseObjectOrderKey] floatValue]];
+            level.selectedInFilter = [NSNumber numberWithBool:YES];
         }
     }
-
 }
-
 
 + (NSString*)idKey
 {

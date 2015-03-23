@@ -30,5 +30,6 @@
 @dynamic name;
 @dynamic order;
 @dynamic events;
+@dynamic selectedInFilter;
 
 @end

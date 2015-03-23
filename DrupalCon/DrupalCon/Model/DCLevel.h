@@ -30,6 +30,7 @@
 @property (nonatomic, retain) NSNumber * levelId;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * order;
+@property (nonatomic, retain) NSNumber * selectedInFilter;
 @property (nonatomic, retain) NSSet *events;
 @end
 

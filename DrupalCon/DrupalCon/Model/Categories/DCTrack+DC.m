@@ -28,6 +28,7 @@
 NSString * kDCTracksKey = @"tracks";
 NSString * kDCTrackIdKey = @"trackId";
 NSString * kDCTrackNameKey = @"trackName";
+NSString * kDCTrackSelectedInFilter = @"trackSelectedInFilter";
 
 @implementation DCTrack (DC)
 
@@ -55,6 +56,7 @@ NSString * kDCTrackNameKey = @"trackName";
             track.trackId = dictionary[kDCTrackIdKey];
             track.name = dictionary[kDCTrackNameKey];
             track.order = [NSNumber numberWithFloat:[dictionary[kDCParseObjectOrderKey] floatValue]];
+            track.selectedInFilter = [NSNumber numberWithBool:YES];
         }
     }
 }

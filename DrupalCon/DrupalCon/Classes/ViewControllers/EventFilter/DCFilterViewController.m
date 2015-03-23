@@ -51,8 +51,10 @@
         // this done to make Status bar white; status bar depends on Navigation bar style, because this VC is inside Navigation controller
     self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
     
-    self.levels = [[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCLevel class] inMainQueue:YES];
-    self.tracks = [[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCTrack class] inMainQueue:YES];
+    NSPredicate * levelPredicate = [NSPredicate predicateWithFormat:@"NOT (levelId = 0)"];
+    self.levels = [[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCLevel class] predicate:levelPredicate inMainQueue:YES];
+    NSPredicate * trackPredicate = [NSPredicate predicateWithFormat:@"NOT (trackId = 0)"];
+    self.tracks = [[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCTrack class] predicate:trackPredicate inMainQueue:YES];
     
     [self.tableView reloadData];
 }
@@ -90,7 +92,9 @@
             
         case FilterCellTypeTrack:
             return self.tracks.count;
-            
+        
+        case FilterCellTypeButton:
+            return 1;
         default:
             NSAssert(false, @"unhanled Filter type");
     }
@@ -110,6 +114,10 @@
             
         case FilterCellTypeTrack:
             headerTitle = @"Track";
+            break;
+        
+        case FilterCellTypeButton:
+            headerTitle = @"";
             break;
     }
     
@@ -141,6 +149,21 @@
     NSAssert(cellTitle != nil, @"no cell title");
     
     return cellTitle;
+}
+
+- (BOOL) getCellSelected:(FilterCellType)aCellType row:(NSInteger)aRow
+{
+    switch (aCellType)
+    {
+        case FilterCellTypeLevel:
+            return [(DCLevel*)[self.levels objectAtIndex: aRow] selectedInFilter].boolValue;
+            
+        case FilterCellTypeTrack:
+            return [(DCTrack*)[self.tracks objectAtIndex: aRow] selectedInFilter].boolValue;
+            
+        default:
+            return NO;
+    }
 }
 
 - (NSNumber*) getCellId:(FilterCellType)aCellType row:(NSInteger)aRow
@@ -206,24 +229,31 @@
 
 -(CGFloat)  tableView: (UITableView*) tableView heightForFooterInSection:(NSInteger)section
 {
-    return 1.0f;
+    return (section == FilterCellTypeButton) ? 44.0f : 1.0f;
 }
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    DCEventFilterCell* cell = (DCEventFilterCell*) [tableView dequeueReusableCellWithIdentifier:@"EventFilterCellIdentifier"];
-    
     FilterCellType cellType = [self getCellType:indexPath.section];
     
-    cell.checkBox.selected = NO;
-    cell.checkBox.delegate = cell;
-    cell.delegate = self;
-    cell.type = cellType;
-    cell.relatedObjectId = [self getCellId:cellType row:indexPath.row];
-    cell.title.text = [self getCellTitle:cellType row:indexPath.row];
-    cell.separator.hidden = [self isLastCellInSection: indexPath];
-    
-    return cell;
+    if (cellType == FilterCellTypeButton)
+    {
+        return [tableView dequeueReusableCellWithIdentifier:@"EventFilterButtonIdentifier"];
+    }
+    else
+    {
+        DCEventFilterCell* cell = (DCEventFilterCell*) [tableView dequeueReusableCellWithIdentifier:@"EventFilterCellIdentifier"];
+        
+        cell.checkBox.delegate = cell;
+        cell.delegate = self;
+        cell.type = cellType;
+        cell.relatedObjectId = [self getCellId:cellType row:indexPath.row];
+        cell.title.text = [self getCellTitle:cellType row:indexPath.row];
+        cell.checkBox.selected = [self getCellSelected:cellType row:indexPath.row];
+        cell.separator.hidden = [self isLastCellInSection: indexPath];
+        
+        return cell;
+    }
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -231,6 +261,11 @@
     DCEventFilterCell* cell = (DCEventFilterCell*) [tableView dequeueReusableCellWithIdentifier:@"EventFilterCellIdentifier"];
     
     return cell.frame.size.height;
+}
+
+- (void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
 }
 
 #pragma mark - User actions handling
@@ -247,6 +282,9 @@
             
         case FilterCellTypeTrack:
             idArray = self.selectedTracks;
+            break;
+            
+        default:
             break;
     }
     
@@ -265,6 +303,11 @@
 - (IBAction)onBackButtonClick:(id)sender
 {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void) onClearButtonClick
+{
+    
 }
 
 - (IBAction)onDoneButtonClick:(id)sender

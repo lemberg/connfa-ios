@@ -30,5 +30,6 @@
 @dynamic trackId;
 @dynamic order;
 @dynamic events;
+@dynamic selectedInFilter;
 
 @end
