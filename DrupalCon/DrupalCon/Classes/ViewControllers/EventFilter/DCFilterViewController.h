@@ -12,13 +12,13 @@
 
 @protocol DCFilterViewControllerDelegate <NSObject>
 
-- (void) filterControllerWillDismissWithResult:(NSArray*)selectedLevelsIds tracks:(NSArray*)selectetTracksIds;
+- (void) filterControllerWillDismiss;
 
 @end
 
 
 
-@interface DCFilterViewController : UITableViewController<DCEventFilterCellDelegate>
+@interface DCFilterViewController : UITableViewController
 
 @property(nonatomic, weak) id<DCFilterViewControllerDelegate> delegate;
 

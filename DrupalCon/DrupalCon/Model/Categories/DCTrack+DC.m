@@ -45,6 +45,7 @@ NSString * kDCTrackSelectedInFilter = @"trackSelectedInFilter";
         if (!track) // then create
         {
             track = [DCTrack createManagedObjectInContext:context];//(DCTrack*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCTrack class]];
+            track.selectedInFilter = [NSNumber numberWithBool:YES];
         }
         
         if ([dictionary[kDCParseObjectDeleted] intValue]==1) // remove
@@ -56,7 +57,6 @@ NSString * kDCTrackSelectedInFilter = @"trackSelectedInFilter";
             track.trackId = dictionary[kDCTrackIdKey];
             track.name = dictionary[kDCTrackNameKey];
             track.order = [NSNumber numberWithFloat:[dictionary[kDCParseObjectOrderKey] floatValue]];
-            track.selectedInFilter = [NSNumber numberWithBool:YES];
         }
     }
 }

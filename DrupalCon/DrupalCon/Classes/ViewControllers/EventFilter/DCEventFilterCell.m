@@ -10,16 +10,5 @@
 
 @implementation DCEventFilterCell
 
-- (void)awakeFromNib
-{
-    self.checkBox.delegate = self;
-}
-
-- (void)DCFilterCheckBox:(DCFilterCheckBox*)checkBox didChangedState:(BOOL)isSelected
-{
-    [self.delegate cellCheckBoxDidSelected: isSelected
-                                  cellType: self.type
-                           relatedObjectId: self.relatedObjectId];
-}
 
 @end

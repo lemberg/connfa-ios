@@ -24,6 +24,8 @@
 #import "DCMainProxy.h"
 #import "UIConstants.h"
 
+#import "DCLevel+DC.h"
+
 @interface AppDelegate ()
 @property (nonatomic, strong) UILocalNotification *localNotification;
 @end
@@ -79,7 +81,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
 }
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification

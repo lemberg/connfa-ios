@@ -12,14 +12,12 @@
 #import "DCMainProxy.h"
 #import "DCEventFilterHeaderCell.h"
 #import "NSManagedObject+DC.h"
+#import "DCCoreDataStore.h"
 
 @interface DCFilterViewController ()
 
 @property (nonatomic, strong) NSArray* levels;
 @property (nonatomic, strong) NSArray* tracks;
-
-@property (nonatomic, strong) NSMutableArray* selectedLevels;
-@property (nonatomic, strong) NSMutableArray* selectedTracks;
 
 @property (nonatomic, strong) IBOutlet UIBarButtonItem* cancelButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem* doneButton;
@@ -37,9 +35,6 @@
     {
         self.navigationItem.leftBarButtonItem = nil;
         self.navigationItem.rightBarButtonItem = nil;
-        
-        self.selectedLevels = [NSMutableArray new];
-        self.selectedTracks = [NSMutableArray new];
     }
     return self;
 }
@@ -51,11 +46,7 @@
         // this done to make Status bar white; status bar depends on Navigation bar style, because this VC is inside Navigation controller
     self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
     
-    NSPredicate * levelPredicate = [NSPredicate predicateWithFormat:@"NOT (levelId = 0)"];
-    self.levels = [[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCLevel class] predicate:levelPredicate inMainQueue:YES];
-    NSPredicate * trackPredicate = [NSPredicate predicateWithFormat:@"NOT (trackId = 0)"];
-    self.tracks = [[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCTrack class] predicate:trackPredicate inMainQueue:YES];
-    
+    [self updateSourceData];
     [self.tableView reloadData];
 }
 
@@ -75,6 +66,23 @@
 }
 
 #pragma mark - Private
+
+- (void) updateSourceData
+{
+    NSPredicate * levelPredicate = [NSPredicate predicateWithFormat:@"NOT (levelId = 0)"];
+    self.levels = [[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCLevel class] predicate:levelPredicate inMainQueue:YES];
+    NSSortDescriptor *levelSort = [NSSortDescriptor sortDescriptorWithKey:@"levelId" ascending:YES];
+    self.levels = [self.levels sortedArrayUsingDescriptors:@[levelSort]];
+    
+    NSPredicate * trackPredicate = [NSPredicate predicateWithFormat:@"NOT (trackId = 0)"];
+    self.tracks = [[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCTrack class] predicate:trackPredicate inMainQueue:YES];
+    NSSortDescriptor *trackSort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    self.tracks = [self.tracks sortedArrayUsingDescriptors:@[trackSort]];
+    
+    NSUndoManager *undoManager = [[NSUndoManager alloc] init];
+    [[(DCLevel*)self.levels.firstObject managedObjectContext] setUndoManager:undoManager];
+    [undoManager beginUndoGrouping];
+}
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -144,6 +152,9 @@
         case FilterCellTypeTrack:
             cellTitle = [(DCTrack*)[self.tracks objectAtIndex: aRow] name];
             break;
+            
+        default:
+            break;
     }
     
     NSAssert(cellTitle != nil, @"no cell title");
@@ -178,6 +189,9 @@
             
         case FilterCellTypeTrack:
             cellId = [(DCTrack*)[self.tracks objectAtIndex: aRow] trackId];
+            break;
+        
+        default:
             break;
     }
     
@@ -244,12 +258,11 @@
     {
         DCEventFilterCell* cell = (DCEventFilterCell*) [tableView dequeueReusableCellWithIdentifier:@"EventFilterCellIdentifier"];
         
-        cell.checkBox.delegate = cell;
-        cell.delegate = self;
         cell.type = cellType;
         cell.relatedObjectId = [self getCellId:cellType row:indexPath.row];
         cell.title.text = [self getCellTitle:cellType row:indexPath.row];
         cell.checkBox.selected = [self getCellSelected:cellType row:indexPath.row];
+        cell.checkBox.userInteractionEnabled = NO;
         cell.separator.hidden = [self isLastCellInSection: indexPath];
         
         return cell;
@@ -263,45 +276,47 @@
     return cell.frame.size.height;
 }
 
-- (void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    switch (indexPath.section)
+    {
+        case FilterCellTypeButton:
+        {
+            [self onClearButtonClick];
+            [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        }
+            return;
+            
+        case FilterCellTypeLevel:
+        {
+            DCLevel* level = [self.levels objectAtIndex:indexPath.row];
+            level.selectedInFilter = [NSNumber numberWithBool: !level.selectedInFilter.boolValue];
+            [level.managedObjectContext save:nil];
+        }
+            break;
+        case FilterCellTypeTrack:
+        {
+            DCLevel* track = [self.tracks objectAtIndex:indexPath.row];
+            track.selectedInFilter = [NSNumber numberWithBool: !track.selectedInFilter.boolValue];
+            [track.managedObjectContext save:nil];
+        }
+            break;
+    }
+    DCEventFilterCell* cell = (DCEventFilterCell*)[self tableView:tableView cellForRowAtIndexPath:indexPath];
+    cell.checkBox.selected = !cell.checkBox.selected;
     
+    [self.tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - User actions handling
 
-- (void) cellCheckBoxDidSelected:(BOOL)aSelected cellType:(FilterCellType)aType relatedObjectId:(NSNumber *)aId
-{
-    NSMutableArray* idArray = nil;
-    
-    switch (aType)
-    {
-        case FilterCellTypeLevel:
-            idArray = self.selectedLevels;
-            break;
-            
-        case FilterCellTypeTrack:
-            idArray = self.selectedTracks;
-            break;
-            
-        default:
-            break;
-    }
-    
-    NSAssert(idArray != nil, @"incorrect filter type");
-    
-    if (aSelected)
-    {
-        [idArray addObject:aId.stringValue];
-    }
-    else
-    {
-        [idArray removeObject:aId.stringValue];
-    }
-}
-
 - (IBAction)onBackButtonClick:(id)sender
 {
+    NSUndoManager* manager = [[(DCLevel*)self.levels.firstObject managedObjectContext] undoManager];
+    [manager endUndoGrouping];
+    [manager undo];
+    
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -312,10 +327,11 @@
 
 - (IBAction)onDoneButtonClick:(id)sender
 {
+    [[(DCLevel*)[self.levels firstObject] managedObjectContext] save:nil];
+    
     if (self.delegate)
     {
-        [self.delegate filterControllerWillDismissWithResult:self.selectedLevels.count ? self.selectedLevels : nil
-                                                 tracks:self.selectedTracks.count ? self.selectedTracks : nil];
+        [self.delegate filterControllerWillDismiss];
     }
     
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];

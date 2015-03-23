@@ -19,14 +19,6 @@ typedef enum {
 } FilterCellType;
 
 
-@protocol DCEventFilterCellDelegate <NSObject>
-
-- (void) cellCheckBoxDidSelected:(BOOL)aSelected cellType:(FilterCellType)aType relatedObjectId:(NSNumber*)aId;
-
-@end
-
-
-
 @interface DCEventFilterCell : UITableViewCell<DCFilterCheckboxDelegateProtocol>
 
 @property (nonatomic, weak) IBOutlet UILabel *title;
@@ -35,8 +27,6 @@ typedef enum {
 
 @property (nonatomic) FilterCellType type;
 @property (nonatomic, weak) NSNumber* relatedObjectId;
-
-@property (nonatomic, weak) id<DCEventFilterCellDelegate> delegate;
 
 @end
 

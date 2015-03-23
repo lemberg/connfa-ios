@@ -25,6 +25,8 @@
 #import "DCMainProxy+Additions.h"
 #import "NSDate+DC.h"
 
+#import "DCLevel.h"
+
 @interface DCProgramViewController ()
 
 @property (nonatomic, strong) UIPageViewController *pageViewController;
@@ -58,7 +60,7 @@
     [self arrangeNavigationBar];
     
     self.currentDayIndex = 0;
-    self.eventsStrategy.predicate = nil;
+    self.eventsStrategy.predicate = [self getEventStrategyPredicate];
     
     [self.activityIndicator startAnimating];
     [[DCMainProxy sharedProxy] setDataReadyCallback:^(DCMainProxyState mainProxyState) {
@@ -84,6 +86,15 @@
 }
 
 #pragma mark - Private
+
+- (NSPredicate*) getEventStrategyPredicate
+{
+    NSPredicate* levelPredicate = [NSPredicate predicateWithFormat:@"level.selectedInFilter = true"];
+    NSPredicate* trackPredicate = [NSPredicate predicateWithFormat:@"ANY tracks.selectedInFilter = true"];
+    
+    NSPredicate* mergedPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[levelPredicate,trackPredicate]];
+    return mergedPredicate;
+}
 
 -(UIStatusBarStyle)preferredStatusBarStyle
 {
@@ -151,34 +162,9 @@
     [self presentViewController:filterController animated:YES completion:nil];
 }
 
-- (void) filterControllerWillDismissWithResult:(NSArray *)selectedLevelsIds tracks:(NSArray *)selectetTracksIds
+- (void) filterControllerWillDismiss
 {
-    if (!selectedLevelsIds && !selectetTracksIds)
-    {
-        if (self.eventsStrategy.predicate != nil)
-        {
-                // User clicked Done with empty filter, show all events if needed
-            self.eventsStrategy.predicate = nil;
-            [self reloadData];
-        }
-    }
-    else
-    {
-            // User has set Filter
-        NSPredicate* levelPredicate = selectedLevelsIds ? [NSPredicate predicateWithFormat:@"level.levelId IN %@",selectedLevelsIds] : nil;
-        NSPredicate* trackPredicate = selectetTracksIds ? [NSPredicate predicateWithFormat:@"ANY tracks.trackId IN %@",selectetTracksIds] : nil;
-
-        NSPredicate* mergedPredicate;
-        
-        if (levelPredicate && trackPredicate)
-            mergedPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[levelPredicate,trackPredicate]];
-        else
-            mergedPredicate = levelPredicate ? levelPredicate : trackPredicate;
-        
-        self.eventsStrategy.predicate = mergedPredicate;
-        
-        [self reloadData];
-    }
+    [self reloadData];
 }
 
 - (NSArray*)DC_fillViewControllers
