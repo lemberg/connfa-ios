@@ -30,6 +30,7 @@
 #import "UIConstants.h"
 #import "DCFavoritesViewController.h"
 #import "DCLimitedNavigationController.h"
+#import "DCDayEventsController.h"
 
 @class DCEvent;
 
@@ -62,7 +63,7 @@
                                 @{ kMenuItemTitle: @"Sessions",
                                    kMenuItemIcon: @"menu_icon_program",
                                    kMenuItemSelectedIcon: @"menu_icon_program_sel",
-                                   kMenuItemControllerId: @"ProgramViewController"
+                                   kMenuItemControllerId: @"DCProgramViewController"
                                    },
                                 @{
                                     kMenuItemTitle: @"BoFs",
@@ -130,6 +131,7 @@
     if (self.event) {
         [self showViewControllerAssociatedWithMenuItem:DCMENU_MYSCHEDULE_ITEM];
         if ([self.sideMenuContainer.centerViewController isMemberOfClass:[DCFavoritesViewController class]]) {
+                                              
             [(DCFavoritesViewController *)self.sideMenuContainer.centerViewController openEvent:self.event];
         }
         self.event = nil;
@@ -206,8 +208,11 @@
 
 - (DCBaseViewController*) getViewController:(DCMenuSection)menuItem
 {
-    NSString *storyboardId = self.arrayOfCaptions[menuItem][kMenuItemControllerId];
-    DCBaseViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier: storyboardId];
+    NSString *storyboardName = [self storyboardNameForMenuItem:menuItem];
+    NSString *controllerId = self.arrayOfCaptions[menuItem][kMenuItemControllerId];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle:nil];
+    
+    DCBaseViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:controllerId];
 
     if ([viewController isKindOfClass:[DCProgramViewController class]])
     {
@@ -216,6 +221,20 @@
 
     return viewController;
 }
+- (NSString *)storyboardNameForMenuItem:(DCMenuSection)menuSection
+{
+    //  TODO: This functionlity return storyboard for appropriate menu items
+    NSString *defaultStoryboardName = @"Main";
+    
+    switch (menuSection) {
+        case DCMENU_PROGRAM_ITEM:
+                defaultStoryboardName = @"Events";
+        default:
+            break;
+    }
+    return defaultStoryboardName;
+}
+
 
 #pragma mark - UITableView delegate
 

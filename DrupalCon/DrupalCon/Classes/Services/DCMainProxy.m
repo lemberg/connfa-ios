@@ -111,7 +111,10 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 {
     if (self.state == DCMainProxyStateDataReady)
     {
-        dataReadyCallback(self.state);
+        if (dataReadyCallback) {
+                dataReadyCallback(self.state);
+        }
+        
     }
     
     _dataReadyCallback = dataReadyCallback;

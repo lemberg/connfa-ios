@@ -50,8 +50,7 @@
 
 @end
 
-static NSString * kDCTimeslotKEY = @"timeslot_key";
-static NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
+
 
 @implementation DCProgramItemsViewController
 
@@ -63,6 +62,9 @@ static NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
     }
     return self;
 }
+
+static NSString * kDCTimeslotKEY = @"timeslot_key";
+static NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
 
 - (void)viewDidLoad
 {

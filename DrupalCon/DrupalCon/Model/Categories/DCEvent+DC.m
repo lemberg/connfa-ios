@@ -101,8 +101,8 @@ const NSString * kDCEventPlaceKey = @"place";
     {
         type = [DCType createManagedObjectInContext:self.managedObjectContext];//(DCType*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCType class]];
 //        type = [[DCMainProxy sharedProxy] createType];
-//        type.name = @"noname";
-//        type.typeID = @(typeID);
+        type.name = @"noname";
+        type.typeID = @(typeID);
     }
     [type addEventsObject:self];
 }
@@ -159,36 +159,36 @@ const NSString * kDCEventPlaceKey = @"place";
 
     switch ([self.type.typeID integerValue]) {
         case DC_EVENT_24h:
-            icon_name = @"program_24_hour";
+            icon_name = @"ic_program_24_hour";
             break;
             
         case DC_EVENT_GROUP:
-            icon_name = @"program_group_photo";
+            icon_name = @"ic_program_group_photo";
             break;
             
         case DC_EVENT_SPEACH_OF_DAY:
-            icon_name = @"program_key_event";
+            icon_name = @"ic_program_speach_of_the_day";
             break;
             
         case DC_EVENT_NONE:
         case DC_EVENT_SPEACH:
-            icon_name = @"ic_program_clock";
+            icon_name = nil;
             break;
             
         case DC_EVENT_WALKING:
-            icon_name = @"program_walking_break";
+            icon_name = @"ic_program_walking_break";
             break;
             
         case DC_EVENT_LUNCH:
-            icon_name = @"ic_program_lunch";
+            icon_name = @"ic_program_lanch";
             break;
             
         case DC_EVENT_COFEE_BREAK:
-            icon_name = @"ic_program_coffe";
+            icon_name = @"ic_program_coffe_break";
             break;
             
         case DC_EVENT_REGISTRATION:
-            icon_name = @"program_check_in";
+            icon_name = @"ic_program_check_in";
             break;
             
         default:

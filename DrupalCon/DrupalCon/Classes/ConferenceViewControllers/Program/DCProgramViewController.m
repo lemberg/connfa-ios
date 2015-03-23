@@ -24,6 +24,7 @@
 #import "DCProgramItemsViewController.h"
 #import "DCMainProxy+Additions.h"
 #import "NSDate+DC.h"
+#import "DCDayEventsController.h"
 
 @interface DCProgramViewController ()
 
@@ -121,16 +122,35 @@
     self.dateLabel.text = [date pageViewDateString];
 }
 
+- (BOOL)isDateInToday:(NSDate *)date
+{
+    NSDateComponents *otherDay = [[NSCalendar currentCalendar] components:NSEraCalendarUnit|NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
+    NSDateComponents *today = [[NSCalendar currentCalendar] components:NSEraCalendarUnit|NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:[NSDate date]];
+    if([today day] == [otherDay day] &&
+       [today month] == [otherDay month] &&
+       [today year] == [otherDay year] &&
+       [today era] == [otherDay era]) {
+        return YES;
+    } else
+        return NO;
+}
+
 - (NSArray*)createViewControllersForDays:(NSArray*)aDays
 {
     NSMutableArray * controllers = [[NSMutableArray alloc] initWithCapacity: aDays.count];
-    
+    NSUInteger currentDatePageIndex = 0;
     for (NSDate* date in self.days)
     {
-        DCProgramItemsViewController *dayViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgramItemsViewController"];
-        dayViewController.date = date;
-        dayViewController.eventsStrategy = self.eventsStrategy;
-        [controllers addObject:dayViewController];
+//        DCProgramItemsViewController *dayViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgramItemsViewController"];
+        if ([self isDateInToday:date]) 
+            self.currentDayIndex = currentDatePageIndex;
+
+        DCDayEventsController *dayEventsController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([DCDayEventsController class])];
+        dayEventsController.date = date;
+        dayEventsController.eventsStrategy = self.eventsStrategy;
+
+        [controllers addObject:dayEventsController];
+        currentDatePageIndex++;
     }
     
     return controllers;
@@ -187,10 +207,11 @@
     NSMutableArray * controllers_ = [[NSMutableArray alloc] initWithCapacity:_days.count];
     for (int i = 0; i<_days.count; i++)
     {
-        DCProgramItemsViewController *eventItemsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgramItemsViewController"];
-//        eventItemsViewController.pageIndex = i;
-        eventItemsViewController.eventsStrategy = self.eventsStrategy;
-        [controllers_ addObject:eventItemsViewController];
+        DCDayEventsController *dayEventsController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([DCDayEventsController class])];
+//        DCProgramItemsViewController *eventItemsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgramItemsViewController"];
+////        eventItemsViewController.pageIndex = i;
+//        eventItemsViewController.eventsStrategy = self.eventsStrategy;
+        [controllers_ addObject:dayEventsController];
     }
     return controllers_;
 }
