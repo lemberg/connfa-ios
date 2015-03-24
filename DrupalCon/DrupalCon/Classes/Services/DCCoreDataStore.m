@@ -68,7 +68,7 @@ static NSString *const DCCoreDataModelFileName = @"main";
 
 #pragma mark - Public Access
 
-- (void)saveMainContext
+- (void)saveMainContextWithCompletionBlock:(void(^)(BOOL isSuccess))callback
 {
     [self.mainContext performBlock:^{
         
@@ -78,7 +78,11 @@ static NSString *const DCCoreDataModelFileName = @"main";
             // handle error
              NSLog(@"Error saving context %@: %@", self.mainContext, [error localizedDescription]);
         }
-        
+        if (error) {
+            callback(NO);
+        } else {
+            callback(YES);
+        }
         // save parent to disk asynchronously
         [self.privateWriterContext performBlock:^{
             NSError *error;
@@ -91,7 +95,7 @@ static NSString *const DCCoreDataModelFileName = @"main";
 
 }
 
-- (BOOL)save
+- (void)saveWithCompletionBlock:(void(^)(BOOL isSuccess))callback
 {
     __block NSError *error = nil;
     [self.workerContext performBlockAndWait:^{
@@ -100,10 +104,15 @@ static NSString *const DCCoreDataModelFileName = @"main";
         if (![self.workerContext save:&error]) {
             // handle error
             NSLog(@"Error saving context %@: %@", self.workerContext, [error localizedDescription]);
+            callback(NO);
+            return ;
         }
-        [self saveMainContext];
+        
+        [self saveMainContextWithCompletionBlock:^(BOOL isSuccess) {
+            callback(isSuccess);
+        }];
     }];
-    return !error;
+   
 }
 
 #pragma mark - Getters

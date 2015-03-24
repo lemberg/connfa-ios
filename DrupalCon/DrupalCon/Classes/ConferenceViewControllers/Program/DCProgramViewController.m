@@ -61,19 +61,20 @@
     [self arrangeNavigationBar];
     
     self.currentDayIndex = 0;
-    self.eventsStrategy.predicate = [self getEventStrategyPredicate];
+    self.eventsStrategy.predicate = nil;//[self getEventStrategyPredicate];
     
     [self.activityIndicator startAnimating];
     [[DCMainProxy sharedProxy] setDataReadyCallback:^(DCMainProxyState mainProxyState) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if ([_eventsStrategy days]) {
                  _days = [[NSArray alloc] initWithArray:[_eventsStrategy days]];
+                [self reloadData];
             } else {
                 _days = nil;
             }
 //            self.viewControllers = [self DC_fillViewControllers];
 //            [self addPageController];
-            [self reloadData];
+            
             [self.activityIndicator stopAnimating];
         });
     }];

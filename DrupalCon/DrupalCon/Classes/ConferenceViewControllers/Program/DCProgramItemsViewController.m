@@ -351,21 +351,8 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
     if(![self headerNeededInSection:indexPath.section])
         return;
     
-    DCEvent * event = [self eventForIndexPath:indexPath];
-    if ([self isClickEnableForEvent:event]) {
-        return;
-    }
 
-    DCEventDetailViewController * detailController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
-    [detailController setEvent:event];
     
-    DCLimitedNavigationController * navContainer = [[DCLimitedNavigationController alloc] initWithRootViewController:detailController completion:^{
-        [self setNeedsStatusBarAppearanceUpdate];
-        [self.tablewView reloadData];
-    }];
-    [navContainer setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
-    
-    [[DCAppFacade shared].mainNavigationController presentViewController: navContainer animated:YES completion:nil];
 }
 
 - (BOOL)isClickEnableForEvent:(DCEvent *)event

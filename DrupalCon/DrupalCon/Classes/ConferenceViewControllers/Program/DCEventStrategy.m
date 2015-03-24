@@ -22,6 +22,7 @@
 
 #import "DCEventStrategy.h"
 #import "DCMainProxy+Additions.h"
+#import "DCSocialEvent+DC.h"
 
 @interface DCEventStrategy ()
 
@@ -48,7 +49,8 @@
             case EDCEventStrategyBofs:
                 _eventClass = [DCBof class];
                 break;
-                
+            case EDCEventStrategySocialEvents:
+                _eventClass = [DCSocialEvent class];
             default:
                 break;
         }

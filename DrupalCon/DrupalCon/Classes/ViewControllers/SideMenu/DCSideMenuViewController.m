@@ -69,13 +69,13 @@
                                     kMenuItemTitle: @"BoFs",
                                     kMenuItemIcon: @"menu_icon_bofs",
                                     kMenuItemSelectedIcon: @"menu_icon_bofs_sel",
-                                    kMenuItemControllerId: @"ProgramViewController"
+                                    kMenuItemControllerId: @"DCProgramViewController"
                                     },
                                 @{
                                     kMenuItemTitle: @"Social Events",
                                     kMenuItemIcon: @"menu_icon_social",
                                     kMenuItemSelectedIcon: @"menu_icon_social_sel",
-                                    kMenuItemControllerId: @""
+                                    kMenuItemControllerId: @"DCProgramViewController"
                                     },
                                 @{
                                     kMenuItemTitle: @"Speakers",
@@ -227,6 +227,8 @@
     NSString *defaultStoryboardName = @"Main";
     
     switch (menuSection) {
+        case DCMENU_SOCIAL_EVENTS_ITEM:
+        case DCMENU_BOFS_ITEM:
         case DCMENU_PROGRAM_ITEM:
                 defaultStoryboardName = @"Events";
         default:

@@ -44,12 +44,13 @@
  *
  *  @return BOOL if save is success
  */
-- (BOOL)save;
+- (void)saveWithCompletionBlock:(void(^)(BOOL isSuccess))callback;
 
 /**
  *  Save main context on disk
  */
-- (void)saveMainContext;
+
+- (void)saveMainContextWithCompletionBlock:(void(^)(BOOL isSuccess))callback;
 
 /**
  *  Context that works on main Queue

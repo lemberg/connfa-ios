@@ -221,12 +221,14 @@ static NSString *const TWITTER_URI    = @"getTwitter";
     [backgroundContext  performBlock:^{
         
         [self fillInModelsFromDictionary:dict inContext:backgroundContext];
-        
-        if ([self.coreDataStore save]) {
-            [self importFinishedWithStatus:DCDataUpdateSuccess];
-        } else {
-            [self updateFailed];
-        }
+        [self.coreDataStore saveWithCompletionBlock:^(BOOL isSuccess) {
+            if (isSuccess) {
+                [self importFinishedWithStatus:DCDataUpdateSuccess];
+            } else {
+                [self updateFailed];
+
+            }
+        }];
         
     }];
     

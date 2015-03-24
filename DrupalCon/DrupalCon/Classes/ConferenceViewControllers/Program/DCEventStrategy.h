@@ -27,7 +27,8 @@
 
 typedef enum {
     EDCEventStrategyPrograms = 0,
-    EDCEventStrategyBofs =1
+    EDCEventStrategyBofs =1,
+    EDCEventStrategySocialEvents
 }EDCEventStrategy;
 
 @interface DCEventStrategy : NSObject
