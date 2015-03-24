@@ -83,6 +83,7 @@ static NSString *eventCellId = @"SpeakerEventCellId";
 {
     [super arrangeNavigationBar];
     
+    self.navigationController.navigationBar.tintColor = NAV_BAR_COLOR;
     [self.navigationController.navigationBar setBackgroundImage: [UIImage imageWithColor:[UIColor clearColor]]
                                                   forBarMetrics: UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
@@ -267,7 +268,7 @@ static NSString *eventCellId = @"SpeakerEventCellId";
             self.backgroundViewTop.constant = -offset/2;
 
             float delta = 50;
-            float maxAlpha = 0.8;
+            float maxAlpha = 0.96;
             float alpha;
             
             if ((offset <= showNavBarPoint) && (offset >= showNavBarPoint-delta))

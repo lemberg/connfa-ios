@@ -19,7 +19,7 @@ typedef enum {
 } FilterCellType;
 
 
-@interface DCEventFilterCell : UITableViewCell<DCFilterCheckboxDelegateProtocol>
+@interface DCEventFilterCell : UITableViewCell
 
 @property (nonatomic, weak) IBOutlet UILabel *title;
 @property (nonatomic, weak) IBOutlet DCFilterCheckBox *checkBox;

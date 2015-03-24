@@ -173,6 +173,7 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
 {
     [super arrangeNavigationBar];
     
+    self.navigationController.navigationBar.tintColor = NAV_BAR_COLOR;
     [self.navigationController.navigationBar setBackgroundImage: [UIImage imageWithColor:[UIColor clearColor]]
                                                   forBarMetrics: UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
@@ -186,7 +187,12 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
     // tag 1: unselected state
     // tag 2: selected state
     favoriteButton.tag = self.event.favorite.boolValue ? 2 : 1;
-    self.navigationItem.rightBarButtonItem = favoriteButton;
+    
+    UIBarButtonItem* sharedButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                                                                  target:self
+                                                                                  action:@selector(favoriteButtonDidClick:)];
+    
+    self.navigationItem.rightBarButtonItems = @[sharedButton, favoriteButton];
 }
 
 - (BOOL) hideEmptyDetailIcon
@@ -344,7 +350,7 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
         
             // Nav bar background alpha setting
         float delta = 5;
-        float maxAlpha = 0.8;
+        float maxAlpha = 0.96;
         float alpha;
         
         if ((-self.topBackgroundTop.constant <= topStopPoint/2) &&
