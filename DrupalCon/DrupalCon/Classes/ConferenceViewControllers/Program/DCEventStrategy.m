@@ -44,6 +44,7 @@
         {
             case EDCEventStrategyPrograms:
                 _eventClass = [DCMainEvent class];
+                _predicate = [self eventStretegyPredicate];
                 break;
                 
             case EDCEventStrategyBofs:
@@ -58,6 +59,14 @@
     return self;
 }
 
+- (NSPredicate *)eventStretegyPredicate
+{
+    NSPredicate* levelPredicate = [NSPredicate predicateWithFormat:@"level.selectedInFilter = true"];
+    NSPredicate* trackPredicate = [NSPredicate predicateWithFormat:@"ANY tracks.selectedInFilter = true"];
+    
+    NSPredicate* mergedPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[levelPredicate,trackPredicate]];
+    return mergedPredicate;
+}
 - (void) dealloc
 {
     self.predicate = nil;

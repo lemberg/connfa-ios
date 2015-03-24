@@ -11,6 +11,7 @@
 #import "DCEventStrategy.h"
 #import "DCTimeRange+DC.h"
 #import "DCTime.h"
+#import "NSDate+DC.h"
 
 @interface DCDayEventsDataSource()
 
@@ -124,6 +125,9 @@ static NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
 {
     NSInteger currentHour = [self currentHour];
     NSInteger sectionNumber = 0;
+    if (![NSDate dc_isDateInToday:self.selectedDay]) {
+        return;
+    }
     for (NSDictionary *sectionInfo in array) {
         
         DCTimeRange *timeRange = sectionInfo[kDCTimeslotKEY];
@@ -149,7 +153,7 @@ static NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:date];
     NSInteger hour = [components hour];
-    return 14;
+    return hour;
 }
 
 @end

@@ -117,7 +117,7 @@ static NSString *ratingsImagesName[] = { @"ic_experience_beginner", @"ic_experie
 - (void)openDetailScreenForEvent:(DCEvent *)event
 {
     
-    DCEventDetailViewController * detailController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([DCEventDetailViewController class])];
+    DCEventDetailViewController * detailController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
     [detailController setEvent:event];
     
     DCLimitedNavigationController * navContainer = [[DCLimitedNavigationController alloc] initWithRootViewController:detailController completion:^{

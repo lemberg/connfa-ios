@@ -28,5 +28,5 @@
 + (NSDate*)fabricateWithEventString:(NSString*)string;
 - (NSString*)pageViewDateString;
 - (NSString*)stringForSpeakerEventCell;
-
++ (BOOL)dc_isDateInToday:(NSDate *)date;
 @end

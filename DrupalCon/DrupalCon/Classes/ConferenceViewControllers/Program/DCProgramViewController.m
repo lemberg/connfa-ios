@@ -61,7 +61,7 @@
     [self arrangeNavigationBar];
     
     self.currentDayIndex = 0;
-    self.eventsStrategy.predicate = nil;//[self getEventStrategyPredicate];
+//    self.eventsStrategy.predicate = nil;//[self getEventStrategyPredicate];
     
     [self.activityIndicator startAnimating];
     [[DCMainProxy sharedProxy] setDataReadyCallback:^(DCMainProxyState mainProxyState) {
@@ -89,15 +89,6 @@
 
 #pragma mark - Private
 
-- (NSPredicate*) getEventStrategyPredicate
-{
-    NSPredicate* levelPredicate = [NSPredicate predicateWithFormat:@"level.selectedInFilter = true"];
-    NSPredicate* trackPredicate = [NSPredicate predicateWithFormat:@"ANY tracks.selectedInFilter = true"];
-    
-    NSPredicate* mergedPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[levelPredicate,trackPredicate]];
-    return mergedPredicate;
-}
-
 -(UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
@@ -114,11 +105,13 @@
 - (void) reloadData
 {
     self.days = [self.eventsStrategy days];
-    
-    self.viewControllers = [self createViewControllersForDays: self.days];
+    if (self.days.count) {
+        self.viewControllers = [self createViewControllersForDays: self.days];
+        [self updatePageController];
+        [self updateButtonsVisibility];
+    }
+   
 
-    [self updatePageController];
-    [self updateButtonsVisibility];
 }
 
 -(void) updatePageController
@@ -134,18 +127,7 @@
     self.dateLabel.text = [date pageViewDateString];
 }
 
-- (BOOL)isDateInToday:(NSDate *)date
-{
-    NSDateComponents *otherDay = [[NSCalendar currentCalendar] components:NSEraCalendarUnit|NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
-    NSDateComponents *today = [[NSCalendar currentCalendar] components:NSEraCalendarUnit|NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:[NSDate date]];
-    if([today day] == [otherDay day] &&
-       [today month] == [otherDay month] &&
-       [today year] == [otherDay year] &&
-       [today era] == [otherDay era]) {
-        return YES;
-    } else
-        return NO;
-}
+
 
 - (NSArray*)createViewControllersForDays:(NSArray*)aDays
 {
@@ -154,7 +136,7 @@
     for (NSDate* date in self.days)
     {
 //        DCProgramItemsViewController *dayViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgramItemsViewController"];
-        if ([self isDateInToday:date]) 
+        if ([NSDate dc_isDateInToday:date])
             self.currentDayIndex = currentDatePageIndex;
 
         DCDayEventsController *dayEventsController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([DCDayEventsController class])];
@@ -188,20 +170,6 @@
     [self reloadData];
 }
 
-- (NSArray*)DC_fillViewControllers
-{
-    
-    NSMutableArray * controllers_ = [[NSMutableArray alloc] initWithCapacity:_days.count];
-    for (int i = 0; i<_days.count; i++)
-    {
-        DCDayEventsController *dayEventsController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([DCDayEventsController class])];
-//        DCProgramItemsViewController *eventItemsViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgramItemsViewController"];
-////        eventItemsViewController.pageIndex = i;
-//        eventItemsViewController.eventsStrategy = self.eventsStrategy;
-        [controllers_ addObject:dayEventsController];
-    }
-    return controllers_;
-}
 
 -(IBAction) previousDayClicked:(id)sender
 {

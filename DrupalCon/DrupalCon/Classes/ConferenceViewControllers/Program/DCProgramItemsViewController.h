@@ -23,6 +23,7 @@
 #import <UIKit/UIKit.h>
 #import "DCEventStrategy.h"
 
+#warning Remove this class before release
 @interface DCProgramItemsViewController : UIViewController
 
 @property (nonatomic, strong) NSDate* date;

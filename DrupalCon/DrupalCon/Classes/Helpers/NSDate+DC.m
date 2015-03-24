@@ -46,6 +46,19 @@ static NSString * kDCSpeakerEventCellFormat = @"dd LLLL";
     return result;
 }
 
++ (BOOL)dc_isDateInToday:(NSDate *)date
+{
+    NSDateComponents *otherDay = [[NSCalendar currentCalendar] components:NSEraCalendarUnit|NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
+    NSDateComponents *today = [[NSCalendar currentCalendar] components:NSEraCalendarUnit|NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:[NSDate date]];
+    if([today day] == [otherDay day] &&
+       [today month] == [otherDay month] &&
+       [today year] == [otherDay year] &&
+       [today era] == [otherDay era]) {
+        return YES;
+    } else
+        return NO;
+}
+
 - (NSString*)pageViewDateString
 {
     NSDateFormatter *outPutDateFormat = [[NSDateFormatter alloc] init];

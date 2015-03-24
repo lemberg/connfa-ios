@@ -322,14 +322,14 @@
         {
             DCLevel* level = [self.levels objectAtIndex:indexPath.row];
             level.selectedInFilter = [NSNumber numberWithBool: !level.selectedInFilter.boolValue];
-            [[DCCoreDataStore  mainQueueContext] save:nil];
+//            [[DCCoreDataStore  mainQueueContext] save:nil];
         }
             break;
         case FilterCellTypeTrack:
         {
             DCLevel* track = [self.tracks objectAtIndex:indexPath.row];
             track.selectedInFilter = [NSNumber numberWithBool: !track.selectedInFilter.boolValue];
-            [[DCCoreDataStore  mainQueueContext] save:nil];
+//            [[DCCoreDataStore  mainQueueContext] save:nil];
         }
             break;
     }
@@ -361,6 +361,7 @@
 
 - (IBAction)onDoneButtonClick:(id)sender
 {
+
         // when all items are deselected, select all
     if ([self allItemsAreSelected:NO array:self.levels] &&
         [self allItemsAreSelected:NO array:self.tracks])
@@ -368,14 +369,21 @@
         [self setAllItemsSelected:YES];
     }
     
-    [[DCCoreDataStore  mainQueueContext] save:nil];
+    NSUndoManager* manager = [[DCCoreDataStore  mainQueueContext] undoManager];
+    [manager endUndoGrouping];
+
+    [[DCCoreDataStore  defaultStore] saveMainContextWithCompletionBlock:^(BOOL isSuccess) {
+        if (self.delegate)
+        {
+            [self.delegate filterControllerWillDismiss];
+            
+        }
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+
+    }];
     
-    if (self.delegate)
-    {
-        [self.delegate filterControllerWillDismiss];
-    }
+
     
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
