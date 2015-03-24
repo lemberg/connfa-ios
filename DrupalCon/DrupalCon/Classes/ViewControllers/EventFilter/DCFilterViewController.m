@@ -80,7 +80,7 @@
     self.tracks = [self.tracks sortedArrayUsingDescriptors:@[trackSort]];
     
     NSUndoManager *undoManager = [[NSUndoManager alloc] init];
-    [[(DCLevel*)self.levels.firstObject managedObjectContext] setUndoManager:undoManager];
+    [[DCCoreDataStore  mainQueueContext] setUndoManager:undoManager];
     [undoManager beginUndoGrouping];
 }
 
@@ -291,14 +291,14 @@
         {
             DCLevel* level = [self.levels objectAtIndex:indexPath.row];
             level.selectedInFilter = [NSNumber numberWithBool: !level.selectedInFilter.boolValue];
-            [level.managedObjectContext save:nil];
+            [[DCCoreDataStore  mainQueueContext] save:nil];
         }
             break;
         case FilterCellTypeTrack:
         {
             DCLevel* track = [self.tracks objectAtIndex:indexPath.row];
             track.selectedInFilter = [NSNumber numberWithBool: !track.selectedInFilter.boolValue];
-            [track.managedObjectContext save:nil];
+            [[DCCoreDataStore  mainQueueContext] save:nil];
         }
             break;
     }
@@ -313,7 +313,7 @@
 
 - (IBAction)onBackButtonClick:(id)sender
 {
-    NSUndoManager* manager = [[(DCLevel*)self.levels.firstObject managedObjectContext] undoManager];
+    NSUndoManager* manager = [[DCCoreDataStore  mainQueueContext] undoManager];
     [manager endUndoGrouping];
     [manager undo];
     
@@ -327,7 +327,7 @@
 
 - (IBAction)onDoneButtonClick:(id)sender
 {
-    [[(DCLevel*)[self.levels firstObject] managedObjectContext] save:nil];
+    [[DCCoreDataStore  mainQueueContext] save:nil];
     
     if (self.delegate)
     {
