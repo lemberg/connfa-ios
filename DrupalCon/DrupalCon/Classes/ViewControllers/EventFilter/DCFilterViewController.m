@@ -18,6 +18,7 @@
 
 @property (nonatomic, strong) NSArray* levels;
 @property (nonatomic, strong) NSArray* tracks;
+@property (nonatomic) BOOL isFilterCleared;
 
 @property (nonatomic, strong) IBOutlet UIBarButtonItem* cancelButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem* doneButton;
@@ -79,9 +80,33 @@
     NSSortDescriptor *trackSort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
     self.tracks = [self.tracks sortedArrayUsingDescriptors:@[trackSort]];
     
+    self.isFilterCleared = ([self allItemsAreSelected:YES array:self.levels] && [self allItemsAreSelected:YES array:self.tracks]);
+    
     NSUndoManager *undoManager = [[NSUndoManager alloc] init];
     [[DCCoreDataStore  mainQueueContext] setUndoManager:undoManager];
     [undoManager beginUndoGrouping];
+}
+
+- (void) setAllItemsSelected: (BOOL) selected
+{
+    [self.levels enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [(DCLevel*)obj setSelectedInFilter: [NSNumber numberWithBool:selected]];
+    }];
+    
+    [self.tracks enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [(DCTrack*)obj setSelectedInFilter: [NSNumber numberWithBool:selected]];
+    }];
+}
+
+- (BOOL) allItemsAreSelected:(BOOL)selected array:(NSArray*)array
+{
+    for (NSObject *item in array)
+    {
+        if (![(NSNumber*)[item valueForKey:@"selectedInFilter"] boolValue] == selected)
+            return NO;
+    }
+    
+    return YES;
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
@@ -261,7 +286,7 @@
         cell.type = cellType;
         cell.relatedObjectId = [self getCellId:cellType row:indexPath.row];
         cell.title.text = [self getCellTitle:cellType row:indexPath.row];
-        cell.checkBox.selected = [self getCellSelected:cellType row:indexPath.row];
+        cell.checkBox.selected = self.isFilterCleared ? NO : [self getCellSelected:cellType row:indexPath.row];
         cell.checkBox.userInteractionEnabled = NO;
         cell.separator.hidden = [self isLastCellInSection: indexPath];
         
@@ -278,6 +303,12 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (self.isFilterCleared)
+    {
+        [self setAllItemsSelected: NO];
+        self.isFilterCleared = NO;
+    }
+    
     switch (indexPath.section)
     {
         case FilterCellTypeButton:
@@ -322,11 +353,21 @@
 
 - (void) onClearButtonClick
 {
+    [self setAllItemsSelected: YES];
+    self.isFilterCleared = YES;
     
+    [self.tableView reloadData];
 }
 
 - (IBAction)onDoneButtonClick:(id)sender
 {
+        // when all items are deselected, select all
+    if ([self allItemsAreSelected:NO array:self.levels] &&
+        [self allItemsAreSelected:NO array:self.tracks])
+    {
+        [self setAllItemsSelected:YES];
+    }
+    
     [[DCCoreDataStore  mainQueueContext] save:nil];
     
     if (self.delegate)
