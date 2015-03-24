@@ -10,16 +10,9 @@
 #import "DCInfoMenuCell.h"
 #import "UIConstants.h"
 #import "UIImage+Extension.h"
-
-typedef NS_ENUM (int, DCInfoMenuSection) {
-    DC_INFO_MENU_ABOUT_DRUPAL = 0,
-    DC_INFO_MENU_TERMS,
-    DC_INFO_MENU_PROGRAM,
-    DC_INFO_MENU_ABOUT_APP
-};
-
-#define kInfoMenuItemTitle @"InfoMenuItemTitle"
-#define kInfoMenuItemControllerId @"InfoMenuItemControllerId"
+#import "DCInfo.h"
+#import "DCInfoCategory.h"
+#import "DCAboutViewController.h"
 
 #define infoMenuItemCellId @"InfoMenuItemCellId"
 
@@ -41,16 +34,10 @@ typedef NS_ENUM (int, DCInfoMenuSection) {
 {
     [super viewDidLoad];
     
-    self.items = @[
-                   @{ kInfoMenuItemTitle: @"About DrupalCon",
-                      kInfoMenuItemControllerId: @"AboutViewController" },
-                   @{ kInfoMenuItemTitle: @"Terms and conditions",
-                      kInfoMenuItemControllerId: @"AboutViewController" },
-                   @{ kInfoMenuItemTitle: @"Program",
-                      kInfoMenuItemControllerId: @"AboutViewController" },
-                   @{ kInfoMenuItemTitle: @"About this app",
-                      kInfoMenuItemControllerId: @"AboutViewController" }
-                   ];
+    DCInfo* info = [[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCInfo class] inMainQueue:YES] lastObject];
+    
+    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
+    self.items = [[info.infoCategory allObjects] sortedArrayUsingDescriptors:@[descriptor]];
     
     [self.tableView reloadData];
 }
@@ -84,7 +71,7 @@ typedef NS_ENUM (int, DCInfoMenuSection) {
 {
     DCInfoMenuCell* cell = [tableView dequeueReusableCellWithIdentifier:infoMenuItemCellId];
     
-    cell.titleLabel.text = self.items[indexPath.row] [kInfoMenuItemTitle];
+    cell.titleLabel.text = [(DCInfoCategory*)self.items[indexPath.row] name];
     BOOL isLastCell = (indexPath.row == self.items.count-1);
     cell.separator.hidden = isLastCell;
     
@@ -98,15 +85,8 @@ typedef NS_ENUM (int, DCInfoMenuSection) {
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    [self showViewControllerAssociatedWithMenuItem: (DCInfoMenuSection)indexPath.row];
-}
-
-- (void) showViewControllerAssociatedWithMenuItem:(DCInfoMenuSection)menuItem
-{
-    NSString *storyboardControllerID = self.items[menuItem][kInfoMenuItemControllerId];
-    NSAssert(storyboardControllerID.length, @"No Storyboard ID for Menu item view controller");
-    
-    DCBaseViewController* controller = [self.storyboard instantiateViewControllerWithIdentifier:storyboardControllerID];
+    DCAboutViewController* controller = [self.storyboard instantiateViewControllerWithIdentifier:@"AboutViewController"];
+    [controller setData: self.items[indexPath.row]];
     
     [self.navigationController pushViewController:controller animated:YES];
 }

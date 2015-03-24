@@ -981,7 +981,7 @@
                                 </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" sectionIndexMinimumDisplayRowCount="2" rowHeight="65" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ze9-cs-tMG">
-                                <rect key="frame" x="0.0" y="44" width="320" height="459"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="524"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexColor" red="0.066666666666666666" green="0.11372549019607843" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
@@ -1043,7 +1043,7 @@
                             <constraint firstItem="5Gv-Pl-sJ6" firstAttribute="top" secondItem="oZk-sF-abG" secondAttribute="top" id="FSa-Kw-xQI"/>
                             <constraint firstItem="5Gv-Pl-sJ6" firstAttribute="leading" secondItem="oZk-sF-abG" secondAttribute="leading" id="LhY-xj-2UC"/>
                             <constraint firstAttribute="trailing" secondItem="ze9-cs-tMG" secondAttribute="trailing" id="PeL-UC-zKN"/>
-                            <constraint firstItem="Xc1-db-giO" firstAttribute="top" secondItem="ze9-cs-tMG" secondAttribute="bottom" constant="65" id="Vn7-Ul-GZS"/>
+                            <constraint firstItem="Xc1-db-giO" firstAttribute="top" secondItem="ze9-cs-tMG" secondAttribute="bottom" id="Vn7-Ul-GZS"/>
                             <constraint firstItem="ze9-cs-tMG" firstAttribute="top" secondItem="5Gv-Pl-sJ6" secondAttribute="bottom" id="W6I-Ym-esd"/>
                             <constraint firstAttribute="trailing" secondItem="5Gv-Pl-sJ6" secondAttribute="trailing" id="WEJ-XL-pCX"/>
                             <constraint firstItem="ze9-cs-tMG" firstAttribute="leading" secondItem="oZk-sF-abG" secondAttribute="leading" id="XIN-nc-vws"/>
@@ -1706,7 +1706,7 @@
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="100" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="59j-aM-plu">
                                 <rect key="frame" x="0.0" y="246" width="320" height="322"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="InfoMenuItemCellId" id="B7p-1f-ZNL" customClass="DCInfoMenuCell">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1737,6 +1737,7 @@
                                                 <constraint firstItem="D1Q-C3-2Uw" firstAttribute="leading" secondItem="IIb-N1-S6F" secondAttribute="leading" constant="20" id="chx-YW-NXB"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="separator" destination="D1Q-C3-2Uw" id="4Fz-QJ-u17"/>
                                             <outlet property="titleLabel" destination="oi6-oH-HlQ" id="xK9-lZ-6iW"/>
@@ -1782,8 +1783,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8JL-WP-80f">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="502"/>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8JL-WP-80f">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="delegate" destination="vHA-yp-h7f" id="qRx-LQ-WzC"/>
@@ -1791,6 +1792,12 @@
                             </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8JL-WP-80f" firstAttribute="leading" secondItem="enU-fg-7F9" secondAttribute="leading" id="ZSV-Om-Xgd"/>
+                            <constraint firstItem="8JL-WP-80f" firstAttribute="top" secondItem="enU-fg-7F9" secondAttribute="top" id="cX0-Vc-5az"/>
+                            <constraint firstAttribute="trailing" secondItem="8JL-WP-80f" secondAttribute="trailing" id="len-De-8O4"/>
+                            <constraint firstItem="Jr3-p7-Xwu" firstAttribute="top" secondItem="8JL-WP-80f" secondAttribute="bottom" id="ytN-Cv-CPM"/>
+                        </constraints>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
