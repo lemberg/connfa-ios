@@ -1,4 +1,4 @@
-//
+  //
 //  The MIT License (MIT)
 //  Copyright (c) 2014 Lemberg Solutions Limited
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -168,7 +168,8 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
         }
         else
         {
-            [self setState:DCMainProxyStateLoadingFail];
+//            [self setState:DCMainProxyStateLoadingFail];
+            [self setState:DCMainProxyStateDataReady];
             [self dataIsReady];
         }
     }
