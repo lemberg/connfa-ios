@@ -159,7 +159,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="CHU-sX-s07">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.1137254902" green="0.1843137255" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.066666666666666666" green="0.11372549019607843" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </textAttributes>

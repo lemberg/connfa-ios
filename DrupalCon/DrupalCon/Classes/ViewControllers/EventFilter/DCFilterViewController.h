@@ -12,7 +12,7 @@
 
 @protocol DCFilterViewControllerDelegate <NSObject>
 
-- (void) filterControllerWillDismiss;
+- (void) filterControllerWillDismiss:(BOOL)cancel;
 
 @end
 

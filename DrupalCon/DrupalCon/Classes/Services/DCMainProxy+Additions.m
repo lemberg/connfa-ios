@@ -25,6 +25,8 @@
 #import "DCMainEvent+DC.h"
 #import "DCBof.h"
 #import "DCTimeRange+DC.h"
+#import "DCLevel.h"
+#import "DCTrack.h"
 
 #import "NSDate+DC.h"
 #import "NSArray+DC.h"
@@ -197,6 +199,22 @@
     }
     
     return nil;
+}
+
+- (BOOL) isFilterCleared
+{
+    NSArray* levels = [self getAllInstancesOfClass:[DCLevel class] inMainQueue:YES];
+    NSArray* tracks = [self getAllInstancesOfClass:[DCTrack class] inMainQueue:YES];
+    
+    for (DCLevel *level in levels)
+        if (![level.selectedInFilter boolValue])
+            return NO;
+
+    for (DCTrack *track in tracks)
+        if (![track.selectedInFilter boolValue])
+            return NO;
+    
+    return YES;
 }
 
 #pragma mark -

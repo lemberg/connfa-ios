@@ -26,8 +26,6 @@
 #import "NSDate+DC.h"
 #import "DCDayEventsController.h"
 
-#import "DCLevel.h"
-
 @interface DCProgramViewController ()
 
 @property (nonatomic, strong) UIPageViewController *pageViewController;
@@ -98,13 +96,7 @@
 {
     [super arrangeNavigationBar];
     
-    UIBarButtonItem* filterButton = [[UIBarButtonItem alloc] initWithImage: [UIImage imageNamed:@"filter-"]
-                                                                       style:UIBarButtonItemStylePlain
-                                                                      target:self
-                                                                      action:@selector(onFilterButtonClick)];
-
-    
-    self.navigationItem.rightBarButtonItem = filterButton;
+    [self setFilterButton];
 }
 
 - (void) reloadData
@@ -161,6 +153,18 @@
     _nextDayButton.hidden = (self.currentDayIndex == (_days.count-1) ? YES : NO);
 }
 
+- (void) setFilterButton
+{
+    UIImage* filterImage = [UIImage imageNamed: [[DCMainProxy sharedProxy] isFilterCleared] ? @"filter-" : @"filter+"];
+    UIBarButtonItem* filterButton = [[UIBarButtonItem alloc] initWithImage:filterImage
+                                                                     style:UIBarButtonItemStylePlain
+                                                                    target:self
+                                                                    action:@selector(onFilterButtonClick)];
+    
+    
+    self.navigationItem.rightBarButtonItem = filterButton;
+}
+
 #pragma mark - User actions
 
 - (void) onFilterButtonClick
@@ -170,9 +174,13 @@
     [self presentViewController:filterController animated:YES completion:nil];
 }
 
-- (void) filterControllerWillDismiss
+- (void) filterControllerWillDismiss:(BOOL)cancel
 {
-    [self reloadData];
+    if (!cancel)
+    {
+        [self setFilterButton];
+        [self reloadData];
+    }
 }
 
 

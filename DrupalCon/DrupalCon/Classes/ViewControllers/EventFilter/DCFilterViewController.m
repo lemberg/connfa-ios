@@ -387,7 +387,7 @@
     [[DCCoreDataStore  defaultStore] saveMainContextWithCompletionBlock:^(BOOL isSuccess) {
         if (self.delegate)
         {
-            [self.delegate filterControllerWillDismiss];
+            [self.delegate filterControllerWillDismiss: NO];
             
         }
         

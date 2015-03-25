@@ -35,6 +35,8 @@
 - (NSArray *)favoriteEvents;
 - (NSArray *)favoriteEventsWithPredicate:(NSPredicate*)aPredicate;
 
+- (BOOL)isFilterCleared;
+
 #pragma mark -
 
 @end
