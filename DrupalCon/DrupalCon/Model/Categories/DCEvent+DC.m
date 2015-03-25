@@ -135,6 +135,7 @@ const NSString * kDCEventPlaceKey = @"place";
         level.levelId = @(levelID);
         level.name = @"";
         level.order = @(100);
+        level.selectedInFilter = [NSNumber numberWithBool:YES];
     }
     [level addEventsObject:self];
 }
@@ -149,6 +150,7 @@ const NSString * kDCEventPlaceKey = @"place";
         track = [DCTrack createManagedObjectInContext:self.managedObjectContext];
         track.trackId = @(trackId);
         track.name = @"";
+        track.selectedInFilter = [NSNumber numberWithBool:YES];
     }
     [track addEventsObject:self];
 }

@@ -98,8 +98,13 @@
 {
     [super arrangeNavigationBar];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStylePlain target:self action:@selector(onFilterButtonClick)];
-    self.navigationItem.rightBarButtonItem.tintColor = [UIColor whiteColor];
+    UIBarButtonItem* filterButton = [[UIBarButtonItem alloc] initWithImage: [UIImage imageNamed:@"filter-"]
+                                                                       style:UIBarButtonItemStylePlain
+                                                                      target:self
+                                                                      action:@selector(onFilterButtonClick)];
+
+    
+    self.navigationItem.rightBarButtonItem = filterButton;
 }
 
 - (void) reloadData

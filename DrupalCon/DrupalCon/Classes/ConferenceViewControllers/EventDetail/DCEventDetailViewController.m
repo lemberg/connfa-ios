@@ -180,7 +180,7 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
     
-    UIBarButtonItem* favoriteButton = [[UIBarButtonItem alloc] initWithImage: self.event.favorite.boolValue ? [UIImage imageNamed:@"star_on"] : [UIImage imageNamed:@"ic_experience_beginner"]
+    UIBarButtonItem* favoriteButton = [[UIBarButtonItem alloc] initWithImage: self.event.favorite.boolValue ? [UIImage imageNamed:@"star+"] : [UIImage imageNamed:@"star-"]
                                                                        style:UIBarButtonItemStylePlain
                                                                       target:self
                                                                       action:@selector(favoriteButtonDidClick:)];
@@ -420,7 +420,7 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
     
     BOOL isSelected = (sender.tag == 2);
     
-    sender.image = isSelected ? [UIImage imageNamed:@"star_on"] : [UIImage imageNamed:@"ic_experience_beginner"];
+    sender.image = isSelected ? [UIImage imageNamed:@"star+"] : [UIImage imageNamed:@"star-"];
     
     self.event.favorite = [NSNumber numberWithBool:isSelected];
     

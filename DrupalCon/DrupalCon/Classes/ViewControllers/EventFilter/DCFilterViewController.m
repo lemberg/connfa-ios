@@ -18,7 +18,9 @@
 
 @property (nonatomic, strong) NSArray* levels;
 @property (nonatomic, strong) NSArray* tracks;
-@property (nonatomic) BOOL isFilterCleared;
+
+@property (nonatomic) BOOL isLevelFilterCleared;
+@property (nonatomic) BOOL isTrackFilterCleared;
 
 @property (nonatomic, strong) IBOutlet UIBarButtonItem* cancelButton;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem* doneButton;
@@ -70,31 +72,30 @@
 
 - (void) updateSourceData
 {
-    NSPredicate * levelPredicate = [NSPredicate predicateWithFormat:@"NOT (levelId = 0)"];
+    NSPredicate * levelPredicate = nil;//[NSPredicate predicateWithFormat:@"NOT (levelId = 0)"];
     self.levels = [[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCLevel class] predicate:levelPredicate inMainQueue:YES];
     NSSortDescriptor *levelSort = [NSSortDescriptor sortDescriptorWithKey:@"levelId" ascending:YES];
     self.levels = [self.levels sortedArrayUsingDescriptors:@[levelSort]];
     
-    NSPredicate * trackPredicate = [NSPredicate predicateWithFormat:@"NOT (trackId = 0)"];
+    NSPredicate * trackPredicate = nil;//[NSPredicate predicateWithFormat:@"NOT (trackId = 0)"];
     self.tracks = [[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCTrack class] predicate:trackPredicate inMainQueue:YES];
     NSSortDescriptor *trackSort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
     self.tracks = [self.tracks sortedArrayUsingDescriptors:@[trackSort]];
     
-    self.isFilterCleared = ([self allItemsAreSelected:YES array:self.levels] && [self allItemsAreSelected:YES array:self.tracks]);
+    self.isLevelFilterCleared = [self allItemsAreSelected:YES array:self.levels];
+    self.isTrackFilterCleared = [self allItemsAreSelected:YES array:self.tracks];
+    
+    [self printData];
     
     NSUndoManager *undoManager = [[NSUndoManager alloc] init];
     [[DCCoreDataStore  mainQueueContext] setUndoManager:undoManager];
     [undoManager beginUndoGrouping];
 }
 
-- (void) setAllItemsSelected: (BOOL) selected
+- (void) setAllItemsSelected: (BOOL) selected array:(NSArray*)array
 {
-    [self.levels enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [(DCLevel*)obj setSelectedInFilter: [NSNumber numberWithBool:selected]];
-    }];
-    
-    [self.tracks enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        [(DCTrack*)obj setSelectedInFilter: [NSNumber numberWithBool:selected]];
+    [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [obj setValue:[NSNumber numberWithBool:selected] forKey:@"selectedInFilter"];
     }];
 }
 
@@ -286,7 +287,9 @@
         cell.type = cellType;
         cell.relatedObjectId = [self getCellId:cellType row:indexPath.row];
         cell.title.text = [self getCellTitle:cellType row:indexPath.row];
-        cell.checkBox.selected = self.isFilterCleared ? NO : [self getCellSelected:cellType row:indexPath.row];
+        
+        BOOL properFilterCleared = (cellType == FilterCellTypeLevel) ? self.isLevelFilterCleared : self.isTrackFilterCleared;
+        cell.checkBox.selected = properFilterCleared ? NO : [self getCellSelected:cellType row:indexPath.row];
         cell.checkBox.userInteractionEnabled = NO;
         cell.separator.hidden = [self isLastCellInSection: indexPath];
         
@@ -303,12 +306,6 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.isFilterCleared)
-    {
-        [self setAllItemsSelected: NO];
-        self.isFilterCleared = NO;
-    }
-    
     switch (indexPath.section)
     {
         case FilterCellTypeButton:
@@ -320,16 +317,25 @@
             
         case FilterCellTypeLevel:
         {
+            if (self.isLevelFilterCleared)
+            {
+                [self setAllItemsSelected: NO array:self.levels];
+                self.isLevelFilterCleared = NO;
+            }
             DCLevel* level = [self.levels objectAtIndex:indexPath.row];
             level.selectedInFilter = [NSNumber numberWithBool: !level.selectedInFilter.boolValue];
-//            [[DCCoreDataStore  mainQueueContext] save:nil];
         }
             break;
         case FilterCellTypeTrack:
         {
+            if (self.isTrackFilterCleared)
+            {
+                [self setAllItemsSelected: NO array:self.tracks];
+                self.isTrackFilterCleared = NO;
+            }
+            
             DCLevel* track = [self.tracks objectAtIndex:indexPath.row];
             track.selectedInFilter = [NSNumber numberWithBool: !track.selectedInFilter.boolValue];
-//            [[DCCoreDataStore  mainQueueContext] save:nil];
         }
             break;
     }
@@ -348,26 +354,32 @@
     [manager endUndoGrouping];
     [manager undo];
     
+    [self printData];
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void) onClearButtonClick
 {
-    [self setAllItemsSelected: YES];
-    self.isFilterCleared = YES;
+    [self setAllItemsSelected: YES array:self.levels];
+    [self setAllItemsSelected: YES array:self.tracks];
+
+    self.isLevelFilterCleared = YES;
+    self.isTrackFilterCleared = YES;
     
     [self.tableView reloadData];
+    
+    [self printData];
 }
 
 - (IBAction)onDoneButtonClick:(id)sender
 {
+        // when all items in Section are deselected, select all
+    if ([self allItemsAreSelected:NO array:self.levels])
+        [self setAllItemsSelected:YES array:self.levels];
 
-        // when all items are deselected, select all
-    if ([self allItemsAreSelected:NO array:self.levels] &&
-        [self allItemsAreSelected:NO array:self.tracks])
-    {
-        [self setAllItemsSelected:YES];
-    }
+    if ([self allItemsAreSelected:NO array:self.tracks])
+        [self setAllItemsSelected:YES array:self.tracks];
+    
     
     NSUndoManager* manager = [[DCCoreDataStore  mainQueueContext] undoManager];
     [manager endUndoGrouping];
@@ -378,12 +390,22 @@
             [self.delegate filterControllerWillDismiss];
             
         }
+        
+        [self printData];
+        
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-
     }];
-    
+}
 
+- (void) printData
+{
+    NSLog(@"\n");
+    for (DCLevel* level in self.levels)
+        NSLog(@"level: %@, selected: %@\n", level.name, level.selectedInFilter);
+    for (DCTrack* track in self.tracks)
+        NSLog(@"track: %@, selected: %@\n", track.name, track.selectedInFilter);
     
+    NSLog(@"level cleared: %d, tracks cleared: %d\n",self.isLevelFilterCleared, self.isTrackFilterCleared);
 }
 
 @end
