@@ -59,6 +59,7 @@ static NSString *eventCellId = @"SpeakerEventCellId";
 
 @property (nonatomic, strong) NSIndexPath *descriptionCellIndexPath;
 @property (nonatomic, strong) NSMutableDictionary *cellsHeight;
+@property (nonatomic, strong) UIColor* currentBarColor;
 
 @property (nonatomic, strong) NSDictionary* cellPrototypes;
 
@@ -74,6 +75,7 @@ static NSString *eventCellId = @"SpeakerEventCellId";
     [super viewDidLoad];
     
     self.cellsHeight = [NSMutableDictionary dictionary];
+    self.currentBarColor = NAV_BAR_COLOR;
     
     self.cellPrototypes = @{eventCellId : [self.speakerTable dequeueReusableCellWithIdentifier:eventCellId],
                             headerCellId : [self.speakerTable dequeueReusableCellWithIdentifier:headerCellId]};
@@ -102,6 +104,13 @@ static NSString *eventCellId = @"SpeakerEventCellId";
     {
         self.closeCallback();
     }
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBar.tintColor = self.currentBarColor;
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle
@@ -280,6 +289,18 @@ static NSString *eventCellId = @"SpeakerEventCellId";
                 alpha = (offset >= showNavBarPoint) ? maxAlpha : 0;
             }
             self.navBarBackgroundView.alpha = alpha;
+            
+                // Nav bar tint color
+            CGFloat red = 0.0, green = 0.0, blue = 0.0, colorAlpha = alpha / maxAlpha;
+            [NAV_BAR_COLOR getRed:&red green:&green blue:&blue alpha:nil];
+            
+            self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:(red+(colorAlpha*(1-red)))
+                                                                                green:(green+(colorAlpha*(1-green)))
+                                                                                 blue:(blue+(colorAlpha*(1-blue)))
+                                                                                alpha:1.0];
+            self.currentBarColor = self.navigationController.navigationBar.tintColor;
+            
+            self.navBarBackgroundTitleLabel.textColor = self.currentBarColor;
         }
     }
 

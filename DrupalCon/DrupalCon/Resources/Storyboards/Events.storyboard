@@ -358,7 +358,7 @@
                             </imageView>
                             <view opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IfC-e0-kfH" userLabel="Top background shadow">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
-                                <color key="backgroundColor" red="0.99215686270000003" green="0.92156862750000001" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.89803921568627454" green="0.070588235294117646" blue="0.070588235294117646" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lSf-2Y-Cj0" userLabel="Header">
                                 <rect key="frame" x="0.0" y="130" width="320" height="150"/>
