@@ -52,6 +52,11 @@
                 break;
             case EDCEventStrategySocialEvents:
                 _eventClass = [DCSocialEvent class];
+                break;
+            case EDCEeventStrategyFavorites:
+                _eventClass = [DCEvent class];
+                _predicate = [self favoritesPredicate];
+                break;
             default:
                 break;
         }
@@ -67,6 +72,12 @@
     NSPredicate* mergedPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[levelPredicate,trackPredicate]];
     return mergedPredicate;
 }
+
+- (NSPredicate *)favoritesPredicate
+{
+    return [NSPredicate predicateWithFormat:@"favorite=%@", [NSNumber numberWithBool:YES]];
+}
+
 - (void) dealloc
 {
     self.predicate = nil;

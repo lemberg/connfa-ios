@@ -26,7 +26,7 @@
 
 + (BOOL)isProgramOrBof:(DCMenuSection)menu
 {
-    return (menu == DCMENU_PROGRAM_ITEM || menu == DCMENU_BOFS_ITEM || menu == DCMENU_SOCIAL_EVENTS_ITEM);
+    return (menu == DCMENU_PROGRAM_ITEM || menu == DCMENU_BOFS_ITEM);
 }
 
 + (DCEventStrategy*)strategyForEventMenuType:(DCMenuSection)menu
@@ -43,6 +43,8 @@
             break;
         case DCMENU_SOCIAL_EVENTS_ITEM:
             eStrategy = EDCEventStrategySocialEvents;
+        case DCMENU_MYSCHEDULE_ITEM:
+            eStrategy = EDCEeventStrategyFavorites;
         default:
             break;
     }

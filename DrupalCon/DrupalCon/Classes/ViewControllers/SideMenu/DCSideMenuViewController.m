@@ -87,7 +87,7 @@
                                     kMenuItemTitle: @"My Schedule",
                                     kMenuItemIcon: @"menu_icon_my_schedule",
                                     kMenuItemSelectedIcon: @"menu_icon_my_schedule_sel",
-                                    kMenuItemControllerId: @"FavoritesViewController"
+                                    kMenuItemControllerId: @"DCProgramViewController"
                                     },
                                 @{
                                     kMenuItemTitle: @"Location",
@@ -227,6 +227,7 @@
     NSString *defaultStoryboardName = @"Main";
     
     switch (menuSection) {
+        case DCMENU_MYSCHEDULE_ITEM:
         case DCMENU_SOCIAL_EVENTS_ITEM:
         case DCMENU_BOFS_ITEM:
         case DCMENU_PROGRAM_ITEM:
