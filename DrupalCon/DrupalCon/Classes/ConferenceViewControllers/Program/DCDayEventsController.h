@@ -9,7 +9,9 @@
 #import "DCBaseViewController.h"
 #import "DCEventStrategy.h"
 
-@interface DCDayEventsController : DCBaseViewController
+@protocol DCUpdateDayEventProtocol;
+
+@interface DCDayEventsController : DCBaseViewController 
 
 @property (nonatomic, strong) NSDate *date;
 
@@ -17,5 +19,11 @@
 //// timeslot element : dictionary "time slot value" : NSArray of events;
 
 @property (nonatomic, strong) DCEventStrategy * eventsStrategy;
+
+@end
+
+@protocol DCUpdateDayEventProtocol <NSObject>
+
+- (void)updateEvents;
 
 @end

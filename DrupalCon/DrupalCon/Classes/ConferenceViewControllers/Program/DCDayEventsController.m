@@ -29,7 +29,7 @@
 
 @implementation DCDayEventsController
 
-static NSString *ratingsImagesName[] = { @"ic_experience_beginner", @"ic_experience_intermediate", @"ic_experience_advanced" };
+static NSString *ratingsImagesName[] = {@"", @"ic_experience_beginner", @"ic_experience_intermediate", @"ic_experience_advanced" };
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -42,6 +42,11 @@ static NSString *ratingsImagesName[] = { @"ic_experience_beginner", @"ic_experie
     [self initDataSource];
     
     // Do any additional setup after loading the view.
+}
+
+- (void)updateEvents
+{
+    [self.eventsDataSource reloadEvents];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -118,6 +123,12 @@ static NSString *ratingsImagesName[] = { @"ic_experience_beginner", @"ic_experie
 {
     
     DCEventDetailViewController * detailController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
+    [detailController setCloseCallback:^(){
+        if (self.eventsStrategy.strategy == EDCEeventStrategyFavorites) {
+            [self updateEvents];
+        }
+    }];
+    
     [detailController setEvent:event];
     
     DCLimitedNavigationController * navContainer = [[DCLimitedNavigationController alloc] initWithRootViewController:detailController completion:^{
@@ -155,7 +166,7 @@ static NSString *ratingsImagesName[] = { @"ic_experience_beginner", @"ic_experie
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DCEvent *event = [self.eventsDataSource eventForIndexPath:indexPath];
-    return [self isEventHasAdditionalFields:event]? 123 : 80;
+    return [self isEventHasAdditionalFields:event]? 110 : 75;
 }
 
 

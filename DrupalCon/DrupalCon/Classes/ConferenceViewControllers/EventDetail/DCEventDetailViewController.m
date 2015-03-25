@@ -39,7 +39,8 @@
 #import "UIImageView+WebCache.h"
 #import "UIConstants.h"
 #import "UIImage+Extension.h"
-
+#import "DCCoreDataStore.h"
+#import "DCDayEventsController.h"
 
 static NSString * cellIdSpeaker = @"DetailCellIdSpeaker";
 static NSString * cellIdDescription = @"DetailCellIdDescription";
@@ -104,6 +105,9 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
 {
     if (self.closeCallback)
         self.closeCallback();
+
+    [[DCCoreDataStore  defaultStore] saveMainContextWithCompletionBlock:^(BOOL isSuccess) {
+    }];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle
@@ -306,8 +310,8 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
     
     if (![[tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[DCSpeakerCell class]])
         return;
-    
-    DCSpeakersDetailViewController * speakerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SpeakersDetailViewController"];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    DCSpeakersDetailViewController * speakerViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SpeakersDetailViewController"];
     speakerViewController.speaker = self.speakers[indexPath.row];
     speakerViewController.closeCallback = ^{
         [self.detailTable reloadData];
@@ -426,6 +430,7 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
     
     if (isSelected)
     {
+        
        // [[DCMainProxy sharedProxy] addToFavoriteEvent:self.event];
     } else {
       //  [[DCMainProxy sharedProxy] removeFavoriteEventWithID:self.event.eventID];

@@ -22,7 +22,7 @@
 - (instancetype)initWithTableView:(UITableView *)tableView
                     eventStrategy:(DCEventStrategy *)eventStrategy
                              date:(NSDate *)date;
-
+- (void)reloadEvents;
 - (DCEvent *)eventForIndexPath:(NSIndexPath *)indexPath;
 - (DCTimeRange *)timeRangeForSection:(NSInteger)section;
 - (NSIndexPath *)actualEventIndexPath;

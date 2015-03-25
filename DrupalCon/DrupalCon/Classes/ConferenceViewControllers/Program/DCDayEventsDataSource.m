@@ -62,6 +62,10 @@
     });
 }
 
+- (void)reloadEvents
+{
+    [self loadEvents];
+}
 
 static NSString * kDCTimeslotKEY = @"timeslot_key";
 static NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
