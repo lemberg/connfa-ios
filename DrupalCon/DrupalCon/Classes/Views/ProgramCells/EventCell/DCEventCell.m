@@ -11,15 +11,16 @@
 
 @interface DCEventCell()
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *separatorLeadingConstraint;
 @property (weak, nonatomic) IBOutlet UIView *rightContentView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *separatorLeadingConstraint;
 
 @end
 
 @implementation DCEventCell
 
-- (void)awakeFromNib {
-    // Initialization code
+- (void)awakeFromNib
+{
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -84,10 +85,26 @@
 
 }
 
-- (IBAction)selectRightContent:(id)sender {
+#pragma mark - User actions
+
+- (IBAction) rightContentViewDidClick
+{
+    [self coverButtonDidTouchUp];
+    
     if ([self.delegate conformsToProtocol:@protocol(DCEventCellProtocol)]) {
         [self.delegate didSelectCell:self];
     }
 }
+
+- (IBAction) coverButtonDidTouchUp
+{
+    self.highlightedView.hidden = YES;
+}
+
+- (IBAction) coverButtonDidTouchDown
+{
+    self.highlightedView.hidden = NO;
+}
+
 
 @end

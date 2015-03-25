@@ -263,9 +263,6 @@
     cell.leftImageView.image = [UIImage imageNamed:itemDict[isActiveCell ? kMenuItemSelectedIcon : kMenuItemIcon]];
     cell.captionLabel.textColor = isActiveCell ? NAV_BAR_COLOR : MENU_DESELECTED_ITEM_TITLE_COLOR;
     
-        //Selection style
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
     cell.separatorView.hidden = !(indexPath.row % 3 == 2);
     
     return cell;

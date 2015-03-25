@@ -75,9 +75,6 @@
     BOOL isLastCell = (indexPath.row == self.items.count-1);
     cell.separator.hidden = isLastCell;
     
-    cell.selectedBackgroundView = [[UIView alloc] initWithFrame: cell.bounds];
-    cell.selectedBackgroundView.backgroundColor = MENU_SELECTION_COLOR;
-    
     return cell;
 }
 

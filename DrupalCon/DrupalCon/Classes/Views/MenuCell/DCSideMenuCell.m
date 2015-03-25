@@ -27,15 +27,17 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
+    if (self) {        
+
     }
     return self;
 }
 
 - (void)awakeFromNib
 {
-    // Initialization code
+        // selected View
+    self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.contentView.frame];
+    self.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:208.0/255.0 green:208.0/255.0 blue:208.0/255.0 alpha:1.0];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -43,6 +45,29 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+#pragma mark - User touch delegate
+
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesBegan:touches withEvent:event];
+    
+    self.selectedBackgroundView.hidden = NO;
+}
+
+- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesEnded:touches withEvent:event];
+    
+    self.selectedBackgroundView.hidden = YES;
+}
+
+- (void) touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [super touchesCancelled:touches withEvent:event];
+    
+    self.selectedBackgroundView.hidden = YES;
 }
 
 @end
