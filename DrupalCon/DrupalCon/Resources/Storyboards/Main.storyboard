@@ -733,7 +733,7 @@
                             </imageView>
                             <view opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ryg-hH-kYr" userLabel="Top background shadow">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
-                                <color key="backgroundColor" red="0.99215686274509807" green="0.92156862745098034" blue="0.76470588235294112" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.8980392157" green="0.070588235289999995" blue="0.070588235289999995" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pqa-OI-2bE" userLabel="Header">
                                 <rect key="frame" x="0.0" y="130" width="320" height="150"/>
@@ -1130,7 +1130,7 @@
                                             <outlet property="photoImageView" destination="6zF-LG-GJa" id="GGA-2b-qDL"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SpeakerDetailButtonsCellId" rowHeight="31" id="pdF-PP-6Ub" customClass="DCSpeakerDetailButtonsCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="SpeakerDetailButtonsCellId" rowHeight="31" id="pdF-PP-6Ub" customClass="DCSpeakerDetailButtonsCell">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pdF-PP-6Ub" id="tEN-IR-ng9">

@@ -1,31 +1,33 @@
  body {
-                padding: 0 13px;
 
                   font-family: "Helvetica-Regular", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-
+                  margin:0;
+                  padding-top:0px;
+                  padding-bottom:0px;
+                  padding-left:20px;
+                  padding-right:20px;
               }
               
               p{
 
                font-size: 16px;
-               color: #666;
+               color: #333333;
                line-height: 22px; 
-               margin: 10px 0;              
-              }   
+              }
               
               ul{
                 margin: 10px 0;
-              } 
-              ul li{
+              }
+              ul li, ol li{
                font-size: 16px;
-               color: #666;
+               color: #333333;
                line-height: 22px; 
               } 
 
 
               strong{
                font-size: 16px;   
-               color: #666;
+               color: #333333;
                line-height: 22px;
               }           
               img{
@@ -38,30 +40,31 @@
 
                font-size: 16px; 
                line-height: 22px;
-               color: #ef262b;
+               color: #05ae43;
                text-decoration: none;
               }
               h1{
 
-               color: #851b1d;
-    font-weight: normal;
-    font-size: 22px;
-    line-height: 20px;
-    margin-top: 0;
-    margin-bottom: 26px;
+               color: #05ae43;
+                font-weight: normal;
+                font-size: 22px;
+                line-height: 20px;
+                margin-top: 0;
+                margin-bottom: 26px;
               }
               h3{
 
                font-size: 21px;
-               color: #851b1d;
+               color: #05ae43;
                line-height: 27px;
                margin-top: 20px;
-    margin-bottom: 20px;
+               margin-bottom: 20px;
               }
               blockquote {
 
-    margin: 16px 16px 16px 32px;
-    padding: 16px 16px 16px 24px;
+    margin: 16px 16px 0px 0px;
+    padding: 16px 16px 0px 0px;
+    color: #333333;
     border-style: solid;
     border-width: 1px;
     border-left-width: 15px;

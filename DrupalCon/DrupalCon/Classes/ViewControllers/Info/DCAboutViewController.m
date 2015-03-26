@@ -43,8 +43,8 @@
     
     self.navigationItem.title = self.data.name;
     
-    NSURL* style = [[[NSBundle mainBundle] URLForResource:@"style" withExtension:@"css"] URLByDeletingLastPathComponent];
-    [self.webView loadHTMLString:self.data.html baseURL: style];
+    [self.webView loadHTMLString:self.data.html];
+    self.webView.scrollView.scrollEnabled = YES;
 }
 
 #pragma mark - Private
