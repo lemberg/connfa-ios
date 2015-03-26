@@ -102,10 +102,16 @@
 - (void) reloadData
 {
     self.days = [self.eventsStrategy days];
+
     if (self.days.count) {
+//        self.viewControllers = nil;
         self.viewControllers = [self createViewControllersForDays: self.days];
         [self updatePageController];
         [self updateButtonsVisibility];
+    } else {
+        self.pageViewController.delegate = nil;
+        self.viewControllers = nil;
+        self.days = nil;
     }
    
 
@@ -143,7 +149,7 @@
         [controllers addObject:dayEventsController];
         currentDatePageIndex++;
     }
-    
+
     return controllers;
 }
 
@@ -155,6 +161,9 @@
 
 - (void) setFilterButton
 {
+    if (![self.eventsStrategy isEnableFilter]) {
+        return;
+    }
     UIImage* filterImage = [UIImage imageNamed: [[DCMainProxy sharedProxy] isFilterCleared] ? @"filter-" : @"filter+"];
     UIBarButtonItem* filterButton = [[UIBarButtonItem alloc] initWithImage:filterImage
                                                                      style:UIBarButtonItemStylePlain
@@ -178,11 +187,26 @@
 {
     if (!cancel)
     {
+        self.pageViewController.dataSource = nil;
+
         [self setFilterButton];
         [self reloadData];
+       
+        self.pageViewController.dataSource = self;
+        [self setCurrentDayControllerAtIndex:self.currentDayIndex];
     }
 }
 
+- (void)updateControllersaToFilterValues
+{
+    for (UIViewController *viewController in self.viewControllers) {
+//        UIViewController *viewController = self.viewControllers[self.currentDayIndex];
+        if ([viewController conformsToProtocol:@protocol(DCUpdateDayEventProtocol)]) {
+            [(id<DCUpdateDayEventProtocol>)viewController updateEvents];
+        }
+        break;
+    }
+}
 
 -(IBAction) previousDayClicked:(id)sender
 {
@@ -196,6 +220,17 @@
     [self.pageViewController setViewControllers: @[self.viewControllers[self.currentDayIndex]]
                                       direction: UIPageViewControllerNavigationDirectionReverse
                                        animated: YES
+                                     completion: nil];
+}
+
+- (void)setCurrentDayControllerAtIndex:(NSUInteger)pageIndex
+{
+
+    [self updateButtonsVisibility];
+    [self displayDateForDay: pageIndex];
+    [self.pageViewController setViewControllers: @[self.viewControllers[pageIndex]]
+                                      direction: UIPageViewControllerNavigationDirectionReverse
+                                       animated: NO
                                      completion: nil];
 }
 

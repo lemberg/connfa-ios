@@ -11,7 +11,7 @@
 
 @protocol DCUpdateDayEventProtocol;
 
-@interface DCDayEventsController : DCBaseViewController 
+@interface DCDayEventsController : DCBaseViewController<DCUpdateDayEventProtocol>
 
 @property (nonatomic, strong) NSDate *date;
 

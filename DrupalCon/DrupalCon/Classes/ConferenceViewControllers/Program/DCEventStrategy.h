@@ -42,5 +42,6 @@ typedef enum {
 - (NSArray*)days;
 - (NSArray*)eventsForDay:(NSDate*)day;
 - (NSArray*)uniqueTimeRangesForDay:(NSDate*)day;
+- (BOOL)isEnableFilter;
 
 @end
