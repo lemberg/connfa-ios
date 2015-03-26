@@ -42,5 +42,6 @@
 @dynamic timeRange;
 @dynamic tracks;
 @dynamic type;
+@dynamic link;
 
 @end

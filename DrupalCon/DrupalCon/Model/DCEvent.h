@@ -32,6 +32,7 @@
 @property (nonatomic, retain) NSNumber * eventID;
 @property (nonatomic, retain) NSNumber * favorite;
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSString * link;
 @property (nonatomic, retain) NSString * place;
 @property (nonatomic, retain) NSNumber * order;
 @property (nonatomic, retain) DCLevel *level;

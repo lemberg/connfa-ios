@@ -205,7 +205,7 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
     
     UIBarButtonItem* sharedButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                                   target:self
-                                                                                  action:@selector(favoriteButtonDidClick:)];
+                                                                                  action:@selector(shareButtonDidClick)];
     
     self.navigationItem.rightBarButtonItems = @[sharedButton, favoriteButton];
 }
@@ -459,6 +459,33 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
     } else {
       //  [[DCMainProxy sharedProxy] removeFavoriteEventWithID:self.event.eventID];
     }
+}
+
+- (void) shareButtonDidClick
+{
+    NSString* invitation = @"Hey, just thought this may be interesting for you: ";
+    NSURL* url = [NSURL URLWithString:self.event.link];
+    
+    UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:@[invitation, url] applicationActivities:nil];
+    
+//    So we have:
+//    UIActivityTypePostToFacebook,
+//    UIActivityTypePostToTwitter,
+//    UIActivityTypeMail,
+//    UIActivityTypeAirDrop
+    activityController.excludedActivityTypes = @[UIActivityTypePostToWeibo,
+                                                 UIActivityTypeMessage,
+                                                 UIActivityTypePrint,
+                                                 UIActivityTypeCopyToPasteboard,
+                                                 UIActivityTypeAssignToContact,
+                                                 UIActivityTypeSaveToCameraRoll,
+                                                 UIActivityTypeAddToReadingList,
+                                                 UIActivityTypePostToFlickr,
+                                                 UIActivityTypePostToVimeo,
+                                                 UIActivityTypePostToTencentWeibo];
+    [activityController setValue:@"DrupalCon 2015, Los Angeles" forKey:@"subject"];
+    
+    [self presentViewController:activityController animated:YES completion:nil];
 }
 
 @end

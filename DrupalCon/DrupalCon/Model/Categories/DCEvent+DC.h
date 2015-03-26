@@ -32,6 +32,7 @@ extern NSString * kDCEventFromKey;
 extern NSString * kDCEventToKey;
 extern NSString * kDCEventTypeKey;
 extern NSString * kDCEventNameKey;
+extern NSString * kDCEventLinkKey;
 extern NSString * kDCEventSpeakersKey;
 extern NSString * kDCEventTrackKey;
 extern NSString * kDCEventExperienceLevelKey;
