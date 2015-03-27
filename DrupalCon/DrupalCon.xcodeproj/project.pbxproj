@@ -106,6 +106,9 @@
 		74FF4BFA1A164F320093C557 /* DCParserService.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FF4BF21A164F320093C557 /* DCParserService.m */; };
 		840147021AC42A9D00423062 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 840147011AC42A9D00423062 /* style.css */; };
 		840C455519BF419700CC144B /* DCBof+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 840C455419BF419700CC144B /* DCBof+DC.m */; };
+		842B5E561AC577F6009614A5 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 842B5E541AC577F6009614A5 /* libGoogleAnalyticsServices.a */; };
+		842B5E631AC579C2009614A5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 842B5E621AC579C2009614A5 /* libz.dylib */; };
+		842B5E651AC579D0009614A5 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 842B5E641AC579D0009614A5 /* AdSupport.framework */; };
 		842B91DB1AB99588003F9116 /* DCSpeakerDetailButtonsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 842B91DA1AB99588003F9116 /* DCSpeakerDetailButtonsCell.m */; };
 		8496B4DB1ABB49DC00BF872D /* DCInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8496B4DA1ABB49DC00BF872D /* DCInfoViewController.m */; };
 		8496B4DE1ABB4A2D00BF872D /* DCAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8496B4DD1ABB4A2D00BF872D /* DCAboutViewController.m */; };
@@ -335,6 +338,19 @@
 		840147011AC42A9D00423062 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
 		840C455319BF419700CC144B /* DCBof+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DCBof+DC.h"; path = "Model/Categories/DCBof+DC.h"; sourceTree = "<group>"; };
 		840C455419BF419700CC144B /* DCBof+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DCBof+DC.m"; path = "Model/Categories/DCBof+DC.m"; sourceTree = "<group>"; };
+		842B5E541AC577F6009614A5 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalyticsServices.a; path = ../libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		842B5E581AC57860009614A5 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		842B5E591AC57860009614A5 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		842B5E5A1AC57860009614A5 /* GAIEcommerceFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceFields.h; sourceTree = "<group>"; };
+		842B5E5B1AC57860009614A5 /* GAIEcommerceProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProduct.h; sourceTree = "<group>"; };
+		842B5E5C1AC57860009614A5 /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProductAction.h; sourceTree = "<group>"; };
+		842B5E5D1AC57860009614A5 /* GAIEcommercePromotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommercePromotion.h; sourceTree = "<group>"; };
+		842B5E5E1AC57860009614A5 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		842B5E5F1AC57860009614A5 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		842B5E601AC57860009614A5 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		842B5E611AC57860009614A5 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		842B5E621AC579C2009614A5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		842B5E641AC579D0009614A5 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		842B91D91AB99588003F9116 /* DCSpeakerDetailButtonsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCSpeakerDetailButtonsCell.h; path = Classes/Views/SpeakerCells/DCSpeakerDetailButtonsCell.h; sourceTree = "<group>"; };
 		842B91DA1AB99588003F9116 /* DCSpeakerDetailButtonsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCSpeakerDetailButtonsCell.m; path = Classes/Views/SpeakerCells/DCSpeakerDetailButtonsCell.m; sourceTree = "<group>"; };
 		8496B4D91ABB49DC00BF872D /* DCInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCInfoViewController.h; path = Info/DCInfoViewController.h; sourceTree = "<group>"; };
@@ -411,7 +427,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				842B5E651AC579D0009614A5 /* AdSupport.framework in Frameworks */,
+				842B5E631AC579C2009614A5 /* libz.dylib in Frameworks */,
 				74356D5219BEE1D90055F13D /* SystemConfiguration.framework in Frameworks */,
+				842B5E561AC577F6009614A5 /* libGoogleAnalyticsServices.a in Frameworks */,
 				74E67C7719B6FEF500DF9D71 /* CoreLocation.framework in Frameworks */,
 				74A470E819B5EA3C00B01BC5 /* MapKit.framework in Frameworks */,
 				849EFDDB19A4ACB800C43E05 /* CoreData.framework in Frameworks */,
@@ -613,6 +632,8 @@
 		5DC8C413198656DA00BF5816 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				842B5E641AC579D0009614A5 /* AdSupport.framework */,
+				842B5E621AC579C2009614A5 /* libz.dylib */,
 				74356D5119BEE1D90055F13D /* SystemConfiguration.framework */,
 				74E67C7619B6FEF500DF9D71 /* CoreLocation.framework */,
 				74A470E719B5EA3C00B01BC5 /* MapKit.framework */,
@@ -648,6 +669,7 @@
 		5DC8C44A1986571300BF5816 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				842B5E571AC57834009614A5 /* Google analytics */,
 				5D6449DC198ABA3C00BC1775 /* AppFacade */,
 				5DC8C453198658BF00BF5816 /* AppDelegate */,
 				849EFDA019A49F8600C43E05 /* Model */,
@@ -872,6 +894,24 @@
 			path = Classes/Services;
 			sourceTree = "<group>";
 		};
+		842B5E571AC57834009614A5 /* Google analytics */ = {
+			isa = PBXGroup;
+			children = (
+				842B5E541AC577F6009614A5 /* libGoogleAnalyticsServices.a */,
+				842B5E581AC57860009614A5 /* GAI.h */,
+				842B5E591AC57860009614A5 /* GAIDictionaryBuilder.h */,
+				842B5E5A1AC57860009614A5 /* GAIEcommerceFields.h */,
+				842B5E5B1AC57860009614A5 /* GAIEcommerceProduct.h */,
+				842B5E5C1AC57860009614A5 /* GAIEcommerceProductAction.h */,
+				842B5E5D1AC57860009614A5 /* GAIEcommercePromotion.h */,
+				842B5E5E1AC57860009614A5 /* GAIFields.h */,
+				842B5E5F1AC57860009614A5 /* GAILogger.h */,
+				842B5E601AC57860009614A5 /* GAITrackedViewController.h */,
+				842B5E611AC57860009614A5 /* GAITracker.h */,
+			);
+			name = "Google analytics";
+			sourceTree = "<group>";
+		};
 		849D92D519AE285700977D67 /* ProgramDetailCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -1079,7 +1119,7 @@
 				ORGANIZATIONNAME = "Lemberg Solution";
 				TargetAttributes = {
 					5DC8C410198656DA00BF5816 = {
-						DevelopmentTeam = FN2T3UCV4E;
+						DevelopmentTeam = J7LBYY3B34;
 					};
 				};
 			};
@@ -1342,6 +1382,10 @@
 				GCC_PREFIX_HEADER = "DrupalCon/DrupalCon-Prefix.pch";
 				INFOPLIST_FILE = "DrupalCon/DrupalCon-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1360,6 +1404,10 @@
 				GCC_PREFIX_HEADER = "DrupalCon/DrupalCon-Prefix.pch";
 				INFOPLIST_FILE = "DrupalCon/DrupalCon-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;

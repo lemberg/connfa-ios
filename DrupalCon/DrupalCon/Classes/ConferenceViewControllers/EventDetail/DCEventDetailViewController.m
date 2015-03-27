@@ -92,6 +92,8 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
 {
     [super viewDidLoad];
     
+    [self registerScreenLoadAtGA: [NSString stringWithFormat:@"eventID: %d", self.event.eventID.intValue]];
+    
     [self arrangeNavigationBar];
     
     self.cellsHeight = [NSMutableDictionary dictionary];
@@ -175,6 +177,13 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
         self.trackAndLevelViewHeight.priority = 1000;
         self.TrackAndLevelView.hidden = YES;
     }
+}
+
+- (void) registerScreenLoadAtGA
+{
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:[NSString stringWithFormat:@"DCEventDetailViewController, eventID: %d", self.event.eventID.intValue]];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
 - (BOOL)isHeaderEmpty

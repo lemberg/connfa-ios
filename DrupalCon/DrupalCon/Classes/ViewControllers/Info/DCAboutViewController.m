@@ -41,6 +41,8 @@
 {
     [super viewDidLoad];
     
+    [self registerScreenLoadAtGA: [NSString stringWithFormat:@"infoID: %d", self.data.infoId.intValue]];
+    
     self.navigationItem.title = self.data.name;
     
     [self.webView loadHTMLString:self.data.html];

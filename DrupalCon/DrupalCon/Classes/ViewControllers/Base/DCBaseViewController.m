@@ -83,4 +83,11 @@
     return nil;
 }
 
+- (void) registerScreenLoadAtGA:(NSString*)message
+{
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:kGAIScreenName value:[NSString stringWithFormat:@"%@ loaded, message: %@", NSStringFromClass(self.class), message]];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+}
+
 @end

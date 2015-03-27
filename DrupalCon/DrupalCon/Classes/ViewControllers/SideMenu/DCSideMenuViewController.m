@@ -264,9 +264,8 @@
     cell.captionLabel.textColor = isActiveCell ? NAV_BAR_COLOR : MENU_DESELECTED_ITEM_TITLE_COLOR;
     
     cell.separatorView.hidden = !(indexPath.row % 3 == 2);
-    
+
     return cell;
-    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

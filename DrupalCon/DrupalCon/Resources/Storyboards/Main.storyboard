@@ -1395,30 +1395,30 @@
                                                         <constraint firstAttribute="width" constant="22" id="qRD-Cs-ULh"/>
                                                     </constraints>
                                                 </imageView>
-                                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H3i-fz-axR" userLabel="separator">
+                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_event_speakers" translatesAutoresizingMaskIntoConstraints="NO" id="2v3-RW-W99" userLabel="separator">
                                                     <rect key="frame" x="20" y="49" width="300" height="1"/>
-                                                    <color key="backgroundColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" red="0.81568627450980391" green="0.81568627450980391" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="1" id="T5O-cR-6h1"/>
+                                                        <constraint firstAttribute="height" constant="1" id="GXn-rF-spC"/>
                                                     </constraints>
-                                                </view>
+                                                </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="Pir-cP-Fbl" firstAttribute="leading" secondItem="gPj-8h-6Fw" secondAttribute="leading" constant="20" id="4H9-Va-JnI"/>
-                                                <constraint firstAttribute="bottom" secondItem="H3i-fz-axR" secondAttribute="bottom" id="9bN-tc-2fF"/>
                                                 <constraint firstItem="xGY-TI-Ty0" firstAttribute="leading" secondItem="Pir-cP-Fbl" secondAttribute="trailing" constant="40" id="IJX-u5-8Vz"/>
-                                                <constraint firstAttribute="trailing" secondItem="H3i-fz-axR" secondAttribute="trailing" id="KZU-iw-IMu"/>
                                                 <constraint firstAttribute="centerY" secondItem="Pir-cP-Fbl" secondAttribute="centerY" id="NTo-03-a9v"/>
                                                 <constraint firstAttribute="centerY" secondItem="xGY-TI-Ty0" secondAttribute="centerY" constant="1" id="Tfd-lr-3tx"/>
-                                                <constraint firstItem="H3i-fz-axR" firstAttribute="leading" secondItem="gPj-8h-6Fw" secondAttribute="leading" constant="20" id="ca6-MH-CK5"/>
+                                                <constraint firstItem="2v3-RW-W99" firstAttribute="leading" secondItem="gPj-8h-6Fw" secondAttribute="leading" constant="20" id="obd-0O-FU5"/>
+                                                <constraint firstAttribute="trailing" secondItem="2v3-RW-W99" secondAttribute="trailing" id="qPd-6Z-GxO"/>
+                                                <constraint firstAttribute="bottom" secondItem="2v3-RW-W99" secondAttribute="bottom" id="tPL-Jq-IXk"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="captionLabel" destination="xGY-TI-Ty0" id="T01-Bg-MJz"/>
                                             <outlet property="leftImageView" destination="Pir-cP-Fbl" id="Z9J-2b-df9"/>
-                                            <outlet property="separatorView" destination="H3i-fz-axR" id="cZs-Ex-etQ"/>
+                                            <outlet property="separatorView" destination="2v3-RW-W99" id="N5e-VC-AZE"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1921,6 +1921,7 @@
         <image name="empty_icon" width="168" height="170"/>
         <image name="event_detail_top" width="320" height="112"/>
         <image name="filter_sessions" width="21" height="21"/>
+        <image name="ic_event_speakers" width="10" height="10"/>
         <image name="ic_experience_advanced" width="12" height="12"/>
         <image name="ic_program_back" width="23" height="23"/>
         <image name="ic_program_clock" width="40" height="40"/>

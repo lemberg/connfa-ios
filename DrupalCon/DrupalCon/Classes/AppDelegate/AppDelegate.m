@@ -23,16 +23,26 @@
 #import "AppDelegate.h"
 #import "DCMainProxy.h"
 #import "UIConstants.h"
-
+#import "GAI.h"
 #import "DCLevel+DC.h"
 
+/** Google Analytics configuration constants **/
+static NSString *const kGaPropertyId = @"UA-267362-67";
+static BOOL const kGaDryRun = NO;
+static int const kGaDispatchPeriod = 30;
+
 @interface AppDelegate ()
+
+@property (strong, nonatomic) id<GAITracker> tracker;
 @property (nonatomic, strong) UILocalNotification *localNotification;
+
 @end
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [self initializeGoogleAnalytics];
+    
     [[DCMainProxy sharedProxy] update];
     UILocalNotification *locationNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (locationNotification) {
@@ -101,7 +111,12 @@
     application.applicationIconBadgeNumber = 0;
 }
 
-
+- (void)initializeGoogleAnalytics
+{
+    [[GAI sharedInstance] setDispatchInterval:kGaDispatchPeriod];
+    [[GAI sharedInstance] setDryRun:kGaDryRun];
+    self.tracker = [[GAI sharedInstance] trackerWithTrackingId:kGaPropertyId];
+}
 
 
 @end

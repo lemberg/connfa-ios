@@ -21,6 +21,8 @@
 //
 
 #import "DCSideMenuCell.h"
+#import "UIImage+Extension.h"
+
 
 @implementation DCSideMenuCell
 
@@ -38,6 +40,9 @@
         // selected View
     self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.contentView.frame];
     self.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:208.0/255.0 green:208.0/255.0 blue:208.0/255.0 alpha:1.0];
+    
+        // this workaround is made to avoid separator hiding when cell is selected. UIImageView objects stay visible
+    self.separatorView.image = [UIImage imageWithColor:[UIColor colorWithRed:208.0/255.0 green:208.0/255.0 blue:208.0/255.0 alpha:1.0]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
