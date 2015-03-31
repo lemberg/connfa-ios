@@ -115,6 +115,11 @@ BackButtonBlock dismissAction;
     }
 }
 
+- (void)didMoveToParentViewController:(UIViewController *)parent
+{
+    // parent is nil if this view controller was removed
+}
+
 -(UIViewController *)childViewControllerForStatusBarStyle
 {
     return self.visibleViewController;

@@ -241,7 +241,8 @@ static NSString *eventCellId = @"SpeakerEventCellId";
     {
         DCEvent *event = [self eventForIndexPath:indexPath];
         
-        DCEventDetailViewController * detailController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Events" bundle:nil];
+        DCEventDetailViewController * detailController = [storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
         [detailController setEvent:event];
         [self.navigationController pushViewController:detailController animated:YES];
     }

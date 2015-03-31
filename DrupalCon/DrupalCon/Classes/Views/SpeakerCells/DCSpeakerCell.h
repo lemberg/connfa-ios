@@ -21,6 +21,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DCSpeaker.h"
 
 @interface DCSpeakerCell : UITableViewCell
 
@@ -29,5 +30,7 @@
 @property (nonatomic, weak) IBOutlet UILabel * positionTitleLbl;
 
 + (float)cellHeight;
+
+- (void) initData:(DCSpeaker*)speaker;
 
 @end

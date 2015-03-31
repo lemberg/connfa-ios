@@ -18,7 +18,7 @@
 
 
 
-@interface DCFilterViewController : UITableViewController
+@interface DCFilterViewController : DCBaseViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property(nonatomic, weak) id<DCFilterViewControllerDelegate> delegate;
 

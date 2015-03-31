@@ -27,14 +27,13 @@
 #import "DCMainEvent+DC.h"
 #import "DCTimeRange+DC.h"
 #import "DCSpeaker+DC.h"
-#import "DCLevel+DC.h"
-#import "DCTrack+DC.h"
 #import "DCBof.h"
-
 #import "DCSpeakerCell.h"
 #import "DCDescriptionTextCell.h"
+#import "DCEventDetailHeaderCell.h"
 #import "UIWebView+DC.h"
 #import "DCTime+DC.h"
+#import "DCLevel+DC.h"
 
 #import "UIImageView+WebCache.h"
 #import "UIConstants.h"
@@ -42,32 +41,27 @@
 #import "DCCoreDataStore.h"
 #import "DCDayEventsController.h"
 
+static NSString * cellIdHeader = @"DetailCellIdHeader";
 static NSString * cellIdSpeaker = @"DetailCellIdSpeaker";
 static NSString * cellIdDescription = @"DetailCellIdDescription";
 
 @interface DCEventDetailViewController ()
 
-@property (nonatomic, weak) IBOutlet UITableView * detailTable;
+@property (nonatomic, weak) IBOutlet UITableView * tableView;
 @property (weak, nonatomic) IBOutlet UIImageView *noDetailImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *topBackgroundView;
 @property (weak, nonatomic) IBOutlet UIView *topBackgroundShadowView;
-
-@property (nonatomic, weak) IBOutlet UILabel* titleLabel;
-@property (nonatomic, weak) IBOutlet UILabel* dateAndPlaceLabel;
-@property (nonatomic, weak) IBOutlet UILabel* trackLabel;
-@property (nonatomic, weak) IBOutlet UILabel* experienceLabel;
-@property (nonatomic, weak) IBOutlet UIImageView* experienceIcon;
-@property (nonatomic, weak) IBOutlet UIView* TrackAndLevelView;
+@property (weak, nonatomic) IBOutlet UILabel *topTitleLabel;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint* topBackgroundTop;
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint* headerViewTop;
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint* trackAndLevelViewHeight;
 
 @property (nonatomic, weak, readonly) NSArray* speakers;
 
 @property (nonatomic, strong) NSIndexPath *lastIndexPath;
 @property (nonatomic, strong) NSMutableDictionary *cellsHeight;
 @property (nonatomic, strong) UIColor* currentBarColor;
+
+@property (nonatomic, strong) NSDictionary *cellsForSizeEstimation;
 
 @end
 
@@ -82,15 +76,22 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
     self = [super init];
     if (self)
     {
-        _closeCallback = nil;
-        _event = event;
+        self.event = event;
     }
     return self;
+}
+
+- (void) awakeFromNib
+{
+
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.cellsForSizeEstimation = @{cellIdHeader : [self.tableView dequeueReusableCellWithIdentifier: cellIdHeader],
+                                    cellIdSpeaker : [self.tableView dequeueReusableCellWithIdentifier: cellIdSpeaker]};
     
     [self registerScreenLoadAtGA: [NSString stringWithFormat:@"eventID: %d", self.event.eventID.intValue]];
     
@@ -98,11 +99,10 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
     
     self.cellsHeight = [NSMutableDictionary dictionary];
     self.currentBarColor = NAV_BAR_COLOR;
+    self.topTitleLabel.text = self.event.name;
     
     self.noDetailImageView.hidden = ![self hideEmptyDetailIcon];
-    self.detailTable.scrollEnabled = ![self hideEmptyDetailIcon];
-    
-    [self updateEventDetailsData];
+    self.tableView.scrollEnabled = ![self hideEmptyDetailIcon];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -129,55 +129,6 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
 }
 
 #pragma mark - UI initialization
-
-- (void) updateEventDetailsData
-{
-    self.titleLabel.text = self.event.name;
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat: @"MM-dd HH:mm"];
-    NSString *date = self.event.date ? [formatter stringFromDate: self.event.date] : @"";
-    NSString *place = self.event.place ? self.event.place : @"";
-    
-    if (date.length && place.length)
-        self.dateAndPlaceLabel.text = [NSString stringWithFormat: @"%@ in %@", date, place];
-    else
-        self.dateAndPlaceLabel.text = [NSString stringWithFormat: @"%@%@", date, place];
-    
-    
-    DCTrack* track = [self.event.tracks anyObject];
-    DCLevel* level = self.event.level;
-    
-    BOOL shouldHideTrackAndLevelView = (track.trackId.integerValue == 0 && level.levelId.integerValue == 0);
-    
-    if (!shouldHideTrackAndLevelView)
-    {
-        self.trackLabel.text = [(DCTrack*)[self.event.tracks anyObject] name];
-        self.experienceLabel.text = self.event.level.name ? [NSString stringWithFormat:@"Experience level: %@", self.event.level.name] : nil;
-        
-        UIImage* icon = nil;
-        switch (self.event.level.levelId.integerValue)
-        {
-            case 1:
-                icon = [UIImage imageNamed:@"ic_experience_beginner"];
-                break;
-            case 2:
-                icon = [UIImage imageNamed:@"ic_experience_intermediate"];
-                break;
-            case 3:
-                icon = [UIImage imageNamed:@"ic_experience_advanced"];
-                break;
-            default:
-                break;
-        }
-        self.experienceIcon.image = icon;
-    }
-    else
-    {
-        self.trackAndLevelViewHeight.priority = 1000;
-        self.TrackAndLevelView.hidden = YES;
-    }
-}
 
 - (void) registerScreenLoadAtGA
 {
@@ -227,20 +178,6 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
     return isHeaderEmpty && isNoSpeakers && isDescriptionEmpty;
 }
 
-- (NSString *)positionTitleForSpeaker:(DCSpeaker *)speaker
-{
-    NSString *organisationName = speaker.organizationName;
-    NSString *jobTitle = speaker.jobTitle;
-    if ([jobTitle length] && [organisationName length]) {
-        return [NSString stringWithFormat:@"%@ / %@", organisationName, jobTitle];
-    }
-    if (![jobTitle length]) {
-        return organisationName;
-    }
-    
-    return jobTitle;
-}
-
 #pragma mark - Private
 
 - (NSArray*) speakers
@@ -250,18 +187,32 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
 
 - (void)updateCellAtIndexPath
 {
-    [self.detailTable beginUpdates];
-    [self.detailTable reloadRowsAtIndexPaths:@[self.lastIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-    [self.detailTable endUpdates];
+    [self.tableView beginUpdates];
+    [self.tableView reloadRowsAtIndexPaths:@[self.lastIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView endUpdates];
 }
 
-- (CGFloat) getSpeakerCellHeight
+- (CGFloat) getHeaderCellHeight
 {
-    DCSpeakerCell *cell = [self.detailTable dequeueReusableCellWithIdentifier: cellIdSpeaker];
-    return cell.frame.size.height;
+    DCEventDetailHeaderCell *cellPrototype = self.cellsForSizeEstimation[cellIdHeader];
+    [cellPrototype initData: self.event];
+    [cellPrototype layoutSubviews];
+    
+    CGFloat height = [cellPrototype.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    return height;
 }
 
-- (float)heightForDescriptionTextCell
+- (CGFloat) getSpeakerCellHeight:(DCSpeaker*)speaker
+{
+    DCSpeakerCell *cellPrototype = self.cellsForSizeEstimation[cellIdSpeaker];
+    [cellPrototype initData: speaker];
+    [cellPrototype layoutSubviews];
+    
+    CGFloat height = [cellPrototype.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    return height;
+}
+
+- (float) heightForDescriptionTextCell
 {
     float descriptionCellHeight = [DCDescriptionTextCell cellHeightForText:_event.desctiptText];;
     if (self.lastIndexPath && [self.cellsHeight objectForKey:self.lastIndexPath]) {
@@ -279,49 +230,47 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == self.speakers.count) // description cell is the last
-    {
+    if (indexPath.row == 0)
+        return [self getHeaderCellHeight];
+    
+    if (indexPath.row == (self.speakers.count+1))
         return [self heightForDescriptionTextCell];
-    }
-    return [self getSpeakerCellHeight];
+    else
+        return [self getSpeakerCellHeight:self.speakers[indexPath.row-1]];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-        // speakers + description
-    return self.speakers.count+1;
+        // speakers + description + header
+    return self.speakers.count+2;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell;
-
-        // description cell
-    if (indexPath.row == self.speakers.count)
+        // header cell
+    if (indexPath.row == 0)
     {
-        DCDescriptionTextCell * _cell = (DCDescriptionTextCell*)[tableView dequeueReusableCellWithIdentifier:cellIdDescription];
-        _cell.descriptionWebView.delegate = self;
+        DCEventDetailHeaderCell* cell = (DCEventDetailHeaderCell*)[tableView dequeueReusableCellWithIdentifier:cellIdHeader];
+        [cell initData: self.event];
+        return cell;
+    }
+    
+        // description cell
+    if (indexPath.row == self.speakers.count+1)
+    {
+        DCDescriptionTextCell * cell = (DCDescriptionTextCell*)[tableView dequeueReusableCellWithIdentifier:cellIdDescription];
+        cell.descriptionWebView.delegate = self;
         self.lastIndexPath = indexPath;
-        [_cell.descriptionWebView loadHTMLString:_event.desctiptText];
-        cell = _cell;
+        [cell.descriptionWebView loadHTMLString:_event.desctiptText];
+        return cell;
     }
     else // speaker cell
     {
-        DCSpeaker * speaker = self.speakers[indexPath.row];
-        DCSpeakerCell * _cell = (DCSpeakerCell*)[tableView dequeueReusableCellWithIdentifier:cellIdSpeaker];
-        [_cell.pictureImg sd_setImageWithURL:[NSURL URLWithString:speaker.avatarPath]
-                            placeholderImage:[UIImage imageNamed:@"avatar_placeholder"]
-                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                       dispatch_async(dispatch_get_main_queue(), ^{
-                                           [_cell setNeedsDisplay];
-                                       });
-                                   }];
-    
-        [_cell.nameLbl setText:speaker.name];
-        [_cell.positionTitleLbl setText:[self positionTitleForSpeaker:speaker]];
-        cell = _cell;
+        DCSpeaker * speaker = self.speakers[indexPath.row-1];
+        DCSpeakerCell * cell = (DCSpeakerCell*)[tableView dequeueReusableCellWithIdentifier:cellIdSpeaker];
+        [cell initData: speaker];
+        return cell;
     }
-    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -332,9 +281,9 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
         return;
     UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     DCSpeakersDetailViewController * speakerViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SpeakersDetailViewController"];
-    speakerViewController.speaker = self.speakers[indexPath.row];
+    speakerViewController.speaker = self.speakers[indexPath.row-1];
     speakerViewController.closeCallback = ^{
-        [self.detailTable reloadData];
+        [self.tableView reloadData];
     };
     [self.navigationController pushViewController:speakerViewController animated:YES];
 }
@@ -364,27 +313,29 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (scrollView == _detailTable)
+    if (scrollView == self.tableView)
     {
-        float topStopPoint = (self.topBackgroundView.frame.size.height - 20 - 44);
+        float topStopPoint = self.topBackgroundView.frame.size.height - self.topBackgroundShadowView.frame.size.height;
         float offset = scrollView.contentOffset.y;
         
-        BOOL shouldMoveToTop = (offset > 0) && (-self.topBackgroundTop.constant*2 < topStopPoint);
-        BOOL shouldMoveToBottom = (offset < 0) && (self.topBackgroundTop.constant < 0);
+        BOOL shouldMoveToTop = (offset > 0) && (-self.topBackgroundTop.constant < topStopPoint);
+        BOOL shouldMoveToBottom = (offset < 0) && (self.topBackgroundTop.constant <= 0);
+        
+        NSLog(@"offset: %f, topStop: %f, bgTop: %f; STop: %d, SBottom: %d", offset, topStopPoint, self.topBackgroundTop.constant, shouldMoveToTop, shouldMoveToBottom);
         
             // Nav bar background alpha setting
-        float delta = 15;
+        float delta = 5;
         float maxAlpha = 1;
         float alpha;
         
-        if ((-self.topBackgroundTop.constant <= topStopPoint/2) &&
-            (-self.topBackgroundTop.constant >= topStopPoint/2-delta))
+        if ((-self.topBackgroundTop.constant <= topStopPoint) &&
+            (-self.topBackgroundTop.constant >= topStopPoint-delta))
         {
-            alpha = (1 - (topStopPoint/2 + self.topBackgroundTop.constant)/delta) * maxAlpha;
+            alpha = (1 - (topStopPoint + self.topBackgroundTop.constant)/delta) * maxAlpha;
         }
         else
         {
-            alpha = (-self.topBackgroundTop.constant >= topStopPoint/2) ? maxAlpha : 0;
+            alpha = (-self.topBackgroundTop.constant >= topStopPoint) ? maxAlpha : 0;
         }
         self.topBackgroundShadowView.alpha = alpha;
         
@@ -397,35 +348,27 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
                                                                              blue:(blue+(colorAlpha*(1-blue)))
                                                                             alpha:1.0];
         self.currentBarColor = self.navigationController.navigationBar.tintColor;
-        
+
         
             // constraints setting
         if (shouldMoveToTop)
         {
-            self.topBackgroundTop.constant -= scrollView.contentOffset.y/2;
-            self.headerViewTop.constant -= scrollView.contentOffset.y/2;
+            self.topBackgroundTop.constant -= scrollView.contentOffset.y;
             
                 // don't move to Top more it is needed
-            if (self.topBackgroundTop.constant < -topStopPoint/2)
-                self.topBackgroundTop.constant = -topStopPoint/2;
-            
-            if (self.headerViewTop.constant < -topStopPoint/2)
-                self.headerViewTop.constant = -topStopPoint/2;
+            if (self.topBackgroundTop.constant < (-topStopPoint))
+                self.topBackgroundTop.constant = -topStopPoint;
             
             [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0) animated:NO];
         }
         
         if (shouldMoveToBottom)
         {
-            self.topBackgroundTop.constant -= scrollView.contentOffset.y/2;
-            self.headerViewTop.constant -= scrollView.contentOffset.y/2;
+            self.topBackgroundTop.constant -= scrollView.contentOffset.y;
             
                 // don't move to Bottom more then it is needed
             if (self.topBackgroundTop.constant >= 0)
                 self.topBackgroundTop.constant = 0;
-            
-            if (self.headerViewTop.constant > 0)
-                self.headerViewTop.constant = 0;
             
                 // after bounce animatically move to bottom point
             if (scrollView.isDecelerating && scrollView.contentOffset.y <= 0)
@@ -433,7 +376,6 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
                 [self.view layoutIfNeeded];
             
                 self.topBackgroundTop.constant = 0;
-                self.headerViewTop.constant = 0;
                 
                 [UIView animateWithDuration: 0.3f
                                  animations:^{

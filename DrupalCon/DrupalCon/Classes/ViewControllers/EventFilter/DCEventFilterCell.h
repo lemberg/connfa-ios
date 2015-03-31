@@ -10,12 +10,11 @@
 #import "DCFilterCheckBox.h"
 
 
-#define FilterCellTypeCount 3
+#define FilterCellTypeCount 2
 
 typedef enum {
     FilterCellTypeLevel = 0,
     FilterCellTypeTrack,
-    FilterCellTypeButton
 } FilterCellType;
 
 

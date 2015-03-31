@@ -16,6 +16,8 @@
 
 @interface DCFilterViewController ()
 
+@property (nonatomic, weak) IBOutlet UITableView* tableView;
+
 @property (nonatomic, strong) NSArray* levels;
 @property (nonatomic, strong) NSArray* tracks;
 
@@ -126,9 +128,7 @@
             
         case FilterCellTypeTrack:
             return self.tracks.count;
-        
-        case FilterCellTypeButton:
-            return 1;
+            
         default:
             NSAssert(false, @"unhanled Filter type");
     }
@@ -148,10 +148,6 @@
             
         case FilterCellTypeTrack:
             headerTitle = @"Track";
-            break;
-        
-        case FilterCellTypeButton:
-            headerTitle = @"";
             break;
     }
     
@@ -269,32 +265,25 @@
 
 -(CGFloat)  tableView: (UITableView*) tableView heightForFooterInSection:(NSInteger)section
 {
-    return (section == FilterCellTypeButton) ? 44.0f : 1.0f;
+    return 1.0f;
 }
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     FilterCellType cellType = [self getCellType:indexPath.section];
     
-    if (cellType == FilterCellTypeButton)
-    {
-        return [tableView dequeueReusableCellWithIdentifier:@"EventFilterButtonIdentifier"];
-    }
-    else
-    {
-        DCEventFilterCell* cell = (DCEventFilterCell*) [tableView dequeueReusableCellWithIdentifier:@"EventFilterCellIdentifier"];
-        
-        cell.type = cellType;
-        cell.relatedObjectId = [self getCellId:cellType row:indexPath.row];
-        cell.title.text = [self getCellTitle:cellType row:indexPath.row];
-        
-        BOOL properFilterCleared = (cellType == FilterCellTypeLevel) ? self.isLevelFilterCleared : self.isTrackFilterCleared;
-        cell.checkBox.selected = properFilterCleared ? NO : [self getCellSelected:cellType row:indexPath.row];
-        cell.checkBox.userInteractionEnabled = NO;
-        cell.separator.hidden = [self isLastCellInSection: indexPath];
-        
-        return cell;
-    }
+    DCEventFilterCell* cell = (DCEventFilterCell*) [tableView dequeueReusableCellWithIdentifier:@"EventFilterCellIdentifier"];
+    
+    cell.type = cellType;
+    cell.relatedObjectId = [self getCellId:cellType row:indexPath.row];
+    cell.title.text = [self getCellTitle:cellType row:indexPath.row];
+    
+    BOOL properFilterCleared = (cellType == FilterCellTypeLevel) ? self.isLevelFilterCleared : self.isTrackFilterCleared;
+    cell.checkBox.selected = properFilterCleared ? NO : [self getCellSelected:cellType row:indexPath.row];
+    cell.checkBox.userInteractionEnabled = NO;
+    cell.separator.hidden = [self isLastCellInSection: indexPath];
+    
+    return cell;
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -308,13 +297,6 @@
 {
     switch (indexPath.section)
     {
-        case FilterCellTypeButton:
-        {
-            [self onClearButtonClick];
-            [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        }
-            return;
-            
         case FilterCellTypeLevel:
         {
             if (self.isLevelFilterCleared)
@@ -358,7 +340,7 @@
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void) onClearButtonClick
+- (IBAction) onClearButtonClick
 {
     [self setAllItemsSelected: YES array:self.levels];
     [self setAllItemsSelected: YES array:self.tracks];

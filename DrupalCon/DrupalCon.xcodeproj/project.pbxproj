@@ -132,6 +132,7 @@
 		84A24FB519C1B254006EF17E /* DCSpeechBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A24FB419C1B254006EF17E /* DCSpeechBaseCell.m */; };
 		84A25A8919F01C6E0051C466 /* NSUserDefaults+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84A25A8819F01C6E0051C466 /* NSUserDefaults+DC.m */; };
 		84ABE8F519BEEB8F0019D5DC /* DCEventStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ABE8F419BEEB8F0019D5DC /* DCEventStrategy.m */; };
+		84C6FEDB1AC5C5600010EC81 /* DCEventDetailHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6FEDA1AC5C5600010EC81 /* DCEventDetailHeaderCell.m */; };
 		84D1CB521AA5FE5A00EEF33A /* DCLimitedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D1CB511AA5FE5A00EEF33A /* DCLimitedNavigationController.m */; };
 		84DCDB291AA0BB8D00BA0097 /* DCMainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DCDB281AA0BB8D00BA0097 /* DCMainNavigationController.m */; };
 		84F601451A9B970B0077BA85 /* DCFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F601441A9B970B0077BA85 /* DCFilterViewController.m */; };
@@ -395,6 +396,8 @@
 		84A25A8819F01C6E0051C466 /* NSUserDefaults+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSUserDefaults+DC.m"; path = "Classes/Helpers/NSUserDefaults+DC.m"; sourceTree = "<group>"; };
 		84ABE8F319BEEB8F0019D5DC /* DCEventStrategy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCEventStrategy.h; sourceTree = "<group>"; };
 		84ABE8F419BEEB8F0019D5DC /* DCEventStrategy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCEventStrategy.m; sourceTree = "<group>"; };
+		84C6FED91AC5C5600010EC81 /* DCEventDetailHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCEventDetailHeaderCell.h; path = Classes/Views/ProgramDetailCells/DCEventDetailHeaderCell.h; sourceTree = "<group>"; };
+		84C6FEDA1AC5C5600010EC81 /* DCEventDetailHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCEventDetailHeaderCell.m; path = Classes/Views/ProgramDetailCells/DCEventDetailHeaderCell.m; sourceTree = "<group>"; };
 		84D1CB501AA5FE5A00EEF33A /* DCLimitedNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCLimitedNavigationController.h; sourceTree = "<group>"; };
 		84D1CB511AA5FE5A00EEF33A /* DCLimitedNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCLimitedNavigationController.m; sourceTree = "<group>"; };
 		84DCDB271AA0BB8D00BA0097 /* DCMainNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCMainNavigationController.h; path = MainNavigation/DCMainNavigationController.h; sourceTree = "<group>"; };
@@ -917,6 +920,8 @@
 			children = (
 				849D92E219AE2A6600977D67 /* DCDescriptionTextCell.h */,
 				849D92E319AE2A6600977D67 /* DCDescriptionTextCell.m */,
+				84C6FED91AC5C5600010EC81 /* DCEventDetailHeaderCell.h */,
+				84C6FEDA1AC5C5600010EC81 /* DCEventDetailHeaderCell.m */,
 			);
 			name = ProgramDetailCells;
 			sourceTree = "<group>";
@@ -1280,6 +1285,7 @@
 				1ACFD6F01A432BBA00F8EE57 /* DCInfo.m in Sources */,
 				74356D5819BEE4860055F13D /* Reachability.m in Sources */,
 				749011701AC05DA900D79C2E /* UIImage+Extension.m in Sources */,
+				84C6FEDB1AC5C5600010EC81 /* DCEventDetailHeaderCell.m in Sources */,
 				5D6449D7198A93E400BC1775 /* DCProgramHeaderCellView.m in Sources */,
 				1ACFD7051A432BBC00F8EE57 /* DCLevel.m in Sources */,
 				7409E6631AB081D6003577F6 /* DCMainEvent.m in Sources */,

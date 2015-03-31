@@ -22,6 +22,7 @@
 
 #import "DCSpeakerCell.h"
 #import "UIImageView+DC.h"
+#import "UIImageView+WebCache.h"
 
 @implementation DCSpeakerCell
 
@@ -49,6 +50,34 @@
 + (float)cellHeight
 {
     return 65.0;
+}
+
+- (void) initData:(DCSpeaker *)speaker
+{
+    [self.pictureImg sd_setImageWithURL:[NSURL URLWithString:speaker.avatarPath]
+                        placeholderImage:[UIImage imageNamed:@"avatar_placeholder"]
+                               completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                   dispatch_async(dispatch_get_main_queue(), ^{
+                                       [self setNeedsDisplay];
+                                   });
+                               }];
+    
+    [self.nameLbl setText:speaker.name];
+    [self.positionTitleLbl setText:[self positionTitleForSpeaker:speaker]];
+}
+
+- (NSString *)positionTitleForSpeaker:(DCSpeaker *)speaker
+{
+    NSString *organisationName = speaker.organizationName;
+    NSString *jobTitle = speaker.jobTitle;
+    if ([jobTitle length] && [organisationName length]) {
+        return [NSString stringWithFormat:@"%@ / %@", organisationName, jobTitle];
+    }
+    if (![jobTitle length]) {
+        return organisationName;
+    }
+    
+    return jobTitle;
 }
 
 @end
