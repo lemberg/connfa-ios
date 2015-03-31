@@ -34,7 +34,7 @@ BackButtonBlock dismissAction;
     {
         completion = aBlock;
         dismissAction = nil;
-        
+        self.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         self.maxDepth = (maxDepth >= 2) ? maxDepth : DEFAULT_MAX_DEPTH;
     }
     return self;
@@ -85,9 +85,7 @@ BackButtonBlock dismissAction;
     self.backPressCount = 0;
 }
 
-#pragma mark - UINavigationController delegate
-
-- (BOOL)navigationBar:(UINavigationBar *)navigationBar shouldPopItem:(UINavigationItem *)item
+- (UIViewController *)popViewControllerAnimated:(BOOL)animated
 {
     self.backPressCount++;
     
@@ -95,30 +93,23 @@ BackButtonBlock dismissAction;
     {
         if (dismissAction)
         {
-                // custom dismiss action
+            // custom dismiss action
             dismissAction();
         }
         else
         {
-                // usual dismiss. In this case NavigationController mus te shown modally
+            // usual dismiss. In this case NavigationController mus te shown modally
             [self dismissViewControllerAnimated:YES completion:completion];
         }
-        return NO;
+        return nil;
     }
     else // just do as usual...
     {
-            //  UINavigationController doesn't declare it's a delegate, so we
-            //  have to do this ugliness…
-        BOOL (*f)(id, SEL, ...) = [UINavigationController instanceMethodForSelector: _cmd];
-        BOOL shouldPop = f(self, _cmd, navigationBar, item);
-        return shouldPop;
+        return [super popViewControllerAnimated:animated];
     }
 }
 
-- (void)didMoveToParentViewController:(UIViewController *)parent
-{
-    // parent is nil if this view controller was removed
-}
+#pragma mark - UINavigationController delegate
 
 -(UIViewController *)childViewControllerForStatusBarStyle
 {

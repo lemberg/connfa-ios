@@ -156,7 +156,6 @@
         [self setNeedsStatusBarAppearanceUpdate];
         [self.speakersTbl reloadData];
     }];
-    [navContainer setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     
     [[DCAppFacade shared].mainNavigationController presentViewController: navContainer animated:YES completion:nil];
 }

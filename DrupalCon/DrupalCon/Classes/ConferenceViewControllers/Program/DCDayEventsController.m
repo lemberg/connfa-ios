@@ -135,7 +135,6 @@ static NSString *ratingsImagesName[] = {@"", @"ic_experience_beginner", @"ic_exp
         [self setNeedsStatusBarAppearanceUpdate];
         [self.tableView reloadData];
     }];
-    [navContainer setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     
     [[DCAppFacade shared].mainNavigationController presentViewController: navContainer animated:YES completion:nil];
 }
