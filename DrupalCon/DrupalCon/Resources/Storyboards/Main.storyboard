@@ -37,23 +37,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="login_bg" translatesAutoresizingMaskIntoConstraints="NO" id="tJ8-lZ-pKi" userLabel="Background view">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_bg" translatesAutoresizingMaskIntoConstraints="NO" id="tJ8-lZ-pKi" userLabel="Background view">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JHz-Di-zQs">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JHz-Di-zQs">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fwJ-Pc-qSu" userLabel="Content View">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fwJ-Pc-qSu" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="87i-9P-6cU" userLabel="Login bg View">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="87i-9P-6cU" userLabel="Login bg View">
                                                 <rect key="frame" x="20" y="287" width="280" height="40"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </imageView>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fTs-bK-Wy9" userLabel="Login TextField" customClass="DCTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fTs-bK-Wy9" userLabel="Login TextField" customClass="DCTextField">
                                                 <rect key="frame" x="20" y="287" width="280" height="40"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="07p-3j-ESK"/>
+                                                </constraints>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
@@ -65,9 +68,12 @@
                                                 <rect key="frame" x="20" y="334" width="280" height="40"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             </imageView>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Mp-9Q-e2f" userLabel="Password TextField" customClass="DCTextField">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Mp-9Q-e2f" userLabel="Password TextField" customClass="DCTextField">
                                                 <rect key="frame" x="20" y="334" width="280" height="40"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="5nn-sF-fsU"/>
+                                                </constraints>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
@@ -75,7 +81,7 @@
                                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="iGI-L1-Feg"/>
                                                 </connections>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N2P-Lx-tLK">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N2P-Lx-tLK">
                                                 <rect key="frame" x="66" y="406" width="189" height="39"/>
                                                 <state key="normal" backgroundImage="login_btn">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -84,16 +90,51 @@
                                                     <action selector="loginButtonCLicked:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="aWE-ft-8Bn"/>
                                                 </connections>
                                             </button>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="login_lock" translatesAutoresizingMaskIntoConstraints="NO" id="7ag-HE-lrS" userLabel="Lock Image View">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_lock" translatesAutoresizingMaskIntoConstraints="NO" id="7ag-HE-lrS" userLabel="Lock Image View">
                                                 <rect key="frame" x="104" y="80" width="112" height="147"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="7ag-HE-lrS" secondAttribute="trailing" constant="104" id="7Fi-Q5-Slt"/>
+                                            <constraint firstItem="9Mp-9Q-e2f" firstAttribute="leading" secondItem="fwJ-Pc-qSu" secondAttribute="leading" constant="20" id="E6o-VG-tqh"/>
+                                            <constraint firstItem="N2P-Lx-tLK" firstAttribute="top" secondItem="9Mp-9Q-e2f" secondAttribute="bottom" constant="32" id="HjL-9r-1xk"/>
+                                            <constraint firstAttribute="trailing" secondItem="N2P-Lx-tLK" secondAttribute="trailing" constant="65" id="LGa-hU-Sfc"/>
+                                            <constraint firstItem="fTs-bK-Wy9" firstAttribute="height" secondItem="87i-9P-6cU" secondAttribute="height" id="OBp-cB-NJf"/>
+                                            <constraint firstAttribute="trailing" secondItem="9Mp-9Q-e2f" secondAttribute="trailing" constant="20" id="TDH-QU-cTe"/>
+                                            <constraint firstItem="7ag-HE-lrS" firstAttribute="top" secondItem="fwJ-Pc-qSu" secondAttribute="top" constant="80" id="THX-1e-X83"/>
+                                            <constraint firstItem="fTs-bK-Wy9" firstAttribute="leading" secondItem="fwJ-Pc-qSu" secondAttribute="leading" constant="20" id="ZKR-hV-zei"/>
+                                            <constraint firstItem="N2P-Lx-tLK" firstAttribute="leading" secondItem="fwJ-Pc-qSu" secondAttribute="leading" constant="66" id="d1r-XH-r3Y"/>
+                                            <constraint firstItem="7ag-HE-lrS" firstAttribute="leading" secondItem="fwJ-Pc-qSu" secondAttribute="leading" constant="104" id="fd7-FJ-724"/>
+                                            <constraint firstItem="fTs-bK-Wy9" firstAttribute="width" secondItem="87i-9P-6cU" secondAttribute="width" id="hXo-vW-xca"/>
+                                            <constraint firstItem="87i-9P-6cU" firstAttribute="centerY" secondItem="fTs-bK-Wy9" secondAttribute="centerY" id="ntC-ZY-Dp7"/>
+                                            <constraint firstItem="fTs-bK-Wy9" firstAttribute="top" secondItem="7ag-HE-lrS" secondAttribute="bottom" constant="60" id="pte-vc-5KB"/>
+                                            <constraint firstAttribute="trailing" secondItem="fTs-bK-Wy9" secondAttribute="trailing" constant="20" id="qUx-Wr-TGN"/>
+                                            <constraint firstItem="87i-9P-6cU" firstAttribute="centerX" secondItem="fTs-bK-Wy9" secondAttribute="centerX" id="u5O-DC-7hK"/>
+                                            <constraint firstItem="9Mp-9Q-e2f" firstAttribute="top" secondItem="fTs-bK-Wy9" secondAttribute="bottom" constant="7" id="v8M-U3-Bvy"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="fwJ-Pc-qSu" firstAttribute="top" secondItem="JHz-Di-zQs" secondAttribute="top" id="3eC-By-Mb2"/>
+                                    <constraint firstItem="fwJ-Pc-qSu" firstAttribute="centerY" secondItem="JHz-Di-zQs" secondAttribute="centerY" id="IaS-qQ-Z86"/>
+                                    <constraint firstItem="fwJ-Pc-qSu" firstAttribute="leading" secondItem="JHz-Di-zQs" secondAttribute="leading" id="MUj-Gp-Lez"/>
+                                    <constraint firstAttribute="trailing" secondItem="fwJ-Pc-qSu" secondAttribute="trailing" id="ayB-M9-c1l"/>
+                                    <constraint firstAttribute="bottom" secondItem="fwJ-Pc-qSu" secondAttribute="bottom" id="sDg-fl-Aqr"/>
+                                </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="JHz-Di-zQs" secondAttribute="trailing" id="73C-UP-ZWA"/>
+                            <constraint firstItem="GBh-N4-nlW" firstAttribute="top" secondItem="tJ8-lZ-pKi" secondAttribute="bottom" id="8fy-V0-CvE"/>
+                            <constraint firstItem="tJ8-lZ-pKi" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="Ife-U4-EvP"/>
+                            <constraint firstItem="GBh-N4-nlW" firstAttribute="top" secondItem="JHz-Di-zQs" secondAttribute="bottom" id="NdR-n9-5hf"/>
+                            <constraint firstItem="tJ8-lZ-pKi" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="Tej-6A-j45"/>
+                            <constraint firstItem="JHz-Di-zQs" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="cpc-0l-uAs"/>
+                            <constraint firstAttribute="trailing" secondItem="tJ8-lZ-pKi" secondAttribute="trailing" id="i4o-iW-v2F"/>
+                            <constraint firstItem="JHz-Di-zQs" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="k4i-J3-E3h"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="IFC-xf-SXo"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
