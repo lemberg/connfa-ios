@@ -52,7 +52,8 @@
 - (void) arrangeNavigationBar
 {    
     self.navigationController.navigationBar.tintColor = NAV_BAR_COLOR;
-    
+    self.navigationItem.title = nil;
+
     [self.navigationController.navigationBar setBackgroundImage: [UIImage imageWithColor:[UIColor clearColor]]
                                                   forBarMetrics: UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];

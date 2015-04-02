@@ -60,7 +60,7 @@
     [super viewDidLoad];
     
     self.arrayOfCaptions = @[
-                                @{ kMenuItemTitle: @"Sessions",
+                                @{ kMenuItemTitle: @"Schedule",
                                    kMenuItemIcon: @"menu_icon_program",
                                    kMenuItemSelectedIcon: @"menu_icon_program_sel",
                                    kMenuItemControllerId: @"DCProgramViewController"
@@ -164,17 +164,10 @@
     DCBaseViewController* rootMenuVC = [self getViewController:menuItem];
     UINavigationController* navigationController;
     
-    if (menuItem == DCMENU_INFO_ITEM)
-    {
-        navigationController = [[DCLimitedNavigationController alloc] initWithRootViewController:rootMenuVC dismissAction:^{
-            [self leftSideMenuButtonPressed:nil];
-        } depth:-1];
-    }
-    else
-    {
-        navigationController = [[UINavigationController alloc] initWithRootViewController: rootMenuVC];
-        [self arrangeNavigationBarForController: rootMenuVC menuItem:menuItem];
-    }
+
+    navigationController = [[UINavigationController alloc] initWithRootViewController: rootMenuVC];
+    [self arrangeNavigationBarForController: rootMenuVC menuItem:menuItem];
+
     
     self.sideMenuContainer.centerViewController = navigationController;
     self.sideMenuContainer.shadow.enabled = YES;
@@ -188,7 +181,7 @@
     aController.navigationItem.title = title;
     
         // add left Menu button to all Controllers
-    UIImage *image = [UIImage imageNamed:@"menu-icon"];
+    UIImage *image = (menuItem == DCMENU_INFO_ITEM) ? [UIImage imageNamed:@"menu-icon-dark"] : [UIImage imageNamed:@"menu-icon"];
     UIButton *button = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, image.size.width, image.size.height)];
     [button setBackgroundImage: image forState: UIControlStateNormal];
     [button addTarget: self action:@selector(leftSideMenuButtonPressed:) forControlEvents: UIControlEventTouchUpInside];
