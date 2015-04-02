@@ -28,6 +28,7 @@
 #import "DCSpeaker+DC.h"
 #import "UIImageView+WebCache.h"
 #import "DCLimitedNavigationController.h"
+#import "UIConstants.h"
 
 @interface DCSpeakersViewController ()
 
@@ -42,6 +43,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[UITableView appearance] setSectionIndexBackgroundColor:[UIColor clearColor]];
+    [[UITableView appearance] setSectionIndexTrackingBackgroundColor:[UIColor clearColor]];
+    [[UITableView appearance] setSectionIndexColor: NAV_BAR_COLOR];
+    
     [self reload];
 }
 
