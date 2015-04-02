@@ -43,6 +43,7 @@
             break;
         case DCMENU_SOCIAL_EVENTS_ITEM:
             eStrategy = EDCEventStrategySocialEvents;
+            break;
         case DCMENU_MYSCHEDULE_ITEM:
             eStrategy = EDCEeventStrategyFavorites;
         default:

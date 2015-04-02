@@ -136,6 +136,10 @@
 {
     NSMutableArray * controllers = [[NSMutableArray alloc] initWithCapacity: aDays.count];
     NSUInteger currentDatePageIndex = 0;
+    NSInteger daysCount = [aDays count];
+    if ( daysCount && self.currentDayIndex >= daysCount) {
+        self.currentDayIndex = 0;
+    }
     for (NSDate* date in self.days)
     {
 //        DCProgramItemsViewController *dayViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgramItemsViewController"];
