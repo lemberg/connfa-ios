@@ -86,6 +86,11 @@
     return [self.fetchedResultsController sectionIndexTitles];
 }
 
+- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
+{
+    view.tintColor = [UIColor colorWithRed:247.0/255.0 green:247.0/255.0 blue:247.0/255.0 alpha:1.0];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
     return [self.fetchedResultsController sectionForSectionIndexTitle:title atIndex:index];
 }
@@ -117,7 +122,13 @@
                                        [_cell setNeedsDisplay];
                                    });
                                }];
+    _cell.separator.hidden = (indexPath.row == [self tableView:tableView numberOfRowsInSection:indexPath.section]-1);
     return _cell;
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [DCSpeakerCell cellHeight];
 }
 
 - (NSString *)positionTitleForSpeaker:(DCSpeaker *)speaker

@@ -261,7 +261,7 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
         DCDescriptionTextCell * cell = (DCDescriptionTextCell*)[tableView dequeueReusableCellWithIdentifier:cellIdDescription];
         cell.descriptionWebView.delegate = self;
         self.lastIndexPath = indexPath;
-        [cell.descriptionWebView loadHTMLString:_event.desctiptText];
+        [cell.descriptionWebView loadHTMLString:_event.desctiptText style:@"event_detail_style"];
         return cell;
     }
     else // speaker cell
@@ -279,7 +279,7 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
     
     if (![[tableView cellForRowAtIndexPath:indexPath] isKindOfClass:[DCSpeakerCell class]])
         return;
-    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard *mainStoryboard = [UIStoryboard storyboardWithName:@"Speakers" bundle:nil];
     DCSpeakersDetailViewController * speakerViewController = [mainStoryboard instantiateViewControllerWithIdentifier:@"SpeakersDetailViewController"];
     speakerViewController.speaker = self.speakers[indexPath.row-1];
     speakerViewController.closeCallback = ^{
@@ -295,6 +295,12 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
     if (![self.cellsHeight objectForKey:self.lastIndexPath]) {
         float height = [[webView stringByEvaluatingJavaScriptFromString:@"document.body.scrollHeight;"] floatValue];
         [self.cellsHeight setObject:[NSNumber numberWithFloat:height] forKey:self.lastIndexPath];
+        
+
+        NSString *padding = @"document.body.style.margin='0';";
+        [webView stringByEvaluatingJavaScriptFromString:padding];
+
+        
         [self updateCellAtIndexPath];
     }
     
@@ -324,7 +330,7 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
         NSLog(@"offset: %f, topStop: %f, bgTop: %f; STop: %d, SBottom: %d", offset, topStopPoint, self.topBackgroundTop.constant, shouldMoveToTop, shouldMoveToBottom);
         
             // Nav bar background alpha setting
-        float delta = 5;
+        float delta = 10;
         float maxAlpha = 1;
         float alpha;
         

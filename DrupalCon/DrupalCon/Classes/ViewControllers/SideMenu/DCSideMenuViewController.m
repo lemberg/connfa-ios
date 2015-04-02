@@ -177,6 +177,7 @@
     }
     
     self.sideMenuContainer.centerViewController = navigationController;
+    self.sideMenuContainer.shadow.enabled = YES;
     [self.sideMenuContainer setMenuState:MFSideMenuStateClosed completion:nil];
 }
 
@@ -231,7 +232,17 @@
         case DCMENU_SOCIAL_EVENTS_ITEM:
         case DCMENU_BOFS_ITEM:
         case DCMENU_PROGRAM_ITEM:
-                defaultStoryboardName = @"Events";
+            defaultStoryboardName = @"Events";
+            break;
+            
+        case DCMENU_SPEAKERS_ITEM:
+            defaultStoryboardName = @"Speakers";
+            break;
+            
+        case DCMENU_INFO_ITEM:
+            defaultStoryboardName = @"Info";
+            break;
+            
         default:
             break;
     }

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "MFSideMenuShadow.h"
 #import "DCBaseViewController.h"
+
 extern NSString * const MFSideMenuStateNotificationEvent;
 
 typedef enum {
@@ -56,6 +57,9 @@ typedef enum {
 
 // shadow
 @property (nonatomic, strong) MFSideMenuShadow *shadow;
+
+// center VC shadow
+@property (nonatomic) BOOL centerShadowEnabled;
 
 // menu slide-in animation
 @property (nonatomic, assign) BOOL menuSlideAnimationEnabled;

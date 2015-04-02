@@ -134,6 +134,7 @@
 		84ABE8F519BEEB8F0019D5DC /* DCEventStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = 84ABE8F419BEEB8F0019D5DC /* DCEventStrategy.m */; };
 		84C6FEDB1AC5C5600010EC81 /* DCEventDetailHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84C6FEDA1AC5C5600010EC81 /* DCEventDetailHeaderCell.m */; };
 		84D1CB521AA5FE5A00EEF33A /* DCLimitedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D1CB511AA5FE5A00EEF33A /* DCLimitedNavigationController.m */; };
+		84D654631ACC2B8E0099B461 /* event_detail_style.css in Resources */ = {isa = PBXBuildFile; fileRef = 84D654621ACC2B8E0099B461 /* event_detail_style.css */; };
 		84DCDB291AA0BB8D00BA0097 /* DCMainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DCDB281AA0BB8D00BA0097 /* DCMainNavigationController.m */; };
 		84F601451A9B970B0077BA85 /* DCFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F601441A9B970B0077BA85 /* DCFilterViewController.m */; };
 		84F601491A9C87D70077BA85 /* DCEventFilterHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F601481A9C87D70077BA85 /* DCEventFilterHeaderCell.m */; };
@@ -400,6 +401,8 @@
 		84C6FEDA1AC5C5600010EC81 /* DCEventDetailHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCEventDetailHeaderCell.m; path = Classes/Views/ProgramDetailCells/DCEventDetailHeaderCell.m; sourceTree = "<group>"; };
 		84D1CB501AA5FE5A00EEF33A /* DCLimitedNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCLimitedNavigationController.h; sourceTree = "<group>"; };
 		84D1CB511AA5FE5A00EEF33A /* DCLimitedNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCLimitedNavigationController.m; sourceTree = "<group>"; };
+		84D654621ACC2B8E0099B461 /* event_detail_style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = event_detail_style.css; sourceTree = "<group>"; };
+		84D654641ACC5C1D0099B461 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		84DCDB271AA0BB8D00BA0097 /* DCMainNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCMainNavigationController.h; path = MainNavigation/DCMainNavigationController.h; sourceTree = "<group>"; };
 		84DCDB281AA0BB8D00BA0097 /* DCMainNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCMainNavigationController.m; path = MainNavigation/DCMainNavigationController.m; sourceTree = "<group>"; };
 		84F601431A9B970B0077BA85 /* DCFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCFilterViewController.h; path = EventFilter/DCFilterViewController.h; sourceTree = "<group>"; };
@@ -635,6 +638,7 @@
 		5DC8C413198656DA00BF5816 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				84D654641ACC5C1D0099B461 /* QuartzCore.framework */,
 				842B5E641AC579D0009614A5 /* AdSupport.framework */,
 				842B5E621AC579C2009614A5 /* libz.dylib */,
 				74356D5119BEE1D90055F13D /* SystemConfiguration.framework */,
@@ -794,6 +798,7 @@
 		74A3EA9C1A56FD9000327225 /* Web */ = {
 			isa = PBXGroup;
 			children = (
+				84D654621ACC2B8E0099B461 /* event_detail_style.css */,
 				840147011AC42A9D00423062 /* style.css */,
 				74A3EA9D1A56FD9000327225 /* about_img.png */,
 			);
@@ -1155,6 +1160,7 @@
 				FA90B9A619C589AE00873865 /* DCEventBaseCell.xib in Resources */,
 				74A3EAA11A56FD9000327225 /* Info.storyboard in Resources */,
 				74A3EA9F1A56FD9000327225 /* Images.xcassets in Resources */,
+				84D654631ACC2B8E0099B461 /* event_detail_style.css in Resources */,
 				74A3EAA31A56FD9000327225 /* about_img.png in Resources */,
 				5DC8C41F198656DB00BF5816 /* InfoPlist.strings in Resources */,
 				840147021AC42A9D00423062 /* style.css in Resources */,
@@ -1404,8 +1410,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DrupalCon/DrupalCon-Prefix.pch";
 				INFOPLIST_FILE = "DrupalCon/DrupalCon-Info.plist";

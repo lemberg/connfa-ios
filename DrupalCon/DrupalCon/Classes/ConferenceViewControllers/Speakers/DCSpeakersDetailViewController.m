@@ -216,7 +216,7 @@ static NSString *eventCellId = @"SpeakerEventCellId";
             cell = [tableView dequeueReusableCellWithIdentifier:descriptionCellId];
             [(DCDescriptionTextCell*)cell descriptionWebView].delegate = self;
             self.descriptionCellIndexPath = indexPath;
-            [[(DCDescriptionTextCell*)cell descriptionWebView] loadHTMLString: self.speaker.characteristic];
+            [[(DCDescriptionTextCell*)cell descriptionWebView] loadHTMLString: self.speaker.characteristic style:@"event_detail_style"];
             break;
         }
         default: // speaker's event cell

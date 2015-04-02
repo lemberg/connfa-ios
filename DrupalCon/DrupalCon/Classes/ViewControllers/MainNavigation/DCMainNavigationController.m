@@ -37,10 +37,13 @@
 - (void) goToSideMenuContainer:(BOOL)animated
 {
     DCSideMenuViewController *sideMenuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SideMenuViewController"];
-    sideMenuViewController.sideMenuContainer = [MFSideMenuContainerViewController containerWithCenterViewController: nil
-                                                                                             leftMenuViewController: sideMenuViewController
-                                                                                            rightMenuViewController: nil];
-    [self pushViewController:sideMenuViewController.sideMenuContainer animated: animated];
+    
+    MFSideMenuContainerViewController *container = [MFSideMenuContainerViewController containerWithCenterViewController: nil
+                                                                                                 leftMenuViewController: sideMenuViewController
+                                                                                                rightMenuViewController: nil];
+    container.centerShadowEnabled = YES;
+    sideMenuViewController.sideMenuContainer = container;
+    [self pushViewController:container animated: animated];
 }
 
 -(UIViewController *)childViewControllerForStatusBarStyle

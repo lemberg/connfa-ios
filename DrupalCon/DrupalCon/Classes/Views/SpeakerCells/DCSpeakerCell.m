@@ -49,7 +49,7 @@
 
 + (float)cellHeight
 {
-    return 65.0;
+    return 52.0;
 }
 
 - (void) initData:(DCSpeaker *)speaker

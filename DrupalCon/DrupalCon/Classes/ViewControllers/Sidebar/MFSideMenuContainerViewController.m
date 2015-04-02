@@ -25,6 +25,8 @@ typedef enum {
 @property (nonatomic, assign) MFSideMenuPanDirection panDirection;
 
 @property (nonatomic, assign) BOOL viewHasAppeared;
+@property (nonatomic, strong) UIView *centerShadowView;
+
 @end
 
 @implementation MFSideMenuContainerViewController
@@ -45,7 +47,7 @@ typedef enum {
 @synthesize menuAnimationDefaultDuration;
 @synthesize menuAnimationMaxDuration;
 @synthesize shadow;
-
+@synthesize centerShadowEnabled;
 
 #pragma mark -
 #pragma mark - Initialization
@@ -91,6 +93,7 @@ typedef enum {
     self.menuAnimationMaxDuration = 0.4f;
     self.panMode = MFSideMenuPanModeDefault;
     self.viewHasAppeared = NO;
+    self.centerShadowEnabled = NO;
 }
 
 - (void)setupMenuContainerView {
@@ -201,6 +204,7 @@ typedef enum {
     [self removeCenterGestureRecognizers];
     [self removeChildViewControllerFromContainer:_centerViewController];
     self.shadow = nil;
+    self.centerShadowView = nil;
     
     CGPoint origin = ((UIViewController *)_centerViewController).view.frame.origin;
     _centerViewController = centerViewController;
@@ -214,6 +218,9 @@ typedef enum {
     
     self.shadow = [MFSideMenuShadow shadowWithView:[_centerViewController view]];
     [self.shadow draw];
+    
+    [self addCenterShadowView: centerViewController];
+    
     [self addCenterGestureRecognizers];
 }
 
@@ -730,6 +737,8 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     frame.origin.x = xOffset;
     [self.centerViewController view].frame = frame;
     
+    [self arrangeCenterShadowViewAlphaForOffset:xOffset];
+    
     if(!self.menuSlideAnimationEnabled) return;
     
     if(xOffset > 0){
@@ -762,8 +771,29 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
     return MIN(duration, self.menuAnimationMaxDuration);
 }
 
+#pragma mark - center controller shadow view
+
+- (void) addCenterShadowView: (UIViewController*)centerViewController
+{
+    if (self.centerShadowEnabled)
+    {
+        self.centerShadowView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, centerViewController.view.frame.size.width, centerViewController.view.frame.size.height)];
+        self.centerShadowView.userInteractionEnabled = NO;
+        self.centerShadowView.backgroundColor = [UIColor blackColor];
+        [centerViewController.view addSubview:self.centerShadowView];
+        [centerViewController.view bringSubviewToFront:self.centerShadowView];
+    }
+}
+
+- (void) arrangeCenterShadowViewAlphaForOffset:(CGFloat)offset
+{
+    if (self.centerShadowEnabled)
+        self.centerShadowView.alpha = (offset / self.leftMenuWidth) * 0.5;
+}
+
 -(void) dealloc {
     self.centerViewController = nil;
+    self.centerShadowView = nil;
 }
 
 @end
