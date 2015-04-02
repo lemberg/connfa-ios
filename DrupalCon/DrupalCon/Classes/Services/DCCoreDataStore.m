@@ -78,11 +78,7 @@ static NSString *const DCCoreDataModelFileName = @"main";
             // handle error
              NSLog(@"Error saving context %@: %@", self.mainContext, [error localizedDescription]);
         }
-        if (error) {
-            callback(NO);
-        } else {
-            callback(YES);
-        }
+
         // save parent to disk asynchronously
         [self.privateWriterContext performBlock:^{
             NSError *error;
@@ -90,6 +86,13 @@ static NSString *const DCCoreDataModelFileName = @"main";
                 // handle error
                  NSLog(@"Error saving context %@: %@", self.privateWriterContext, [error localizedDescription]);
             }
+            dispatch_async(dispatch_get_main_queue(),  ^{
+                if (error) {
+                    callback(NO);
+                } else {
+                    callback(YES);
+                }
+            });
         }];
     }];
 
