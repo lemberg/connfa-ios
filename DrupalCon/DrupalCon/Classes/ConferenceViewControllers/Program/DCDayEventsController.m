@@ -31,7 +31,6 @@
 
 @implementation DCDayEventsController
 
-static NSString *ratingsImagesName[] = {@"", @"ic_experience_beginner", @"ic_experience_intermediate", @"ic_experience_advanced" };
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -74,8 +73,6 @@ static NSString *ratingsImagesName[] = {@"", @"ic_experience_beginner", @"ic_exp
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-//    NSIndexPath *actualCell = [self.eventsDataSource actualEventIndexPath];
-
 }
 
 - (void)registerCells
@@ -91,47 +88,15 @@ static NSString *ratingsImagesName[] = {@"", @"ic_experience_beginner", @"ic_exp
     [self.eventsDataSource setPrepareBlockForTableView:^UITableViewCell* (UITableView * tableView, NSIndexPath *indexPath) {
         NSString *cellIdentifier = NSStringFromClass([DCEventCell class]);
         DCEventCell *cell = (DCEventCell*)[tableView dequeueReusableCellWithIdentifier: cellIdentifier];
-        [weakSelf updateCell:cell atIndexPath:indexPath];
         
+        DCEvent *event = [weakSelf.eventsDataSource eventForIndexPath:indexPath];
+        NSInteger eventsCountInSection = [weakSelf.eventsDataSource tableView:nil numberOfRowsInSection:indexPath.section];
+        cell.isLastCellInSection = (indexPath.row == eventsCountInSection - 1)? YES : NO;
+        cell.isFirstCellInSection = !indexPath.row;
+
+        [cell initData:event delegate:weakSelf];
         return cell;
     }];
-}
-
-- (void)updateCell:(DCEventCell *)cell atIndexPath:(NSIndexPath *)indexPath
-{
-    DCEvent *event = [self.eventsDataSource eventForIndexPath:indexPath];
-    NSInteger eventsCountInSection = [self.eventsDataSource tableView:nil numberOfRowsInSection:indexPath.section];
-    cell.isLastCellInSection = ( indexPath.row == eventsCountInSection - 1)? YES : NO;
-    NSString *eventTitle =  event.name;
-    NSString *trackName = [(DCTrack*)[event.tracks anyObject] name];
-    
-    if (![self isEventHasAdditionalFields:event]) {
-        [cell updateWithTitle:eventTitle andPlace:event.place];
-    } else {
-        [cell updateWithTitle:eventTitle
-                     subTitle:trackName
-                     speakers:[self speakersFromEvent:event]
-                        place:event.place];
-        
-    }
-   
-    NSInteger eventRating = [event.level.levelId integerValue];
-    NSString *ratingImageName = ratingsImagesName[eventRating];
-    cell.eventLevelImageView.image = [UIImage imageNamed:ratingImageName];
-    cell.eventImageView.image = event.imageForEvent;
-    if (!indexPath.row) {
-
-        cell.startTimeLabel.text = [self hourFormatForDate:event.startDate] ;
-        cell.endTimeLabel.text  = [self hourFormatForDate:event.endDate];
-    }
-    cell.delegate = self;
-}
-
-- (NSString *)hourFormatForDate:(NSDate *)date {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"h:mm aaa"];
-    NSString *dateDisplay = [dateFormatter stringFromDate:date];
-    return  dateDisplay;
 }
 
 - (void)didSelectCell:(DCEventCell *)eventCell {
@@ -160,33 +125,18 @@ static NSString *ratingsImagesName[] = {@"", @"ic_experience_beginner", @"ic_exp
     [[DCAppFacade shared].mainNavigationController presentViewController: navContainer animated:YES completion:nil];
 }
 
-- (BOOL)isEventHasAdditionalFields:(DCEvent *)event
-{
-
-//    BOOL isEnableAdditionalField = event.getTypeID == DC_EVENT_SPEACH;
-    return [[self speakersFromEvent:event] length] > 0;
-}
-
-- (NSString *)speakersFromEvent:(DCEvent *)event
-{
-    NSMutableString *speakersList = [NSMutableString stringWithString:@""];
-    for (DCSpeaker *speaker in [event.speakers allObjects]) {
-        if (speakersList.length > 0) {
-            [speakersList appendString:@", "];
-        }
-        
-        [speakersList appendString:speaker.name];
-    }
-    return [NSString stringWithString:speakersList];
-}
-
 #pragma mark - UITableView delegate
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DCEvent *event = [self.eventsDataSource eventForIndexPath:indexPath];
-    return [self isEventHasAdditionalFields:event]? 110 : 75;
+    DCEventCell *cellPrototype = [self.tableView dequeueReusableCellWithIdentifier:NSStringFromClass([DCEventCell class])];
+    [cellPrototype initData:event delegate:self];
+    [cellPrototype layoutSubviews];
+    
+    CGFloat height = [cellPrototype.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+    return height;
 }
 
 @end

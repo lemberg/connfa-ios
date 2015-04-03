@@ -21,7 +21,7 @@
 //
 
 static NSString * kDCEventDateFormat = @"dd-MM-yyyy";
-static NSString * kDCEventViewOutputFormat = @"EEEE - dd MMM";
+static NSString * kDCEventViewOutputFormat = @"EEEE dd ";
 static NSString * kDCSpeakerEventCellFormat = @"dd LLLL";
 
 #define T_ZERO [NSTimeZone timeZoneForSecondsFromGMT:0]
@@ -64,7 +64,7 @@ static NSString * kDCSpeakerEventCellFormat = @"dd LLLL";
     NSDateFormatter *outPutDateFormat = [[NSDateFormatter alloc] init];
     [outPutDateFormat setDateFormat:kDCEventViewOutputFormat];
     [outPutDateFormat setTimeZone:T_ZERO];
-    NSString *theDate = [outPutDateFormat stringFromDate:self];
+    NSString *theDate = [[outPutDateFormat stringFromDate:self] uppercaseString];
     return theDate;
 }
 

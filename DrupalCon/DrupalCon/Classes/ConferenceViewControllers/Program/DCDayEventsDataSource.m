@@ -106,6 +106,11 @@ static NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
     return self.prepareBlockForTableView(tableView, indexPath);
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.eventsByTimeRange.count;
 }

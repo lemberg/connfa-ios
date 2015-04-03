@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -16,24 +15,24 @@
                         <viewControllerLayoutGuide type="bottom" id="Lbo-rS-uhw"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="sNW-pd-JUz">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6bO-pf-MPE" userLabel="Days navigation">
-                                <rect key="frame" x="0.0" y="20" width="600" height="35"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="35"/>
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qU0-jE-nVu" userLabel="Date label">
-                                        <rect key="frame" x="10" y="7" width="580" height="21"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="15"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WEDNESDAY 11" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qU0-jE-nVu" userLabel="Date label">
+                                        <rect key="frame" x="10" y="7" width="300" height="18"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Zq-rf-wWq" userLabel="Button Next">
-                                        <rect key="frame" x="551" y="0.0" width="35" height="35"/>
+                                        <rect key="frame" x="278" y="3" width="35" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="35" id="7fd-w4-0ze"/>
                                         </constraints>
-                                        <state key="normal" image="ic_program_next">
+                                        <state key="normal" image="arrow_r">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -41,11 +40,11 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AED-7d-fwj" userLabel="Button Previous">
-                                        <rect key="frame" x="14" y="0.0" width="35" height="35"/>
+                                        <rect key="frame" x="7" y="3" width="35" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="35" id="phf-vr-wyd"/>
                                         </constraints>
-                                        <state key="normal" image="ic_program_back">
+                                        <state key="normal" image="arrow_l">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -55,25 +54,23 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.066666666666666666" green="0.11372549019607843" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="AED-7d-fwj" firstAttribute="top" secondItem="6bO-pf-MPE" secondAttribute="top" id="FRd-uO-IrJ"/>
-                                    <constraint firstItem="3Zq-rf-wWq" firstAttribute="top" secondItem="6bO-pf-MPE" secondAttribute="top" id="IlB-4L-9R6"/>
                                     <constraint firstItem="qU0-jE-nVu" firstAttribute="top" secondItem="6bO-pf-MPE" secondAttribute="top" constant="7" id="M1x-Nd-PCK"/>
                                     <constraint firstAttribute="height" constant="35" id="UHp-6E-ILW"/>
-                                    <constraint firstAttribute="bottom" secondItem="3Zq-rf-wWq" secondAttribute="bottom" id="UgO-1b-S7R"/>
-                                    <constraint firstItem="AED-7d-fwj" firstAttribute="leading" secondItem="6bO-pf-MPE" secondAttribute="leading" constant="14" id="XOn-V1-Kvu"/>
+                                    <constraint firstAttribute="bottom" secondItem="3Zq-rf-wWq" secondAttribute="bottom" constant="10" id="UgO-1b-S7R"/>
+                                    <constraint firstItem="AED-7d-fwj" firstAttribute="leading" secondItem="6bO-pf-MPE" secondAttribute="leading" constant="7" id="XOn-V1-Kvu"/>
                                     <constraint firstItem="qU0-jE-nVu" firstAttribute="leading" secondItem="6bO-pf-MPE" secondAttribute="leading" constant="10" id="ZDy-ZN-1xa"/>
-                                    <constraint firstAttribute="bottom" secondItem="AED-7d-fwj" secondAttribute="bottom" id="iee-PZ-b38"/>
-                                    <constraint firstAttribute="bottom" secondItem="qU0-jE-nVu" secondAttribute="bottom" constant="7" id="lVj-0v-c5G"/>
-                                    <constraint firstAttribute="trailing" secondItem="3Zq-rf-wWq" secondAttribute="trailing" constant="14" id="na1-Wa-2Rm"/>
+                                    <constraint firstAttribute="bottom" secondItem="AED-7d-fwj" secondAttribute="bottom" constant="10" id="iee-PZ-b38"/>
+                                    <constraint firstAttribute="bottom" secondItem="qU0-jE-nVu" secondAttribute="bottom" constant="10" id="lVj-0v-c5G"/>
+                                    <constraint firstAttribute="trailing" secondItem="3Zq-rf-wWq" secondAttribute="trailing" constant="7" id="na1-Wa-2Rm"/>
                                     <constraint firstAttribute="trailing" secondItem="qU0-jE-nVu" secondAttribute="trailing" constant="10" id="tMb-k4-FR6"/>
                                 </constraints>
                             </view>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="qEC-G5-ro3">
-                                <rect key="frame" x="290" y="290" width="20" height="20"/>
+                                <rect key="frame" x="150" y="290" width="20" height="20"/>
                                 <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8bi-cc-ytX">
-                                <rect key="frame" x="0.0" y="55" width="600" height="545"/>
+                                <rect key="frame" x="0.0" y="55" width="320" height="545"/>
                                 <connections>
                                     <segue destination="D9W-92-0ZP" kind="embed" identifier="EmbeddedDaysPageVC" id="gHy-AJ-SqY"/>
                                 </connections>
@@ -94,6 +91,8 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="320" height="600"/>
                     <connections>
                         <outlet property="activityIndicator" destination="qEC-G5-ro3" id="X4s-u6-hTD"/>
                         <outlet property="dateLabel" destination="qU0-jE-nVu" id="Kum-T8-vyB"/>
@@ -160,7 +159,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="da3-7f-yO8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1327" y="-548.5"/>
+            <point key="canvasLocation" x="-1582" y="-584.5"/>
         </scene>
         <!--Nav View Controller-->
         <scene sceneID="cFR-qF-SRW">
@@ -649,11 +648,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow_l" width="21" height="21"/>
+        <image name="arrow_r" width="21" height="21"/>
         <image name="event_detail_top" width="320" height="112"/>
         <image name="filter_sessions" width="21" height="21"/>
         <image name="ic_experience_advanced" width="12" height="12"/>
-        <image name="ic_program_back" width="23" height="23"/>
-        <image name="ic_program_next" width="23" height="23"/>
         <image name="no_details" width="90" height="95"/>
     </resources>
 </document>

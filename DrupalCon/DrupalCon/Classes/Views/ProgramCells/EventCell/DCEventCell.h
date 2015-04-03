@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class DCEvent;
+
 @protocol DCEventCellProtocol;
 
 @interface DCEventCell : UITableViewCell
@@ -22,22 +24,23 @@
 // Event right section 
 @property (weak, nonatomic) IBOutlet UIImageView *eventLevelImageView;
 @property (weak, nonatomic) IBOutlet UILabel *eventTitleLabel;
-@property (weak, nonatomic) IBOutlet UIButton *firstSubtitleButton;
-@property (weak, nonatomic) IBOutlet UIButton *secondSubtitleButton;
-@property (weak, nonatomic) IBOutlet UIButton *thirdSubtitleButton;
+@property (weak, nonatomic) IBOutlet UILabel *trackLabel;
+@property (weak, nonatomic) IBOutlet UILabel *speakersLabel;
+@property (weak, nonatomic) IBOutlet UILabel *placeLabel;
 
 @property (nonatomic,setter=isLastCellInSection:) BOOL isLastCellInSection;
+@property (nonatomic) BOOL isFirstCellInSection;
 
 @property (weak, nonatomic) id<DCEventCellProtocol> delegate;
 
-- (void)updateWithTitle:(NSString *)title andPlace:(NSString *)place;
 
-- (void)updateWithTitle:(NSString *)title
-               subTitle:(NSString *)eventType
-               speakers:(NSString *)speakers
-                  place:(NSString *)place;
+
+- (void) initData:(DCEvent*)event delegate:(id<DCEventCellProtocol>)aDelegate;
+
 
 @end
+
+
 
 @protocol DCEventCellProtocol <NSObject>
 - (void)didSelectCell:(DCEventCell *)eventCell;
