@@ -65,7 +65,6 @@
     self.eventTrackLabel.text = [(DCTrack*)[event.tracks anyObject] name];
     
         // event experience Level
-    
     if (event.level.name.length)
     {
         self.eventLevelLabel.text = [NSString stringWithFormat:@"Experience level: %@", event.level.name];
@@ -91,6 +90,12 @@
         self.experienceIcon.hidden = YES;
         self.experienceIcon.frame = CGRectZero;
     }
+    
+        // this code makes labels in Cell resizable relating to screen size. Cell height with layoutSubviews will work properly
+    CGFloat preferredWidth = [UIScreen mainScreen].bounds.size.width - self.labelsCommonSidePadding.constant*2;
+    self.eventNameLabel.preferredMaxLayoutWidth = preferredWidth;
+    self.eventTimeLabel.preferredMaxLayoutWidth = preferredWidth;
+    self.eventTrackLabel.preferredMaxLayoutWidth = preferredWidth;
 
 }
 

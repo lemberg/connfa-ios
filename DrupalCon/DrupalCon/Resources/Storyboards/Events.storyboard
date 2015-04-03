@@ -376,19 +376,15 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="event_detail_top" translatesAutoresizingMaskIntoConstraints="NO" id="DWN-jN-BQe" userLabel="Top background">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="130" id="4aA-LQ-qCJ"/>
                                     <constraint firstAttribute="height" secondItem="DWN-jN-BQe" secondAttribute="width" multiplier="13:32" id="dFs-1R-QEq"/>
                                 </constraints>
                             </imageView>
                             <view opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9cX-Fi-Qcx" userLabel="Top background shadow">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modernizing Testbot: The Future of Drupal.org Automated Testing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="220" translatesAutoresizingMaskIntoConstraints="NO" id="xdk-Xd-H6Z" userLabel="Event name">
-                                        <rect key="frame" x="45" y="31" width="200" height="22"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="200" id="xMK-oA-Zzp"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="18"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Modernizing Testbot: The Future of Drupal.org Automated Testing" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xdk-Xd-H6Z" userLabel="Event name">
+                                        <rect key="frame" x="75" y="33" width="145" height="18"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -397,7 +393,8 @@
                                 <constraints>
                                     <constraint firstAttribute="centerY" secondItem="xdk-Xd-H6Z" secondAttribute="centerY" constant="-10" id="76M-Ry-DWO"/>
                                     <constraint firstAttribute="height" constant="64" id="OLb-BC-Ima"/>
-                                    <constraint firstAttribute="centerX" secondItem="xdk-Xd-H6Z" secondAttribute="centerX" constant="15" id="l0L-C9-dr1"/>
+                                    <constraint firstAttribute="trailing" secondItem="xdk-Xd-H6Z" secondAttribute="trailing" constant="100" id="tVo-oa-9le"/>
+                                    <constraint firstItem="xdk-Xd-H6Z" firstAttribute="leading" secondItem="9cX-Fi-Qcx" secondAttribute="leading" constant="75" id="uJL-eD-WR6"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="oWL-xb-vpP">

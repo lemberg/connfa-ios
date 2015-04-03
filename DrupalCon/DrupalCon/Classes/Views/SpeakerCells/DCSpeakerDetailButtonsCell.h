@@ -16,6 +16,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *twitterButton;
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *webButtonLeftPadding;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *webButtonBottomPadding;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *webButtonWidth;
 
 

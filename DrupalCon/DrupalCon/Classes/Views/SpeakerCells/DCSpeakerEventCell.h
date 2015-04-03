@@ -32,6 +32,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *eventLevelLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *experienceIcon;
 
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint * labelsCommonSidePadding;
+
 @property (nonatomic, weak) IBOutlet UIView *separator;
 
 - (void) initData:(DCEvent*)event;

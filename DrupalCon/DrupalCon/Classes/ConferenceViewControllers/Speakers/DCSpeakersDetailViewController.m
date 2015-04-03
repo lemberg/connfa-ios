@@ -50,7 +50,8 @@ static NSString *eventCellId = @"SpeakerEventCellId";
 @interface DCSpeakersDetailViewController ()<UIWebViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UITableView * speakerTable;
-@property (nonatomic, weak) IBOutlet UIImageView * backgroundView;
+@property (nonatomic, weak) IBOutlet UIView * backgroundView;
+@property (nonatomic, weak) IBOutlet UIImageView * backgroundImageView;
 @property (nonatomic, weak) IBOutlet UIView * navBarBackgroundView;
 @property (nonatomic, weak) IBOutlet UILabel * navBarBackgroundTitleLabel;
 
@@ -80,7 +81,8 @@ static NSString *eventCellId = @"SpeakerEventCellId";
     self.currentBarColor = NAV_BAR_COLOR;
     
     self.cellPrototypes = @{eventCellId : [self.speakerTable dequeueReusableCellWithIdentifier:eventCellId],
-                            headerCellId : [self.speakerTable dequeueReusableCellWithIdentifier:headerCellId]};
+                            headerCellId : [self.speakerTable dequeueReusableCellWithIdentifier:headerCellId],
+                            buttonsCellId : [self.speakerTable dequeueReusableCellWithIdentifier:buttonsCellId]};
 }
 
 - (void) arrangeNavigationBar
@@ -149,18 +151,27 @@ static NSString *eventCellId = @"SpeakerEventCellId";
             [cellPrototype initData:self.speaker];
             [cellPrototype layoutSubviews];
             
+            UIImage* image = [UIImage imageNamed:@"speaker_detail_top"];
+            CGFloat minBgHeight = ([UIScreen mainScreen].bounds.size.width / image.size.width)*image.size.height;
             CGFloat height = [cellPrototype.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
             
             [self.cellsHeight setObject:[NSNumber numberWithFloat:height] forKey:headerCellId];
-            self.backgroundViewHeight.constant = height;
             
-            return height;
+                // this hardcoded value sets min cell height to avoid background image scaling. It depends on image size
+            self.backgroundViewHeight.constant = height < minBgHeight ? minBgHeight : height;
+            return self.backgroundViewHeight.constant;
         }
         case 1: //buttons cell
         {
-            DCSpeakerDetailButtonsCell* cellPrototype = [tableView dequeueReusableCellWithIdentifier:buttonsCellId];
+                // no buttons, self becomes invisible
+            if (!self.speaker.webSite.length && !self.speaker.twitterName.length)
+                return 0;
+
+            DCSpeakerDetailButtonsCell * cellPrototype = self.cellPrototypes[buttonsCellId];
             [cellPrototype initData:self.speaker];
-            return cellPrototype.frame.size.height;
+            [cellPrototype layoutSubviews];
+            
+            return [cellPrototype.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
         }
         case 2: // description cell
         {

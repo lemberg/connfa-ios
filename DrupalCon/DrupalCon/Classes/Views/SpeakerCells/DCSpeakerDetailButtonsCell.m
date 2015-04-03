@@ -16,7 +16,7 @@
     // hide unused buttons
     if (!speaker.webSite.length)
     {
-        self.webButtonLeftPadding.constant = 8;
+        self.webButtonLeftPadding.constant = 3;
         self.webButtonWidth.constant = 0;
     }
     
@@ -25,11 +25,10 @@
         self.twitterButton.hidden = YES;
     }
     
-        // no buttons, self becomes invisible
-    if (!speaker.webSite.length && !speaker.twitterName.length)
+        // if there is no description below, remove bottom padding
+    if (speaker.characteristic.length)
     {
-        self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, 0);
-        return;
+        self.webButtonBottomPadding.constant = 0;
     }
 }
 

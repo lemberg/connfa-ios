@@ -52,6 +52,12 @@
     if (speaker.organizationName.length)
         [jobAndCompany appendString: speaker.jobTitle.length ? [NSString stringWithFormat:@" at %@", speaker.organizationName] : speaker.organizationName];
     self.jobAndCompanyLabel.text = jobAndCompany;
+
+        // this code makes labels in Cell resizable relating to screen size. Cell height with layoutSubviews will work properly
+    CGFloat preferredWidth = [UIScreen mainScreen].bounds.size.width - self.labelsCommonSidePadding.constant*2;
+    self.nameLabel.preferredMaxLayoutWidth = preferredWidth;
+    self.jobAndCompanyLabel.preferredMaxLayoutWidth = preferredWidth;
+
 }
 
 @end
