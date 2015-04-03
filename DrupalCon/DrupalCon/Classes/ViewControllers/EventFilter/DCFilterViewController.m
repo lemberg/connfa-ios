@@ -373,7 +373,7 @@
             
         }
         
-        [self printData];
+        //[self printData];
         
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     }];

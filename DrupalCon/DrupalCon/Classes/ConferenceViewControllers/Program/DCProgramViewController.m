@@ -64,15 +64,8 @@
     [self.activityIndicator startAnimating];
     [[DCMainProxy sharedProxy] setDataReadyCallback:^(DCMainProxyState mainProxyState) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            if ([_eventsStrategy days]) {
-                 _days = [[NSArray alloc] initWithArray:[_eventsStrategy days]];
-                [self reloadData];
-            } else {
-                _days = nil;
-            }
-//            self.viewControllers = [self DC_fillViewControllers];
-//            [self addPageController];
-            
+            [self reloadData];
+
             [self.activityIndicator stopAnimating];
         });
     }];
@@ -101,20 +94,12 @@
 
 - (void) reloadData
 {
-    self.days = [self.eventsStrategy days];
-
-    if (self.days.count) {
-//        self.viewControllers = nil;
-        self.viewControllers = [self createViewControllersForDays: self.days];
-        [self updatePageController];
-        [self updateButtonsVisibility];
-    } else {
-        self.pageViewController.delegate = nil;
-        self.viewControllers = nil;
-        self.days = nil;
-    }
-   
-
+    self.days = self.eventsStrategy.days.count ? [[NSArray alloc] initWithArray:[_eventsStrategy days]] : nil;
+    self.currentDayIndex = 0;
+    
+    self.viewControllers = [self createViewControllersForDays: self.days];
+    [self updatePageController];
+    [self updateButtonsVisibility];
 }
 
 -(void) updatePageController
@@ -127,40 +112,45 @@
 -(void) displayDateForDay: (NSInteger) day
 {
     NSDate * date = _days[day];
-    self.dateLabel.text = [date pageViewDateString];
+    self.dateLabel.text = date ? [date pageViewDateString] : nil;
 }
-
-
 
 - (NSArray*)createViewControllersForDays:(NSArray*)aDays
 {
-    NSMutableArray * controllers = [[NSMutableArray alloc] initWithCapacity: aDays.count];
-    NSUInteger currentDatePageIndex = 0;
-    NSInteger daysCount = [aDays count];
-    if ( daysCount && self.currentDayIndex >= daysCount) {
-        self.currentDayIndex = 0;
-    }
-    for (NSDate* date in self.days)
+    if (aDays.count)
     {
-//        DCProgramItemsViewController *dayViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ProgramItemsViewController"];
-        if ([NSDate dc_isDateInToday:date])
-            self.currentDayIndex = currentDatePageIndex;
-
-        DCDayEventsController *dayEventsController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([DCDayEventsController class])];
-        dayEventsController.date = date;
-        dayEventsController.eventsStrategy = self.eventsStrategy;
-
-        [controllers addObject:dayEventsController];
-        currentDatePageIndex++;
+        NSMutableArray * controllers = [[NSMutableArray alloc] initWithCapacity: aDays.count];
+        NSUInteger currentDatePageIndex = 0;
+        NSInteger daysCount = [aDays count];
+        if ( daysCount && self.currentDayIndex >= daysCount) {
+            self.currentDayIndex = 0;
+        }
+        for (NSDate* date in self.days)
+        {
+            if ([NSDate dc_isDateInToday:date])
+                self.currentDayIndex = currentDatePageIndex;
+            
+            DCDayEventsController *dayEventsController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([DCDayEventsController class])];
+            dayEventsController.date = date;
+            dayEventsController.eventsStrategy = self.eventsStrategy;
+            
+            [controllers addObject:dayEventsController];
+            currentDatePageIndex++;
+        }
+        return controllers;
     }
-
-    return controllers;
+    else // make stub controller with no items
+    {
+        DCDayEventsController *dayEventsController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([DCDayEventsController class])];
+        [dayEventsController initAsStubController:@"No Matching Events"];
+        return @[dayEventsController];
+    }
 }
 
 - (void)updateButtonsVisibility
 {
     _previousDayButton.hidden = (self.currentDayIndex == 0 ? YES : NO);
-    _nextDayButton.hidden = (self.currentDayIndex == (_days.count-1) ? YES : NO);
+    _nextDayButton.hidden = (self.currentDayIndex == (_days.count-1) || !self.days.count ? YES : NO);
 }
 
 - (void) setFilterButton
@@ -269,6 +259,9 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
+    if (!self.days.count)
+        return nil;
+    
      NSUInteger index = [self.days indexOfObject: ((DCProgramItemsViewController*) viewController).date];
     if (index == NSNotFound) {
         return nil;
@@ -281,7 +274,8 @@
     return self.viewControllers[index];
 }
 
-- (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed {
+- (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
+{
     if(completed){
         NSUInteger currentIndex = [self.days indexOfObject:[(DCProgramItemsViewController*)[self.pageViewController.viewControllers lastObject] date]];
         self.currentDayIndex = currentIndex;

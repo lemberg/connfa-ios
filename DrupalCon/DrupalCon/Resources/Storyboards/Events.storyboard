@@ -125,17 +125,26 @@
                                     <outlet property="delegate" destination="QwI-ro-LUX" id="yRU-Yr-AZ6"/>
                                 </connections>
                             </tableView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Matching Events" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l5d-eC-FFW">
+                                <rect key="frame" x="54" y="226" width="212" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" red="0.58039215690000001" green="0.58039215690000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="LGB-y9-1LY" secondAttribute="trailing" id="2BD-ph-yfE"/>
                             <constraint firstItem="LGB-y9-1LY" firstAttribute="top" secondItem="4kh-Fi-n9X" secondAttribute="top" id="Ejp-pn-zu7"/>
                             <constraint firstItem="5Te-r8-u10" firstAttribute="top" secondItem="LGB-y9-1LY" secondAttribute="bottom" id="a8O-D6-Kh5"/>
+                            <constraint firstAttribute="centerX" secondItem="l5d-eC-FFW" secondAttribute="centerX" id="hwo-dh-06n"/>
                             <constraint firstItem="LGB-y9-1LY" firstAttribute="leading" secondItem="4kh-Fi-n9X" secondAttribute="leading" id="lbd-YV-QNY"/>
+                            <constraint firstAttribute="centerY" secondItem="l5d-eC-FFW" secondAttribute="centerY" constant="-0.5" id="vnL-C9-VwE"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="noItemsLabel" destination="l5d-eC-FFW" id="qIN-tv-dbt"/>
                         <outlet property="tableView" destination="LGB-y9-1LY" id="e78-94-0PF"/>
                     </connections>
                 </viewController>
@@ -535,13 +544,13 @@
                                                         <constraint firstAttribute="width" constant="40" id="Liq-AN-ZqG"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Victor Kane" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="260" translatesAutoresizingMaskIntoConstraints="NO" id="OOt-ZX-l6d">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Victor Kane" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OOt-ZX-l6d">
                                                     <rect key="frame" x="70" y="13" width="235" height="16"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Architect and Process engineer " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="260" translatesAutoresizingMaskIntoConstraints="NO" id="Gef-oK-pyl" customClass="DCLabel">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Architect and Process engineer " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gef-oK-pyl" customClass="DCLabel">
                                                     <rect key="frame" x="70" y="33" width="235" height="14"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" red="0.58039215686274515" green="0.58039215686274515" blue="0.58039215686274515" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

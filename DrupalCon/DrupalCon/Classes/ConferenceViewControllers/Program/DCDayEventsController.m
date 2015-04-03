@@ -22,8 +22,10 @@
 @interface DCDayEventsController ()<DCEventCellProtocol>
 
 @property (nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic) DCDayEventsDataSource *eventsDataSource;
+@property (nonatomic) IBOutlet UILabel *noItemsLabel;
 
+@property (nonatomic, strong) NSString* stubMessage;
+@property (nonatomic) DCDayEventsDataSource *eventsDataSource;
 
 @end
 
@@ -38,10 +40,30 @@ static NSString *ratingsImagesName[] = {@"", @"ic_experience_beginner", @"ic_exp
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self registerCells];
-    [self initDataSource];
-    
-    // Do any additional setup after loading the view.
+
+    if (!self.stubMessage)
+    {
+        [self registerCells];
+        [self initDataSource];
+    }
+    else
+    {
+        self.tableView.dataSource = nil;
+        self.tableView.hidden = YES;
+        
+        self.noItemsLabel.hidden = NO;
+        self.noItemsLabel.text = self.stubMessage;
+    }
+}
+
+- (void) dealloc
+{
+    self.stubMessage = nil;
+}
+
+- (void) initAsStubController:(NSString*)noEventMessage
+{
+    self.stubMessage = noEventMessage;
 }
 
 - (void)updateEvents
@@ -74,7 +96,6 @@ static NSString *ratingsImagesName[] = {@"", @"ic_experience_beginner", @"ic_exp
         return cell;
     }];
 }
-
 
 - (void)updateCell:(DCEventCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
@@ -167,7 +188,5 @@ static NSString *ratingsImagesName[] = {@"", @"ic_experience_beginner", @"ic_exp
     DCEvent *event = [self.eventsDataSource eventForIndexPath:indexPath];
     return [self isEventHasAdditionalFields:event]? 110 : 75;
 }
-
-
 
 @end

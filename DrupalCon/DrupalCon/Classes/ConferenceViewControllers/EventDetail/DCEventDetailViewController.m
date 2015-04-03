@@ -327,8 +327,6 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
         BOOL shouldMoveToTop = (offset > 0) && (-self.topBackgroundTop.constant < topStopPoint);
         BOOL shouldMoveToBottom = (offset < 0) && (self.topBackgroundTop.constant <= 0);
         
-        NSLog(@"offset: %f, topStop: %f, bgTop: %f; STop: %d, SBottom: %d", offset, topStopPoint, self.topBackgroundTop.constant, shouldMoveToTop, shouldMoveToBottom);
-        
             // Nav bar background alpha setting
         float delta = 10;
         float maxAlpha = 1;

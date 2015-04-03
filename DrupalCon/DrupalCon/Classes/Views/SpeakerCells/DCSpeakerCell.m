@@ -64,6 +64,11 @@
     
     [self.nameLbl setText:speaker.name];
     [self.positionTitleLbl setText:[self positionTitleForSpeaker:speaker]];
+    
+        // this code makes labels in Cell resizable relating to screen size. Cell height with layoutSubviews will work properly
+    CGFloat preferredWidth = [UIScreen mainScreen].bounds.size.width - 85;
+    self.nameLbl.preferredMaxLayoutWidth = preferredWidth;
+    self.positionTitleLbl.preferredMaxLayoutWidth = preferredWidth;
 }
 
 - (NSString *)positionTitleForSpeaker:(DCSpeaker *)speaker

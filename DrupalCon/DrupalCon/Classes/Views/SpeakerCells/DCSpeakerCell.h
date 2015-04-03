@@ -30,6 +30,7 @@
 @property (nonatomic, weak) IBOutlet UILabel * positionTitleLbl;
 @property (nonatomic, weak) IBOutlet UIView * separator;
 
+
 + (float)cellHeight;
 
 - (void) initData:(DCSpeaker*)speaker;

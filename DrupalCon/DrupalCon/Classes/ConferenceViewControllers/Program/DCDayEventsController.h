@@ -20,7 +20,12 @@
 
 @property (nonatomic, strong) DCEventStrategy * eventsStrategy;
 
+- (void) initAsStubController:(NSString*)noEventMessage;
+
 @end
+
+
+
 
 @protocol DCUpdateDayEventProtocol <NSObject>
 
