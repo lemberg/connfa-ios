@@ -136,13 +136,10 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DCEvent *event = [self.eventsDataSource eventForIndexPath:indexPath];
+    self.cellPrototype.isFirstCellInSection = !indexPath.row;
     [self.cellPrototype initData:event delegate:self];
-  //  [self.cellPrototype layoutSubviews];
     
     return [self.cellPrototype getHeightForEvent:event isFirstInSection:!indexPath.row];
-    
-   // CGFloat height = /*[cellPrototype getHeightForEvent:event isFirstInSection:!indexPath.row];*/[self.cellPrototype.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-   // return height;
 }
 
 @end
