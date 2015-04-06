@@ -27,7 +27,8 @@
 @interface DCEventStrategy ()
 
 @property (nonatomic, strong) Class eventClass;
-
+// Only for favorite events
+@property (nonatomic, strong) UIColor *leftSectionContainerColor;
 
 @end
 
@@ -57,12 +58,18 @@
             case EDCEeventStrategyFavorites:
                 _eventClass = [DCEvent class];
                 _predicate = [self favoritesPredicate];
+                _leftSectionContainerColor = [UIColor whiteColor];
                 break;
             default:
                 break;
         }
     }
     return self;
+}
+
+- (UIColor *)leftSectionContainerColor
+{
+    return _leftSectionContainerColor;
 }
 
 - (BOOL)isEnableFilter

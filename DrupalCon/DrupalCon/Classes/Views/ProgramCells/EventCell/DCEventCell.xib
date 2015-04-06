@@ -23,7 +23,7 @@
                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_experience_advanced" translatesAutoresizingMaskIntoConstraints="NO" id="O10-8Z-v0x">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ic_experience_advanced" translatesAutoresizingMaskIntoConstraints="NO" id="O10-8Z-v0x">
                                 <rect key="frame" x="217" y="18" width="12" height="12"/>
                             </imageView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pDk-DV-pAD" userLabel="track">
@@ -232,11 +232,14 @@
                 <outlet property="highlightedView" destination="bAw-z3-zya" id="u5V-LL-U9N"/>
                 <outlet property="leftContentView" destination="8Nq-xq-iNG" id="jFn-ia-Fy5"/>
                 <outlet property="leftCoverButton" destination="APf-ho-qaw" id="CEM-3u-WvY"/>
+                <outlet property="leftSectionContainerView" destination="8Nq-xq-iNG" id="946-2q-9S2"/>
                 <outlet property="leftSideWidth" destination="tt5-mS-0bb" id="ufL-8Q-xMx"/>
                 <outlet property="placeLabel" destination="GxY-Fi-Cd5" id="QaC-eM-kpB"/>
                 <outlet property="placeViewHeight" destination="Vzb-PS-LDu" id="Syb-6Z-hFe"/>
                 <outlet property="rightContentView" destination="P2l-bS-0fe" id="pUX-Rc-D5W"/>
                 <outlet property="rightCoverButton" destination="IzX-XD-gON" id="Ipd-nF-nJx"/>
+                <outlet property="rightSectionContainerView" destination="P2l-bS-0fe" id="4lA-Vq-Wen"/>
+                <outlet property="separatorCellView" destination="ncl-yd-ySY" id="W09-H5-eyP"/>
                 <outlet property="separatorLeadingConstraint" destination="NR7-jr-LHO" id="w5b-3B-TzN"/>
                 <outlet property="speakersLabel" destination="eRh-DH-v6a" id="vq4-7C-sub"/>
                 <outlet property="speakersViewHeight" destination="63V-jq-bR5" id="zis-Mb-2Qw"/>

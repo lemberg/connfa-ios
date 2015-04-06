@@ -82,7 +82,7 @@ const NSString * kDCEventOrderKey = @"order";
     self.date = date;
     self.eventId = eventDict[kDCEventIdKey];
     self.name = eventDict[kDCEventNameKey];
-    self.order = eventDict[kDCEventOrderKey];
+    self.order = @([eventDict[kDCEventOrderKey] integerValue]);
     
     self.link = eventDict[kDCEventLinkKey];
     self.place = [eventDict[kDCEventPlaceKey] kv_decodeHTMLCharacterEntities];

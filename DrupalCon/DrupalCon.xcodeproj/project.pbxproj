@@ -76,6 +76,9 @@
 		74A470E819B5EA3C00B01BC5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74A470E719B5EA3C00B01BC5 /* MapKit.framework */; };
 		74A6278819B8A37200B46B75 /* DCFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A6278719B8A37200B46B75 /* DCFavoritesViewController.m */; };
 		74C6E7951AB18F3700834542 /* DCDayEventsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C6E7941AB18F3700834542 /* DCDayEventsDataSource.m */; };
+		74DDDE731AD2AD1100C67124 /* DCFavoriteEventsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DDDE721AD2AD1100C67124 /* DCFavoriteEventsDataSource.m */; };
+		74DDDE761AD2AD7200C67124 /* DCEventDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DDDE751AD2AD7200C67124 /* DCEventDataSource.m */; };
+		74DDDE791AD2D09C00C67124 /* DCInfoEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DDDE781AD2D09C00C67124 /* DCInfoEventCell.m */; };
 		74E67C7219B6FDF400DF9D71 /* DCLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E67C7119B6FDF400DF9D71 /* DCLocationViewController.m */; };
 		74E67C7519B6FE9800DF9D71 /* DCPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E67C7419B6FE9800DF9D71 /* DCPin.m */; };
 		74E67C7719B6FEF500DF9D71 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74E67C7619B6FEF500DF9D71 /* CoreLocation.framework */; };
@@ -281,6 +284,12 @@
 		74C6E7931AB18F3700834542 /* DCDayEventsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCDayEventsDataSource.h; sourceTree = "<group>"; };
 		74C6E7941AB18F3700834542 /* DCDayEventsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCDayEventsDataSource.m; sourceTree = "<group>"; };
 		74C725501A07725E00F48F9D /* DCManagedObjectUpdateProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DCManagedObjectUpdateProtocol.h; path = Model/Categories/DCManagedObjectUpdateProtocol.h; sourceTree = "<group>"; };
+		74DDDE711AD2AD1100C67124 /* DCFavoriteEventsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCFavoriteEventsDataSource.h; sourceTree = "<group>"; };
+		74DDDE721AD2AD1100C67124 /* DCFavoriteEventsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCFavoriteEventsDataSource.m; sourceTree = "<group>"; };
+		74DDDE741AD2AD7200C67124 /* DCEventDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCEventDataSource.h; sourceTree = "<group>"; };
+		74DDDE751AD2AD7200C67124 /* DCEventDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCEventDataSource.m; sourceTree = "<group>"; };
+		74DDDE771AD2D09C00C67124 /* DCInfoEventCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCInfoEventCell.h; sourceTree = "<group>"; };
+		74DDDE781AD2D09C00C67124 /* DCInfoEventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCInfoEventCell.m; sourceTree = "<group>"; };
 		74E67C7019B6FDF400DF9D71 /* DCLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCLocationViewController.h; path = Location/DCLocationViewController.h; sourceTree = "<group>"; };
 		74E67C7119B6FDF400DF9D71 /* DCLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCLocationViewController.m; path = Location/DCLocationViewController.m; sourceTree = "<group>"; };
 		74E67C7319B6FE9800DF9D71 /* DCPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCPin.h; path = Location/DCPin.h; sourceTree = "<group>"; };
@@ -536,6 +545,10 @@
 				749BC1C21AAF347000FD5037 /* DCDayEventsController.m */,
 				74C6E7931AB18F3700834542 /* DCDayEventsDataSource.h */,
 				74C6E7941AB18F3700834542 /* DCDayEventsDataSource.m */,
+				74DDDE711AD2AD1100C67124 /* DCFavoriteEventsDataSource.h */,
+				74DDDE721AD2AD1100C67124 /* DCFavoriteEventsDataSource.m */,
+				74DDDE741AD2AD7200C67124 /* DCEventDataSource.h */,
+				74DDDE751AD2AD7200C67124 /* DCEventDataSource.m */,
 			);
 			name = ProgramItemsViewController;
 			sourceTree = "<group>";
@@ -769,6 +782,8 @@
 				749BC1BC1AAF025E00FD5037 /* DCEventCell.h */,
 				749BC1BD1AAF025E00FD5037 /* DCEventCell.m */,
 				749BC1BE1AAF025E00FD5037 /* DCEventCell.xib */,
+				74DDDE771AD2D09C00C67124 /* DCInfoEventCell.h */,
+				74DDDE781AD2D09C00C67124 /* DCInfoEventCell.m */,
 			);
 			name = EventCell;
 			path = Classes/Views/ProgramCells/EventCell;
@@ -1199,6 +1214,7 @@
 				74356D5B19BF3B290055F13D /* UIWebView+DC.m in Sources */,
 				84A06E3319ACBA0600104876 /* DCEventDetailViewController.m in Sources */,
 				849E84FF19AF385D006F43B3 /* DCSpeakerEventCell.m in Sources */,
+				74DDDE731AD2AD1100C67124 /* DCFavoriteEventsDataSource.m in Sources */,
 				849EFE4119A5067000C43E05 /* DCType+DC.m in Sources */,
 				84DCDB291AA0BB8D00BA0097 /* DCMainNavigationController.m in Sources */,
 				1ACFD70E1A432BBC00F8EE57 /* DCFavoriteEvent.m in Sources */,
@@ -1231,6 +1247,7 @@
 				1ACFD7171A432BBC00F8EE57 /* DCTimeRange.m in Sources */,
 				842B91DB1AB99588003F9116 /* DCSpeakerDetailButtonsCell.m in Sources */,
 				5D6449B1198908C600BC1775 /* DCProgramItemsViewController.m in Sources */,
+				74DDDE761AD2AD7200C67124 /* DCEventDataSource.m in Sources */,
 				74E67C7519B6FE9800DF9D71 /* DCPin.m in Sources */,
 				749BC1BF1AAF025E00FD5037 /* DCEventCell.m in Sources */,
 				5D6449AD1988ECA400BC1775 /* DCMenuStoryboardHelper.m in Sources */,
@@ -1254,6 +1271,7 @@
 				74E8381819C061CD000D2BE4 /* UIImage+GIF.m in Sources */,
 				1ACFD6F31A432BBB00F8EE57 /* DCEvent.m in Sources */,
 				1ACFD72C1A44681A00F8EE57 /* DCSocialEvent+DC.m in Sources */,
+				74DDDE791AD2D09C00C67124 /* DCInfoEventCell.m in Sources */,
 				5D38E69919869303006F7A59 /* DCProgramViewController.m in Sources */,
 				74E8381319C061CD000D2BE4 /* SDWebImageDownloader.m in Sources */,
 				5D6449D019893BD700BC1775 /* DCCofeeCell.m in Sources */,

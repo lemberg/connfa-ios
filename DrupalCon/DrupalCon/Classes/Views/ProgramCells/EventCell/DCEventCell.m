@@ -126,8 +126,8 @@ static NSInteger eventCellImageHeight = 16;
     self.eventImageHeight.constant = self.eventImageView.image ? eventCellImageHeight : 0;
     
         // Time  (left side)
-    self.startTimeLabel.text = self.isFirstCellInSection ? [NSString stringWithFormat:@"%@ AM",[self hourFormatForDate:event.startDate]] : nil;
-    self.endTimeLabel.text  = self.isFirstCellInSection ? [NSString stringWithFormat:@"to %@ PM", [self hourFormatForDate:event.endDate]] : nil;
+    self.startTimeLabel.text = self.isFirstCellInSection ? [NSString stringWithFormat:@"%@",[self hourFormatForDate:event.startDate]] : nil;
+    self.endTimeLabel.text  = self.isFirstCellInSection ? [NSString stringWithFormat:@"to %@", [self hourFormatForDate:event.endDate]] : nil;
 
     self.separatorLeadingConstraint.constant = self.isLastCellInSection? 0 : self.leftSideWidth.constant + self.eventTitleLabelLeftPadding.constant;
     
@@ -150,6 +150,7 @@ static NSInteger eventCellImageHeight = 16;
     }
     return [NSString stringWithString:speakersList];
 }
+
 
 - (CGFloat) getHeightForLabel:(UILabel*)label
 {

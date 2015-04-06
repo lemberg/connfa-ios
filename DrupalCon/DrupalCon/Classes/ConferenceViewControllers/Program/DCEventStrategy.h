@@ -39,6 +39,8 @@ typedef enum {
 
 - (instancetype)initWithStrategy:(EDCEventStrategy)strategy;
 
+// Only for favorite events
+- (UIColor *)leftSectionContainerColor;
 - (NSArray*)days;
 - (NSArray*)eventsForDay:(NSDate*)day;
 - (NSArray*)uniqueTimeRangesForDay:(NSDate*)day;

@@ -18,14 +18,15 @@
 #import "DCLimitedNavigationController.h"
 #import "DCAppFacade.h"
 #import "DCTrack+DC.h"
-
+#import "DCInfoEventCell.h"
+#import "DCFavoriteEventsDataSource.h"
 @interface DCDayEventsController ()<DCEventCellProtocol>
 
 @property (nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) IBOutlet UILabel *noItemsLabel;
 
 @property (nonatomic, strong) NSString* stubMessage;
-@property (nonatomic) DCDayEventsDataSource *eventsDataSource;
+@property (nonatomic) DCEventDataSource *eventsDataSource;
 
 @property (nonatomic, strong) DCEventCell* cellPrototype;
 
@@ -88,7 +89,7 @@
 
 - (void)initDataSource
 {
-    self.eventsDataSource = [[DCDayEventsDataSource alloc] initWithTableView:self.tableView eventStrategy:self.eventsStrategy date:self.date];
+    self.eventsDataSource = [self dayEventsDataSource];//[[DCDayEventsDataSource alloc] initWithTableView:self.tableView eventStrategy:self.eventsStrategy date:self.date];
     __weak typeof (self) weakSelf = self;
     [self.eventsDataSource setPrepareBlockForTableView:^UITableViewCell* (UITableView * tableView, NSIndexPath *indexPath) {
         NSString *cellIdentifier = NSStringFromClass([DCEventCell class]);
@@ -100,8 +101,24 @@
         cell.isFirstCellInSection = !indexPath.row;
 
         [cell initData:event delegate:weakSelf];
+        // Some conditions for favorite events
+        NSString *titleForNextSection = [weakSelf.eventsDataSource titleForSectionAtIdexPath:indexPath.section + 1];
+        cell.separatorCellView.hidden = ( titleForNextSection && cell.isLastCellInSection)? YES : NO;
+        if ([weakSelf.eventsStrategy leftSectionContainerColor]) {
+            cell.leftSectionContainerView.backgroundColor = [weakSelf.eventsStrategy leftSectionContainerColor];
+        }
+        
         return cell;
     }];
+}
+
+- (DCEventDataSource *)dayEventsDataSource
+{
+    if (self.eventsStrategy.strategy == EDCEeventStrategyFavorites) {
+        return [[DCFavoriteEventsDataSource alloc] initWithTableView:self.tableView eventStrategy:self.eventsStrategy date:self.date];
+
+    }
+    return [[DCDayEventsDataSource alloc] initWithTableView:self.tableView eventStrategy:self.eventsStrategy date:self.date];
 }
 
 - (void)didSelectCell:(DCEventCell *)eventCell {
@@ -130,6 +147,7 @@
     [[DCAppFacade shared].mainNavigationController presentViewController: navContainer animated:YES completion:nil];
 }
 
+
 #pragma mark - UITableView delegate
 
 
@@ -140,6 +158,27 @@
     [self.cellPrototype initData:event delegate:self];
     
     return [self.cellPrototype getHeightForEvent:event isFirstInSection:!indexPath.row];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return [self.eventsDataSource titleForSectionAtIdexPath:section]? 30 : 0.;
+}
+
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    DCInfoEventCell *headerViewCell = (DCInfoEventCell*)[tableView dequeueReusableCellWithIdentifier:NSStringFromClass([DCInfoEventCell class])];
+
+    NSString *title = [self.eventsDataSource titleForSectionAtIdexPath:section];
+    if(title) {
+        headerViewCell.titleLabel.text = title;
+        return [headerViewCell contentView];
+    }
+    
+    UIView *v = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 320, 0.0)];
+    v.backgroundColor = [UIColor whiteColor];
+    return v;
 }
 
 @end
