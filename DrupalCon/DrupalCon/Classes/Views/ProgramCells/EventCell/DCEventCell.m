@@ -20,9 +20,16 @@ static NSString *ratingsImagesName[] = {@"", @"ic_experience_beginner", @"ic_exp
 static NSInteger eventCellSubtitleHeight = 14;
 static NSInteger eventCellImageHeight = 16;
 
+#define leftButonEnabledColor [UIColor colorWithWhite:247.0/255.0 alpha:1.0]
+#define leftButonDisabledColor [UIColor colorWithWhite:237.0/255.0 alpha:1.0]
+
 @interface DCEventCell()
 
+@property (nonatomic) BOOL isEnabled;
 @property (weak, nonatomic) IBOutlet UIView *rightContentView;
+@property (weak, nonatomic) IBOutlet UIView *leftContentView;
+@property (weak, nonatomic) IBOutlet UIButton *rightCoverButton;
+@property (weak, nonatomic) IBOutlet UIButton *leftCoverButton;
 
     // Right side constraints
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *separatorLeadingConstraint;
@@ -45,7 +52,6 @@ static NSInteger eventCellImageHeight = 16;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftSideWidth;
 
 @end
-
 
 
 @implementation DCEventCell
@@ -78,6 +84,14 @@ static NSInteger eventCellImageHeight = 16;
     return leftSideHeight > rightSideHeight ? leftSideHeight : rightSideHeight;
 }
 
+- (void) setCellEnabled:(BOOL)enabled
+{
+    self.leftCoverButton.enabled = enabled;
+    self.rightCoverButton.enabled = enabled;
+    
+    self.leftContentView.backgroundColor = enabled ? leftButonEnabledColor : leftButonDisabledColor;
+    self.rightContentView.backgroundColor = enabled ? [UIColor whiteColor] : leftButonEnabledColor;
+}
 
 - (void) initData:(DCEvent*)event delegate:(id<DCEventCellProtocol>)aDelegate
 {
@@ -91,7 +105,7 @@ static NSInteger eventCellImageHeight = 16;
     
         // Track
     self.trackLabel.text = trackName;
-    self.trackViewHeight.constant = trackName.length ? eventCellSubtitleHeight : 0;
+    self.trackViewHeight.constant = trackName.length ? eventCellSubtitleHeight : 0;  
     
         // Speakers
     NSString* speakers = [self speakersFromEvent:event];
@@ -116,6 +130,10 @@ static NSInteger eventCellImageHeight = 16;
     self.endTimeLabel.text  = self.isFirstCellInSection ? [NSString stringWithFormat:@"to %@ PM", [self hourFormatForDate:event.endDate]] : nil;
 
     self.separatorLeadingConstraint.constant = self.isLastCellInSection? 0 : self.leftSideWidth.constant + self.eventTitleLabelLeftPadding.constant;
+    
+        // setting cell clickable
+    self.isEnabled = event.speakers.count;
+    [self setCellEnabled:self.isEnabled];
     
     self.delegate = aDelegate;
 }
@@ -162,6 +180,5 @@ static NSInteger eventCellImageHeight = 16;
 {
     self.highlightedView.hidden = NO;
 }
-
 
 @end
