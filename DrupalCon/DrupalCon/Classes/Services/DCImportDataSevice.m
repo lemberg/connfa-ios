@@ -199,9 +199,18 @@ static NSString *const TWITTER_URI    = @"getTwitter";
                                 }
                                   onError:^(NSHTTPURLResponse *response, id data, NSError *error) {
                                       NSLog(@"err-%@",error);
+                                      [self handleNetworkError];
                                   }];
 }
 
+- (void)handleNetworkError
+{
+    if ([self isInitDataImport]) {
+        [self  importFinishedWithStatus:DCDataNotChanged];
+    } else {
+        [self  importFinishedWithStatus:DCDataUpdateFailed];
+    }
+}
 
 - (void)importDataForURIs:(NSArray*)URIs
 {

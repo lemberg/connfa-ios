@@ -39,6 +39,7 @@ extern NSString * kDCEventExperienceLevelKey;
 extern NSString * kDCEventIdKey;
 extern NSString * kDCEventTextKey;
 extern NSString * kDCEventPlaceKey;
+extern NSString * kDCEventOrderKey;
 
 typedef NS_ENUM (int, DCEventType) {
     DC_EVENT_NONE = 0,

@@ -29,7 +29,7 @@
 
 @property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) NSString * desctiptText;
-@property (nonatomic, retain) NSNumber * eventID;
+@property (nonatomic, retain) NSNumber * eventId;
 @property (nonatomic, retain) NSNumber * favorite;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * link;

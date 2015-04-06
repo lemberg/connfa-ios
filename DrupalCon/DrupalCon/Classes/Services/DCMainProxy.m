@@ -225,7 +225,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 - (NSArray *)eventsWithIDs:(NSArray *)iDs
 #warning this method used by LocalNotification process. Can be obsolated
 {
-    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"eventID IN %@", iDs];
+    NSPredicate * predicate = [NSPredicate predicateWithFormat:@"%K IN %@", kDCEventIdKey, iDs];
     NSArray *results = [self instancesOfClass:[DCEvent class]
                          filtredUsingPredicate:predicate
                                      inContext:self.defaultPrivateContext];
@@ -281,7 +281,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 - (void)addToFavoriteEvent:(DCEvent *)event
 {
     DCFavoriteEvent *favoriteEvent = [DCFavoriteEvent createManagedObjectInContext:self.newMainQueueContext];//(DCFavoriteEvent*)[self createObjectOfClass:[DCFavoriteEvent class]];
-    favoriteEvent.eventID = event.eventID;
+    favoriteEvent.eventID = event.eventId;
     [DCLocalNotificationManager scheduleNotificationWithItem:event interval:5];
     [self saveContext];
 }

@@ -89,7 +89,7 @@
             
         [fetchRequest setPredicate:mergedPredicate];
         
-        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"eventID"
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:kDCEventIdKey
                                                                        ascending:YES];
         [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:sortDescriptor, nil]];
         

@@ -37,7 +37,9 @@
     DCInfo* info = [[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCInfo class] inMainQueue:YES] lastObject];
     
     NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
-    self.items = [[info.infoCategory allObjects] sortedArrayUsingDescriptors:@[descriptor]];
+    NSSortDescriptor *iDDescriptor = [[NSSortDescriptor alloc] initWithKey:@"infoId" ascending:YES];
+
+    self.items = [[info.infoCategory allObjects] sortedArrayUsingDescriptors:@[iDDescriptor, descriptor]];
     
     [self.tableView reloadData];
 }
