@@ -43,7 +43,7 @@ const NSString * kDCEventLinkKey = @"link";
 const NSString * kDCEventSpeakersKey = @"speakers";
 const NSString * kDCEventTrackKey = @"track";
 const NSString * kDCEventExperienceLevelKey = @"experienceLevel";
-const NSString * kDCEventIdKey = @"eventID";
+const NSString * kDCEventIdKey = @"eventId";
 const NSString * kDCEventTextKey = @"text";
 const NSString * kDCEventPlaceKey = @"place";
 
@@ -79,7 +79,7 @@ const NSString * kDCEventPlaceKey = @"place";
 - (void)updateFromDictionary:(NSDictionary *)eventDict forData:(NSDate *)date
 {
     self.date = date;
-    self.eventID = eventDict[kDCEventIdKey];
+    self.eventId = eventDict[kDCEventIdKey];
     self.name = eventDict[kDCEventNameKey];
     self.favorite = @NO;
     self.link = eventDict[kDCEventLinkKey];
@@ -111,6 +111,7 @@ const NSString * kDCEventPlaceKey = @"place";
 
 - (void)addSpeakersForIds:(NSArray*)speakerIds
 {
+    self.speakers = nil;
     for (NSNumber* speakerIdNum in speakerIds)
     {
         DCSpeaker * speaker = (DCSpeaker*)[[DCMainProxy sharedProxy] objectForID:[speakerIdNum intValue]

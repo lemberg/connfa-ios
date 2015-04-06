@@ -93,7 +93,7 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
     self.cellsForSizeEstimation = @{cellIdHeader : [self.tableView dequeueReusableCellWithIdentifier: cellIdHeader],
                                     cellIdSpeaker : [self.tableView dequeueReusableCellWithIdentifier: cellIdSpeaker]};
     
-    [self registerScreenLoadAtGA: [NSString stringWithFormat:@"eventID: %d", self.event.eventID.intValue]];
+    [self registerScreenLoadAtGA: [NSString stringWithFormat:@"eventID: %d", self.event.eventId.intValue]];
     
     [self arrangeNavigationBar];
     
@@ -133,7 +133,7 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
 - (void) registerScreenLoadAtGA
 {
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker set:kGAIScreenName value:[NSString stringWithFormat:@"DCEventDetailViewController, eventID: %d", self.event.eventID.intValue]];
+    [tracker set:kGAIScreenName value:[NSString stringWithFormat:@"DCEventDetailViewController, eventId: %d", self.event.eventId.intValue]];
     [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 

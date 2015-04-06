@@ -247,7 +247,7 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
     if (isFavorite) {
         [[DCMainProxy sharedProxy] addToFavoriteEvent:event];
     } else {
-        [[DCMainProxy sharedProxy] removeFavoriteEventWithID:event.eventID];
+        [[DCMainProxy sharedProxy] removeFavoriteEventWithID:event.eventId];
     }
 }
 

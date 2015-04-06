@@ -38,9 +38,12 @@
         NSDate * date = [NSDate fabricateWithEventString:day[kDCEventDateKey]];
         for (NSDictionary * event in day[kDCEventsKey])
         {
-            DCMainEvent * mainEventInstance = (DCMainEvent*)[[DCMainProxy sharedProxy] objectForID:[event[kDCEventIdKey] intValue]
-                                                                                     ofClass:[DCMainEvent class]
-                                                                                   inContext:context];
+            int eventId = [event[kDCEventIdKey] intValue];
+            DCMainEvent * mainEventInstance = (DCMainEvent*)[[DCMainProxy sharedProxy]
+                                                             objectForID:eventId
+                                                             
+                                                             ofClass:[DCMainEvent class]
+                                                             inContext:context];
             
             if (!mainEventInstance) // create
             {
@@ -51,13 +54,7 @@
             if ([event[kDCParseObjectDeleted] intValue]==1) // remove
             {
                 [[DCMainProxy sharedProxy] removeItem:mainEventInstance];
-                DCFavoriteEvent * favorite = (DCFavoriteEvent*)[[DCMainProxy sharedProxy] objectForID:[event[kDCEventIdKey] intValue]
-                                                                                              ofClass:[DCFavoriteEvent class]
-                                                                                            inContext:context];
-                if (favorite) // in case when event was in favorites - remove from there
-                {
-                    [[DCMainProxy sharedProxy] removeItem:favorite];
-                }
+
             }
             else // update
             {

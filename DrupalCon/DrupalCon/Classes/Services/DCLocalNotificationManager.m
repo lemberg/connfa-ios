@@ -70,7 +70,7 @@ static  const NSString * kEventId = @"EventID";
     localNotif.applicationIconBadgeNumber = 1;
     
     
-    NSDictionary *infoDict = [NSDictionary dictionaryWithObject:item.eventID  forKey:kEventId];
+    NSDictionary *infoDict = [NSDictionary dictionaryWithObject:item.eventId  forKey:kEventId];
     localNotif.userInfo = infoDict;
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
 }

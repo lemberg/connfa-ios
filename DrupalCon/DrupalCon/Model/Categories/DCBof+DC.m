@@ -52,13 +52,7 @@
             if ([event[kDCParseObjectDeleted] intValue]==1) // remove
             {
                 [[DCMainProxy sharedProxy] removeItem:bofInstance];
-                DCFavoriteEvent * favorite = (DCFavoriteEvent*)[[DCMainProxy sharedProxy] objectForID:[event[kDCEventIdKey] intValue]
-                                                                                              ofClass:[DCFavoriteEvent class]
-                                                                                            inContext:context];
-                if (favorite) // in case when event was in favorites - remove from there
-                {
-                    [[DCMainProxy sharedProxy] removeItem:favorite];
-                }
+ 
             }
             else // update
             {
