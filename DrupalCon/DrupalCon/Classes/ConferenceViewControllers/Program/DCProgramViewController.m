@@ -37,6 +37,7 @@
 @property (nonatomic, strong) NSArray *viewControllers;
 @property (nonatomic, strong) NSArray *days;
 @property (nonatomic) NSInteger currentDayIndex;
+@property (nonatomic, strong) NSDate* currentPageDate; // used to set current Date after filtering
 
 @end
 
@@ -59,7 +60,7 @@
     [self arrangeNavigationBar];
     
     self.currentDayIndex = 0;
-//    self.eventsStrategy.predicate = nil;//[self getEventStrategyPredicate];
+    self.currentPageDate = nil;
     
     [self.activityIndicator startAnimating];
     [[DCMainProxy sharedProxy] setDataReadyCallback:^(DCMainProxyState mainProxyState) {
@@ -69,13 +70,6 @@
             [self.activityIndicator stopAnimating];
         });
     }];
-    /*
-    if (![[DCMainProxy sharedProxy] isDataReady]) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            [[DCMainProxy sharedProxy] update];
-        });
-    }
-     */
 }
 
 #pragma mark - Private
@@ -92,10 +86,42 @@
     [self setFilterButton];
 }
 
+- (NSUInteger) getCurrentDayIndex: (NSDate*)neededDate
+{
+    NSDateComponents *neededDateComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate: neededDate];
+    NSInteger neededDay = [neededDateComponents day];
+    NSInteger neededMonth = [neededDateComponents month];
+    NSInteger neededYear = [neededDateComponents year];
+    
+    for (NSDate* iteratedDay in self.days)
+    {
+        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate: iteratedDay];
+        NSInteger day = [components day];
+        NSInteger month = [components month];
+        NSInteger year = [components year];
+        
+        if ((neededYear == year) && (neededMonth == month) && (neededDay == day))
+            return [self.days indexOfObject:iteratedDay];
+        else
+        {
+            if (iteratedDay.timeIntervalSince1970 > neededDate.timeIntervalSince1970)
+               return [self.days indexOfObject:iteratedDay];
+        }
+    }
+    
+    return self.days.count ?  self.days.count-1 : 0;
+}
+
 - (void) reloadData
 {
     self.days = self.eventsStrategy.days.count ? [[NSArray alloc] initWithArray:[_eventsStrategy days]] : nil;
-    self.currentDayIndex = 0;
+
+        // set current page Index to set proper Date after filtering
+    if (self.currentPageDate)
+    {
+        self.currentDayIndex = [self getCurrentDayIndex:self.currentPageDate];
+        self.currentPageDate = nil;
+    }
     
     self.viewControllers = [self createViewControllersForDays: self.days];
     [self updatePageController];
@@ -105,7 +131,7 @@
 -(void) updatePageController
 {
     [self.pageViewController setViewControllers:@[self.viewControllers[self.currentDayIndex]] direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-
+    
     [self displayDateForDay: self.currentDayIndex];
 }
 
@@ -182,7 +208,8 @@
     if (!cancel)
     {
         self.pageViewController.dataSource = nil;
-
+        self.currentPageDate = self.days[self.currentDayIndex];
+        
         [self setFilterButton];
         [self reloadData];
        
@@ -194,7 +221,6 @@
 - (void)updateControllersaToFilterValues
 {
     for (UIViewController *viewController in self.viewControllers) {
-//        UIViewController *viewController = self.viewControllers[self.currentDayIndex];
         if ([viewController conformsToProtocol:@protocol(DCUpdateDayEventProtocol)]) {
             [(id<DCUpdateDayEventProtocol>)viewController updateEvents];
         }

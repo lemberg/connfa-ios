@@ -27,6 +27,8 @@
 @property (nonatomic, strong) NSString* stubMessage;
 @property (nonatomic) DCDayEventsDataSource *eventsDataSource;
 
+@property (nonatomic, strong) DCEventCell* cellPrototype;
+
 @end
 
 @implementation DCDayEventsController
@@ -44,6 +46,8 @@
     {
         [self registerCells];
         [self initDataSource];
+        
+        self.cellPrototype = [self.tableView dequeueReusableCellWithIdentifier:NSStringFromClass([DCEventCell class])];
     }
     else
     {
@@ -58,6 +62,7 @@
 - (void) dealloc
 {
     self.stubMessage = nil;
+    self.cellPrototype = nil;
 }
 
 - (void) initAsStubController:(NSString*)noEventMessage
@@ -131,12 +136,13 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     DCEvent *event = [self.eventsDataSource eventForIndexPath:indexPath];
-    DCEventCell *cellPrototype = [self.tableView dequeueReusableCellWithIdentifier:NSStringFromClass([DCEventCell class])];
-    [cellPrototype initData:event delegate:self];
-    [cellPrototype layoutSubviews];
+    [self.cellPrototype initData:event delegate:self];
+  //  [self.cellPrototype layoutSubviews];
     
-    CGFloat height = [cellPrototype.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
-    return height;
+    return [self.cellPrototype getHeightForEvent:event isFirstInSection:!indexPath.row];
+    
+   // CGFloat height = /*[cellPrototype getHeightForEvent:event isFirstInSection:!indexPath.row];*/[self.cellPrototype.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+   // return height;
 }
 
 @end

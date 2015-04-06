@@ -36,7 +36,7 @@
 
 
 - (void) initData:(DCEvent*)event delegate:(id<DCEventCellProtocol>)aDelegate;
-
+- (CGFloat) getHeightForEvent:(DCEvent*)event isFirstInSection:(BOOL)isFirst;
 
 @end
 

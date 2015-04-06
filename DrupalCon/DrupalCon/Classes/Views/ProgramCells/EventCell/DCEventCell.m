@@ -15,23 +15,40 @@
 #import "DCLevel.h"
 
 static NSString *ratingsImagesName[] = {@"", @"ic_experience_beginner", @"ic_experience_intermediate", @"ic_experience_advanced" };
+
+    // These values are hardcoded because cells are get by "dequeueREusableCells" method, so previous cell value might be set to 0.
 static NSInteger eventCellSubtitleHeight = 14;
 static NSInteger eventCellImageHeight = 16;
 
 @interface DCEventCell()
 
 @property (weak, nonatomic) IBOutlet UIView *rightContentView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *separatorLeadingConstraint;
 
+    // Right side constraints
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *separatorLeadingConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *eventTitleLabelTopPadding;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *eventTitleLabelLeftPadding;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *eventTitleLabelRightPadding;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *eventTitleLabelBottomPadding;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *subtitleBottomPadding;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *trackViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *speakersViewHeight;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *placeViewHeight;
+
+    // Left side constraints
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *eventImageHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *startTimeTopPadding;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *startTimeBottomPadding;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *endTimeBottomPadding;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *eventImageBottomPading;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *leftSideWidth;
 
 @end
 
-@implementation DCEventCell
 
+
+@implementation DCEventCell
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
@@ -46,6 +63,22 @@ static NSInteger eventCellImageHeight = 16;
     return  dateDisplay;
 }
 
+- (CGFloat) getHeightForEvent:(DCEvent*)event isFirstInSection:(BOOL)isFirst
+{
+        // Left side height calculating
+    CGFloat startTimeLabelHeight = [self getHeightForLabel:self.startTimeLabel];
+    CGFloat endTimeLabelHeight = [self getHeightForLabel:self.endTimeLabel];
+    
+    CGFloat leftSideHeight = self.startTimeTopPadding.constant + startTimeLabelHeight + self.startTimeBottomPadding.constant + endTimeLabelHeight + self.endTimeBottomPadding.constant + self.eventImageHeight.constant + self.eventImageBottomPading.constant;
+    
+        // Right side height calculating
+    CGFloat eventTitleHeight = [self getHeightForLabel:self.eventTitleLabel];
+    CGFloat rightSideHeight = self.eventTitleLabelTopPadding.constant + eventTitleHeight + self.eventTitleLabelBottomPadding.constant + self.trackViewHeight.constant + self.speakersViewHeight.constant + self.placeViewHeight.constant + self.subtitleBottomPadding.constant;
+    
+    return leftSideHeight > rightSideHeight ? leftSideHeight : rightSideHeight;
+}
+
+
 - (void) initData:(DCEvent*)event delegate:(id<DCEventCellProtocol>)aDelegate
 {
     NSString *trackName = [(DCTrack*)[event.tracks anyObject] name];
@@ -53,7 +86,7 @@ static NSInteger eventCellImageHeight = 16;
         // Name
     self.eventTitleLabel.text = event.name;
         // this code makes labels in Cell resizable relating to screen size. Cell height with layoutSubviews will work properly
-    CGFloat preferredWidth = [UIScreen mainScreen].bounds.size.width - 77 - 9 - 28;
+    CGFloat preferredWidth = [UIScreen mainScreen].bounds.size.width - self.leftSideWidth.constant - self.eventTitleLabelLeftPadding.constant - self.eventTitleLabelRightPadding.constant;
     self.eventTitleLabel.preferredMaxLayoutWidth = preferredWidth;
     
         // Track
@@ -79,10 +112,10 @@ static NSInteger eventCellImageHeight = 16;
     self.eventImageHeight.constant = self.eventImageView.image ? eventCellImageHeight : 0;
     
         // Time  (left side)
-    self.startTimeLabel.text = self.isFirstCellInSection ? [self hourFormatForDate:event.startDate] : nil;
-    self.endTimeLabel.text  = self.isFirstCellInSection ? [NSString stringWithFormat:@"to %@", [self hourFormatForDate:event.endDate]] : nil;
+    self.startTimeLabel.text = self.isFirstCellInSection ? [NSString stringWithFormat:@"%@ AM",[self hourFormatForDate:event.startDate]] : nil;
+    self.endTimeLabel.text  = self.isFirstCellInSection ? [NSString stringWithFormat:@"to %@ PM", [self hourFormatForDate:event.endDate]] : nil;
 
-    self.separatorLeadingConstraint.constant = self.isLastCellInSection? 0 : 77 + 9;
+    self.separatorLeadingConstraint.constant = self.isLastCellInSection? 0 : self.leftSideWidth.constant + self.eventTitleLabelLeftPadding.constant;
     
     self.delegate = aDelegate;
 }
@@ -98,6 +131,15 @@ static NSInteger eventCellImageHeight = 16;
         [speakersList appendString:speaker.name];
     }
     return [NSString stringWithString:speakersList];
+}
+
+- (CGFloat) getHeightForLabel:(UILabel*)label
+{
+    CGRect textRect = [label.text boundingRectWithSize: CGSizeMake(label.preferredMaxLayoutWidth, NSIntegerMax)
+                                               options: NSStringDrawingUsesLineFragmentOrigin
+                                            attributes: @{NSFontAttributeName:label.font}
+                                               context: nil];
+    return textRect.size.height;
 }
 
 #pragma mark - User actions
