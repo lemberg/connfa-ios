@@ -12,6 +12,7 @@
 #import "DCTimeRange+DC.h"
 #import "DCTime.h"
 #import "NSDate+DC.h"
+#import "DCEvent+DC.h"
 
 @interface DCDayEventsDataSource()
 
@@ -78,7 +79,8 @@ static NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
     NSArray *uniqueTimeSlotForDay = [self.eventStrategy uniqueTimeRangesForDay:self.selectedDay];
     
     for (DCTimeRange * timerange in uniqueTimeSlotForDay) {
-        NSArray *timeslotEvents = [eventsForDay eventsForTimeRange:timerange];
+        NSArray *timeslotEvents = [[[eventsForDay eventsForTimeRange:timerange] sortedByKey:kDCEventIdKey] sortedByKey:kDCEventOrderKey];
+
         NSDictionary *timeslotDict = [[NSDictionary alloc] initWithObjects:@[timerange, timeslotEvents] forKeys:@[kDCTimeslotKEY, kDCTimeslotEventKEY]];
         [uniqueTimeSlotsSource addObject:timeslotDict];
     }

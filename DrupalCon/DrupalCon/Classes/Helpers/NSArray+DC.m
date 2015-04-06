@@ -51,6 +51,33 @@
     return self;
 }
 
+- (NSArray *)sortedByEventId
+{
+
+    if (self.count) {
+        if ([self.firstObject isKindOfClass:[DCEvent class]])
+        {
+            NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:kDCEventIdKey
+                                                                           ascending:YES];
+            return [self sortedArrayUsingDescriptors:@[sortDescriptor]];
+        }
+    }
+    NSLog(@"WRONG! array for sort. events by id");
+    return self;
+}
+
+- (NSArray *)sortedByKey:(NSString *)key
+{
+    
+    if (self.count) {
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:key
+                                                               ascending:YES];
+        return [self sortedArrayUsingDescriptors:@[sortDescriptor]];
+    }
+    NSLog(@"WRONG! array for sort. events by id");
+    return self;
+}
+
 - (NSArray*)sortedDates
 {
     if (self.count) {
@@ -103,6 +130,7 @@
             NSPredicate * predicate = [NSPredicate predicateWithBlock:^BOOL(id evaluatedObject, NSDictionary *bindings) {
                 return [(DCTimeRange*)[(DCEvent*)evaluatedObject timeRange] isEqualTo:timeRange];
             }];
+            
             return [self filteredArrayUsingPredicate:predicate];
         }
     }

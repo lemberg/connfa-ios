@@ -46,6 +46,7 @@ const NSString * kDCEventExperienceLevelKey = @"experienceLevel";
 const NSString * kDCEventIdKey = @"eventId";
 const NSString * kDCEventTextKey = @"text";
 const NSString * kDCEventPlaceKey = @"place";
+const NSString * kDCEventOrderKey = @"order";
 
 @implementation DCEvent (DC)
 
@@ -81,7 +82,8 @@ const NSString * kDCEventPlaceKey = @"place";
     self.date = date;
     self.eventId = eventDict[kDCEventIdKey];
     self.name = eventDict[kDCEventNameKey];
-    self.favorite = @NO;
+    self.order = eventDict[kDCEventOrderKey];
+    
     self.link = eventDict[kDCEventLinkKey];
     self.place = [eventDict[kDCEventPlaceKey] kv_decodeHTMLCharacterEntities];
     self.desctiptText = eventDict[kDCEventTextKey]; //kv_decodeHTMLCharacterEntities];
