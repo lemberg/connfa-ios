@@ -21,6 +21,7 @@
 
 @property (nonatomic, weak) IBOutlet UITableView* tableView;
 @property (nonatomic, strong) NSArray* items;
+@property (nonatomic) __block DCMainProxyState previousState;
 
 @end
 
@@ -34,11 +35,30 @@
 {
     [super viewDidLoad];
     
+
+    [[DCMainProxy sharedProxy] setDataReadyCallback:^(DCMainProxyState mainProxyState) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"Data ready callback %d", mainProxyState);
+            if ( !self.previousState) {
+                [self reloadData];
+                self.previousState = mainProxyState;
+            }
+            
+            
+            if ( mainProxyState == DCMainProxyStateDataUpdated) {
+                [self reloadData];
+            }
+            
+        });
+    }];
+}
+- (void)reloadData
+{
     DCInfo* info = [[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCInfo class] inMainQueue:YES] lastObject];
     
     NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
     NSSortDescriptor *iDDescriptor = [[NSSortDescriptor alloc] initWithKey:@"infoId" ascending:YES];
-
+    
     self.items = [[info.infoCategory allObjects] sortedArrayUsingDescriptors:@[iDDescriptor, descriptor]];
     
     [self.tableView reloadData];
