@@ -130,14 +130,22 @@
     [super viewWillAppear:animated];
     
     if (self.event) {
+        
         [self showViewControllerAssociatedWithMenuItem:DCMENU_MYSCHEDULE_ITEM];
-        if ([self.sideMenuContainer.centerViewController isMemberOfClass:[DCFavoritesViewController class]]) {
-                                              
-            [(DCFavoritesViewController *)self.sideMenuContainer.centerViewController openEvent:self.event];
+        
+        UINavigationController *navCon = self.sideMenuContainer.centerViewController;
+        if ([navCon isKindOfClass:[UINavigationController class]]) {
+            
+            DCProgramViewController *programController = (DCProgramViewController *)navCon.topViewController;
+            if ([programController respondsToSelector:@selector(openDetailScreenForEvent:)]) {
+                
+                [programController openDetailScreenForEvent:self.event];
+                self.event = nil;
+            }
         }
-        self.event = nil;
     }
 }
+
 
 #pragma mark - Private
 
@@ -176,11 +184,11 @@
 
 - (void) arrangeNavigationBarForController:(DCBaseViewController*)aController menuItem:(DCMenuSection)menuItem
 {
-        // add proper Title
+    // add proper Title
     NSString *title = self.arrayOfCaptions[menuItem][kMenuItemTitle];
     aController.navigationItem.title = title;
     
-        // add left Menu button to all Controllers
+    // add left Menu button to all Controllers
     UIImage *image = (menuItem == DCMENU_INFO_ITEM) ? [UIImage imageNamed:@"menu-icon-dark"] : [UIImage imageNamed:@"menu-icon"];
     UIButton *button = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, image.size.width, image.size.height)];
     [button setBackgroundImage: image forState: UIControlStateNormal];

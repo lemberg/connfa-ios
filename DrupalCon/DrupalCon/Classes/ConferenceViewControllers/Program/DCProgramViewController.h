@@ -28,5 +28,6 @@
 
 @property (nonatomic, strong) DCEventStrategy * eventsStrategy;
 
+- (void)openDetailScreenForEvent:(DCEvent *)event;
 
 @end

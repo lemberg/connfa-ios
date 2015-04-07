@@ -25,6 +25,9 @@
 #import "DCMainProxy+Additions.h"
 #import "NSDate+DC.h"
 #import "DCDayEventsController.h"
+#import "DCEventDetailViewController.h"
+#import "DCLimitedNavigationController.h"
+#import "DCAppFacade.h"
 
 @interface DCProgramViewController ()
 
@@ -80,6 +83,29 @@
         });
     }];
 }
+
+- (void)openDetailScreenForEvent:(DCEvent *)event
+{
+    DCEventDetailViewController * detailController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
+    
+    DCDayEventsController *dayController = self.viewControllers[self.currentDayIndex];
+    
+    [detailController setCloseCallback:^(){
+        if (self.eventsStrategy.strategy == EDCEeventStrategyFavorites) {
+            [dayController updateEvents];
+        }
+    }];
+    
+    [detailController setEvent:event];
+    
+    DCLimitedNavigationController * navContainer = [[DCLimitedNavigationController alloc] initWithRootViewController:detailController completion:^{
+        [dayController setNeedsStatusBarAppearanceUpdate];
+        [dayController.tableView reloadData];
+    }];
+    
+    [[DCAppFacade shared].mainNavigationController presentViewController: navContainer animated:YES completion:nil];
+}
+
 
 #pragma mark - Private
 
@@ -166,6 +192,7 @@
                 self.currentDayIndex = currentDatePageIndex;
             
             DCDayEventsController *dayEventsController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([DCDayEventsController class])];
+            dayEventsController.parentProgramController = self;
             dayEventsController.date = date;
             dayEventsController.eventsStrategy = self.eventsStrategy;
             

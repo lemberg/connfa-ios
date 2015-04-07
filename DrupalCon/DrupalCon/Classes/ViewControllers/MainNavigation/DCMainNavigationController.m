@@ -30,7 +30,7 @@
 
 - (void)openEventFromFavoriteController:(DCEvent *)event
 {
-    [self goToSideMenuContainer: NO];
+    [self goToSideMenuContainer:NO];
     [self.sideMenuController openEventFromFavorite:event];
 }
 
@@ -38,11 +38,14 @@
 {
     DCSideMenuViewController *sideMenuViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SideMenuViewController"];
     
+    self.sideMenuController = sideMenuViewController;
+    
     MFSideMenuContainerViewController *container = [MFSideMenuContainerViewController containerWithCenterViewController: nil
-                                                                                                 leftMenuViewController: sideMenuViewController
+                                                                                                 leftMenuViewController: self.sideMenuController
                                                                                                 rightMenuViewController: nil];
     container.centerShadowEnabled = YES;
     sideMenuViewController.sideMenuContainer = container;
+    
     [self pushViewController:container animated: animated];
 }
 

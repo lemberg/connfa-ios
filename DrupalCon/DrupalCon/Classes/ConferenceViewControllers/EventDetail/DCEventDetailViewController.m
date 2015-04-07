@@ -409,10 +409,9 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
     
     if (isSelected)
     {
-        
-       // [[DCMainProxy sharedProxy] addToFavoriteEvent:self.event];
+        [[DCMainProxy sharedProxy] addToFavoriteEvent:self.event];
     } else {
-      //  [[DCMainProxy sharedProxy] removeFavoriteEventWithID:self.event.eventID];
+        [[DCMainProxy sharedProxy] removeFavoriteEventWithID:self.event.eventId];
     }
 }
 

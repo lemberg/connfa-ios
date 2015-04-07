@@ -44,6 +44,16 @@ static int const kGaDispatchPeriod = 30;
     [self initializeGoogleAnalytics];
     
     [[DCMainProxy sharedProxy] update];
+    
+    // Register user notifications
+    UIUserNotificationType types = UIUserNotificationTypeBadge |
+    UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+    
+    UIUserNotificationSettings *settings =
+    [UIUserNotificationSettings settingsForTypes:types categories:nil];
+    
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    
     UILocalNotification *locationNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (locationNotification) {
         self.localNotification = locationNotification;

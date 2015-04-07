@@ -48,7 +48,7 @@
 {
     [super viewDidLoad];
     
-        // this done to make Status bar white; status bar depends on Navigation bar style, because this VC is inside Navigation controller
+    // this done to make Status bar white; status bar depends on Navigation bar style, because this VC is inside Navigation controller
     self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
     
     [self updateSourceData];

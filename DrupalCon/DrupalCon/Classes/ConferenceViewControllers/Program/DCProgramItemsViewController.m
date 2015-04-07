@@ -242,6 +242,7 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
 
 - (void)updateFavoriteItemsInIndexPath:(NSIndexPath *)anIndexPath
                              withValue:(BOOL)isFavorite {
+    
     DCEvent * event = [self eventForIndexPath:anIndexPath];
     event.favorite = [NSNumber numberWithBool:isFavorite];
     if (isFavorite) {

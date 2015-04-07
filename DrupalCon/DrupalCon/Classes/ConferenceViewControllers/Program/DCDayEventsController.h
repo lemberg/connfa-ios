@@ -8,18 +8,22 @@
 
 #import "DCBaseViewController.h"
 #import "DCEventStrategy.h"
+#import "DCProgramViewController.h"
 
 @protocol DCUpdateDayEventProtocol;
 
-@interface DCDayEventsController : DCBaseViewController<DCUpdateDayEventProtocol>
+@interface DCDayEventsController : DCBaseViewController <DCUpdateDayEventProtocol>
 
+@property (nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSDate *date;
 
 //@property (nonatomic, strong) NSArray *timeslots;
 //// timeslot element : dictionary "time slot value" : NSArray of events;
 
+@property (nonatomic, weak) DCProgramViewController *parentProgramController;
 @property (nonatomic, strong) DCEventStrategy * eventsStrategy;
 
+- (void) updateEvents;
 - (void) initAsStubControllerWithString:(NSString*)noEventMessage;
 - (void) initAsStubControllerWithImage:(UIImage*)noEventsImage;
 

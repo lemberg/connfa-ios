@@ -49,6 +49,7 @@
 #import "AppDelegate.h"
 #import "DCLocalNotificationManager.h"
 #import "DCLoginViewController.h"
+#import "DCMainNavigationController.h"
 //
 
 #import "DCImportDataSevice.h"
@@ -109,7 +110,9 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 
 - (void)setDataReadyCallback:(void (^)(DCMainProxyState))dataReadyCallback
 {
-    if (self.state == DCMainProxyStateDataReady)
+    if (self.state == DCMainProxyStateDataReady ||
+        self.state == DCmainProxyStateDataNotChange ||
+        self.state == DCMainProxyStateDataUpdated)
     {
         if (dataReadyCallback) {
                 dataReadyCallback(self.state);
@@ -299,24 +302,22 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 
 - (void)removeFavoriteEventWithID:(NSNumber *)eventID
 {
-    DCFavoriteEvent *favoriteEvent = (DCFavoriteEvent*)[self objectForID:[eventID intValue]
-                                                                 ofClass:[DCFavoriteEvent class]
-                                                               inContext:self.defaultPrivateContext];
-    if (favoriteEvent) {
-        [DCLocalNotificationManager cancelLocalNotificationWithId:favoriteEvent.eventID];
-        [self removeItem:favoriteEvent];
-    }
+    [DCLocalNotificationManager cancelLocalNotificationWithId:eventID];
 }
 
 - (void)openLocalNotification:(UILocalNotification *)localNotification
 {
     // FIXME: Rewrite this code. It create stack with favorite controller and event detail controller.
-    UINavigationController *navigation = (UINavigationController *)[(AppDelegate*)[[UIApplication sharedApplication] delegate] window].rootViewController;
+    DCMainNavigationController *navigation = (DCMainNavigationController *)[(AppDelegate*)[[UIApplication sharedApplication] delegate] window].rootViewController;
+    
     [navigation popToRootViewControllerAnimated:NO];
+    
     NSNumber *eventID = localNotification.userInfo[@"EventID"];
     NSArray *event = [[DCMainProxy sharedProxy] eventsWithIDs:@[eventID]];
-    [(DCLoginViewController *)[navigation topViewController] openEventFromFavoriteController:[event firstObject]];
     
+    if ([navigation respondsToSelector:@selector(openEventFromFavoriteController:)]) {
+        [navigation openEventFromFavoriteController:[event firstObject]];
+    }
 }
 
 - (void)loadHtmlAboutInfo:(void(^)(NSString *))callback

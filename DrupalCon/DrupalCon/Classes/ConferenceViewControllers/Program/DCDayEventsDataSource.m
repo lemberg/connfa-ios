@@ -15,9 +15,6 @@
 
 @implementation DCDayEventsDataSource
 
-
-
-
 - (void)loadEvents
 {
     __weak typeof(self) weakSelf = self;
