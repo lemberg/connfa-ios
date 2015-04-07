@@ -22,7 +22,6 @@
 #import "DCFavoriteEventsDataSource.h"
 @interface DCDayEventsController ()<DCEventCellProtocol>
 
-@property (nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, weak) IBOutlet UILabel *noItemsLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *noItemsImageView;
 
