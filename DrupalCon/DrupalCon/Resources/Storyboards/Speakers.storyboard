@@ -226,11 +226,11 @@
                                                         <constraint firstAttribute="width" constant="90" id="pFQ-ig-q3o"/>
                                                         <constraint firstAttribute="height" constant="31" id="rvi-Vv-H8K"/>
                                                     </constraints>
-                                                    <state key="normal" image="website">
+                                                    <state key="normal" image="twitter">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="buttonWebDidClick:" destination="ON0-IG-lh7" eventType="touchUpInside" id="14M-mk-Run"/>
+                                                        <action selector="buttonTwitterDidClick:" destination="ON0-IG-lh7" eventType="touchUpInside" id="ZVd-mS-bjM"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KGA-xZ-frX" userLabel="Button-twitter">
@@ -239,11 +239,11 @@
                                                         <constraint firstAttribute="width" constant="90" id="7DF-kQ-d6H"/>
                                                         <constraint firstAttribute="height" constant="31" id="zoP-LN-erA"/>
                                                     </constraints>
-                                                    <state key="normal" image="twitter">
+                                                    <state key="normal" image="website">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="buttonTwitterDidClick:" destination="ON0-IG-lh7" eventType="touchUpInside" id="btS-PF-FWO"/>
+                                                        <action selector="buttonWebDidClick:" destination="ON0-IG-lh7" eventType="touchUpInside" id="dZs-DU-LOo"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -258,8 +258,8 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <outlet property="twitterButton" destination="KGA-xZ-frX" id="Rxe-c7-lZG"/>
-                                            <outlet property="webButton" destination="ZdC-3x-qvi" id="rje-gL-Yj1"/>
+                                            <outlet property="twitterButton" destination="ZdC-3x-qvi" id="AMD-RR-1mp"/>
+                                            <outlet property="webButton" destination="KGA-xZ-frX" id="Blb-sT-KqD"/>
                                             <outlet property="webButtonBottomPadding" destination="cU1-Wa-skE" id="U8r-cg-Mp9"/>
                                             <outlet property="webButtonLeftPadding" destination="W1M-IH-okf" id="Gee-Zg-Xqi"/>
                                             <outlet property="webButtonWidth" destination="pFQ-ig-q3o" id="2ZO-Hb-Fvp"/>
@@ -304,7 +304,7 @@
                                                 </view>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="12 Best practices for Wundercraut" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67I-gw-wXp" userLabel="Event name">
                                                     <rect key="frame" x="15" y="8" width="295" height="16"/>
-                                                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
