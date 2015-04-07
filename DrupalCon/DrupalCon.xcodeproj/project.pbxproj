@@ -487,9 +487,9 @@
 		5D38E692198692E9006F7A59 /* Programs&BoFs */ = {
 			isa = PBXGroup;
 			children = (
+				5D6449AE1989088C00BC1775 /* ProgramItemsViewController */,
 				84ABE8F319BEEB8F0019D5DC /* DCEventStrategy.h */,
 				84ABE8F419BEEB8F0019D5DC /* DCEventStrategy.m */,
-				5D6449AE1989088C00BC1775 /* ProgramItemsViewController */,
 				5D38E69719869303006F7A59 /* DCProgramViewController.h */,
 				5D38E69819869303006F7A59 /* DCProgramViewController.m */,
 			);

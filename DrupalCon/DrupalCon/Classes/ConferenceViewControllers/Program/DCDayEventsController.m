@@ -22,7 +22,6 @@
 #import "DCFavoriteEventsDataSource.h"
 @interface DCDayEventsController ()<DCEventCellProtocol>
 
-@property (nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic) IBOutlet UILabel *noItemsLabel;
 
 @property (nonatomic, strong) NSString* stubMessage;
@@ -124,27 +123,7 @@
 - (void)didSelectCell:(DCEventCell *)eventCell {
     NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:eventCell];
     DCEvent *selectedEvent = [self.eventsDataSource eventForIndexPath:cellIndexPath];
-    [self openDetailScreenForEvent:selectedEvent];
-}
-
-- (void)openDetailScreenForEvent:(DCEvent *)event
-{
-    
-    DCEventDetailViewController * detailController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
-    [detailController setCloseCallback:^(){
-        if (self.eventsStrategy.strategy == EDCEeventStrategyFavorites) {
-            [self updateEvents];
-        }
-    }];
-    
-    [detailController setEvent:event];
-    
-    DCLimitedNavigationController * navContainer = [[DCLimitedNavigationController alloc] initWithRootViewController:detailController completion:^{
-        [self setNeedsStatusBarAppearanceUpdate];
-        [self.tableView reloadData];
-    }];
-    
-    [[DCAppFacade shared].mainNavigationController presentViewController: navContainer animated:YES completion:nil];
+    [self.parentProgramController openDetailScreenForEvent:selectedEvent];
 }
 
 

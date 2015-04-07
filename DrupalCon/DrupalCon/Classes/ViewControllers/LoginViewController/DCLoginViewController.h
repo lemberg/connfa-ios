@@ -26,6 +26,4 @@
 
 @interface DCLoginViewController : UIViewController
 
-- (void)openEventFromFavoriteController:(DCEvent *)event;
-
 @end

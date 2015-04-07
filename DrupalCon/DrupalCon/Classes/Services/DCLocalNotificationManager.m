@@ -21,7 +21,7 @@
 //
 
 #import "DCLocalNotificationManager.h"
-#import "DCEvent.h"
+#import "DCEvent+DC.h"
 #import "DCTime.h"
 #import "DCTimeRange.h"
 
@@ -31,31 +31,9 @@ static  const NSString * kEventId = @"EventID";
 
 + (void)scheduleNotificationWithItem:(DCEvent *)item interval:(int)minutesBefore
 {
-    
-    NSCalendar *calendar = [NSCalendar autoupdatingCurrentCalendar];
-    
-    NSDateComponents *dateComps = [[NSDateComponents alloc] init];
-    
-    NSDate *date = item.date;//[NSDate date];
-    
-    unsigned unitFlags = NSYearCalendarUnit |
-                         NSMonthCalendarUnit |
-                         NSDayCalendarUnit |
-                         NSCalendarUnitDay |
-                         NSCalendarUnitHour |
-                         NSCalendarUnitMinute ;
-   
-    NSDateComponents *eventDate = [calendar components:unitFlags fromDate:date];
-    [dateComps setDay:[eventDate day]];
-    [dateComps setMonth:eventDate.month];
-    [dateComps setYear:eventDate.year];
-    [dateComps setHour:[item.timeRange.from.hour integerValue]];
-    [dateComps setMinute:[item.timeRange.from.minute integerValue]];
-    
-    NSDate *itemDate = [calendar dateFromComponents:dateComps];
     UILocalNotification *localNotif = [[UILocalNotification alloc] init];
     
-    localNotif.fireDate = [itemDate dateByAddingTimeInterval:-(minutesBefore*60)];
+    localNotif.fireDate = [item.startDate dateByAddingTimeInterval:-(minutesBefore * 60.f)];
     localNotif.timeZone = [NSTimeZone defaultTimeZone];
     
     NSString *alertBody = [NSString
@@ -63,6 +41,7 @@ static  const NSString * kEventId = @"EventID";
                            item.name,
                            minutesBefore,
                            item.place];
+    
     localNotif.alertBody = alertBody;
     
     localNotif.alertAction = NSLocalizedString(@"View Details", nil);
@@ -72,6 +51,7 @@ static  const NSString * kEventId = @"EventID";
     
     NSDictionary *infoDict = [NSDictionary dictionaryWithObject:item.eventId  forKey:kEventId];
     localNotif.userInfo = infoDict;
+    
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
 }
 
