@@ -430,6 +430,7 @@
 		84FAE10B19A6600900DC9FF1 /* DCTimeRange+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DCTimeRange+DC.m"; path = "Model/Categories/DCTimeRange+DC.m"; sourceTree = "<group>"; };
 		9E18FA421A56D0BE001475A7 /* DCCalendarManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCalendarManager.h; sourceTree = "<group>"; };
 		9E18FA431A56D0BE001475A7 /* DCCalendarManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCalendarManager.m; sourceTree = "<group>"; };
+		A830F8571AD4315500E3DCFE /* main_2.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = main_2.0.xcdatamodel; sourceTree = "<group>"; };
 		FA90B9A119C5893700873865 /* DCEventBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCEventBaseCell.h; path = Classes/Views/ProgramCells/EventBaseCell/DCEventBaseCell.h; sourceTree = "<group>"; };
 		FA90B9A219C5893700873865 /* DCEventBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCEventBaseCell.m; path = Classes/Views/ProgramCells/EventBaseCell/DCEventBaseCell.m; sourceTree = "<group>"; };
 		FA90B9A519C589AE00873865 /* DCEventBaseCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DCEventBaseCell.xib; path = Classes/Views/ProgramCells/EventBaseCell/DCEventBaseCell.xib; sourceTree = "<group>"; };
@@ -1472,9 +1473,10 @@
 		849EFDA119A49FB600C43E05 /* main.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				A830F8571AD4315500E3DCFE /* main_2.0.xcdatamodel */,
 				849EFDA219A49FB600C43E05 /* main.xcdatamodel */,
 			);
-			currentVersion = 849EFDA219A49FB600C43E05 /* main.xcdatamodel */;
+			currentVersion = A830F8571AD4315500E3DCFE /* main_2.0.xcdatamodel */;
 			name = main.xcdatamodeld;
 			path = Model/main.xcdatamodeld;
 			sourceTree = "<group>";
