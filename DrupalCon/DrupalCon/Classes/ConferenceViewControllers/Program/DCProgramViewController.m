@@ -168,7 +168,12 @@
     else // make stub controller with no items
     {
         DCDayEventsController *dayEventsController = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([DCDayEventsController class])];
-        [dayEventsController initAsStubController:@"No Matching Events"];
+        
+        if (self.eventsStrategy.strategy == EDCEeventStrategyFavorites)
+            [dayEventsController initAsStubControllerWithImage:[UIImage imageNamed:@"empty_icon"]];
+        else
+            [dayEventsController initAsStubControllerWithString:@"No Matching Events"];
+             
         return @[dayEventsController];
     }
 }

@@ -20,7 +20,8 @@
 
 @property (nonatomic, strong) DCEventStrategy * eventsStrategy;
 
-- (void) initAsStubController:(NSString*)noEventMessage;
+- (void) initAsStubControllerWithString:(NSString*)noEventMessage;
+- (void) initAsStubControllerWithImage:(UIImage*)noEventsImage;
 
 @end
 
