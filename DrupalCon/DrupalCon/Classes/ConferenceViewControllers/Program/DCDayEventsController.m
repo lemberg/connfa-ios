@@ -22,9 +22,13 @@
 #import "DCFavoriteEventsDataSource.h"
 @interface DCDayEventsController ()<DCEventCellProtocol>
 
-@property (nonatomic) IBOutlet UILabel *noItemsLabel;
+@property (nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UILabel *noItemsLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *noItemsImageView;
 
 @property (nonatomic, strong) NSString* stubMessage;
+@property (nonatomic, strong) UIImage* stubImage;
+
 @property (nonatomic) DCEventDataSource *eventsDataSource;
 
 @property (nonatomic, strong) DCEventCell* cellPrototype;
@@ -42,8 +46,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    if (!self.stubMessage)
+    if (!self.stubMessage && !self.stubImage)
     {
+            // this controller is not Stub controller and contains events
         [self registerCells];
         [self initDataSource];
         
@@ -51,23 +56,41 @@
     }
     else
     {
+            // this controller does not have events and will show stub Message or Image
         self.tableView.dataSource = nil;
         self.tableView.hidden = YES;
         
-        self.noItemsLabel.hidden = NO;
-        self.noItemsLabel.text = self.stubMessage;
+        self.noItemsLabel.hidden = !self.stubMessage;
+        self.noItemsImageView.hidden = !self.stubImage;
+        
+        if (self.stubMessage)
+        {
+            self.noItemsLabel.text = self.stubMessage;
+        }
+        else if (self.stubImage)
+        {
+            self.noItemsImageView.image = self.stubImage;
+        }
+            
     }
 }
 
 - (void) dealloc
 {
     self.stubMessage = nil;
+    self.stubImage = nil;
+    
     self.cellPrototype = nil;
 }
 
-- (void) initAsStubController:(NSString*)noEventMessage
+- (void) initAsStubControllerWithString:(NSString *)noEventMessage
 {
     self.stubMessage = noEventMessage;
+}
+
+- (void) initAsStubControllerWithImage:(UIImage *)noEventsImage
+{
+    self.stubImage = noEventsImage;
 }
 
 - (void)updateEvents

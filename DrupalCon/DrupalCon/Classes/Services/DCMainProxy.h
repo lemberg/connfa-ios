@@ -34,7 +34,9 @@ typedef enum {
     DCMainProxyStateInitDataLoading,
     DCMainProxyStateDataLoading,
     DCMainProxyStateUpdatesWaiting,
-    DCMainProxyStateDataReady
+    DCMainProxyStateDataReady,
+    DCmainProxyStateDataNotChange,
+    DCMainProxyStateDataUpdated
 }DCMainProxyState;
 
 @interface DCMainProxy : NSObject

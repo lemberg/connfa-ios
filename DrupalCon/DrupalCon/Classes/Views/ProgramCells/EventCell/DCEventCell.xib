@@ -23,7 +23,7 @@
                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ic_experience_advanced" translatesAutoresizingMaskIntoConstraints="NO" id="O10-8Z-v0x">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_experience_advanced" translatesAutoresizingMaskIntoConstraints="NO" id="O10-8Z-v0x">
                                 <rect key="frame" x="217" y="18" width="12" height="12"/>
                             </imageView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pDk-DV-pAD" userLabel="track">

@@ -23,9 +23,9 @@
 @property (nonatomic, weak) DCProgramViewController *parentProgramController;
 @property (nonatomic, strong) DCEventStrategy * eventsStrategy;
 
-- (void) initAsStubController:(NSString*)noEventMessage;
-- (void) openDetailScreenForEvent:(DCEvent *)event;
 - (void) updateEvents;
+- (void) initAsStubControllerWithString:(NSString*)noEventMessage;
+- (void) initAsStubControllerWithImage:(UIImage*)noEventsImage;
 
 @end
 

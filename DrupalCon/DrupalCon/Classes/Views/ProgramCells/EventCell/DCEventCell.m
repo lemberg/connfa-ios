@@ -13,6 +13,7 @@
 #import "DCTrack.h"
 #import "DCSpeaker.h"
 #import "DCLevel.h"
+#import "DCType.h"
 
 static NSString *ratingsImagesName[] = {@"", @"ic_experience_beginner", @"ic_experience_intermediate", @"ic_experience_advanced" };
 
@@ -132,11 +133,22 @@ static NSInteger eventCellImageHeight = 16;
     self.separatorLeadingConstraint.constant = self.isLastCellInSection? 0 : self.leftSideWidth.constant + self.eventTitleLabelLeftPadding.constant;
     
         // setting cell clickable
-    self.isEnabled = event.speakers.count;
+    self.isEnabled = [self isEnabled: event];
     [self setCellEnabled:self.isEnabled];
     
     self.delegate = aDelegate;
 }
+
+- (BOOL) isEnabled:(DCEvent*)event
+{
+    BOOL disabledByType = ((event.type.typeID.integerValue == DC_EVENT_COFEE_BREAK) ||
+                          (event.type.typeID.integerValue == DC_EVENT_REGISTRATION) ||
+                          (event.type.typeID.integerValue == DC_EVENT_LUNCH));
+    BOOL disabledByData = !event.speakers.count && !event.desctiptText.length;
+    
+    return !(disabledByData || disabledByType);
+}
+
 
 - (NSString *)speakersFromEvent:(DCEvent *)event
 {

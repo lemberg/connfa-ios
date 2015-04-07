@@ -145,17 +145,22 @@
                                     <outlet property="delegate" destination="QwI-ro-LUX" id="yRU-Yr-AZ6"/>
                                 </connections>
                             </tableView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Matching Events" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l5d-eC-FFW">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Matching Events" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l5d-eC-FFW" userLabel="NoEventsLabel">
                                 <rect key="frame" x="54" y="226" width="212" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" red="0.58039215690000001" green="0.58039215690000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="empty_icon" translatesAutoresizingMaskIntoConstraints="NO" id="snM-S4-k4Z" userLabel="NoEventsImageView">
+                                <rect key="frame" x="76" y="155" width="168" height="170"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="LGB-y9-1LY" secondAttribute="trailing" id="2BD-ph-yfE"/>
                             <constraint firstItem="LGB-y9-1LY" firstAttribute="top" secondItem="4kh-Fi-n9X" secondAttribute="top" id="Ejp-pn-zu7"/>
+                            <constraint firstAttribute="centerX" secondItem="snM-S4-k4Z" secondAttribute="centerX" id="J1i-nq-4B6"/>
+                            <constraint firstAttribute="centerY" secondItem="snM-S4-k4Z" secondAttribute="centerY" id="Zmd-sh-qfA"/>
                             <constraint firstItem="5Te-r8-u10" firstAttribute="top" secondItem="LGB-y9-1LY" secondAttribute="bottom" id="a8O-D6-Kh5"/>
                             <constraint firstAttribute="centerX" secondItem="l5d-eC-FFW" secondAttribute="centerX" id="hwo-dh-06n"/>
                             <constraint firstItem="LGB-y9-1LY" firstAttribute="leading" secondItem="4kh-Fi-n9X" secondAttribute="leading" id="lbd-YV-QNY"/>
@@ -164,6 +169,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="noItemsImageView" destination="snM-S4-k4Z" id="tuJ-vH-CLi"/>
                         <outlet property="noItemsLabel" destination="l5d-eC-FFW" id="qIN-tv-dbt"/>
                         <outlet property="tableView" destination="LGB-y9-1LY" id="e78-94-0PF"/>
                     </connections>
@@ -671,6 +677,7 @@
     <resources>
         <image name="arrow_l" width="21" height="21"/>
         <image name="arrow_r" width="21" height="21"/>
+        <image name="empty_icon" width="168" height="170"/>
         <image name="event_detail_top" width="320" height="112"/>
         <image name="filter_sessions" width="21" height="21"/>
         <image name="ic_experience_advanced" width="12" height="12"/>

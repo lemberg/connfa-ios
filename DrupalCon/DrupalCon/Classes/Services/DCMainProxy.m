@@ -158,7 +158,13 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     {
         if (self.state == DCMainProxyStateInitDataLoading)
         {
-            [self setState:DCMainProxyStateNoData];
+            if (![self.importDataService isInitDataImport]) {
+                [self setState:DCMainProxyStateNoData];
+                
+            } else {
+                [self setState:DCMainProxyStateDataReady];
+            }
+            [self dataIsReady];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[[UIAlertView alloc] initWithTitle:@"Attention"
                                             message:@"Internet connection is not available at this moment. Please, try later"
@@ -198,9 +204,14 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
             NSLog(@"Update failed");
             break;
         }
-        case DCDataNotChanged:
+        case DCDataNotChanged: {
+            [self setState:DCmainProxyStateDataNotChange];
+            [self dataIsReady];
+
+            break;
+        }
         case DCDataUpdateSuccess: {
-            [self setState:DCMainProxyStateDataReady];
+            [self setState:DCMainProxyStateDataUpdated];
             [self dataIsReady];
             break;
         }
