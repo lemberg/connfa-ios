@@ -38,7 +38,7 @@
 @property (nonatomic, strong) NSArray *days;
 @property (nonatomic) NSInteger currentDayIndex;
 @property (nonatomic, strong) NSDate* currentPageDate; // used to set current Date after filtering
-
+@property (nonatomic) __block DCMainProxyState previousState;
 @end
 
 @implementation DCProgramViewController
@@ -65,8 +65,17 @@
     [self.activityIndicator startAnimating];
     [[DCMainProxy sharedProxy] setDataReadyCallback:^(DCMainProxyState mainProxyState) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self reloadData];
-
+            NSLog(@"Data ready callback %d", mainProxyState);
+            if ( !self.previousState) {
+                [self reloadData];
+                self.previousState = mainProxyState;
+            }
+            
+                
+            if ( mainProxyState == DCMainProxyStateDataUpdated) {
+                [self reloadData];
+            }
+           
             [self.activityIndicator stopAnimating];
         });
     }];

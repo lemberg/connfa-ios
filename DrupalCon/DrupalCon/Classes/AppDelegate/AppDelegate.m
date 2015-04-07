@@ -74,8 +74,8 @@ static int const kGaDispatchPeriod = 30;
 {
     if ([self.window.rootViewController isKindOfClass:[UINavigationController class]]) {
         [[DCMainProxy sharedProxy] update];
-        UINavigationController * natigator = (UINavigationController*)self.window.rootViewController;
-        [natigator popToRootViewControllerAnimated:NO];
+//        UINavigationController * natigator = (UINavigationController*)self.window.rootViewController;
+//        [natigator popToRootViewControllerAnimated:NO];
     }
 
 }
