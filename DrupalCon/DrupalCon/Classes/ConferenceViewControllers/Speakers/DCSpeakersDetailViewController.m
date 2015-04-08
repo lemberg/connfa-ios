@@ -272,8 +272,8 @@ static NSString *eventCellId = @"SpeakerEventCellId";
     
     if (installed) {
         
-//        NSString *twitter = [NSString stringWithFormat:@"http://twitter.com/%@", _speaker.twitterName];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitter://"]];
+        NSString *twitter = [NSString stringWithFormat:@"twitter://user?screen_name=%@", _speaker.twitterName];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:twitter]];
         
     } else {
         
