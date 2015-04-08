@@ -99,22 +99,31 @@
                                     <outlet property="delegate" destination="SQY-AD-QPu" id="hfD-mK-dpK"/>
                                 </connections>
                             </tableView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Search Result" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tLD-xw-rtL" userLabel="NoEventsLabel">
+                                <rect key="frame" x="69" y="226" width="183" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" red="0.58039215690000001" green="0.58039215690000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="coi-og-QUw" firstAttribute="leading" secondItem="xTa-JX-2Bu" secondAttribute="leading" id="1Ug-rx-aVi"/>
                             <constraint firstItem="coi-og-QUw" firstAttribute="top" secondItem="xTa-JX-2Bu" secondAttribute="top" id="3dB-h4-YOJ"/>
+                            <constraint firstAttribute="centerY" secondItem="tLD-xw-rtL" secondAttribute="centerY" id="6A5-n2-F69"/>
                             <constraint firstAttribute="trailing" secondItem="Rtg-Kq-JJf" secondAttribute="trailing" id="GGV-ce-sdR"/>
                             <constraint firstAttribute="trailing" secondItem="coi-og-QUw" secondAttribute="trailing" id="KRG-Cb-c8K"/>
                             <constraint firstItem="Rtg-Kq-JJf" firstAttribute="leading" secondItem="xTa-JX-2Bu" secondAttribute="leading" id="gNL-A9-cvH"/>
                             <constraint firstItem="Rtg-Kq-JJf" firstAttribute="top" secondItem="coi-og-QUw" secondAttribute="bottom" id="kff-BM-wXd"/>
                             <constraint firstItem="qWf-aw-BGy" firstAttribute="top" secondItem="Rtg-Kq-JJf" secondAttribute="bottom" id="qiF-Zl-IfG"/>
+                            <constraint firstAttribute="centerX" secondItem="tLD-xw-rtL" secondAttribute="centerX" id="ud5-qZ-GqI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="k4l-of-SUN"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="noItemsLabel" destination="tLD-xw-rtL" id="BM2-bM-jXG"/>
                         <outlet property="searchBar" destination="coi-og-QUw" id="t8t-Rw-pDQ"/>
                         <outlet property="speakersTbl" destination="Rtg-Kq-JJf" id="B0Y-mk-aPj"/>
                     </connections>
