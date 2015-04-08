@@ -25,6 +25,7 @@
 #import <MapKit/MapKit.h>
 #import "DCPin.h"
 #import "DCLocation.h"
+#import "DCMainProxy.h"
 
 
 @interface DCLocationViewController ()
@@ -67,6 +68,12 @@
 //    self.geocoder = [[CLGeocoder alloc] init];
 //    [self updateLocation: CLLocationCoordinate2DMake([self.location.latitude doubleValue],
 //                                                     [self.location.longitude doubleValue])];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [[DCMainProxy sharedProxy] checkReachable];
 }
 
 #pragma mark - View appearance
