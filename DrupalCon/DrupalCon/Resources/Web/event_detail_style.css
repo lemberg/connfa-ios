@@ -1,6 +1,7 @@
  body {
 
                   font-family: "Helvetica-Regular", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+                  font-size: 13px;
                   margin-top:0px;
                   margin-left:0px;
                   margin-right:0px;
@@ -22,14 +23,14 @@
                 margin: 0px 0;
               }
               ul li, ol li{
-               font-size: 15px;
+               font-size: 13px;
                color: #333333;
                line-height: 22px; 
               } 
 
 
               strong{
-               font-size: 15px;
+               font-size: 14px;
                color: #333333;
                line-height: 22px;
               }           
@@ -41,7 +42,7 @@
               }
               a{
 
-               font-size: 15px;
+               font-size: 14px;
                line-height: 22px;
                color: #142048;
                text-decoration: none;
@@ -50,14 +51,14 @@
 
                color: #142048;
                 font-weight: normal;
-                font-size: 19px;
+                font-size: 14px;
                 line-height: 20px;
                 margin-top: 0;
                 margin-bottom: 26px;
               }
               h3{
 
-               font-size: 20px;
+               font-size: 14px;
                color: #142048;
                line-height: 27px;
                margin-top: 20px;
