@@ -66,16 +66,20 @@
     return self;
 }
 
-- (NSArray *)sortedByKey:(NSString *)key
+- (NSArray *)sortedByKey:(NSString *)key ascending:(BOOL)ascending
 {
-    
     if (self.count) {
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:key
-                                                               ascending:YES];
+                                                                       ascending:YES];
         return [self sortedArrayUsingDescriptors:@[sortDescriptor]];
     }
     NSLog(@"WRONG! array for sort. events by id");
     return self;
+}
+
+- (NSArray *)sortedByKey:(NSString *)key
+{
+    return [self sortedByKey:key ascending:YES];
 }
 
 - (NSArray*)sortedDates
