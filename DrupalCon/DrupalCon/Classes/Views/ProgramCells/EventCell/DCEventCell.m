@@ -142,11 +142,10 @@ static NSInteger eventCellImageHeight = 16;
 - (BOOL) isEnabled:(DCEvent*)event
 {
     BOOL disabledByType = ((event.type.typeID.integerValue == DC_EVENT_COFEE_BREAK) ||
-                          (event.type.typeID.integerValue == DC_EVENT_REGISTRATION) ||
-                          (event.type.typeID.integerValue == DC_EVENT_LUNCH));
-    BOOL disabledByData = !event.speakers.count && !event.desctiptText.length;
-    
-    return !(disabledByData || disabledByType);
+                           (event.type.typeID.integerValue == DC_EVENT_REGISTRATION) ||
+                           (event.type.typeID.integerValue == DC_EVENT_LUNCH) ||
+                           (event.type.typeID.integerValue == DC_EVENT_FREE_SLOT));
+    return !disabledByType;
 }
 
 

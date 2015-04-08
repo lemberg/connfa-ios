@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1ACFD6ED1A41D7D700F8EE57 /* DCFirstLoadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACFD6EC1A41D7D700F8EE57 /* DCFirstLoadViewController.m */; };
-		1ACFD6F01A432BBA00F8EE57 /* DCInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACFD6EF1A432BBA00F8EE57 /* DCInfo.m */; };
 		1ACFD6F31A432BBB00F8EE57 /* DCEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACFD6F21A432BBB00F8EE57 /* DCEvent.m */; };
 		1ACFD6F91A432BBB00F8EE57 /* DCTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACFD6F81A432BBB00F8EE57 /* DCTrack.m */; };
 		1ACFD6FC1A432BBB00F8EE57 /* DCTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACFD6FB1A432BBB00F8EE57 /* DCTime.m */; };
@@ -27,7 +26,6 @@
 		1ACFD72C1A44681A00F8EE57 /* DCSocialEvent+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACFD72B1A44681A00F8EE57 /* DCSocialEvent+DC.m */; };
 		1ACFD72F1A446AED00F8EE57 /* DCPoi+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACFD72E1A446AED00F8EE57 /* DCPoi+DC.m */; };
 		1ACFD7321A446FC400F8EE57 /* DCInfo+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACFD7311A446FC400F8EE57 /* DCInfo+DC.m */; };
-		1ACFD7351A447EA900F8EE57 /* DCInfoCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACFD7341A447EA900F8EE57 /* DCInfoCategory.m */; };
 		1ACFD7381A449ECC00F8EE57 /* DCTwitter+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACFD7371A449ECC00F8EE57 /* DCTwitter+DC.m */; };
 		1ACFD73B1A44A22E00F8EE57 /* DCInfoCategory+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACFD73A1A44A22E00F8EE57 /* DCInfoCategory+DC.m */; };
 		5D38E696198692E9006F7A59 /* DCSpeakersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D38E695198692E9006F7A59 /* DCSpeakersViewController.m */; };
@@ -75,6 +73,8 @@
 		74A43C6D19BDDE9200F7BFA0 /* NSDictionary+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A43C6C19BDDE9200F7BFA0 /* NSDictionary+DC.m */; };
 		74A470E819B5EA3C00B01BC5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74A470E719B5EA3C00B01BC5 /* MapKit.framework */; };
 		74A6278819B8A37200B46B75 /* DCFavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 74A6278719B8A37200B46B75 /* DCFavoritesViewController.m */; };
+		74AB6CE21AD442D80029D3F2 /* DCInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 74AB6CDF1AD442D80029D3F2 /* DCInfo.m */; };
+		74AB6CE31AD442D80029D3F2 /* DCInfoCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 74AB6CE11AD442D80029D3F2 /* DCInfoCategory.m */; };
 		74C6E7951AB18F3700834542 /* DCDayEventsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 74C6E7941AB18F3700834542 /* DCDayEventsDataSource.m */; };
 		74DDDE731AD2AD1100C67124 /* DCFavoriteEventsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DDDE721AD2AD1100C67124 /* DCFavoriteEventsDataSource.m */; };
 		74DDDE761AD2AD7200C67124 /* DCEventDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 74DDDE751AD2AD7200C67124 /* DCEventDataSource.m */; };
@@ -155,8 +155,6 @@
 /* Begin PBXFileReference section */
 		1ACFD6EB1A41D7D700F8EE57 /* DCFirstLoadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCFirstLoadViewController.h; sourceTree = "<group>"; };
 		1ACFD6EC1A41D7D700F8EE57 /* DCFirstLoadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCFirstLoadViewController.m; sourceTree = "<group>"; };
-		1ACFD6EE1A432BBA00F8EE57 /* DCInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCInfo.h; path = Model/DCInfo.h; sourceTree = "<group>"; };
-		1ACFD6EF1A432BBA00F8EE57 /* DCInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCInfo.m; path = Model/DCInfo.m; sourceTree = "<group>"; };
 		1ACFD6F11A432BBB00F8EE57 /* DCEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCEvent.h; path = Model/DCEvent.h; sourceTree = "<group>"; };
 		1ACFD6F21A432BBB00F8EE57 /* DCEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCEvent.m; path = Model/DCEvent.m; sourceTree = "<group>"; };
 		1ACFD6F71A432BBB00F8EE57 /* DCTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCTrack.h; path = Model/DCTrack.h; sourceTree = "<group>"; };
@@ -193,8 +191,6 @@
 		1ACFD72E1A446AED00F8EE57 /* DCPoi+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DCPoi+DC.m"; path = "Model/Categories/DCPoi+DC.m"; sourceTree = "<group>"; };
 		1ACFD7301A446FC400F8EE57 /* DCInfo+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DCInfo+DC.h"; path = "Model/Categories/DCInfo+DC.h"; sourceTree = "<group>"; };
 		1ACFD7311A446FC400F8EE57 /* DCInfo+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DCInfo+DC.m"; path = "Model/Categories/DCInfo+DC.m"; sourceTree = "<group>"; };
-		1ACFD7331A447EA900F8EE57 /* DCInfoCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCInfoCategory.h; path = Model/DCInfoCategory.h; sourceTree = "<group>"; };
-		1ACFD7341A447EA900F8EE57 /* DCInfoCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCInfoCategory.m; path = Model/DCInfoCategory.m; sourceTree = "<group>"; };
 		1ACFD7361A449ECC00F8EE57 /* DCTwitter+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DCTwitter+DC.h"; path = "Model/Categories/DCTwitter+DC.h"; sourceTree = "<group>"; };
 		1ACFD7371A449ECC00F8EE57 /* DCTwitter+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DCTwitter+DC.m"; path = "Model/Categories/DCTwitter+DC.m"; sourceTree = "<group>"; };
 		1ACFD7391A44A22E00F8EE57 /* DCInfoCategory+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DCInfoCategory+DC.h"; path = "Model/Categories/DCInfoCategory+DC.h"; sourceTree = "<group>"; };
@@ -281,6 +277,10 @@
 		74A470E719B5EA3C00B01BC5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		74A6278619B8A37200B46B75 /* DCFavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCFavoritesViewController.h; path = Favorites/DCFavoritesViewController.h; sourceTree = "<group>"; };
 		74A6278719B8A37200B46B75 /* DCFavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCFavoritesViewController.m; path = Favorites/DCFavoritesViewController.m; sourceTree = "<group>"; };
+		74AB6CDE1AD442D80029D3F2 /* DCInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCInfo.h; path = Model/DCInfo.h; sourceTree = "<group>"; };
+		74AB6CDF1AD442D80029D3F2 /* DCInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCInfo.m; path = Model/DCInfo.m; sourceTree = "<group>"; };
+		74AB6CE01AD442D80029D3F2 /* DCInfoCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCInfoCategory.h; path = Model/DCInfoCategory.h; sourceTree = "<group>"; };
+		74AB6CE11AD442D80029D3F2 /* DCInfoCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCInfoCategory.m; path = Model/DCInfoCategory.m; sourceTree = "<group>"; };
 		74C6E7931AB18F3700834542 /* DCDayEventsDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCDayEventsDataSource.h; sourceTree = "<group>"; };
 		74C6E7941AB18F3700834542 /* DCDayEventsDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCDayEventsDataSource.m; sourceTree = "<group>"; };
 		74C725501A07725E00F48F9D /* DCManagedObjectUpdateProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DCManagedObjectUpdateProtocol.h; path = Model/Categories/DCManagedObjectUpdateProtocol.h; sourceTree = "<group>"; };
@@ -992,10 +992,10 @@
 				1ACFD6F81A432BBB00F8EE57 /* DCTrack.m */,
 				1ACFD6F11A432BBB00F8EE57 /* DCEvent.h */,
 				1ACFD6F21A432BBB00F8EE57 /* DCEvent.m */,
-				1ACFD6EE1A432BBA00F8EE57 /* DCInfo.h */,
-				1ACFD6EF1A432BBA00F8EE57 /* DCInfo.m */,
-				1ACFD7331A447EA900F8EE57 /* DCInfoCategory.h */,
-				1ACFD7341A447EA900F8EE57 /* DCInfoCategory.m */,
+				74AB6CDE1AD442D80029D3F2 /* DCInfo.h */,
+				74AB6CDF1AD442D80029D3F2 /* DCInfo.m */,
+				74AB6CE01AD442D80029D3F2 /* DCInfoCategory.h */,
+				74AB6CE11AD442D80029D3F2 /* DCInfoCategory.m */,
 			);
 			name = DataObjects;
 			sourceTree = "<group>";
@@ -1201,7 +1201,6 @@
 				74E8380E19C061CD000D2BE4 /* MKAnnotationView+WebCache.m in Sources */,
 				84FAE10919A65FEA00DC9FF1 /* DCTime+DC.m in Sources */,
 				741A4E651A0285A40065FDB6 /* NSManagedObject+DC.m in Sources */,
-				1ACFD7351A447EA900F8EE57 /* DCInfoCategory.m in Sources */,
 				849D92D119AE07D200977D67 /* DCSpeakersDetailViewController.m in Sources */,
 				5DC8C459198658BF00BF5816 /* AppDelegate.m in Sources */,
 				74E67C8019B7133C00DF9D71 /* DCLocation+DC.m in Sources */,
@@ -1272,6 +1271,7 @@
 				74E8381819C061CD000D2BE4 /* UIImage+GIF.m in Sources */,
 				1ACFD6F31A432BBB00F8EE57 /* DCEvent.m in Sources */,
 				1ACFD72C1A44681A00F8EE57 /* DCSocialEvent+DC.m in Sources */,
+				74AB6CE21AD442D80029D3F2 /* DCInfo.m in Sources */,
 				74DDDE791AD2D09C00C67124 /* DCInfoEventCell.m in Sources */,
 				5D38E69919869303006F7A59 /* DCProgramViewController.m in Sources */,
 				74E8381319C061CD000D2BE4 /* SDWebImageDownloader.m in Sources */,
@@ -1287,6 +1287,7 @@
 				849E852019AF679F006F43B3 /* DCTrack+DC.m in Sources */,
 				5D38E6A11987A673006F7A59 /* DCTextField.m in Sources */,
 				74E8381919C061CD000D2BE4 /* UIImage+MultiFormat.m in Sources */,
+				74AB6CE31AD442D80029D3F2 /* DCInfoCategory.m in Sources */,
 				74E8380F19C061CD000D2BE4 /* NSData+ImageContentType.m in Sources */,
 				1ACFD71A1A432BBC00F8EE57 /* DCType.m in Sources */,
 				FA90B9A919C5A6C600873865 /* DCLabel.m in Sources */,
@@ -1307,7 +1308,6 @@
 				1ACFD7201A432BBC00F8EE57 /* DCBof.m in Sources */,
 				849EFDA319A49FB600C43E05 /* main.xcdatamodeld in Sources */,
 				1ACFD7321A446FC400F8EE57 /* DCInfo+DC.m in Sources */,
-				1ACFD6F01A432BBA00F8EE57 /* DCInfo.m in Sources */,
 				74356D5819BEE4860055F13D /* Reachability.m in Sources */,
 				749011701AC05DA900D79C2E /* UIImage+Extension.m in Sources */,
 				84C6FEDB1AC5C5600010EC81 /* DCEventDetailHeaderCell.m in Sources */,

@@ -24,7 +24,7 @@ static NSString *kDCInfoTitleMinor = @"titleMinor";
 
 + (void)updateFromDictionary:(NSDictionary *)dictionary inContext:(NSManagedObjectContext *)context
 {
-    NSArray * infos = [[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCInfo class] inMainQueue:YES];
+    NSArray * infos = [[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCInfo class] inContext:context];
     DCInfo * info;
     if (infos.count == 0)
     {
@@ -51,7 +51,9 @@ static NSString *kDCInfoTitleMinor = @"titleMinor";
         for (NSDictionary * infoCategory in (NSArray*)dictionary[kDCInfoCategories])
         {
 #warning figueout if it is corrent to use add for updating
-            [info addInfoCategoryObject:[DCInfo DC_parseInfoCategoriesFromDictionary:infoCategory inContext:context]];
+            DCInfoCategory *category = [DCInfo DC_parseInfoCategoriesFromDictionary:infoCategory inContext:context];
+            if (category)
+                category.info = info;
         }
     }
 }
@@ -71,6 +73,7 @@ static NSString *kDCInfoTitleMinor = @"titleMinor";
     if ([categoryDict[kDCParseObjectDeleted] intValue]==1) // remove
     {
         [[DCMainProxy sharedProxy] removeItem:category];
+        return nil;
     }
     else // update
     {

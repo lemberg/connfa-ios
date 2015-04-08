@@ -100,7 +100,20 @@
     
     DCLimitedNavigationController * navContainer = [[DCLimitedNavigationController alloc] initWithRootViewController:detailController completion:^{
         [dayController setNeedsStatusBarAppearanceUpdate];
-        [dayController.tableView reloadData];
+        
+        NSArray *newDaysArray = self.eventsStrategy.days;
+        
+        if ([self.days isEqualToArray:newDaysArray])
+        {
+                // reload just current Day controller
+            [dayController.tableView reloadData];
+        }
+        else
+        {
+                // days has been changed - reload all days. It's a heavy operation!
+            [self reloadData];
+        }
+
     }];
     
     [[DCAppFacade shared].mainNavigationController presentViewController: navContainer animated:YES completion:nil];
@@ -172,6 +185,13 @@
 
 -(void) displayDateForDay: (NSInteger) day
 {
+        // change UILabel text animatically
+    CATransition *animation = [CATransition animation];
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    animation.type = kCATransitionFade;
+    animation.duration = 0.6;
+    [self.dateLabel.layer addAnimation:animation forKey:@"kCATransitionFade"];
+    
     NSDate * date = _days[day];
     self.dateLabel.text = date ? [date pageViewDateString] : nil;
 }

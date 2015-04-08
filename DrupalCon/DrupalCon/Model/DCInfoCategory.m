@@ -2,18 +2,20 @@
 //  DCInfoCategory.m
 //  DrupalCon
 //
-//  Created by Volodymyr Hyrka on 12/19/14.
-//  Copyright (c) 2014 Lemberg Solution. All rights reserved.
+//  Created by Olexandr on 4/7/15.
+//  Copyright (c) 2015 Lemberg Solution. All rights reserved.
 //
 
 #import "DCInfoCategory.h"
+#import "DCInfo.h"
 
 
 @implementation DCInfoCategory
 
-@dynamic name;
 @dynamic html;
-@dynamic order;
 @dynamic infoId;
+@dynamic name;
+@dynamic order;
+@dynamic info;
 
 @end

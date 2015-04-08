@@ -53,7 +53,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.062745098039215685" green="0.090196078431372548" blue="0.21176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.066666666666666666" green="0.11372549019607843" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="AED-7d-fwj" firstAttribute="leading" secondItem="6bO-pf-MPE" secondAttribute="leading" id="7Z8-Vq-KqS"/>
                                     <constraint firstAttribute="trailing" secondItem="3Zq-rf-wWq" secondAttribute="trailing" id="82H-aD-Xuc"/>
@@ -349,15 +349,23 @@
                                     <outlet property="delegate" destination="rIy-l5-K4b" id="Uz3-aq-2pz"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="INW-xw-a6B" userLabel="separator">
+                                <rect key="frame" x="0.0" y="371" width="320" height="1"/>
+                                <color key="backgroundColor" red="0.88627450980392153" green="0.88627450980392153" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="Van-UB-vq4"/>
+                                </constraints>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gBF-YY-1Gd" userLabel="Clear Filter">
                                 <rect key="frame" x="0.0" y="372" width="320" height="44"/>
                                 <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="qdb-XA-4n5"/>
                                 </constraints>
-                                <state key="normal" title="Clear Filter">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Clear Filters">
+                                    <color key="titleColor" red="0.58039215686274515" green="0.58039215686274515" blue="0.58039215686274515" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" red="0.066666666666666666" green="0.11372549019607843" blue="0.26666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="onClearButtonClick" destination="rIy-l5-K4b" eventType="touchUpInside" id="tCi-21-Ndk"/>
@@ -369,17 +377,14 @@
                             <constraint firstItem="N04-sg-jeE" firstAttribute="top" secondItem="gNP-fE-KTG" secondAttribute="topMargin" id="Azm-9Y-sAo"/>
                             <constraint firstAttribute="bottom" secondItem="gBF-YY-1Gd" secondAttribute="bottom" id="Dez-jy-Jsg"/>
                             <constraint firstItem="gBF-YY-1Gd" firstAttribute="leading" secondItem="gNP-fE-KTG" secondAttribute="leading" id="Drs-fm-ZnI"/>
+                            <constraint firstItem="INW-xw-a6B" firstAttribute="leading" secondItem="gNP-fE-KTG" secondAttribute="leading" id="Gcn-Ii-9FN"/>
                             <constraint firstItem="N04-sg-jeE" firstAttribute="leading" secondItem="gNP-fE-KTG" secondAttribute="leading" id="HgR-nd-KPG"/>
+                            <constraint firstItem="gBF-YY-1Gd" firstAttribute="top" secondItem="INW-xw-a6B" secondAttribute="bottom" id="QM0-yE-jhC"/>
                             <constraint firstItem="gBF-YY-1Gd" firstAttribute="top" secondItem="N04-sg-jeE" secondAttribute="bottom" id="g4Y-hY-Wps"/>
                             <constraint firstAttribute="trailing" secondItem="N04-sg-jeE" secondAttribute="trailing" id="kFU-br-cNe"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="N04-sg-jeE" secondAttribute="bottom" constant="100" id="ysX-eo-SWb"/>
+                            <constraint firstAttribute="trailing" secondItem="INW-xw-a6B" secondAttribute="trailing" id="nH4-nG-hy1"/>
                             <constraint firstAttribute="trailing" secondItem="gBF-YY-1Gd" secondAttribute="trailing" id="zPO-c0-NKE"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="ysX-eo-SWb"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Filter" id="POI-Kj-IP6">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="Lhp-OD-3f1">

@@ -99,22 +99,31 @@
                                     <outlet property="delegate" destination="SQY-AD-QPu" id="hfD-mK-dpK"/>
                                 </connections>
                             </tableView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Search Result" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tLD-xw-rtL" userLabel="NoEventsLabel">
+                                <rect key="frame" x="69" y="226" width="183" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" red="0.58039215690000001" green="0.58039215690000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="coi-og-QUw" firstAttribute="leading" secondItem="xTa-JX-2Bu" secondAttribute="leading" id="1Ug-rx-aVi"/>
                             <constraint firstItem="coi-og-QUw" firstAttribute="top" secondItem="xTa-JX-2Bu" secondAttribute="top" id="3dB-h4-YOJ"/>
+                            <constraint firstAttribute="centerY" secondItem="tLD-xw-rtL" secondAttribute="centerY" id="6A5-n2-F69"/>
                             <constraint firstAttribute="trailing" secondItem="Rtg-Kq-JJf" secondAttribute="trailing" id="GGV-ce-sdR"/>
                             <constraint firstAttribute="trailing" secondItem="coi-og-QUw" secondAttribute="trailing" id="KRG-Cb-c8K"/>
                             <constraint firstItem="Rtg-Kq-JJf" firstAttribute="leading" secondItem="xTa-JX-2Bu" secondAttribute="leading" id="gNL-A9-cvH"/>
                             <constraint firstItem="Rtg-Kq-JJf" firstAttribute="top" secondItem="coi-og-QUw" secondAttribute="bottom" id="kff-BM-wXd"/>
                             <constraint firstItem="qWf-aw-BGy" firstAttribute="top" secondItem="Rtg-Kq-JJf" secondAttribute="bottom" id="qiF-Zl-IfG"/>
+                            <constraint firstAttribute="centerX" secondItem="tLD-xw-rtL" secondAttribute="centerX" id="ud5-qZ-GqI"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="k4l-of-SUN"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="noItemsLabel" destination="tLD-xw-rtL" id="BM2-bM-jXG"/>
                         <outlet property="searchBar" destination="coi-og-QUw" id="t8t-Rw-pDQ"/>
                         <outlet property="speakersTbl" destination="Rtg-Kq-JJf" id="B0Y-mk-aPj"/>
                     </connections>
@@ -226,11 +235,11 @@
                                                         <constraint firstAttribute="width" constant="90" id="pFQ-ig-q3o"/>
                                                         <constraint firstAttribute="height" constant="31" id="rvi-Vv-H8K"/>
                                                     </constraints>
-                                                    <state key="normal" image="website">
+                                                    <state key="normal" image="twitter">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="buttonWebDidClick:" destination="ON0-IG-lh7" eventType="touchUpInside" id="14M-mk-Run"/>
+                                                        <action selector="buttonTwitterDidClick:" destination="ON0-IG-lh7" eventType="touchUpInside" id="ZVd-mS-bjM"/>
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KGA-xZ-frX" userLabel="Button-twitter">
@@ -239,11 +248,11 @@
                                                         <constraint firstAttribute="width" constant="90" id="7DF-kQ-d6H"/>
                                                         <constraint firstAttribute="height" constant="31" id="zoP-LN-erA"/>
                                                     </constraints>
-                                                    <state key="normal" image="twitter">
+                                                    <state key="normal" image="website">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="buttonTwitterDidClick:" destination="ON0-IG-lh7" eventType="touchUpInside" id="btS-PF-FWO"/>
+                                                        <action selector="buttonWebDidClick:" destination="ON0-IG-lh7" eventType="touchUpInside" id="dZs-DU-LOo"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -258,8 +267,8 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <outlet property="twitterButton" destination="KGA-xZ-frX" id="Rxe-c7-lZG"/>
-                                            <outlet property="webButton" destination="ZdC-3x-qvi" id="rje-gL-Yj1"/>
+                                            <outlet property="twitterButton" destination="ZdC-3x-qvi" id="AMD-RR-1mp"/>
+                                            <outlet property="webButton" destination="KGA-xZ-frX" id="Blb-sT-KqD"/>
                                             <outlet property="webButtonBottomPadding" destination="cU1-Wa-skE" id="U8r-cg-Mp9"/>
                                             <outlet property="webButtonLeftPadding" destination="W1M-IH-okf" id="Gee-Zg-Xqi"/>
                                             <outlet property="webButtonWidth" destination="pFQ-ig-q3o" id="2ZO-Hb-Fvp"/>
@@ -304,7 +313,7 @@
                                                 </view>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="12 Best practices for Wundercraut" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67I-gw-wXp" userLabel="Event name">
                                                     <rect key="frame" x="15" y="8" width="295" height="16"/>
-                                                    <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>

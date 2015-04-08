@@ -33,6 +33,8 @@
 @interface DCSpeakersViewController ()
 
 @property (nonatomic, weak) IBOutlet UITableView * speakersTbl;
+@property (nonatomic, weak) IBOutlet UILabel * noItemsLabel;
+
 @property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
@@ -220,10 +222,17 @@
     
     NSError *error = nil;
     [self.fetchedResultsController performFetch:&error];
+    
     if (error)
         NSLog(@"%@", error);
     
-    [self.speakersTbl reloadData];
+    BOOL itemsEnabled = self.fetchedResultsController.fetchedObjects.count;
+    
+    self.noItemsLabel.hidden = itemsEnabled;
+    self.speakersTbl.hidden = !itemsEnabled;
+    
+    if (itemsEnabled)
+        [self.speakersTbl reloadData];
 }
 
 

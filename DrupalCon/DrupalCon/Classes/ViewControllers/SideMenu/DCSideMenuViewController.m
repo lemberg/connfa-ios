@@ -43,6 +43,7 @@
 @interface DCSideMenuViewController ()
 
 @property (nonatomic, weak) IBOutlet UITableView* tableView;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint* topBackgroundViewHeight;
 
 @property (nonatomic, strong) NSArray *arrayOfCaptions;
 @property (nonatomic, strong) NSIndexPath* activeCellPath;
@@ -178,7 +179,6 @@
 
     
     self.sideMenuContainer.centerViewController = navigationController;
-    self.sideMenuContainer.shadow.enabled = YES;
     [self.sideMenuContainer setMenuState:MFSideMenuStateClosed completion:nil];
 }
 
@@ -260,7 +260,7 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return [UIImage imageNamed:@"nav_header"].size.height;
+    return [UIImage imageNamed:@"nav_header"].size.height + 20;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -305,5 +305,21 @@
 {
     return 1;
 }
+
+#pragma mark - UIScrollView delegate
+
+- (void) scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView == self.tableView)
+    {
+            // we change top background height to provide Background color different below the tableView in the top and bottom of tableView. Top should stratch with table scrolling
+        float offset = scrollView.contentOffset.y;
+        
+        if (offset < 0)
+            self.topBackgroundViewHeight.constant = - offset;
+    }
+    
+}
+
 
 @end

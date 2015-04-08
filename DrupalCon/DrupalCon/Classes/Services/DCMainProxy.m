@@ -66,7 +66,7 @@ typedef void(^UpdateDataFail)(NSString *reason);
 
 @interface DCMainProxy () <DCImportDataSeviceDelegate>
 
-@property (nonatomic, copy) void(^dataReadyCallback)(DCMainProxyState mainProxyState);
+@property (nonatomic, copy) __block void(^dataReadyCallback)(DCMainProxyState mainProxyState);
 //
 @property (strong, nonatomic) DCImportDataSevice *importDataService;
 
@@ -265,6 +265,13 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 {
     return [self getAllInstancesOfClass:aClass predicate:nil inMainQueue:mainQueue];
 }
+
+- (NSArray*)getAllInstancesOfClass:(Class)aClass inContext:(NSManagedObjectContext *)context
+{
+    return [self instancesOfClass:aClass filtredUsingPredicate:nil inContext:context];
+
+}
+
 
 - (NSArray*)getAllInstancesOfClass:(Class)aClass predicate:(NSPredicate*)aPredicate inMainQueue:(BOOL)mainQueue
 {
