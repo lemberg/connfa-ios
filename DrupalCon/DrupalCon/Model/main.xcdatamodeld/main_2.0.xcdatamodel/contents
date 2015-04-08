@@ -32,13 +32,14 @@
     <entity name="DCInfo" representedClassName="DCInfo" syncable="YES">
         <attribute name="titleMajor" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="titleMinor" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="infoCategory" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DCInfoCategory" syncable="YES"/>
+        <relationship name="infoCategory" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DCInfoCategory" inverseName="info" inverseEntity="DCInfoCategory" syncable="YES"/>
     </entity>
     <entity name="DCInfoCategory" representedClassName="DCInfoCategory" syncable="YES">
         <attribute name="html" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="infoId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="order" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="info" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DCInfo" inverseName="infoCategory" inverseEntity="DCInfo" syncable="YES"/>
     </entity>
     <entity name="DCLevel" representedClassName="DCLevel" syncable="YES">
         <attribute name="levelId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -111,12 +112,12 @@
         <element name="DCFavoriteEvent" positionX="-5231" positionY="-2205" width="128" height="58"/>
         <element name="DCHousePlan" positionX="-5141" positionY="-1626" width="128" height="103"/>
         <element name="DCInfo" positionX="-5330" positionY="-1989" width="128" height="88"/>
-        <element name="DCInfoCategory" positionX="-5141" positionY="-1917" width="128" height="103"/>
+        <element name="DCInfoCategory" positionX="-5123" positionY="-1998" width="128" height="118"/>
         <element name="DCLevel" positionX="-5978" positionY="-2214" width="128" height="120"/>
         <element name="DCLocation" positionX="-5465" positionY="-1645" width="128" height="133"/>
-        <element name="DCMainEvent" positionX="-5571" positionY="-2142" width="128" height="43"/>
+        <element name="DCMainEvent" positionX="-5571" positionY="-2142" width="128" height="45"/>
         <element name="DCPoi" positionX="-5301" positionY="-1654" width="128" height="133"/>
-        <element name="DCSocialEvent" positionX="-5499" positionY="-2016" width="128" height="43"/>
+        <element name="DCSocialEvent" positionX="-5499" positionY="-2016" width="128" height="45"/>
         <element name="DCSpeaker" positionX="-5733" positionY="-1744" width="128" height="223"/>
         <element name="DCTime" positionX="-6192" positionY="-2061" width="128" height="73"/>
         <element name="DCTimeRange" positionX="-5978" positionY="-2088" width="128" height="73"/>
