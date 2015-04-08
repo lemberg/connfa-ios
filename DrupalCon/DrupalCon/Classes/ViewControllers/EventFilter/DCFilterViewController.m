@@ -74,12 +74,12 @@
 
 - (void) updateSourceData
 {
-    NSPredicate * levelPredicate = nil;//[NSPredicate predicateWithFormat:@"NOT (levelId = 0)"];
+    NSPredicate * levelPredicate = [NSPredicate predicateWithFormat:@"NOT (levelId = 0)"];
     self.levels = [[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCLevel class] predicate:levelPredicate inMainQueue:YES];
     NSSortDescriptor *levelSort = [NSSortDescriptor sortDescriptorWithKey:@"levelId" ascending:YES];
     self.levels = [self.levels sortedArrayUsingDescriptors:@[levelSort]];
     
-    NSPredicate * trackPredicate = nil;//[NSPredicate predicateWithFormat:@"NOT (trackId = 0)"];
+    NSPredicate * trackPredicate = [NSPredicate predicateWithFormat:@"NOT (trackId = 0)"];
     self.tracks = [[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCTrack class] predicate:trackPredicate inMainQueue:YES];
     NSSortDescriptor *trackSort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
     self.tracks = [self.tracks sortedArrayUsingDescriptors:@[trackSort]];
