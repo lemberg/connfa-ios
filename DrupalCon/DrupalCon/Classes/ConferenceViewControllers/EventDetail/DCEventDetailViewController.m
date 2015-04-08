@@ -34,6 +34,7 @@
 #import "UIWebView+DC.h"
 #import "DCTime+DC.h"
 #import "DCLevel+DC.h"
+#import "DCInfo.h"
 
 #import "UIImageView+WebCache.h"
 #import "UIConstants.h"
@@ -437,7 +438,12 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
                                                  UIActivityTypePostToFlickr,
                                                  UIActivityTypePostToVimeo,
                                                  UIActivityTypePostToTencentWeibo];
-    [activityController setValue:@"DrupalCon 2015, Los Angeles" forKey:@"subject"];
+    
+    DCInfo* info = [[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCInfo class] inMainQueue:YES] lastObject];
+    NSString* projectName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+    NSString* subject = [NSString stringWithFormat:@"%@ %@", projectName, info.titleMajor];
+    
+    [activityController setValue:subject forKey:@"subject"];
     
     [self presentViewController:activityController animated:YES completion:nil];
 }
