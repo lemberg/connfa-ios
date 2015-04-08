@@ -56,6 +56,7 @@ typedef enum {
 #pragma mark - public
 
 - (void)update;
+- (void)checkReachable;
 
 #pragma mark - work with instances
 

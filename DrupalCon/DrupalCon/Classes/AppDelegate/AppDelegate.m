@@ -45,14 +45,17 @@ static int const kGaDispatchPeriod = 30;
     
     [[DCMainProxy sharedProxy] update];
     
-    // Register user notifications
-    UIUserNotificationType types = UIUserNotificationTypeBadge |
-    UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
-    
-    UIUserNotificationSettings *settings =
-    [UIUserNotificationSettings settingsForTypes:types categories:nil];
-    
-    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        
+        // Register user notifications
+        UIUserNotificationType types = UIUserNotificationTypeBadge |
+        UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+        
+        UIUserNotificationSettings *settings =
+        [UIUserNotificationSettings settingsForTypes:types categories:nil];
+        
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    }
     
     UILocalNotification *locationNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
     if (locationNotification) {

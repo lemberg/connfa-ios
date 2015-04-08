@@ -268,8 +268,18 @@ static NSString *eventCellId = @"SpeakerEventCellId";
 
 - (IBAction) buttonTwitterDidClick:(id)sender
 {
-    NSString *twitter = [NSString stringWithFormat:@"http://twitter.com/%@", _speaker.twitterName];
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:twitter]];
+    BOOL installed = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://"]];
+    
+    if (installed) {
+        
+//        NSString *twitter = [NSString stringWithFormat:@"http://twitter.com/%@", _speaker.twitterName];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitter://"]];
+        
+    } else {
+        
+        NSString *twitter = [NSString stringWithFormat:@"http://twitter.com/%@", _speaker.twitterName];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:twitter]];
+    }
 }
 
 #pragma mark - UIScrollView delegate

@@ -51,6 +51,12 @@
     [self reload];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [[DCMainProxy sharedProxy] checkReachable];
+}
+
 #pragma mark - UISearchBarDelegate
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
@@ -149,12 +155,6 @@
     }
     
     return jobTitle;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle
