@@ -171,10 +171,13 @@
     NSAssert(storyboardControllerID.length, @"No Storyboard ID for Menu item view controller");
     
     DCBaseViewController* rootMenuVC = [self getViewController:menuItem];
-    UINavigationController* navigationController;
+    UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController: rootMenuVC];
     
-
-    navigationController = [[UINavigationController alloc] initWithRootViewController: rootMenuVC];
+        // disable swipe-to-Back gesture
+    if ([navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+    
     [self arrangeNavigationBarForController: rootMenuVC menuItem:menuItem];
 
     

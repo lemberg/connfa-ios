@@ -89,6 +89,11 @@ BackButtonBlock dismissAction;
 {
     [super pushViewController:viewController animated:animated];
     
+        // disable swipe-to-Back gesture 
+    if ([self respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        self.interactivePopGestureRecognizer.enabled = NO;
+    }
+    
     self.backPressCount = 0;
 }
 
