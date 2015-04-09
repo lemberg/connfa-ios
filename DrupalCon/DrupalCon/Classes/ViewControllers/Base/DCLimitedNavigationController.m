@@ -21,6 +21,7 @@ BackButtonBlock dismissAction;
 @interface DCLimitedNavigationController ()
 
 @property (nonatomic) int backPressCount;
+@property (nonatomic) BOOL shouldAnimateNavigationBar;
 
 @end
 
@@ -66,8 +67,14 @@ BackButtonBlock dismissAction;
     
     self.backPressCount = 0;
     self.delegate = self;
+    self.shouldAnimateNavigationBar = YES;
     
     [self pushViewController:[UIViewController new] animated:NO];
+}
+
+- (void) onBackButtonClick
+{
+    [self popViewControllerAnimated:YES];
 }
 
 - (void) arrangeNavigationBar
@@ -85,12 +92,19 @@ BackButtonBlock dismissAction;
     self.backPressCount = 0;
 }
 
+- (BOOL) navigationBar:(UINavigationBar *)navigationBar shouldPopItem:(UINavigationItem *)item
+{
+    [self popViewControllerAnimated:YES];
+    return self.shouldAnimateNavigationBar;
+}
+
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated
 {
     self.backPressCount++;
     
     if ((self.backPressCount == self.maxDepth) || (self.viewControllers.count == 2))
     {
+        self.shouldAnimateNavigationBar = NO;
         if (dismissAction)
         {
             // custom dismiss action

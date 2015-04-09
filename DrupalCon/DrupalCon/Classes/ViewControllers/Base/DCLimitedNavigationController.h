@@ -17,7 +17,7 @@
 typedef void (^CompletionBlock)();
 typedef void (^BackButtonBlock)();
 
-@interface DCLimitedNavigationController : UINavigationController<UINavigationControllerDelegate>
+@interface DCLimitedNavigationController : UINavigationController<UINavigationControllerDelegate, UINavigationBarDelegate>
 
 @property (nonatomic) NSInteger maxDepth;
 

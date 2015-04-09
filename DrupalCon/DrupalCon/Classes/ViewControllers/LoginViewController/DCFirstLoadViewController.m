@@ -9,6 +9,7 @@
 #import "DCFirstLoadViewController.h"
 #import "DCMainProxy.h"
 #import "UIImage+Extension.h"
+#import "DCAppFacade.h"
 
 @interface DCFirstLoadViewController ()
 
@@ -25,11 +26,7 @@
     
     [[DCMainProxy sharedProxy] setDataReadyCallback:^(DCMainProxyState mainProxyState) {
         dispatch_async(dispatch_get_main_queue(), ^{
-//            if (mainProxyState == DCMainProxyStateDataReady)
-//            {
-              //  [self dismissViewControllerAnimated:NO completion:nil];
-            [self performSegueWithIdentifier:@"goToSideMenuVC" sender:self];
-//            }
+            [[DCAppFacade shared].mainNavigationController goToSideMenuContainer: nil];
         });
     }];
 }
