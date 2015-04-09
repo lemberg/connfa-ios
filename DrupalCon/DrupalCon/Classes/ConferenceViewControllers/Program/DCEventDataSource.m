@@ -28,6 +28,7 @@
         self.tableView.dataSource = self;
         self.eventStrategy        = eventStrategy;
         self.selectedDay          = date;
+        self.actualEventIndexPath = nil;
         [self loadEvents];
     }
     return self;
@@ -111,20 +112,39 @@ const NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
 {
     NSInteger currentHour = [self currentHour];
     NSInteger sectionNumber = 0;
+    
     if (![NSDate dc_isDateInToday:self.selectedDay]) {
+        self.actualEventIndexPath = nil;
         return;
     }
+    
     for (NSDictionary *sectionInfo in array) {
         
         DCTimeRange *timeRange = sectionInfo[kDCTimeslotKEY];
+        DCTimeRange *nextTimeRange = [array indexOfObject:sectionInfo] < array.count-1 ? [(NSDictionary*)[array objectAtIndex:[array indexOfObject:sectionInfo]+1] objectForKey:kDCTimeslotKEY] : nil;
         
-        if ([timeRange.from.hour integerValue] >= currentHour ) {
+        NSInteger from = timeRange.from.hour.integerValue;
+        NSInteger to = timeRange.to.hour.integerValue;
+        NSInteger fromInNext = nextTimeRange ? nextTimeRange.from.hour.integerValue : -1;
+        
+            // if Current hour is in time range, return this time range
+        if (from <= currentHour && currentHour <= to) {
             self.actualEventIndexPath = [NSIndexPath indexPathForItem:0 inSection:sectionNumber];
-            break;
+            return;
         }
         
+            // if Current hour is between time ranges, return Next time range
+        if (currentHour < fromInNext)
+        {
+            self.actualEventIndexPath = [NSIndexPath indexPathForItem:0 inSection:sectionNumber];
+            return;
+        }
+
         sectionNumber++;
     }
+    
+        // set the last Range
+    self.actualEventIndexPath = [NSIndexPath indexPathForItem:0 inSection:sectionNumber>0 ? sectionNumber-1 : 0];
 }
 
 - (NSIndexPath *)actualEventIndexPath

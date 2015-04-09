@@ -29,9 +29,27 @@
             __strong __typeof__(weakSelf) strongSelf = weakSelf;
             strongSelf.eventsByTimeRange = eventsByTimeRange;
             [strongSelf.tableView reloadData];
-            [strongSelf.tableView scrollToRowAtIndexPath:strongSelf.actualEventIndexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+            
+                // when this controller shows Current day
+            if (strongSelf.actualEventIndexPath)
+                [strongSelf moveTableToCurrentTime];
+
         });
     });
+}
+
+- (void) moveTableToCurrentTime
+{
+    self.tableView.alpha = 0;
+    [self.tableView scrollToRowAtIndexPath:self.actualEventIndexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
+    
+    [UIView transitionWithView:self.tableView
+                      duration:0.25
+                       options:UIViewAnimationOptionCurveLinear
+                    animations:^{
+                        self.tableView.alpha = 1;
+                    }
+                    completion:nil];
 }
 
 - (void)reloadEvents
