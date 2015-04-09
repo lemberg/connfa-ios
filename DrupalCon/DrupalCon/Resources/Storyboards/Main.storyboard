@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="q81-Jd-j9t">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="q81-Jd-j9t">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -17,12 +17,33 @@
                     <view key="view" contentMode="scaleToFill" id="AfV-oq-yUP">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pNf-SA-FQa">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="VSv-PR-47m">
+                                <rect key="frame" x="142" y="266" width="37" height="37"/>
+                            </activityIndicatorView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="VSv-PR-47m" secondAttribute="centerY" id="1cd-LY-iGE"/>
+                            <constraint firstAttribute="centerX" secondItem="VSv-PR-47m" secondAttribute="centerX" id="Nu2-w0-fpx"/>
+                            <constraint firstAttribute="trailing" secondItem="pNf-SA-FQa" secondAttribute="trailing" id="WqC-9L-edh"/>
+                            <constraint firstItem="pNf-SA-FQa" firstAttribute="leading" secondItem="AfV-oq-yUP" secondAttribute="leading" id="crX-Jd-hNG"/>
+                            <constraint firstItem="h11-4l-oWE" firstAttribute="top" secondItem="pNf-SA-FQa" secondAttribute="bottom" id="hS7-Xt-Bdy"/>
+                            <constraint firstItem="pNf-SA-FQa" firstAttribute="top" secondItem="AfV-oq-yUP" secondAttribute="top" id="jS2-0a-q0q"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="xA4-QL-iKP"/>
+                    <connections>
+                        <outlet property="backgroundImageView" destination="pNf-SA-FQa" id="tkC-cD-oF7"/>
+                        <segue destination="rXy-Fh-Jkq" kind="push" identifier="goToSideMenuVC" id="ZwY-kH-6H2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iub-Yg-yDP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="720" y="-452"/>
+            <point key="canvasLocation" x="648" y="211"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="ufC-wZ-h7g">
@@ -142,12 +163,11 @@
                         <outlet property="loginTextField" destination="fTs-bK-Wy9" id="9pE-9B-v8X"/>
                         <outlet property="passwordTextField" destination="9Mp-9Q-e2f" id="oFu-RX-Deb"/>
                         <outlet property="scrollView" destination="JHz-Di-zQs" id="T7Z-79-dsO"/>
-                        <segue destination="7w6-Ae-ZC0" kind="modal" identifier="toFirstLoading" animates="NO" id="O68-6T-AJB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="770" y="211"/>
+            <point key="canvasLocation" x="162" y="-489"/>
         </scene>
         <!--Program Items View Controller-->
         <scene sceneID="ced-v9-JJ0">
@@ -590,6 +610,7 @@
                             <constraint firstAttribute="trailing" secondItem="8VY-Vf-Rre" secondAttribute="trailing" id="kEM-it-5gZ"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="LXs-HS-iaV"/>
                     <connections>
                         <outlet property="tableView" destination="rA1-f8-M65" id="qHy-fm-vUe"/>
                         <outlet property="topBackgroundViewHeight" destination="s1p-0T-rE9" id="4oG-Ne-k3Y"/>
@@ -855,13 +876,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="RdW-sU-V58">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="RdW-sU-V58">
                                 <rect key="frame" x="0.0" y="111" width="320" height="457"/>
                                 <connections>
                                     <outlet property="delegate" destination="HyN-5J-w0d" id="WZq-FL-8h0"/>
                                 </connections>
                             </mapView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tRu-8b-hDP" userLabel="Labels placeholder">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tRu-8b-hDP" userLabel="Labels placeholder">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="111"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RoyalPark Metrotel" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="hQz-sT-h3H" userLabel="Name">
@@ -876,13 +897,13 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Bogota, Cundinamarca" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="Tvz-q1-gvg" userLabel="City and province">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bogota, Cundinamarca" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="Tvz-q1-gvg" userLabel="City and province">
                                         <rect key="frame" x="20" y="57" width="280" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Colombia" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="Nil-uv-QF5" userLabel="State">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Colombia" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="Nil-uv-QF5" userLabel="State">
                                         <rect key="frame" x="20" y="80" width="280" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -943,7 +964,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="Vau-Ie-wXC"/>
+                        <segue destination="7w6-Ae-ZC0" kind="relationship" relationship="rootViewController" id="Jen-mM-xot"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NGj-Gm-OdD" userLabel="First Responder" sceneMemberID="firstResponder"/>

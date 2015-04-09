@@ -8,8 +8,11 @@
 
 #import "DCFirstLoadViewController.h"
 #import "DCMainProxy.h"
+#import "UIImage+Extension.h"
 
 @interface DCFirstLoadViewController ()
+
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 
 @end
 
@@ -17,11 +20,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.backgroundImageView.image = [UIImage splashImageForOrientation:UIInterfaceOrientationPortrait];
+    
     [[DCMainProxy sharedProxy] setDataReadyCallback:^(DCMainProxyState mainProxyState) {
         dispatch_async(dispatch_get_main_queue(), ^{
 //            if (mainProxyState == DCMainProxyStateDataReady)
 //            {
-                [self dismissViewControllerAnimated:YES completion:nil];
+              //  [self dismissViewControllerAnimated:NO completion:nil];
+            [self performSegueWithIdentifier:@"goToSideMenuVC" sender:self];
 //            }
         });
     }];

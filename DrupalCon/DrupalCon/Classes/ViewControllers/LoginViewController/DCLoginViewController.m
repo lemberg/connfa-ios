@@ -50,6 +50,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     [self.scrollView setDelaysContentTouches: NO];
     
     [self registerForKeyboardNotifications];
@@ -85,6 +86,7 @@
 
 -(void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear: animated];
+    
     // Login Screen is not actual for now!! But on this point we have a triger for initial loading screen;
     
     if ([DCMainProxy sharedProxy].state == DCMainProxyStateInitDataLoading)
@@ -93,8 +95,9 @@
     }
     else
     {
-        [self loginButtonCLicked:nil];
+        [[DCAppFacade shared].mainNavigationController goToSideMenuContainer: nil];
     }
+    return;
 }
 
 -(IBAction) loginButtonCLicked:(id)sender

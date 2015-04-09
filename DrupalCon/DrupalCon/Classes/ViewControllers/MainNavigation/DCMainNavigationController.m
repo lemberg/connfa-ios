@@ -26,6 +26,15 @@
     [super viewDidLoad];
     
     [DCAppFacade shared].mainNavigationController = self;
+    
+    
+    // Login Screen is not actual for now!! But on this point we have a triger for initial loading screen;
+    
+    if ([DCMainProxy sharedProxy].state != DCMainProxyStateInitDataLoading)
+    {
+        [[DCAppFacade shared].mainNavigationController goToSideMenuContainer: nil];
+    }
+    return;
 }
 
 - (void)openEventFromFavoriteController:(DCEvent *)event
