@@ -14,21 +14,21 @@
 - (void) initData:(DCSpeaker*)speaker
 {
     // hide unused buttons
-    if (!speaker.webSite.length)
-    {
-        self.webButtonLeftPadding.constant = 3;
-        self.webButtonWidth.constant = 0;
-    }
-    
     if (!speaker.twitterName.length)
     {
-        self.twitterButton.hidden = YES;
+        self.twitterButtonLeftPadding.constant = 3;
+        self.twitterButtonWidth.constant = 0;
+    }
+    
+    if (!speaker.webSite.length)
+    {
+        self.webButton.hidden = YES;
     }
     
         // if there is no description below, remove bottom padding
     if (speaker.characteristic.length)
     {
-        self.webButtonBottomPadding.constant = 0;
+        self.twitterButtonBottomPadding.constant = 0;
     }
 }
 

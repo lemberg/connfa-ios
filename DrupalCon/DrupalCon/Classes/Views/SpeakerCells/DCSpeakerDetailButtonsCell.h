@@ -15,9 +15,9 @@
 @property (nonatomic, weak) IBOutlet UIButton *webButton;
 @property (nonatomic, weak) IBOutlet UIButton *twitterButton;
 
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint *webButtonLeftPadding;
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint *webButtonBottomPadding;
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint *webButtonWidth;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *twitterButtonLeftPadding;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *twitterButtonBottomPadding;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *twitterButtonWidth;
 
 
 - (void) initData:(DCSpeaker*)speaker;
