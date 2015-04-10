@@ -64,7 +64,6 @@
 		749BC1BF1AAF025E00FD5037 /* DCEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 749BC1BD1AAF025E00FD5037 /* DCEventCell.m */; };
 		749BC1C01AAF025E00FD5037 /* DCEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 749BC1BE1AAF025E00FD5037 /* DCEventCell.xib */; };
 		749BC1C31AAF347000FD5037 /* DCDayEventsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 749BC1C21AAF347000FD5037 /* DCDayEventsController.m */; };
-		74A3EA9F1A56FD9000327225 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74A3EA971A56FD9000327225 /* Images.xcassets */; };
 		74A3EAA01A56FD9000327225 /* Events.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74A3EA991A56FD9000327225 /* Events.storyboard */; };
 		74A3EAA11A56FD9000327225 /* Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74A3EA9A1A56FD9000327225 /* Info.storyboard */; };
 		74A3EAA21A56FD9000327225 /* Speakers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 74A3EA9B1A56FD9000327225 /* Speakers.storyboard */; };
@@ -113,6 +112,7 @@
 		842B5E631AC579C2009614A5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 842B5E621AC579C2009614A5 /* libz.dylib */; };
 		842B5E651AC579D0009614A5 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 842B5E641AC579D0009614A5 /* AdSupport.framework */; };
 		842B91DB1AB99588003F9116 /* DCSpeakerDetailButtonsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 842B91DA1AB99588003F9116 /* DCSpeakerDetailButtonsCell.m */; };
+		8465186C1AD7F96D00BE1607 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8465186B1AD7F96D00BE1607 /* Images.xcassets */; };
 		8496B4DB1ABB49DC00BF872D /* DCInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8496B4DA1ABB49DC00BF872D /* DCInfoViewController.m */; };
 		8496B4DE1ABB4A2D00BF872D /* DCAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8496B4DD1ABB4A2D00BF872D /* DCAboutViewController.m */; };
 		8496B4E11ABC320800BF872D /* DCInfoMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8496B4E01ABC320800BF872D /* DCInfoMenuCell.m */; };
@@ -266,7 +266,6 @@
 		749BC1BE1AAF025E00FD5037 /* DCEventCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DCEventCell.xib; sourceTree = "<group>"; };
 		749BC1C11AAF347000FD5037 /* DCDayEventsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCDayEventsController.h; sourceTree = "<group>"; };
 		749BC1C21AAF347000FD5037 /* DCDayEventsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCDayEventsController.m; sourceTree = "<group>"; };
-		74A3EA971A56FD9000327225 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		74A3EA991A56FD9000327225 /* Events.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Events.storyboard; sourceTree = "<group>"; };
 		74A3EA9A1A56FD9000327225 /* Info.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Info.storyboard; sourceTree = "<group>"; };
 		74A3EA9B1A56FD9000327225 /* Speakers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Speakers.storyboard; sourceTree = "<group>"; };
@@ -364,6 +363,7 @@
 		842B5E641AC579D0009614A5 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		842B91D91AB99588003F9116 /* DCSpeakerDetailButtonsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCSpeakerDetailButtonsCell.h; path = Classes/Views/SpeakerCells/DCSpeakerDetailButtonsCell.h; sourceTree = "<group>"; };
 		842B91DA1AB99588003F9116 /* DCSpeakerDetailButtonsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCSpeakerDetailButtonsCell.m; path = Classes/Views/SpeakerCells/DCSpeakerDetailButtonsCell.m; sourceTree = "<group>"; };
+		8465186B1AD7F96D00BE1607 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8496B4D91ABB49DC00BF872D /* DCInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCInfoViewController.h; path = Info/DCInfoViewController.h; sourceTree = "<group>"; };
 		8496B4DA1ABB49DC00BF872D /* DCInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCInfoViewController.m; path = Info/DCInfoViewController.m; sourceTree = "<group>"; };
 		8496B4DC1ABB4A2D00BF872D /* DCAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCAboutViewController.h; path = Info/DCAboutViewController.h; sourceTree = "<group>"; };
@@ -793,7 +793,7 @@
 		74A3EA961A56FD9000327225 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				74A3EA971A56FD9000327225 /* Images.xcassets */,
+				8465186B1AD7F96D00BE1607 /* Images.xcassets */,
 				74A3EA981A56FD9000327225 /* Storyboards */,
 				74A3EA9C1A56FD9000327225 /* Web */,
 			);
@@ -1175,7 +1175,7 @@
 				74A3EAA21A56FD9000327225 /* Speakers.storyboard in Resources */,
 				FA90B9A619C589AE00873865 /* DCEventBaseCell.xib in Resources */,
 				74A3EAA11A56FD9000327225 /* Info.storyboard in Resources */,
-				74A3EA9F1A56FD9000327225 /* Images.xcassets in Resources */,
+				8465186C1AD7F96D00BE1607 /* Images.xcassets in Resources */,
 				84D654631ACC2B8E0099B461 /* event_detail_style.css in Resources */,
 				74A3EAA31A56FD9000327225 /* about_img.png in Resources */,
 				5DC8C41F198656DB00BF5816 /* InfoPlist.strings in Resources */,

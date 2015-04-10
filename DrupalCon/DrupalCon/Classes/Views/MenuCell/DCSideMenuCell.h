@@ -26,6 +26,7 @@
 
 @property (nonatomic, weak) IBOutlet UILabel     *captionLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *leftImageView;
-@property (nonatomic, weak) IBOutlet UIImageView *separatorView;
+
+@property (nonatomic, strong) IBOutlet UIView *selectedBackground;
 
 @end

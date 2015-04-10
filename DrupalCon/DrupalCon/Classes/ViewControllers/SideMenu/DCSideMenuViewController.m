@@ -43,7 +43,7 @@
 @interface DCSideMenuViewController ()
 
 @property (nonatomic, weak) IBOutlet UITableView* tableView;
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint* topBackgroundViewHeight;
+@property (nonatomic, weak) IBOutlet UIImageView* backgroundImageView;
 
 @property (nonatomic, strong) NSArray *arrayOfCaptions;
 @property (nonatomic, strong) NSIndexPath* activeCellPath;
@@ -162,7 +162,7 @@
 
 -(UIStatusBarStyle)preferredStatusBarStyle
 {
-    return UIStatusBarStyleDefault;
+    return UIStatusBarStyleLightContent;
 }
 
 - (void) showViewControllerAssociatedWithMenuItem:(DCMenuSection)menuItem
@@ -256,16 +256,6 @@
 
 #pragma mark - UITableView delegate
 
-- (UIView *) tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    return [tableView dequeueReusableCellWithIdentifier: @"SideMenuHeaderId"];
-}
-
-- (CGFloat) tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return [UIImage imageNamed:@"nav_header"].size.height + 20;
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cellIdentifier = @"SideMenuCellIdentifier";
     
@@ -276,10 +266,10 @@
     
     BOOL isActiveCell = indexPath.row == self.activeCellPath.row;
     cell.leftImageView.image = [UIImage imageNamed:itemDict[isActiveCell ? kMenuItemSelectedIcon : kMenuItemIcon]];
-    cell.captionLabel.textColor = isActiveCell ? NAV_BAR_COLOR : MENU_DESELECTED_ITEM_TITLE_COLOR;
-    
-    cell.separatorView.hidden = !(indexPath.row % 3 == 2);
 
+    UIFontDescriptor * fontDescriptor = [cell.captionLabel.font.fontDescriptor fontDescriptorWithSymbolicTraits:isActiveCell ? UIFontDescriptorTraitBold : 0];
+    cell.captionLabel.font = [UIFont fontWithDescriptor:fontDescriptor size:0];
+    
     return cell;
 }
 
@@ -290,10 +280,14 @@
     DCSideMenuCell* newSelected = (DCSideMenuCell*)[tableView cellForRowAtIndexPath:indexPath];
     
     lastSelected.leftImageView.image = [UIImage imageNamed:[self.arrayOfCaptions objectAtIndex: self.activeCellPath.row][kMenuItemIcon]];
-    lastSelected.captionLabel.textColor = MENU_DESELECTED_ITEM_TITLE_COLOR;
+    
+    UIFontDescriptor * regularFontDescriptor = [lastSelected.captionLabel.font.fontDescriptor fontDescriptorWithSymbolicTraits:0];
+    lastSelected.captionLabel.font = [UIFont fontWithDescriptor:regularFontDescriptor size:0];
     
     newSelected.leftImageView.image = [UIImage imageNamed:[self.arrayOfCaptions objectAtIndex: indexPath.row][kMenuItemSelectedIcon]];
-    newSelected.captionLabel.textColor = NAV_BAR_COLOR;
+
+    UIFontDescriptor * boldFontDescriptor = [newSelected.captionLabel.font.fontDescriptor fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold];
+    newSelected.captionLabel.font = [UIFont fontWithDescriptor:boldFontDescriptor size:0];
     
     self.activeCellPath = indexPath;
     
@@ -309,20 +303,9 @@
     return 1;
 }
 
-#pragma mark - UIScrollView delegate
-
-- (void) scrollViewDidScroll:(UIScrollView *)scrollView
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (scrollView == self.tableView)
-    {
-            // we change top background height to provide Background color different below the tableView in the top and bottom of tableView. Top should stratch with table scrolling
-        float offset = scrollView.contentOffset.y;
-        
-        if (offset < 0)
-            self.topBackgroundViewHeight.constant = - offset;
-    }
-    
+    return (indexPath.row % 3 == 2) ? 65 : 50;
 }
-
 
 @end

@@ -35,16 +35,6 @@
     return self;
 }
 
-- (void)awakeFromNib
-{
-        // selected View
-    self.selectedBackgroundView = [[UIView alloc] initWithFrame:self.contentView.frame];
-    self.selectedBackgroundView.backgroundColor = [UIColor colorWithRed:208.0/255.0 green:208.0/255.0 blue:208.0/255.0 alpha:1.0];
-    
-        // this workaround is made to avoid separator hiding when cell is selected. UIImageView objects stay visible
-    self.separatorView.image = [UIImage imageWithColor:[UIColor colorWithRed:208.0/255.0 green:208.0/255.0 blue:208.0/255.0 alpha:1.0]];
-}
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
@@ -58,21 +48,21 @@
 {
     [super touchesBegan:touches withEvent:event];
     
-    self.selectedBackgroundView.hidden = NO;
+    self.selectedBackground.hidden = NO;
 }
 
 - (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesEnded:touches withEvent:event];
     
-    self.selectedBackgroundView.hidden = YES;
+    self.selectedBackground.hidden = YES;
 }
 
 - (void) touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [super touchesCancelled:touches withEvent:event];
     
-    self.selectedBackgroundView.hidden = YES;
+    self.selectedBackground.hidden = YES;
 }
 
 @end
