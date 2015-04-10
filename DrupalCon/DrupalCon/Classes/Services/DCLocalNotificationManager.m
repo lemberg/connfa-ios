@@ -32,7 +32,7 @@ static  const NSString * kEventId = @"EventID";
 + (void)scheduleNotificationWithItem:(DCEvent *)item interval:(int)minutesBefore
 {
     UILocalNotification *localNotif = [[UILocalNotification alloc] init];
-    
+
     localNotif.fireDate = [item.startDate dateByAddingTimeInterval:-(minutesBefore * 60.f)];
     localNotif.timeZone = [NSTimeZone defaultTimeZone];
     

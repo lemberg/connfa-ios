@@ -80,7 +80,7 @@
 - (NSPredicate *)eventStretegyPredicate
 {
     NSPredicate* levelPredicate = [NSPredicate predicateWithFormat:@"level.selectedInFilter == true"];
-    NSPredicate* trackPredicate = [NSPredicate predicateWithFormat:@"ANY tracks.selectedInFilter == true"/*@"ALL tracks.selectedInFilter == true"*/];
+    NSPredicate* trackPredicate = [NSPredicate predicateWithFormat:@"ANY tracks.selectedInFilter == true"];
     
     NSPredicate* mergedPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[levelPredicate,trackPredicate]];
     return mergedPredicate;
