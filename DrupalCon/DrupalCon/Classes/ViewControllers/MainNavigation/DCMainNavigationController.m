@@ -50,7 +50,6 @@
     MFSideMenuContainerViewController *container = [MFSideMenuContainerViewController containerWithCenterViewController: nil
                                                                                                  leftMenuViewController: self.sideMenuController
                                                                                                 rightMenuViewController: nil];
-    container.centerShadowEnabled = YES;
     sideMenuViewController.sideMenuContainer = container;
     
     [self pushViewController:container animated: animated];

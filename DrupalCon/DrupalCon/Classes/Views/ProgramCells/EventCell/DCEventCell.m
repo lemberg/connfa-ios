@@ -106,7 +106,7 @@ static NSInteger eventCellImageHeight = 16;
     
         // Track
     self.trackLabel.text = trackName;
-    self.trackViewHeight.constant = trackName.length ? eventCellSubtitleHeight : 0;  
+    self.trackViewHeight.constant = trackName.length ? eventCellSubtitleHeight + 5 : 0;
     
         // Speakers
     NSString* speakers = [self speakersFromEvent:event];

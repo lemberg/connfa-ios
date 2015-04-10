@@ -18,8 +18,10 @@
 
 @property (nonatomic, weak) IBOutlet UITableView* tableView;
 
-@property (nonatomic, strong) NSArray* levels;
-@property (nonatomic, strong) NSArray* tracks;
+@property (nonatomic, strong) NSArray* levelsToShow;
+@property (nonatomic, strong) NSArray* levelsAll;
+@property (nonatomic, strong) NSArray* tracksToShow;
+@property (nonatomic, strong) NSArray* tracksAll;
 
 @property (nonatomic) BOOL isLevelFilterCleared;
 @property (nonatomic) BOOL isTrackFilterCleared;
@@ -74,18 +76,22 @@
 
 - (void) updateSourceData
 {
-    NSPredicate * levelPredicate = [NSPredicate predicateWithFormat:@"NOT (levelId = 0)"];
-    self.levels = [[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCLevel class] predicate:levelPredicate inMainQueue:YES];
+    self.levelsAll = [[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCLevel class] predicate:nil inMainQueue:YES];
     NSSortDescriptor *levelSort = [NSSortDescriptor sortDescriptorWithKey:@"levelId" ascending:YES];
-    self.levels = [self.levels sortedArrayUsingDescriptors:@[levelSort]];
+    self.levelsAll = [self.levelsAll sortedArrayUsingDescriptors:@[levelSort]];
     
-    NSPredicate * trackPredicate = [NSPredicate predicateWithFormat:@"NOT (trackId = 0)"];
-    self.tracks = [[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCTrack class] predicate:trackPredicate inMainQueue:YES];
+    NSPredicate * whichLevelsWillBeShown = [NSPredicate predicateWithFormat:@"NOT (levelId = 0)"];
+    self.levelsToShow = [self.levelsAll filteredArrayUsingPredicate:whichLevelsWillBeShown];
+    
+    self.tracksAll = [[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCTrack class] predicate:nil inMainQueue:YES];
     NSSortDescriptor *trackSort = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
-    self.tracks = [self.tracks sortedArrayUsingDescriptors:@[trackSort]];
+    self.tracksAll = [self.tracksAll sortedArrayUsingDescriptors:@[trackSort]];
     
-    self.isLevelFilterCleared = [self allItemsAreSelected:YES array:self.levels];
-    self.isTrackFilterCleared = [self allItemsAreSelected:YES array:self.tracks];
+    NSPredicate * whichTracksWillBeShown = [NSPredicate predicateWithFormat:@"NOT (trackId = 0)"];
+    self.tracksToShow = [self.tracksAll filteredArrayUsingPredicate:whichTracksWillBeShown];
+    
+    self.isLevelFilterCleared = [self allItemsAreSelected:YES array:self.levelsToShow];
+    self.isTrackFilterCleared = [self allItemsAreSelected:YES array:self.tracksToShow];
     
     [self printData];
     
@@ -124,10 +130,10 @@
     switch (type)
     {
         case FilterCellTypeLevel:
-            return self.levels.count;
+            return self.levelsToShow.count;
             
         case FilterCellTypeTrack:
-            return self.tracks.count;
+            return self.tracksToShow.count;
             
         default:
             NSAssert(false, @"unhanled Filter type");
@@ -168,11 +174,11 @@
     switch (aCellType)
     {
         case FilterCellTypeLevel:
-            cellTitle = [(DCLevel*)[self.levels objectAtIndex: aRow] name];
+            cellTitle = [(DCLevel*)[self.levelsToShow objectAtIndex: aRow] name];
             break;
             
         case FilterCellTypeTrack:
-            cellTitle = [(DCTrack*)[self.tracks objectAtIndex: aRow] name];
+            cellTitle = [(DCTrack*)[self.tracksToShow objectAtIndex: aRow] name];
             break;
             
         default:
@@ -189,10 +195,10 @@
     switch (aCellType)
     {
         case FilterCellTypeLevel:
-            return [(DCLevel*)[self.levels objectAtIndex: aRow] selectedInFilter].boolValue;
+            return [(DCLevel*)[self.levelsToShow objectAtIndex: aRow] selectedInFilter].boolValue;
             
         case FilterCellTypeTrack:
-            return [(DCTrack*)[self.tracks objectAtIndex: aRow] selectedInFilter].boolValue;
+            return [(DCTrack*)[self.tracksToShow objectAtIndex: aRow] selectedInFilter].boolValue;
             
         default:
             return NO;
@@ -206,11 +212,11 @@
     switch (aCellType)
     {
         case FilterCellTypeLevel:
-            cellId = [(DCLevel*)[self.levels objectAtIndex: aRow] levelId];
+            cellId = [(DCLevel*)[self.levelsToShow objectAtIndex: aRow] levelId];
             break;
             
         case FilterCellTypeTrack:
-            cellId = [(DCTrack*)[self.tracks objectAtIndex: aRow] trackId];
+            cellId = [(DCTrack*)[self.tracksToShow objectAtIndex: aRow] trackId];
             break;
         
         default:
@@ -229,10 +235,10 @@
     switch (type)
     {
         case FilterCellTypeLevel:
-            return ((aPath.row+1) == self.levels.count);
+            return ((aPath.row+1) == self.levelsToShow.count);
             
         case FilterCellTypeTrack:
-            return ((aPath.row+1) == self.tracks.count);
+            return ((aPath.row+1) == self.tracksToShow.count);
             
         default:
             NSAssert(false, @"unhandled Filter type");
@@ -301,10 +307,10 @@
         {
             if (self.isLevelFilterCleared)
             {
-                [self setAllItemsSelected: NO array:self.levels];
+                [self setAllItemsSelected: NO array:self.levelsAll];
                 self.isLevelFilterCleared = NO;
             }
-            DCLevel* level = [self.levels objectAtIndex:indexPath.row];
+            DCLevel* level = [self.levelsToShow objectAtIndex:indexPath.row];
             level.selectedInFilter = [NSNumber numberWithBool: !level.selectedInFilter.boolValue];
         }
             break;
@@ -312,11 +318,11 @@
         {
             if (self.isTrackFilterCleared)
             {
-                [self setAllItemsSelected: NO array:self.tracks];
+                [self setAllItemsSelected: NO array:self.tracksAll];
                 self.isTrackFilterCleared = NO;
             }
             
-            DCLevel* track = [self.tracks objectAtIndex:indexPath.row];
+            DCLevel* track = [self.tracksToShow objectAtIndex:indexPath.row];
             track.selectedInFilter = [NSNumber numberWithBool: !track.selectedInFilter.boolValue];
         }
             break;
@@ -342,8 +348,8 @@
 
 - (IBAction) onClearButtonClick
 {
-    [self setAllItemsSelected: YES array:self.levels];
-    [self setAllItemsSelected: YES array:self.tracks];
+    [self setAllItemsSelected: YES array:self.levelsAll];
+    [self setAllItemsSelected: YES array:self.tracksAll];
 
     self.isLevelFilterCleared = YES;
     self.isTrackFilterCleared = YES;
@@ -356,11 +362,11 @@
 - (IBAction)onDoneButtonClick:(id)sender
 {
         // when all items in Section are deselected, select all
-    if ([self allItemsAreSelected:NO array:self.levels])
-        [self setAllItemsSelected:YES array:self.levels];
+    if ([self allItemsAreSelected:NO array:self.levelsToShow])
+        [self setAllItemsSelected:YES array:self.levelsAll];
 
-    if ([self allItemsAreSelected:NO array:self.tracks])
-        [self setAllItemsSelected:YES array:self.tracks];
+    if ([self allItemsAreSelected:NO array:self.tracksToShow])
+        [self setAllItemsSelected:YES array:self.tracksAll];
     
     
     NSUndoManager* manager = [[DCCoreDataStore  mainQueueContext] undoManager];
@@ -382,9 +388,9 @@
 - (void) printData
 {
     NSLog(@"\n");
-    for (DCLevel* level in self.levels)
+    for (DCLevel* level in self.levelsToShow)
         NSLog(@"level: %@, selected: %@\n", level.name, level.selectedInFilter);
-    for (DCTrack* track in self.tracks)
+    for (DCTrack* track in self.tracksToShow)
         NSLog(@"track: %@, selected: %@\n", track.name, track.selectedInFilter);
     
     NSLog(@"level cleared: %d, tracks cleared: %d\n",self.isLevelFilterCleared, self.isTrackFilterCleared);

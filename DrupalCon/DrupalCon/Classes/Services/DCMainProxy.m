@@ -316,7 +316,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 
 - (void)addToFavoriteEvent:(DCEvent *)event
 {
-    DCFavoriteEvent *favoriteEvent = [DCFavoriteEvent createManagedObjectInContext:self.newMainQueueContext];//(DCFavoriteEvent*)[self createObjectOfClass:[DCFavoriteEvent class]];
+    DCFavoriteEvent *favoriteEvent = [DCFavoriteEvent createManagedObjectInContext:self.newMainQueueContext];
     favoriteEvent.eventID = event.eventId;
     [DCLocalNotificationManager scheduleNotificationWithItem:event interval:5];
     [self saveContext];
