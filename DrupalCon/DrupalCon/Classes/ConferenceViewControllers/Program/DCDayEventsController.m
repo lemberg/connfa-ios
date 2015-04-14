@@ -110,7 +110,7 @@
 
 - (void)initDataSource
 {
-    self.eventsDataSource = [self dayEventsDataSource];//[[DCDayEventsDataSource alloc] initWithTableView:self.tableView eventStrategy:self.eventsStrategy date:self.date];
+    self.eventsDataSource = [self dayEventsDataSource];
     __weak typeof (self) weakSelf = self;
     [self.eventsDataSource setPrepareBlockForTableView:^UITableViewCell* (UITableView * tableView, NSIndexPath *indexPath) {
         NSString *cellIdentifier = NSStringFromClass([DCEventCell class]);

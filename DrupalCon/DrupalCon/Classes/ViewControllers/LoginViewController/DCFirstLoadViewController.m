@@ -24,11 +24,19 @@
     
     self.backgroundImageView.image = [UIImage splashImageForOrientation:UIInterfaceOrientationPortrait];
     
-    [[DCMainProxy sharedProxy] setDataReadyCallback:^(DCMainProxyState mainProxyState) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[DCAppFacade shared].mainNavigationController goToSideMenuContainer: nil];
-        });
-    }];
+    if ([DCMainProxy sharedProxy].state != DCMainProxyStateInitDataLoading)
+    {
+        [[DCAppFacade shared].mainNavigationController goToSideMenuContainer: YES];
+    }
+    else
+    {
+        [[DCMainProxy sharedProxy] setDataReadyCallback:^(DCMainProxyState mainProxyState) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[DCAppFacade shared].mainNavigationController goToSideMenuContainer: YES
+                 ];
+            });
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

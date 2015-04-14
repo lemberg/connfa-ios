@@ -28,7 +28,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button hidden="YES" opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Zq-rf-wWq" userLabel="Button Next">
-                                        <rect key="frame" x="270" y="0.0" width="42" height="35"/>
+                                        <rect key="frame" x="269" y="0.0" width="42" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="42" id="6JO-2s-do0"/>
                                         </constraints>
@@ -40,7 +40,7 @@
                                         </connections>
                                     </button>
                                     <button hidden="YES" opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AED-7d-fwj" userLabel="Button Previous">
-                                        <rect key="frame" x="8" y="0.0" width="42" height="35"/>
+                                        <rect key="frame" x="9" y="0.0" width="42" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="42" id="OsC-DH-7wS"/>
                                         </constraints>
@@ -54,8 +54,8 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.066666666666666666" green="0.11372549019607843" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="AED-7d-fwj" firstAttribute="leading" secondItem="6bO-pf-MPE" secondAttribute="leading" constant="8" id="7Z8-Vq-KqS"/>
-                                    <constraint firstAttribute="trailing" secondItem="3Zq-rf-wWq" secondAttribute="trailing" constant="8" id="82H-aD-Xuc"/>
+                                    <constraint firstItem="AED-7d-fwj" firstAttribute="leading" secondItem="6bO-pf-MPE" secondAttribute="leading" constant="9" id="7Z8-Vq-KqS"/>
+                                    <constraint firstAttribute="trailing" secondItem="3Zq-rf-wWq" secondAttribute="trailing" constant="9" id="82H-aD-Xuc"/>
                                     <constraint firstItem="qU0-jE-nVu" firstAttribute="top" secondItem="6bO-pf-MPE" secondAttribute="top" constant="7" id="M1x-Nd-PCK"/>
                                     <constraint firstItem="3Zq-rf-wWq" firstAttribute="top" secondItem="6bO-pf-MPE" secondAttribute="top" id="Qwu-5f-cou"/>
                                     <constraint firstAttribute="height" constant="35" id="UHp-6E-ILW"/>

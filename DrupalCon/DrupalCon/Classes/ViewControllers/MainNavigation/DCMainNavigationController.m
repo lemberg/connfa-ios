@@ -27,11 +27,6 @@
     
     [DCAppFacade shared].mainNavigationController = self;
     
-    if ([DCMainProxy sharedProxy].state != DCMainProxyStateInitDataLoading)
-    {
-            // if it's not a first loading - go forward to Side menu; else FirstLaunchVC will be shown (root)
-        [[DCAppFacade shared].mainNavigationController goToSideMenuContainer: nil];
-    }
     return;
 }
 

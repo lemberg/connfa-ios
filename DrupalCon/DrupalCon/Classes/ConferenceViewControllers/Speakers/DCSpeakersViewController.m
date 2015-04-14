@@ -50,6 +50,9 @@
     [[UITableView appearance] setSectionIndexTrackingBackgroundColor:[UIColor clearColor]];
     [[UITableView appearance] setSectionIndexColor: NAV_BAR_COLOR];
     
+    [self.searchBar setTintColor:[UIColor whiteColor]];
+    [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTintColor:[UIColor darkGrayColor]];
+    
     [self reload];
 }
 

@@ -13,6 +13,7 @@
 #import "DCInfo.h"
 #import "DCInfoCategory.h"
 #import "DCAboutViewController.h"
+#import "DCLimitedNavigationController.h"
 
 #define infoMenuItemCellId @"InfoMenuItemCellId"
 
@@ -108,7 +109,11 @@
     DCAboutViewController* controller = [self.storyboard instantiateViewControllerWithIdentifier:@"AboutViewController"];
     [controller setData: self.items[indexPath.row]];
     
-    [self.navigationController pushViewController:controller animated:YES];
+    DCLimitedNavigationController * navContainer = [[DCLimitedNavigationController alloc] initWithRootViewController:controller completion:^{
+        [self setNeedsStatusBarAppearanceUpdate];
+    }];
+    
+    [self.navigationController presentViewController: navContainer animated:YES completion:nil];
 }
 
 @end

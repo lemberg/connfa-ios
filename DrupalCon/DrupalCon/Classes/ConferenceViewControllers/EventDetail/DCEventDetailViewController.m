@@ -440,10 +440,7 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
                                                  UIActivityTypePostToTencentWeibo];
     
     DCInfo* info = [[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCInfo class] inMainQueue:YES] lastObject];
-    NSString* projectName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
-    NSString* subject = [NSString stringWithFormat:@"%@ %@", projectName, info.titleMajor];
-    
-    [activityController setValue:subject forKey:@"subject"];
+    [activityController setValue:info.titleMajor forKey:@"subject"];
     
     [self presentViewController:activityController animated:YES completion:nil];
 }
