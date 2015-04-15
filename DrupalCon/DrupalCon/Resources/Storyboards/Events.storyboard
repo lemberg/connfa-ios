@@ -85,6 +85,7 @@
                             </activityIndicatorView>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8bi-cc-ytX">
                                 <rect key="frame" x="0.0" y="55" width="320" height="545"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <segue destination="D9W-92-0ZP" kind="embed" identifier="EmbeddedDaysPageVC" id="gHy-AJ-SqY"/>
                                 </connections>
@@ -473,12 +474,12 @@
                                                             <subviews>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Durable Drupal lean Process Factory" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="290" translatesAutoresizingMaskIntoConstraints="NO" id="6if-Tw-ynf" userLabel="Title">
                                                                     <rect key="frame" x="15" y="10" width="290" height="16"/>
-                                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                                                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_experience_advanced" translatesAutoresizingMaskIntoConstraints="NO" id="0Y4-nP-iM9">
-                                                                    <rect key="frame" x="173" y="32" width="12" height="12"/>
+                                                                    <rect key="frame" x="184" y="33" width="12" height="12"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="12" id="Oas-MC-Bhz"/>
                                                                         <constraint firstAttribute="width" constant="12" id="qpl-lI-f0c"/>
@@ -492,8 +493,8 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Experience level: Beginner" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="saD-Ka-cgM">
-                                                                    <rect key="frame" x="15" y="30" width="154" height="16"/>
-                                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                                                    <rect key="frame" x="15" y="30" width="165" height="16"/>
+                                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                                                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
@@ -504,7 +505,7 @@
                                                                 <constraint firstItem="0Y4-nP-iM9" firstAttribute="leading" secondItem="saD-Ka-cgM" secondAttribute="trailing" constant="4" id="2mx-sZ-2n0"/>
                                                                 <constraint firstItem="Wjs-91-htT" firstAttribute="leading" secondItem="3Vc-9k-AIe" secondAttribute="leading" constant="70" id="B8b-AV-GTJ"/>
                                                                 <constraint firstItem="6if-Tw-ynf" firstAttribute="top" secondItem="3Vc-9k-AIe" secondAttribute="top" priority="499" constant="10" id="BZC-rN-rQx"/>
-                                                                <constraint firstItem="saD-Ka-cgM" firstAttribute="centerY" secondItem="0Y4-nP-iM9" secondAttribute="centerY" priority="999" constant="0.5" id="MBs-aL-PZ2"/>
+                                                                <constraint firstItem="saD-Ka-cgM" firstAttribute="centerY" secondItem="0Y4-nP-iM9" secondAttribute="centerY" priority="999" constant="-1" id="MBs-aL-PZ2"/>
                                                                 <constraint firstItem="saD-Ka-cgM" firstAttribute="leading" secondItem="3Vc-9k-AIe" secondAttribute="leading" constant="15" id="QgY-hn-o0V"/>
                                                                 <constraint firstAttribute="trailing" secondItem="Wjs-91-htT" secondAttribute="trailing" id="V8h-XP-Azh"/>
                                                                 <constraint firstAttribute="trailing" secondItem="6if-Tw-ynf" secondAttribute="trailing" constant="15" id="cud-ki-vwc"/>

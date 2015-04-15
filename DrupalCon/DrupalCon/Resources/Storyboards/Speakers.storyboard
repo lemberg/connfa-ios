@@ -100,8 +100,8 @@
                                 </connections>
                             </tableView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Search Result" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tLD-xw-rtL" userLabel="NoEventsLabel">
-                                <rect key="frame" x="69" y="226" width="183" height="29"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <rect key="frame" x="97" y="230" width="127" height="20"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.58039215690000001" green="0.58039215690000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -313,7 +313,7 @@
                                                 </view>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" text="12 Best practices for Wundercraut" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="67I-gw-wXp" userLabel="Event name">
                                                     <rect key="frame" x="15" y="8" width="295" height="16"/>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="13"/>
                                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -326,17 +326,17 @@
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="253" verticalCompressionResistancePriority="752" text="DevOps" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZmS-b5-3CT" userLabel="Track">
                                                     <rect key="frame" x="15" y="76" width="295" height="16"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
-                                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="252" text="Experience level: Beginner" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PfM-lo-JYz" userLabel="Level">
                                                     <rect key="frame" x="15" y="96" width="154" height="16"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
-                                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="253" verticalHuggingPriority="251" image="ic_experience_advanced" translatesAutoresizingMaskIntoConstraints="NO" id="fhb-DO-Nwb">
-                                                    <rect key="frame" x="173" y="97" width="12" height="12"/>
+                                                    <rect key="frame" x="179" y="99" width="12" height="12"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="12" id="6CH-Xa-Iw4"/>
                                                         <constraint firstAttribute="width" constant="12" id="sxZ-be-Wnk"/>
@@ -352,22 +352,16 @@
                                                 <constraint firstItem="67I-gw-wXp" firstAttribute="leading" secondItem="cNy-8d-3ma" secondAttribute="leading" id="HIU-Pp-0Ht"/>
                                                 <constraint firstItem="PfM-lo-JYz" firstAttribute="leading" secondItem="67I-gw-wXp" secondAttribute="leading" id="NhK-Qe-Gdp"/>
                                                 <constraint firstItem="cNy-8d-3ma" firstAttribute="top" secondItem="67I-gw-wXp" secondAttribute="bottom" priority="998" constant="4" id="NlM-Ot-lEs"/>
-                                                <constraint firstItem="Won-iy-D3j" firstAttribute="leading" secondItem="hNX-gc-dal" secondAttribute="leading" constant="20" id="PE5-G5-obl"/>
                                                 <constraint firstItem="ZmS-b5-3CT" firstAttribute="leading" secondItem="67I-gw-wXp" secondAttribute="leading" id="PQ5-0z-DBn"/>
-                                                <constraint firstItem="fhb-DO-Nwb" firstAttribute="centerY" secondItem="PfM-lo-JYz" secondAttribute="centerY" constant="-1" id="T9W-Lh-B4C"/>
-                                                <constraint firstItem="fhb-DO-Nwb" firstAttribute="leading" secondItem="PfM-lo-JYz" secondAttribute="trailing" constant="4" id="TLX-2Q-FFp"/>
+                                                <constraint firstItem="fhb-DO-Nwb" firstAttribute="centerY" secondItem="PfM-lo-JYz" secondAttribute="centerY" constant="1" id="T9W-Lh-B4C"/>
                                                 <constraint firstItem="Won-iy-D3j" firstAttribute="top" secondItem="hNX-gc-dal" secondAttribute="top" id="UYp-Pd-JTH"/>
                                                 <constraint firstAttribute="trailing" secondItem="cNy-8d-3ma" secondAttribute="trailing" constant="10" id="VSW-KA-7ng"/>
+                                                <constraint firstItem="fhb-DO-Nwb" firstAttribute="leading" secondItem="PfM-lo-JYz" secondAttribute="trailing" constant="10" id="Y69-7g-cFl"/>
                                                 <constraint firstAttribute="trailing" secondItem="Won-iy-D3j" secondAttribute="trailing" id="gxB-rT-o34"/>
                                                 <constraint firstItem="67I-gw-wXp" firstAttribute="left" secondItem="hNX-gc-dal" secondAttribute="left" constant="15" id="hUU-Ja-6ji"/>
                                                 <constraint firstItem="PfM-lo-JYz" firstAttribute="top" secondItem="ZmS-b5-3CT" secondAttribute="bottom" constant="4" id="icV-m6-Unp"/>
                                                 <constraint firstItem="67I-gw-wXp" firstAttribute="top" secondItem="hNX-gc-dal" secondAttribute="top" constant="8" id="mMg-n7-gvb"/>
                                             </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="PE5-G5-obl"/>
-                                                </mask>
-                                            </variation>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>

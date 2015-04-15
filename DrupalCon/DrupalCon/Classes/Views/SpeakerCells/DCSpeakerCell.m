@@ -79,10 +79,10 @@
         return [NSString stringWithFormat:@"%@ / %@", organisationName, jobTitle];
     }
     if (![jobTitle length]) {
-        return organisationName;
+        return organisationName.length ? organisationName : @" ";
     }
-    
-    return jobTitle;
+
+    return jobTitle.length ? jobTitle : @" ";
 }
 
 @end

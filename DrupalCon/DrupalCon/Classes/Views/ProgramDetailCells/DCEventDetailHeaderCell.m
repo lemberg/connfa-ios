@@ -9,6 +9,9 @@
 #import "DCEventDetailHeaderCell.h"
 #import "DCLevel.h"
 #import "DCTrack.h"
+#import "DCTimeRange+DC.h"
+#import "NSDate+DC.h"
+#import "DCEvent+DC.h"
 
 
 @implementation DCEventDetailHeaderCell
@@ -17,9 +20,14 @@
 {
     self.titleLabel.text = event.name;
     
+    // event Date
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat: @"MM-dd HH:mm"];
+    [formatter setDateFormat: @"EEE"];
     NSString *date = event.date ? [formatter stringFromDate: event.date] : @"";
+    
+    date = [NSString stringWithFormat:@"%@, %@ - %@", [date uppercaseString], [NSDate hourFormatForDate:event.startDate], [NSDate hourFormatForDate:event.endDate]];
+    
+    
     NSString *place = event.place ? event.place : @"";
     
     if (date.length && place.length)

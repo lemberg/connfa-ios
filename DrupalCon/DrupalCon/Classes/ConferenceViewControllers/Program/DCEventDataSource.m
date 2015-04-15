@@ -110,7 +110,7 @@ const NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
 
 - (void)updateActualEventIndexPathForTimeRange:(NSArray *)array
 {
-    NSInteger currentHour = [self currentHour];
+    float currentHour = [self currentHour];
     NSInteger sectionNumber = 0;
     
     if (![NSDate dc_isDateInToday:self.selectedDay]) {
@@ -123,9 +123,9 @@ const NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
         DCTimeRange *timeRange = sectionInfo[kDCTimeslotKEY];
         DCTimeRange *nextTimeRange = [array indexOfObject:sectionInfo] < array.count-1 ? [(NSDictionary*)[array objectAtIndex:[array indexOfObject:sectionInfo]+1] objectForKey:kDCTimeslotKEY] : nil;
         
-        NSInteger from = timeRange.from.hour.integerValue;
-        NSInteger to = timeRange.to.hour.integerValue;
-        NSInteger fromInNext = nextTimeRange ? nextTimeRange.from.hour.integerValue : -1;
+        float from = timeRange.from.hour.integerValue + timeRange.from.minute.integerValue/60;
+        float to = timeRange.to.hour.integerValue + timeRange.to.minute.integerValue/60;
+        float fromInNext = nextTimeRange ? nextTimeRange.from.hour.integerValue + nextTimeRange.from.minute.integerValue/60 : -1;
         
             // if Current hour is in time range, return this time range
         if (from <= currentHour && currentHour <= to) {
@@ -153,14 +153,14 @@ const NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
 }
 
 
-- (NSInteger)currentHour
+- (float) currentHour
 {
     NSDate *date = [NSDate date];
     NSCalendar *calendar = [NSCalendar currentCalendar];
+    [calendar setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_GB"]];
     NSDateComponents *components = [calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:date];
-    NSInteger hour = [components hour];
+    float hour = (float)[components hour] + (float)[components minute]/60;
     return hour;
 }
-
 
 @end

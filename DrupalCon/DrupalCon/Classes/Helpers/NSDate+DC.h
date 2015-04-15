@@ -29,4 +29,6 @@
 - (NSString*)pageViewDateString;
 - (NSString*)stringForSpeakerEventCell;
 + (BOOL)dc_isDateInToday:(NSDate *)date;
++ (NSString *)hourFormatForDate:(NSDate *)date;
+
 @end

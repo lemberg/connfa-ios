@@ -362,11 +362,17 @@
 - (IBAction)onDoneButtonClick:(id)sender
 {
         // when all items in Section are deselected, select all
-    if ([self allItemsAreSelected:NO array:self.levelsToShow])
+    if ([self allItemsAreSelected:NO array:self.levelsToShow] ||
+        [self allItemsAreSelected:YES array:self.levelsToShow])
+    {
         [self setAllItemsSelected:YES array:self.levelsAll];
-
-    if ([self allItemsAreSelected:NO array:self.tracksToShow])
+    }
+    
+    if ([self allItemsAreSelected:NO array:self.tracksToShow] ||
+        [self allItemsAreSelected:YES array:self.tracksToShow])
+    {
         [self setAllItemsSelected:YES array:self.tracksAll];
+    }
     
     
     NSUndoManager* manager = [[DCCoreDataStore  mainQueueContext] undoManager];

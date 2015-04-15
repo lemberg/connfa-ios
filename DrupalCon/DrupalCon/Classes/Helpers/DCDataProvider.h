@@ -22,7 +22,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define SERVER_URL  @"http://drupalcon.uat.link"
+#define SERVER_URL  @"http://drupalconla.uat.link"
 #define BASE_URL [NSString stringWithFormat:@"%@/api/v2/",SERVER_URL]
 
 typedef void (^DataProviderCallBack)(BOOL success, id result, id lastModifiedResponce);

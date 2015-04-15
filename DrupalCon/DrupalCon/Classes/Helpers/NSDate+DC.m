@@ -68,13 +68,12 @@ static NSString * kDCSpeakerEventCellFormat = @"dd LLLL";
     return theDate;
 }
 
-- (NSString*)stringForSpeakerEventCell
++ (NSString *)hourFormatForDate:(NSDate *)date
 {
-    NSDateFormatter * speakerEventCellFormatter = [[NSDateFormatter alloc] init];
-    [speakerEventCellFormatter setDateFormat:kDCSpeakerEventCellFormat];
-    [speakerEventCellFormatter setTimeZone:T_ZERO];
-    NSString * theDate = [speakerEventCellFormatter stringFromDate:self];
-    return theDate;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"h:mm aaa"];
+    NSString *dateDisplay = [dateFormatter stringFromDate:date];
+    return  dateDisplay;
 }
 
 #pragma mark - private

@@ -116,8 +116,8 @@
         }
     
         self.addressLabel.text = self.location.name;
-        self.streetAndNumberLabel.text = streetAndHouse;
-        self.cityAndProvinceLabel.text = cityAndProvince;
+        self.streetAndNumberLabel.text = streetAndHouse.length ? [NSString stringWithFormat:@"%@,", streetAndHouse] : nil;
+        self.cityAndProvinceLabel.text = cityAndProvince.length ? [NSString stringWithFormat:@"%@,", cityAndProvince] : nil;
         self.stateLabel.text = state;
     }
 }

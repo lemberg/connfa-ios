@@ -8,7 +8,7 @@
 
 #import "DCEventCell.h"
 #import "DCTimeRange+DC.h"
-
+#import "NSDate+DC.h"
 #import "DCEvent+DC.h"
 #import "DCTrack.h"
 #import "DCSpeaker.h"
@@ -60,14 +60,6 @@ static NSInteger eventCellImageHeight = 16;
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:NO animated:animated];
-}
-
-- (NSString *)hourFormatForDate:(NSDate *)date
-{
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"h:mm aaa"];
-    NSString *dateDisplay = [dateFormatter stringFromDate:date];
-    return  dateDisplay;
 }
 
 - (CGFloat) getHeightForEvent:(DCEvent*)event isFirstInSection:(BOOL)isFirst
@@ -127,8 +119,8 @@ static NSInteger eventCellImageHeight = 16;
     self.eventImageHeight.constant = self.eventImageView.image ? eventCellImageHeight : 0;
     
         // Time  (left side)
-    self.startTimeLabel.text = self.isFirstCellInSection ? [NSString stringWithFormat:@"%@",[self hourFormatForDate:event.startDate]] : nil;
-    self.endTimeLabel.text  = self.isFirstCellInSection ? [NSString stringWithFormat:@"to %@", [self hourFormatForDate:event.endDate]] : nil;
+    self.startTimeLabel.text = self.isFirstCellInSection ? [NSString stringWithFormat:@"%@",[NSDate hourFormatForDate:event.startDate]] : nil;
+    self.endTimeLabel.text  = self.isFirstCellInSection ? [NSString stringWithFormat:@"to %@", [NSDate hourFormatForDate:event.endDate]] : nil;
 
     self.separatorLeadingConstraint.constant = self.isLastCellInSection? 0 : self.leftSideWidth.constant + self.eventTitleLabelLeftPadding.constant;
     
