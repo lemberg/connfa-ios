@@ -54,7 +54,9 @@
 {
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     
-    NSURL *requestURL = [NSURL URLWithString:uri relativeToURL:[NSURL URLWithString:BASE_URL]];
+//    TODO: Remove testing property in getParameter
+    NSString *testUriParameter = [NSString stringWithFormat:@"%@/?testing=1", uri];
+    NSURL *requestURL = [NSURL URLWithString:testUriParameter relativeToURL:[NSURL URLWithString:BASE_URL]];
     [request setURL:requestURL];
     request.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
     [request setHTTPMethod:httpMethod];
@@ -178,9 +180,12 @@
     }
 }
 
+//  FIXME: Create another procedure for KEY to save appropriate server responses
 - (NSString *)uriSufixFromResourseString:(NSString *)resourceSpecifier
 {
-    return [[resourceSpecifier componentsSeparatedByString:@"/"] lastObject];
+    NSString *getSuffix = [[resourceSpecifier componentsSeparatedByString:@"/get"] lastObject];
+    NSString *sufix = [[getSuffix componentsSeparatedByString:@"/"] firstObject];
+    return [NSString stringWithFormat:@"get%@", sufix];
     
 }
 
