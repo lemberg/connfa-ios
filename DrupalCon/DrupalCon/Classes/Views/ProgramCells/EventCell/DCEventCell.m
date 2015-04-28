@@ -18,7 +18,7 @@
 static NSString *ratingsImagesName[] = {@"", @"ic_experience_beginner", @"ic_experience_intermediate", @"ic_experience_advanced" };
 
     // These values are hardcoded because cells are get by "dequeueREusableCells" method, so previous cell value might be set to 0.
-static NSInteger eventCellSubtitleHeight = 17;
+static NSInteger eventCellSubtitleHeight = 16;
 static NSInteger eventCellImageHeight = 16;
 
 #define leftButonEnabledColor [UIColor colorWithWhite:247.0/255.0 alpha:1.0]

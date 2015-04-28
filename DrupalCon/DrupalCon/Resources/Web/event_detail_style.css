@@ -1,7 +1,7 @@
  body {
 
                   font-family: "HelveticaNeue-Light";
-                  font-size: 16px;
+                  font-size: 15px;
                   margin-top:0px;
                   margin-left:0px;
                   margin-right:0px;
@@ -46,7 +46,7 @@
                font-family: "HelveticaNeue-Light";
                font-size: 15px;
                line-height: 22px;
-               color: #142048;
+               color: #be2626;
                text-decoration: none;
               }
               h1{
@@ -58,13 +58,22 @@
                 margin-top: 0;
                 margin-bottom: 26px;
               }
-              h3{
+            h2 {
+                font-family: "HelveticaNeue-Light";
+                font-size: 15px;
+                font-weight: bold;
+                color: #142048;
+                margin-top: 20px;
+                margin-bottom: 20px;
+
+            }
+            h3 {
                font-family: "HelveticaNeue-Light";
                font-size: 15px;
                color: #142048;
-               line-height: 27px;
                margin-top: 20px;
                margin-bottom: 20px;
+               line-height: 20px;
               }
               blockquote {
 

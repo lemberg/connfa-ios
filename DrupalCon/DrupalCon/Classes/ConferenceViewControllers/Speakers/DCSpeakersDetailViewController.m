@@ -78,7 +78,7 @@ static NSString *eventCellId = @"SpeakerEventCellId";
     [self registerScreenLoadAtGA: [NSString stringWithFormat:@"speakerID: %d", self.speaker.speakerId.intValue]];
     
     self.cellsHeight = [NSMutableDictionary dictionary];
-    self.currentBarColor = NAV_BAR_COLOR;
+    self.currentBarColor = [UIColor whiteColor];//NAV_BAR_COLOR;
     
     self.cellPrototypes = @{eventCellId : [self.speakerTable dequeueReusableCellWithIdentifier:eventCellId],
                             headerCellId : [self.speakerTable dequeueReusableCellWithIdentifier:headerCellId],
@@ -89,7 +89,7 @@ static NSString *eventCellId = @"SpeakerEventCellId";
 {
     [super arrangeNavigationBar];
     
-    self.navigationController.navigationBar.tintColor = NAV_BAR_COLOR;
+//    self.navigationController.navigationBar.tintColor = NAV_BAR_COLOR;
     [self.navigationController.navigationBar setBackgroundImage: [UIImage imageWithColor:[UIColor clearColor]]
                                                   forBarMetrics: UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
@@ -119,7 +119,7 @@ static NSString *eventCellId = @"SpeakerEventCellId";
 
 -(UIStatusBarStyle)preferredStatusBarStyle
 {
-    return UIStatusBarStyleDefault;
+    return UIStatusBarStyleLightContent;
 }
 
 #pragma mark - Private
@@ -158,7 +158,7 @@ static NSString *eventCellId = @"SpeakerEventCellId";
             [self.cellsHeight setObject:[NSNumber numberWithFloat:height] forKey:headerCellId];
             
                 // this hardcoded value sets min cell height to avoid background image scaling. It depends on image size
-            self.backgroundViewHeight.constant = height < minBgHeight ? minBgHeight : height;
+            self.backgroundViewHeight.constant = height; //< minBgHeight ? minBgHeight : height;
             return self.backgroundViewHeight.constant;
         }
         case 1: //buttons cell
@@ -315,15 +315,15 @@ static NSString *eventCellId = @"SpeakerEventCellId";
             self.navBarBackgroundView.alpha = alpha;
             
                 // Nav bar tint color
-            CGFloat red = 0.0, green = 0.0, blue = 0.0, colorAlpha = alpha / maxAlpha;
-            [NAV_BAR_COLOR getRed:&red green:&green blue:&blue alpha:nil];
-            
-            self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:(red+(colorAlpha*(1-red)))
-                                                                                green:(green+(colorAlpha*(1-green)))
-                                                                                 blue:(blue+(colorAlpha*(1-blue)))
-                                                                                alpha:1.0];
-            self.currentBarColor = self.navigationController.navigationBar.tintColor;
-            
+//            CGFloat red = 0.0, green = 0.0, blue = 0.0, colorAlpha = alpha / maxAlpha;
+//            [NAV_BAR_COLOR getRed:&red green:&green blue:&blue alpha:nil];
+//            
+//            self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:(red+(colorAlpha*(1-red)))
+//                                                                                green:(green+(colorAlpha*(1-green)))
+//                                                                                 blue:(blue+(colorAlpha*(1-blue)))
+//                                                                                alpha:1.0];
+//            self.currentBarColor = self.navigationController.navigationBar.tintColor;
+//            
             self.navBarBackgroundTitleLabel.textColor = self.currentBarColor;
         }
     }

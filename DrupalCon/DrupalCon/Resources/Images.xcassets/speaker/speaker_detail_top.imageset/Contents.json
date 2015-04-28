@@ -7,12 +7,12 @@
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "Speakers det@2x.png"
+      "filename" : "speaker_detail_top@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "Speakers det@3x.png"
+      "filename" : "speaker_detail_top@3x.png"
     }
   ],
   "info" : {

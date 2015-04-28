@@ -99,7 +99,7 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
     [self arrangeNavigationBar];
     
     self.cellsHeight = [NSMutableDictionary dictionary];
-    self.currentBarColor = NAV_BAR_COLOR;
+    self.currentBarColor = [UIColor whiteColor];
     self.topTitleLabel.text = self.event.name;
     
     self.noDetailImageView.hidden = ![self hideEmptyDetailIcon];
@@ -126,7 +126,7 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
 
 -(UIStatusBarStyle)preferredStatusBarStyle
 {
-    return UIStatusBarStyleDefault;
+    return UIStatusBarStyleLightContent;
 }
 
 #pragma mark - UI initialization
@@ -149,7 +149,7 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
 {
     [super arrangeNavigationBar];
     
-    self.navigationController.navigationBar.tintColor = NAV_BAR_COLOR;
+//    self.navigationController.navigationBar.tintColor = NAV_BAR_COLOR;
     [self.navigationController.navigationBar setBackgroundImage: [UIImage imageWithColor:[UIColor clearColor]]
                                                   forBarMetrics: UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
@@ -345,14 +345,14 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
         self.topBackgroundShadowView.alpha = alpha;
         
             // Nav bar tint color
-        CGFloat red = 0.0, green = 0.0, blue = 0.0, colorAlpha = alpha / maxAlpha;
-        [NAV_BAR_COLOR getRed:&red green:&green blue:&blue alpha:nil];
-        
-        self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:(red+(colorAlpha*(1-red)))
-                                                                            green:(green+(colorAlpha*(1-green)))
-                                                                             blue:(blue+(colorAlpha*(1-blue)))
-                                                                            alpha:1.0];
-        self.currentBarColor = self.navigationController.navigationBar.tintColor;
+//        CGFloat red = 0.0, green = 0.0, blue = 0.0, colorAlpha = alpha / maxAlpha;
+//        [NAV_BAR_COLOR getRed:&red green:&green blue:&blue alpha:nil];
+//        
+//        self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:(red+(colorAlpha*(1-red)))
+//                                                                            green:(green+(colorAlpha*(1-green)))
+//                                                                             blue:(blue+(colorAlpha*(1-blue)))
+//                                                                            alpha:1.0];
+//        self.currentBarColor = self.navigationController.navigationBar.tintColor;
 
         
             // constraints setting
@@ -385,8 +385,8 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
                 [UIView animateWithDuration: 0.3f
                                  animations:^{
                                      self.topBackgroundShadowView.alpha = 0;
-                                     self.navigationController.navigationBar.tintColor = NAV_BAR_COLOR;
-                                     self.currentBarColor = self.navigationController.navigationBar.tintColor;
+//                                     self.navigationController.navigationBar.tintColor = NAV_BAR_COLOR;
+//                                     self.currentBarColor = self.navigationController.navigationBar.tintColor;
                                      [self.view layoutIfNeeded];
                                  }];
             }
