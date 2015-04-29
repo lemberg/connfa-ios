@@ -328,7 +328,8 @@
     // Is iphone 5,6
 
     if (IS_IPHONE_5 ) {
-        return 150;
+        
+        return 135;
     } else if (IS_STANDARD_IPHONE_6)
         return 240;
     else if (IS_STANDARD_IPHONE_6_PLUS)
