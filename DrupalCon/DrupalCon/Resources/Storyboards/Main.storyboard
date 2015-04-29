@@ -565,6 +565,42 @@
                                             <outlet property="selectedBackground" destination="c7F-0x-Dd6" id="MhW-Ua-gfZ"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AppSign" rowHeight="79" id="lzn-Tu-Qmq">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lzn-Tu-Qmq" id="7B5-b7-t7V">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="May 11-15" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eek-Pz-Kju" userLabel="date">
+                                                    <rect key="frame" x="108" y="8" width="104" height="26"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="26" id="jRg-aF-eeU"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="21"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Los Angeles, DrupalCon 2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DRQ-Td-vXz" userLabel="place">
+                                                    <rect key="frame" x="51" y="36" width="218" height="19"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="19" id="lbo-50-P1s"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="DRQ-Td-vXz" secondAttribute="bottom" constant="23" id="0qd-bh-NLq"/>
+                                                <constraint firstAttribute="centerX" secondItem="DRQ-Td-vXz" secondAttribute="centerX" id="QFB-SJ-q1Q"/>
+                                                <constraint firstItem="DRQ-Td-vXz" firstAttribute="top" secondItem="eek-Pz-Kju" secondAttribute="bottom" constant="2" id="Zmp-sb-ynL"/>
+                                                <constraint firstAttribute="centerX" secondItem="eek-Pz-Kju" secondAttribute="centerX" id="aWf-JB-7mf"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="rXy-Fh-Jkq" id="T1w-OS-cKj"/>

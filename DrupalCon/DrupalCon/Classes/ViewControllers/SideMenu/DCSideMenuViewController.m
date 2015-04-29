@@ -107,6 +107,8 @@
                                     kMenuItemIcon: @"menu_icon_about",
                                     kMenuItemSelectedIcon: @"menu_icon_about_sel",
                                     kMenuItemControllerId: @"InfoViewController"
+                                    },
+                                @{ kMenuItemTitle: @"Time and event place"
                                     }
                              ];
     
@@ -253,12 +255,17 @@
     return defaultStoryboardName;
 }
 
+- (BOOL)isLastMenuItemAtIndexPath:(NSIndexPath *)indexPath {
+    return [self.arrayOfCaptions count] - 1 == indexPath.row;
+}
 
 #pragma mark - UITableView delegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cellIdentifier = @"SideMenuCellIdentifier";
-    
+    if ([self isLastMenuItemAtIndexPath:indexPath]) {
+        return [tableView dequeueReusableCellWithIdentifier: @"AppSign"];
+    }
     DCSideMenuCell *cell = (DCSideMenuCell*)[tableView dequeueReusableCellWithIdentifier: cellIdentifier];
     
     NSDictionary *itemDict   = [self.arrayOfCaptions objectAtIndex: indexPath.row];
@@ -305,7 +312,32 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if ([self isLastMenuItemAtIndexPath:indexPath])
+        return [self heightForLastItem];
     return (indexPath.row % 3 == 2) ? 65 : 50;
 }
+
+#define IS_OS_8_OR_LATER    ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define IS_IPHONE_5 (IS_IPHONE && ([[UIScreen mainScreen] bounds].size.height == 568.0) && ((IS_OS_8_OR_LATER && [UIScreen mainScreen].nativeScale == [UIScreen mainScreen].scale) || !IS_OS_8_OR_LATER))
+#define IS_STANDARD_IPHONE_6 (IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 667.0  && IS_OS_8_OR_LATER && [UIScreen mainScreen].nativeScale == [UIScreen mainScreen].scale)
+
+#define IS_STANDARD_IPHONE_6_PLUS (IS_IPHONE && [[UIScreen mainScreen] bounds].size.height == 736.0)
+
+- (CGFloat)heightForLastItem {
+    // Is iphone 5,6
+
+    if (IS_IPHONE_5 ) {
+        
+        return 135;
+    } else if (IS_STANDARD_IPHONE_6)
+        return 240;
+    else if (IS_STANDARD_IPHONE_6_PLUS)
+        return 300;
+    else
+        return 80;
+}
+
+
 
 @end

@@ -466,9 +466,9 @@
 				849D92D519AE285700977D67 /* ProgramDetailCells */,
 				84A06E2C19ACA3D100104876 /* controls */,
 				84A06E2819ACA2B100104876 /* SpeakerCells */,
-				5D6449C719893B7E00BC1775 /* ProgramCells */,
 				5D38E69E1987A648006F7A59 /* DCtextField */,
 				5D38E69A1987A631006F7A59 /* MenuCell */,
+				5D6449C719893B7E00BC1775 /* ProgramCells */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1407,7 +1407,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Lyubomyr Dutko (FN2T3UCV4E)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DrupalCon/DrupalCon-Prefix.pch";
@@ -1418,7 +1418,7 @@
 					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "2b9d5e99-39e0-4914-8db1-9b80cfaf1826";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1429,7 +1429,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+<<<<<<< HEAD
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+=======
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Lyubomyr Dutko (FN2T3UCV4E)";
+>>>>>>> develop
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DrupalCon/DrupalCon-Prefix.pch";
@@ -1440,7 +1444,7 @@
 					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "2b9d5e99-39e0-4914-8db1-9b80cfaf1826";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
