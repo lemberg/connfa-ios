@@ -147,6 +147,9 @@
 		84FAE10919A65FEA00DC9FF1 /* DCTime+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAE10819A65FEA00DC9FF1 /* DCTime+DC.m */; };
 		84FAE10C19A6600900DC9FF1 /* DCTimeRange+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84FAE10B19A6600900DC9FF1 /* DCTimeRange+DC.m */; };
 		9E18FA441A56D0BE001475A7 /* DCCalendarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E18FA431A56D0BE001475A7 /* DCCalendarManager.m */; };
+		A60A90741B4BB6CC00C1F72E /* DCAppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A60A90731B4BB6CC00C1F72E /* DCAppSettings.m */; };
+		A60A90771B4BB79900C1F72E /* DCAppSettings+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A60A90761B4BB79900C1F72E /* DCAppSettings+DC.m */; };
+		A60A907A1B4C030300C1F72E /* DCDateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A60A90791B4C030300C1F72E /* DCDateHelper.m */; };
 		FA90B9A319C5893700873865 /* DCEventBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90B9A219C5893700873865 /* DCEventBaseCell.m */; };
 		FA90B9A619C589AE00873865 /* DCEventBaseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA90B9A519C589AE00873865 /* DCEventBaseCell.xib */; };
 		FA90B9A919C5A6C600873865 /* DCLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90B9A819C5A6C600873865 /* DCLabel.m */; };
@@ -430,6 +433,12 @@
 		84FAE10B19A6600900DC9FF1 /* DCTimeRange+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DCTimeRange+DC.m"; path = "Model/Categories/DCTimeRange+DC.m"; sourceTree = "<group>"; };
 		9E18FA421A56D0BE001475A7 /* DCCalendarManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCCalendarManager.h; sourceTree = "<group>"; };
 		9E18FA431A56D0BE001475A7 /* DCCalendarManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCalendarManager.m; sourceTree = "<group>"; };
+		A60A90721B4BB6CC00C1F72E /* DCAppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCAppSettings.h; path = Model/DCAppSettings.h; sourceTree = "<group>"; };
+		A60A90731B4BB6CC00C1F72E /* DCAppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCAppSettings.m; path = Model/DCAppSettings.m; sourceTree = "<group>"; };
+		A60A90751B4BB79900C1F72E /* DCAppSettings+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DCAppSettings+DC.h"; path = "Model/Categories/DCAppSettings+DC.h"; sourceTree = "<group>"; };
+		A60A90761B4BB79900C1F72E /* DCAppSettings+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DCAppSettings+DC.m"; path = "Model/Categories/DCAppSettings+DC.m"; sourceTree = "<group>"; };
+		A60A90781B4C030300C1F72E /* DCDateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCDateHelper.h; path = Classes/Helpers/DCDateHelper.h; sourceTree = "<group>"; };
+		A60A90791B4C030300C1F72E /* DCDateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCDateHelper.m; path = Classes/Helpers/DCDateHelper.m; sourceTree = "<group>"; };
 		A830F8571AD4315500E3DCFE /* main_2.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = main_2.0.xcdatamodel; sourceTree = "<group>"; };
 		FA90B9A119C5893700873865 /* DCEventBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCEventBaseCell.h; path = Classes/Views/ProgramCells/EventBaseCell/DCEventBaseCell.h; sourceTree = "<group>"; };
 		FA90B9A219C5893700873865 /* DCEventBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCEventBaseCell.m; path = Classes/Views/ProgramCells/EventBaseCell/DCEventBaseCell.m; sourceTree = "<group>"; };
@@ -611,6 +620,8 @@
 				7490116F1AC05DA900D79C2E /* UIImage+Extension.m */,
 				741A4E631A0285A40065FDB6 /* NSManagedObject+DC.h */,
 				741A4E641A0285A40065FDB6 /* NSManagedObject+DC.m */,
+				A60A90781B4C030300C1F72E /* DCDateHelper.h */,
+				A60A90791B4C030300C1F72E /* DCDateHelper.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -996,6 +1007,8 @@
 				74AB6CDF1AD442D80029D3F2 /* DCInfo.m */,
 				74AB6CE01AD442D80029D3F2 /* DCInfoCategory.h */,
 				74AB6CE11AD442D80029D3F2 /* DCInfoCategory.m */,
+				A60A90721B4BB6CC00C1F72E /* DCAppSettings.h */,
+				A60A90731B4BB6CC00C1F72E /* DCAppSettings.m */,
 			);
 			name = DataObjects;
 			sourceTree = "<group>";
@@ -1036,6 +1049,8 @@
 				1ACFD73A1A44A22E00F8EE57 /* DCInfoCategory+DC.m */,
 				1ACFD7361A449ECC00F8EE57 /* DCTwitter+DC.h */,
 				1ACFD7371A449ECC00F8EE57 /* DCTwitter+DC.m */,
+				A60A90751B4BB79900C1F72E /* DCAppSettings+DC.h */,
+				A60A90761B4BB79900C1F72E /* DCAppSettings+DC.m */,
 			);
 			name = DOCategories;
 			sourceTree = "<group>";
@@ -1217,6 +1232,7 @@
 				74DDDE731AD2AD1100C67124 /* DCFavoriteEventsDataSource.m in Sources */,
 				849EFE4119A5067000C43E05 /* DCType+DC.m in Sources */,
 				84DCDB291AA0BB8D00BA0097 /* DCMainNavigationController.m in Sources */,
+				A60A907A1B4C030300C1F72E /* DCDateHelper.m in Sources */,
 				1ACFD70E1A432BBC00F8EE57 /* DCFavoriteEvent.m in Sources */,
 				74E67C7219B6FDF400DF9D71 /* DCLocationViewController.m in Sources */,
 				7409E6661AB0820E003577F6 /* DCWebService.m in Sources */,
@@ -1225,6 +1241,7 @@
 				8496B4DB1ABB49DC00BF872D /* DCInfoViewController.m in Sources */,
 				74FF4BF91A164F320093C557 /* DCMainProxy.m in Sources */,
 				849D92C519ADEA8700977D67 /* DCSpeaker+DC.m in Sources */,
+				A60A90771B4BB79900C1F72E /* DCAppSettings+DC.m in Sources */,
 				1ACFD72F1A446AED00F8EE57 /* DCPoi+DC.m in Sources */,
 				5D38E69D1987A631006F7A59 /* DCSideMenuCell.m in Sources */,
 				1ACFD7141A432BBC00F8EE57 /* DCTwitter.m in Sources */,
@@ -1264,6 +1281,7 @@
 				741A4E621A026B120065FDB6 /* NSFileManager+DC.m in Sources */,
 				5DC8C421198656DB00BF5816 /* main.m in Sources */,
 				5DC8C47A19865C8400BF5816 /* DCSideMenuViewController.m in Sources */,
+				A60A90741B4BB6CC00C1F72E /* DCAppSettings.m in Sources */,
 				7409E6601AB081B4003577F6 /* DCMainEvent+DC.m in Sources */,
 				84D1CB521AA5FE5A00EEF33A /* DCLimitedNavigationController.m in Sources */,
 				74E8381B19C061CD000D2BE4 /* UIImageView+HighlightedWebCache.m in Sources */,
