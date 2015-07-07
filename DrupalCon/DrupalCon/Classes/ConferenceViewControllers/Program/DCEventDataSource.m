@@ -112,36 +112,36 @@ const NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
 {
     float currentHour = [self currentHour];
     NSInteger sectionNumber = 0;
-    
+    return;
     if (![NSDate dc_isDateInToday:self.selectedDay]) {
         self.actualEventIndexPath = nil;
         return;
     }
     
-    for (NSDictionary *sectionInfo in array) {
-        
-        DCTimeRange *timeRange = sectionInfo[kDCTimeslotKEY];
-        DCTimeRange *nextTimeRange = [array indexOfObject:sectionInfo] < array.count-1 ? [(NSDictionary*)[array objectAtIndex:[array indexOfObject:sectionInfo]+1] objectForKey:kDCTimeslotKEY] : nil;
-        
-        float from = timeRange.from.hour.integerValue + timeRange.from.minute.integerValue/60;
-        float to = timeRange.to.hour.integerValue + timeRange.to.minute.integerValue/60;
-        float fromInNext = nextTimeRange ? nextTimeRange.from.hour.integerValue + nextTimeRange.from.minute.integerValue/60 : -1;
-        
-            // if Current hour is in time range, return this time range
-        if (from <= currentHour && currentHour <= to) {
-            self.actualEventIndexPath = [NSIndexPath indexPathForItem:0 inSection:sectionNumber];
-            return;
-        }
-        
-            // if Current hour is between time ranges, return Next time range
-        if (currentHour < fromInNext)
-        {
-            self.actualEventIndexPath = [NSIndexPath indexPathForItem:0 inSection:sectionNumber];
-            return;
-        }
-
-        sectionNumber++;
-    }
+//    for (NSDictionary *sectionInfo in array) {
+//        
+//        DCTimeRange *timeRange = sectionInfo[kDCTimeslotKEY];
+//        DCTimeRange *nextTimeRange = [array indexOfObject:sectionInfo] < array.count-1 ? [(NSDictionary*)[array objectAtIndex:[array indexOfObject:sectionInfo]+1] objectForKey:kDCTimeslotKEY] : nil;
+//        
+//        float from = timeRange.from.hour.integerValue + timeRange.from.minute.integerValue/60;
+//        float to = timeRange.to.hour.integerValue + timeRange.to.minute.integerValue/60;
+//        float fromInNext = nextTimeRange ? nextTimeRange.from.hour.integerValue + nextTimeRange.from.minute.integerValue/60 : -1;
+//        
+//            // if Current hour is in time range, return this time range
+//        if (from <= currentHour && currentHour <= to) {
+//            self.actualEventIndexPath = [NSIndexPath indexPathForItem:0 inSection:sectionNumber];
+//            return;
+//        }
+//        
+//            // if Current hour is between time ranges, return Next time range
+//        if (currentHour < fromInNext)
+//        {
+//            self.actualEventIndexPath = [NSIndexPath indexPathForItem:0 inSection:sectionNumber];
+//            return;
+//        }
+//
+//        sectionNumber++;
+//    }
     
         // set the last Range
     self.actualEventIndexPath = [NSIndexPath indexPathForItem:0 inSection:sectionNumber>0 ? sectionNumber-1 : 0];
