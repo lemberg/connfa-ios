@@ -116,66 +116,66 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
     DCEvent * event = [self eventForIndexPath:indexPath];
     UITableViewCell *cell;
     
-    switch ([event getTypeID]) {
-        case DC_EVENT_NONE:
-        {
-            NSLog(@"WRONG! there is no Type for event: %@",event);
-        }
-        
-        case DC_EVENT_24h:
-        case DC_EVENT_SPEACH: {
-            DCSpeechCell *_cell = (DCSpeechCell *)[tableView dequeueReusableCellWithIdentifier: cellIdSpeech];
-            [self updateCell:_cell witEvent:event];
-            cell = _cell;
-            break;
-        }
-        case DC_EVENT_SPEACH_OF_DAY: {
-            DCSpeechOfDayCell *_cell = (DCSpeechOfDayCell*)[tableView dequeueReusableCellWithIdentifier: cellIdSpeechOfDay];
-            [self updateCell:_cell witEvent:event];
-            cell = _cell;
-            break;
-        }
-        case DC_EVENT_WALKING:
-        {
-            DCCofeeCell *_cell = (DCCofeeCell*)[tableView dequeueReusableCellWithIdentifier: cellIdCoffeBreak];
-            [_cell.leftImageView setImage:[UIImage imageNamed:@"program_walking_break"]];
-            _cell.startLabel.text = [event.timeRange.from stringValue];
-            _cell.endLabel.text = [event.timeRange.to stringValue];
-            [_cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            cell = _cell;
-            break;
-        }
-        case DC_EVENT_REGISTRATION:
-        {
-            DCCofeeCell *_cell = (DCCofeeCell*)[tableView dequeueReusableCellWithIdentifier: cellIdCoffeBreak];
-            [_cell.leftImageView setImage:[UIImage imageNamed:@"program_check_in"]];
-            _cell.startLabel.text = [event.timeRange.from stringValue];
-            _cell.endLabel.text = [event.timeRange.to stringValue];
-            [_cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            cell = _cell;
-            break;
-        }
-        case DC_EVENT_COFEE_BREAK: {
-            DCCofeeCell *_cell = (DCCofeeCell*)[tableView dequeueReusableCellWithIdentifier: cellIdCoffeBreak];
-            _cell.startLabel.text = [event.timeRange.from stringValue];
-            _cell.endLabel.text = [event.timeRange.to stringValue];
-            [_cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            cell = _cell;
-            break;
-        }
-        
-        case DC_EVENT_GROUP:
-        case DC_EVENT_LUNCH: {
-            DCLunchCell *_cell = (DCLunchCell*)[tableView dequeueReusableCellWithIdentifier: cellIdLunch];
-            _cell.startLabel.text = [event.timeRange.from stringValue];
-            _cell.endLabel.text = [event.timeRange.to stringValue];
-            [_cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-            cell = _cell;
-            break;
-        }
-        default:
-            break;
-    }
+//    switch ([event getTypeID]) {
+//        case DC_EVENT_NONE:
+//        {
+//            NSLog(@"WRONG! there is no Type for event: %@",event);
+//        }
+//        
+//        case DC_EVENT_24h:
+//        case DC_EVENT_SPEACH: {
+//            DCSpeechCell *_cell = (DCSpeechCell *)[tableView dequeueReusableCellWithIdentifier: cellIdSpeech];
+//            [self updateCell:_cell witEvent:event];
+//            cell = _cell;
+//            break;
+//        }
+//        case DC_EVENT_SPEACH_OF_DAY: {
+//            DCSpeechOfDayCell *_cell = (DCSpeechOfDayCell*)[tableView dequeueReusableCellWithIdentifier: cellIdSpeechOfDay];
+//            [self updateCell:_cell witEvent:event];
+//            cell = _cell;
+//            break;
+//        }
+//        case DC_EVENT_WALKING:
+//        {
+//            DCCofeeCell *_cell = (DCCofeeCell*)[tableView dequeueReusableCellWithIdentifier: cellIdCoffeBreak];
+//            [_cell.leftImageView setImage:[UIImage imageNamed:@"program_walking_break"]];
+//            _cell.startLabel.text = [event.timeRange.from stringValue];
+//            _cell.endLabel.text = [event.timeRange.to stringValue];
+//            [_cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+//            cell = _cell;
+//            break;
+//        }
+//        case DC_EVENT_REGISTRATION:
+//        {
+//            DCCofeeCell *_cell = (DCCofeeCell*)[tableView dequeueReusableCellWithIdentifier: cellIdCoffeBreak];
+//            [_cell.leftImageView setImage:[UIImage imageNamed:@"program_check_in"]];
+//            _cell.startLabel.text = [event.timeRange.from stringValue];
+//            _cell.endLabel.text = [event.timeRange.to stringValue];
+//            [_cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+//            cell = _cell;
+//            break;
+//        }
+//        case DC_EVENT_COFEE_BREAK: {
+//            DCCofeeCell *_cell = (DCCofeeCell*)[tableView dequeueReusableCellWithIdentifier: cellIdCoffeBreak];
+//            _cell.startLabel.text = [event.timeRange.from stringValue];
+//            _cell.endLabel.text = [event.timeRange.to stringValue];
+//            [_cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+//            cell = _cell;
+//            break;
+//        }
+//        
+//        case DC_EVENT_GROUP:
+//        case DC_EVENT_LUNCH: {
+//            DCLunchCell *_cell = (DCLunchCell*)[tableView dequeueReusableCellWithIdentifier: cellIdLunch];
+//            _cell.startLabel.text = [event.timeRange.from stringValue];
+//            _cell.endLabel.text = [event.timeRange.to stringValue];
+//            [_cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+//            cell = _cell;
+//            break;
+//        }
+//        default:
+//            break;
+//    }
     return cell;
 }
 
@@ -273,16 +273,16 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
     DCProgramHeaderCellView *headerViewCell = (DCProgramHeaderCellView*)[tableView dequeueReusableCellWithIdentifier: @"ProgramCellHeaderCell"];
     //    lets check if this date range contains some events that need a time period header, DCSpeechCelll and DCSPeechofTheDayCell, if its only coffe breaks or lunch - we dont display a header
     BOOL headerNeeded = [self headerNeededInSection: section];
-    if(headerNeeded) {
-        DCTimeRange * timeslot = [_timeslots[section] objectForKey:kDCTimeslotKEY];
-        [headerViewCell.leftImageView setImage:[[[_timeslots[section] objectForKey:kDCTimeslotEventKEY] firstObject] imageForEvent]];
-        headerViewCell.startLabel.text = [timeslot.from stringValue];
-        headerViewCell.endLabel.text = [timeslot.to stringValue];
-        // Hide time slot section when time is invalid
-        [headerViewCell hideTimeSection:![timeslot.from isTimeValid]];
-        [self removeGesturesFromView:headerViewCell.contentView];
-        return [headerViewCell contentView];
-    }
+//    if(headerNeeded) {
+//        DCTimeRange * timeslot = [_timeslots[section] objectForKey:kDCTimeslotKEY];
+//        [headerViewCell.leftImageView setImage:[[[_timeslots[section] objectForKey:kDCTimeslotEventKEY] firstObject] imageForEvent]];
+//        headerViewCell.startLabel.text = [timeslot.from stringValue];
+//        headerViewCell.endLabel.text = [timeslot.to stringValue];
+//        // Hide time slot section when time is invalid
+//        [headerViewCell hideTimeSection:![timeslot.from isTimeValid]];
+//        [self removeGesturesFromView:headerViewCell.contentView];
+//        return [headerViewCell contentView];
+//    }
     UIView *v = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 320, 0.0)];
     v.backgroundColor = [UIColor whiteColor];
     return v;

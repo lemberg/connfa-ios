@@ -30,12 +30,7 @@ static NSString * kDCSpeakerEventCellFormat = @"dd LLLL";
 
 @implementation NSDate (DC)
 
-+ (NSString*)currentUnixTimeString
-{
-    NSDate * now  = [NSDate date];
-    NSTimeInterval interval = [now timeIntervalSince1970];
-    return [NSString stringWithFormat:@"%f",interval];
-}
+
 
 + (NSDate*)fabricateWithEventString:(NSString*)string
 {
@@ -59,22 +54,32 @@ static NSString * kDCSpeakerEventCellFormat = @"dd LLLL";
         return NO;
 }
 
-- (NSString*)pageViewDateString
++ (NSDate *)dateFromString:(NSString *)formattedDate format:(NSString *)dateFormat
 {
-    NSDateFormatter *outPutDateFormat = [[NSDateFormatter alloc] init];
-    [outPutDateFormat setDateFormat:kDCEventViewOutputFormat];
-    [outPutDateFormat setTimeZone:T_ZERO];
-    NSString *theDate = [[outPutDateFormat stringFromDate:self] uppercaseString];
-    return theDate;
+    if (![formattedDate isKindOfClass:[NSString class]])
+    {
+        return nil;
+    }
+    
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    [dateFormatter setDateFormat:dateFormat];
+
+
+    return [dateFormatter dateFromString:formattedDate];
 }
 
-+ (NSString *)hourFormatForDate:(NSDate *)date
+- (NSString *)dateToStringWithFormat:(NSString *)dateFormat
 {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"h:mm aaa"];
-    NSString *dateDisplay = [dateFormatter stringFromDate:date];
-    return  dateDisplay;
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    dateFormatter.timeZone = T_ZERO;
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setDateFormat:dateFormat];
+    return [dateFormatter stringFromDate:self];
 }
+
+
+
 
 #pragma mark - private
 

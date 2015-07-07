@@ -27,7 +27,7 @@
 
 @interface DCTimeRange : NSManagedObject
 
-@property (nonatomic, retain) DCTime *from;
-@property (nonatomic, retain) DCTime *to;
+@property (nonatomic, retain) NSDate *from;
+@property (nonatomic, retain) NSDate *to;
 
 @end

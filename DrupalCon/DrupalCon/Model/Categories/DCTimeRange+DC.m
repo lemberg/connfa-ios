@@ -21,7 +21,7 @@
 //
 
 #import "DCTimeRange+DC.h"
-#import "DCTime+DC.h"
+#import "NSDate+DC.h"
 #import "NSManagedObject+DC.h"
 
 #import "DCMainProxy.h"
@@ -30,28 +30,26 @@
 
 - (NSString*)stringValue
 {
-    return [NSString stringWithFormat:@"%@ - %@", [self.from stringValue], [self.to stringValue]];
+    return [NSString stringWithFormat:@"%@ - %@", [self.from dateToStringWithFormat:@"h:mm aaa"], [self.to dateToStringWithFormat:@"h:mm aaa"]];
 }
 
 - (void)setFrom:(NSString *)from to:(NSString *)to
 {
-    self.from = [DCTime createManagedObjectInContext:self.managedObjectContext];//(DCTime*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCTime class]];
-    [self.from setTime:from];
-    self.to = [DCTime createManagedObjectInContext:self.managedObjectContext];//(DCTime*)[[DCMainProxy sharedProxy] createObjectOfClass:[DCTime class]];
-    [self.to setTime:to];
+    self.from = [NSDate dateFromString:from format:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
+    self.to  = [NSDate dateFromString:to format:@"yyyy-MM-dd'T'HH:mm:ssZZZZZ"];
 }
 
 - (BOOL)isEqualTo:(DCTimeRange *)timeRange
 {
     BOOL result = YES;
-    if (![[timeRange.from stringValue] isEqualToString:[self.from stringValue]])
-    {
+    if (![timeRange.from isEqualToDate:self.from]) {
         result = NO;
     }
-    if (![[timeRange.to stringValue] isEqualToString:[self.to stringValue]])
-    {
+    
+    if (![timeRange.to isEqualToDate:self.to]) {
         result = NO;
     }
+
     return result;
 }
 - (NSString*)description
