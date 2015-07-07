@@ -70,7 +70,7 @@
 {
     if (self.count) {
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:key
-                                                                       ascending:YES];
+                                                                       ascending:ascending];
         return [self sortedArrayUsingDescriptors:@[sortDescriptor]];
     }
     NSLog(@"WRONG! array for sort. events by id");
