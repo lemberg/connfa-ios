@@ -119,8 +119,11 @@ static NSInteger eventCellImageHeight = 16;
     self.eventImageHeight.constant = self.eventImageView.image ? eventCellImageHeight : 0;
     
         // Time  (left side)
-    self.startTimeLabel.text = self.isFirstCellInSection ? [NSString stringWithFormat:@"%@",[NSDate hourFormatForDate:event.startDate]] : nil;
-    self.endTimeLabel.text  = self.isFirstCellInSection ? [NSString stringWithFormat:@"to %@", [NSDate hourFormatForDate:event.endDate]] : nil;
+    NSString *startTime = [DCDateHelper convertDate:event.startDate toApplicationFormat:@"h:mm aaa"];
+    NSString *endTime   = [DCDateHelper convertDate:event.endDate toApplicationFormat:@"h:mm aaa"];
+
+    self.startTimeLabel.text = self.isFirstCellInSection ? [NSString stringWithFormat:@"%@", startTime] : nil;
+    self.endTimeLabel.text  = self.isFirstCellInSection ? [NSString stringWithFormat:@"to %@", endTime] : nil;
 
     self.separatorLeadingConstraint.constant = self.isLastCellInSection? 0 : self.leftSideWidth.constant + self.eventTitleLabelLeftPadding.constant;
     

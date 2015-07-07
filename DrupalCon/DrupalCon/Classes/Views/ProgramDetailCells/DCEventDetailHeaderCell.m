@@ -21,11 +21,16 @@
     self.titleLabel.text = event.name;
     
     // event Date
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat: @"EEE"];
-    NSString *date = event.date ? [formatter stringFromDate: event.date] : @"";
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    [formatter setDateFormat: @"EEE"];
     
-    date = [NSString stringWithFormat:@"%@, %@ - %@", [date uppercaseString], [NSDate hourFormatForDate:event.startDate], [NSDate hourFormatForDate:event.endDate]];
+    NSString *date = event.date ? [DCDateHelper convertDate:event.date toApplicationFormat:@"EEE"] : @"";
+    NSString *startTime = [DCDateHelper convertDate:event.startDate toApplicationFormat:@"h:mm aaa"];
+    NSString *endTime   = [DCDateHelper convertDate:event.endDate toApplicationFormat:@"h:mm aaa"];
+    date = [NSString stringWithFormat:@"%@, %@ - %@",
+            [date uppercaseString],
+            startTime,
+            endTime];
     
     
     NSString *place = event.place ? event.place : @"";
