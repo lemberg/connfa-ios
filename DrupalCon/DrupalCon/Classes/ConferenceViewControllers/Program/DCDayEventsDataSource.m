@@ -29,6 +29,8 @@
 - (void) moveTableToCurrentTime
 {
     self.tableView.alpha = 0;
+    [self updateActualEventIndexPathForTimeRange:[self timeRangeSlotsDictionary]];
+    
     [self.tableView scrollToRowAtIndexPath:self.actualEventIndexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
     
     [UIView transitionWithView:self.tableView
@@ -45,6 +47,13 @@
     [self loadEvents];
 }
 
+- (NSArray *)timeRangeSlotsDictionary {
+    NSMutableArray *timeRanges = [NSMutableArray array];
+    for (id <NSFetchedResultsSectionInfo> sectionInfo in [self.fetchedResultController sections]) {
+        [timeRanges addObject:@{kDCTimeslotKEY: sectionInfo.objects.firstObject}];
+    }
+    return timeRanges;
+}
 
 - (NSArray *)eventsForDay
 {
@@ -107,6 +116,7 @@
     if (error)
         NSLog(@"%@", error);
     [self.tableView reloadData];
+    [self moveTableToCurrentTime];
 }
 
 
