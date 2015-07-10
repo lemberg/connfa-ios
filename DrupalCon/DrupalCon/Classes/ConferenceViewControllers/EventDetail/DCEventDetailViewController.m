@@ -56,7 +56,7 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint* topBackgroundTop;
 
-@property (nonatomic, weak, readonly) NSArray* speakers;
+@property (nonatomic, strong) NSArray* speakers;
 
 @property (nonatomic, strong) NSIndexPath *lastIndexPath;
 @property (nonatomic, strong) NSMutableDictionary *cellsHeight;
@@ -104,6 +104,8 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
     
     self.noDetailImageView.hidden = ![self hideEmptyDetailIcon];
     self.tableView.scrollEnabled = ![self hideEmptyDetailIcon];
+    
+    [self initSpeakers];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -181,9 +183,14 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
 
 #pragma mark - Private
 
-- (NSArray*) speakers
-{
-    return [self.event.speakers allObjects];
+- (void) initSpeakers {
+    NSArray *sortedSpeakers = [self.event.speakers.allObjects sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+        NSInteger first = [(DCSpeaker*)a speakerId].integerValue;
+        NSInteger second = [(DCSpeaker*)b speakerId].integerValue;
+        return first<second;
+    }];
+    
+    self.speakers = sortedSpeakers;
 }
 
 - (void)updateCellAtIndexPath
