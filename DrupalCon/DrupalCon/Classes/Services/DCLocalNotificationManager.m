@@ -24,6 +24,8 @@
 #import "DCEvent+DC.h"
 #import "DCTime.h"
 #import "DCTimeRange.h"
+#import "DCCalendarManager.h"
+#import "DCMainProxy.h"
 
 @implementation DCLocalNotificationManager
 
@@ -53,6 +55,7 @@ static  const NSString * kEventId = @"EventID";
     localNotif.userInfo = infoDict;
     
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
+    [DCCalendarManager addEventWithItem:item];
 }
 
 + (void)cancelLocalNotificationWithId:(NSNumber *)eventID
@@ -64,6 +67,8 @@ static  const NSString * kEventId = @"EventID";
             [app cancelLocalNotification: event];
         }
     }
+    NSArray* event = [[DCMainProxy sharedProxy] eventsWithIDs:@[eventID]];
+    [DCCalendarManager removeEventOfItem:event.lastObject];
 }
 
 @end
