@@ -107,23 +107,6 @@ static int const kGaDispatchPeriod = 30;
     
 }
 
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
-{
-    UIApplicationState state = [application applicationState];
-    if (state == UIApplicationStateActive) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reminder"
-                                                        message:notification.alertBody
-                                                       delegate:self cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
-    } else {
-        self.localNotification = notification;
-    }
-    
-    NSLog(@"Push notification come");
-    application.applicationIconBadgeNumber = 0;
-}
-
 - (void)initializeGoogleAnalytics
 {
     [[GAI sharedInstance] setDispatchInterval:kGaDispatchPeriod];

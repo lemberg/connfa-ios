@@ -31,7 +31,6 @@
 #import "DCLevel+DC.h"
 #import "DCTrack+DC.h"
 #import "DCLocation+DC.h"
-#import "DCFavoriteEvent.h"
 
 #import "NSDate+DC.h"
 #import "NSUserDefaults+DC.h"
@@ -48,12 +47,12 @@
 
 //TODO: remove import after calendar will be intagrated
 #import "AppDelegate.h"
-#import "DCLocalNotificationManager.h"
 #import "DCLoginViewController.h"
 #import "DCMainNavigationController.h"
 //
 
 #import "DCImportDataSevice.h"
+#import "DCCalendarManager.h"
 
 const NSString * INVALID_JSON_EXCEPTION = @"Invalid JSON";
 
@@ -329,20 +328,18 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 
 - (void)addToFavoriteEvent:(DCEvent *)event
 {
-    DCFavoriteEvent *favoriteEvent = [DCFavoriteEvent createManagedObjectInContext:self.newMainQueueContext];
-    favoriteEvent.eventID = event.eventId;
+    event.favorite = [NSNumber numberWithBool:YES];
+    [[DCCoreDataStore defaultStore] saveWithCompletionBlock:nil];
     
-    if (event.startDate.timeIntervalSinceNow >= 0) // don't schedule last Events
-    {
-        [DCLocalNotificationManager scheduleNotificationWithItem:event interval:5];
-    }
-    
-    [self saveContext];
+    [DCCalendarManager addEventWithItem:event interval:5];
 }
 
-- (void)removeFavoriteEventWithID:(NSNumber *)eventID
+- (void)removeFavoriteEventWithID:(DCEvent *)event
 {
-    [DCLocalNotificationManager cancelLocalNotificationWithId:eventID];
+    event.favorite = [NSNumber numberWithBool:NO];
+    [[DCCoreDataStore defaultStore] saveWithCompletionBlock:nil];
+    
+    [DCCalendarManager removeEventOfItem:event];
 }
 
 - (void)openLocalNotification:(UILocalNotification *)localNotification
@@ -386,9 +383,6 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 {
     [self.defaultPrivateContext rollback];
 }
-
-
-
 
 #pragma mark - Core Data stack
 

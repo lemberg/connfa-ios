@@ -244,11 +244,10 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
                              withValue:(BOOL)isFavorite {
     
     DCEvent * event = [self eventForIndexPath:anIndexPath];
-    event.favorite = [NSNumber numberWithBool:isFavorite];
     if (isFavorite) {
         [[DCMainProxy sharedProxy] addToFavoriteEvent:event];
     } else {
-        [[DCMainProxy sharedProxy] removeFavoriteEventWithID:event.eventId];
+        [[DCMainProxy sharedProxy] removeFavoriteEventWithID:event];
     }
 }
 

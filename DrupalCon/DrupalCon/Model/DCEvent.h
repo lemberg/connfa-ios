@@ -30,7 +30,6 @@
 @property (nonatomic, retain) NSDate * date;
 @property (nonatomic, retain) NSString * desctiptText;
 @property (nonatomic, retain) NSNumber * eventId;
-@property (nonatomic, retain) NSNumber * favorite;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * link;
 @property (nonatomic, retain) NSString * place;
@@ -40,6 +39,10 @@
 @property (nonatomic, retain) DCTimeRange *timeRange;
 @property (nonatomic, retain) NSSet *tracks;
 @property (nonatomic, retain) DCType *type;
+
+@property (nonatomic, retain) NSNumber * favorite;
+@property (nonatomic, retain) NSString * calendarId;
+
 @end
 
 @interface DCEvent (CoreDataGeneratedAccessors)

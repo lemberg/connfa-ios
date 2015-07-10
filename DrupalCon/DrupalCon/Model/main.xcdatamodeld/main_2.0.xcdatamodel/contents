@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14D136" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14A389" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="DCAppSettings" representedClassName="DCAppSettings" syncable="YES">
         <attribute name="eventTimeZone" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
@@ -9,6 +9,7 @@
         </fetchedProperty>
     </entity>
     <entity name="DCEvent" representedClassName="DCEvent" isAbstract="YES" syncable="YES">
+        <attribute name="calendarId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="desctiptText" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eventId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -22,9 +23,6 @@
         <relationship name="timeRange" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DCTimeRange" syncable="YES"/>
         <relationship name="tracks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DCTrack" inverseName="events" inverseEntity="DCTrack" syncable="YES"/>
         <relationship name="type" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DCType" inverseName="events" inverseEntity="DCType" syncable="YES"/>
-    </entity>
-    <entity name="DCFavoriteEvent" representedClassName="DCFavoriteEvent" syncable="YES">
-        <attribute name="eventID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="DCHousePlan" representedClassName="DCHousePlan" syncable="YES">
         <attribute name="housePlanId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
@@ -106,9 +104,9 @@
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DCEvent" inverseName="type" inverseEntity="DCEvent" syncable="YES"/>
     </entity>
     <elements>
+        <element name="DCAppSettings" positionX="-6012" positionY="-1638" width="128" height="58"/>
         <element name="DCBof" positionX="-5427" positionY="-2142" width="128" height="74"/>
-        <element name="DCEvent" positionX="-5744" positionY="-2142" width="128" height="238"/>
-        <element name="DCFavoriteEvent" positionX="-5231" positionY="-2205" width="128" height="58"/>
+        <element name="DCEvent" positionX="-5744" positionY="-2142" width="128" height="255"/>
         <element name="DCHousePlan" positionX="-5141" positionY="-1626" width="128" height="103"/>
         <element name="DCInfo" positionX="-5330" positionY="-1989" width="128" height="90"/>
         <element name="DCInfoCategory" positionX="-5123" positionY="-1998" width="128" height="118"/>
@@ -118,10 +116,9 @@
         <element name="DCPoi" positionX="-5301" positionY="-1654" width="128" height="133"/>
         <element name="DCSocialEvent" positionX="-5499" positionY="-2016" width="128" height="45"/>
         <element name="DCSpeaker" positionX="-5733" positionY="-1744" width="128" height="223"/>
+        <element name="DCTimeRange" positionX="-5562" positionY="-1944" width="128" height="73"/>
         <element name="DCTrack" positionX="-5994" positionY="-1998" width="128" height="120"/>
         <element name="DCTwitter" positionX="-5373" positionY="-1827" width="128" height="58"/>
         <element name="DCType" positionX="-5969" positionY="-1879" width="128" height="118"/>
-        <element name="DCAppSettings" positionX="-6012" positionY="-1638" width="128" height="58"/>
-        <element name="DCTimeRange" positionX="-5562" positionY="-1944" width="128" height="73"/>
     </elements>
 </model>

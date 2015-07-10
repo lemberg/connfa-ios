@@ -15,7 +15,6 @@
 		1ACFD7021A432BBB00F8EE57 /* DCLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACFD7011A432BBB00F8EE57 /* DCLocation.m */; };
 		1ACFD7051A432BBC00F8EE57 /* DCLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACFD7041A432BBC00F8EE57 /* DCLevel.m */; };
 		1ACFD70B1A432BBC00F8EE57 /* DCHousePlan.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACFD70A1A432BBC00F8EE57 /* DCHousePlan.m */; };
-		1ACFD70E1A432BBC00F8EE57 /* DCFavoriteEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACFD70D1A432BBC00F8EE57 /* DCFavoriteEvent.m */; };
 		1ACFD7111A432BBC00F8EE57 /* DCSocialEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACFD7101A432BBC00F8EE57 /* DCSocialEvent.m */; };
 		1ACFD7141A432BBC00F8EE57 /* DCTwitter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACFD7131A432BBC00F8EE57 /* DCTwitter.m */; };
 		1ACFD7171A432BBC00F8EE57 /* DCTimeRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 1ACFD7161A432BBC00F8EE57 /* DCTimeRange.m */; };
@@ -102,7 +101,6 @@
 		74F159CB19B9DD750033B31F /* DCFavoriteSourceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 74F159CA19B9DD750033B31F /* DCFavoriteSourceManager.m */; };
 		74FF4BF51A164F320093C557 /* DCCoreDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FF4BE81A164F320093C557 /* DCCoreDataStore.m */; };
 		74FF4BF61A164F320093C557 /* DCImportDataSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FF4BEA1A164F320093C557 /* DCImportDataSevice.m */; };
-		74FF4BF71A164F320093C557 /* DCLocalNotificationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FF4BEC1A164F320093C557 /* DCLocalNotificationManager.m */; };
 		74FF4BF81A164F320093C557 /* DCMainProxy+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FF4BEE1A164F320093C557 /* DCMainProxy+Additions.m */; };
 		74FF4BF91A164F320093C557 /* DCMainProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FF4BF01A164F320093C557 /* DCMainProxy.m */; };
 		74FF4BFA1A164F320093C557 /* DCParserService.m in Sources */ = {isa = PBXBuildFile; fileRef = 74FF4BF21A164F320093C557 /* DCParserService.m */; };
@@ -172,8 +170,6 @@
 		1ACFD7041A432BBC00F8EE57 /* DCLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCLevel.m; path = Model/DCLevel.m; sourceTree = "<group>"; };
 		1ACFD7091A432BBC00F8EE57 /* DCHousePlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCHousePlan.h; path = Model/DCHousePlan.h; sourceTree = "<group>"; };
 		1ACFD70A1A432BBC00F8EE57 /* DCHousePlan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCHousePlan.m; path = Model/DCHousePlan.m; sourceTree = "<group>"; };
-		1ACFD70C1A432BBC00F8EE57 /* DCFavoriteEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCFavoriteEvent.h; path = Model/DCFavoriteEvent.h; sourceTree = "<group>"; };
-		1ACFD70D1A432BBC00F8EE57 /* DCFavoriteEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCFavoriteEvent.m; path = Model/DCFavoriteEvent.m; sourceTree = "<group>"; };
 		1ACFD70F1A432BBC00F8EE57 /* DCSocialEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCSocialEvent.h; path = Model/DCSocialEvent.h; sourceTree = "<group>"; };
 		1ACFD7101A432BBC00F8EE57 /* DCSocialEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCSocialEvent.m; path = Model/DCSocialEvent.m; sourceTree = "<group>"; };
 		1ACFD7121A432BBC00F8EE57 /* DCTwitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCTwitter.h; path = Model/DCTwitter.h; sourceTree = "<group>"; };
@@ -340,8 +336,6 @@
 		74FF4BE81A164F320093C557 /* DCCoreDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCCoreDataStore.m; sourceTree = "<group>"; };
 		74FF4BE91A164F320093C557 /* DCImportDataSevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCImportDataSevice.h; sourceTree = "<group>"; };
 		74FF4BEA1A164F320093C557 /* DCImportDataSevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCImportDataSevice.m; sourceTree = "<group>"; };
-		74FF4BEB1A164F320093C557 /* DCLocalNotificationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCLocalNotificationManager.h; sourceTree = "<group>"; };
-		74FF4BEC1A164F320093C557 /* DCLocalNotificationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCLocalNotificationManager.m; sourceTree = "<group>"; };
 		74FF4BED1A164F320093C557 /* DCMainProxy+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DCMainProxy+Additions.h"; sourceTree = "<group>"; };
 		74FF4BEE1A164F320093C557 /* DCMainProxy+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DCMainProxy+Additions.m"; sourceTree = "<group>"; };
 		74FF4BEF1A164F320093C557 /* DCMainProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCMainProxy.h; sourceTree = "<group>"; };
@@ -914,8 +908,6 @@
 				74FF4BE81A164F320093C557 /* DCCoreDataStore.m */,
 				74FF4BE91A164F320093C557 /* DCImportDataSevice.h */,
 				74FF4BEA1A164F320093C557 /* DCImportDataSevice.m */,
-				74FF4BEB1A164F320093C557 /* DCLocalNotificationManager.h */,
-				74FF4BEC1A164F320093C557 /* DCLocalNotificationManager.m */,
 				74FF4BED1A164F320093C557 /* DCMainProxy+Additions.h */,
 				74FF4BEE1A164F320093C557 /* DCMainProxy+Additions.m */,
 				74FF4BEF1A164F320093C557 /* DCMainProxy.h */,
@@ -987,8 +979,6 @@
 				1ACFD7131A432BBC00F8EE57 /* DCTwitter.m */,
 				1ACFD70F1A432BBC00F8EE57 /* DCSocialEvent.h */,
 				1ACFD7101A432BBC00F8EE57 /* DCSocialEvent.m */,
-				1ACFD70C1A432BBC00F8EE57 /* DCFavoriteEvent.h */,
-				1ACFD70D1A432BBC00F8EE57 /* DCFavoriteEvent.m */,
 				1ACFD7091A432BBC00F8EE57 /* DCHousePlan.h */,
 				1ACFD70A1A432BBC00F8EE57 /* DCHousePlan.m */,
 				1ACFD7031A432BBC00F8EE57 /* DCLevel.h */,
@@ -1158,11 +1148,6 @@
 				CLASSPREFIX = DC;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Lemberg Solution";
-				TargetAttributes = {
-					5DC8C410198656DA00BF5816 = {
-						DevelopmentTeam = J7LBYY3B34;
-					};
-				};
 			};
 			buildConfigurationList = 5DC8C40C198656DA00BF5816 /* Build configuration list for PBXProject "DrupalCon" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1233,7 +1218,6 @@
 				849EFE4119A5067000C43E05 /* DCType+DC.m in Sources */,
 				84DCDB291AA0BB8D00BA0097 /* DCMainNavigationController.m in Sources */,
 				A60A907A1B4C030300C1F72E /* DCDateHelper.m in Sources */,
-				1ACFD70E1A432BBC00F8EE57 /* DCFavoriteEvent.m in Sources */,
 				74E67C7219B6FDF400DF9D71 /* DCLocationViewController.m in Sources */,
 				7409E6661AB0820E003577F6 /* DCWebService.m in Sources */,
 				84ABE8F519BEEB8F0019D5DC /* DCEventStrategy.m in Sources */,
@@ -1246,7 +1230,6 @@
 				5D38E69D1987A631006F7A59 /* DCSideMenuCell.m in Sources */,
 				1ACFD7141A432BBC00F8EE57 /* DCTwitter.m in Sources */,
 				5DC8C46E198658FF00BF5816 /* MFSideMenuShadow.m in Sources */,
-				74FF4BF71A164F320093C557 /* DCLocalNotificationManager.m in Sources */,
 				5D38E696198692E9006F7A59 /* DCSpeakersViewController.m in Sources */,
 				84F601451A9B970B0077BA85 /* DCFilterViewController.m in Sources */,
 				84A24FB519C1B254006EF17E /* DCSpeechBaseCell.m in Sources */,
@@ -1426,7 +1409,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Lyubomyr Dutko (FN2T3UCV4E)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Lyubomyr Dutko (FN2T3UCV4E)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DrupalCon/DrupalCon-Prefix.pch";
 				INFOPLIST_FILE = "DrupalCon/DrupalCon-Info.plist";
@@ -1436,7 +1419,7 @@
 					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2b9d5e99-39e0-4914-8db1-9b80cfaf1826";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1448,7 +1431,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Lyubomyr Dutko (FN2T3UCV4E)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Lyubomyr Dutko (FN2T3UCV4E)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DrupalCon/DrupalCon-Prefix.pch";
 				INFOPLIST_FILE = "DrupalCon/DrupalCon-Info.plist";
@@ -1458,7 +1441,7 @@
 					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "2b9d5e99-39e0-4914-8db1-9b80cfaf1826";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};

@@ -406,13 +406,11 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
     
     sender.image = isSelected ? [UIImage imageNamed:@"star+"] : [UIImage imageNamed:@"star-"];
     
-    self.event.favorite = [NSNumber numberWithBool:isSelected];
-    
     if (isSelected)
     {
         [[DCMainProxy sharedProxy] addToFavoriteEvent:self.event];
     } else {
-        [[DCMainProxy sharedProxy] removeFavoriteEventWithID:self.event.eventId];
+        [[DCMainProxy sharedProxy] removeFavoriteEventWithID:self.event];
     }
 }
 

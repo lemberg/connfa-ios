@@ -76,7 +76,7 @@ typedef enum {
 //FIXME: separate Favorites to favoriteManager
 
 - (void)addToFavoriteEvent:(DCEvent *)event;
-- (void)removeFavoriteEventWithID:(NSNumber *)eventID;
+- (void)removeFavoriteEventWithID:(DCEvent *)event;
 - (NSArray *)eventsWithIDs:(NSArray *)iDs;
 - (void)openLocalNotification:(UILocalNotification *)localNotification;
 
