@@ -205,25 +205,11 @@ const NSString * kDCEventOrderKey = @"order";
 }
 
 - (NSDate *)startDate {
-    unsigned unitFlags      = NSCalendarUnitYear | NSCalendarUnitMonth |  NSCalendarUnitDay;
-    NSCalendar *calendar    = [NSCalendar currentCalendar];
-    NSDateComponents *comps = [calendar components:unitFlags fromDate:self.date];
-    comps.hour              = [self.timeRange.from.hour integerValue];
-    comps.minute            = [self.timeRange.from.minute integerValue];
-    comps.second            = 0;
-    
-    return [calendar dateFromComponents:comps];
+    return self.timeRange.from;
 }
 
 - (NSDate *)endDate {
-    unsigned unitFlags      = NSCalendarUnitYear | NSCalendarUnitMonth |  NSCalendarUnitDay;
-    NSCalendar *calendar    = [NSCalendar currentCalendar];
-    NSDateComponents *comps = [calendar components:unitFlags fromDate:self.date];
-    comps.hour              = [self.timeRange.to.hour integerValue];
-    comps.minute            = [self.timeRange.to.minute integerValue];
-    comps.second            = 0;
-    
-    return [calendar dateFromComponents:comps];
+    return self.timeRange.to;
 }
 
 

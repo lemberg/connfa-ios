@@ -245,11 +245,11 @@ static NSString *const cellIdSpeechOfDay = @"ProgramCellIdentifierSpeechOfDay";
     
     DCTimeRange * timeslot = [self.favoriteSourceMng timeRangeForSection:(int)section];
     [headerViewCell.leftImageView setImage:[[self DC_eventForIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]] imageForEvent]];
-    headerViewCell.startLabel.text = [timeslot.from stringValue];
-    headerViewCell.endLabel.text = [timeslot.to stringValue];
+//    headerViewCell.startLabel.text = [timeslot.from ];
+//    headerViewCell.endLabel.text = [timeslot.to stringValue];
     headerViewCell.dateLabel.text = [self.favoriteSourceMng dateForSection:(int)section];
     // Hide time slot section when time is invalid
-    [headerViewCell hideTimeSection:![timeslot.from isTimeValid]];
+//    [headerViewCell hideTimeSection:![timeslot.from isTimeValid]];
     [self removeGesturesFromView:headerViewCell.contentView];
     return [headerViewCell contentView];
     

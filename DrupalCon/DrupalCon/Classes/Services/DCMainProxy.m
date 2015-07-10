@@ -42,6 +42,7 @@
 #import "DCParserService.h"
 #import "NSManagedObject+DC.h"
 #import "DCCoreDataStore.h"
+#import "DCAppSettings.h"
 
 #import "DCManagedObjectUpdateProtocol.h"
 
@@ -69,6 +70,8 @@ typedef void(^UpdateDataFail)(NSString *reason);
 @property (nonatomic, copy) __block void(^dataReadyCallback)(DCMainProxyState mainProxyState);
 //
 @property (strong, nonatomic) DCImportDataSevice *importDataService;
+
+@property (nonatomic) NSTimeZone *applicationTimeZone;
 
 @end
 
@@ -107,6 +110,16 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     [self setState:(![self.importDataService isInitDataImport])? DCMainProxyStateDataReady : DCMainProxyStateNoData];
 }
 
+- (NSTimeZone *)eventTimeZone {
+
+    if (!self.applicationTimeZone) {
+        NSArray *settings = [[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCAppSettings class] inContext:[self defaultPrivateContext]];
+        DCAppSettings *appSetting = [settings lastObject];
+        NSInteger timeZoneHourOffset = appSetting.eventTimeZone.integerValue;
+        self.applicationTimeZone = [NSTimeZone timeZoneForSecondsFromGMT:60 * 60 * timeZoneHourOffset];
+    }
+    return self.applicationTimeZone;
+}
 
 - (void)setDataReadyCallback:(void (^)(DCMainProxyState))dataReadyCallback
 {

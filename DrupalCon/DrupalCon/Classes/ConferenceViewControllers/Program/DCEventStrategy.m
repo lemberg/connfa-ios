@@ -26,7 +26,6 @@
 
 @interface DCEventStrategy ()
 
-@property (nonatomic, strong) Class eventClass;
 // Only for favorite events
 @property (nonatomic, strong) UIColor *leftSectionContainerColor;
 

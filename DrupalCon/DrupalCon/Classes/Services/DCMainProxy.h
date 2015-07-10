@@ -59,6 +59,7 @@ typedef enum {
 - (void)checkReachable;
 
 #pragma mark - work with instances
+- (NSTimeZone *)eventTimeZone;
 
 - (NSArray*)getAllInstancesOfClass:(Class)aClass inMainQueue:(BOOL)mainQueue;
 - (NSArray*)getAllInstancesOfClass:(Class)aClass predicate:(NSPredicate*)aPredicate inMainQueue:(BOOL)mainQueue;

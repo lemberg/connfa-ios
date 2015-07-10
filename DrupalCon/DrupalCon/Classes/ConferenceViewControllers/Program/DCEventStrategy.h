@@ -36,6 +36,7 @@ typedef enum {
 
 @property (nonatomic) EDCEventStrategy strategy;
 @property (nonatomic, strong) NSPredicate *predicate;
+@property (nonatomic, strong) Class eventClass;
 
 - (instancetype)initWithStrategy:(EDCEventStrategy)strategy;
 
