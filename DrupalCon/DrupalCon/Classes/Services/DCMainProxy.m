@@ -183,11 +183,11 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                [[[UIAlertView alloc] initWithTitle:@"Attention"
-                                            message:@"Internet connection is not available at this moment. Please, try later"
-                                           delegate:nil
-                                  cancelButtonTitle:@"Ok"
-                                  otherButtonTitles:nil] show];
+//                [[[UIAlertView alloc] initWithTitle:@"Attention"
+//                                            message:@"Internet connection is not available at this moment. Please, try later"
+//                                           delegate:nil
+//                                  cancelButtonTitle:@"Ok"
+//                                  otherButtonTitles:nil] show];
             });
         }
         else
@@ -202,14 +202,14 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 
 - (void)checkReachable {
     
-    Reachability * reach = [Reachability reachabilityWithHostname:@"google.com"];
-    
-    if (!reach.isReachable)
-        [[[UIAlertView alloc] initWithTitle:@"Attention"
-                                    message:@"Internet connection is not available at this moment. Please, try later"
-                                   delegate:nil
-                          cancelButtonTitle:@"Ok"
-                          otherButtonTitles:nil] show];
+//    Reachability * reach = [Reachability reachabilityWithHostname:@"google.com"];
+//    
+//    if (!reach.isReachable)
+//        [[[UIAlertView alloc] initWithTitle:@"Attention"
+//                                    message:@"Internet connection is not available at this moment. Please, try later"
+//                                   delegate:nil
+//                          cancelButtonTitle:@"Ok"
+//                          otherButtonTitles:nil] show];
 }
 
 
