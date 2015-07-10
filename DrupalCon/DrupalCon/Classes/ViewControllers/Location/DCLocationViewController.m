@@ -119,6 +119,11 @@
         self.streetAndNumberLabel.text = streetAndHouse.length ? [NSString stringWithFormat:@"%@,", streetAndHouse] : nil;
         self.cityAndProvinceLabel.text = cityAndProvince.length ? [NSString stringWithFormat:@"%@,", cityAndProvince] : nil;
         self.stateLabel.text = state;
+    } else {
+        self.addressLabel.text = @"Location is not available";
+        self.streetAndNumberLabel.text = @"";//streetAndHouse.length ? [NSString stringWithFormat:@"%@,", streetAndHouse] : nil;
+        self.cityAndProvinceLabel.text =@"";// cityAndProvince.length ? [NSString stringWithFormat:@"%@,", cityAndProvince] : nil;
+        self.stateLabel.text = @"";
     }
 }
 
