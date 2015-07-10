@@ -112,7 +112,7 @@ const NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
 {
     float currentHour = [self currentHour];
     NSInteger sectionNumber = 0;
-    return;
+
     if (![NSDate dc_isDateInToday:self.selectedDay]) {
         self.actualEventIndexPath = nil;
         return;

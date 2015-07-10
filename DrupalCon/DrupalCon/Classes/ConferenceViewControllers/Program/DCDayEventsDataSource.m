@@ -50,7 +50,8 @@
 - (NSArray *)timeRangeSlotsDictionary {
     NSMutableArray *timeRanges = [NSMutableArray array];
     for (id <NSFetchedResultsSectionInfo> sectionInfo in [self.fetchedResultController sections]) {
-        [timeRanges addObject:@{kDCTimeslotKEY: sectionInfo.objects.firstObject}];
+        DCEvent *event = sectionInfo.objects.firstObject;
+        [timeRanges addObject:@{kDCTimeslotKEY: event.timeRange}];
     }
     return timeRanges;
 }

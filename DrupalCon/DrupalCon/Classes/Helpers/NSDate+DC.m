@@ -43,8 +43,12 @@ static NSString * kDCSpeakerEventCellFormat = @"dd LLLL";
 
 + (BOOL)dc_isDateInToday:(NSDate *)date
 {
-    NSDateComponents *otherDay = [[NSCalendar currentCalendar] components:NSEraCalendarUnit|NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
+    NSCalendar *gregorian = [[NSCalendar alloc]
+                             initWithCalendarIdentifier:NSGregorianCalendar];
+    gregorian.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    NSDateComponents *otherDay = [gregorian components:NSEraCalendarUnit|NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
     NSDateComponents *today = [[NSCalendar currentCalendar] components:NSEraCalendarUnit|NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:[NSDate date]];
+    today.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
     if([today day] == [otherDay day] &&
        [today month] == [otherDay month] &&
        [today year] == [otherDay year] &&

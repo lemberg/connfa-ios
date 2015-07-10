@@ -193,7 +193,7 @@
     [self.dateLabel.layer addAnimation:animation forKey:@"kCATransitionFade"];
     
     NSDate * date = _days[day];
-    self.dateLabel.text = date ? [DCDateHelper convertDate:date toApplicationFormat:@"EEEE dd"] : nil;
+    self.dateLabel.text = date ? [DCDateHelper convertDate:date toDefaultTimeFormat:@"EEEE dd"] : nil;
 }
 
 - (NSArray*)createViewControllersForDays:(NSArray*)aDays

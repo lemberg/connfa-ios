@@ -17,4 +17,8 @@
     return [eventLocalTime dateToStringWithFormat:format];
 }
 
++ (NSString *)convertDate:(NSDate *)date toDefaultTimeFormat:(NSString *)format
+{
+    return [date dateToStringWithFormat:format];
+}
 @end
