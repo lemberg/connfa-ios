@@ -25,6 +25,9 @@
 #import "UIConstants.h"
 #import "GAI.h"
 #import "DCLevel+DC.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 
 /** Google Analytics configuration constants **/
 static NSString *const kGaPropertyId = @"UA-267362-67";
@@ -41,6 +44,9 @@ static int const kGaDispatchPeriod = 30;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // Initialise crashlytics
+    [Fabric with:@[CrashlyticsKit]];
+
     [self initializeGoogleAnalytics];
     
     [[DCMainProxy sharedProxy] update];

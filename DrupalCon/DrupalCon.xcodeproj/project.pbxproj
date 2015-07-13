@@ -148,6 +148,8 @@
 		A60A90741B4BB6CC00C1F72E /* DCAppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A60A90731B4BB6CC00C1F72E /* DCAppSettings.m */; };
 		A60A90771B4BB79900C1F72E /* DCAppSettings+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A60A90761B4BB79900C1F72E /* DCAppSettings+DC.m */; };
 		A60A907A1B4C030300C1F72E /* DCDateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A60A90791B4C030300C1F72E /* DCDateHelper.m */; };
+		A6EBA9BC1B53D4DB00C91E41 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6EBA9B81B53D3A700C91E41 /* Crashlytics.framework */; };
+		A6EBA9BD1B53D4DB00C91E41 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6EBA9B91B53D3A700C91E41 /* Fabric.framework */; };
 		FA90B9A319C5893700873865 /* DCEventBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90B9A219C5893700873865 /* DCEventBaseCell.m */; };
 		FA90B9A619C589AE00873865 /* DCEventBaseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA90B9A519C589AE00873865 /* DCEventBaseCell.xib */; };
 		FA90B9A919C5A6C600873865 /* DCLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90B9A819C5A6C600873865 /* DCLabel.m */; };
@@ -433,6 +435,8 @@
 		A60A90761B4BB79900C1F72E /* DCAppSettings+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DCAppSettings+DC.m"; path = "Model/Categories/DCAppSettings+DC.m"; sourceTree = "<group>"; };
 		A60A90781B4C030300C1F72E /* DCDateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCDateHelper.h; path = Classes/Helpers/DCDateHelper.h; sourceTree = "<group>"; };
 		A60A90791B4C030300C1F72E /* DCDateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCDateHelper.m; path = Classes/Helpers/DCDateHelper.m; sourceTree = "<group>"; };
+		A6EBA9B81B53D3A700C91E41 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		A6EBA9B91B53D3A700C91E41 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		A830F8571AD4315500E3DCFE /* main_2.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = main_2.0.xcdatamodel; sourceTree = "<group>"; };
 		FA90B9A119C5893700873865 /* DCEventBaseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCEventBaseCell.h; path = Classes/Views/ProgramCells/EventBaseCell/DCEventBaseCell.h; sourceTree = "<group>"; };
 		FA90B9A219C5893700873865 /* DCEventBaseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCEventBaseCell.m; path = Classes/Views/ProgramCells/EventBaseCell/DCEventBaseCell.m; sourceTree = "<group>"; };
@@ -446,6 +450,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6EBA9BC1B53D4DB00C91E41 /* Crashlytics.framework in Frameworks */,
+				A6EBA9BD1B53D4DB00C91E41 /* Fabric.framework in Frameworks */,
 				842B5E651AC579D0009614A5 /* AdSupport.framework in Frameworks */,
 				842B5E631AC579C2009614A5 /* libz.dylib in Frameworks */,
 				74356D5219BEE1D90055F13D /* SystemConfiguration.framework in Frameworks */,
@@ -677,6 +683,7 @@
 				74A3EA961A56FD9000327225 /* Resources */,
 				5DC8C44A1986571300BF5816 /* Classes */,
 				5DC8C41B198656DB00BF5816 /* Supporting Files */,
+				A6EBA9B61B53D3A700C91E41 /* Vendor */,
 			);
 			path = DrupalCon;
 			sourceTree = "<group>";
@@ -1100,6 +1107,23 @@
 			name = EventFilter;
 			sourceTree = "<group>";
 		};
+		A6EBA9B61B53D3A700C91E41 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				A6EBA9B71B53D3A700C91E41 /* Crashlytics */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		A6EBA9B71B53D3A700C91E41 /* Crashlytics */ = {
+			isa = PBXGroup;
+			children = (
+				A6EBA9B81B53D3A700C91E41 /* Crashlytics.framework */,
+				A6EBA9B91B53D3A700C91E41 /* Fabric.framework */,
+			);
+			path = Crashlytics;
+			sourceTree = "<group>";
+		};
 		FA90B9A419C5894200873865 /* EventBaseCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1129,6 +1153,7 @@
 				5DC8C40D198656DA00BF5816 /* Sources */,
 				5DC8C40E198656DA00BF5816 /* Frameworks */,
 				5DC8C40F198656DA00BF5816 /* Resources */,
+				A6EBA9AC1B53CD8600C91E41 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1187,6 +1212,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A6EBA9AC1B53CD8600C91E41 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./DrupalCon/Vendor/Crashlytics/Fabric.framework/run e92185b02a2fa31062b797232c3d5cccf9867952 86aa1940d27f46c329fc363de870071c4117aaea9b473564fef59b1783a54c8d";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5DC8C40D198656DA00BF5816 /* Sources */ = {
@@ -1410,6 +1451,12 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Lyubomyr Dutko (FN2T3UCV4E)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Lyubomyr Dutko (FN2T3UCV4E)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DrupalCon",
+					"$(PROJECT_DIR)/DrupalCon/CrashLytics",
+					"$(PROJECT_DIR)/DrupalCon/Vendor/Crashlytics",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DrupalCon/DrupalCon-Prefix.pch";
 				INFOPLIST_FILE = "DrupalCon/DrupalCon-Info.plist";
@@ -1419,7 +1466,7 @@
 					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "d81bd8dd-9af9-4e94-9fac-4dbc288c2418";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1432,6 +1479,12 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Lyubomyr Dutko (FN2T3UCV4E)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Lyubomyr Dutko (FN2T3UCV4E)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DrupalCon",
+					"$(PROJECT_DIR)/DrupalCon/CrashLytics",
+					"$(PROJECT_DIR)/DrupalCon/Vendor/Crashlytics",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DrupalCon/DrupalCon-Prefix.pch";
 				INFOPLIST_FILE = "DrupalCon/DrupalCon-Info.plist";
@@ -1441,7 +1494,7 @@
 					"$(PROJECT_DIR)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "d81bd8dd-9af9-4e94-9fac-4dbc288c2418";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
