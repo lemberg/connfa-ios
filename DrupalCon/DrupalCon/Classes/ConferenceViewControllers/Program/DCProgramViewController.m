@@ -84,6 +84,12 @@
     }];
 }
 
+- (void) viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    [self arrangePreviousAndNextDayButtons];
+}
+
 - (void)openDetailScreenForEvent:(DCEvent *)event
 {
     DCEventDetailViewController * detailController = [self.storyboard instantiateViewControllerWithIdentifier:@"EventDetailViewController"];
@@ -125,6 +131,35 @@
 -(UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
+}
+
+- (void) arrangePreviousAndNextDayButtons
+{
+    NSMutableArray* buttons = [[NSMutableArray alloc] init];
+    for (UIControl *view in self.navigationController.navigationBar.subviews) {
+        
+        if ([view isKindOfClass:[UIControl class]]) { // navigation bar buttons search
+            [buttons addObject:view];
+        }
+    }
+    
+    if (buttons.count >= 2) {   
+        UIView *leftButton = [buttons sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            UIControl *button1 = obj1;
+            UIControl *button2 = obj2;
+            
+            if (button1.frame.origin.x < button2.frame.origin.x)
+                return NSOrderedAscending;
+            else if (button1.frame.origin.x > button2.frame.origin.x)
+                return NSOrderedDescending;
+            else
+                return NSOrderedSame;
+        }].firstObject;
+        float padding = leftButton.frame.origin.x;
+        
+        self.previousDayButton.contentEdgeInsets = UIEdgeInsetsMake(0, padding, 0, 0);
+        self.nextDayButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, padding);
+    }
 }
 
 - (void) arrangeNavigationBar
