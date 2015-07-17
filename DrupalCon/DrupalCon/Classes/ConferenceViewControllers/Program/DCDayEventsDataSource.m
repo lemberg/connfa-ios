@@ -94,8 +94,6 @@
 - (void)reload
 {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass(self.eventStrategy.eventClass)];
-    NSSortDescriptor *sectionKeyDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"timeRange.from" ascending:YES] ;
-    request.sortDescriptors = @[sectionKeyDescriptor];
     
     NSPredicate *predicate = [self.eventStrategy predicate];
     NSPredicate *dayPredicate = [NSPredicate predicateWithFormat:@"date == %@", self.selectedDay];
@@ -105,6 +103,12 @@
         request.predicate = dayPredicate;
         
     }
+    
+    NSSortDescriptor *sectionKeyDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"timeRange.from" ascending:YES] ;
+    NSSortDescriptor *idDescriptor = [[NSSortDescriptor alloc] initWithKey:kDCEventIdKey
+                                                                 ascending:YES];
+    NSSortDescriptor *orderDescriptor = [[NSSortDescriptor alloc] initWithKey:kDCEventOrderKey ascending:NO];
+    [request setSortDescriptors:[NSArray arrayWithObjects:sectionKeyDescriptor, orderDescriptor, idDescriptor, nil]];
     
     self.fetchedResultController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
                                                                    managedObjectContext:[DCMainProxy sharedProxy].workContext

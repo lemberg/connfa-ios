@@ -187,7 +187,7 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
     NSArray *sortedSpeakers = [self.event.speakers.allObjects sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
         NSInteger first = [(DCSpeaker*)a speakerId].integerValue;
         NSInteger second = [(DCSpeaker*)b speakerId].integerValue;
-        return first<second;
+        return first>second;
     }];
     
     self.speakers = sortedSpeakers;

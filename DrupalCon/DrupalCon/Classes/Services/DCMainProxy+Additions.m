@@ -89,12 +89,6 @@
             
         [fetchRequest setPredicate:mergedPredicate];
         
-        NSSortDescriptor *idDescriptor = [[NSSortDescriptor alloc] initWithKey:kDCEventIdKey
-                                                                       ascending:YES];
-        NSSortDescriptor *orderDescriptor = [[NSSortDescriptor alloc] initWithKey:kDCEventOrderKey ascending:NO];
-        
-        [fetchRequest setSortDescriptors:[NSArray arrayWithObjects:orderDescriptor, idDescriptor, nil]];
-        
         NSError *error = nil;
         NSArray *fetchedObjects = [self.workContext executeFetchRequest:fetchRequest error:&error];
         if (error || !fetchedObjects)
