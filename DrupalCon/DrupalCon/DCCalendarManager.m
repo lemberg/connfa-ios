@@ -64,7 +64,7 @@ static EKEventStore *eventStore;
     EKSource *localSource;
     
     for (EKSource *source in eventStore.sources) {
-        if (source.sourceType == EKSourceTypeLocal) {
+        if (source.sourceType == EKSourceTypeSubscribed) {
             localSource = source;
         }
     }
