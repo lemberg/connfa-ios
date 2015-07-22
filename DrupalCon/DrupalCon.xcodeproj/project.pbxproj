@@ -137,6 +137,7 @@
 		84D1CB521AA5FE5A00EEF33A /* DCLimitedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D1CB511AA5FE5A00EEF33A /* DCLimitedNavigationController.m */; };
 		84D654631ACC2B8E0099B461 /* event_detail_style.css in Resources */ = {isa = PBXBuildFile; fileRef = 84D654621ACC2B8E0099B461 /* event_detail_style.css */; };
 		84DCDB291AA0BB8D00BA0097 /* DCMainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84DCDB281AA0BB8D00BA0097 /* DCMainNavigationController.m */; };
+		84E64E761B5FD14900ACEAA0 /* NSCalendar+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E64E751B5FD14900ACEAA0 /* NSCalendar+DC.m */; };
 		84F601451A9B970B0077BA85 /* DCFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F601441A9B970B0077BA85 /* DCFilterViewController.m */; };
 		84F601491A9C87D70077BA85 /* DCEventFilterHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F601481A9C87D70077BA85 /* DCEventFilterHeaderCell.m */; };
 		84F6014C1A9C88170077BA85 /* DCEventFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84F6014B1A9C88170077BA85 /* DCEventFilterCell.m */; };
@@ -413,6 +414,8 @@
 		84D654641ACC5C1D0099B461 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		84DCDB271AA0BB8D00BA0097 /* DCMainNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCMainNavigationController.h; path = MainNavigation/DCMainNavigationController.h; sourceTree = "<group>"; };
 		84DCDB281AA0BB8D00BA0097 /* DCMainNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCMainNavigationController.m; path = MainNavigation/DCMainNavigationController.m; sourceTree = "<group>"; };
+		84E64E741B5FD14900ACEAA0 /* NSCalendar+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSCalendar+DC.h"; path = "Classes/Helpers/NSCalendar+DC.h"; sourceTree = "<group>"; };
+		84E64E751B5FD14900ACEAA0 /* NSCalendar+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSCalendar+DC.m"; path = "Classes/Helpers/NSCalendar+DC.m"; sourceTree = "<group>"; };
 		84F601431A9B970B0077BA85 /* DCFilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCFilterViewController.h; path = EventFilter/DCFilterViewController.h; sourceTree = "<group>"; };
 		84F601441A9B970B0077BA85 /* DCFilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCFilterViewController.m; path = EventFilter/DCFilterViewController.m; sourceTree = "<group>"; };
 		84F601471A9C87D70077BA85 /* DCEventFilterHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCEventFilterHeaderCell.h; path = EventFilter/DCEventFilterHeaderCell.h; sourceTree = "<group>"; };
@@ -595,6 +598,8 @@
 		5D6449D8198AA9E100BC1775 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				84E64E741B5FD14900ACEAA0 /* NSCalendar+DC.h */,
+				84E64E751B5FD14900ACEAA0 /* NSCalendar+DC.m */,
 				74E837EC19C061A3000D2BE4 /* SDWebImage */,
 				849EFE1019A4D63500C43E05 /* DCDataProvider.h */,
 				849EFE1119A4D63500C43E05 /* DCDataProvider.m */,
@@ -1297,6 +1302,7 @@
 				74FF4BF61A164F320093C557 /* DCImportDataSevice.m in Sources */,
 				840C455519BF419700CC144B /* DCBof+DC.m in Sources */,
 				74FF4BFA1A164F320093C557 /* DCParserService.m in Sources */,
+				84E64E761B5FD14900ACEAA0 /* NSCalendar+DC.m in Sources */,
 				8496B4E11ABC320800BF872D /* DCInfoMenuCell.m in Sources */,
 				849D92E419AE2A6600977D67 /* DCDescriptionTextCell.m in Sources */,
 				5DC8C46F198658FF00BF5816 /* UIViewController+MFSideMenuAdditions.m in Sources */,

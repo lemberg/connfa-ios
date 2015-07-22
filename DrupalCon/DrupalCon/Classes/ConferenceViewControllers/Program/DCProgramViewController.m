@@ -28,6 +28,7 @@
 #import "DCEventDetailViewController.h"
 #import "DCLimitedNavigationController.h"
 #import "DCAppFacade.h"
+#import "NSCalendar+DC.h"
 
 @interface DCProgramViewController ()
 
@@ -171,14 +172,14 @@
 
 - (NSUInteger) getCurrentDayIndex: (NSDate*)neededDate
 {
-    NSDateComponents *neededDateComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate: neededDate];
+    NSDateComponents *neededDateComponents = [[NSCalendar currentGregorianCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate: neededDate];
     NSInteger neededDay = [neededDateComponents day];
     NSInteger neededMonth = [neededDateComponents month];
     NSInteger neededYear = [neededDateComponents year];
     
     for (NSDate* iteratedDay in self.days)
     {
-        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate: iteratedDay];
+        NSDateComponents *components = [[NSCalendar currentGregorianCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate: iteratedDay];
         NSInteger day = [components day];
         NSInteger month = [components month];
         NSInteger year = [components year];

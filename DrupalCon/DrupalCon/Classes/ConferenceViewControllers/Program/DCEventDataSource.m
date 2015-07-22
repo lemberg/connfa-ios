@@ -7,7 +7,7 @@
 //
 
 #import "DCEventDataSource.h"
-
+#import "NSCalendar+DC.h"
 
 
 @interface DCEventDataSource()
@@ -148,7 +148,7 @@ const NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
 }
 
 - (float)hoursFromDate:(NSDate *)date {
-    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSCalendar *calendar = [NSCalendar currentGregorianCalendar];
     NSDateComponents *components = [calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:date];
     NSInteger hour = [components hour];
     NSInteger minute = [components minute];
@@ -164,7 +164,7 @@ const NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
 - (float) currentHour
 {
     NSDate *date = [NSDate date];
-    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSCalendar *calendar = [NSCalendar currentGregorianCalendar];
     [calendar setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_GB"]];
     NSDateComponents *components = [calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:date];
     float hour = (float)[components hour] + (float)[components minute]/60;
