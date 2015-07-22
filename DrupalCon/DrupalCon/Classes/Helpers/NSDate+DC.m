@@ -80,7 +80,23 @@ static NSString * kDCSpeakerEventCellFormat = @"dd LLLL";
     return [dateFormatter stringFromDate:self];
 }
 
++ (float)hoursFromDate:(NSDate *)date {
+    NSCalendar *calendar = [NSCalendar currentGregorianCalendar];
+    NSDateComponents *components = [calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:date];
+    NSInteger hour = [components hour];
+    NSInteger minute = [components minute];
+    return hour + minute/60;
+}
 
++ (float) currentHour
+{
+    NSDate *date = [NSDate date];
+    NSCalendar *calendar = [NSCalendar currentGregorianCalendar];
+    [calendar setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_GB"]];
+    NSDateComponents *components = [calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:date];
+    float hour = (float)[components hour] + (float)[components minute]/60;
+    return hour;
+}
 
 
 #pragma mark - private
