@@ -149,11 +149,11 @@
     switch (cellType)
     {
         case FilterCellTypeLevel:
-            headerTitle = @"Experience";
+            headerTitle = @"Experience Levels";
             break;
             
         case FilterCellTypeTrack:
-            headerTitle = @"Track";
+            headerTitle = @"Tracks";
             break;
     }
     
