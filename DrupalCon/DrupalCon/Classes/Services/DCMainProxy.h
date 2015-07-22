@@ -56,7 +56,7 @@ typedef enum {
 #pragma mark - public
 
 - (void)update;
-- (void)checkReachable;
+- (BOOL)checkReachable;
 
 #pragma mark - work with instances
 - (NSTimeZone *)eventTimeZone;

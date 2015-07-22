@@ -49,13 +49,6 @@
     self.webView.scrollView.scrollEnabled = YES;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    [[DCMainProxy sharedProxy] checkReachable];
-}
-
-
 #pragma mark - Private
 
 -(UIStatusBarStyle)preferredStatusBarStyle

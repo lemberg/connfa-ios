@@ -67,19 +67,17 @@
     self.currentPageDate = nil;
     
     [self.activityIndicator startAnimating];
+    
     [[DCMainProxy sharedProxy] setDataReadyCallback:^(DCMainProxyState mainProxyState) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"Data ready callback %d", mainProxyState);
             if ( !self.previousState) {
                 [self reloadData];
                 self.previousState = mainProxyState;
-            }
-            
-                
-            if ( mainProxyState == DCMainProxyStateDataUpdated) {
+            } else if ( mainProxyState == DCMainProxyStateDataUpdated) {
                 [self reloadData];
             }
-           
+            
             [self.activityIndicator stopAnimating];
         });
     }];

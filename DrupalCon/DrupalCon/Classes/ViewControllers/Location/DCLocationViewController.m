@@ -70,12 +70,6 @@
 //                                                     [self.location.longitude doubleValue])];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    [[DCMainProxy sharedProxy] checkReachable];
-}
-
 #pragma mark - View appearance
 
 - (void) arrangeNavigationBar

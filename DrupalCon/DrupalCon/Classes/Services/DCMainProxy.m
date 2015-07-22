@@ -139,77 +139,52 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
 
 - (void)update
 {
-    _workContext = [self newMainQueueContext];
+    if (!_workContext) {
+        _workContext = [self newMainQueueContext];
+    }
+    
     if (self.state == DCMainProxyStateInitDataLoading ||
-        self.state == DCMainProxyStateDataLoading)
+            self.state == DCMainProxyStateDataLoading)
     {
         NSLog(@"data is already in loading progress");
         return;
     }
-    else if (self.state == DCMainProxyStateNoData)
-    {
-        [self setState:DCMainProxyStateInitDataLoading];
-    }
     else
     {
-        [self setState:DCMainProxyStateDataLoading];
+        if ([self checkReachable])
+        {
+            if (self.state == DCMainProxyStateNoData)
+            {
+                [self setState:DCMainProxyStateInitDataLoading];
+            }
+            else
+            {
+                [self setState:DCMainProxyStateDataLoading];
+            }
+            
+            [self updateEvents];
+        } else
+        {
+            if ([self.importDataService isInitDataImport])
+            {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[[UIAlertView alloc] initWithTitle:@"Attention"
+                                                message:@"Internet connection is not available at this moment. Please, try later"
+                                               delegate:nil
+                                      cancelButtonTitle:@"Ok"
+                                      otherButtonTitles:nil] show];
+                });
+            }
+        }
     }
-    
-    [self startNetworkChecking];
 }
 
 #pragma mark -
 
-- (void)startNetworkChecking
+- (BOOL) checkReachable
 {
-//    Reachability * reach = [Reachability reachabilityWithHostname:SERVER_URL];
-    Reachability * reach = [Reachability reachabilityWithHostname:@"google.com"];
-    if (reach.isReachable)
-    {
-        [self updateEvents];
-    }
-    else
-    {
-        if (self.state == DCMainProxyStateInitDataLoading)
-        {
-            if (![self.importDataService isInitDataImport]) {
-                [self setState:DCMainProxyStateNoData];
-                
-            } else {
-                [self setState:DCMainProxyStateDataReady];
-            }
-            
-            [self dataIsReady];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-//                [[[UIAlertView alloc] initWithTitle:@"Attention"
-//                                            message:@"Internet connection is not available at this moment. Please, try later"
-//                                           delegate:nil
-//                                  cancelButtonTitle:@"Ok"
-//                                  otherButtonTitles:nil] show];
-            });
-        }
-        else
-        {
-//            [self setState:DCMainProxyStateLoadingFail];
-            [self setState:DCMainProxyStateDataReady];
-            [self dataIsReady];
-        }
-    }
-    return;
-}
-
-- (void)checkReachable {
-    
-//    Reachability * reach = [Reachability reachabilityWithHostname:@"google.com"];
-//    
-//    if (!reach.isReachable)
-//        [[[UIAlertView alloc] initWithTitle:@"Attention"
-//                                    message:@"Internet connection is not available at this moment. Please, try later"
-//                                   delegate:nil
-//                          cancelButtonTitle:@"Ok"
-//                          otherButtonTitles:nil] show];
+    Reachability *reach = [Reachability reachabilityWithHostname:@"google.com"];
+    return reach.isReachable;
 }
 
 
@@ -258,7 +233,6 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
             self.dataReadyCallback(self.state);
         }
     });
-
 }
 
 #pragma mark - getting instances

@@ -36,7 +36,6 @@
 {
     [super viewDidLoad];
     
-
     [[DCMainProxy sharedProxy] setDataReadyCallback:^(DCMainProxyState mainProxyState) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"Data ready callback %d", mainProxyState);
