@@ -61,23 +61,29 @@ static EKEventStore *eventStore;
 
 + (EKCalendar*) createNewCalendar {
     EKCalendar *calendar;
-    EKSource *localSource;
-    
-    for (EKSource *source in eventStore.sources) {
-        if (source.sourceType == EKSourceTypeSubscribed) {
-            localSource = source;
-        }
-    }
+    EKSource *defaultSource = [eventStore defaultCalendarForNewEvents].source;
 
-        // create new calendar in local source
+        // create new calendar in Default source
     calendar = [EKCalendar calendarForEntityType:EKEntityTypeEvent eventStore:eventStore];
     calendar.title = calendarTitle;
-    calendar.source = localSource;
-    [eventStore saveCalendar:calendar commit:YES error:nil];
+    calendar.source = defaultSource;
     
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setObject:calendar.calendarIdentifier forKey:kCalendarIdKey];
-    [userDefaults synchronize];
+    NSError* error = nil;
+    [eventStore saveCalendar:calendar commit:YES error:&error];
+    
+    if (error && error.code == 17) {
+        [[[UIAlertView alloc] initWithTitle:@"Attention"
+                                    message:@"DrupalCon calendar was not created because app does not have rights to access your calendar account. Go to Settings->Mail,Contacts,Calendars->Account and turn off Calendar switcher. Or use iCloud account for calendar."
+                                   delegate:nil
+                          cancelButtonTitle:@"Ok"
+                          otherButtonTitles:nil] show];
+    }
+    
+    if (!error) {
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setObject:calendar.calendarIdentifier forKey:kCalendarIdKey];
+        [userDefaults synchronize];
+    }
 
     return calendar;
 }
