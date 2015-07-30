@@ -427,16 +427,16 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView hidden="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_details" translatesAutoresizingMaskIntoConstraints="NO" id="htM-00-tdR">
-                                <rect key="frame" x="115" y="316" width="90" height="95"/>
+                                <rect key="frame" x="115" y="298" width="90" height="95"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="95" id="FwM-UX-gSW"/>
                                     <constraint firstAttribute="width" constant="90" id="Nuz-Qv-dnI"/>
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="event_detail_top" translatesAutoresizingMaskIntoConstraints="NO" id="DWN-jN-BQe" userLabel="Top background">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="130"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="112"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" secondItem="DWN-jN-BQe" secondAttribute="width" multiplier="13:32" id="dFs-1R-QEq"/>
+                                    <constraint firstAttribute="height" secondItem="DWN-jN-BQe" secondAttribute="width" multiplier="224:640" id="dFs-1R-QEq"/>
                                 </constraints>
                             </imageView>
                             <view opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9cX-Fi-Qcx" userLabel="Top background shadow">
@@ -458,7 +458,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="oWL-xb-vpP">
-                                <rect key="frame" x="0.0" y="130" width="320" height="350"/>
+                                <rect key="frame" x="0.0" y="112" width="320" height="368"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -480,8 +480,8 @@
                                                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="ic_experience_advanced" translatesAutoresizingMaskIntoConstraints="NO" id="0Y4-nP-iM9">
-                                                                    <rect key="frame" x="184" y="33" width="12" height="12"/>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_experience_advanced" translatesAutoresizingMaskIntoConstraints="NO" id="0Y4-nP-iM9">
+                                                                    <rect key="frame" x="173" y="33" width="12" height="12"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="12" id="Oas-MC-Bhz"/>
                                                                         <constraint firstAttribute="width" constant="12" id="qpl-lI-f0c"/>
@@ -494,8 +494,8 @@
                                                                         <constraint firstAttribute="height" priority="100" constant="1" id="Q66-d3-NU3"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Experience level: Beginner" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="saD-Ka-cgM">
-                                                                    <rect key="frame" x="15" y="30" width="165" height="16"/>
+                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Experience level: Beginner" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="saD-Ka-cgM">
+                                                                    <rect key="frame" x="15" y="30" width="154" height="16"/>
                                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                                                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -595,14 +595,14 @@
                                                         <constraint firstAttribute="width" constant="40" id="Liq-AN-ZqG"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Victor Kane" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OOt-ZX-l6d">
-                                                    <rect key="frame" x="70" y="13" width="235" height="16"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Victor Kane" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OOt-ZX-l6d">
+                                                    <rect key="frame" x="70" y="13" width="235" height="18"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Architect and Process engineer " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gef-oK-pyl" customClass="DCLabel">
-                                                    <rect key="frame" x="70" y="33" width="235" height="14"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Architect and Process engineer " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gef-oK-pyl" customClass="DCLabel">
+                                                    <rect key="frame" x="70" y="35" width="235" height="12"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
                                                     <color key="textColor" red="0.58039215686274515" green="0.58039215686274515" blue="0.58039215686274515" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>

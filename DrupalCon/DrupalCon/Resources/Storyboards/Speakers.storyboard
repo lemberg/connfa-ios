@@ -148,7 +148,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lAE-7I-eW9" userLabel="bg container">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="250"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="speaker_detail_top" translatesAutoresizingMaskIntoConstraints="NO" id="Gwj-Qt-ipO" userLabel="background">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="speaker_detail_top" translatesAutoresizingMaskIntoConstraints="NO" id="Gwj-Qt-ipO" userLabel="background">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="250"/>
                                         <constraints>
                                             <constraint firstAttribute="height" secondItem="Gwj-Qt-ipO" secondAttribute="width" multiplier="23:40" id="V5X-1L-5uz"/>
