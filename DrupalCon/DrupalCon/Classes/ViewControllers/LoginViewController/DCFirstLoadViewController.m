@@ -22,6 +22,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [UIApplication sharedApplication].keyWindow.backgroundColor = [UIColor whiteColor];
+    
     self.backgroundImageView.image = [UIImage splashImageForOrientation:UIInterfaceOrientationPortrait];
     
     [[DCMainProxy sharedProxy] setDataReadyCallback:^(DCMainProxyState mainProxyState) {
