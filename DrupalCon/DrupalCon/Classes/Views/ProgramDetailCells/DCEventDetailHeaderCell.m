@@ -18,11 +18,12 @@
 
 - (void) initData:(DCEvent *)event
 {
-    self.titleLabel.text = event.name;
+        // this code makes labels in Cell resizable relating to screen size. Cell height with layoutSubviews will work properly
+    CGFloat preferredWidth = [UIScreen mainScreen].bounds.size.width - 30;
+    self.titleLabel.preferredMaxLayoutWidth = preferredWidth;
+    self.dateAndPlaceLabel.preferredMaxLayoutWidth = preferredWidth;
     
-    // event Date
-//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//    [formatter setDateFormat: @"EEE"];
+    self.titleLabel.text = event.name;
     
     NSString *date = event.date ? [DCDateHelper convertDate:event.date toApplicationFormat:@"EEE"] : @"";
     NSString *startTime = [DCDateHelper convertDate:event.startDate toApplicationFormat:@"h:mm aaa"];

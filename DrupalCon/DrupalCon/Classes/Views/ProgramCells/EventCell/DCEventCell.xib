@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -47,8 +47,8 @@
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aaC-fh-4Ly" userLabel="speakers">
                                 <rect key="frame" x="9" y="71" width="204" height="14"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalCompressionResistancePriority="1000" image="ic_event_speakers" translatesAutoresizingMaskIntoConstraints="NO" id="Smd-7l-Nad">
-                                        <rect key="frame" x="0.0" y="1" width="10" height="10"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalCompressionResistancePriority="1000" image="ic_speakers" translatesAutoresizingMaskIntoConstraints="NO" id="Smd-7l-Nad">
+                                        <rect key="frame" x="0.0" y="3" width="10" height="10"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="10" id="A89-Zi-y39"/>
                                             <constraint firstAttribute="width" constant="10" id="Wia-9Z-qZk"/>
@@ -68,14 +68,14 @@
                                     <constraint firstItem="eRh-DH-v6a" firstAttribute="top" secondItem="aaC-fh-4Ly" secondAttribute="top" id="SH9-VF-6mV"/>
                                     <constraint firstAttribute="trailing" secondItem="eRh-DH-v6a" secondAttribute="trailing" id="Vt1-Ch-GBf"/>
                                     <constraint firstItem="Smd-7l-Nad" firstAttribute="leading" secondItem="aaC-fh-4Ly" secondAttribute="leading" id="kGM-fq-6kB"/>
-                                    <constraint firstItem="Smd-7l-Nad" firstAttribute="top" secondItem="aaC-fh-4Ly" secondAttribute="top" constant="1" id="nN0-Q4-PRF"/>
+                                    <constraint firstItem="Smd-7l-Nad" firstAttribute="top" secondItem="aaC-fh-4Ly" secondAttribute="top" constant="3" id="nN0-Q4-PRF"/>
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wwU-2B-kPy" userLabel="place">
                                 <rect key="frame" x="9" y="85" width="204" height="14"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalCompressionResistancePriority="1000" image="ic_place" translatesAutoresizingMaskIntoConstraints="NO" id="11u-ah-3H7">
-                                        <rect key="frame" x="0.0" y="2" width="10" height="10"/>
+                                        <rect key="frame" x="0.0" y="3" width="10" height="10"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="10" id="CoN-J4-vFf"/>
                                             <constraint firstAttribute="width" constant="10" id="KlQ-1g-iq7"/>
@@ -94,7 +94,7 @@
                                     <constraint firstItem="GxY-Fi-Cd5" firstAttribute="top" secondItem="wwU-2B-kPy" secondAttribute="top" id="GyD-Qg-G96"/>
                                     <constraint firstItem="GxY-Fi-Cd5" firstAttribute="leading" secondItem="11u-ah-3H7" secondAttribute="trailing" constant="2" id="JFp-pt-XvG"/>
                                     <constraint firstItem="11u-ah-3H7" firstAttribute="leading" secondItem="wwU-2B-kPy" secondAttribute="leading" id="OTr-T6-wJE"/>
-                                    <constraint firstItem="11u-ah-3H7" firstAttribute="top" secondItem="wwU-2B-kPy" secondAttribute="top" constant="2" id="Siq-kG-Uav"/>
+                                    <constraint firstItem="11u-ah-3H7" firstAttribute="top" secondItem="wwU-2B-kPy" secondAttribute="top" constant="3" id="Siq-kG-Uav"/>
                                     <constraint firstAttribute="height" constant="14" id="Vzb-PS-LDu"/>
                                 </constraints>
                             </view>
@@ -254,9 +254,9 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="ic_event_speakers" width="10" height="10"/>
         <image name="ic_experience_advanced" width="12" height="12"/>
         <image name="ic_place" width="10" height="10"/>
         <image name="ic_program_24_hour" width="16" height="16"/>
+        <image name="ic_speakers" width="10" height="10"/>
     </resources>
 </document>

@@ -51,6 +51,8 @@
     [[UITableView appearance] setSectionIndexColor: NAV_BAR_COLOR];
     
     [self.searchBar setTintColor:[UIColor whiteColor]];
+    self.searchBar.layer.borderWidth = 1;
+    self.searchBar.layer.borderColor = [NAV_BAR_COLOR CGColor];
     [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTintColor:[UIColor darkGrayColor]];
     
     [self reload];

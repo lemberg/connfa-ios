@@ -37,7 +37,7 @@ static int const kGaDispatchPeriod = 30;
 @interface AppDelegate ()
 
 @property (strong, nonatomic) id<GAITracker> tracker;
-@property (nonatomic, strong) UILocalNotification *localNotification;
+//@property (nonatomic, strong) UILocalNotification *localNotification;
 
 @end
 @implementation AppDelegate
@@ -51,22 +51,23 @@ static int const kGaDispatchPeriod = 30;
     
     [[DCMainProxy sharedProxy] update];
     
-    if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-        
-        // Register user notifications
-        UIUserNotificationType types = UIUserNotificationTypeBadge |
-        UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
-        
-        UIUserNotificationSettings *settings =
-        [UIUserNotificationSettings settingsForTypes:types categories:nil];
-        
-        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-    }
+    // Local Notification are replacded by Calendar
+//    if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+//        
+//        // Register user notifications
+//        UIUserNotificationType types = UIUserNotificationTypeBadge |
+//        UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+//        
+//        UIUserNotificationSettings *settings =
+//        [UIUserNotificationSettings settingsForTypes:types categories:nil];
+//        
+//        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+//    }
     
-    UILocalNotification *locationNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
-    if (locationNotification) {
-        self.localNotification = locationNotification;
-    }
+//    UILocalNotification *locationNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+//    if (locationNotification) {
+//        self.localNotification = locationNotification;
+//    }
     
 #ifdef DEBUG_MODE
     NSLog(@"====================");
@@ -93,19 +94,17 @@ static int const kGaDispatchPeriod = 30;
 {
     if ([self.window.rootViewController isKindOfClass:[UINavigationController class]]) {
         [[DCMainProxy sharedProxy] update];
-//        UINavigationController * natigator = (UINavigationController*)self.window.rootViewController;
-//        [natigator popToRootViewControllerAnimated:NO];
     }
 
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    if (self.localNotification) {
-        [[DCMainProxy sharedProxy] openLocalNotification:self.localNotification];
-        self.localNotification = nil;
-        application.applicationIconBadgeNumber = 0;
-    }
+//    if (self.localNotification) {
+//        [[DCMainProxy sharedProxy] openLocalNotification:self.localNotification];
+//        self.localNotification = nil;
+//        application.applicationIconBadgeNumber = 0;
+//    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

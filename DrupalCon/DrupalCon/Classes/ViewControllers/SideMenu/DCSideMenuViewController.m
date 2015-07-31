@@ -61,7 +61,7 @@
     [super viewDidLoad];
     
     self.arrayOfCaptions = @[
-                                @{ kMenuItemTitle: @"Schedule",
+                                @{ kMenuItemTitle: @"Sessions",
                                    kMenuItemIcon: @"menu_icon_program",
                                    kMenuItemSelectedIcon: @"menu_icon_program_sel",
                                    kMenuItemControllerId: @"DCProgramViewController"

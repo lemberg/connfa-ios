@@ -128,7 +128,7 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
 
 -(UIStatusBarStyle)preferredStatusBarStyle
 {
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 
 #pragma mark - UI initialization

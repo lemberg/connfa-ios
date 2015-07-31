@@ -64,7 +64,7 @@
     if ([NSStringFromClass(class) isEqualToString:NSStringFromClass([DCBof class])]) {
         return @"Bofs";
     } else if ([NSStringFromClass(class) isEqualToString:NSStringFromClass([DCMainEvent class])]){
-        return @"Schedule";
+        return @"Sessions";
     } else {
         return @"Social Events";
     }
