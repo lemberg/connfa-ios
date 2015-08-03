@@ -93,6 +93,8 @@
         
         if (!error) {
             [self addData:result forKey:key];
+        } if (error.code == 3840) {
+            NSLog(@"Parse failed in key %@ with no value %@", key, error);
         } else {
             //
             [self.operationQueue cancelAllOperations];

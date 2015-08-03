@@ -21,9 +21,9 @@
 //
 
 #import "DCWebService.h"
-
-#warning Remove this and move SERVER URL in this file
-#import "DCDataProvider.h"
+#import "DCAppConfiguration.h"
+//#warning Remove this and move SERVER URL in this file
+//#import "DCDataProvider.h"
 
 @interface DCWebService ()
 

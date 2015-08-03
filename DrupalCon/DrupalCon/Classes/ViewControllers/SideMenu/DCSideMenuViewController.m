@@ -31,14 +31,9 @@
 #import "DCFavoritesViewController.h"
 #import "DCLimitedNavigationController.h"
 #import "DCDayEventsController.h"
+#import "DCAppConfiguration.h"
 
 @class DCEvent;
-
-#define kMenuItemTitle              @"MenuItemTitle"
-#define kMenuItemIcon               @"MenuItemIcon"
-#define kMenuItemSelectedIcon       @"MenuItemSelectedIcon"
-#define kMenuItemControllerId       @"MenuItemControllerId"
-
 
 @interface DCSideMenuViewController ()
 
@@ -60,57 +55,7 @@
 {
     [super viewDidLoad];
     
-    self.arrayOfCaptions = @[
-                                @{ kMenuItemTitle: @"Sessions",
-                                   kMenuItemIcon: @"menu_icon_program",
-                                   kMenuItemSelectedIcon: @"menu_icon_program_sel",
-                                   kMenuItemControllerId: @"DCProgramViewController"
-                                   },
-                                @{
-                                    kMenuItemTitle: @"BoFs",
-                                    kMenuItemIcon: @"menu_icon_bofs",
-                                    kMenuItemSelectedIcon: @"menu_icon_bofs_sel",
-                                    kMenuItemControllerId: @"DCProgramViewController"
-                                    },
-                                @{
-                                    kMenuItemTitle: @"Social Events",
-                                    kMenuItemIcon: @"menu_icon_social",
-                                    kMenuItemSelectedIcon: @"menu_icon_social_sel",
-                                    kMenuItemControllerId: @"DCProgramViewController"
-                                    },
-                                @{
-                                    kMenuItemTitle: @"Speakers",
-                                    kMenuItemIcon: @"menu_icon_speakers",
-                                    kMenuItemSelectedIcon: @"menu_icon_speakers_sel",
-                                    kMenuItemControllerId: @"SpeakersViewController"
-                                    },
-                                @{
-                                    kMenuItemTitle: @"My Schedule",
-                                    kMenuItemIcon: @"menu_icon_my_schedule",
-                                    kMenuItemSelectedIcon: @"menu_icon_my_schedule_sel",
-                                    kMenuItemControllerId: @"DCProgramViewController"
-                                    },
-                                @{
-                                    kMenuItemTitle: @"Location",
-                                    kMenuItemIcon: @"menu_icon_location",
-                                    kMenuItemSelectedIcon: @"menu_icon_location_sel",
-                                    kMenuItemControllerId: @"LocationViewController"
-                                    },
-//                                @{
-//                                    kMenuItemTitle: @"Points of Interest",
-//                                    kMenuItemIcon: @"menu_icon_points",
-//                                    kMenuItemSelectedIcon: @"menu_icon_points_sel",
-//                                    kMenuItemControllerId: @""
-//                                    },
-                                @{
-                                    kMenuItemTitle: @"Info",
-                                    kMenuItemIcon: @"menu_icon_about",
-                                    kMenuItemSelectedIcon: @"menu_icon_about_sel",
-                                    kMenuItemControllerId: @"InfoViewController"
-                                    },
-                                @{ kMenuItemTitle: @"Time and event place"
-                                    }
-                             ];
+    self.arrayOfCaptions = [DCAppConfiguration appMenuItems];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(menuStateDidChange:)
                                                  name:MFSideMenuStateNotificationEvent
@@ -133,7 +78,8 @@
     
     if (self.event) {
         
-        [self showViewControllerAssociatedWithMenuItem:DCMENU_MYSCHEDULE_ITEM];
+        NSDictionary *menuItem = self.arrayOfCaptions.firstObject;
+        [self showViewControllerAssociatedWithMenuItem:menuItem];
         
         UINavigationController *navCon = self.sideMenuContainer.centerViewController;
         if ([navCon isKindOfClass:[UINavigationController class]]) {
@@ -167,12 +113,14 @@
     return UIStatusBarStyleLightContent;
 }
 
-- (void) showViewControllerAssociatedWithMenuItem:(DCMenuSection)menuItem
+- (void)showViewControllerAssociatedWithMenuItem:(NSDictionary *)menuItemInfo
 {
-    NSString *storyboardControllerID = self.arrayOfCaptions[menuItem][kMenuItemControllerId];
-    NSAssert(storyboardControllerID.length, @"No Storyboard ID for Menu item view controller");
+    DCMenuSection menuSection = [menuItemInfo[kMenuType] intValue];
+    NSString *viewControllerId = menuItemInfo[kMenuItemControllerId];
     
-    DCBaseViewController* rootMenuVC = [self getViewController:menuItem];
+    NSAssert(viewControllerId.length, @"No Storyboard ID for Menu item view controller");
+    
+    DCBaseViewController* rootMenuVC = [self viewControllerFromMenuItem:menuSection andControllerId:viewControllerId];
     UINavigationController* navigationController = [[UINavigationController alloc] initWithRootViewController: rootMenuVC];
     
         // disable swipe-to-Back gesture
@@ -180,17 +128,21 @@
         navigationController.interactivePopGestureRecognizer.enabled = NO;
     }
     
-    [self arrangeNavigationBarForController: rootMenuVC menuItem:menuItem];
+    [self arrangeNavigationBarForController:rootMenuVC
+                                   menuItem:menuSection
+     andTitle:menuItemInfo[kMenuItemTitle]];
 
     
     self.sideMenuContainer.centerViewController = navigationController;
     [self.sideMenuContainer setMenuState:MFSideMenuStateClosed completion:nil];
 }
 
-- (void) arrangeNavigationBarForController:(DCBaseViewController*)aController menuItem:(DCMenuSection)menuItem
+- (void) arrangeNavigationBarForController:(DCBaseViewController*)aController
+                                  menuItem:(DCMenuSection)menuItem
+                                  andTitle:(NSString *)title
 {
     // add proper Title
-    NSString *title = self.arrayOfCaptions[menuItem][kMenuItemTitle];
+
     aController.navigationItem.title = title;
     
     // add left Menu button to all Controllers
@@ -213,10 +165,9 @@
     [self.sideMenuContainer toggleLeftSideMenuCompletion:nil];
 }
 
-- (DCBaseViewController*) getViewController:(DCMenuSection)menuItem
+- (DCBaseViewController *)viewControllerFromMenuItem:(DCMenuSection)menuItem andControllerId:(NSString *)controllerId
 {
     NSString *storyboardName = [self storyboardNameForMenuItem:menuItem];
-    NSString *controllerId = self.arrayOfCaptions[menuItem][kMenuItemControllerId];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:storyboardName bundle:nil];
     
     DCBaseViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:controllerId];
@@ -268,7 +219,7 @@
     }
     DCSideMenuCell *cell = (DCSideMenuCell*)[tableView dequeueReusableCellWithIdentifier: cellIdentifier];
     
-    NSDictionary *itemDict   = [self.arrayOfCaptions objectAtIndex: indexPath.row];
+    NSDictionary *itemDict   = self.arrayOfCaptions[indexPath.row];
     cell.captionLabel.text   = itemDict[kMenuItemTitle];
     
     BOOL isActiveCell = indexPath.row == self.activeCellPath.row;
@@ -285,7 +236,7 @@
         // Change cells view to display Selection 
     DCSideMenuCell* lastSelected = (DCSideMenuCell*)[tableView cellForRowAtIndexPath:self.activeCellPath];
     DCSideMenuCell* newSelected = (DCSideMenuCell*)[tableView cellForRowAtIndexPath:indexPath];
-    
+
     lastSelected.leftImageView.image = [UIImage imageNamed:[self.arrayOfCaptions objectAtIndex: self.activeCellPath.row][kMenuItemIcon]];
     
     UIFontDescriptor * regularFontDescriptor = [lastSelected.captionLabel.font.fontDescriptor fontDescriptorWithSymbolicTraits:0];
@@ -298,7 +249,8 @@
     
     self.activeCellPath = indexPath;
     
-    [self showViewControllerAssociatedWithMenuItem:(DCMenuSection)indexPath.row];
+    NSDictionary *menuItem = self.arrayOfCaptions[indexPath.row];
+    [self showViewControllerAssociatedWithMenuItem:menuItem];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

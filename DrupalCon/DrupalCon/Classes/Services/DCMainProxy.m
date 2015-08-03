@@ -36,7 +36,6 @@
 #import "NSUserDefaults+DC.h"
 
 #import "Reachability.h"
-#import "DCDataProvider.h"
 #import "DCWebService.h"
 #import "DCParserService.h"
 #import "NSManagedObject+DC.h"
