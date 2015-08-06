@@ -15,6 +15,8 @@
 #endif
 #define BASE_URL [NSString stringWithFormat:@"%@/api/v2/",SERVER_URL]
 
+#define NSBUNDLE_IMAGE(imageName,imageFormat) [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:imageName ofType:imageFormat]]
+
 @interface DCAppConfiguration : NSObject
 + (NSArray *)appMenuItems;
 @end
