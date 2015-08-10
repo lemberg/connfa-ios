@@ -38,6 +38,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *previousDayButton;
 @property (nonatomic, strong) IBOutlet UILabel *dateLabel;
 
+@property (weak, nonatomic) IBOutlet UIView *dayContainerView;
 @property (nonatomic, strong) NSArray *viewControllers;
 @property (nonatomic, strong) NSArray *days;
 @property (nonatomic) NSInteger currentDayIndex;
@@ -65,6 +66,7 @@
     
     self.currentDayIndex = 0;
     self.currentPageDate = nil;
+    self.dayContainerView.backgroundColor = [DCAppConfiguration navigationBarColor];
     
     [self.activityIndicator startAnimating];
     

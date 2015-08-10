@@ -48,11 +48,12 @@
     
     [[UITableView appearance] setSectionIndexBackgroundColor:[UIColor clearColor]];
     [[UITableView appearance] setSectionIndexTrackingBackgroundColor:[UIColor clearColor]];
-    [[UITableView appearance] setSectionIndexColor: NAV_BAR_COLOR];
+    [[UITableView appearance] setSectionIndexColor: [DCAppConfiguration navigationBarColor]];
     
     [self.searchBar setTintColor:[UIColor whiteColor]];
+    self.searchBar.barTintColor = [DCAppConfiguration navigationBarColor];
     self.searchBar.layer.borderWidth = 1;
-    self.searchBar.layer.borderColor = [NAV_BAR_COLOR CGColor];
+    self.searchBar.layer.borderColor = [[DCAppConfiguration navigationBarColor] CGColor];
     [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTintColor:[UIColor darkGrayColor]];
     
     [self reload];

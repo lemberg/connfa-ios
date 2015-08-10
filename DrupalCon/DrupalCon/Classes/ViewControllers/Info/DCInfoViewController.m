@@ -73,7 +73,7 @@
 
 - (void) arrangeNavigationBar
 {    
-    self.navigationController.navigationBar.tintColor = NAV_BAR_COLOR;
+    self.navigationController.navigationBar.tintColor = [DCAppConfiguration navigationBarColor];;
     self.navigationItem.title = nil;
 
     [self.navigationController.navigationBar setBackgroundImage: [UIImage imageWithColor:[UIColor clearColor]]

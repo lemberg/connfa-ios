@@ -32,6 +32,7 @@ typedef NS_ENUM (int, DCMenuSection) {
     DCMENU_LOCATION_ITEM,
     //DCMENU_INTERESTS_ITEM,
     DCMENU_INFO_ITEM,
+    DCMENU_SIZE
 };
 
 #endif

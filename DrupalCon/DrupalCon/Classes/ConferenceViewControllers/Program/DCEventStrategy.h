@@ -40,6 +40,7 @@ typedef enum {
 
 - (instancetype)initWithStrategy:(EDCEventStrategy)strategy;
 
+- (UIColor *)favoriteTextColor;
 // Only for favorite events
 - (UIColor *)leftSectionContainerColor;
 - (NSArray*)days;

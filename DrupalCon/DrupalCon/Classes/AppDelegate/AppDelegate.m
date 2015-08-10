@@ -50,7 +50,7 @@ static int const kGaDispatchPeriod = 30;
     [self initializeGoogleAnalytics];
     
     [[DCMainProxy sharedProxy] update];
-    
+
     // Local Notification are replacded by Calendar
 //    if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
 //        

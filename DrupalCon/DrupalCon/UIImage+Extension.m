@@ -56,4 +56,11 @@
     return image;
 }
 
+
+
++ (UIImage *)imageNamedFromBundle:(NSString *)imageName {
+    
+    //NSString *imageBundlePath = [NSString stringWithFormat:@"%@/Images/%@",BUNDLE_NAME, imageName];
+    return [UIImage imageNamed:imageName];
+}
 @end

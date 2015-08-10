@@ -565,7 +565,7 @@
                                             <outlet property="selectedBackground" destination="c7F-0x-Dd6" id="MhW-Ua-gfZ"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AppSign" rowHeight="79" id="lzn-Tu-Qmq">
+                                    <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DCAppSignMenuCell" rowHeight="79" id="lzn-Tu-Qmq" customClass="DCAppSignMenuCell">
                                         <rect key="frame" x="0.0" y="22" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lzn-Tu-Qmq" id="7B5-b7-t7V">
@@ -600,6 +600,10 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="eek-Pz-Kju" id="rxZ-gJ-bZS"/>
+                                            <outlet property="placeLabel" destination="DRQ-Td-vXz" id="DqC-PU-pui"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -957,6 +961,7 @@
                         <outlet property="mapView" destination="RdW-sU-V58" id="2Hu-eF-GVW"/>
                         <outlet property="stateLabel" destination="Nil-uv-QF5" id="gpN-2W-szV"/>
                         <outlet property="streetAndNumberLabel" destination="2yf-nA-7Ch" id="ttI-fM-16f"/>
+                        <outlet property="titlesContainerView" destination="tRu-8b-hDP" id="6YJ-xh-znO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ptj-t8-hbe" userLabel="First Responder" sceneMemberID="firstResponder"/>
