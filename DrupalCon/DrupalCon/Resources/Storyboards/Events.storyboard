@@ -113,6 +113,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="qEC-G5-ro3" id="X4s-u6-hTD"/>
                         <outlet property="dateLabel" destination="qU0-jE-nVu" id="Kum-T8-vyB"/>
+                        <outlet property="dayContainerView" destination="6bO-pf-MPE" id="NRU-23-Mo5"/>
                         <outlet property="nextDayButton" destination="3Zq-rf-wWq" id="B4l-tN-fVA"/>
                         <outlet property="previousDayButton" destination="AED-7d-fwj" id="uzp-t6-KtK"/>
                     </connections>
@@ -567,6 +568,7 @@
                                         <connections>
                                             <outlet property="TrackAndLevelView" destination="3Vc-9k-AIe" id="fpY-rA-NK4"/>
                                             <outlet property="dateAndPlaceLabel" destination="MiW-dm-ghz" id="FPb-N0-LIr"/>
+                                            <outlet property="eventDetailContainerView" destination="Nnb-h4-c6e" id="mb5-pO-XBR"/>
                                             <outlet property="experienceIcon" destination="0Y4-nP-iM9" id="Zs9-Sp-a8P"/>
                                             <outlet property="experienceLabel" destination="saD-Ka-cgM" id="q2n-iL-2T1"/>
                                             <outlet property="titleLabel" destination="CQL-fM-7yr" id="NeW-hu-JkK"/>

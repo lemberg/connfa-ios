@@ -295,10 +295,16 @@
 		A616E4491B6F546600AEE87D /* HCE-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A616E4481B6F546600AEE87D /* HCE-Info.plist */; };
 		A616E44C1B6F6C8C00AEE87D /* DCAppConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = A616E44B1B6F6C8C00AEE87D /* DCAppConfiguration.m */; };
 		A616E44D1B6F6C8C00AEE87D /* DCAppConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = A616E44B1B6F6C8C00AEE87D /* DCAppConfiguration.m */; };
+		A62830A91B78F4DA00FF78EC /* DCAppSignMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A62830A81B78F4DA00FF78EC /* DCAppSignMenuCell.m */; };
+		A62830AA1B78F4DA00FF78EC /* DCAppSignMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A62830A81B78F4DA00FF78EC /* DCAppSignMenuCell.m */; };
 		A654C0431B724030004AB528 /* HCE-Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A616E4541B6F83FE00AEE87D /* HCE-Images.xcassets */; };
 		A654C0441B724681004AB528 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8465186B1AD7F96D00BE1607 /* Images.xcassets */; };
 		A654C0451B724682004AB528 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8465186B1AD7F96D00BE1607 /* Images.xcassets */; };
 		A654C0491B7268CA004AB528 /* DC-Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A654C0481B7268CA004AB528 /* DC-Images.xcassets */; };
+		A6B2A5911B78B7F100DE35D6 /* UIColor+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B2A5901B78B7F100DE35D6 /* UIColor+Helper.m */; };
+		A6B2A5921B78B7F100DE35D6 /* UIColor+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = A6B2A5901B78B7F100DE35D6 /* UIColor+Helper.m */; };
+		A6D80DBA1B735F0500602086 /* DC-Theme.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A6D80DB81B735F0500602086 /* DC-Theme.bundle */; };
+		A6D80DBC1B735F0C00602086 /* HCE-Theme.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A6D80DB91B735F0500602086 /* HCE-Theme.bundle */; };
 		A6EBA9BC1B53D4DB00C91E41 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6EBA9B81B53D3A700C91E41 /* Crashlytics.framework */; };
 		A6EBA9BD1B53D4DB00C91E41 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6EBA9B91B53D3A700C91E41 /* Fabric.framework */; };
 		FA90B9A319C5893700873865 /* DCEventBaseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA90B9A219C5893700873865 /* DCEventBaseCell.m */; };
@@ -591,7 +597,13 @@
 		A616E44A1B6F6C8C00AEE87D /* DCAppConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCAppConfiguration.h; path = Classes/Helpers/DCAppConfiguration.h; sourceTree = "<group>"; };
 		A616E44B1B6F6C8C00AEE87D /* DCAppConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCAppConfiguration.m; path = Classes/Helpers/DCAppConfiguration.m; sourceTree = "<group>"; };
 		A616E4541B6F83FE00AEE87D /* HCE-Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "HCE-Images.xcassets"; sourceTree = "<group>"; };
+		A62830A71B78F4DA00FF78EC /* DCAppSignMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCAppSignMenuCell.h; sourceTree = "<group>"; };
+		A62830A81B78F4DA00FF78EC /* DCAppSignMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCAppSignMenuCell.m; sourceTree = "<group>"; };
 		A654C0481B7268CA004AB528 /* DC-Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "DC-Images.xcassets"; sourceTree = "<group>"; };
+		A6B2A58F1B78B7F100DE35D6 /* UIColor+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Helper.h"; sourceTree = "<group>"; };
+		A6B2A5901B78B7F100DE35D6 /* UIColor+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Helper.m"; sourceTree = "<group>"; };
+		A6D80DB81B735F0500602086 /* DC-Theme.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "DC-Theme.bundle"; sourceTree = "<group>"; };
+		A6D80DB91B735F0500602086 /* HCE-Theme.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "HCE-Theme.bundle"; sourceTree = "<group>"; };
 		A6EBA9B81B53D3A700C91E41 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		A6EBA9B91B53D3A700C91E41 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		A830F8571AD4315500E3DCFE /* main_2.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = main_2.0.xcdatamodel; sourceTree = "<group>"; };
@@ -699,6 +711,8 @@
 			children = (
 				5D38E69B1987A631006F7A59 /* DCSideMenuCell.h */,
 				5D38E69C1987A631006F7A59 /* DCSideMenuCell.m */,
+				A62830A71B78F4DA00FF78EC /* DCAppSignMenuCell.h */,
+				A62830A81B78F4DA00FF78EC /* DCAppSignMenuCell.m */,
 			);
 			name = MenuCell;
 			path = Classes/Views/MenuCell;
@@ -773,6 +787,8 @@
 			children = (
 				84E64E741B5FD14900ACEAA0 /* NSCalendar+DC.h */,
 				84E64E751B5FD14900ACEAA0 /* NSCalendar+DC.m */,
+				A6B2A58F1B78B7F100DE35D6 /* UIColor+Helper.h */,
+				A6B2A5901B78B7F100DE35D6 /* UIColor+Helper.m */,
 				74E837EC19C061A3000D2BE4 /* SDWebImage */,
 				849CF81F19A6246A00C84675 /* NSDate+DC.h */,
 				849CF82019A6246A00C84675 /* NSDate+DC.m */,
@@ -990,6 +1006,8 @@
 				74A3EA9C1A56FD9000327225 /* Web */,
 				A616E4541B6F83FE00AEE87D /* HCE-Images.xcassets */,
 				A654C0481B7268CA004AB528 /* DC-Images.xcassets */,
+				A6D80DB81B735F0500602086 /* DC-Theme.bundle */,
+				A6D80DB91B735F0500602086 /* HCE-Theme.bundle */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1405,6 +1423,7 @@
 				A654C0491B7268CA004AB528 /* DC-Images.xcassets in Resources */,
 				74A3EAA31A56FD9000327225 /* about_img.png in Resources */,
 				5DC8C41F198656DB00BF5816 /* InfoPlist.strings in Resources */,
+				A6D80DBA1B735F0500602086 /* DC-Theme.bundle in Resources */,
 				840147021AC42A9D00423062 /* style.css in Resources */,
 				74A3EAA61A5703B600327225 /* Main.storyboard in Resources */,
 				A654C0441B724681004AB528 /* Images.xcassets in Resources */,
@@ -1423,6 +1442,7 @@
 				A654C0451B724682004AB528 /* Images.xcassets in Resources */,
 				A616E4381B6F51DC00AEE87D /* DCEventBaseCell.xib in Resources */,
 				A616E4391B6F51DC00AEE87D /* Info.storyboard in Resources */,
+				A6D80DBC1B735F0C00602086 /* HCE-Theme.bundle in Resources */,
 				A616E43B1B6F51DC00AEE87D /* event_detail_style.css in Resources */,
 				A616E43C1B6F51DC00AEE87D /* about_img.png in Resources */,
 				A616E43D1B6F51DC00AEE87D /* InfoPlist.strings in Resources */,
@@ -1490,6 +1510,7 @@
 				1ACFD6F91A432BBB00F8EE57 /* DCTrack.m in Sources */,
 				74356D5B19BF3B290055F13D /* UIWebView+DC.m in Sources */,
 				84A06E3319ACBA0600104876 /* DCEventDetailViewController.m in Sources */,
+				A62830A91B78F4DA00FF78EC /* DCAppSignMenuCell.m in Sources */,
 				849E84FF19AF385D006F43B3 /* DCSpeakerEventCell.m in Sources */,
 				74DDDE731AD2AD1100C67124 /* DCFavoriteEventsDataSource.m in Sources */,
 				849EFE4119A5067000C43E05 /* DCType+DC.m in Sources */,
@@ -1541,6 +1562,7 @@
 				5D6449CD19893BC300BC1775 /* DCSpeechOfDayCell.m in Sources */,
 				741A4E621A026B120065FDB6 /* NSFileManager+DC.m in Sources */,
 				5DC8C421198656DB00BF5816 /* main.m in Sources */,
+				A6B2A5911B78B7F100DE35D6 /* UIColor+Helper.m in Sources */,
 				5DC8C47A19865C8400BF5816 /* DCSideMenuViewController.m in Sources */,
 				A60A90741B4BB6CC00C1F72E /* DCAppSettings.m in Sources */,
 				7409E6601AB081B4003577F6 /* DCMainEvent+DC.m in Sources */,
@@ -1621,6 +1643,7 @@
 				A616E3BE1B6F51DC00AEE87D /* DCTrack.m in Sources */,
 				A616E3BF1B6F51DC00AEE87D /* UIWebView+DC.m in Sources */,
 				A616E3C01B6F51DC00AEE87D /* DCEventDetailViewController.m in Sources */,
+				A62830AA1B78F4DA00FF78EC /* DCAppSignMenuCell.m in Sources */,
 				A616E3C11B6F51DC00AEE87D /* DCSpeakerEventCell.m in Sources */,
 				A616E3C21B6F51DC00AEE87D /* DCFavoriteEventsDataSource.m in Sources */,
 				A616E3C31B6F51DC00AEE87D /* DCType+DC.m in Sources */,
@@ -1672,6 +1695,7 @@
 				A616E3F11B6F51DC00AEE87D /* DCSpeechOfDayCell.m in Sources */,
 				A616E3F21B6F51DC00AEE87D /* NSFileManager+DC.m in Sources */,
 				A616E3F31B6F51DC00AEE87D /* main.m in Sources */,
+				A6B2A5921B78B7F100DE35D6 /* UIColor+Helper.m in Sources */,
 				A616E3F41B6F51DC00AEE87D /* DCSideMenuViewController.m in Sources */,
 				A616E3F51B6F51DC00AEE87D /* DCAppSettings.m in Sources */,
 				A616E3F61B6F51DC00AEE87D /* DCMainEvent+DC.m in Sources */,

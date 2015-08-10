@@ -42,7 +42,7 @@
 {
     if (self.navigatorBarStyle == EBaseViewControllerNatigatorBarStyleNormal)
     {
-        self.navigationController.navigationBar.barTintColor = NAV_BAR_COLOR;
+        self.navigationController.navigationBar.barTintColor = [DCAppConfiguration navigationBarColor];
         NSDictionary *textAttributes = NAV_BAR_TITLE_ATTRIBUTES;
         
         self.navigationController.navigationBar.titleTextAttributes = textAttributes;

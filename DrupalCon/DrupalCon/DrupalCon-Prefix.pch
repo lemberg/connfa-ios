@@ -15,4 +15,6 @@
     #import <Foundation/Foundation.h>
     #import "DCMainProxy.h"
     #import "DCDateHelper.h"
+    #import "DCAppConfiguration.h"
+
 #endif

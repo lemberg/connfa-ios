@@ -14,6 +14,7 @@
 #import "DCSpeaker.h"
 #import "DCLevel.h"
 #import "DCType.h"
+#import "UIImage+Extension.h"
 
 static NSString *ratingsImagesName[] = {@"", @"ic_experience_beginner", @"ic_experience_intermediate", @"ic_experience_advanced" };
 
@@ -112,7 +113,7 @@ static NSInteger eventCellImageHeight = 16;
         // Experience level
     NSInteger eventRating = [event.level.levelId integerValue];
     NSString *ratingImageName = ratingsImagesName[eventRating];
-    self.eventLevelImageView.image = [UIImage imageNamed:ratingImageName];
+    self.eventLevelImageView.image = [UIImage imageNamedFromBundle:ratingImageName];
     
         // Event image (left side)
     self.eventImageView.image = event.imageForEvent;

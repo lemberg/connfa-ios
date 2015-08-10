@@ -9,8 +9,64 @@
 #import "DCAppConfiguration.h"
 #import "DCSideMenuViewController.h"
 #import "DCSideMenuType.h"
+#import "UIColor+Helper.h"
 
 @implementation DCAppConfiguration
+
+static NSString * const kNavigationBarColour = @"NavigationBarColour";
+static NSString * const kFavoriteEventColour = @"FavoriteEventColour";
+static NSString * const kEventDetailHeaderColour = @"EventDetailHeaderColour";
+static NSString * const kEventDetailNavBarTextColour = @"EventDetailNavBarTextColour";
+static NSString * const kIsFilterEnable = @"IsFilterEnable";
+static NSString * const kSpeakerDetailBarColour = @"SpeakerDetailBarColour";
+static NSString * const kEventDate = @"EventDate";
+static NSString * const kEventPlace = @"EventPlace";
+
+static NSBundle *themeBundle;
+
++ (void)initialize {
+    NSString *bundlePath = [[NSBundle mainBundle] pathForResource:BUNDLE_NAME ofType:@"bundle"];
+    themeBundle = [NSBundle bundleWithPath:bundlePath];
+}
+
++ (UIColor *)navigationBarColor {
+    NSString *colorId = [themeBundle infoDictionary][kNavigationBarColour];
+    return [UIColor colorFromHexString:colorId];
+}
+
++ (UIColor *)favoriteEventColor {
+    NSString *colorId = [themeBundle infoDictionary][kFavoriteEventColour];
+    return [UIColor colorFromHexString:colorId];
+}
+
++ (UIColor *)eventDetailHeaderColour {
+    NSString *colorId = [themeBundle infoDictionary][kEventDetailHeaderColour];
+    return [UIColor colorFromHexString:colorId];
+}
+
++ (UIColor *)eventDetailNavBarTextColor {
+    NSString *colorId = [themeBundle infoDictionary][kEventDetailNavBarTextColour];
+    return [UIColor colorFromHexString:colorId];
+}
+
++ (UIColor *)speakerDetailBarColor {
+    NSString *colorId = [themeBundle infoDictionary][kSpeakerDetailBarColour];
+    return [UIColor colorFromHexString:colorId];
+}
+
++ (NSString *)eventTime {
+    NSString *eventTime = [themeBundle infoDictionary][kEventDate];
+    return eventTime;
+}
+
++ (NSString *)eventPlace {
+    NSString *eventPlace = [themeBundle infoDictionary][kEventPlace];
+    return eventPlace;
+}
++ (BOOL)isFilterEnable {
+    return [[themeBundle infoDictionary][kIsFilterEnable] boolValue];
+}
+
 + (NSArray *)appMenuItems {
     NSArray *menuItems;
 #ifdef HCE

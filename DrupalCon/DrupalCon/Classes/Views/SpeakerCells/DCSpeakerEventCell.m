@@ -27,7 +27,7 @@
 #import "DCTime+DC.h"
 #import "DCTimeRange+DC.h"
 #import "NSDate+DC.h"
-
+#import "UIImage+Extension.h"
 
 @interface DCSpeakerEventCell ()
 
@@ -83,13 +83,13 @@
         switch (event.level.levelId.integerValue)
         {
             case 1:
-                icon = [UIImage imageNamed:@"ic_experience_beginner"];
+                icon = [UIImage imageNamedFromBundle:@"ic_experience_beginner"];
                 break;
             case 2:
-                icon = [UIImage imageNamed:@"ic_experience_intermediate"];
+                icon = [UIImage imageNamedFromBundle:@"ic_experience_intermediate"];
                 break;
             case 3:
-                icon = [UIImage imageNamed:@"ic_experience_advanced"];
+                icon = [UIImage imageNamedFromBundle:@"ic_experience_advanced"];
                 break;
             default:
                 break;

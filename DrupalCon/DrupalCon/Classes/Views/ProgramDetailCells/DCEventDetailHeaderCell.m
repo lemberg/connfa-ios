@@ -12,7 +12,7 @@
 #import "DCTimeRange+DC.h"
 #import "NSDate+DC.h"
 #import "DCEvent+DC.h"
-
+#import "UIImage+Extension.h"
 
 @implementation DCEventDetailHeaderCell
 
@@ -33,7 +33,7 @@
             startTime,
             endTime];
     
-    
+    self.eventDetailContainerView.backgroundColor = [DCAppConfiguration eventDetailHeaderColour];
     NSString *place = event.place ? event.place : @"";
     
     if (date.length && place.length)
@@ -56,13 +56,13 @@
         switch (event.level.levelId.integerValue)
         {
             case 1:
-                icon = [UIImage imageNamed:@"ic_experience_beginner"];
+                icon = [UIImage imageNamedFromBundle:@"ic_experience_beginner"];
                 break;
             case 2:
-                icon = [UIImage imageNamed:@"ic_experience_intermediate"];
+                icon = [UIImage imageNamedFromBundle:@"ic_experience_intermediate"];
                 break;
             case 3:
-                icon = [UIImage imageNamed:@"ic_experience_advanced"];
+                icon = [UIImage imageNamedFromBundle:@"ic_experience_advanced"];
                 break;
             default:
                 break;

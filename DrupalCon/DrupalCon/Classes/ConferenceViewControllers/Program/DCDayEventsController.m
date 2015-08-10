@@ -129,6 +129,11 @@
             cell.leftSectionContainerView.backgroundColor = [weakSelf.eventsStrategy leftSectionContainerColor];
         }
         
+        cell.eventTitleLabel.textColor = [UIColor blackColor];
+        if ([event.favorite boolValue]  && [weakSelf.eventsStrategy favoriteTextColor]) {
+            cell.eventTitleLabel.textColor = [weakSelf.eventsStrategy favoriteTextColor];
+        }
+        
         return cell;
     }];
 }
