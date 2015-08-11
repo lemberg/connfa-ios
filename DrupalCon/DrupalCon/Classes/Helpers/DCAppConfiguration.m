@@ -67,6 +67,10 @@ static NSBundle *themeBundle;
     return [[themeBundle infoDictionary][kIsFilterEnable] boolValue];
 }
 
++ (NSString *)appDisplayName {
+    return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+}
+
 + (NSArray *)appMenuItems {
     NSArray *menuItems;
 #ifdef HCE

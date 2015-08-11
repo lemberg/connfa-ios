@@ -34,5 +34,5 @@
 + (BOOL)isFilterEnable;
 + (NSString *)eventTime;
 + (NSString *)eventPlace;
-
++ (NSString *)appDisplayName;
 @end

@@ -14,7 +14,6 @@
 #import "DCCoreDataStore.h"
 
 NSString * kCalendarIdKey = @"CalendarIdKey";
-NSString * calendarTitle = @"DrupalCon events";
 
 
 @implementation DCCalendarManager
@@ -25,11 +24,15 @@ static EKEventStore *eventStore;
     eventStore = [EKEventStore new];
 }
 
++ (NSString *)calendarTitle {
+    return [NSString stringWithFormat:@"%@ events", [DCAppConfiguration appDisplayName]];
+}
+
 + (EKCalendar*) defaultCalendar {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString * calendarId = [defaults stringForKey:kCalendarIdKey];
     
-    EKCalendar* calendar = [self findCalendar:calendarId title:calendarTitle];
+    EKCalendar* calendar = [self findCalendar:calendarId title:[self calendarTitle]];
     
     if (!calendarId && calendar) {
         [self removeCalendar:calendar];
@@ -65,7 +68,7 @@ static EKEventStore *eventStore;
 
         // create new calendar in Default source
     calendar = [EKCalendar calendarForEntityType:EKEntityTypeEvent eventStore:eventStore];
-    calendar.title = calendarTitle;
+    calendar.title = [self calendarTitle];
     calendar.source = defaultSource;
     
     NSError* error = nil;
