@@ -158,18 +158,17 @@
 
 - (void)setAnnotation
 {
-    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([self.location.latitude doubleValue],
-                                                                   [self.location.longitude doubleValue]);
-    DCPin *pinAnnotation = [[DCPin alloc] initWithCoordinate:coordinate title:@""];
+    CLLocation *location =  [[CLLocation alloc]initWithLatitude:[self.location.latitude doubleValue] longitude: [self.location.longitude doubleValue]];
+
+    DCPin *pinAnnotation = [[DCPin alloc] initWithCoordinate:location.coordinate title:@""];
     [self.mapView addAnnotation:pinAnnotation];
 
     // Set view region
-    if (coordinate.latitude < 0. || coordinate.longitude < 0. ) {
-
-    } else {
-        MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(coordinate, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
+    if (CLLocationCoordinate2DIsValid(location.coordinate)) {
         [_mapView setRegion:viewRegion animated:YES];
     }
+    
 
 }
 
