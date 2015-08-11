@@ -63,8 +63,6 @@
                 _eventClass = [DCEvent class];
                 _predicate = [self favoritesPredicate];
                 _leftSectionContainerColor = [UIColor whiteColor];
-                _favoriteEventTextColor = nil;
-
                 break;
             default:
                 break;
