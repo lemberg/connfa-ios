@@ -8,11 +8,12 @@
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "menu-icon-dark@2x.png"
+      "filename" : "menu_icon_dark@2x.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "menu_icon_dark@3x.png"
     }
   ],
   "info" : {
