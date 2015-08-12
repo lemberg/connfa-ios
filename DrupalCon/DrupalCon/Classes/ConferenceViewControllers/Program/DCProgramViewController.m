@@ -21,7 +21,6 @@
 //
 
 #import "DCProgramViewController.h"
-#import "DCProgramItemsViewController.h"
 #import "DCMainProxy+Additions.h"
 #import "NSDate+DC.h"
 #import "DCDayEventsController.h"
@@ -370,7 +369,7 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
-     NSUInteger index = [self.days indexOfObject: ((DCProgramItemsViewController*) viewController).date];
+     NSUInteger index = [self.days indexOfObject: ((DCDayEventsController*) viewController).date];
     
     if ((index == 0) || (index == NSNotFound)) {
         return nil;
@@ -385,7 +384,7 @@
     if (!self.days.count)
         return nil;
     
-     NSUInteger index = [self.days indexOfObject: ((DCProgramItemsViewController*) viewController).date];
+     NSUInteger index = [self.days indexOfObject: ((DCDayEventsController*) viewController).date];
     if (index == NSNotFound) {
         return nil;
     }
@@ -400,7 +399,7 @@
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
 {
     if(completed){
-        NSUInteger currentIndex = [self.days indexOfObject:[(DCProgramItemsViewController*)[self.pageViewController.viewControllers lastObject] date]];
+        NSUInteger currentIndex = [self.days indexOfObject:[(DCDayEventsController*)[self.pageViewController.viewControllers lastObject] date]];
         self.currentDayIndex = currentIndex;
         [self displayDateForDay: self.currentDayIndex];
         [self updateButtonsVisibility];
