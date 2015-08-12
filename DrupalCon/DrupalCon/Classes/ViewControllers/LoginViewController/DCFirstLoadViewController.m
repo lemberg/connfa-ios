@@ -32,7 +32,7 @@
             mainProxyState == DCMainProxyStateDataReady ||
             mainProxyState == DCmainProxyStateDataNotChange)
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[DCAppFacade shared].mainNavigationController goToSideMenuContainer: YES];
+            [[DCAppFacade shared].mainNavigationController goToSideMenuContainer: NO];
         });
     }];
 }
