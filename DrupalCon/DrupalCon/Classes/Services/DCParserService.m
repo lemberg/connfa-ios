@@ -90,16 +90,18 @@
 - (CompleteParseCallback)parseCallbackForKey:(NSString *)key
 {
     CompleteParseCallback callback = ^(NSError *error, NSDictionary *result) {
-        
-        if (!error) {
+        if (result.allKeys.count > 0 && !error) {
             [self addData:result forKey:key];
-        } else {
-            //
-            [self.operationQueue cancelAllOperations];
-            // Set error
-            @synchronized(self) {
-                self.parseError = error;
-            }
+            return ;
+        }
+      if (error.code == 3840) {
+            NSLog(@"Parse failed in key %@ with no value %@", key, error);
+      } else {
+          //// Set error
+          @synchronized(self) {
+              [self.operationQueue cancelAllOperations];
+              self.parseError = error;
+          }
             NSLog(@"Parse failed in key %@ withError %@", key, error);
         }
     };

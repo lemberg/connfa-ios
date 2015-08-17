@@ -38,6 +38,7 @@
 
 @property (nonatomic, strong) DCLocation *location;
 @property (nonatomic, strong) CLGeocoder *geocoder;
+@property (weak, nonatomic) IBOutlet UIView *titlesContainerView;
 
 @end
 
@@ -59,21 +60,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     self.location = [[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCLocation class] inMainQueue:YES] lastObject];
     [self updateLocation];
-    
+    self.titlesContainerView.backgroundColor = [DCAppConfiguration speakerDetailBarColor];
         // geocoder isn't used now because we use the ready data from local DB
         // if you want to use geocode just uncomment the proper code
 //    self.geocoder = [[CLGeocoder alloc] init];
 //    [self updateLocation: CLLocationCoordinate2DMake([self.location.latitude doubleValue],
 //                                                     [self.location.longitude doubleValue])];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    [[DCMainProxy sharedProxy] checkReachable];
 }
 
 #pragma mark - View appearance
@@ -82,7 +76,8 @@
 {
     [super arrangeNavigationBar];
     
-    self.navigationController.navigationBar.barTintColor = MENU_SELECTION_COLOR;
+    self.navigationController.navigationBar.barTintColor = [DCAppConfiguration speakerDetailBarColor];
+    
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle
@@ -119,6 +114,11 @@
         self.streetAndNumberLabel.text = streetAndHouse.length ? [NSString stringWithFormat:@"%@,", streetAndHouse] : nil;
         self.cityAndProvinceLabel.text = cityAndProvince.length ? [NSString stringWithFormat:@"%@,", cityAndProvince] : nil;
         self.stateLabel.text = state;
+    } else {
+        self.addressLabel.text = @"Location is not available";
+        self.streetAndNumberLabel.text = @"";//streetAndHouse.length ? [NSString stringWithFormat:@"%@,", streetAndHouse] : nil;
+        self.cityAndProvinceLabel.text =@"";// cityAndProvince.length ? [NSString stringWithFormat:@"%@,", cityAndProvince] : nil;
+        self.stateLabel.text = @"";
     }
 }
 
@@ -158,14 +158,18 @@
 
 - (void)setAnnotation
 {
-    CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([self.location.latitude doubleValue],
-                                                                   [self.location.longitude doubleValue]);
-    DCPin *pinAnnotation = [[DCPin alloc] initWithCoordinate:coordinate title:@""];
+    CLLocation *location =  [[CLLocation alloc]initWithLatitude:[self.location.latitude doubleValue] longitude: [self.location.longitude doubleValue]];
+
+    DCPin *pinAnnotation = [[DCPin alloc] initWithCoordinate:location.coordinate title:@""];
     [self.mapView addAnnotation:pinAnnotation];
 
     // Set view region
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(coordinate, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
-    [_mapView setRegion:viewRegion animated:YES];
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 0.5*METERS_PER_MILE, 0.5*METERS_PER_MILE);
+    if (CLLocationCoordinate2DIsValid(location.coordinate)) {
+        [_mapView setRegion:viewRegion animated:YES];
+    }
+    
+
 }
 
 #pragma mark -

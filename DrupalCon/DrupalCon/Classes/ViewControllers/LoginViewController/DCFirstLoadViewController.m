@@ -22,21 +22,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [UIApplication sharedApplication].keyWindow.backgroundColor = [UIColor whiteColor];
+    
     self.backgroundImageView.image = [UIImage splashImageForOrientation:UIInterfaceOrientationPortrait];
     
-    if ([DCMainProxy sharedProxy].state != DCMainProxyStateInitDataLoading)
-    {
-        [[DCAppFacade shared].mainNavigationController goToSideMenuContainer: YES];
-    }
-    else
-    {
-        [[DCMainProxy sharedProxy] setDataReadyCallback:^(DCMainProxyState mainProxyState) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[DCAppFacade shared].mainNavigationController goToSideMenuContainer: YES
-                 ];
-            });
-        }];
-    }
+    [[DCMainProxy sharedProxy] setDataReadyCallback:^(DCMainProxyState mainProxyState) {
+        
+        if (mainProxyState == DCMainProxyStateDataUpdated ||
+            mainProxyState == DCMainProxyStateDataReady ||
+            mainProxyState == DCmainProxyStateDataNotChange)
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[DCAppFacade shared].mainNavigationController goToSideMenuContainer: NO];
+        });
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

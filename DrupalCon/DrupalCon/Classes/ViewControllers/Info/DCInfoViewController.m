@@ -36,7 +36,6 @@
 {
     [super viewDidLoad];
     
-
     [[DCMainProxy sharedProxy] setDataReadyCallback:^(DCMainProxyState mainProxyState) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"Data ready callback %d", mainProxyState);
@@ -57,10 +56,10 @@
 {
     DCInfo* info = [[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCInfo class] inMainQueue:YES] lastObject];
     
-    NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
+    NSSortDescriptor *orderDescriptor = [[NSSortDescriptor alloc] initWithKey:@"order" ascending:NO];
     NSSortDescriptor *iDDescriptor = [[NSSortDescriptor alloc] initWithKey:@"infoId" ascending:YES];
     
-    self.items = [[info.infoCategory allObjects] sortedArrayUsingDescriptors:@[iDDescriptor, descriptor]];
+    self.items = [[info.infoCategory allObjects] sortedArrayUsingDescriptors:@[orderDescriptor, iDDescriptor]];
     
     [self.tableView reloadData];
 }
@@ -74,7 +73,7 @@
 
 - (void) arrangeNavigationBar
 {    
-    self.navigationController.navigationBar.tintColor = NAV_BAR_COLOR;
+    self.navigationController.navigationBar.tintColor = [DCAppConfiguration navigationBarColor];;
     self.navigationItem.title = nil;
 
     [self.navigationController.navigationBar setBackgroundImage: [UIImage imageWithColor:[UIColor clearColor]]

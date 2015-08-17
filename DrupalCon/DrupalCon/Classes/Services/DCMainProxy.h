@@ -56,9 +56,10 @@ typedef enum {
 #pragma mark - public
 
 - (void)update;
-- (void)checkReachable;
+- (BOOL)checkReachable;
 
 #pragma mark - work with instances
+- (NSTimeZone *)eventTimeZone;
 
 - (NSArray*)getAllInstancesOfClass:(Class)aClass inMainQueue:(BOOL)mainQueue;
 - (NSArray*)getAllInstancesOfClass:(Class)aClass predicate:(NSPredicate*)aPredicate inMainQueue:(BOOL)mainQueue;
@@ -75,7 +76,7 @@ typedef enum {
 //FIXME: separate Favorites to favoriteManager
 
 - (void)addToFavoriteEvent:(DCEvent *)event;
-- (void)removeFavoriteEventWithID:(NSNumber *)eventID;
+- (void)removeFavoriteEventWithID:(DCEvent *)event;
 - (NSArray *)eventsWithIDs:(NSArray *)iDs;
 - (void)openLocalNotification:(UILocalNotification *)localNotification;
 

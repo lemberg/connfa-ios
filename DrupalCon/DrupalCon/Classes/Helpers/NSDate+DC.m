@@ -27,15 +27,11 @@ static NSString * kDCSpeakerEventCellFormat = @"dd LLLL";
 #define T_ZERO [NSTimeZone timeZoneForSecondsFromGMT:0]
 
 #import "NSDate+DC.h"
+#import "NSCalendar+DC.h"
 
 @implementation NSDate (DC)
 
-+ (NSString*)currentUnixTimeString
-{
-    NSDate * now  = [NSDate date];
-    NSTimeInterval interval = [now timeIntervalSince1970];
-    return [NSString stringWithFormat:@"%f",interval];
-}
+
 
 + (NSDate*)fabricateWithEventString:(NSString*)string
 {
@@ -48,8 +44,9 @@ static NSString * kDCSpeakerEventCellFormat = @"dd LLLL";
 
 + (BOOL)dc_isDateInToday:(NSDate *)date
 {
-    NSDateComponents *otherDay = [[NSCalendar currentCalendar] components:NSEraCalendarUnit|NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
-    NSDateComponents *today = [[NSCalendar currentCalendar] components:NSEraCalendarUnit|NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:[NSDate date]];
+    NSDateComponents *otherDay = [[NSCalendar currentGregorianCalendar] components:NSEraCalendarUnit|NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
+    NSDateComponents *today = [[NSCalendar currentGregorianCalendar] components:NSEraCalendarUnit|NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:[NSDate date]];
+    today.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
     if([today day] == [otherDay day] &&
        [today month] == [otherDay month] &&
        [today year] == [otherDay year] &&
@@ -59,22 +56,48 @@ static NSString * kDCSpeakerEventCellFormat = @"dd LLLL";
         return NO;
 }
 
-- (NSString*)pageViewDateString
++ (NSDate *)dateFromString:(NSString *)formattedDate format:(NSString *)dateFormat
 {
-    NSDateFormatter *outPutDateFormat = [[NSDateFormatter alloc] init];
-    [outPutDateFormat setDateFormat:kDCEventViewOutputFormat];
-    [outPutDateFormat setTimeZone:T_ZERO];
-    NSString *theDate = [[outPutDateFormat stringFromDate:self] uppercaseString];
-    return theDate;
+    if (![formattedDate isKindOfClass:[NSString class]])
+    {
+        return nil;
+    }
+    
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    [dateFormatter setDateFormat:dateFormat];
+
+
+    return [dateFormatter dateFromString:formattedDate];
 }
 
-+ (NSString *)hourFormatForDate:(NSDate *)date
+- (NSString *)dateToStringWithFormat:(NSString *)dateFormat
 {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"h:mm aaa"];
-    NSString *dateDisplay = [dateFormatter stringFromDate:date];
-    return  dateDisplay;
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    dateFormatter.timeZone = T_ZERO;
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setDateFormat:dateFormat];
+    return [dateFormatter stringFromDate:self];
 }
+
++ (float)hoursFromDate:(NSDate *)date {
+    NSCalendar *calendar = [NSCalendar currentGregorianCalendar];
+    NSDateComponents *components = [calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:date];
+    float hour = (float)[components hour];
+    float minute = (float)[components minute];
+    return hour + minute/60.0;
+}
+
++ (float) currentHour
+{
+    NSDate *date = [NSDate date];
+    NSCalendar *calendar = [NSCalendar currentGregorianCalendar];
+    [calendar setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_GB"]];
+    NSDateComponents *components = [calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit) fromDate:date];
+    float hour = (float)[components hour] + (float)[components minute]/60;
+    return hour;
+}
+
 
 #pragma mark - private
 

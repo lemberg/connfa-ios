@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -20,9 +20,9 @@
                         <subviews>
                             <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="coi-og-QUw">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <color key="backgroundColor" red="0.078431372550000003" green="0.12549019610000001" blue="0.2784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.4941176471" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="barTintColor" red="0.066666666666666666" green="0.11372549019607843" blue="0.26666666666666666" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="0.0" green="0.49411764705882355" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <scopeButtonTitles>
                                     <string>Title</string>
@@ -148,7 +148,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lAE-7I-eW9" userLabel="bg container">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="250"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="speaker_detail_top" translatesAutoresizingMaskIntoConstraints="NO" id="Gwj-Qt-ipO" userLabel="background">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="speaker_detail_top" translatesAutoresizingMaskIntoConstraints="NO" id="Gwj-Qt-ipO" userLabel="background">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="250"/>
                                         <constraints>
                                             <constraint firstAttribute="height" secondItem="Gwj-Qt-ipO" secondAttribute="width" multiplier="23:40" id="V5X-1L-5uz"/>
@@ -181,16 +181,16 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="210"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="100" verticalCompressionResistancePriority="99" misplaced="YES" text="Vesa Palmu" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pxb-Yf-LuZ">
-                                                    <rect key="frame" x="20" y="160" width="280" height="22"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="100" verticalCompressionResistancePriority="99" text="Vesa Palmu" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pxb-Yf-LuZ">
+                                                    <rect key="frame" x="20" y="160" width="280" height="26"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="21"/>
-                                                    <color key="textColor" red="0.019607843140000001" green="0.73333333329999995" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="100" verticalCompressionResistancePriority="97" misplaced="YES" text="Senior Developer Engineer at Global Logic" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7g-Bm-ido" userLabel="Job and Company label">
-                                                    <rect key="frame" x="20" y="185" width="280" height="15"/>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="100" verticalCompressionResistancePriority="97" text="Senior Developer Engineer at Global Logic" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7g-Bm-ido" userLabel="Job and Company label">
+                                                    <rect key="frame" x="20" y="189" width="280" height="11"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
-                                                    <color key="textColor" red="0.019607843140000001" green="0.73333333329999995" blue="0.82352941180000006" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="100" verticalCompressionResistancePriority="100" image="avatar_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="KIy-0H-cOi">
@@ -385,11 +385,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vesa Palmu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="adT-8j-OUI" userLabel="Speaker name">
                                         <rect key="frame" x="75" y="33" width="225" height="18"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="15"/>
-                                        <color key="textColor" red="0.066666666669999999" green="0.1137254902" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.82352941180000006" green="0.27450980390000002" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.066666666669999999" green="0.1137254902" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.82352941180000006" green="0.27450980390000002" blue="0.1647058824" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="5uH-Oo-T9t"/>
                                     <constraint firstAttribute="centerY" secondItem="adT-8j-OUI" secondAttribute="centerY" constant="-10" id="Ada-Qa-5Ac"/>

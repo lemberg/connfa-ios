@@ -56,7 +56,7 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint* topBackgroundTop;
 
-@property (nonatomic, weak, readonly) NSArray* speakers;
+@property (nonatomic, strong) NSArray* speakers;
 
 @property (nonatomic, strong) NSIndexPath *lastIndexPath;
 @property (nonatomic, strong) NSMutableDictionary *cellsHeight;
@@ -96,14 +96,15 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
     
     [self registerScreenLoadAtGA: [NSString stringWithFormat:@"eventID: %d", self.event.eventId.intValue]];
     
-    [self arrangeNavigationBar];
     
     self.cellsHeight = [NSMutableDictionary dictionary];
-    self.currentBarColor = [UIColor whiteColor];
+
     self.topTitleLabel.text = self.event.name;
     
     self.noDetailImageView.hidden = ![self hideEmptyDetailIcon];
     self.tableView.scrollEnabled = ![self hideEmptyDetailIcon];
+    self.topBackgroundShadowView.backgroundColor = [DCAppConfiguration eventDetailHeaderColour];
+    [self initSpeakers];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -120,13 +121,12 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    self.navigationController.navigationBar.tintColor = self.currentBarColor;
+    [self arrangeNavigationBar];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle
 {
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleDefault;
 }
 
 #pragma mark - UI initialization
@@ -147,16 +147,17 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
 
 - (void) arrangeNavigationBar
 {
+    self.navigatorBarStyle = EBaseViewControllerNatigatorBarStyleTransparrent;
     [super arrangeNavigationBar];
     
-//    self.navigationController.navigationBar.tintColor = NAV_BAR_COLOR;
+    self.navigationController.navigationBar.tintColor = [DCAppConfiguration navigationBarColor];
     [self.navigationController.navigationBar setBackgroundImage: [UIImage imageWithColor:[UIColor clearColor]]
                                                   forBarMetrics: UIBarMetricsDefault];
     self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.translucent = YES;
     self.navigationController.navigationBar.backgroundColor = [UIColor clearColor];
-    
-    UIBarButtonItem* favoriteButton = [[UIBarButtonItem alloc] initWithImage: self.event.favorite.boolValue ? [UIImage imageNamed:@"star+"] : [UIImage imageNamed:@"star-"]
+    UIImage *startImage = self.event.favorite.boolValue ? [[UIImage imageNamedFromBundle:@"star+"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] : [[UIImage imageNamedFromBundle:@"star-"]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    UIBarButtonItem* favoriteButton = [[UIBarButtonItem alloc] initWithImage:startImage
                                                                        style:UIBarButtonItemStylePlain
                                                                       target:self
                                                                       action:@selector(favoriteButtonDidClick:)];
@@ -168,6 +169,11 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
                                                                                   target:self
                                                                                   action:@selector(shareButtonDidClick)];
     
+    UIColor *eventNavColor = [DCAppConfiguration eventDetailNavBarTextColor];
+    self.navigationController.navigationBar.tintColor = eventNavColor;
+    self.topTitleLabel.textColor = eventNavColor;
+    self.currentBarColor = eventNavColor;
+
     self.navigationItem.rightBarButtonItems = @[sharedButton, favoriteButton];
 }
 
@@ -181,9 +187,14 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
 
 #pragma mark - Private
 
-- (NSArray*) speakers
-{
-    return [self.event.speakers allObjects];
+- (void) initSpeakers {
+    NSArray *sortedSpeakers = [self.event.speakers.allObjects sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+        NSInteger first = [(DCSpeaker*)a speakerId].integerValue;
+        NSInteger second = [(DCSpeaker*)b speakerId].integerValue;
+        return first>second;
+    }];
+    
+    self.speakers = sortedSpeakers;
 }
 
 - (void)updateCellAtIndexPath
@@ -404,15 +415,13 @@ static NSString * cellIdDescription = @"DetailCellIdDescription";
     
     BOOL isSelected = (sender.tag == 2);
     
-    sender.image = isSelected ? [UIImage imageNamed:@"star+"] : [UIImage imageNamed:@"star-"];
-    
-    self.event.favorite = [NSNumber numberWithBool:isSelected];
+    sender.image = isSelected ?  [[UIImage imageNamedFromBundle:@"star+"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]  :  [[UIImage imageNamedFromBundle:@"star-"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] ;
     
     if (isSelected)
     {
         [[DCMainProxy sharedProxy] addToFavoriteEvent:self.event];
     } else {
-        [[DCMainProxy sharedProxy] removeFavoriteEventWithID:self.event.eventId];
+        [[DCMainProxy sharedProxy] removeFavoriteEventWithID:self.event];
     }
 }
 

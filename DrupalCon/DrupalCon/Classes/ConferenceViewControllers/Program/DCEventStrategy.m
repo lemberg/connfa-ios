@@ -26,9 +26,10 @@
 
 @interface DCEventStrategy ()
 
-@property (nonatomic, strong) Class eventClass;
 // Only for favorite events
 @property (nonatomic, strong) UIColor *leftSectionContainerColor;
+
+@property (nonatomic, strong) UIColor *favoriteEventTextColor;
 
 @end
 
@@ -42,6 +43,8 @@
         _predicate = nil;
         
         _strategy = strategy;
+        _favoriteEventTextColor = [DCAppConfiguration favoriteEventColor];
+
         switch (_strategy)
         {
             case EDCEventStrategyPrograms:
@@ -54,6 +57,7 @@
                 break;
             case EDCEventStrategySocialEvents:
                 _eventClass = [DCSocialEvent class];
+                
                 break;
             case EDCEeventStrategyFavorites:
                 _eventClass = [DCEvent class];
@@ -67,6 +71,10 @@
     return self;
 }
 
+- (UIColor *)favoriteTextColor {
+    return  self.favoriteEventTextColor;
+}
+
 - (UIColor *)leftSectionContainerColor
 {
     return _leftSectionContainerColor;
@@ -74,7 +82,7 @@
 
 - (BOOL)isEnableFilter
 {
-    return self.strategy == EDCEventStrategyPrograms;
+    return self.strategy == EDCEventStrategyPrograms && [DCAppConfiguration isFilterEnable];
 }
 
 - (NSPredicate *)eventStretegyPredicate

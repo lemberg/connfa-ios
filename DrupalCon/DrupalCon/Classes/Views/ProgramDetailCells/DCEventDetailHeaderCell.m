@@ -12,22 +12,28 @@
 #import "DCTimeRange+DC.h"
 #import "NSDate+DC.h"
 #import "DCEvent+DC.h"
-
+#import "UIImage+Extension.h"
 
 @implementation DCEventDetailHeaderCell
 
 - (void) initData:(DCEvent *)event
 {
+        // this code makes labels in Cell resizable relating to screen size. Cell height with layoutSubviews will work properly
+    CGFloat preferredWidth = [UIScreen mainScreen].bounds.size.width - 30;
+    self.titleLabel.preferredMaxLayoutWidth = preferredWidth;
+    self.dateAndPlaceLabel.preferredMaxLayoutWidth = preferredWidth;
+    
     self.titleLabel.text = event.name;
     
-    // event Date
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat: @"EEE"];
-    NSString *date = event.date ? [formatter stringFromDate: event.date] : @"";
+    NSString *date = event.date ? [DCDateHelper convertDate:event.date toApplicationFormat:@"EEE"] : @"";
+    NSString *startTime = [DCDateHelper convertDate:event.startDate toApplicationFormat:@"h:mm aaa"];
+    NSString *endTime   = [DCDateHelper convertDate:event.endDate toApplicationFormat:@"h:mm aaa"];
+    date = [NSString stringWithFormat:@"%@, %@ - %@",
+            [date uppercaseString],
+            startTime,
+            endTime];
     
-    date = [NSString stringWithFormat:@"%@, %@ - %@", [date uppercaseString], [NSDate hourFormatForDate:event.startDate], [NSDate hourFormatForDate:event.endDate]];
-    
-    
+    self.eventDetailContainerView.backgroundColor = [DCAppConfiguration eventDetailHeaderColour];
     NSString *place = event.place ? event.place : @"";
     
     if (date.length && place.length)
@@ -50,13 +56,13 @@
         switch (event.level.levelId.integerValue)
         {
             case 1:
-                icon = [UIImage imageNamed:@"ic_experience_beginner"];
+                icon = [UIImage imageNamedFromBundle:@"ic_experience_beginner"];
                 break;
             case 2:
-                icon = [UIImage imageNamed:@"ic_experience_intermediate"];
+                icon = [UIImage imageNamedFromBundle:@"ic_experience_intermediate"];
                 break;
             case 3:
-                icon = [UIImage imageNamed:@"ic_experience_advanced"];
+                icon = [UIImage imageNamedFromBundle:@"ic_experience_advanced"];
                 break;
             default:
                 break;

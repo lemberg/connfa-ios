@@ -33,6 +33,7 @@
 @dynamic date;
 @dynamic desctiptText;
 @dynamic eventId;
+@dynamic calendarId;
 @dynamic favorite;
 @dynamic name;
 @dynamic place;

@@ -24,11 +24,12 @@
 
 @interface NSDate (DC)
 
-+ (NSString*)currentUnixTimeString;
+
 + (NSDate*)fabricateWithEventString:(NSString*)string;
-- (NSString*)pageViewDateString;
-- (NSString*)stringForSpeakerEventCell;
 + (BOOL)dc_isDateInToday:(NSDate *)date;
-+ (NSString *)hourFormatForDate:(NSDate *)date;
++ (NSDate *)dateFromString:(NSString *)formattedDate format:(NSString *)dateFormat;
+- (NSString *)dateToStringWithFormat:(NSString *)dateFormat;
++ (float)hoursFromDate:(NSDate *)date;
++ (float) currentHour;
 
 @end

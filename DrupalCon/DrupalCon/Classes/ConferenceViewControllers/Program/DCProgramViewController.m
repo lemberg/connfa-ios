@@ -21,13 +21,13 @@
 //
 
 #import "DCProgramViewController.h"
-#import "DCProgramItemsViewController.h"
 #import "DCMainProxy+Additions.h"
 #import "NSDate+DC.h"
 #import "DCDayEventsController.h"
 #import "DCEventDetailViewController.h"
 #import "DCLimitedNavigationController.h"
 #import "DCAppFacade.h"
+#import "NSCalendar+DC.h"
 
 @interface DCProgramViewController ()
 
@@ -37,6 +37,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *previousDayButton;
 @property (nonatomic, strong) IBOutlet UILabel *dateLabel;
 
+@property (weak, nonatomic) IBOutlet UIView *dayContainerView;
 @property (nonatomic, strong) NSArray *viewControllers;
 @property (nonatomic, strong) NSArray *days;
 @property (nonatomic) NSInteger currentDayIndex;
@@ -64,24 +65,29 @@
     
     self.currentDayIndex = 0;
     self.currentPageDate = nil;
+    self.dayContainerView.backgroundColor = [DCAppConfiguration navigationBarColor];
     
     [self.activityIndicator startAnimating];
+    
     [[DCMainProxy sharedProxy] setDataReadyCallback:^(DCMainProxyState mainProxyState) {
         dispatch_async(dispatch_get_main_queue(), ^{
             NSLog(@"Data ready callback %d", mainProxyState);
             if ( !self.previousState) {
                 [self reloadData];
                 self.previousState = mainProxyState;
-            }
-            
-                
-            if ( mainProxyState == DCMainProxyStateDataUpdated) {
+            } else if ( mainProxyState == DCMainProxyStateDataUpdated) {
                 [self reloadData];
             }
-           
+            
             [self.activityIndicator stopAnimating];
         });
     }];
+}
+
+- (void) viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    [self arrangePreviousAndNextDayButtons];
 }
 
 - (void)openDetailScreenForEvent:(DCEvent *)event
@@ -127,6 +133,35 @@
     return UIStatusBarStyleLightContent;
 }
 
+- (void) arrangePreviousAndNextDayButtons
+{
+    NSMutableArray* buttons = [[NSMutableArray alloc] init];
+    for (UIControl *view in self.navigationController.navigationBar.subviews) {
+        
+        if ([view isKindOfClass:[UIControl class]]) { // navigation bar buttons search
+            [buttons addObject:view];
+        }
+    }
+    
+    if (buttons.count >= 2) {   
+        UIView *leftButton = [buttons sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            UIControl *button1 = obj1;
+            UIControl *button2 = obj2;
+            
+            if (button1.frame.origin.x < button2.frame.origin.x)
+                return NSOrderedAscending;
+            else if (button1.frame.origin.x > button2.frame.origin.x)
+                return NSOrderedDescending;
+            else
+                return NSOrderedSame;
+        }].firstObject;
+        float padding = leftButton.frame.origin.x;
+        
+        self.previousDayButton.contentEdgeInsets = UIEdgeInsetsMake(0, padding, 0, 0);
+        self.nextDayButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, padding);
+    }
+}
+
 - (void) arrangeNavigationBar
 {
     [super arrangeNavigationBar];
@@ -136,14 +171,14 @@
 
 - (NSUInteger) getCurrentDayIndex: (NSDate*)neededDate
 {
-    NSDateComponents *neededDateComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate: neededDate];
+    NSDateComponents *neededDateComponents = [[NSCalendar currentGregorianCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate: neededDate];
     NSInteger neededDay = [neededDateComponents day];
     NSInteger neededMonth = [neededDateComponents month];
     NSInteger neededYear = [neededDateComponents year];
     
     for (NSDate* iteratedDay in self.days)
     {
-        NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate: iteratedDay];
+        NSDateComponents *components = [[NSCalendar currentGregorianCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate: iteratedDay];
         NSInteger day = [components day];
         NSInteger month = [components month];
         NSInteger year = [components year];
@@ -193,7 +228,7 @@
     [self.dateLabel.layer addAnimation:animation forKey:@"kCATransitionFade"];
     
     NSDate * date = _days[day];
-    self.dateLabel.text = date ? [date pageViewDateString] : nil;
+    self.dateLabel.text = date ? [DCDateHelper convertDate:date toDefaultTimeFormat:@"EEEE dd"] : nil;
 }
 
 - (NSArray*)createViewControllersForDays:(NSArray*)aDays
@@ -334,7 +369,7 @@
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
 {
-     NSUInteger index = [self.days indexOfObject: ((DCProgramItemsViewController*) viewController).date];
+     NSUInteger index = [self.days indexOfObject: ((DCDayEventsController*) viewController).date];
     
     if ((index == 0) || (index == NSNotFound)) {
         return nil;
@@ -349,7 +384,7 @@
     if (!self.days.count)
         return nil;
     
-     NSUInteger index = [self.days indexOfObject: ((DCProgramItemsViewController*) viewController).date];
+     NSUInteger index = [self.days indexOfObject: ((DCDayEventsController*) viewController).date];
     if (index == NSNotFound) {
         return nil;
     }
@@ -364,7 +399,7 @@
 - (void)pageViewController:(UIPageViewController *)pageViewController didFinishAnimating:(BOOL)finished previousViewControllers:(NSArray *)previousViewControllers transitionCompleted:(BOOL)completed
 {
     if(completed){
-        NSUInteger currentIndex = [self.days indexOfObject:[(DCProgramItemsViewController*)[self.pageViewController.viewControllers lastObject] date]];
+        NSUInteger currentIndex = [self.days indexOfObject:[(DCDayEventsController*)[self.pageViewController.viewControllers lastObject] date]];
         self.currentDayIndex = currentIndex;
         [self displayDateForDay: self.currentDayIndex];
         [self updateButtonsVisibility];

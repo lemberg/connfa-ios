@@ -23,11 +23,6 @@
 #ifndef DrupalCon_UIConstants_h
 #define DrupalCon_UIConstants_h
 
-#define NAV_BAR_COLOR [UIColor colorWithRed:17.0/255. green:29.0/255. blue: 68./255. alpha: 1.0]
-
-#define MENU_SELECTION_COLOR [UIColor colorWithRed:229./255. green:18./255. blue:18./255. alpha:1.0]
-#define MENU_DESELECTED_ITEM_TITLE_COLOR [UIColor colorWithRed:98./255. green:98./255. blue:98./255. alpha:1.0]
-
 #define NAV_BAR_TITLE_ATTRIBUTES [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,[UIColor whiteColor],NSBackgroundColorAttributeName, [UIFont fontWithName:@"HelveticaNeue-Medium" size:17],NSFontAttributeName,nil]
 
 #endif

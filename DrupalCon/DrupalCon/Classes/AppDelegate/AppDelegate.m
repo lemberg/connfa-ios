@@ -25,6 +25,9 @@
 #import "UIConstants.h"
 #import "GAI.h"
 #import "DCLevel+DC.h"
+#import <Fabric/Fabric.h>
+#import <Crashlytics/Crashlytics.h>
+
 
 /** Google Analytics configuration constants **/
 static NSString *const kGaPropertyId = @"UA-267362-67";
@@ -34,33 +37,37 @@ static int const kGaDispatchPeriod = 30;
 @interface AppDelegate ()
 
 @property (strong, nonatomic) id<GAITracker> tracker;
-@property (nonatomic, strong) UILocalNotification *localNotification;
+//@property (nonatomic, strong) UILocalNotification *localNotification;
 
 @end
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // Initialise crashlytics
+    [Fabric with:@[CrashlyticsKit]];
+
     [self initializeGoogleAnalytics];
     
     [[DCMainProxy sharedProxy] update];
+
+    // Local Notification are replacded by Calendar
+//    if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+//        
+//        // Register user notifications
+//        UIUserNotificationType types = UIUserNotificationTypeBadge |
+//        UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
+//        
+//        UIUserNotificationSettings *settings =
+//        [UIUserNotificationSettings settingsForTypes:types categories:nil];
+//        
+//        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+//    }
     
-    if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-        
-        // Register user notifications
-        UIUserNotificationType types = UIUserNotificationTypeBadge |
-        UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
-        
-        UIUserNotificationSettings *settings =
-        [UIUserNotificationSettings settingsForTypes:types categories:nil];
-        
-        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-    }
-    
-    UILocalNotification *locationNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
-    if (locationNotification) {
-        self.localNotification = locationNotification;
-    }
+//    UILocalNotification *locationNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
+//    if (locationNotification) {
+//        self.localNotification = locationNotification;
+//    }
     
 #ifdef DEBUG_MODE
     NSLog(@"====================");
@@ -87,41 +94,22 @@ static int const kGaDispatchPeriod = 30;
 {
     if ([self.window.rootViewController isKindOfClass:[UINavigationController class]]) {
         [[DCMainProxy sharedProxy] update];
-//        UINavigationController * natigator = (UINavigationController*)self.window.rootViewController;
-//        [natigator popToRootViewControllerAnimated:NO];
     }
 
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    if (self.localNotification) {
-        [[DCMainProxy sharedProxy] openLocalNotification:self.localNotification];
-        self.localNotification = nil;
-        application.applicationIconBadgeNumber = 0;
-    }
+//    if (self.localNotification) {
+//        [[DCMainProxy sharedProxy] openLocalNotification:self.localNotification];
+//        self.localNotification = nil;
+//        application.applicationIconBadgeNumber = 0;
+//    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     
-}
-
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
-{
-    UIApplicationState state = [application applicationState];
-    if (state == UIApplicationStateActive) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Reminder"
-                                                        message:notification.alertBody
-                                                       delegate:self cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-        [alert show];
-    } else {
-        self.localNotification = notification;
-    }
-    
-    NSLog(@"Push notification come");
-    application.applicationIconBadgeNumber = 0;
 }
 
 - (void)initializeGoogleAnalytics

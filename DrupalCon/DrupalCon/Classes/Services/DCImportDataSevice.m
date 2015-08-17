@@ -39,6 +39,7 @@
 #import "DCPoi+DC.h"
 #import "DCInfo+DC.h"
 #import "DCTwitter+DC.h"
+#import "DCAppSettings+DC.h"
 
 #import "DCWebService.h"
 #import "DCParserService.h"
@@ -59,6 +60,7 @@ static NSString *const SOCIAL_EVENTS_URI = @"getSocialEvents";
 static NSString *const POI_URI        = @"getPOI";
 static NSString *const INFO_URI       = @"getInfo";
 static NSString *const TWITTER_URI    = @"getTwitter";
+static NSString *const SETTINGS_URI    = @"getSettings";
 
 
 
@@ -106,6 +108,7 @@ static NSString *const TWITTER_URI    = @"getTwitter";
 {
     if  (!_classesMap) {
         _classesMap =  @{ TYPES_URI: [DCType class],
+                          SETTINGS_URI: [DCAppSettings class],
                           SPEAKERS_URI: [DCSpeaker class],
                           LEVELS_URI: [DCLevel class],
                           HOUSEPLANS_URI: [DCHousePlan class],
@@ -316,9 +319,7 @@ static NSString *const TWITTER_URI    = @"getTwitter";
 - (NSString*)DC_URIFromId:(NSString*)Id
 {
     NSInteger intId = [Id integerValue];
-    if (!intId)
-        @throw [[NSException alloc] initWithName:@"API" reason:@"method id can't be 0" userInfo:nil];
-    
+
     NSString * result = @"";
     switch (intId) {
         case 1:
@@ -370,6 +371,7 @@ static NSString *const TWITTER_URI    = @"getTwitter";
             break;
             
         default:
+            result = SETTINGS_URI;
             break;
     }
     

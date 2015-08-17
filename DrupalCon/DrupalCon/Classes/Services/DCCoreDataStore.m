@@ -112,7 +112,9 @@ static NSString *const DCCoreDataModelFileName = @"main";
         }
         
         [self saveMainContextWithCompletionBlock:^(BOOL isSuccess) {
-            callback(isSuccess);
+            if (callback != NULL) {
+                callback(isSuccess);
+            }
         }];
     }];
    

@@ -79,7 +79,7 @@ static NSString *eventCellId = @"SpeakerEventCellId";
     
     self.cellsHeight = [NSMutableDictionary dictionary];
     self.currentBarColor = [UIColor whiteColor];//NAV_BAR_COLOR;
-    
+    self.navBarBackgroundView.backgroundColor = [DCAppConfiguration speakerDetailBarColor];
     self.cellPrototypes = @{eventCellId : [self.speakerTable dequeueReusableCellWithIdentifier:eventCellId],
                             headerCellId : [self.speakerTable dequeueReusableCellWithIdentifier:headerCellId],
                             buttonsCellId : [self.speakerTable dequeueReusableCellWithIdentifier:buttonsCellId]};
@@ -151,7 +151,7 @@ static NSString *eventCellId = @"SpeakerEventCellId";
             [cellPrototype initData:self.speaker];
             [cellPrototype layoutSubviews];
             
-            UIImage* image = [UIImage imageNamed:@"speaker_detail_top"];
+            UIImage* image = [UIImage imageNamedFromBundle:@"speaker_detail_top"];
             CGFloat minBgHeight = ([UIScreen mainScreen].bounds.size.width / image.size.width)*image.size.height;
             CGFloat height = [cellPrototype.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
             

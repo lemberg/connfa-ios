@@ -25,7 +25,6 @@
 #import "NSManagedObject+DC.h"
 
 #import "NSDate+DC.h"
-#import "DCFavoriteEvent+DC.h"
 #import "DCMainProxy.h"
 
 @implementation DCMainEvent (DC)

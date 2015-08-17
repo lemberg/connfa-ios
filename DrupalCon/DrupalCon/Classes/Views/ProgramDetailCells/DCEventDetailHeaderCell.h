@@ -17,6 +17,8 @@
 @property (nonatomic, weak) IBOutlet UILabel* experienceLabel;
 @property (nonatomic, weak) IBOutlet UIImageView* experienceIcon;
 @property (nonatomic, weak) IBOutlet UIView* TrackAndLevelView;
+@property (weak, nonatomic) IBOutlet UIView *eventDetailContainerView;
+
 
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint* trackAndLevelViewHeight;
 

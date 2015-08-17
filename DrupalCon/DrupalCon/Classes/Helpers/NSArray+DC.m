@@ -70,7 +70,7 @@
 {
     if (self.count) {
         NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:key
-                                                                       ascending:YES];
+                                                                       ascending:ascending];
         return [self sortedArrayUsingDescriptors:@[sortDescriptor]];
     }
     NSLog(@"WRONG! array for sort. events by id");
@@ -103,19 +103,18 @@
             NSSortDescriptor* descriptor = [NSSortDescriptor sortDescriptorWithKey:@"self"
                                                                          ascending:YES
                                                                         comparator:^NSComparisonResult(id obj1, id obj2) {
-                                                                            DCTime* time1 = [(DCTimeRange*)obj1 from];
-                                                                            DCTime* time2 = [(DCTimeRange*)obj2 from];
+                                                                            NSDate* time1 = [(DCTimeRange*)obj1 from];
+                                                                            NSDate* time2 = [(DCTimeRange*)obj2 from];
                                                                             
-                                                                            NSComparisonResult fromResult = [self DC_checkTime1:time1 time2:time2];
+                                                                            NSComparisonResult fromResult = [time1 compare:time2];//[self DC_checkTime1:time1 time2:time2];
                                                                             
                                                                             if (fromResult != NSOrderedSame)
                                                                             {
                                                                                 return fromResult;
                                                                             }
-                                                                            DCTime* endTime1 = [(DCTimeRange*)obj1 from];
-                                                                            DCTime* endTime2 = [(DCTimeRange*)obj2 from];
+          
                                                                             
-                                                                            NSComparisonResult toResult = [self DC_checkTime1:endTime1 time2:endTime2];
+                                                                            NSComparisonResult toResult = fromResult;
                                                                         
                                                                             return toResult;
                                                                         }];
@@ -144,31 +143,6 @@
 
 
 #pragma mark - private
-
-- (NSComparisonResult)DC_checkTime1:(DCTime*)time1 time2:(DCTime*)time2
-{
-    if ([time1.hour integerValue] > [time2.hour integerValue])
-    {
-        return (NSComparisonResult)NSOrderedDescending;
-    }
-    else if ([time1.hour integerValue] < [time2.hour integerValue])
-    {
-        return (NSComparisonResult)NSOrderedAscending;
-    }
-    else
-    {
-        if ([time1.minute integerValue] > [time2.minute integerValue])
-        {
-            return (NSComparisonResult)NSOrderedDescending;
-        }
-        else if ([time1.minute integerValue] < [time2.minute integerValue])
-        {
-            return (NSComparisonResult)NSOrderedAscending;
-        }
-    }
-    return NSOrderedSame;
-}
-
 
 - (NSArray *)dictionaryByReplacingNullsWithStrings  {
     NSMutableArray *replaced = [self mutableCopy];
