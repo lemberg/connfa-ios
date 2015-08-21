@@ -1887,8 +1887,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: THE NATIONAL CENTER FOR APPROPRIATE TECHNOLOGY INC. (7QWCD26GS2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: THE NATIONAL CENTER FOR APPROPRIATE TECHNOLOGY INC. (7QWCD26GS2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DrupalCon",
@@ -1909,7 +1909,7 @@
 				);
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = HCE;
-				PROVISIONING_PROFILE = "d81bd8dd-9af9-4e94-9fac-4dbc288c2418";
+				PROVISIONING_PROFILE = "e046544a-abe8-4cf6-870c-1145028dc674";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1920,8 +1920,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: THE NATIONAL CENTER FOR APPROPRIATE TECHNOLOGY INC. (7QWCD26GS2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: THE NATIONAL CENTER FOR APPROPRIATE TECHNOLOGY INC. (7QWCD26GS2)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DrupalCon",
@@ -1939,7 +1939,7 @@
 				);
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = HCE;
-				PROVISIONING_PROFILE = "d81bd8dd-9af9-4e94-9fac-4dbc288c2418";
+				PROVISIONING_PROFILE = "e046544a-abe8-4cf6-870c-1145028dc674";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
