@@ -19,18 +19,29 @@
 - (void)loadEvents
 {
     __weak typeof(self) weakSelf = self;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        //
-        [weakSelf reload];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
+        NSArray *uniqueTimeSlotForDay = [self.eventStrategy uniqueTimeRangesForDay:self.selectedDay];
+        NSArray *eventsByTimeRange = [self eventsSortedByTimeRange:[self eventsForDay]
+                                               withUniqueTimeRange:uniqueTimeSlotForDay];
+        [self updateActualEventIndexPathForTimeRange:eventsByTimeRange];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //
+            __strong __typeof__(weakSelf) strongSelf = weakSelf;
+            strongSelf.eventsByTimeRange = eventsByTimeRange;
+            [strongSelf.tableView reloadData];
+            
+            // when this controller shows Current day
+            if (strongSelf.actualEventIndexPath)
+                [strongSelf moveTableToCurrentTime];
+            
+        });
     });
 }
 
 - (void) moveTableToCurrentTime
 {
     self.tableView.alpha = 0;
-    [self updateActualEventIndexPathForTimeRange:[self timeRangeSlotsDictionary]];
-    
     [self.tableView scrollToRowAtIndexPath:self.actualEventIndexPath atScrollPosition:UITableViewScrollPositionTop animated:NO];
     
     [UIView transitionWithView:self.tableView
@@ -47,82 +58,10 @@
     [self loadEvents];
 }
 
-- (NSArray *)timeRangeSlotsDictionary {
-    NSMutableArray *timeRanges = [NSMutableArray array];
-    for (id <NSFetchedResultsSectionInfo> sectionInfo in [self.fetchedResultController sections]) {
-        DCEvent *event = sectionInfo.objects.firstObject;
-        [timeRanges addObject:@{kDCTimeslotKEY: event.timeRange}];
-    }
-    return timeRanges;
-}
 
 - (NSArray *)eventsForDay
 {
     return [self.eventStrategy eventsForDay:self.selectedDay];
 }
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    
-    return [[self.fetchedResultController sections] count];//self.eventsByTimeRange.count;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    id <NSFetchedResultsSectionInfo> sectionInfo = [[self.fetchedResultController sections] objectAtIndex:section];
-    
-    return [sectionInfo numberOfObjects];
-}
-
-
-- (DCEvent *)eventForIndexPath:(NSIndexPath *)indexPath
-{
-    return [self.fetchedResultController objectAtIndexPath:indexPath];
-}
-
-- (DCTimeRange *)timeRangeForSection:(NSInteger)section
-{
-    
-    return [self.fetchedResultController objectAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:section]];
-}
-
-- (NSString *)titleForSectionAtIdexPath:(NSInteger)section
-{
-    //    TODO: Reload in the child classes
-    return nil;
-}
-
-
-- (void)reload
-{
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:NSStringFromClass(self.eventStrategy.eventClass)];
-    
-    NSPredicate *predicate = [self.eventStrategy predicate];
-    NSPredicate *dayPredicate = [NSPredicate predicateWithFormat:@"date == %@", self.selectedDay];
-    if (predicate) {
-        request.predicate = [NSCompoundPredicate andPredicateWithSubpredicates:@[predicate, dayPredicate]];
-    } else {
-        request.predicate = dayPredicate;
-        
-    }
-    
-    NSSortDescriptor *sectionKeyDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"timeRange.from" ascending:YES] ;
-    NSSortDescriptor *idDescriptor = [[NSSortDescriptor alloc] initWithKey:kDCEventIdKey
-                                                                 ascending:YES];
-    NSSortDescriptor *orderDescriptor = [[NSSortDescriptor alloc] initWithKey:kDCEventOrderKey ascending:NO];
-    [request setSortDescriptors:[NSArray arrayWithObjects:sectionKeyDescriptor, orderDescriptor, idDescriptor, nil]];
-    
-    self.fetchedResultController = [[NSFetchedResultsController alloc] initWithFetchRequest:request
-                                                                   managedObjectContext:[DCMainProxy sharedProxy].workContext
-                                                                     sectionNameKeyPath:@"timeRange.from"
-                                                                              cacheName:nil];
-    
-    NSError *error = nil;
-    [self.fetchedResultController performFetch:&error];
-    
-    if (error)
-        NSLog(@"%@", error);
-    [self.tableView reloadData];
-    [self moveTableToCurrentTime];
-}
-
 
 @end

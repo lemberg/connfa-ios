@@ -103,20 +103,26 @@
             NSSortDescriptor* descriptor = [NSSortDescriptor sortDescriptorWithKey:@"self"
                                                                          ascending:YES
                                                                         comparator:^NSComparisonResult(id obj1, id obj2) {
-                                                                            NSDate* time1 = [(DCTimeRange*)obj1 from];
-                                                                            NSDate* time2 = [(DCTimeRange*)obj2 from];
+                                                                            NSDate* fromTime1 = [(DCTimeRange*)obj1 from];
+                                                                            NSDate* fromTime2 = [(DCTimeRange*)obj2 from];
                                                                             
-                                                                            NSComparisonResult fromResult = [time1 compare:time2];//[self DC_checkTime1:time1 time2:time2];
+                                                                            NSDate* toTime1 = [(DCTimeRange*)obj1 to];
+                                                                            NSDate* toTime2 = [(DCTimeRange*)obj2 to];
                                                                             
-                                                                            if (fromResult != NSOrderedSame)
+                                                                            NSComparisonResult fromResult = [fromTime1 compare:fromTime2];//[self DC_checkTime1:time1 time2:time2];
+                                                                            
+                                                                            NSComparisonResult toResult = [toTime1 compare:toTime2];
+                                                                            if (fromResult == NSOrderedSame && toResult == NSOrderedSame)
                                                                             {
                                                                                 return fromResult;
                                                                             }
+                                                                            if (fromResult == NSOrderedSame && toResult != NSOrderedSame)
+                                                                            {
+                                                                                return toResult;
+                                                                            }
           
-                                                                            
-                                                                            NSComparisonResult toResult = fromResult;
                                                                         
-                                                                            return toResult;
+                                                                            return fromResult;
                                                                         }];
             return [self sortedArrayUsingDescriptors:@[descriptor]];
         }
@@ -143,6 +149,9 @@
 
 
 #pragma mark - private
+
+
+
 
 - (NSArray *)dictionaryByReplacingNullsWithStrings  {
     NSMutableArray *replaced = [self mutableCopy];
