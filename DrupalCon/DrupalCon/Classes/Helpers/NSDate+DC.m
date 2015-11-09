@@ -75,7 +75,7 @@ static NSString * kDCSpeakerEventCellFormat = @"dd LLLL";
 {
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     dateFormatter.timeZone = T_ZERO;
-    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
     [dateFormatter setDateFormat:dateFormat];
     return [dateFormatter stringFromDate:self];
 }
