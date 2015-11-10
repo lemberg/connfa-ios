@@ -15,24 +15,48 @@
 
 NSString * kCalendarIdKey = @"CalendarIdKey";
 
+@interface DCCalendarManager()
+@property (nonatomic) EKEventStore *eventStore;
+@property (nonatomic, strong) NSBlockOperation *blockOperation;
+@property (nonatomic) BOOL isAccessGranted;
+
+@end
 
 @implementation DCCalendarManager
 
-static EKEventStore *eventStore;
+//static EKEventStore *eventStore;
 
-+ (void) initialize {
-    eventStore = [EKEventStore new];
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.eventStore = [EKEventStore new];
+        self.blockOperation = [[NSBlockOperation alloc] init];
+        [self checkEventStoreAccessForCalendar];
+    }
+    return self;
+}
+
+- (void)executeRequest:(void (^)())request
+{
+    if (self.isAccessGranted) {
+        request();
+    } else {
+        [self.blockOperation addExecutionBlock:^{
+            request();
+        }];
+    }
 }
 
 + (NSString *)calendarTitle {
     return [NSString stringWithFormat:@"%@ events", [DCAppConfiguration appDisplayName]];
 }
 
-+ (EKCalendar*) defaultCalendar {
+- (EKCalendar*) defaultCalendar {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString * calendarId = [defaults stringForKey:kCalendarIdKey];
     
-    EKCalendar* calendar = [self findCalendar:calendarId title:[self calendarTitle]];
+    EKCalendar* calendar = [self findCalendar:calendarId title:[DCCalendarManager calendarTitle]];
     
     if (!calendarId && calendar) {
         [self removeCalendar:calendar];
@@ -46,13 +70,13 @@ static EKEventStore *eventStore;
     return calendar;
 }
 
-+ (EKCalendar*) findCalendar: (NSString*)calendarId title:(NSString*)calendarTitle{
+- (EKCalendar*) findCalendar: (NSString*)calendarId title:(NSString*)calendarTitle {
     
         //instead of getting calendar by identifier
         //get all calendars and check matching in the cycle
         //workaround caused by bug: http://stackoverflow.com/questions/28258204/error-getting-shared-calendar-invitations-for-entity-types-3-xcode-6-1-1-ekcal
     
-    NSArray *allCalendars = [eventStore calendarsForEntityType:EKEntityTypeEvent];
+    NSArray *allCalendars = [self.eventStore calendarsForEntityType:EKEntityTypeEvent];
     for (EKCalendar *calendar in allCalendars) {
         if ([calendar.calendarIdentifier isEqualToString:calendarId] || [calendar.title isEqualToString:calendarTitle]) {
             return calendar;
@@ -62,24 +86,72 @@ static EKEventStore *eventStore;
     return nil;
 }
 
-+ (EKCalendar*) createNewCalendar {
+
+#pragma mark -
+#pragma mark Access Calendar
+
+// Check the authorization status of our application for Calendar
+-(void)checkEventStoreAccessForCalendar
+{
+    EKAuthorizationStatus status = [EKEventStore authorizationStatusForEntityType:EKEntityTypeEvent];
+    
+    switch (status)
+    {
+            // Update our UI if the user has granted access to their Calendar
+        case EKAuthorizationStatusAuthorized: [self accessGrantedForCalendar];
+            break;
+            // Prompt the user for access to Calendar if there is no definitive answer
+        case EKAuthorizationStatusNotDetermined: [self requestCalendarAccess];
+            break;
+            // Display a message if the user has denied or restricted access to Calendar
+        case EKAuthorizationStatusDenied:
+        case EKAuthorizationStatusRestricted: {
+            [self showAlertWithTitle:@"Privacy Warning" message:@"Permission was not granted for Calendar"];
+
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+
+// Prompt the user for access to their Calendar
+-(void)requestCalendarAccess
+{
+    __weak typeof(self) weakSelf = self;
+
+    [self.eventStore requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError *error) {
+         if (granted) {
+             weakSelf.isAccessGranted = YES;
+             [weakSelf.blockOperation start];
+         }
+     }];
+}
+
+- (void)showAlertWithTitle:(NSString *)title message:(NSString *)msg {
+    [[[UIAlertView alloc] initWithTitle:title
+                                message:msg
+                               delegate:nil
+                      cancelButtonTitle:@"Ok"
+                      otherButtonTitles:nil] show];
+
+}
+
+- (EKCalendar*) createNewCalendar {
     EKCalendar *calendar;
-    EKSource *defaultSource = [eventStore defaultCalendarForNewEvents].source;
+    EKSource *defaultSource = [self.eventStore defaultCalendarForNewEvents].source;
 
         // create new calendar in Default source
-    calendar = [EKCalendar calendarForEntityType:EKEntityTypeEvent eventStore:eventStore];
-    calendar.title = [self calendarTitle];
+    calendar = [EKCalendar calendarForEntityType:EKEntityTypeEvent eventStore:self.eventStore];
+    calendar.title = [DCCalendarManager calendarTitle];
     calendar.source = defaultSource;
     
     NSError* error = nil;
-    [eventStore saveCalendar:calendar commit:YES error:&error];
+    [self.eventStore saveCalendar:calendar commit:YES error:&error];
     
     if (error && error.code == 17) {
-        [[[UIAlertView alloc] initWithTitle:@"Attention"
-                                    message:@"DrupalCon calendar was not created because app does not have rights to access your calendar account. Go to Settings->Mail,Contacts,Calendars->Account and turn off Calendar switcher. Or use iCloud account for calendar."
-                                   delegate:nil
-                          cancelButtonTitle:@"Ok"
-                          otherButtonTitles:nil] show];
+        [self showAlertWithTitle:@"Attention" message:@"DrupalCon calendar was not created because app does not have rights to access your calendar account. Go to Settings->Mail,Contacts,Calendars->Account and turn off Calendar switcher. Or use iCloud account for calendar."];
     }
     
     if (!error) {
@@ -91,64 +163,72 @@ static EKEventStore *eventStore;
     return calendar;
 }
 
-+ (void) removeCalendar: (EKCalendar*)calendar {
+// This method is called when the user has granted permission to Calendar
+-(void)accessGrantedForCalendar
+{
+    // Let's get the default calendar associated with our event store
+    self.isAccessGranted = YES;
+    [self.blockOperation start];
+}
+
+
+- (void)removeCalendar: (EKCalendar*)calendar {
     NSError *error = nil;
     
-    BOOL result = [eventStore removeCalendar:calendar commit:YES error:&error];
+    BOOL result = [self.eventStore removeCalendar:calendar commit:YES error:&error];
     if (!result) {
         NSLog(@"Deleting calendar failed: %@.", error);
     }
 }
 
-+ (void)addEventWithItem:(DCEvent *)event interval:(int)minutesBefore {
-    [eventStore requestAccessToEntityType:EKEntityTypeEvent
-                               completion:^(BOOL granted, NSError *error) {
-                                   if (granted) {
-                                       dispatch_async(dispatch_get_main_queue(), ^{
-                                           EKEvent *calEvent  = [EKEvent eventWithEventStore:eventStore];
-                                           calEvent.title     = event.name;
-                                           calEvent.location = event.place;
-                                           calEvent.startDate = [event startDate];
-                                           calEvent.endDate   = [event endDate];
-                                           calEvent.calendar = [self defaultCalendar];
+- (void)addEventWithItem:(DCEvent *)event interval:(int)minutesBefore {
+    __weak typeof(self) weakSelf = self;
 
-                                           NSTimeInterval interval = -(minutesBefore * 60.f);
-                                           EKAlarm *alarm = [EKAlarm alarmWithRelativeOffset: interval];
-                                           [calEvent addAlarm:alarm];
-                                           
-                                           NSError *err = nil;
-                                           [eventStore saveEvent:calEvent
-                                                            span:EKSpanThisEvent
-                                                           error:&err];
-                                           
-                                           event.calendarId = calEvent.eventIdentifier;
-                                           [[DCCoreDataStore defaultStore] saveWithCompletionBlock:nil];
-                                           
-                                           if (err)
-                                               NSLog(@"Error during adding event to a calendar %@", err);                                       
-                                       });
-                                   } else {
-                                       [[[UIAlertView alloc] initWithTitle:@"Attention"
-                                                                   message:@"Event was not added to Calendar. Please, go to Settings and allow access to Calendar application."
-                                                                  delegate:nil
-                                                         cancelButtonTitle:@"Ok"
-                                                         otherButtonTitles:nil] show];
+    [self executeRequest:^{
+        EKEvent *calEvent  = [EKEvent eventWithEventStore:self.eventStore];
+        calEvent.title     = event.name;
+        calEvent.location = event.place;
+        calEvent.startDate = [event startDate];
+        calEvent.endDate   = [event endDate];
+        calEvent.calendar = [self defaultCalendar];
+        
+        NSTimeInterval interval = -(minutesBefore * 60.f);
+        EKAlarm *alarm = [EKAlarm alarmWithRelativeOffset: interval];
+        [calEvent addAlarm:alarm];
+        
+        NSError *err = nil;
+        [weakSelf.eventStore saveEvent:calEvent
+                         span:EKSpanThisEvent
+                        error:&err];
+        if (err)
+            NSLog(@"Error during adding event to a calendar %@", err);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            event.calendarId = calEvent.eventIdentifier;
+            [[DCCoreDataStore defaultStore] saveWithCompletionBlock:nil];
+            
+            
+        });
+    }];
 
-                                   }
-                               }];
 }
 
-+ (void)removeEventOfItem:(DCEvent *)event {
-    EKEvent *calendarEvent = [eventStore eventWithIdentifier:event.calendarId];
-    
-    if (calendarEvent) {
-        NSError *error;
-        [eventStore removeEvent:calendarEvent
-                           span:EKSpanThisEvent
-                          error:&error];
-        if (error)
-            NSLog(@"Error during removing event from a calendar %@", error);
-    }
+- (void)removeEventOfItem:(DCEvent *)event {
+    __weak typeof(self) weakSelf = self;
+
+    [self executeRequest:^{
+        EKEvent *calendarEvent = [self.eventStore eventWithIdentifier:event.calendarId];
+        
+        if (calendarEvent) {
+            NSError *error;
+            [weakSelf.eventStore removeEvent:calendarEvent
+                               span:EKSpanThisEvent
+                              error:&error];
+            if (error)
+                NSLog(@"Error during removing event from a calendar %@", error);
+        }
+    }];
+
 }
 
 @end

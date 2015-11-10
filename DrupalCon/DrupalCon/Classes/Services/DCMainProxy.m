@@ -71,6 +71,7 @@ typedef void(^UpdateDataFail)(NSString *reason);
 
 @property (nonatomic) NSTimeZone *applicationTimeZone;
 
+@property (nonatomic) DCCalendarManager *calendarManager;
 @end
 
 #pragma mark -
@@ -93,6 +94,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     static dispatch_once_t disp;
     dispatch_once(&disp, ^{
         sharedProxy = [[self alloc] init];
+        
         [sharedProxy initialise];
     });
     return sharedProxy;
@@ -106,6 +108,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     self.importDataService = [[DCImportDataSevice alloc] initWithManagedObjectContext:[DCCoreDataStore defaultStore] andDelegate:self];
     // Set default data
     [self setState:(![self.importDataService isInitDataImport])? DCMainProxyStateDataReady : DCMainProxyStateNoData];
+    self.calendarManager = [[DCCalendarManager alloc] init];
 }
 
 - (NSTimeZone *)eventTimeZone {
@@ -304,7 +307,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     event.favorite = [NSNumber numberWithBool:YES];
     [[DCCoreDataStore defaultStore] saveWithCompletionBlock:nil];
     
-    [DCCalendarManager addEventWithItem:event interval:5];
+    [self.calendarManager addEventWithItem:event interval:5];
 }
 
 - (void)removeFavoriteEventWithID:(DCEvent *)event
@@ -312,7 +315,7 @@ persistentStoreCoordinator=_persistentStoreCoordinator;
     event.favorite = [NSNumber numberWithBool:NO];
     [[DCCoreDataStore defaultStore] saveWithCompletionBlock:nil];
     
-    [DCCalendarManager removeEventOfItem:event];
+    [self.calendarManager removeEventOfItem:event];
 }
 
 - (void)openLocalNotification:(UILocalNotification *)localNotification
