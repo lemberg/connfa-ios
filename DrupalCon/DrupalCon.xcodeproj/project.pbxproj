@@ -165,10 +165,12 @@
 		A63DF5BD1BF5E5F400EC73EF /* DCEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F1FC1BF4E9C60093AD65 /* DCEventCell.xib */; };
 		A63DF5C01BF5E5F400EC73EF /* about_img.png in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F21C1BF4E9C60093AD65 /* about_img.png */; };
 		A63DF5C81BF5E64400EC73EF /* HCE-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A63DF5C71BF5E64400EC73EF /* HCE-Info.plist */; };
-		A63DF5C91BF5E66100EC73EF /* HCE-Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2131BF4E9C60093AD65 /* HCE-Images.xcassets */; };
-		A63DF5CA1BF5E6C800EC73EF /* HCE-Theme.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2141BF4E9C60093AD65 /* HCE-Theme.bundle */; };
 		A63DF5CB1BF5E75900EC73EF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2151BF4E9C60093AD65 /* Images.xcassets */; };
 		A63DF5CC1BF5E75900EC73EF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2151BF4E9C60093AD65 /* Images.xcassets */; };
+		A63DF5D01BF5F53E00EC73EF /* DC-Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A63DF5CE1BF5F53E00EC73EF /* DC-Images.xcassets */; };
+		A63DF5D11BF5F53E00EC73EF /* DC-Theme.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A63DF5CF1BF5F53E00EC73EF /* DC-Theme.bundle */; };
+		A63DF5D51BF5F54700EC73EF /* HCE-Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A63DF5D31BF5F54700EC73EF /* HCE-Images.xcassets */; };
+		A63DF5D61BF5F54700EC73EF /* HCE-Theme.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A63DF5D41BF5F54700EC73EF /* HCE-Theme.bundle */; };
 		A6C5F2571BF4E9C60093AD65 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F0F61BF4E9C50093AD65 /* AppDelegate.m */; };
 		A6C5F2591BF4E9C60093AD65 /* DCAppFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F0F91BF4E9C50093AD65 /* DCAppFacade.m */; };
 		A6C5F25B1BF4E9C60093AD65 /* DCEventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F0FD1BF4E9C50093AD65 /* DCEventDetailViewController.m */; };
@@ -279,7 +281,6 @@
 		A6C5F32D1BF4E9C60093AD65 /* DCSpeakerDetailButtonsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F20B1BF4E9C60093AD65 /* DCSpeakerDetailButtonsCell.m */; };
 		A6C5F32F1BF4E9C60093AD65 /* DCSpeakerEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F20D1BF4E9C60093AD65 /* DCSpeakerEventCell.m */; };
 		A6C5F3311BF4E9C60093AD65 /* DCSpeakerHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F20F1BF4E9C60093AD65 /* DCSpeakerHeaderCell.m */; };
-		A6C5F3331BF4E9C60093AD65 /* DC-Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2111BF4E9C60093AD65 /* DC-Images.xcassets */; };
 		A6C5F33D1BF4E9C60093AD65 /* Events.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2171BF4E9C60093AD65 /* Events.storyboard */; };
 		A6C5F33F1BF4E9C60093AD65 /* Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2181BF4E9C60093AD65 /* Info.storyboard */; };
 		A6C5F3411BF4E9C60093AD65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2191BF4E9C60093AD65 /* Main.storyboard */; };
@@ -309,7 +310,6 @@
 		A6C5F3731BF4E9C60093AD65 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2521BF4E9C60093AD65 /* UIImageView+HighlightedWebCache.m */; };
 		A6C5F3751BF4E9C60093AD65 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2541BF4E9C60093AD65 /* UIImageView+WebCache.m */; };
 		A6C5F3771BF4E9C60093AD65 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2561BF4E9C60093AD65 /* UIView+WebCacheOperation.m */; };
-		A6D12F0E1BF4F04F00B85FD1 /* DC-Theme.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2121BF4E9C60093AD65 /* DC-Theme.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -326,6 +326,10 @@
 		84D654641ACC5C1D0099B461 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A63DF5C51BF5E5F400EC73EF /* HCE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HCE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A63DF5C71BF5E64400EC73EF /* HCE-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "HCE-Info.plist"; sourceTree = "<group>"; };
+		A63DF5CE1BF5F53E00EC73EF /* DC-Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "DC-Images.xcassets"; sourceTree = "<group>"; };
+		A63DF5CF1BF5F53E00EC73EF /* DC-Theme.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "DC-Theme.bundle"; sourceTree = "<group>"; };
+		A63DF5D31BF5F54700EC73EF /* HCE-Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "HCE-Images.xcassets"; sourceTree = "<group>"; };
+		A63DF5D41BF5F54700EC73EF /* HCE-Theme.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "HCE-Theme.bundle"; sourceTree = "<group>"; };
 		A6C5F0F51BF4E9C50093AD65 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A6C5F0F61BF4E9C50093AD65 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		A6C5F0F81BF4E9C50093AD65 /* DCAppFacade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCAppFacade.h; sourceTree = "<group>"; };
@@ -548,10 +552,6 @@
 		A6C5F20D1BF4E9C60093AD65 /* DCSpeakerEventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCSpeakerEventCell.m; sourceTree = "<group>"; };
 		A6C5F20E1BF4E9C60093AD65 /* DCSpeakerHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCSpeakerHeaderCell.h; sourceTree = "<group>"; };
 		A6C5F20F1BF4E9C60093AD65 /* DCSpeakerHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCSpeakerHeaderCell.m; sourceTree = "<group>"; };
-		A6C5F2111BF4E9C60093AD65 /* DC-Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "DC-Images.xcassets"; sourceTree = "<group>"; };
-		A6C5F2121BF4E9C60093AD65 /* DC-Theme.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "DC-Theme.bundle"; sourceTree = "<group>"; };
-		A6C5F2131BF4E9C60093AD65 /* HCE-Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "HCE-Images.xcassets"; sourceTree = "<group>"; };
-		A6C5F2141BF4E9C60093AD65 /* HCE-Theme.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "HCE-Theme.bundle"; sourceTree = "<group>"; };
 		A6C5F2151BF4E9C60093AD65 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A6C5F2171BF4E9C60093AD65 /* Events.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Events.storyboard; sourceTree = "<group>"; };
 		A6C5F2181BF4E9C60093AD65 /* Info.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Info.storyboard; sourceTree = "<group>"; };
@@ -687,6 +687,24 @@
 				5DC8C418198656DA00BF5816 /* UIKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A63DF5CD1BF5F53E00EC73EF /* DC */ = {
+			isa = PBXGroup;
+			children = (
+				A63DF5CE1BF5F53E00EC73EF /* DC-Images.xcassets */,
+				A63DF5CF1BF5F53E00EC73EF /* DC-Theme.bundle */,
+			);
+			path = DC;
+			sourceTree = "<group>";
+		};
+		A63DF5D21BF5F54700EC73EF /* HCE */ = {
+			isa = PBXGroup;
+			children = (
+				A63DF5D31BF5F54700EC73EF /* HCE-Images.xcassets */,
+				A63DF5D41BF5F54700EC73EF /* HCE-Theme.bundle */,
+			);
+			path = HCE;
 			sourceTree = "<group>";
 		};
 		A6C5F0F21BF4E9C50093AD65 /* DrupalCon */ = {
@@ -1419,11 +1437,9 @@
 		A6C5F2101BF4E9C60093AD65 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A6C5F2111BF4E9C60093AD65 /* DC-Images.xcassets */,
-				A6C5F2121BF4E9C60093AD65 /* DC-Theme.bundle */,
-				A6C5F2131BF4E9C60093AD65 /* HCE-Images.xcassets */,
-				A6C5F2141BF4E9C60093AD65 /* HCE-Theme.bundle */,
+				A63DF5CD1BF5F53E00EC73EF /* DC */,
 				A6C5F2151BF4E9C60093AD65 /* Images.xcassets */,
+				A63DF5D21BF5F54700EC73EF /* HCE */,
 				A6C5F2161BF4E9C60093AD65 /* Storyboards */,
 				A6C5F21B1BF4E9C60093AD65 /* Web */,
 			);
@@ -1618,14 +1634,14 @@
 				A6C5F3411BF4E9C60093AD65 /* Main.storyboard in Resources */,
 				A6C5F31D1BF4E9C60093AD65 /* DCEventBaseCell.xib in Resources */,
 				A6C5F3431BF4E9C60093AD65 /* Speakers.storyboard in Resources */,
-				A6C5F3331BF4E9C60093AD65 /* DC-Images.xcassets in Resources */,
 				A6C5F3571BF4E9C60093AD65 /* LICENSE in Resources */,
 				A6C5F3491BF4E9C60093AD65 /* style.css in Resources */,
 				A6C5F33D1BF4E9C60093AD65 /* Events.storyboard in Resources */,
 				A63DF5CB1BF5E75900EC73EF /* Images.xcassets in Resources */,
 				A6C5F34B1BF4E9C60093AD65 /* DrupalCon-Info.plist in Resources */,
+				A63DF5D01BF5F53E00EC73EF /* DC-Images.xcassets in Resources */,
 				A6C5F3211BF4E9C60093AD65 /* DCEventCell.xib in Resources */,
-				A6D12F0E1BF4F04F00B85FD1 /* DC-Theme.bundle in Resources */,
+				A63DF5D11BF5F53E00EC73EF /* DC-Theme.bundle in Resources */,
 				A6C5F3451BF4E9C60093AD65 /* about_img.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1634,10 +1650,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A63DF5D51BF5F54700EC73EF /* HCE-Images.xcassets in Resources */,
+				A63DF5D61BF5F54700EC73EF /* HCE-Theme.bundle in Resources */,
 				A63DF5B21BF5E5F400EC73EF /* Info.storyboard in Resources */,
-				A63DF5CA1BF5E6C800EC73EF /* HCE-Theme.bundle in Resources */,
 				A63DF5B31BF5E5F400EC73EF /* event_detail_style.css in Resources */,
-				A63DF5C91BF5E66100EC73EF /* HCE-Images.xcassets in Resources */,
 				A63DF5B41BF5E5F400EC73EF /* Main.storyboard in Resources */,
 				A63DF5B51BF5E5F400EC73EF /* DCEventBaseCell.xib in Resources */,
 				A63DF5CC1BF5E75900EC73EF /* Images.xcassets in Resources */,
