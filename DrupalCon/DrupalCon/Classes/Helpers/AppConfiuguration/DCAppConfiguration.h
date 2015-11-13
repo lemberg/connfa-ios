@@ -8,18 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-#ifdef HCE
 
-#define SERVER_URL  @"http://harvestcleanenergy.uat.link"
-#define BUNDLE_NAME @"HCE-Theme"
-
-
-#else
 
 #define SERVER_URL  @"http://drupalconbarcelona2015.uat.link"
 #define BUNDLE_NAME @"DC-Theme"
 
-#endif
+
 #define BASE_URL [NSString stringWithFormat:@"%@/api/v2/",SERVER_URL]
 
 
