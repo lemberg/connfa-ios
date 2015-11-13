@@ -55,8 +55,8 @@ const NSString * kDCTimeslotEventKEY = @"timeslot_event_key";
 {
     NSMutableArray *uniqueTimeSlotsSource = [NSMutableArray array];
     
-    NSArray *eventsForDay = events;//[self eventsForDay];
-    NSArray *uniqueTimeSlotForDay = unqueTimeRange;//[self.eventStrategy uniqueTimeRangesForDay:self.selectedDay];
+    NSArray *eventsForDay = events;
+    NSArray *uniqueTimeSlotForDay = unqueTimeRange;
     
     for (DCTimeRange * timerange in uniqueTimeSlotForDay) {
         NSArray *timeslotEvents = [[[eventsForDay eventsForTimeRange:timerange] sortedByKey:kDCEventIdKey] sortedByKey:kDCEventOrderKey];

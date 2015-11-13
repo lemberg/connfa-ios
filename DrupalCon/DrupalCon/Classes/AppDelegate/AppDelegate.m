@@ -51,24 +51,7 @@ static int const kGaDispatchPeriod = 30;
     
     [[DCMainProxy sharedProxy] update];
 
-    // Local Notification are replacded by Calendar
-//    if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-//        
-//        // Register user notifications
-//        UIUserNotificationType types = UIUserNotificationTypeBadge |
-//        UIUserNotificationTypeSound | UIUserNotificationTypeAlert;
-//        
-//        UIUserNotificationSettings *settings =
-//        [UIUserNotificationSettings settingsForTypes:types categories:nil];
-//        
-//        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-//    }
-    
-//    UILocalNotification *locationNotification = [launchOptions objectForKey:UIApplicationLaunchOptionsLocalNotificationKey];
-//    if (locationNotification) {
-//        self.localNotification = locationNotification;
-//    }
-    
+
 #ifdef DEBUG_MODE
     NSLog(@"====================");
     NSLog(@"====DEBUG MODE======");
@@ -100,11 +83,6 @@ static int const kGaDispatchPeriod = 30;
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-//    if (self.localNotification) {
-//        [[DCMainProxy sharedProxy] openLocalNotification:self.localNotification];
-//        self.localNotification = nil;
-//        application.applicationIconBadgeNumber = 0;
-//    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

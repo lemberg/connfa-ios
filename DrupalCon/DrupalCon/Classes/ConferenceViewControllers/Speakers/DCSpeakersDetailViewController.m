@@ -151,14 +151,12 @@ static NSString *eventCellId = @"SpeakerEventCellId";
             [cellPrototype initData:self.speaker];
             [cellPrototype layoutSubviews];
             
-            UIImage* image = [UIImage imageNamedFromBundle:@"speaker_detail_top"];
-            CGFloat minBgHeight = ([UIScreen mainScreen].bounds.size.width / image.size.width)*image.size.height;
             CGFloat height = [cellPrototype.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
             
             [self.cellsHeight setObject:[NSNumber numberWithFloat:height] forKey:headerCellId];
             
                 // this hardcoded value sets min cell height to avoid background image scaling. It depends on image size
-            self.backgroundViewHeight.constant = height; //< minBgHeight ? minBgHeight : height;
+            self.backgroundViewHeight.constant = height;
             return self.backgroundViewHeight.constant;
         }
         case 1: //buttons cell
