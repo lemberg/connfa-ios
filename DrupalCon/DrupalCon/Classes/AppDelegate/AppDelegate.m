@@ -29,15 +29,9 @@
 #import <Crashlytics/Crashlytics.h>
 
 
-/** Google Analytics configuration constants **/
-static NSString *const kGaPropertyId = @"UA-267362-67";
-static BOOL const kGaDryRun = NO;
-static int const kGaDispatchPeriod = 30;
-
 @interface AppDelegate ()
 
 @property (strong, nonatomic) id<GAITracker> tracker;
-//@property (nonatomic, strong) UILocalNotification *localNotification;
 
 @end
 @implementation AppDelegate
@@ -92,9 +86,9 @@ static int const kGaDispatchPeriod = 30;
 
 - (void)initializeGoogleAnalytics
 {
-    [[GAI sharedInstance] setDispatchInterval:kGaDispatchPeriod];
-    [[GAI sharedInstance] setDryRun:kGaDryRun];
-    self.tracker = [[GAI sharedInstance] trackerWithTrackingId:kGaPropertyId];
+    [[GAI sharedInstance] setDispatchInterval:[DCAppConfiguration dispatchInvervalGA]];
+    [[GAI sharedInstance] setDryRun:[DCAppConfiguration dryRunGA]];
+    self.tracker = [[GAI sharedInstance] trackerWithTrackingId:[DCAppConfiguration googleAnalyticsID]];
 }
 
 

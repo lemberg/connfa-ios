@@ -63,6 +63,7 @@ static NSBundle *themeBundle;
     NSString *eventPlace = [themeBundle infoDictionary][kEventPlace];
     return eventPlace;
 }
+
 + (BOOL)isFilterEnable {
     return [[themeBundle infoDictionary][kIsFilterEnable] boolValue];
 }
@@ -130,6 +131,18 @@ static NSBundle *themeBundle;
     return menuItems;
 }
 
+// GA
 
++ (NSInteger)dispatchInvervalGA {
+    return [NSBundle.mainBundle.infoDictionary[@"GoogleAnalytics"][@"DispatchInterval"] integerValue];
+}
+
++ (BOOL)dryRunGA {
+    return [NSBundle.mainBundle.infoDictionary[@"GoogleAnalytics"][@"DryRun"] boolValue];
+}
+
++ (NSString *)googleAnalyticsID {
+    return NSBundle.mainBundle.infoDictionary[@"GoogleAnalytics"][@"GoogleAnalyticsID"];
+}
 
 @end

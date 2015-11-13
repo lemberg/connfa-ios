@@ -29,4 +29,9 @@
 + (NSString *)eventTime;
 + (NSString *)eventPlace;
 + (NSString *)appDisplayName;
+
++ (NSInteger)dispatchInvervalGA;
++ (BOOL)dryRunGA;
++ (NSString *)googleAnalyticsID;
+
 @end
