@@ -757,7 +757,6 @@
 			children = (
 				A6C5F0FB1BF4E9C50093AD65 /* EventDetail */,
 				A6C5F0FE1BF4E9C50093AD65 /* Favorites */,
-				A6C5F1031BF4E9C50093AD65 /* LimitedNavigation */,
 				A6C5F1041BF4E9C50093AD65 /* Program */,
 				A6C5F1151BF4E9C50093AD65 /* Speakers */,
 			);
@@ -782,13 +781,6 @@
 				A6C5F1021BF4E9C50093AD65 /* DCFavoritesViewController.m */,
 			);
 			path = Favorites;
-			sourceTree = "<group>";
-		};
-		A6C5F1031BF4E9C50093AD65 /* LimitedNavigation */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = LimitedNavigation;
 			sourceTree = "<group>";
 		};
 		A6C5F1041BF4E9C50093AD65 /* Program */ = {

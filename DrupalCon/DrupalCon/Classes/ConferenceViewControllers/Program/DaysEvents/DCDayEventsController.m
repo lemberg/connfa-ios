@@ -117,7 +117,7 @@
         DCEventCell *cell = (DCEventCell*)[tableView dequeueReusableCellWithIdentifier: cellIdentifier];
         
         DCEvent *event = [weakSelf.eventsDataSource eventForIndexPath:indexPath];
-        NSInteger eventsCountInSection = [weakSelf.eventsDataSource tableView:nil numberOfRowsInSection:indexPath.section];
+        NSInteger eventsCountInSection = [weakSelf.eventsDataSource tableView:tableView numberOfRowsInSection:indexPath.section];
         cell.isLastCellInSection = (indexPath.row == eventsCountInSection - 1)? YES : NO;
         cell.isFirstCellInSection = !indexPath.row;
 
