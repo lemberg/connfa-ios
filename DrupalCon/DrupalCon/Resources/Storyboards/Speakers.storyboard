@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -40,10 +40,10 @@
                                 <color key="sectionIndexTrackingBackgroundColor" red="0.99607843139999996" green="0.89411764709999997" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DetailCellIdentifierSpeaker" rowHeight="52" id="7fo-QL-KrG" customClass="DCSpeakerCell">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="65"/>
+                                        <rect key="frame" x="0.0" y="22" width="320" height="52"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7fo-QL-KrG" id="khG-Ya-ywT">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="52"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RuN-Fu-GRM">
@@ -100,7 +100,7 @@
                                     <outlet property="delegate" destination="SQY-AD-QPu" id="hfD-mK-dpK"/>
                                 </connections>
                             </tableView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Search Result" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tLD-xw-rtL" userLabel="NoEventsLabel">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="No Search Result" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tLD-xw-rtL" userLabel="NoEventsLabel">
                                 <rect key="frame" x="97" y="230" width="127" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.58039215690000001" green="0.58039215690000001" blue="0.58039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -175,10 +175,10 @@
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" verticalHuggingPriority="1" verticalCompressionResistancePriority="1000" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SpeakerDetailHeaderCellId" rowHeight="220" id="bhM-pj-mME" customClass="DCSpeakerHeaderCell">
-                                        <rect key="frame" x="0.0" y="22" width="320" height="210"/>
+                                        <rect key="frame" x="0.0" y="22" width="320" height="220"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" verticalHuggingPriority="1" verticalCompressionResistancePriority="800" tableViewCell="bhM-pj-mME" id="fbz-VC-Vb8">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="210"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="220"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="100" verticalCompressionResistancePriority="99" text="Vesa Palmu" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pxb-Yf-LuZ">
@@ -223,9 +223,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" verticalHuggingPriority="1" verticalCompressionResistancePriority="1" selectionStyle="none" indentationWidth="10" reuseIdentifier="SpeakerDetailButtonsCellId" rowHeight="46" id="rGT-pE-ZK3" customClass="DCSpeakerDetailButtonsCell">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="242" width="320" height="46"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" verticalHuggingPriority="1" verticalCompressionResistancePriority="1" tableViewCell="rGT-pE-ZK3" id="AxO-fs-u9t">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZdC-3x-qvi" userLabel="Button-web">
@@ -274,10 +275,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SpeakerDetailDescriptionCellId" rowHeight="120" id="pju-vq-Mh9" customClass="DCDescriptionTextCell">
-                                        <rect key="frame" x="0.0" y="327" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="288" width="320" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pju-vq-Mh9" id="4DY-hY-KVV">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hh8-a9-VW2">
@@ -297,10 +298,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SpeakerEventCellId" rowHeight="120" id="KBy-9G-krj" customClass="DCSpeakerEventCell">
-                                        <rect key="frame" x="0.0" y="232" width="320" height="95"/>
+                                        <rect key="frame" x="0.0" y="408" width="320" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" verticalHuggingPriority="1" verticalCompressionResistancePriority="100" tableViewCell="KBy-9G-krj" id="hNX-gc-dal">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="95"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Won-iy-D3j" userLabel="Separator">
