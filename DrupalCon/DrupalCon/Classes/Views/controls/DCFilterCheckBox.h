@@ -8,20 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol  DCFilterCheckboxDelegateProtocol;
+@protocol DCFilterCheckboxDelegateProtocol;
 
-@interface DCFilterCheckBox : UIImageView
-{
-    BOOL _selected;
+@interface DCFilterCheckBox : UIImageView {
+  BOOL _selected;
 }
 
-@property (nonatomic, getter = isSelected) BOOL selected;
-@property (nonatomic, weak) id<DCFilterCheckboxDelegateProtocol> delegate;
+@property(nonatomic, getter=isSelected) BOOL selected;
+@property(nonatomic, weak) id<DCFilterCheckboxDelegateProtocol> delegate;
 
 @end
 
-@protocol DCFilterCheckboxDelegateProtocol <NSObject>
+@protocol DCFilterCheckboxDelegateProtocol<NSObject>
 
-- (void)DCFilterCheckBox:(DCFilterCheckBox*)checkBox didChangedState:(BOOL)isSelected;
+- (void)DCFilterCheckBox:(DCFilterCheckBox*)checkBox
+         didChangedState:(BOOL)isSelected;
 
 @end

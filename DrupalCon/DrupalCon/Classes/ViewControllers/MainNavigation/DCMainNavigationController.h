@@ -11,7 +11,7 @@
 @class DCEvent;
 @interface DCMainNavigationController : UINavigationController
 
-- (void)openEventFromFavoriteController:(DCEvent *)event;
-- (void) goToSideMenuContainer:(BOOL) animated;
+- (void)openEventFromFavoriteController:(DCEvent*)event;
+- (void)goToSideMenuContainer:(BOOL)animated;
 
 @end

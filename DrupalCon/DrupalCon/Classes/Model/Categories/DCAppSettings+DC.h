@@ -10,6 +10,6 @@
 #import "DCAppSettings.h"
 #import "DCManagedObjectUpdateProtocol.h"
 
-@interface DCAppSettings(DC) <ManagedObjectUpdateProtocol>
+@interface DCAppSettings (DC)<ManagedObjectUpdateProtocol>
 
 @end

@@ -8,17 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString * kTimeStampSynchronisation;
+extern NSString* kTimeStampSynchronisation;
 
-extern NSString * kAboutInfo;
-extern NSString * kBundleVersionMajor;
-extern NSString * kBundleVersionMinor;
+extern NSString* kAboutInfo;
+extern NSString* kBundleVersionMajor;
+extern NSString* kBundleVersionMinor;
 
 @interface NSUserDefaults (DC)
 
 #pragma mark - last modified timestamp
 #warning timestamp is substitute by last-modify parameter
-+ (void)updateTimestampString:(NSString *)timestamp ForClass:(Class)aClass;
++ (void)updateTimestampString:(NSString*)timestamp ForClass:(Class)aClass;
 + (NSString*)lastUpdateForClass:(Class)aClass;
 
 #pragma mark - last-modify
@@ -27,7 +27,7 @@ extern NSString * kBundleVersionMinor;
 + (NSString*)lastModify;
 
 #pragma mark - about
-//TODO: shift About to dababase
+// TODO: shift About to dababase
 + (void)saveAbout:(NSString*)aboutString;
 + (NSString*)aboutString;
 
@@ -36,6 +36,5 @@ extern NSString * kBundleVersionMinor;
 + (void)saveBundleVersionMajor:(NSString*)major minor:(NSString*)minor;
 + (NSString*)bundleVersionMajor;
 + (NSString*)bundleVersionMinor;
-
 
 @end

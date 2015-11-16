@@ -9,9 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-
 @interface DCAppSettings : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * eventTimeZone;
+@property(nonatomic, retain) NSNumber* eventTimeZone;
 
 @end

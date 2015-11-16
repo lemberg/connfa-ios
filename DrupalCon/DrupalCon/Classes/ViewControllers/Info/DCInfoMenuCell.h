@@ -10,8 +10,7 @@
 
 @interface DCInfoMenuCell : UITableViewCell
 
-@property (nonatomic, weak) IBOutlet UILabel *titleLabel;
-@property (nonatomic, weak) IBOutlet UIView *separator;
-
+@property(nonatomic, weak) IBOutlet UILabel* titleLabel;
+@property(nonatomic, weak) IBOutlet UIView* separator;
 
 @end

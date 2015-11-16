@@ -10,8 +10,6 @@
 #import <CoreData/CoreData.h>
 #import "DCEvent.h"
 
-
 @interface DCMainEvent : DCEvent
-
 
 @end

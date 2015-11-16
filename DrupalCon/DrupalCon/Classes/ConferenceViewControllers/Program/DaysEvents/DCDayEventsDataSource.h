@@ -12,6 +12,4 @@
 
 @interface DCDayEventsDataSource : DCEventDataSource
 
-
 @end
-

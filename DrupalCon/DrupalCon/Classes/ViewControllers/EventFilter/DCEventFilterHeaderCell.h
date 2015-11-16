@@ -10,6 +10,6 @@
 
 @interface DCEventFilterHeaderCell : UITableViewCell
 
-@property (nonatomic, weak) IBOutlet UILabel *title;
+@property(nonatomic, weak) IBOutlet UILabel* title;
 
 @end

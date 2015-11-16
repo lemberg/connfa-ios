@@ -16,37 +16,39 @@
 
 @import UIKit;
 
-extern  NSString * kDCTimeslotKEY;
-extern  NSString * kDCTimeslotEventKEY;
+extern NSString* kDCTimeslotKEY;
+extern NSString* kDCTimeslotEventKEY;
 
 @class DCEventStrategy, DCEvent, DCTimeRange;
 @protocol DCDayEventSourceProtocol;
 
-@interface DCEventDataSource : NSObject<UITableViewDataSource, DCDayEventSourceProtocol>
+@interface DCEventDataSource
+    : NSObject<UITableViewDataSource, DCDayEventSourceProtocol>
 
-@property (copy, nonatomic) UITableViewCell* (^prepareBlockForTableView)(UITableView *tableView, NSIndexPath *indexPath) ;
+@property(copy, nonatomic) UITableViewCell* (^prepareBlockForTableView)
+    (UITableView* tableView, NSIndexPath* indexPath);
 
+@property(strong, nonatomic) DCEventStrategy* eventStrategy;
+@property(strong, nonatomic) NSDate* selectedDay;
+@property(strong, nonatomic) NSArray* eventsByTimeRange;
 
-@property (strong, nonatomic) DCEventStrategy          *eventStrategy;
-@property (strong, nonatomic) NSDate                   *selectedDay;
-@property (strong, nonatomic)  NSArray          *eventsByTimeRange;
+@property(weak, nonatomic) UITableView* tableView;
 
-@property (weak, nonatomic  ) UITableView              *tableView;
-
-- (instancetype)initWithTableView:(UITableView *)tableView
-                    eventStrategy:(DCEventStrategy *)eventStrategy
-                             date:(NSDate *)date;
-- (void)updateActualEventIndexPathForTimeRange:(NSArray *)array;
-- (NSArray *)eventsSortedByTimeRange:(NSArray *)events withUniqueTimeRange:(NSArray *)unqueTimeRange;
+- (instancetype)initWithTableView:(UITableView*)tableView
+                    eventStrategy:(DCEventStrategy*)eventStrategy
+                             date:(NSDate*)date;
+- (void)updateActualEventIndexPathForTimeRange:(NSArray*)array;
+- (NSArray*)eventsSortedByTimeRange:(NSArray*)events
+                withUniqueTimeRange:(NSArray*)unqueTimeRange;
 
 @end
 
-@protocol DCDayEventSourceProtocol <NSObject>
+@protocol DCDayEventSourceProtocol<NSObject>
 
 - (void)reloadEvents;
-- (DCEvent *)eventForIndexPath:(NSIndexPath *)indexPath;
-- (DCTimeRange *)timeRangeForSection:(NSInteger)section;
-- (NSIndexPath *)actualEventIndexPath;
-- (NSString *)titleForSectionAtIdexPath:(NSInteger)section;
+- (DCEvent*)eventForIndexPath:(NSIndexPath*)indexPath;
+- (DCTimeRange*)timeRangeForSection:(NSInteger)section;
+- (NSIndexPath*)actualEventIndexPath;
+- (NSString*)titleForSectionAtIdexPath:(NSInteger)section;
 
 @end

@@ -12,27 +12,25 @@
 
 @protocol DCUpdateDayEventProtocol;
 
-@interface DCDayEventsController : DCBaseViewController <DCUpdateDayEventProtocol>
+@interface DCDayEventsController
+    : DCBaseViewController<DCUpdateDayEventProtocol>
 
-@property (nonatomic) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) NSDate *date;
+@property(nonatomic) IBOutlet UITableView* tableView;
+@property(nonatomic, strong) NSDate* date;
 
 //@property (nonatomic, strong) NSArray *timeslots;
 //// timeslot element : dictionary "time slot value" : NSArray of events;
 
-@property (nonatomic, weak) DCProgramViewController *parentProgramController;
-@property (nonatomic, strong) DCEventStrategy * eventsStrategy;
+@property(nonatomic, weak) DCProgramViewController* parentProgramController;
+@property(nonatomic, strong) DCEventStrategy* eventsStrategy;
 
-- (void) updateEvents;
-- (void) initAsStubControllerWithString:(NSString*)noEventMessage;
-- (void) initAsStubControllerWithImage:(UIImage*)noEventsImage;
+- (void)updateEvents;
+- (void)initAsStubControllerWithString:(NSString*)noEventMessage;
+- (void)initAsStubControllerWithImage:(UIImage*)noEventsImage;
 
 @end
 
-
-
-
-@protocol DCUpdateDayEventProtocol <NSObject>
+@protocol DCUpdateDayEventProtocol<NSObject>
 
 - (void)updateEvents;
 

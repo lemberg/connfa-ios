@@ -9,7 +9,6 @@
 #import "DCInfoCategory.h"
 #import "DCInfo.h"
 
-
 @implementation DCInfoCategory
 
 @dynamic html;

@@ -1,17 +1,17 @@
 /*
  Copyright (c) 2011, Tony Million.
  All rights reserved.
- 
+
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
- 
+
  1. Redistributions of source code must retain the above copyright notice, this
  list of conditions and the following disclaimer.
- 
+
  2. Redistributions in binary form must reproduce the above copyright notice,
  this list of conditions and the following disclaimer in the documentation
  and/or other materials provided with the distribution.
- 
+
  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -30,9 +30,11 @@
 /**
  *  DCWebService manages http request/repsponse
  */
-typedef void (^SuccessResponseCallback)(NSHTTPURLResponse *response, id data);
-typedef void (^FailureResponseCallback)(NSHTTPURLResponse *response, id data, NSError *error);
-typedef void (^CompleteRequestCallback)(BOOL success, NSDictionary *result);
+typedef void (^SuccessResponseCallback)(NSHTTPURLResponse* response, id data);
+typedef void (^FailureResponseCallback)(NSHTTPURLResponse* response,
+                                        id data,
+                                        NSError* error);
+typedef void (^CompleteRequestCallback)(BOOL success, NSDictionary* result);
 
 @interface DCWebService : NSObject
 
@@ -45,34 +47,35 @@ typedef void (^CompleteRequestCallback)(BOOL success, NSDictionary *result);
  *
  *  @return NSURLRequest
  */
-+ (NSURLRequest *)urlRequestForURI:(NSString *)uri
-                    withHTTPMethod:(NSString *)httpMethod
-                 withHeaderOptions:(NSDictionary *)options;
++ (NSURLRequest*)urlRequestForURI:(NSString*)uri
+                   withHTTPMethod:(NSString*)httpMethod
+                withHeaderOptions:(NSDictionary*)options;
 
 /**
- *  Fetch data from server synchronously accroding to urlRequest in the call thread
+ *  Fetch data from server synchronously accroding to urlRequest in the call
+ *thread
  *
- *  @param urlRequest      NSURLRequest object with URL request, Http method etc.
+ *  @param urlRequest      NSURLRequest object with URL request, Http method
+ *etc.
  *  @param successCallback request is success
  *  @param failureCallback request failed
  */
 
-+ (void)dataFromURLRequest:(NSURLRequest *)urlRequest
++ (void)dataFromURLRequest:(NSURLRequest*)urlRequest
                  onSuccess:(SuccessResponseCallback)successCallback
                    onError:(FailureResponseCallback)failureCallback;
-
 
 /**
  *  Fetches data from server asynchronously
  *
- *  @param urlRequest      NSURLRequest object with URL request, Http method etc.
+ *  @param urlRequest      NSURLRequest object with URL request, Http method
+ *etc.
  *  @param successCallback call when request is success in global queue
  *  @param failureCallback call when request is failure in global queue
  */
-+ (void)fetchDataFromURLRequest:(NSURLRequest *)urlRequest
++ (void)fetchDataFromURLRequest:(NSURLRequest*)urlRequest
                       onSuccess:(SuccessResponseCallback)successCallback
                         onError:(FailureResponseCallback)failureCallback;
-
 
 /**
  *  Fetches data from server asynchronously
@@ -80,7 +83,7 @@ typedef void (^CompleteRequestCallback)(BOOL success, NSDictionary *result);
  *  @param requests array with NSURLRequest objects
  *  @param callback call in globar queue when all requests has finished
  */
-- (void)fetchesDataFromURLRequests:(NSArray *)requests callBack:(CompleteRequestCallback)callback;
-
+- (void)fetchesDataFromURLRequests:(NSArray*)requests
+                          callBack:(CompleteRequestCallback)callback;
 
 @end
