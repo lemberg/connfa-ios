@@ -22,6 +22,15 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>41</string>
+	<key>GoogleAnalytics</key>
+	<dict>
+		<key>GoogleAnalyticsID</key>
+		<string>UA-267362-67</string>
+		<key>DryRun</key>
+		<false/>
+		<key>DispatchInterval</key>
+		<integer>50</integer>
+	</dict>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>

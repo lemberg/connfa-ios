@@ -1,10 +1,28 @@
-//
-//  DCAppConfiguration.m
-//  DrupalCon
-//
-//  Created by Olexandr on 8/3/15.
-//  Copyright (c) 2015 Lemberg Solution. All rights reserved.
-//
+/**********************************************************************************
+ *                                                                           
+ *  The MIT License (MIT)
+ *  Copyright (c) 2015 Lemberg Solutions Limited
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy
+ *  of this software and associated documentation files (the "Software"), to
+ *  deal in the Software without restriction, including without limitation the 
+ *  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+ *  sell copies of the Software, and to permit persons to whom the Software is
+ *  furnished to do so, subject to the following conditions:
+ *   The above copyright notice and this permission notice shall be included in
+ *   all  copies or substantial portions of the Software.
+ *
+ *   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ *  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ *  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ *  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ *  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ *  FROM,  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS 
+ *  IN THE SOFTWARE.
+ *
+ *                                                                           
+ *****************************************************************************/
+
+
 
 #import "DCAppConfiguration.h"
 #import "DCSideMenuViewController.h"
@@ -13,62 +31,67 @@
 
 @implementation DCAppConfiguration
 
-static NSString * const kNavigationBarColour = @"NavigationBarColour";
-static NSString * const kFavoriteEventColour = @"FavoriteEventColour";
-static NSString * const kEventDetailHeaderColour = @"EventDetailHeaderColour";
-static NSString * const kEventDetailNavBarTextColour = @"EventDetailNavBarTextColour";
-static NSString * const kIsFilterEnable = @"IsFilterEnable";
-static NSString * const kSpeakerDetailBarColour = @"SpeakerDetailBarColour";
-static NSString * const kEventDate = @"EventDate";
-static NSString * const kEventPlace = @"EventPlace";
+static NSString* const kNavigationBarColour = @"NavigationBarColour";
+static NSString* const kFavoriteEventColour = @"FavoriteEventColour";
+static NSString* const kEventDetailHeaderColour = @"EventDetailHeaderColour";
+static NSString* const kEventDetailNavBarTextColour =
+    @"EventDetailNavBarTextColour";
+static NSString* const kIsFilterEnable = @"IsFilterEnable";
+static NSString* const kSpeakerDetailBarColour = @"SpeakerDetailBarColour";
+static NSString* const kEventDate = @"EventDate";
+static NSString* const kEventPlace = @"EventPlace";
 
-static NSBundle *themeBundle;
+static NSBundle* themeBundle;
 
 + (void)initialize {
-    NSString *bundlePath = [[NSBundle mainBundle] pathForResource:BUNDLE_NAME ofType:@"bundle"];
-    themeBundle = [NSBundle bundleWithPath:bundlePath];
+  NSString* bundlePath =
+      [[NSBundle mainBundle] pathForResource:BUNDLE_NAME ofType:@"bundle"];
+  themeBundle = [NSBundle bundleWithPath:bundlePath];
 }
 
-+ (UIColor *)navigationBarColor {
-    NSString *colorId = [themeBundle infoDictionary][kNavigationBarColour];
-    return [UIColor colorFromHexString:colorId];
++ (UIColor*)navigationBarColor {
+  NSString* colorId = [themeBundle infoDictionary][kNavigationBarColour];
+  return [UIColor colorFromHexString:colorId];
 }
 
-+ (UIColor *)favoriteEventColor {
-    NSString *colorId = [themeBundle infoDictionary][kFavoriteEventColour];
-    return [UIColor colorFromHexString:colorId];
++ (UIColor*)favoriteEventColor {
+  NSString* colorId = [themeBundle infoDictionary][kFavoriteEventColour];
+  return [UIColor colorFromHexString:colorId];
 }
 
-+ (UIColor *)eventDetailHeaderColour {
-    NSString *colorId = [themeBundle infoDictionary][kEventDetailHeaderColour];
-    return [UIColor colorFromHexString:colorId];
++ (UIColor*)eventDetailHeaderColour {
+  NSString* colorId = [themeBundle infoDictionary][kEventDetailHeaderColour];
+  return [UIColor colorFromHexString:colorId];
 }
 
-+ (UIColor *)eventDetailNavBarTextColor {
-    NSString *colorId = [themeBundle infoDictionary][kEventDetailNavBarTextColour];
-    return [UIColor colorFromHexString:colorId];
++ (UIColor*)eventDetailNavBarTextColor {
+  NSString* colorId =
+      [themeBundle infoDictionary][kEventDetailNavBarTextColour];
+  return [UIColor colorFromHexString:colorId];
 }
 
-+ (UIColor *)speakerDetailBarColor {
-    NSString *colorId = [themeBundle infoDictionary][kSpeakerDetailBarColour];
-    return [UIColor colorFromHexString:colorId];
++ (UIColor*)speakerDetailBarColor {
+  NSString* colorId = [themeBundle infoDictionary][kSpeakerDetailBarColour];
+  return [UIColor colorFromHexString:colorId];
 }
 
-+ (NSString *)eventTime {
-    NSString *eventTime = [themeBundle infoDictionary][kEventDate];
-    return eventTime;
++ (NSString*)eventTime {
+  NSString* eventTime = [themeBundle infoDictionary][kEventDate];
+  return eventTime;
 }
 
-+ (NSString *)eventPlace {
-    NSString *eventPlace = [themeBundle infoDictionary][kEventPlace];
-    return eventPlace;
++ (NSString*)eventPlace {
+  NSString* eventPlace = [themeBundle infoDictionary][kEventPlace];
+  return eventPlace;
 }
+
 + (BOOL)isFilterEnable {
-    return [[themeBundle infoDictionary][kIsFilterEnable] boolValue];
+  return [[themeBundle infoDictionary][kIsFilterEnable] boolValue];
 }
 
-+ (NSString *)appDisplayName {
-    return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
++ (NSString*)appDisplayName {
+  return
+      [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
 }
 
 + (NSArray *)appMenuItems {
@@ -169,9 +192,24 @@ static NSBundle *themeBundle;
     
 #endif
 
-    return menuItems;
+  return menuItems;
 }
 
+// GA
 
++ (NSInteger)dispatchInvervalGA {
+  return [NSBundle.mainBundle.infoDictionary[@"GoogleAnalytics"][
+      @"DispatchInterval"] integerValue];
+}
+
++ (BOOL)dryRunGA {
+  return [NSBundle.mainBundle
+              .infoDictionary[@"GoogleAnalytics"][@"DryRun"] boolValue];
+}
+
++ (NSString*)googleAnalyticsID {
+  return NSBundle.mainBundle
+      .infoDictionary[@"GoogleAnalytics"][@"GoogleAnalyticsID"];
+}
 
 @end

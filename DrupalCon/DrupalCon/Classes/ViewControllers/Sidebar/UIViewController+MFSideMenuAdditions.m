@@ -13,15 +13,18 @@
 
 @dynamic menuContainerViewController;
 
-- (MFSideMenuContainerViewController *)menuContainerViewController {
-    id containerView = self;
-    while (![containerView isKindOfClass:[MFSideMenuContainerViewController class]] && containerView) {
-        if ([containerView respondsToSelector:@selector(parentViewController)])
-            containerView = [containerView parentViewController];
-        if ([containerView respondsToSelector:@selector(splitViewController)] && !containerView)
-            containerView = [containerView splitViewController];
-    }
-    return containerView;
+- (MFSideMenuContainerViewController*)menuContainerViewController {
+  id containerView = self;
+  while (![containerView
+             isKindOfClass:[MFSideMenuContainerViewController class]] &&
+         containerView) {
+    if ([containerView respondsToSelector:@selector(parentViewController)])
+      containerView = [containerView parentViewController];
+    if ([containerView respondsToSelector:@selector(splitViewController)] &&
+        !containerView)
+      containerView = [containerView splitViewController];
+  }
+  return containerView;
 }
 
 @end
