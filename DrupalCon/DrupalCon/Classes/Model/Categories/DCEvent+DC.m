@@ -202,7 +202,7 @@ const NSString * kDCEventOrderKey = @"order";
         default:
             break;
     }
-    return [UIImage imageNamedFromBundle:icon_name];
+    return icon_name? [UIImage imageNamedFromBundle:icon_name] : nil;
 }
 
 - (NSDate *)startDate {
@@ -214,8 +214,7 @@ const NSString * kDCEventOrderKey = @"order";
 }
 
 
-+ (NSString*)idKey
-{
++ (NSString*)idKey {
     return (NSString*)kDCEventIdKey;
 }
 

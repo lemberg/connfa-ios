@@ -93,7 +93,6 @@
     self.isLevelFilterCleared = [self allItemsAreSelected:YES array:self.levelsToShow];
     self.isTrackFilterCleared = [self allItemsAreSelected:YES array:self.tracksToShow];
     
-    [self printData];
     
     NSUndoManager *undoManager = [[NSUndoManager alloc] init];
     [[DCCoreDataStore  mainQueueContext] setUndoManager:undoManager];
@@ -342,7 +341,6 @@
     [manager endUndoGrouping];
     [manager undo];
     
-    [self printData];
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -356,7 +354,6 @@
     
     [self.tableView reloadData];
     
-    [self printData];
 }
 
 - (IBAction)onDoneButtonClick:(id)sender
@@ -384,8 +381,6 @@
             [self.delegate filterControllerWillDismiss: NO];
             
         }
-        
-        //[self printData];
         
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     }];

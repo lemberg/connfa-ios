@@ -113,10 +113,23 @@ static NSInteger eventCellImageHeight = 16;
         // Experience level
     NSInteger eventRating = [event.level.levelId integerValue];
     NSString *ratingImageName = ratingsImagesName[eventRating];
-    self.eventLevelImageView.image = [UIImage imageNamedFromBundle:ratingImageName];
+    UIImage *ratingImage = ratingImageName.length > 0 ? [UIImage imageNamedFromBundle:ratingImageName] : nil;
+    if (ratingImage) {
+        self.eventLevelImageView.image = ratingImage;
+        self.eventLevelImageView.hidden = NO;
+    } else {
+        self.eventLevelImageView.hidden = YES;
+
+    }
     
         // Event image (left side)
-    self.eventImageView.image = event.imageForEvent;
+    UIImage *eventImage = event.imageForEvent;
+    if (eventImage) {
+        self.eventImageView.image = eventImage;
+        self.eventImageView.hidden = NO;
+    } else {
+        self.eventImageView.hidden = YES;
+    }
     self.eventImageHeight.constant = self.eventImageView.image ? eventCellImageHeight : 0;
     
         // Time  (left side)
