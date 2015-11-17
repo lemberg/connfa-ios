@@ -1576,7 +1576,6 @@
 				A63DF5261BF5E5F400EC73EF /* Sources */,
 				A63DF5A41BF5E5F400EC73EF /* Frameworks */,
 				A63DF5B11BF5E5F400EC73EF /* Resources */,
-				A63DF5C11BF5E5F400EC73EF /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2041,7 +2040,7 @@
 					"$(PROJECT_DIR)/DrupalCon/Vendor/GoogleAnalytics",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c53e98f1-df4a-421b-ad42-f74bad957adc";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -2070,7 +2069,7 @@
 					"$(PROJECT_DIR)/DrupalCon/Vendor/GoogleAnalytics",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c53e98f1-df4a-421b-ad42-f74bad957adc";
+				PROVISIONING_PROFILE = "2805ecd5-9371-4add-aa9a-7035cd810bfd";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
