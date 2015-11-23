@@ -17,6 +17,10 @@
 		842B5E651AC579D0009614A5 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 842B5E641AC579D0009614A5 /* AdSupport.framework */; };
 		849EFDDB19A4ACB800C43E05 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849EFDDA19A4ACB800C43E05 /* CoreData.framework */; };
 		A678FD441C03590B00F24105 /* main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A678FD421C03590B00F24105 /* main.xcdatamodeld */; };
+		A678FD481C03666600F24105 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A678FD471C03666600F24105 /* Reachability.m */; };
+		A678FD511C0366AF00F24105 /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A678FD4C1C0366AF00F24105 /* MFSideMenuContainerViewController.m */; };
+		A678FD521C0366AF00F24105 /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = A678FD4E1C0366AF00F24105 /* MFSideMenuShadow.m */; };
+		A678FD531C0366AF00F24105 /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A678FD501C0366AF00F24105 /* UIViewController+MFSideMenuAdditions.m */; };
 		A690C2AE1BFDDD2400DC5EB8 /* DC-Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2111BF4E9C60093AD65 /* DC-Images.xcassets */; };
 		A6C5F2571BF4E9C60093AD65 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F0F61BF4E9C50093AD65 /* AppDelegate.m */; };
 		A6C5F2591BF4E9C60093AD65 /* DCAppFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F0F91BF4E9C50093AD65 /* DCAppFacade.m */; };
@@ -42,7 +46,6 @@
 		A6C5F2851BF4E9C60093AD65 /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1361BF4E9C50093AD65 /* UIImage+Extension.m */; };
 		A6C5F2871BF4E9C60093AD65 /* UIImageView+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1381BF4E9C50093AD65 /* UIImageView+DC.m */; };
 		A6C5F2891BF4E9C60093AD65 /* NSManagedObject+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F13B1BF4E9C50093AD65 /* NSManagedObject+DC.m */; };
-		A6C5F28B1BF4E9C60093AD65 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F13E1BF4E9C50093AD65 /* Reachability.m */; };
 		A6C5F28D1BF4E9C60093AD65 /* UIWebView+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1411BF4E9C50093AD65 /* UIWebView+DC.m */; };
 		A6C5F28F1BF4E9C60093AD65 /* DCHousePlan.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1451BF4E9C50093AD65 /* DCHousePlan.m */; };
 		A6C5F2911BF4E9C60093AD65 /* DCLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1471BF4E9C50093AD65 /* DCLocation.m */; };
@@ -98,9 +101,6 @@
 		A6C5F2F71BF4E9C60093AD65 /* DCFirstLoadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1C71BF4E9C50093AD65 /* DCFirstLoadViewController.m */; };
 		A6C5F2F91BF4E9C60093AD65 /* DCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1C91BF4E9C50093AD65 /* DCLoginViewController.m */; };
 		A6C5F2FB1BF4E9C60093AD65 /* DCMainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1CC1BF4E9C50093AD65 /* DCMainNavigationController.m */; };
-		A6C5F2FD1BF4E9C60093AD65 /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1D01BF4E9C50093AD65 /* MFSideMenuContainerViewController.m */; };
-		A6C5F2FF1BF4E9C60093AD65 /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1D21BF4E9C50093AD65 /* MFSideMenuShadow.m */; };
-		A6C5F3011BF4E9C60093AD65 /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1D41BF4E9C50093AD65 /* UIViewController+MFSideMenuAdditions.m */; };
 		A6C5F3031BF4E9C60093AD65 /* DCMenuStoryboardHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1D71BF4E9C50093AD65 /* DCMenuStoryboardHelper.m */; };
 		A6C5F3051BF4E9C60093AD65 /* DCSideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1DA1BF4E9C50093AD65 /* DCSideMenuViewController.m */; };
 		A6C5F3071BF4E9C60093AD65 /* DCFilterCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1DE1BF4E9C50093AD65 /* DCFilterCheckBox.m */; };
@@ -163,6 +163,15 @@
 		849EFDDA19A4ACB800C43E05 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		84D654641ACC5C1D0099B461 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A678FD431C03590B00F24105 /* main_2.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = main_2.0.xcdatamodel; sourceTree = "<group>"; };
+		A678FD461C03666600F24105 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		A678FD471C03666600F24105 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		A678FD4A1C0366AF00F24105 /* MFSideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenu.h; sourceTree = "<group>"; };
+		A678FD4B1C0366AF00F24105 /* MFSideMenuContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenuContainerViewController.h; sourceTree = "<group>"; };
+		A678FD4C1C0366AF00F24105 /* MFSideMenuContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuContainerViewController.m; sourceTree = "<group>"; };
+		A678FD4D1C0366AF00F24105 /* MFSideMenuShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenuShadow.h; sourceTree = "<group>"; };
+		A678FD4E1C0366AF00F24105 /* MFSideMenuShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuShadow.m; sourceTree = "<group>"; };
+		A678FD4F1C0366AF00F24105 /* UIViewController+MFSideMenuAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MFSideMenuAdditions.h"; sourceTree = "<group>"; };
+		A678FD501C0366AF00F24105 /* UIViewController+MFSideMenuAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MFSideMenuAdditions.m"; sourceTree = "<group>"; };
 		A6C5F0F51BF4E9C50093AD65 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A6C5F0F61BF4E9C50093AD65 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		A6C5F0F81BF4E9C50093AD65 /* DCAppFacade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCAppFacade.h; sourceTree = "<group>"; };
@@ -211,8 +220,6 @@
 		A6C5F1381BF4E9C50093AD65 /* UIImageView+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+DC.m"; sourceTree = "<group>"; };
 		A6C5F13A1BF4E9C50093AD65 /* NSManagedObject+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+DC.h"; sourceTree = "<group>"; };
 		A6C5F13B1BF4E9C50093AD65 /* NSManagedObject+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+DC.m"; sourceTree = "<group>"; };
-		A6C5F13D1BF4E9C50093AD65 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
-		A6C5F13E1BF4E9C50093AD65 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		A6C5F1401BF4E9C50093AD65 /* UIWebView+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+DC.h"; sourceTree = "<group>"; };
 		A6C5F1411BF4E9C50093AD65 /* UIWebView+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+DC.m"; sourceTree = "<group>"; };
 		A6C5F1441BF4E9C50093AD65 /* DCHousePlan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCHousePlan.h; sourceTree = "<group>"; };
@@ -325,13 +332,6 @@
 		A6C5F1C91BF4E9C50093AD65 /* DCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCLoginViewController.m; sourceTree = "<group>"; };
 		A6C5F1CB1BF4E9C50093AD65 /* DCMainNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCMainNavigationController.h; sourceTree = "<group>"; };
 		A6C5F1CC1BF4E9C50093AD65 /* DCMainNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCMainNavigationController.m; sourceTree = "<group>"; };
-		A6C5F1CE1BF4E9C50093AD65 /* MFSideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenu.h; sourceTree = "<group>"; };
-		A6C5F1CF1BF4E9C50093AD65 /* MFSideMenuContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenuContainerViewController.h; sourceTree = "<group>"; };
-		A6C5F1D01BF4E9C50093AD65 /* MFSideMenuContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuContainerViewController.m; sourceTree = "<group>"; };
-		A6C5F1D11BF4E9C50093AD65 /* MFSideMenuShadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenuShadow.h; sourceTree = "<group>"; };
-		A6C5F1D21BF4E9C50093AD65 /* MFSideMenuShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuShadow.m; sourceTree = "<group>"; };
-		A6C5F1D31BF4E9C50093AD65 /* UIViewController+MFSideMenuAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MFSideMenuAdditions.h"; sourceTree = "<group>"; };
-		A6C5F1D41BF4E9C50093AD65 /* UIViewController+MFSideMenuAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MFSideMenuAdditions.m"; sourceTree = "<group>"; };
 		A6C5F1D61BF4E9C50093AD65 /* DCMenuStoryboardHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCMenuStoryboardHelper.h; sourceTree = "<group>"; };
 		A6C5F1D71BF4E9C50093AD65 /* DCMenuStoryboardHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCMenuStoryboardHelper.m; sourceTree = "<group>"; };
 		A6C5F1D81BF4E9C50093AD65 /* DCSideMenuType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCSideMenuType.h; sourceTree = "<group>"; };
@@ -484,6 +484,29 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A678FD451C03666600F24105 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				A678FD461C03666600F24105 /* Reachability.h */,
+				A678FD471C03666600F24105 /* Reachability.m */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
+		A678FD491C0366AF00F24105 /* Sidebar */ = {
+			isa = PBXGroup;
+			children = (
+				A678FD4A1C0366AF00F24105 /* MFSideMenu.h */,
+				A678FD4B1C0366AF00F24105 /* MFSideMenuContainerViewController.h */,
+				A678FD4C1C0366AF00F24105 /* MFSideMenuContainerViewController.m */,
+				A678FD4D1C0366AF00F24105 /* MFSideMenuShadow.h */,
+				A678FD4E1C0366AF00F24105 /* MFSideMenuShadow.m */,
+				A678FD4F1C0366AF00F24105 /* UIViewController+MFSideMenuAdditions.h */,
+				A678FD501C0366AF00F24105 /* UIViewController+MFSideMenuAdditions.m */,
+			);
+			path = Sidebar;
+			sourceTree = "<group>";
+		};
 		A6C5F0F21BF4E9C50093AD65 /* DrupalCon */ = {
 			isa = PBXGroup;
 			children = (
@@ -620,7 +643,6 @@
 				A6C5F12D1BF4E9C50093AD65 /* Date */,
 				A6C5F1341BF4E9C50093AD65 /* Images */,
 				A6C5F1391BF4E9C50093AD65 /* ManagedObject */,
-				A6C5F13C1BF4E9C50093AD65 /* Reachability */,
 				A6C5F13F1BF4E9C50093AD65 /* WebView */,
 			);
 			path = Helpers;
@@ -699,15 +721,6 @@
 				A6C5F13B1BF4E9C50093AD65 /* NSManagedObject+DC.m */,
 			);
 			path = ManagedObject;
-			sourceTree = "<group>";
-		};
-		A6C5F13C1BF4E9C50093AD65 /* Reachability */ = {
-			isa = PBXGroup;
-			children = (
-				A6C5F13D1BF4E9C50093AD65 /* Reachability.h */,
-				A6C5F13E1BF4E9C50093AD65 /* Reachability.m */,
-			);
-			path = Reachability;
 			sourceTree = "<group>";
 		};
 		A6C5F13F1BF4E9C50093AD65 /* WebView */ = {
@@ -962,7 +975,6 @@
 				A6C5F1C01BF4E9C50093AD65 /* Location */,
 				A6C5F1C51BF4E9C50093AD65 /* LoginViewController */,
 				A6C5F1CA1BF4E9C50093AD65 /* MainNavigation */,
-				A6C5F1CD1BF4E9C50093AD65 /* Sidebar */,
 				A6C5F1D51BF4E9C50093AD65 /* SideMenu */,
 			);
 			path = ViewControllers;
@@ -1034,20 +1046,6 @@
 				A6C5F1CC1BF4E9C50093AD65 /* DCMainNavigationController.m */,
 			);
 			path = MainNavigation;
-			sourceTree = "<group>";
-		};
-		A6C5F1CD1BF4E9C50093AD65 /* Sidebar */ = {
-			isa = PBXGroup;
-			children = (
-				A6C5F1CE1BF4E9C50093AD65 /* MFSideMenu.h */,
-				A6C5F1CF1BF4E9C50093AD65 /* MFSideMenuContainerViewController.h */,
-				A6C5F1D01BF4E9C50093AD65 /* MFSideMenuContainerViewController.m */,
-				A6C5F1D11BF4E9C50093AD65 /* MFSideMenuShadow.h */,
-				A6C5F1D21BF4E9C50093AD65 /* MFSideMenuShadow.m */,
-				A6C5F1D31BF4E9C50093AD65 /* UIViewController+MFSideMenuAdditions.h */,
-				A6C5F1D41BF4E9C50093AD65 /* UIViewController+MFSideMenuAdditions.m */,
-			);
-			path = Sidebar;
 			sourceTree = "<group>";
 		};
 		A6C5F1D51BF4E9C50093AD65 /* SideMenu */ = {
@@ -1216,6 +1214,8 @@
 		A6C5F2241BF4E9C60093AD65 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				A678FD491C0366AF00F24105 /* Sidebar */,
+				A678FD451C03666600F24105 /* Reachability */,
 				A6C5F2251BF4E9C60093AD65 /* Crashlytics */,
 				A6C5F2281BF4E9C60093AD65 /* GoogleAnalytics */,
 				A6C5F2341BF4E9C60093AD65 /* SDWebImage */,
@@ -1386,7 +1386,6 @@
 				A6C5F30D1BF4E9C60093AD65 /* DCAppSignMenuCell.m in Sources */,
 				A6C5F27D1BF4E9C60093AD65 /* NSUserDefaults+DC.m in Sources */,
 				A6C5F2991BF4E9C60093AD65 /* DCBof+DC.m in Sources */,
-				A6C5F2FF1BF4E9C60093AD65 /* MFSideMenuShadow.m in Sources */,
 				A6C5F2C31BF4E9C60093AD65 /* DCSpeaker.m in Sources */,
 				A6C5F3711BF4E9C60093AD65 /* UIImage+WebP.m in Sources */,
 				A6C5F26F1BF4E9C60093AD65 /* DCSpeakersViewController.m in Sources */,
@@ -1401,7 +1400,6 @@
 				A6C5F2C91BF4E9C60093AD65 /* DCTrack.m in Sources */,
 				A6C5F2951BF4E9C60093AD65 /* DCAppSettings.m in Sources */,
 				A6C5F2D51BF4E9C60093AD65 /* DCCalendarManager.m in Sources */,
-				A6C5F2FD1BF4E9C60093AD65 /* MFSideMenuContainerViewController.m in Sources */,
 				A6C5F2E31BF4E9C60093AD65 /* DCBaseViewController.m in Sources */,
 				A6C5F36D1BF4E9C60093AD65 /* UIImage+GIF.m in Sources */,
 				A6C5F2711BF4E9C60093AD65 /* DCAppConfiguration.m in Sources */,
@@ -1418,7 +1416,6 @@
 				A6C5F2A11BF4E9C60093AD65 /* DCInfoCategory+DC.m in Sources */,
 				A6C5F29B1BF4E9C60093AD65 /* DCEvent+DC.m in Sources */,
 				A6C5F2AF1BF4E9C60093AD65 /* DCTime+DC.m in Sources */,
-				A6C5F3011BF4E9C60093AD65 /* UIViewController+MFSideMenuAdditions.m in Sources */,
 				A6C5F32B1BF4E9C60093AD65 /* DCSpeakerCell.m in Sources */,
 				A6C5F36B1BF4E9C60093AD65 /* UIButton+WebCache.m in Sources */,
 				A6C5F2591BF4E9C60093AD65 /* DCAppFacade.m in Sources */,
@@ -1435,12 +1432,15 @@
 				A6C5F2F11BF4E9C60093AD65 /* DCInfoViewController.m in Sources */,
 				A6C5F2971BF4E9C60093AD65 /* DCAppSettings+DC.m in Sources */,
 				A6C5F2EB1BF4E9C60093AD65 /* DCFilterViewController.m in Sources */,
+				A678FD481C03666600F24105 /* Reachability.m in Sources */,
 				A6C5F3031BF4E9C60093AD65 /* DCMenuStoryboardHelper.m in Sources */,
 				A6C5F36F1BF4E9C60093AD65 /* UIImage+MultiFormat.m in Sources */,
+				A678FD521C0366AF00F24105 /* MFSideMenuShadow.m in Sources */,
 				A6C5F31F1BF4E9C60093AD65 /* DCEventCell.m in Sources */,
 				A6C5F3651BF4E9C60093AD65 /* SDWebImageDownloaderOperation.m in Sources */,
 				A6C5F32F1BF4E9C60093AD65 /* DCSpeakerEventCell.m in Sources */,
 				A6C5F35D1BF4E9C60093AD65 /* SDImageCache.m in Sources */,
+				A678FD531C0366AF00F24105 /* UIViewController+MFSideMenuAdditions.m in Sources */,
 				A6C5F3671BF4E9C60093AD65 /* SDWebImageManager.m in Sources */,
 				A6C5F2B71BF4E9C60093AD65 /* DCType+DC.m in Sources */,
 				A6C5F3051BF4E9C60093AD65 /* DCSideMenuViewController.m in Sources */,
@@ -1474,6 +1474,7 @@
 				A6C5F27F1BF4E9C60093AD65 /* DCDateHelper.m in Sources */,
 				A6C5F2731BF4E9C60093AD65 /* NSArray+DC.m in Sources */,
 				A6C5F26D1BF4E9C60093AD65 /* DCSpeakersDetailViewController.m in Sources */,
+				A678FD511C0366AF00F24105 /* MFSideMenuContainerViewController.m in Sources */,
 				A6C5F3611BF4E9C60093AD65 /* SDWebImageDecoder.m in Sources */,
 				A6C5F27B1BF4E9C60093AD65 /* NSString+HTML.m in Sources */,
 				A6C5F2DB1BF4E9C60093AD65 /* DCParserService.m in Sources */,
@@ -1491,7 +1492,6 @@
 				A6C5F2D91BF4E9C60093AD65 /* DCImportDataSevice.m in Sources */,
 				A678FD441C03590B00F24105 /* main.xcdatamodeld in Sources */,
 				A6C5F2691BF4E9C60093AD65 /* DCEventStrategy.m in Sources */,
-				A6C5F28B1BF4E9C60093AD65 /* Reachability.m in Sources */,
 				A6C5F2B91BF4E9C60093AD65 /* DCBof.m in Sources */,
 				A6C5F2B11BF4E9C60093AD65 /* DCTimeRange+DC.m in Sources */,
 				A6C5F2FB1BF4E9C60093AD65 /* DCMainNavigationController.m in Sources */,
