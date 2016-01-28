@@ -4,6 +4,6 @@
 
 @interface DCAppSettings : NSManagedObject
 // Seconds GMT offset
-@property(nonatomic, retain) NSNumber* eventTimeZone;
+@property(nonatomic, retain) NSString* timeZoneName;
 
 @end

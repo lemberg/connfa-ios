@@ -2,10 +2,12 @@
 #import "AppDelegate.h"
 #import "DCMainProxy.h"
 #import "UIConstants.h"
+#import "DCAlertsManager.h"
 #import "GAI.h"
 #import "DCLevel+DC.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import "NSUserDefaults+DC.h"
 
 @interface AppDelegate ()
 
@@ -20,7 +22,8 @@
   [Fabric with:@[ CrashlyticsKit ]];
 
   [self initializeGoogleAnalytics];
-
+  [self handleUpdateData];
+  
   [[DCMainProxy sharedProxy] update];
 
 #ifdef DEBUG_MODE
@@ -30,6 +33,25 @@
 #endif
 
   return YES;
+}
+
+- (void)handleUpdateData {
+  // Handle it only when application start
+  [[DCMainProxy sharedProxy] setDataUpdatedCallback:^(DCMainProxyState mainProxyState) {
+    NSTimeZone *eventTimeZone = [[DCMainProxy sharedProxy]
+                                 isSystemTimeCoincidencWithEventTimezone];
+    if (eventTimeZone && [NSUserDefaults isEnabledTimeZoneAlert]) {
+      [DCAlertsManager
+       showTimeZoneAlertForTimeZone:eventTimeZone
+       withSuccess:^(BOOL isSuccess){
+         if (isSuccess) {
+           [NSUserDefaults disableTimeZoneNotification];
+         }
+         [[DCMainProxy sharedProxy] setDataUpdatedCallback:nil];
+       }];
+    }
+
+  }];
 }
 
 - (void)applicationWillResignActive:(UIApplication*)application {

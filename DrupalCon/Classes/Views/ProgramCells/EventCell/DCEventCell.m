@@ -148,11 +148,12 @@ static NSInteger eventCellImageHeight = 16;
   self.eventImageHeight.constant =
       self.eventImageView.image ? eventCellImageHeight : 0;
 
+  NSString *timeFormat = ([NSDate is24hourFormat])? @"HH:mm" : @"h:mm aaa";
   // Time  (left side)
   NSString* startTime = [DCDateHelper convertDate:event.startDate
-                              toApplicationFormat:@"h:mm aaa"];
+                              toApplicationFormat:timeFormat];
   NSString* endTime =
-      [DCDateHelper convertDate:event.endDate toApplicationFormat:@"h:mm aaa"];
+      [DCDateHelper convertDate:event.endDate toApplicationFormat:timeFormat];
 
   self.startTimeLabel.text = self.isFirstCellInSection
                                  ? [NSString stringWithFormat:@"%@", startTime]
@@ -178,7 +179,8 @@ static NSInteger eventCellImageHeight = 16;
       ((event.type.typeID.integerValue == DC_EVENT_COFEE_BREAK) ||
        (event.type.typeID.integerValue == DC_EVENT_REGISTRATION) ||
        (event.type.typeID.integerValue == DC_EVENT_LUNCH) ||
-       (event.type.typeID.integerValue == DC_EVENT_FREE_SLOT));
+       (event.type.typeID.integerValue == DC_EVENT_FREE_SLOT) ||
+       (event.type.typeID.integerValue == DC_EVENT_NONE));
   return !disabledByType;
 }
 

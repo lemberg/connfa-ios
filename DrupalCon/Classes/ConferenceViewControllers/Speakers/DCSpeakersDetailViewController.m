@@ -143,18 +143,18 @@ static NSString* eventCellId = @"SpeakerEventCellId";
     }
     case 1:  // buttons cell
     {
-      // no buttons, self becomes invisible
-      if (!self.speaker.webSite.length && !self.speaker.twitterName.length)
-        return 0;
-
       DCSpeakerDetailButtonsCell* cellPrototype =
-          self.cellPrototypes[buttonsCellId];
+      self.cellPrototypes[buttonsCellId];
+      // no buttons, self becomes invisible
+      if (!self.speaker.webSite.length && !self.speaker.twitterName.length) {
+        cellPrototype.separatorView.hidden = true;
+        return 0;
+      }
+
       [cellPrototype initData:self.speaker];
       [cellPrototype layoutSubviews];
 
-      return [cellPrototype.contentView
-                 systemLayoutSizeFittingSize:UILayoutFittingCompressedSize]
-          .height;
+      return 55.;
     }
     case 2:  // description cell
     {
@@ -171,6 +171,8 @@ static NSString* eventCellId = @"SpeakerEventCellId";
               cellHeightForText:self.speaker.characteristic];
         }
       } else {
+        DCSpeakerEventCell* cellPrototype = self.cellPrototypes[eventCellId];
+        cellPrototype.contentView.hidden = true;
         return 0;
       }
     }

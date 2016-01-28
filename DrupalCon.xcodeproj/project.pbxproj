@@ -16,6 +16,8 @@
 		842B5E631AC579C2009614A5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 842B5E621AC579C2009614A5 /* libz.dylib */; };
 		842B5E651AC579D0009614A5 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 842B5E641AC579D0009614A5 /* AdSupport.framework */; };
 		849EFDDB19A4ACB800C43E05 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849EFDDA19A4ACB800C43E05 /* CoreData.framework */; };
+		A6580B7D1C5F60F5001B0D62 /* DCAlertsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6580B7C1C5F60F5001B0D62 /* DCAlertsManager.m */; };
+		A66BD0BF1C5BBAB700C568EE /* UIAlertView+DCWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A66BD0BE1C5BBAB700C568EE /* UIAlertView+DCWrapper.m */; };
 		A678FD441C03590B00F24105 /* main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A678FD421C03590B00F24105 /* main.xcdatamodeld */; };
 		A678FD481C03666600F24105 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A678FD471C03666600F24105 /* Reachability.m */; };
 		A678FD511C0366AF00F24105 /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A678FD4C1C0366AF00F24105 /* MFSideMenuContainerViewController.m */; };
@@ -162,6 +164,10 @@
 		842B5E641AC579D0009614A5 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		849EFDDA19A4ACB800C43E05 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		84D654641ACC5C1D0099B461 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A6580B7B1C5F60F5001B0D62 /* DCAlertsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCAlertsManager.h; sourceTree = "<group>"; };
+		A6580B7C1C5F60F5001B0D62 /* DCAlertsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCAlertsManager.m; sourceTree = "<group>"; };
+		A66BD0BD1C5BBAB700C568EE /* UIAlertView+DCWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+DCWrapper.h"; sourceTree = "<group>"; };
+		A66BD0BE1C5BBAB700C568EE /* UIAlertView+DCWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertView+DCWrapper.m"; sourceTree = "<group>"; };
 		A678FD431C03590B00F24105 /* main_2.0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = main_2.0.xcdatamodel; sourceTree = "<group>"; };
 		A678FD461C03666600F24105 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		A678FD471C03666600F24105 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -484,6 +490,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A6580B7A1C5F60F5001B0D62 /* Alerts */ = {
+			isa = PBXGroup;
+			children = (
+				A6580B7B1C5F60F5001B0D62 /* DCAlertsManager.h */,
+				A6580B7C1C5F60F5001B0D62 /* DCAlertsManager.m */,
+			);
+			path = Alerts;
+			sourceTree = "<group>";
+		};
+		A66BD0BC1C5BBAA100C568EE /* AlertView */ = {
+			isa = PBXGroup;
+			children = (
+				A66BD0BD1C5BBAB700C568EE /* UIAlertView+DCWrapper.h */,
+				A66BD0BE1C5BBAB700C568EE /* UIAlertView+DCWrapper.m */,
+			);
+			path = AlertView;
+			sourceTree = "<group>";
+		};
 		A678FD451C03666600F24105 /* Reachability */ = {
 			isa = PBXGroup;
 			children = (
@@ -636,6 +660,7 @@
 		A6C5F11A1BF4E9C50093AD65 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				A66BD0BC1C5BBAA100C568EE /* AlertView */,
 				A6C5F11B1BF4E9C50093AD65 /* AppConfiuguration */,
 				A6C5F11E1BF4E9C50093AD65 /* Collections */,
 				A6C5F1231BF4E9C50093AD65 /* Color */,
@@ -900,6 +925,7 @@
 		A6C5F1961BF4E9C50093AD65 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				A6580B7A1C5F60F5001B0D62 /* Alerts */,
 				A6C5F1971BF4E9C50093AD65 /* Calendar */,
 				A6C5F19A1BF4E9C50093AD65 /* CoreDataStore */,
 				A6C5F19D1BF4E9C50093AD65 /* ImportData */,
@@ -1449,6 +1475,7 @@
 				A6C5F2CF1BF4E9C60093AD65 /* DCInfoCategory.m in Sources */,
 				A6C5F32D1BF4E9C60093AD65 /* DCSpeakerDetailButtonsCell.m in Sources */,
 				A6C5F2E11BF4E9C60093AD65 /* DCWebService.m in Sources */,
+				A66BD0BF1C5BBAB700C568EE /* UIAlertView+DCWrapper.m in Sources */,
 				A6C5F34F1BF4E9C60093AD65 /* main.m in Sources */,
 				A6C5F30F1BF4E9C60093AD65 /* DCSideMenuCell.m in Sources */,
 				A6C5F26B1BF4E9C60093AD65 /* DCProgramViewController.m in Sources */,
@@ -1458,6 +1485,7 @@
 				A6C5F2571BF4E9C60093AD65 /* AppDelegate.m in Sources */,
 				A6C5F2F71BF4E9C60093AD65 /* DCFirstLoadViewController.m in Sources */,
 				A6C5F35B1BF4E9C60093AD65 /* NSData+ImageContentType.m in Sources */,
+				A6580B7D1C5F60F5001B0D62 /* DCAlertsManager.m in Sources */,
 				A6C5F2F51BF4E9C60093AD65 /* DCPin.m in Sources */,
 				A6C5F2C51BF4E9C60093AD65 /* DCTime.m in Sources */,
 				A6C5F2631BF4E9C60093AD65 /* DCDayEventsDataSource.m in Sources */,

@@ -32,7 +32,7 @@
 #pragma mark - Private
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
-  return UIStatusBarStyleDefault;
+  return UIStatusBarStyleLightContent;
 }
 
 #pragma mark - UIWebView delegate

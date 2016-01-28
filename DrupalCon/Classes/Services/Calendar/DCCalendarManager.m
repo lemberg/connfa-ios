@@ -5,6 +5,7 @@
 #import "DCTime+DC.h"
 #import "DCEvent+DC.h"
 #import "DCCoreDataStore.h"
+#import "DCAlertsManager.h"
 
 NSString* kCalendarIdKey = @"CalendarIdKey";
 
@@ -125,11 +126,7 @@ NSString* kCalendarIdKey = @"CalendarIdKey";
 }
 
 - (void)showAlertWithTitle:(NSString*)title message:(NSString*)msg {
-  [[[UIAlertView alloc] initWithTitle:title
-                              message:msg
-                             delegate:nil
-                    cancelButtonTitle:@"Ok"
-                    otherButtonTitles:nil] show];
+  [DCAlertsManager showAlertWithTitle:title message:msg];
 }
 
 - (EKCalendar*)createNewCalendar {
