@@ -178,7 +178,8 @@ static NSInteger eventCellImageHeight = 16;
       ((event.type.typeID.integerValue == DC_EVENT_COFEE_BREAK) ||
        (event.type.typeID.integerValue == DC_EVENT_REGISTRATION) ||
        (event.type.typeID.integerValue == DC_EVENT_LUNCH) ||
-       (event.type.typeID.integerValue == DC_EVENT_FREE_SLOT));
+       (event.type.typeID.integerValue == DC_EVENT_FREE_SLOT) ||
+       (event.type.typeID.integerValue == DC_EVENT_NONE));
   return !disabledByType;
 }
 
