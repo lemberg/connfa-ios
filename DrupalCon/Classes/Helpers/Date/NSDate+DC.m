@@ -35,6 +35,19 @@ static NSString* kDCSpeakerEventCellFormat = @"dd LLLL";
     return NO;
 }
 
+
++ (BOOL)is24hourFormat {
+  NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+  [formatter setLocale:[NSLocale currentLocale]];
+  [formatter setDateStyle:NSDateFormatterNoStyle];
+  [formatter setTimeStyle:NSDateFormatterShortStyle];
+  NSString *dateString = [formatter stringFromDate:[NSDate date]];
+  NSRange amRange = [dateString rangeOfString:[formatter AMSymbol]];
+  NSRange pmRange = [dateString rangeOfString:[formatter PMSymbol]];
+  BOOL is24h = (amRange.location == NSNotFound && pmRange.location == NSNotFound);
+  return is24h;
+}
+
 + (NSDate*)dateFromString:(NSString*)formattedDate
                    format:(NSString*)dateFormat {
   if (![formattedDate isKindOfClass:[NSString class]]) {
@@ -52,6 +65,7 @@ static NSString* kDCSpeakerEventCellFormat = @"dd LLLL";
 - (NSString*)dateToStringWithFormat:(NSString*)dateFormat {
   NSDateFormatter* dateFormatter = [NSDateFormatter new];
   dateFormatter.timeZone = T_ZERO;
+  [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
   [dateFormatter setDateStyle:NSDateFormatterShortStyle];
   [dateFormatter setDateFormat:dateFormat];
   return [dateFormatter stringFromDate:self];

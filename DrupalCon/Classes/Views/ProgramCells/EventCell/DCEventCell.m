@@ -148,11 +148,12 @@ static NSInteger eventCellImageHeight = 16;
   self.eventImageHeight.constant =
       self.eventImageView.image ? eventCellImageHeight : 0;
 
+  NSString *timeFormat = ([NSDate is24hourFormat])? @"HH:MM" : @"h:mm aaa";
   // Time  (left side)
   NSString* startTime = [DCDateHelper convertDate:event.startDate
-                              toApplicationFormat:@"h:mm aaa"];
+                              toApplicationFormat:timeFormat];
   NSString* endTime =
-      [DCDateHelper convertDate:event.endDate toApplicationFormat:@"h:mm aaa"];
+      [DCDateHelper convertDate:event.endDate toApplicationFormat:timeFormat];
 
   self.startTimeLabel.text = self.isFirstCellInSection
                                  ? [NSString stringWithFormat:@"%@", startTime]
