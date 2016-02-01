@@ -34,11 +34,14 @@ typedef enum {
 - (NSManagedObjectContext*)newMainQueueContext;
 - (void)setDataReadyCallback:
     (void (^)(DCMainProxyState mainProxyState))dataReadyCallback;
+- (void)setDataUpdatedCallback:
+    (void (^)(DCMainProxyState mainProxyState))dataUpdatedCallback;
 
 #pragma mark - public
 
 - (void)update;
 - (BOOL)checkReachable;
+- (NSTimeZone *)isSystemTimeCoincidencWithEventTimezone;
 
 #pragma mark - work with instances
 - (NSTimeZone*)eventTimeZone;

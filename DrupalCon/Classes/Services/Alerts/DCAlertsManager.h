@@ -9,5 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface DCAlertsManager : NSObject
++ (void)showTimeZoneAlertForTimeZone:(NSTimeZone *)zone
+                         withSuccess:(void(^)(BOOL))success;
+
++ (void)showAlertWithTitle:(NSString*)title message:(NSString*)msg;
 
 @end

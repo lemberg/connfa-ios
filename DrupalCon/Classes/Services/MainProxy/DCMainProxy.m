@@ -31,6 +31,7 @@
 
 #import "DCImportDataSevice.h"
 #import "DCCalendarManager.h"
+#import "DCAlertsManager.h"
 
 const NSString* INVALID_JSON_EXCEPTION = @"Invalid JSON";
 
@@ -44,6 +45,9 @@ typedef void (^UpdateDataFail)(NSString* reason);
 
 @property(nonatomic, copy) __block void (^dataReadyCallback)
     (DCMainProxyState mainProxyState);
+
+@property(nonatomic, copy) __block void (^dataUpdatedCallback)
+  (DCMainProxyState mainProxyState);
 //
 @property(strong, nonatomic) DCImportDataSevice* importDataService;
 
@@ -101,6 +105,15 @@ typedef void (^UpdateDataFail)(NSString* reason);
   return self.applicationTimeZone;
 }
 
+- (NSTimeZone *)isSystemTimeCoincidencWithEventTimezone {
+  NSTimeZone *eventTimeZone = [self eventTimeZone];
+  NSTimeZone *systemTimeZone = [NSTimeZone systemTimeZone];
+  if (eventTimeZone.secondsFromGMT == systemTimeZone.secondsFromGMT) {
+    return nil;
+  }
+  return eventTimeZone;
+}
+
 - (void)setDataReadyCallback:(void (^)(DCMainProxyState))dataReadyCallback {
   if (self.state == DCMainProxyStateDataReady ||
       self.state == DCmainProxyStateDataNotChange ||
@@ -111,6 +124,10 @@ typedef void (^UpdateDataFail)(NSString* reason);
   }
 
   _dataReadyCallback = dataReadyCallback;
+}
+
+- (void)setDataUpdatedCallback:(void (^)(DCMainProxyState))dataUpdatedCallback {
+  _dataUpdatedCallback = dataUpdatedCallback;
 }
 
 #pragma mark - public
@@ -136,13 +153,9 @@ typedef void (^UpdateDataFail)(NSString* reason);
     } else {
       if ([self.importDataService isInitDataImport]) {
         dispatch_async(dispatch_get_main_queue(), ^{
-          [[[UIAlertView alloc]
-                  initWithTitle:@"Attention"
-                        message:@"Internet connection is not available at this "
-                        @"moment. Please, try later"
-                       delegate:nil
-              cancelButtonTitle:@"Ok"
-              otherButtonTitles:nil] show];
+
+          [DCAlertsManager showAlertWithTitle:@"Attention"
+                                      message:@"Internet connection is not available at this moment. Please, try later"];
         });
       }
     }
@@ -198,6 +211,16 @@ typedef void (^UpdateDataFail)(NSString* reason);
       self.dataReadyCallback(self.state);
     }
   });
+  
+  if (self.state == DCMainProxyStateDataUpdated) {
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+      if (self.dataUpdatedCallback) {
+        self.dataUpdatedCallback(self.state);
+      }
+    });
+  }
+  
 }
 
 #pragma mark - getting instances
