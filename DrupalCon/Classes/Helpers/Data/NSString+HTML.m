@@ -198,4 +198,10 @@
   return encoded;
 }
 
+
+- (NSString*)trimmingWhiteSpace {
+  return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+}
+
+
 @end

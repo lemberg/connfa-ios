@@ -39,8 +39,8 @@ const NSString* kDCSpeakerAvatarImageURLKey = @"avatarImageURL";
     } else  // update
     {
       speaker.speakerId = dictionary[kDCSpeakerIdKey];
-      speaker.firstName = dictionary[kDCSpeakerFirstNameKey];
-      speaker.lastName = dictionary[kDCSpeakerLastNameKey];
+      speaker.firstName = [dictionary[kDCSpeakerFirstNameKey] trimmingWhiteSpace];
+      speaker.lastName = [dictionary[kDCSpeakerLastNameKey] trimmingWhiteSpace];
       speaker.avatarPath = dictionary[kDCSpeakerAvatarImageURLKey];
       speaker.twitterName = dictionary[kDCSpeakerTwitterNameKey];
       speaker.webSite = dictionary[kDCSpeakerWebSiteKey];
@@ -57,6 +57,8 @@ const NSString* kDCSpeakerAvatarImageURLKey = @"avatarImageURL";
     }
   }
 }
+
+
 
 + (NSString*)firstUpperLetter:(NSString*)source {
   NSString* upperCaseSource = [source uppercaseString];
