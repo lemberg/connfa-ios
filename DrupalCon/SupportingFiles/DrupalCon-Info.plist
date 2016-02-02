@@ -43,7 +43,7 @@
 		<key>DryRun</key>
 		<false/>
 		<key>GoogleAnalyticsID</key>
-		<string></string>
+		<string>UA-267362-74</string>
 	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
