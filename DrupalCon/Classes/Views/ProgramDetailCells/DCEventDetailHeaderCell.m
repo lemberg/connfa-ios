@@ -26,7 +26,7 @@
                               toApplicationFormat:@"h:mm aaa"];
   NSString* endTime =
       [DCDateHelper convertDate:event.endDate toApplicationFormat:@"h:mm aaa"];
-  date = [NSString stringWithFormat:@"%@, %@ - %@", [date uppercaseString],
+  date = [NSString stringWithFormat:@"%@, %@ - %@", date,
                                     startTime, endTime];
 
   self.eventDetailContainerView.backgroundColor =
