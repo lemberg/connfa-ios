@@ -80,20 +80,20 @@ static NSBundle* themeBundle;
       kMenuItemControllerId : @"DCProgramViewController",
       kMenuType : @(DCMENU_PROGRAM_ITEM)
     },
-    @{
-      kMenuItemTitle : @"BoFs",
-      kMenuItemIcon : @"menu_icon_bofs",
-      kMenuItemSelectedIcon : @"menu_icon_bofs_sel",
-      kMenuItemControllerId : @"DCProgramViewController",
-      kMenuType : @(DCMENU_BOFS_ITEM)
-    },
-    @{
-      kMenuItemTitle : @"Social Events",
-      kMenuItemIcon : @"menu_icon_social",
-      kMenuItemSelectedIcon : @"menu_icon_social_sel",
-      kMenuItemControllerId : @"DCProgramViewController",
-      kMenuType : @(DCMENU_SOCIAL_EVENTS_ITEM)
-    },
+//    @{
+//      kMenuItemTitle : @"BoFs",
+//      kMenuItemIcon : @"menu_icon_bofs",
+//      kMenuItemSelectedIcon : @"menu_icon_bofs_sel",
+//      kMenuItemControllerId : @"DCProgramViewController",
+//      kMenuType : @(DCMENU_BOFS_ITEM)
+//    },
+//    @{
+//      kMenuItemTitle : @"Social Events",
+//      kMenuItemIcon : @"menu_icon_social",
+//      kMenuItemSelectedIcon : @"menu_icon_social_sel",
+//      kMenuItemControllerId : @"DCProgramViewController",
+//      kMenuType : @(DCMENU_SOCIAL_EVENTS_ITEM)
+//    },
     @{
       kMenuItemTitle : @"Speakers",
       kMenuItemIcon : @"menu_icon_speakers",
