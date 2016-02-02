@@ -98,9 +98,7 @@ typedef void (^UpdateDataFail)(NSString* reason);
         getAllInstancesOfClass:[DCAppSettings class]
                      inContext:[self defaultPrivateContext]];
     DCAppSettings* appSetting = [settings lastObject];
-    NSInteger timeZoneSecondsOffset = appSetting.eventTimeZone.integerValue;
-    self.applicationTimeZone =
-        [NSTimeZone timeZoneForSecondsFromGMT: timeZoneSecondsOffset];
+    self.applicationTimeZone = [NSTimeZone timeZoneWithName:appSetting.timeZoneName];
   }
   return self.applicationTimeZone;
 }

@@ -13,10 +13,10 @@
 
 + (void)showTimeZoneAlertForTimeZone:(NSTimeZone *)zone
                          withSuccess:(void(^)(BOOL))success {
-//  NSInteger hoursFromGmt = zone.secondsFromGMT / 3600;
+  NSInteger hoursFromGmt = zone.secondsFromGMT / 3600;
   NSString *timeZoneName = zone.name;//[zone localizedName:NSTimeZoneNameStyleGeneric locale:[NSLocale currentLocale]];
   
-  NSString *title = [NSString stringWithFormat:@"Event dates are provided in %@ timezone.", timeZoneName];
+  NSString *title = [NSString stringWithFormat:@"Event dates are provided in %@(%li) timezone.", timeZoneName, hoursFromGmt];
   UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Attention" message:title delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:@"Don't show", nil];
   [alertView showWithCompletion:^(UIAlertView *alertView, NSInteger buttonIndex) {
     BOOL isSuccess = buttonIndex != 0;

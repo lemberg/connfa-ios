@@ -3,6 +3,6 @@
 
 @implementation DCAppSettings
 
-@dynamic eventTimeZone;
+@dynamic timeZoneName;
 
 @end
