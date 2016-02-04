@@ -32,7 +32,7 @@
 
   //    TODO: Remove testing property in getParameter
   NSString* testUriParameter =
-      uri;  //[NSString stringWithFormat:@"%@/?testing=1", uri];
+      [NSString stringWithFormat:@"%@/?testing=1", uri];
   NSURL* requestURL = [NSURL URLWithString:testUriParameter
                              relativeToURL:[NSURL URLWithString:BASE_URL]];
   [request setURL:requestURL];
