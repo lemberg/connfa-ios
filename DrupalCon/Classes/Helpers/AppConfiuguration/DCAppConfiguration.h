@@ -6,6 +6,10 @@
 
 #define BASE_URL [NSString stringWithFormat:@"%@/api/v2/", SERVER_URL]
 
+extern NSString* kFontOpenSansBold;
+extern NSString* kFontOpenSansCondBold;
+extern NSString* kFontOpenSansRegular;
+
 @interface DCAppConfiguration : NSObject
 
 + (NSArray*)appMenuItems;
@@ -22,5 +26,7 @@
 + (NSInteger)dispatchInvervalGA;
 + (BOOL)dryRunGA;
 + (NSString*)googleAnalyticsID;
+
++ (UIFont *)fontWithName:(NSString *)name andSize:(CGFloat)size;
 
 @end

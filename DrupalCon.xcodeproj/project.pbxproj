@@ -21,6 +21,9 @@
 		A678FD511C0366AF00F24105 /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A678FD4C1C0366AF00F24105 /* MFSideMenuContainerViewController.m */; };
 		A678FD521C0366AF00F24105 /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = A678FD4E1C0366AF00F24105 /* MFSideMenuShadow.m */; };
 		A678FD531C0366AF00F24105 /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A678FD501C0366AF00F24105 /* UIViewController+MFSideMenuAdditions.m */; };
+		A68AE7C11C626470002E862D /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A68AE7BE1C626470002E862D /* OpenSans-Bold.ttf */; };
+		A68AE7C21C626470002E862D /* OpenSans-CondBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A68AE7BF1C626470002E862D /* OpenSans-CondBold.ttf */; };
+		A68AE7C31C626470002E862D /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A68AE7C01C626470002E862D /* OpenSans-Regular.ttf */; };
 		A690C2AE1BFDDD2400DC5EB8 /* DC-Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2111BF4E9C60093AD65 /* DC-Images.xcassets */; };
 		A6C5F2571BF4E9C60093AD65 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F0F61BF4E9C50093AD65 /* AppDelegate.m */; };
 		A6C5F2591BF4E9C60093AD65 /* DCAppFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F0F91BF4E9C50093AD65 /* DCAppFacade.m */; };
@@ -172,6 +175,9 @@
 		A678FD4E1C0366AF00F24105 /* MFSideMenuShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuShadow.m; sourceTree = "<group>"; };
 		A678FD4F1C0366AF00F24105 /* UIViewController+MFSideMenuAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MFSideMenuAdditions.h"; sourceTree = "<group>"; };
 		A678FD501C0366AF00F24105 /* UIViewController+MFSideMenuAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MFSideMenuAdditions.m"; sourceTree = "<group>"; };
+		A68AE7BE1C626470002E862D /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		A68AE7BF1C626470002E862D /* OpenSans-CondBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-CondBold.ttf"; sourceTree = "<group>"; };
+		A68AE7C01C626470002E862D /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		A6C5F0F51BF4E9C50093AD65 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A6C5F0F61BF4E9C50093AD65 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		A6C5F0F81BF4E9C50093AD65 /* DCAppFacade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCAppFacade.h; sourceTree = "<group>"; };
@@ -505,6 +511,16 @@
 				A678FD501C0366AF00F24105 /* UIViewController+MFSideMenuAdditions.m */,
 			);
 			path = Sidebar;
+			sourceTree = "<group>";
+		};
+		A68AE7BD1C626470002E862D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				A68AE7BE1C626470002E862D /* OpenSans-Bold.ttf */,
+				A68AE7BF1C626470002E862D /* OpenSans-CondBold.ttf */,
+				A68AE7C01C626470002E862D /* OpenSans-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		A6C5F0F21BF4E9C50093AD65 /* DrupalCon */ = {
@@ -1172,6 +1188,7 @@
 		A6C5F2101BF4E9C60093AD65 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A68AE7BD1C626470002E862D /* Fonts */,
 				A6C5F2111BF4E9C60093AD65 /* DC-Images.xcassets */,
 				A6C5F2121BF4E9C60093AD65 /* DC-Theme.bundle */,
 				A6C5F2161BF4E9C60093AD65 /* Storyboards */,
@@ -1349,12 +1366,15 @@
 				A6C5F3471BF4E9C60093AD65 /* event_detail_style.css in Resources */,
 				A6C5F3411BF4E9C60093AD65 /* Main.storyboard in Resources */,
 				A690C2AE1BFDDD2400DC5EB8 /* DC-Images.xcassets in Resources */,
+				A68AE7C21C626470002E862D /* OpenSans-CondBold.ttf in Resources */,
 				A6C5F3431BF4E9C60093AD65 /* Speakers.storyboard in Resources */,
 				A6C5F3571BF4E9C60093AD65 /* LICENSE in Resources */,
 				A6C5F3491BF4E9C60093AD65 /* style.css in Resources */,
 				A6C5F33D1BF4E9C60093AD65 /* Events.storyboard in Resources */,
 				A6C5F34B1BF4E9C60093AD65 /* DrupalCon-Info.plist in Resources */,
+				A68AE7C31C626470002E862D /* OpenSans-Regular.ttf in Resources */,
 				A6C5F3211BF4E9C60093AD65 /* DCEventCell.xib in Resources */,
+				A68AE7C11C626470002E862D /* OpenSans-Bold.ttf in Resources */,
 				A6D12F0E1BF4F04F00B85FD1 /* DC-Theme.bundle in Resources */,
 				A6C5F3451BF4E9C60093AD65 /* about_img.png in Resources */,
 			);

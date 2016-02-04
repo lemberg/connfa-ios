@@ -70,4 +70,10 @@
   [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
+- (void)updateLabel:(UILabel *)label withFontName:(NSString *)fontName {
+  CGFloat fontHeight = label.font.pointSize;
+  label.font = [DCAppConfiguration fontWithName:fontName andSize:fontHeight];
+}
+
+
 @end

@@ -174,6 +174,7 @@ static NSInteger eventCellImageHeight = 16;
   self.delegate = aDelegate;
 }
 
+
 - (BOOL)isEnabled:(DCEvent*)event {
   BOOL disabledByType =
       ((event.type.typeID.integerValue == DC_EVENT_COFEE_BREAK) ||

@@ -220,13 +220,22 @@
   cell.leftImageView.image = [UIImage
       imageNamedFromBundle:itemDict[isActiveCell ? kMenuItemSelectedIcon
                                                  : kMenuItemIcon]];
-
-  UIFontDescriptor* fontDescriptor = [cell.captionLabel.font.fontDescriptor
-      fontDescriptorWithSymbolicTraits:isActiveCell ? UIFontDescriptorTraitBold
-                                                    : 0];
-  cell.captionLabel.font = [UIFont fontWithDescriptor:fontDescriptor size:0];
+  if (isActiveCell) {
+    [self updateLabel:cell.captionLabel withFontName:kFontOpenSansBold];
+  } else {
+    [self updateLabel:cell.captionLabel withFontName:kFontOpenSansRegular];
+  }
+//  UIFontDescriptor* fontDescriptor = [cell.captionLabel.font.fontDescriptor
+//      fontDescriptorWithSymbolicTraits:isActiveCell ? UIFontDescriptorTraitBold
+//                                                    : 0];
+//  cell.captionLabel.font = [UIFont fontWithDescriptor:fontDescriptor size:0];
 
   return cell;
+}
+
+- (void)updateLabel:(UILabel *)label withFontName:(NSString *)fontName {
+  CGFloat fontHeight = label.font.pointSize;
+  label.font = [DCAppConfiguration fontWithName:fontName andSize:fontHeight];
 }
 
 - (void)tableView:(UITableView*)tableView
@@ -242,21 +251,18 @@
                                         objectAtIndex:self.activeCellPath
                                                           .row][kMenuItemIcon]];
 
-  UIFontDescriptor* regularFontDescriptor =
-      [lastSelected.captionLabel.font.fontDescriptor
-          fontDescriptorWithSymbolicTraits:0];
-  lastSelected.captionLabel.font =
-      [UIFont fontWithDescriptor:regularFontDescriptor size:0];
+
+//  lastSelected.captionLabel.font =
+//      [UIFont fontWithDescriptor:regularFontDescriptor size:0];
+  [self updateLabel:lastSelected.captionLabel withFontName:kFontOpenSansRegular];
 
   newSelected.leftImageView.image = [UIImage
       imageNamedFromBundle:[self.arrayOfCaptions objectAtIndex:indexPath.row]
                                [kMenuItemSelectedIcon]];
 
-  UIFontDescriptor* boldFontDescriptor =
-      [newSelected.captionLabel.font.fontDescriptor
-          fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitBold];
-  newSelected.captionLabel.font =
-      [UIFont fontWithDescriptor:boldFontDescriptor size:0];
+//  newSelected.captionLabel.font =
+//      [UIFont fontWithDescriptor:boldFontDescriptor size:0];
+  [self updateLabel:newSelected.captionLabel withFontName:kFontOpenSansBold];
 
   self.activeCellPath = indexPath;
 

@@ -63,6 +63,7 @@
 
         });
       }];
+  [self updateLabel:self.dateLabel withFontName:kFontOpenSansRegular];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
