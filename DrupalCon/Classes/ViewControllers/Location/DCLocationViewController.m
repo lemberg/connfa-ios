@@ -39,7 +39,7 @@
                                              inMainQueue:YES] lastObject];
   [self updateLocation];
   self.titlesContainerView.backgroundColor =
-      [DCAppConfiguration speakerDetailBarColor];
+      [DCAppConfiguration navigationBarColor];
 
 }
 
@@ -49,7 +49,7 @@
   [super arrangeNavigationBar];
 
   self.navigationController.navigationBar.barTintColor =
-      [DCAppConfiguration speakerDetailBarColor];
+      [DCAppConfiguration navigationBarColor];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

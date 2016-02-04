@@ -44,7 +44,7 @@
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
-  return UIStatusBarStyleDefault;
+  return UIStatusBarStyleLightContent;
 }
 
 - (UIImageView*)findHairlineImageViewUnder:(UIView*)view {

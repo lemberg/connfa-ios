@@ -128,9 +128,7 @@
   aController.navigationItem.title = title;
 
   // add left Menu button to all Controllers
-  UIImage* image = (menuItem == DCMENU_INFO_ITEM)
-                       ? [UIImage imageNamedFromBundle:@"menu-icon-dark"]
-                       : [UIImage imageNamedFromBundle:@"menu-icon"];
+  UIImage* image = [UIImage imageNamedFromBundle:@"menu-icon"];
   UIButton* button = [[UIButton alloc]
       initWithFrame:CGRectMake(0, 0, image.size.width, image.size.height)];
   [button setBackgroundImage:image forState:UIControlStateNormal];

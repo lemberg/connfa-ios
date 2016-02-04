@@ -3,20 +3,20 @@
 <plist version="1.0">
 <dict>
 	<key>EventDate</key>
-	<string>Sep 21-25</string>
+	<string>Mar 04-06</string>
 	<key>EventPlace</key>
-	<string>Barсelona, DrupalCon 2015</string>
+	<string>London, Drupal Camp 2016</string>
 	<key>NavigationBarColour</key>
-	<string>#007EC8</string>
+	<string>#FF4B39</string>
 	<key>EventDetailHeaderColour</key>
-	<string>#D2462A</string>
+	<string>#FF4B39</string>
 	<key>EventDetailNavBarTextColour</key>
 	<string>#ffffff</string>
 	<key>FavoriteEventColour</key>
-	<string>#D2462A</string>
+	<string>#FF4B39</string>
 	<key>IsFilterEnable</key>
 	<true/>
 	<key>SpeakerDetailBarColour</key>
-	<string>#D2462A</string>
+	<string>#00ACE1</string>
 </dict>
 </plist>
