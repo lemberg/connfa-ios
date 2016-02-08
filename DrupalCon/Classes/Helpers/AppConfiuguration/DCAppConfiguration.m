@@ -4,7 +4,7 @@
 #import "DCSideMenuType.h"
 #import "UIColor+Helper.h"
 
-const NSString*  kFontOpenSansBold = @"Open Sans Bold";
+const NSString*  kFontOpenSansBold = @"OpenSans-Bold";
 const NSString*  kFontOpenSansCondBold = @"Open Sans Condensed";
 const NSString*  kFontOpenSansRegular = @"Open Sans";
 

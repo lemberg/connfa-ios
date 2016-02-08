@@ -64,7 +64,7 @@
   NSArray* parts;
 
   if (self.location.address)
-    parts = [self.location.address componentsSeparatedByString:@", "];
+    parts = [self.location.address componentsSeparatedByString:@","];
 
   if (parts.count) {
     NSString* streetAndHouse = parts[0];
@@ -75,17 +75,17 @@
       [cityAndProvince appendString:parts[1]];
 
       for (int i = 2; i < parts.count - 1; i++)
-        [cityAndProvince appendFormat:@", %@", parts[i]];
+        [cityAndProvince appendFormat:@" %@", parts[i]];
     }
 
     self.addressLabel.text = self.location.name;
     self.streetAndNumberLabel.text =
         streetAndHouse.length
-            ? [NSString stringWithFormat:@"%@,", streetAndHouse]
+            ? [NSString stringWithFormat:@"%@", streetAndHouse]
             : nil;
     self.cityAndProvinceLabel.text =
         cityAndProvince.length
-            ? [NSString stringWithFormat:@"%@,", cityAndProvince]
+            ? [NSString stringWithFormat:@"%@", cityAndProvince]
             : nil;
     self.stateLabel.text = state;
   } else {

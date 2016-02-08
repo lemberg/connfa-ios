@@ -9,9 +9,9 @@
         <mutableArray key="OpenSans-CondBold.ttf">
             <string>OpenSans-CondensedBold</string>
             <string>OpenSans-CondensedBold</string>
-            <string>OpenSans-CondensedBold</string>
         </mutableArray>
         <mutableArray key="OpenSans-Regular.ttf">
+            <string>OpenSans</string>
             <string>OpenSans</string>
             <string>OpenSans</string>
             <string>OpenSans</string>
@@ -289,7 +289,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="19" id="lbo-50-P1s"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="OpenSans-CondensedBold" family="Open Sans Condensed" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -350,14 +350,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="RdW-sU-V58">
-                                <rect key="frame" x="0.0" y="111" width="320" height="457"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="RdW-sU-V58">
+                                <rect key="frame" x="0.0" y="114" width="320" height="454"/>
                                 <connections>
                                     <outlet property="delegate" destination="HyN-5J-w0d" id="WZq-FL-8h0"/>
                                 </connections>
                             </mapView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tRu-8b-hDP" userLabel="Labels placeholder">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="111"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tRu-8b-hDP" userLabel="Labels placeholder">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="114"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="RoyalPark Metrotel" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="hQz-sT-h3H" userLabel="Name">
                                         <rect key="frame" x="20" y="0.0" width="280" height="26"/>
@@ -389,16 +389,16 @@
                                     <constraint firstAttribute="trailing" secondItem="Nil-uv-QF5" secondAttribute="trailing" constant="20" id="1kk-a3-OOe"/>
                                     <constraint firstAttribute="trailing" secondItem="hQz-sT-h3H" secondAttribute="trailing" constant="20" id="5bY-ZA-3Yt"/>
                                     <constraint firstItem="2yf-nA-7Ch" firstAttribute="leading" secondItem="tRu-8b-hDP" secondAttribute="leading" constant="20" id="Blx-rX-DcY"/>
-                                    <constraint firstItem="Tvz-q1-gvg" firstAttribute="top" secondItem="2yf-nA-7Ch" secondAttribute="bottom" constant="2" id="JuU-rJ-Ibq"/>
+                                    <constraint firstItem="Tvz-q1-gvg" firstAttribute="top" secondItem="2yf-nA-7Ch" secondAttribute="bottom" constant="-2" id="JuU-rJ-Ibq"/>
                                     <constraint firstItem="Nil-uv-QF5" firstAttribute="leading" secondItem="tRu-8b-hDP" secondAttribute="leading" constant="20" id="Ky7-Ob-xLg"/>
                                     <constraint firstItem="Tvz-q1-gvg" firstAttribute="leading" secondItem="tRu-8b-hDP" secondAttribute="leading" constant="20" id="P0u-md-pAG"/>
                                     <constraint firstAttribute="trailing" secondItem="2yf-nA-7Ch" secondAttribute="trailing" constant="20" id="Rpz-a2-5XD"/>
-                                    <constraint firstItem="Nil-uv-QF5" firstAttribute="top" secondItem="Tvz-q1-gvg" secondAttribute="bottom" constant="2" id="Vqh-WD-Rrg"/>
-                                    <constraint firstAttribute="bottom" secondItem="Nil-uv-QF5" secondAttribute="bottom" constant="10" id="bAp-7p-duV"/>
+                                    <constraint firstItem="Nil-uv-QF5" firstAttribute="top" secondItem="Tvz-q1-gvg" secondAttribute="bottom" constant="-2" id="Vqh-WD-Rrg"/>
+                                    <constraint firstAttribute="bottom" secondItem="Nil-uv-QF5" secondAttribute="bottom" constant="15" id="bAp-7p-duV"/>
                                     <constraint firstItem="hQz-sT-h3H" firstAttribute="leading" secondItem="tRu-8b-hDP" secondAttribute="leading" constant="20" id="cHg-Sy-0Ft"/>
                                     <constraint firstAttribute="trailing" secondItem="Tvz-q1-gvg" secondAttribute="trailing" constant="20" id="gul-SB-4d2"/>
                                     <constraint firstItem="hQz-sT-h3H" firstAttribute="top" secondItem="tRu-8b-hDP" secondAttribute="top" id="nws-zE-h5B"/>
-                                    <constraint firstItem="2yf-nA-7Ch" firstAttribute="top" secondItem="hQz-sT-h3H" secondAttribute="bottom" constant="8" id="x06-Mo-6oH"/>
+                                    <constraint firstItem="2yf-nA-7Ch" firstAttribute="top" secondItem="hQz-sT-h3H" secondAttribute="bottom" constant="2" id="x06-Mo-6oH"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -451,6 +451,6 @@
         <image name="login_bg" width="320" height="480"/>
         <image name="login_btn" width="189" height="39"/>
         <image name="login_lock" width="112" height="147"/>
-        <image name="menu_bg" width="227" height="480"/>
+        <image name="menu_bg" width="316" height="667"/>
     </resources>
 </document>
