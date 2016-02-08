@@ -1,6 +1,7 @@
 
 #import "DCAppSettings+DC.h"
 #import "NSManagedObject+DC.h"
+#import "NSUserDefaults+DC.h"
 
 @implementation DCAppSettings (DC)
 static NSString* kDCAppSettingsTimeZoneValue = @"timezone";
@@ -24,8 +25,7 @@ static NSString* kDCAppSettings = @"settings";
 
   if ([[dictionary allKeys] containsObject:kDCAppSettings]) {
     NSString *eventTimeZoneName = dictionary[kDCAppSettings][kDCAppSettingsTimeZoneValue];
-    NSTimeZone *eventTimeZone = [NSTimeZone timeZoneWithName:eventTimeZoneName];
-    appSettings.eventTimeZone = @(eventTimeZone.secondsFromGMT);
+    appSettings.timeZoneName = eventTimeZoneName;
   }
 }
 @end

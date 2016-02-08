@@ -9,6 +9,9 @@ extern NSString* kBundleVersionMinor;
 
 @interface NSUserDefaults (DC)
 
++ (void)disableTimeZoneNotification;
++ (BOOL)isEnabledTimeZoneAlert;
+
 #pragma mark - last modified timestamp
 #warning timestamp is substitute by last-modify parameter
 + (void)updateTimestampString:(NSString*)timestamp ForClass:(Class)aClass;

@@ -6,6 +6,7 @@ const NSString* kLastModify = @"kLastModify";
 const NSString* kAboutInfo = @"aboutHTML";
 const NSString* kBundleVersionMajor = @"kBundleVersionMajor";
 const NSString* kBundleVersionMinor = @"kBundleVersionMinor";
+const NSString* kNotShowTimeZoneEventAlert = @"kNotShowTimeZoneEventAlert";
 
 @implementation NSUserDefaults (DC)
 
@@ -34,6 +35,13 @@ const NSString* kBundleVersionMinor = @"kBundleVersionMinor";
   return [NSUserDefaults DC_savedValueForKey:(NSString*)kLastModify];
 }
 
++ (void)disableTimeZoneNotification {
+  [self DC_saveObject:@(YES) forKey:(NSString *)kNotShowTimeZoneEventAlert];
+}
+
++ (BOOL)isEnabledTimeZoneAlert {
+  return ![[self DC_savedValueForKey:(NSString *)kNotShowTimeZoneEventAlert] boolValue];
+}
 #pragma mark - about
 
 + (void)saveAbout:(NSString*)aboutString {
