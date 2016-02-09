@@ -156,7 +156,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5DC8C411198656DA00BF5816 /* DrupalCon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrupalCon.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DC8C411198656DA00BF5816 /* DrupalCamp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrupalCamp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC8C414198656DA00BF5816 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5DC8C416198656DA00BF5816 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		5DC8C418198656DA00BF5816 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -474,7 +474,7 @@
 		5DC8C412198656DA00BF5816 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5DC8C411198656DA00BF5816 /* DrupalCon.app */,
+				5DC8C411198656DA00BF5816 /* DrupalCamp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1352,7 +1352,7 @@
 			);
 			name = DrupalCon;
 			productName = DrupalCon;
-			productReference = 5DC8C411198656DA00BF5816 /* DrupalCon.app */;
+			productReference = 5DC8C411198656DA00BF5816 /* DrupalCamp.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1650,7 +1650,7 @@
 					"$(PROJECT_DIR)/DrupalCon/Vendor/GoogleAnalytics",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.lemberg.drupalcamp.qa;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = DrupalCamp;
 				PROVISIONING_PROFILE = "f55145e2-0b5e-4175-92a7-ddd2376e97f9";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -1681,7 +1681,7 @@
 					"$(PROJECT_DIR)/DrupalCon/Vendor/GoogleAnalytics",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.lemberg.drupalcamp.qa;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = DrupalCamp;
 				PROVISIONING_PROFILE = "996fa4f3-b2bd-4c3e-9a88-091068212d4c";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
