@@ -153,10 +153,11 @@
 		A6C5F3751BF4E9C60093AD65 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2541BF4E9C60093AD65 /* UIImageView+WebCache.m */; };
 		A6C5F3771BF4E9C60093AD65 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2561BF4E9C60093AD65 /* UIView+WebCacheOperation.m */; };
 		A6D12F0E1BF4F04F00B85FD1 /* DC-Theme.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2121BF4E9C60093AD65 /* DC-Theme.bundle */; };
+		A6F456401C6B490900EF3DCD /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6F4563F1C6B490900EF3DCD /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5DC8C411198656DA00BF5816 /* DrupalCamp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrupalCamp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DC8C411198656DA00BF5816 /* DrupalCamp London.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DrupalCamp London.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC8C414198656DA00BF5816 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5DC8C416198656DA00BF5816 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		5DC8C418198656DA00BF5816 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -437,6 +438,7 @@
 		A6C5F2541BF4E9C60093AD65 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		A6C5F2551BF4E9C60093AD65 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		A6C5F2561BF4E9C60093AD65 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		A6F4563F1C6B490900EF3DCD /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -474,7 +476,7 @@
 		5DC8C412198656DA00BF5816 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5DC8C411198656DA00BF5816 /* DrupalCamp.app */,
+				5DC8C411198656DA00BF5816 /* DrupalCamp London.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1230,6 +1232,7 @@
 				A6C5F2181BF4E9C60093AD65 /* Info.storyboard */,
 				A6C5F2191BF4E9C60093AD65 /* Main.storyboard */,
 				A6C5F21A1BF4E9C60093AD65 /* Speakers.storyboard */,
+				A6F4563F1C6B490900EF3DCD /* Launch Screen.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1352,7 +1355,7 @@
 			);
 			name = DrupalCon;
 			productName = DrupalCon;
-			productReference = 5DC8C411198656DA00BF5816 /* DrupalCamp.app */;
+			productReference = 5DC8C411198656DA00BF5816 /* DrupalCamp London.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1398,6 +1401,7 @@
 				A6C5F3491BF4E9C60093AD65 /* style.css in Resources */,
 				A6C5F33D1BF4E9C60093AD65 /* Events.storyboard in Resources */,
 				A6C5F34B1BF4E9C60093AD65 /* DrupalCon-Info.plist in Resources */,
+				A6F456401C6B490900EF3DCD /* Launch Screen.storyboard in Resources */,
 				A68AE7C31C626470002E862D /* OpenSans-Regular.ttf in Resources */,
 				A6C5F3211BF4E9C60093AD65 /* DCEventCell.xib in Resources */,
 				A68AE7C11C626470002E862D /* OpenSans-Bold.ttf in Resources */,
@@ -1650,8 +1654,8 @@
 					"$(PROJECT_DIR)/DrupalCon/Vendor/GoogleAnalytics",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.lemberg.drupalcamp.qa;
-				PRODUCT_NAME = DrupalCamp;
-				PROVISIONING_PROFILE = "f55145e2-0b5e-4175-92a7-ddd2376e97f9";
+				PRODUCT_NAME = "DrupalCamp London";
+				PROVISIONING_PROFILE = "996fa4f3-b2bd-4c3e-9a88-091068212d4c";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1681,7 +1685,7 @@
 					"$(PROJECT_DIR)/DrupalCon/Vendor/GoogleAnalytics",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = uk.co.lemberg.drupalcamp.qa;
-				PRODUCT_NAME = DrupalCamp;
+				PRODUCT_NAME = "DrupalCamp London";
 				PROVISIONING_PROFILE = "996fa4f3-b2bd-4c3e-9a88-091068212d4c";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
