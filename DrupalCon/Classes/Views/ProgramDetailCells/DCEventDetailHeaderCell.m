@@ -22,10 +22,12 @@
       event.date
           ? [DCDateHelper convertDate:event.date toApplicationFormat:@"EEE"]
           : @"";
+  NSString *timeFormat = ([NSDate is24hourFormat])? @"HH:mm" : @"h:mm aaa";
+
   NSString* startTime = [DCDateHelper convertDate:event.startDate
-                              toApplicationFormat:@"h:mm aaa"];
+                              toApplicationFormat:timeFormat];
   NSString* endTime =
-      [DCDateHelper convertDate:event.endDate toApplicationFormat:@"h:mm aaa"];
+      [DCDateHelper convertDate:event.endDate toApplicationFormat:timeFormat];
   date = [NSString stringWithFormat:@"%@, %@ - %@", date,
                                     startTime, endTime];
 
