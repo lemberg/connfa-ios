@@ -1635,13 +1635,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Lyubomyr Dutko (FN2T3UCV4E)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Lyubomyr Dutko (FN2T3UCV4E)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Lemberg Solutions Limited (J7LBYY3B34)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Lemberg Solutions Limited (J7LBYY3B34)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DrupalCon",
-					"$(PROJECT_DIR)/DrupalCon/CrashLytics",
 					"$(PROJECT_DIR)/DrupalCon/Vendor/Crashlytics",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
@@ -1653,9 +1652,9 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/DrupalCon/Vendor/GoogleAnalytics",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.lemberg.drupalcamp.qa;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.lemberg.drupalcamp;
 				PRODUCT_NAME = "DrupalCamp London";
-				PROVISIONING_PROFILE = "996fa4f3-b2bd-4c3e-9a88-091068212d4c";
+				PROVISIONING_PROFILE = "babacf20-53d5-4938-ba3e-203a90dab6d5";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1666,13 +1665,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Lyubomyr Dutko (FN2T3UCV4E)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Lyubomyr Dutko (FN2T3UCV4E)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Lemberg Solutions Limited (J7LBYY3B34)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Lemberg Solutions Limited (J7LBYY3B34)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DrupalCon",
-					"$(PROJECT_DIR)/DrupalCon/CrashLytics",
 					"$(PROJECT_DIR)/DrupalCon/Vendor/Crashlytics",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
@@ -1684,9 +1682,9 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/DrupalCon/Vendor/GoogleAnalytics",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = uk.co.lemberg.drupalcamp.qa;
+				PRODUCT_BUNDLE_IDENTIFIER = uk.co.lemberg.drupalcamp;
 				PRODUCT_NAME = "DrupalCamp London";
-				PROVISIONING_PROFILE = "996fa4f3-b2bd-4c3e-9a88-091068212d4c";
+				PROVISIONING_PROFILE = "babacf20-53d5-4938-ba3e-203a90dab6d5";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
