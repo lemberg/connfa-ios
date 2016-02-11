@@ -1,6 +1,6 @@
  body {
 
-                  font-family: "OpenSans-Regular";
+                  font-family: "Open Sans";
                   font-size: 15px;
                   margin-top:0px;
                   margin-left:0px;
@@ -13,7 +13,7 @@
               }
               
               p{
-               font-family: "OpenSans-Regular";
+               font-family: "Open Sans";
                font-size: 15px;
                color: #333333;
                line-height: 20px;
@@ -23,7 +23,7 @@
                 margin: 0px 0;
               }
               ul li, ol li{
-                                 font-family: "OpenSans-Regular";
+                                 font-family: "Open Sans";
                font-size: 15px;
                color: #333333;
                line-height: 20px;
@@ -31,7 +31,7 @@
 
 
               strong{
-               font-family: "OpenSans-Regular";
+               font-family: "Open Sans";
                font-size: 15px;
                color: #333333;
                line-height: 22px;
@@ -43,14 +43,14 @@
                   margin: 15px auto;
               }
               a{
-               font-family: "OpenSans-Regular";
+               font-family: "Open Sans";
                font-size: 15px;
                line-height: 22px;
                color: #00ACE1;
                text-decoration: none;
               }
               h1{
-               font-family: "OpenSans-Regular";
+               font-family: "Open Sans";
                color: #142048;
                 font-weight: normal;
                 font-size: 15px;
@@ -59,7 +59,7 @@
                 margin-bottom: 26px;
               }
             h2 {
-                font-family: "OpenSans-Regular";
+                font-family: "Open Sans";
                 font-size: 15px;
                 font-weight: bold;
                 color: #142048;
@@ -68,7 +68,7 @@
 
             }
             h3 {
-               font-family: "OpenSans-Regular";
+               font-family: "Open Sans";
                font-size: 15px;
                color: #142048;
                margin-top: 20px;
