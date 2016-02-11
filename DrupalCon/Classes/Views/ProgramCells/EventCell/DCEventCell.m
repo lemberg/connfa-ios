@@ -76,11 +76,12 @@ static NSInteger eventCellImageHeight = 16;
 
   // Right side height calculating
   CGFloat eventTitleHeight = [self getHeightForLabel:self.eventTitleLabel];
+  NSInteger paddingHeight = 12;
   CGFloat rightSideHeight =
       self.eventTitleLabelTopPadding.constant + eventTitleHeight +
       self.eventTitleLabelBottomPadding.constant +
       self.trackViewHeight.constant + self.speakersViewHeight.constant +
-      self.placeViewHeight.constant + self.subtitleBottomPadding.constant;
+      self.placeViewHeight.constant + self.subtitleBottomPadding.constant + paddingHeight;
 
   return leftSideHeight > rightSideHeight ? leftSideHeight : rightSideHeight;
 }

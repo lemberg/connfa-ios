@@ -255,10 +255,9 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZdC-3x-qvi" userLabel="Button-web">
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZdC-3x-qvi" userLabel="Button-web">
                                                     <rect key="frame" x="15" y="10" width="90" height="31"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="90" id="pFQ-ig-q3o"/>
                                                         <constraint firstAttribute="height" constant="31" id="rvi-Vv-H8K"/>
                                                     </constraints>
                                                     <state key="normal" image="twitter">
@@ -268,10 +267,9 @@
                                                         <action selector="buttonTwitterDidClick:" destination="ON0-IG-lh7" eventType="touchUpInside" id="ZVd-mS-bjM"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KGA-xZ-frX" userLabel="Button-twitter">
+                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KGA-xZ-frX" userLabel="Button-twitter">
                                                     <rect key="frame" x="117" y="10" width="90" height="31"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="90" id="7DF-kQ-d6H"/>
                                                         <constraint firstAttribute="height" constant="31" id="zoP-LN-erA"/>
                                                     </constraints>
                                                     <state key="normal" image="website">
@@ -296,7 +294,6 @@
                                             <outlet property="twitterButton" destination="ZdC-3x-qvi" id="AMD-RR-1mp"/>
                                             <outlet property="twitterButtonBottomPadding" destination="cU1-Wa-skE" id="C0A-ze-1dJ"/>
                                             <outlet property="twitterButtonLeftPadding" destination="W1M-IH-okf" id="Vvy-BJ-BMh"/>
-                                            <outlet property="twitterButtonWidth" destination="pFQ-ig-q3o" id="eO5-en-VPU"/>
                                             <outlet property="webButton" destination="KGA-xZ-frX" id="Blb-sT-KqD"/>
                                         </connections>
                                     </tableViewCell>
@@ -460,7 +457,7 @@
         <image name="avatar_placeholder" width="40" height="40"/>
         <image name="ic_experience_advanced" width="12" height="12"/>
         <image name="speaker_detail_top" width="320" height="201"/>
-        <image name="twitter" width="90" height="31"/>
-        <image name="website" width="90" height="31"/>
+        <image name="twitter" width="80" height="27"/>
+        <image name="website" width="80" height="27"/>
     </resources>
 </document>
