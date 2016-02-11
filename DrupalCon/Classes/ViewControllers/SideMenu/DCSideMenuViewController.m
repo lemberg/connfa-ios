@@ -281,7 +281,7 @@
     heightForRowAtIndexPath:(NSIndexPath*)indexPath {
   if ([self isLastMenuItemAtIndexPath:indexPath])
     return [self heightForLastItem];
-  return (indexPath.row % 3 == 2) ? 65 : 50;
+  return (indexPath.row % 4 == 3) ? 65 : 50;
 }
 
 #define IS_OS_8_OR_LATER \
