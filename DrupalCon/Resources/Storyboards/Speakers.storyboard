@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="OpenSans-CondBold.ttf">
@@ -248,18 +249,15 @@
                                             <outlet property="photoImageView" destination="KIy-0H-cOi" id="6Uf-eY-MrR"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" verticalHuggingPriority="1" verticalCompressionResistancePriority="1" selectionStyle="none" indentationWidth="10" reuseIdentifier="SpeakerDetailButtonsCellId" rowHeight="46" id="rGT-pE-ZK3" customClass="DCSpeakerDetailButtonsCell">
-                                        <rect key="frame" x="0.0" y="242" width="320" height="46"/>
+                                    <tableViewCell contentMode="scaleToFill" verticalHuggingPriority="1" verticalCompressionResistancePriority="1" selectionStyle="none" indentationWidth="10" reuseIdentifier="SpeakerDetailButtonsCellId" rowHeight="55" id="rGT-pE-ZK3" customClass="DCSpeakerDetailButtonsCell">
+                                        <rect key="frame" x="0.0" y="242" width="320" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" verticalHuggingPriority="1" verticalCompressionResistancePriority="1" tableViewCell="rGT-pE-ZK3" id="AxO-fs-u9t">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZdC-3x-qvi" userLabel="Button-web">
-                                                    <rect key="frame" x="15" y="10" width="90" height="31"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="31" id="rvi-Vv-H8K"/>
-                                                    </constraints>
+                                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZdC-3x-qvi" userLabel="Button-web">
+                                                    <rect key="frame" x="15" y="14" width="80" height="27"/>
                                                     <state key="normal" image="twitter">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -267,11 +265,8 @@
                                                         <action selector="buttonTwitterDidClick:" destination="ON0-IG-lh7" eventType="touchUpInside" id="ZVd-mS-bjM"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KGA-xZ-frX" userLabel="Button-twitter">
-                                                    <rect key="frame" x="117" y="10" width="90" height="31"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="31" id="zoP-LN-erA"/>
-                                                    </constraints>
+                                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KGA-xZ-frX" userLabel="Button-twitter">
+                                                    <rect key="frame" x="107" y="14" width="80" height="27"/>
                                                     <state key="normal" image="website">
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
@@ -279,26 +274,41 @@
                                                         <action selector="buttonWebDidClick:" destination="ON0-IG-lh7" eventType="touchUpInside" id="dZs-DU-LOo"/>
                                                     </connections>
                                                 </button>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UoO-zy-rn2" userLabel="Separator">
+                                                    <rect key="frame" x="15" y="54" width="305" height="1"/>
+                                                    <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="1" id="CUB-Pt-mZS"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="UoO-zy-rn2" secondAttribute="trailing" id="4ee-mc-CQF"/>
+                                                <constraint firstItem="ZdC-3x-qvi" firstAttribute="centerY" secondItem="AxO-fs-u9t" secondAttribute="centerY" id="6BX-B0-jV3"/>
+                                                <constraint firstAttribute="bottom" secondItem="UoO-zy-rn2" secondAttribute="bottom" id="FPJ-bJ-DGp"/>
                                                 <constraint firstItem="KGA-xZ-frX" firstAttribute="leading" secondItem="ZdC-3x-qvi" secondAttribute="trailing" constant="12" id="MKh-eQ-BrN"/>
                                                 <constraint firstItem="ZdC-3x-qvi" firstAttribute="leading" secondItem="AxO-fs-u9t" secondAttribute="leading" constant="15" id="W1M-IH-okf"/>
                                                 <constraint firstItem="ZdC-3x-qvi" firstAttribute="centerY" secondItem="KGA-xZ-frX" secondAttribute="centerY" id="YGW-pr-2OW"/>
-                                                <constraint firstAttribute="bottom" secondItem="ZdC-3x-qvi" secondAttribute="bottom" priority="100" constant="5" id="cU1-Wa-skE"/>
+                                                <constraint firstItem="UoO-zy-rn2" firstAttribute="leading" secondItem="AxO-fs-u9t" secondAttribute="leadingMargin" constant="7" id="nog-2G-Bkw"/>
                                                 <constraint firstItem="ZdC-3x-qvi" firstAttribute="top" secondItem="AxO-fs-u9t" secondAttribute="top" constant="10" id="ydG-Vp-gZq"/>
                                             </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="ydG-Vp-gZq"/>
+                                                </mask>
+                                            </variation>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <connections>
+                                            <outlet property="separatorView" destination="UoO-zy-rn2" id="vnc-mk-ttf"/>
                                             <outlet property="twitterButton" destination="ZdC-3x-qvi" id="AMD-RR-1mp"/>
-                                            <outlet property="twitterButtonBottomPadding" destination="cU1-Wa-skE" id="C0A-ze-1dJ"/>
-                                            <outlet property="twitterButtonLeftPadding" destination="W1M-IH-okf" id="Vvy-BJ-BMh"/>
                                             <outlet property="webButton" destination="KGA-xZ-frX" id="Blb-sT-KqD"/>
+                                            <outlet property="webButtonLeftPadding" destination="MKh-eQ-BrN" id="he1-bL-nh0"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SpeakerDetailDescriptionCellId" rowHeight="120" id="pju-vq-Mh9" customClass="DCDescriptionTextCell">
-                                        <rect key="frame" x="0.0" y="288" width="320" height="120"/>
+                                        <rect key="frame" x="0.0" y="297" width="320" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="pju-vq-Mh9" id="4DY-hY-KVV">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
@@ -321,7 +331,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SpeakerEventCellId" rowHeight="120" id="KBy-9G-krj" customClass="DCSpeakerEventCell">
-                                        <rect key="frame" x="0.0" y="408" width="320" height="120"/>
+                                        <rect key="frame" x="0.0" y="417" width="320" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" verticalHuggingPriority="1" verticalCompressionResistancePriority="100" tableViewCell="KBy-9G-krj" id="hNX-gc-dal">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
@@ -329,7 +339,7 @@
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Won-iy-D3j" userLabel="Separator">
                                                     <rect key="frame" x="15" y="0.0" width="305" height="1"/>
-                                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="1" id="0LX-Ff-7Ic"/>
                                                     </constraints>

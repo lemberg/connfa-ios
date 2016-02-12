@@ -8,10 +8,11 @@
 @property(nonatomic, weak) IBOutlet UIButton* twitterButton;
 
 @property(nonatomic, weak)
-    IBOutlet NSLayoutConstraint* twitterButtonLeftPadding;
+    IBOutlet NSLayoutConstraint* webButtonLeftPadding;
 @property(nonatomic, weak)
     IBOutlet NSLayoutConstraint* twitterButtonBottomPadding;
-@property(nonatomic, weak) IBOutlet NSLayoutConstraint* twitterButtonWidth;
+
+@property (weak, nonatomic) IBOutlet UIView *separatorView;
 
 - (void)initData:(DCSpeaker*)speaker;
 
