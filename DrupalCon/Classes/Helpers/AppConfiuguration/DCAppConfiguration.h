@@ -1,7 +1,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define SERVER_URL @"http://london2016.drupalcon.uat.link"
+#define SERVER_URL @"http://neworleans2016.drupalcon.uat.link"
 #define BUNDLE_NAME @"DC-Theme"
 
 #define BASE_URL [NSString stringWithFormat:@"%@/api/v2/", SERVER_URL]
