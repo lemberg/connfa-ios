@@ -55,6 +55,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>OpenSans-CondBold.ttf</string>
+		<string>Smythe-Regular.ttf</string>
 		<string>OpenSans-Regular.ttf</string>
 		<string>OpenSans-Bold.ttf</string>
 	</array>

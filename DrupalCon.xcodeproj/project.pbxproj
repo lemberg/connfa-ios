@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		283A1F351CB4E5B5007F6BCB /* Smythe-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 283A1F341CB4E5B5007F6BCB /* Smythe-Regular.ttf */; };
 		5DC8C415198656DA00BF5816 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C414198656DA00BF5816 /* Foundation.framework */; };
 		5DC8C417198656DA00BF5816 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C416198656DA00BF5816 /* CoreGraphics.framework */; };
 		5DC8C419198656DA00BF5816 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C418198656DA00BF5816 /* UIKit.framework */; };
@@ -157,6 +158,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		283A1F341CB4E5B5007F6BCB /* Smythe-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Smythe-Regular.ttf"; sourceTree = "<group>"; };
 		5DC8C411198656DA00BF5816 /* DrupalCamp London.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DrupalCamp London.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC8C414198656DA00BF5816 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5DC8C416198656DA00BF5816 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -542,6 +544,7 @@
 		A68AE7BD1C626470002E862D /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				283A1F341CB4E5B5007F6BCB /* Smythe-Regular.ttf */,
 				A68AE7BE1C626470002E862D /* OpenSans-Bold.ttf */,
 				A68AE7BF1C626470002E862D /* OpenSans-CondBold.ttf */,
 				A68AE7C01C626470002E862D /* OpenSans-Regular.ttf */,
@@ -1395,6 +1398,7 @@
 				A6C5F3471BF4E9C60093AD65 /* event_detail_style.css in Resources */,
 				A6C5F3411BF4E9C60093AD65 /* Main.storyboard in Resources */,
 				A690C2AE1BFDDD2400DC5EB8 /* DC-Images.xcassets in Resources */,
+				283A1F351CB4E5B5007F6BCB /* Smythe-Regular.ttf in Resources */,
 				A68AE7C21C626470002E862D /* OpenSans-CondBold.ttf in Resources */,
 				A6C5F3431BF4E9C60093AD65 /* Speakers.storyboard in Resources */,
 				A6C5F3571BF4E9C60093AD65 /* LICENSE in Resources */,
