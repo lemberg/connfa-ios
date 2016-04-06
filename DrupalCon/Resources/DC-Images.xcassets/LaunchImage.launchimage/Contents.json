@@ -29,6 +29,7 @@
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
+      "filename" : "splash4s-3.png",
       "extent" : "full-screen",
       "minimum-system-version" : "7.0",
       "scale" : "2x"

@@ -217,7 +217,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu_bg" translatesAutoresizingMaskIntoConstraints="NO" id="4g4-X3-bWs" userLabel="background">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu_bg" translatesAutoresizingMaskIntoConstraints="NO" id="4g4-X3-bWs" userLabel="background">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="rA1-f8-M65">
@@ -453,6 +453,6 @@
         <image name="login_bg" width="320" height="480"/>
         <image name="login_btn" width="189" height="39"/>
         <image name="login_lock" width="112" height="147"/>
-        <image name="menu_bg" width="455" height="960"/>
+        <image name="menu_bg" width="640" height="960"/>
     </resources>
 </document>
