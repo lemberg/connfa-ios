@@ -51,7 +51,7 @@
               }
               h1{
                font-family: "Open Sans";
-               color: #142048;
+               color: #333333;
                 font-weight: normal;
                 font-size: 15px;
                 line-height: 20px;
@@ -62,7 +62,7 @@
                 font-family: "Open Sans";
                 font-size: 15px;
                 font-weight: bold;
-                color: #142048;
+                color: #333333;
                 margin-top: 20px;
                 margin-bottom: 20px;
 
@@ -70,7 +70,7 @@
             h3 {
                font-family: "Open Sans";
                font-size: 15px;
-               color: #142048;
+               color: #333333;
                margin-top: 20px;
                margin-bottom: 20px;
                line-height: 20px;

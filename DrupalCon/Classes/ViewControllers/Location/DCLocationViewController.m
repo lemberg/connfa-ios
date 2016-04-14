@@ -81,13 +81,13 @@
     self.addressLabel.text = self.location.name;
     self.streetAndNumberLabel.text =
         streetAndHouse.length
-            ? [NSString stringWithFormat:@"%@", streetAndHouse]
+            ? [NSString stringWithFormat:@"%@,", streetAndHouse]
             : nil;
-    self.cityAndProvinceLabel.text =
-        cityAndProvince.length
-            ? [NSString stringWithFormat:@"%@", cityAndProvince]
-            : nil;
-    self.stateLabel.text = state;
+    self.cityAndProvinceLabel.text = cityAndProvince.length ? [NSString stringWithFormat:@"%@,", cityAndProvince] : nil;
+    NSString *cityAndState = [NSString stringWithFormat:@"%@ %@", self.cityAndProvinceLabel.text, state];
+    self.cityAndProvinceLabel.text = [cityAndState stringByTrimmingCharactersInSet:
+                                        [NSCharacterSet whitespaceCharacterSet]];;
+    self.stateLabel.text = @"";
   } else {
     self.addressLabel.text = @"Location is not available";
     self.streetAndNumberLabel.text = @"";

@@ -159,7 +159,7 @@
 
 /* Begin PBXFileReference section */
 		283A1F341CB4E5B5007F6BCB /* Smythe-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Smythe-Regular.ttf"; sourceTree = "<group>"; };
-		5DC8C411198656DA00BF5816 /* DrupalCamp London.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DrupalCamp London.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DC8C411198656DA00BF5816 /* DrupalCamp London.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "DrupalCamp London.app"; path = "DrupalCon .app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC8C414198656DA00BF5816 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5DC8C416198656DA00BF5816 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		5DC8C418198656DA00BF5816 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
