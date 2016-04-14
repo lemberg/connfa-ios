@@ -1657,7 +1657,7 @@
 					"$(PROJECT_DIR)/DrupalCon/Vendor/GoogleAnalytics",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon.qa;
-				PRODUCT_NAME = "DrupalCamp London";
+				PRODUCT_NAME = "DrupalCon ";
 				PROVISIONING_PROFILE = "d81bd8dd-9af9-4e94-9fac-4dbc288c2418";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -1687,7 +1687,7 @@
 					"$(PROJECT_DIR)/DrupalCon/Vendor/GoogleAnalytics",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon.qa;
-				PRODUCT_NAME = "DrupalCamp London";
+				PRODUCT_NAME = "DrupalCon ";
 				PROVISIONING_PROFILE = "d81bd8dd-9af9-4e94-9fac-4dbc288c2418";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
