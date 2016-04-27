@@ -188,6 +188,9 @@
       defaultStoryboardName = @"Info";
       break;
 
+    case DCMENU_SOCIALMEDIA_ITEM:
+      defaultStoryboardName = @"Info";
+      break;
     default:
       break;
   }

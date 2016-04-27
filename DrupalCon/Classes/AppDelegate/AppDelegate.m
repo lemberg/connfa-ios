@@ -7,6 +7,7 @@
 #import "DCLevel+DC.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import <TwitterKit/TwitterKit.h>
 #import "NSUserDefaults+DC.h"
 
 @interface AppDelegate ()
@@ -19,7 +20,7 @@
 - (BOOL)application:(UIApplication*)application
     didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
   // Initialise crashlytics
-  [Fabric with:@[ CrashlyticsKit ]];
+  [Fabric with:@[[Crashlytics class], [Twitter class]]];
 
   [self initializeGoogleAnalytics];
   [self handleUpdateData];
