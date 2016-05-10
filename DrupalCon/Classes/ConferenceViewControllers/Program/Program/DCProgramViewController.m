@@ -219,7 +219,7 @@
   [self.dateLabel.layer addAnimation:animation forKey:@"kCATransitionFade"];
 
   NSDate* date = _days[day];
-  NSString *dateString = [DCDateHelper convertDate:date toDefaultTimeFormat:@"EEEE dd"];
+  NSString *dateString = [DCDateHelper convertDate:date toApplicationFormat:@"EEEE dd"];
   self.dateLabel.text =
       date ? [dateString uppercaseString]
            : nil;
