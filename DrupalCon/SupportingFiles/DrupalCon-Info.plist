@@ -34,6 +34,17 @@
 				<key>KitName</key>
 				<string>Crashlytics</string>
 			</dict>
+			<dict>
+				<key>KitInfo</key>
+				<dict>
+					<key>consumerKey</key>
+					<string>Mxl1GoGSM98T3jTIWdlUuqXmh</string>
+					<key>consumerSecret</key>
+					<string>UM74rykaGhxPhhKED2KxJrd6zGBLNWgVsGdlzjdSwSNqLTiyqY</string>
+				</dict>
+				<key>KitName</key>
+				<string>Twitter</string>
+			</dict>
 		</array>
 	</dict>
 	<key>GoogleAnalytics</key>

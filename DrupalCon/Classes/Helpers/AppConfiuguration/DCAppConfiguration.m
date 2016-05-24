@@ -121,6 +121,13 @@ static NSBundle* themeBundle;
       kMenuType : @(DCMENU_LOCATION_ITEM)
     },
     @{
+      kMenuItemTitle : @"Social Media",
+      kMenuItemIcon : @"menu_icon_points",
+      kMenuItemSelectedIcon : @"menu_icon_points_sel",
+      kMenuItemControllerId : @"DCSocialMediaViewController",
+      kMenuType : @(DCMENU_SOCIALMEDIA_ITEM)
+    },
+    @{
       kMenuItemTitle : @"Info",
       kMenuItemIcon : @"menu_icon_about",
       kMenuItemSelectedIcon : @"menu_icon_about_sel",

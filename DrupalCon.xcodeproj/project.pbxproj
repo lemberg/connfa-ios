@@ -17,6 +17,10 @@
 		842B5E631AC579C2009614A5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 842B5E621AC579C2009614A5 /* libz.dylib */; };
 		842B5E651AC579D0009614A5 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 842B5E641AC579D0009614A5 /* AdSupport.framework */; };
 		849EFDDB19A4ACB800C43E05 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849EFDDA19A4ACB800C43E05 /* CoreData.framework */; };
+		A06091171CD0BF1A00B8C2FD /* DCSocialMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A06091161CD0BF1A00B8C2FD /* DCSocialMediaViewController.m */; };
+		A06091301CD0E13500B8C2FD /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A060912D1CD0E13500B8C2FD /* TwitterKit.framework */; };
+		A06091311CD0E13500B8C2FD /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A060912E1CD0E13500B8C2FD /* TwitterKitResources.bundle */; };
+		A06091321CD0E13500B8C2FD /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A060912F1CD0E13500B8C2FD /* TwitterCore.framework */; };
 		A6580B7D1C5F60F5001B0D62 /* DCAlertsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6580B7C1C5F60F5001B0D62 /* DCAlertsManager.m */; };
 		A66BD0BF1C5BBAB700C568EE /* UIAlertView+DCWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A66BD0BE1C5BBAB700C568EE /* UIAlertView+DCWrapper.m */; };
 		A678FD441C03590B00F24105 /* main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A678FD421C03590B00F24105 /* main.xcdatamodeld */; };
@@ -170,6 +174,11 @@
 		842B5E641AC579D0009614A5 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		849EFDDA19A4ACB800C43E05 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		84D654641ACC5C1D0099B461 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A06091151CD0BF1A00B8C2FD /* DCSocialMediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCSocialMediaViewController.h; sourceTree = "<group>"; };
+		A06091161CD0BF1A00B8C2FD /* DCSocialMediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCSocialMediaViewController.m; sourceTree = "<group>"; };
+		A060912D1CD0E13500B8C2FD /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
+		A060912E1CD0E13500B8C2FD /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
+		A060912F1CD0E13500B8C2FD /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
 		A6580B7B1C5F60F5001B0D62 /* DCAlertsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCAlertsManager.h; sourceTree = "<group>"; };
 		A6580B7C1C5F60F5001B0D62 /* DCAlertsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCAlertsManager.m; sourceTree = "<group>"; };
 		A66BD0BD1C5BBAB700C568EE /* UIAlertView+DCWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+DCWrapper.h"; sourceTree = "<group>"; };
@@ -457,8 +466,10 @@
 				A6C5F3511BF4E9C60093AD65 /* Crashlytics.framework in Frameworks */,
 				5DC8C417198656DA00BF5816 /* CoreGraphics.framework in Frameworks */,
 				5DC8C419198656DA00BF5816 /* UIKit.framework in Frameworks */,
+				A06091321CD0E13500B8C2FD /* TwitterCore.framework in Frameworks */,
 				5DC8C415198656DA00BF5816 /* Foundation.framework in Frameworks */,
 				A6C5F3531BF4E9C60093AD65 /* Fabric.framework in Frameworks */,
+				A06091301CD0E13500B8C2FD /* TwitterKit.framework in Frameworks */,
 				A6C5F3551BF4E9C60093AD65 /* libGoogleAnalyticsServices.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -498,6 +509,15 @@
 				5DC8C418198656DA00BF5816 /* UIKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A06091141CD0BF1A00B8C2FD /* SocialMedia */ = {
+			isa = PBXGroup;
+			children = (
+				A06091151CD0BF1A00B8C2FD /* DCSocialMediaViewController.h */,
+				A06091161CD0BF1A00B8C2FD /* DCSocialMediaViewController.m */,
+			);
+			path = SocialMedia;
 			sourceTree = "<group>";
 		};
 		A6580B7A1C5F60F5001B0D62 /* Alerts */ = {
@@ -1019,6 +1039,7 @@
 				A6C5F1AD1BF4E9C50093AD65 /* Base */,
 				A6C5F1B21BF4E9C50093AD65 /* EventFilter */,
 				A6C5F1B91BF4E9C50093AD65 /* Info */,
+				A06091141CD0BF1A00B8C2FD /* SocialMedia */,
 				A6C5F1C01BF4E9C50093AD65 /* Location */,
 				A6C5F1C51BF4E9C50093AD65 /* LoginViewController */,
 				A6C5F1CA1BF4E9C50093AD65 /* MainNavigation */,
@@ -1275,6 +1296,9 @@
 		A6C5F2251BF4E9C60093AD65 /* Crashlytics */ = {
 			isa = PBXGroup;
 			children = (
+				A060912D1CD0E13500B8C2FD /* TwitterKit.framework */,
+				A060912E1CD0E13500B8C2FD /* TwitterKitResources.bundle */,
+				A060912F1CD0E13500B8C2FD /* TwitterCore.framework */,
 				A6C5F2261BF4E9C60093AD65 /* Crashlytics.framework */,
 				A6C5F2271BF4E9C60093AD65 /* Fabric.framework */,
 			);
@@ -1396,6 +1420,7 @@
 			files = (
 				A6C5F33F1BF4E9C60093AD65 /* Info.storyboard in Resources */,
 				A6C5F3471BF4E9C60093AD65 /* event_detail_style.css in Resources */,
+				A06091311CD0E13500B8C2FD /* TwitterKitResources.bundle in Resources */,
 				A6C5F3411BF4E9C60093AD65 /* Main.storyboard in Resources */,
 				A690C2AE1BFDDD2400DC5EB8 /* DC-Images.xcassets in Resources */,
 				283A1F351CB4E5B5007F6BCB /* Smythe-Regular.ttf in Resources */,
@@ -1526,6 +1551,7 @@
 				A6C5F2E91BF4E9C60093AD65 /* DCEventFilterHeaderCell.m in Sources */,
 				A6C5F28F1BF4E9C60093AD65 /* DCHousePlan.m in Sources */,
 				A6C5F2771BF4E9C60093AD65 /* UIColor+Helper.m in Sources */,
+				A06091171CD0BF1A00B8C2FD /* DCSocialMediaViewController.m in Sources */,
 				A6C5F2851BF4E9C60093AD65 /* UIImage+Extension.m in Sources */,
 				A6C5F27F1BF4E9C60093AD65 /* DCDateHelper.m in Sources */,
 				A6C5F2731BF4E9C60093AD65 /* NSArray+DC.m in Sources */,
@@ -1650,7 +1676,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "DrupalCon/SupportingFiles/DrupalCon-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/DrupalCon/SupportingFiles/DrupalCon-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1680,7 +1706,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "DrupalCon/SupportingFiles/DrupalCon-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/DrupalCon/SupportingFiles/DrupalCon-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

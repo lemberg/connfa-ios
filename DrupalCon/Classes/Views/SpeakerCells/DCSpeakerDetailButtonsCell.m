@@ -16,9 +16,9 @@
   }
 
   // if there is no description below, remove bottom padding
-  if (speaker.characteristic.length) {
-    self.twitterButtonBottomPadding.constant = 0;
-  }
+//  if (speaker.characteristic.length) {
+//    self.twitterButtonBottomPadding.constant = 0;
+//  }
 }
 
 @end
