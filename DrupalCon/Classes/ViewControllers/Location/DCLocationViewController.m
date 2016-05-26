@@ -82,8 +82,8 @@
     self.streetAndNumberLabel.text =
         streetAndHouse.length
             ? [NSString stringWithFormat:@"%@,", streetAndHouse]
-            : nil;
-    self.cityAndProvinceLabel.text = cityAndProvince.length ? [NSString stringWithFormat:@"%@,", cityAndProvince] : nil;
+            : @"";
+    self.cityAndProvinceLabel.text = cityAndProvince.length ? [NSString stringWithFormat:@"%@,", cityAndProvince] : @"";
     NSString *cityAndState = [NSString stringWithFormat:@"%@ %@", self.cityAndProvinceLabel.text, state];
     self.cityAndProvinceLabel.text = [cityAndState stringByTrimmingCharactersInSet:
                                         [NSCharacterSet whitespaceCharacterSet]];;
