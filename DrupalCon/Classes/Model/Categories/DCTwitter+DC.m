@@ -5,6 +5,7 @@
 #import "NSManagedObject+DC.h"
 
 static NSString* kDCTwitterWidgetHTML = @"twitterWidgetHTML";
+static NSString* ksearchQuery = @"twitterSearchQuery";
 
 @implementation DCTwitter (DC)
 
@@ -25,6 +26,7 @@ static NSString* kDCTwitterWidgetHTML = @"twitterWidgetHTML";
   }
 
   twitter.widgetHTML = dictionary[kDCTwitterWidgetHTML];
+  twitter.searchQuery = dictionary[ksearchQuery];
 }
 
 @end

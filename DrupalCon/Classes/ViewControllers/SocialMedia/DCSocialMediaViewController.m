@@ -1,9 +1,11 @@
 
 #import "DCSocialMediaViewController.h"
 #import "UIConstants.h"
+#import "DCTwitter.h"
 
 @interface DCSocialMediaViewController ()
 
+@property(nonatomic) __block DCMainProxyState previousState;
 
 @end
 
@@ -23,10 +25,21 @@
   [super viewDidLoad];
   [self setNeedsStatusBarAppearanceUpdate];
   [self arrangeNavigationBar];
-  TWTRAPIClient *client = [[TWTRAPIClient alloc] init];
-  self.dataSource = [[TWTRSearchTimelineDataSource alloc] initWithSearchQuery:@"#drupalcon OR @lemberg_co_uk"
-                                                                      APIClient:client];
-
+  
+  [[DCMainProxy sharedProxy]
+   setDataReadyCallback:^(DCMainProxyState mainProxyState) {
+     dispatch_async(dispatch_get_main_queue(), ^{
+       NSLog(@"Data ready callback %d", mainProxyState);
+       if (!self.previousState) {
+         [self reloadData];
+         self.previousState = mainProxyState;
+       }
+       
+       if (mainProxyState == DCMainProxyStateDataUpdated) {
+         [self reloadData];
+       }
+     });
+   }];
 }
 
 #pragma mark - View appearance
@@ -49,5 +62,17 @@
 
 #pragma mark - Private
 
+
+- (void)reloadData {
+    DCTwitter* twitter =
+    [[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCTwitter class]
+                                           inMainQueue:YES] lastObject];
+  
+  NSLog(@"SearchQuery: %@", twitter.searchQuery);
+  
+    TWTRAPIClient *client = [[TWTRAPIClient alloc] init];
+    self.dataSource = [[TWTRSearchTimelineDataSource alloc] initWithSearchQuery:twitter.searchQuery //@"#drupalcon OR @lemberg_co_uk"
+                                                                      APIClient:client];
+}
 
 @end

@@ -157,6 +157,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		283A1F341CB4E5B5007F6BCB /* Smythe-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Smythe-Regular.ttf"; sourceTree = "<group>"; };
 		5DC8C411198656DA00BF5816 /* DrupalCon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrupalCon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC8C414198656DA00BF5816 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5DC8C416198656DA00BF5816 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -440,6 +441,8 @@
 		A6C5F2541BF4E9C60093AD65 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		A6C5F2551BF4E9C60093AD65 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		A6C5F2561BF4E9C60093AD65 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		A6F4563F1C6B490900EF3DCD /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		F54B3D721CF5FB960031BAF4 /* main_2.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = main_2.1.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1721,9 +1724,10 @@
 		A678FD421C03590B00F24105 /* main.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				F54B3D721CF5FB960031BAF4 /* main_2.1.xcdatamodel */,
 				A678FD431C03590B00F24105 /* main_2.0.xcdatamodel */,
 			);
-			currentVersion = A678FD431C03590B00F24105 /* main_2.0.xcdatamodel */;
+			currentVersion = F54B3D721CF5FB960031BAF4 /* main_2.1.xcdatamodel */;
 			path = main.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
