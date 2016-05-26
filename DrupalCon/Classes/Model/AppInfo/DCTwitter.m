@@ -4,5 +4,6 @@
 @implementation DCTwitter
 
 @dynamic widgetHTML;
+@dynamic searchQuery;
 
 @end

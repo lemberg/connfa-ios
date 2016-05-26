@@ -5,5 +5,6 @@
 @interface DCTwitter : NSManagedObject
 
 @property(nonatomic, retain) NSString* widgetHTML;
+@property(nonatomic, retain) NSString* searchQuery;
 
 @end

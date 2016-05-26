@@ -35,7 +35,6 @@ static NSString* kDCSpeakerEventCellFormat = @"dd LLLL";
     return NO;
 }
 
-
 + (BOOL)is24hourFormat {
   NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
   [formatter setLocale:[NSLocale currentLocale]];
