@@ -1,7 +1,7 @@
 
 #import "DCSocialMediaViewController.h"
 #import "UIConstants.h"
-#import "DCTwitter.h"
+#import "DCAppSettings.h"
 
 @interface DCSocialMediaViewController ()
 
@@ -64,14 +64,12 @@
 
 
 - (void)reloadData {
-    DCTwitter* twitter =
-    [[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCTwitter class]
+    DCAppSettings* settings =
+    [[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCAppSettings class]
                                            inMainQueue:YES] lastObject];
   
-  NSLog(@"SearchQuery: %@", twitter.searchQuery);
-  
     TWTRAPIClient *client = [[TWTRAPIClient alloc] init];
-    self.dataSource = [[TWTRSearchTimelineDataSource alloc] initWithSearchQuery:twitter.searchQuery //@"#drupalcon OR @lemberg_co_uk"
+    self.dataSource = [[TWTRSearchTimelineDataSource alloc] initWithSearchQuery:settings.searchQuery //@"#drupalcon OR @lemberg_co_uk"
                                                                       APIClient:client];
 }
 
