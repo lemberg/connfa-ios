@@ -78,11 +78,13 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
 
   self.topTitleLabel.text = self.event.name;
 
-  self.noDetailImageView.hidden = ![self hideEmptyDetailIcon];
-  self.tableView.scrollEnabled = ![self hideEmptyDetailIcon];
+
   self.topBackgroundShadowView.backgroundColor =
       [DCAppConfiguration eventDetailHeaderColour];
   [self initSpeakers];
+    
+  self.noDetailImageView.hidden = ![self showEmptyDetailIcon];
+  self.tableView.scrollEnabled = ![self showEmptyDetailIcon];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -163,9 +165,9 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
   self.navigationItem.rightBarButtonItems = @[ sharedButton, favoriteButton ];
 }
 
-- (BOOL)hideEmptyDetailIcon {
+- (BOOL)showEmptyDetailIcon {
   BOOL isHeaderEmpty = [self isHeaderEmpty];
-  BOOL isNoSpeakers = ![self.speakers count];
+  BOOL isNoSpeakers = [self.speakers count] == 0;
   BOOL isDescriptionEmpty = _event.desctiptText.length == 0;
   return isHeaderEmpty && isNoSpeakers && isDescriptionEmpty;
 }
