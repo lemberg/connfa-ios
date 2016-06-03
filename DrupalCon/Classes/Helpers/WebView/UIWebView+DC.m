@@ -11,7 +11,9 @@
                        @"http-equiv=\"content-type\" content=\"text/html; "
                        @"charset=ISO-8859-1\"><link rel=\"stylesheet\" "
                        @"type=\"text/css\" "
-                       @"href=\"%@.css\"></head><body>%@</body></html> ",
+                       @"href=\"%@.css\">"
+                       @"<meta name=\"format-detection\" content=\"telephone=no\">"
+                       @"</head><body>%@</body></html> ",
                        styleSource, string];
 
   [self loadHTMLString:html baseURL:[self baseURL]];
