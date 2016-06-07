@@ -9,10 +9,7 @@
 #import "DCType.h"
 #import "UIImage+Extension.h"
 
-static NSString* ratingsImagesName[] = {@"",
-                                        @"ic_experience_beginner",
-                                        @"ic_experience_intermediate",
-                                        @"ic_experience_advanced"};
+
 
 // These values are hardcoded because cells are get by "dequeueREusableCells"
 // method, so previous cell value might be set to 0.
@@ -126,10 +123,13 @@ static NSInteger eventCellImageHeight = 16;
 
   // Experience level
   NSInteger eventRating = [event.level.levelId integerValue];
-  NSString* ratingImageName = ratingsImagesName[eventRating];
-  UIImage* ratingImage = ratingImageName.length > 0
-                             ? [UIImage imageNamedFromBundle:ratingImageName]
-                             : nil;
+    
+    NSString* ratingImageName = [self ratingsImagesName:eventRating];
+    UIImage* ratingImage = ratingImageName.length > 0
+    ? [UIImage imageNamedFromBundle:ratingImageName]
+    : nil;
+
+    
   if (ratingImage) {
     self.eventLevelImageView.image = ratingImage;
     self.eventLevelImageView.hidden = NO;
@@ -172,6 +172,19 @@ static NSInteger eventCellImageHeight = 16;
   [self setCellEnabled:self.isEnabled];
 
   self.delegate = aDelegate;
+}
+
+- (NSString*)ratingsImagesName:(NSInteger)identifier{
+    switch(identifier){
+        case 1:
+            return  @"ic_experience_beginner";
+        case 2:
+            return  @"ic_experience_intermediate";
+        case 3:
+            return @"ic_experience_advanced";
+        default:
+            return @"";
+    }
 }
 
 - (BOOL)isEnabled:(DCEvent*)event {
