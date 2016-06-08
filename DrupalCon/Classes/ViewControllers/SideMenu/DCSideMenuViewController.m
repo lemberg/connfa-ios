@@ -185,12 +185,11 @@
       break;
 
     case DCMENU_INFO_ITEM:
-      defaultStoryboardName = @"Info";
-      break;
-
+    case DCMENU_FLOORPLAN_ITEM:
     case DCMENU_SOCIALMEDIA_ITEM:
       defaultStoryboardName = @"Info";
       break;
+
     default:
       break;
   }

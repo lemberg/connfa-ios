@@ -152,6 +152,7 @@
 		A6C5F3751BF4E9C60093AD65 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2541BF4E9C60093AD65 /* UIImageView+WebCache.m */; };
 		A6C5F3771BF4E9C60093AD65 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2561BF4E9C60093AD65 /* UIView+WebCacheOperation.m */; };
 		A6D12F0E1BF4F04F00B85FD1 /* DC-Theme.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2121BF4E9C60093AD65 /* DC-Theme.bundle */; };
+		F5D072CE1D0844AD00331E07 /* DCFloorPlanController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D072CD1D0844AD00331E07 /* DCFloorPlanController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -436,6 +437,8 @@
 		A6C5F2551BF4E9C60093AD65 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		A6C5F2561BF4E9C60093AD65 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		F54B3D721CF5FB960031BAF4 /* main_2.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = main_2.1.xcdatamodel; sourceTree = "<group>"; };
+		F5D072CC1D0844AD00331E07 /* DCFloorPlanController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCFloorPlanController.h; path = FloorPlan/DCFloorPlanController.h; sourceTree = "<group>"; };
+		F5D072CD1D0844AD00331E07 /* DCFloorPlanController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCFloorPlanController.m; path = FloorPlan/DCFloorPlanController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1007,6 +1010,7 @@
 		A6C5F1AC1BF4E9C50093AD65 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				F5D072CB1D08325600331E07 /* FloorPlan */,
 				A6C5F1AD1BF4E9C50093AD65 /* Base */,
 				A6C5F1B21BF4E9C50093AD65 /* EventFilter */,
 				A6C5F1B91BF4E9C50093AD65 /* Info */,
@@ -1333,6 +1337,15 @@
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
+		F5D072CB1D08325600331E07 /* FloorPlan */ = {
+			isa = PBXGroup;
+			children = (
+				F5D072CC1D0844AD00331E07 /* DCFloorPlanController.h */,
+				F5D072CD1D0844AD00331E07 /* DCFloorPlanController.m */,
+			);
+			name = FloorPlan;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1508,6 +1521,7 @@
 				A6C5F2891BF4E9C60093AD65 /* NSManagedObject+DC.m in Sources */,
 				A6C5F3251BF4E9C60093AD65 /* DCProgramHeaderCellView.m in Sources */,
 				A6C5F3771BF4E9C60093AD65 /* UIView+WebCacheOperation.m in Sources */,
+				F5D072CE1D0844AD00331E07 /* DCFloorPlanController.m in Sources */,
 				A6C5F29F1BF4E9C60093AD65 /* DCInfo+DC.m in Sources */,
 				A6C5F3691BF4E9C60093AD65 /* SDWebImagePrefetcher.m in Sources */,
 				A6C5F2E91BF4E9C60093AD65 /* DCEventFilterHeaderCell.m in Sources */,
