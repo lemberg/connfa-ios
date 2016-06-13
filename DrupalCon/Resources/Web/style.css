@@ -44,6 +44,7 @@
                font-size: 15px;
                line-height: 22px;
                color: #be2626;
+               word-wrap: break-word;
                text-decoration: none;
               }
               h1{
