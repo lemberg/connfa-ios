@@ -78,6 +78,10 @@ static NSString * const cellIdentifier = @"cellIdenifier";
 
 #pragma mark - Private
 
+- (UIStatusBarStyle)preferredStatusBarStyle {
+  return UIStatusBarStyleLightContent;
+}
+
 - (UIView *)shadowView {
   if (!_shadowView) {
     _shadowView = [[UIView alloc] initWithFrame:[UIApplication sharedApplication].keyWindow.frame];
@@ -89,9 +93,13 @@ static NSString * const cellIdentifier = @"cellIdenifier";
 }
 
 - (void)dismiss {
-  [self dismissViewControllerAnimated:YES completion:^{
-    [self.shadowView removeFromSuperview];
-  }];
+  double delayInSeconds = 0.1;
+  dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+  dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+    [self dismissViewControllerAnimated:YES completion:^{
+      [self.shadowView removeFromSuperview];
+    }];
+  });
 }
 
 - (void)configureCancelView {
