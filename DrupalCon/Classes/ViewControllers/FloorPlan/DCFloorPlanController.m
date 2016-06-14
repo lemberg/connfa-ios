@@ -8,6 +8,8 @@
 
 #import "DCFloorPlanController.h"
 #import "LESelectedActionSheetController.h"
+#import "DCHousePlan.h"
+#import "UIImageView+WebCache.h"
 
 @interface DCFloorPlanController () <LESelectedActionSheetControllerProtocol, UIScrollViewDelegate>
 
@@ -22,7 +24,9 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) NSArray *floors;
+@property (strong, nonatomic) NSArray *floorTitles;
 @property (nonatomic) NSUInteger selectedActionIndex;
+@property(nonatomic) __block DCMainProxyState previousState;
 
 @end
 
@@ -33,14 +37,54 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   
-  // Test data
-  self.floors = @[@"Floor1", @"Floor2", @"Floor3", @"Floor4"];
-  self.selectedActionIndex = 2;
-  [self.floorButton setTitle:self.floors[self.selectedActionIndex] forState:UIControlStateNormal];
   self.imageView.image = [UIImage imageNamed:@"testFloor"];
+  
+  [self configureTapGestureRecognizers];
+  
+  [self checkProxyState];
 }
 
 #pragma mark - Private
+
+- (void)checkProxyState {
+  [[DCMainProxy sharedProxy]
+   setDataReadyCallback:^(DCMainProxyState mainProxyState) {
+     dispatch_async(dispatch_get_main_queue(), ^{
+       NSLog(@"Data ready callback %d", mainProxyState);
+       if (!self.previousState) {
+         [self reloadData];
+         self.previousState = mainProxyState;
+       }
+       
+       if (mainProxyState == DCMainProxyStateDataUpdated) {
+         [self reloadData];
+       }
+     });
+   }];
+}
+
+- (void)reloadData {
+  self.floors = [[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCHousePlan class] inMainQueue:YES];
+  
+  NSMutableArray *floorTitles = [[NSMutableArray alloc] init];
+  for (DCHousePlan *floorPlan in self.floors) {
+    [floorTitles addObject:floorPlan.name];
+  }
+  self.floorTitles = [NSArray arrayWithArray:floorTitles];
+  [self.floorButton setTitle:floorTitles[self.selectedActionIndex] forState:UIControlStateNormal];
+  [self reloadImage];
+}
+
+- (void)reloadImage {
+  [UIApplication sharedApplication]
+  
+  DCHousePlan *floorPlan = self.floors[self.selectedActionIndex];
+  NSURL *URL = [NSURL URLWithString:floorPlan.imageURL];
+  [self.imageView sd_setImageWithURL:URL placeholderImage:nil
+                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+    
+  }];
+}
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
   return UIStatusBarStyleLightContent;
@@ -73,6 +117,38 @@
   [self.view layoutIfNeeded];
 }
 
+- (void)configureTapGestureRecognizers {
+  UITapGestureRecognizer *doubleTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollViewDoubleTapped:)];
+  doubleTapRecognizer.numberOfTapsRequired = 2;
+  doubleTapRecognizer.numberOfTouchesRequired = 1;
+  [self.scrollView addGestureRecognizer:doubleTapRecognizer];
+  
+  UITapGestureRecognizer *twoFingerTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollViewTwoFingerTapped:)];
+  twoFingerTapRecognizer.numberOfTapsRequired = 1;
+  twoFingerTapRecognizer.numberOfTouchesRequired = 2;
+  [self.scrollView addGestureRecognizer:twoFingerTapRecognizer];
+}
+
+- (void)scrollViewDoubleTapped:(UITapGestureRecognizer *)recognizer {
+  CGPoint pointInView = [recognizer locationInView:self.imageView];
+  CGFloat newZoomScale = self.scrollView.zoomScale * 1.5;
+  newZoomScale = MIN(newZoomScale, self.scrollView.maximumZoomScale);
+  CGSize scrollViewSize = self.scrollView.bounds.size;
+  CGFloat w = scrollViewSize.width / newZoomScale;
+  CGFloat h = scrollViewSize.height / newZoomScale;
+  CGFloat x = pointInView.x - (w / 2.0);
+  CGFloat y = pointInView.y - (h / 2.0);
+  CGRect rectToZoomTo = CGRectMake(x, y, w, h);
+  [self.scrollView zoomToRect:rectToZoomTo animated:YES];
+  [self updateConstraintsForSize:self.view.bounds.size];
+}
+
+- (void)scrollViewTwoFingerTapped:(UITapGestureRecognizer*)recognizer {
+  CGFloat newZoomScale = self.scrollView.zoomScale / 1.5f;
+  newZoomScale = MAX(newZoomScale, self.scrollView.minimumZoomScale);
+  [self.scrollView setZoomScale:newZoomScale animated:YES];
+}
+
 #pragma mark - Overrides
 
 - (void)viewDidLayoutSubviews {
@@ -95,12 +171,13 @@
 }
 
 - (NSString *)titleForActionAtIndex:(NSInteger)index {
-  return self.floors[index];
+  return self.floorTitles[index];
 }
 
 - (void)performActionAtIndex:(NSInteger)index {
   self.selectedActionIndex = index;
-  [self.floorButton setTitle:self.floors[index] forState:UIControlStateNormal];
+  [self.floorButton setTitle:self.floorTitles[index] forState:UIControlStateNormal];
+  [self reloadImage];
 }
 
 #pragma mark - UIScrollViewDelegate
