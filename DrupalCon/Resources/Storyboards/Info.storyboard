@@ -146,20 +146,47 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Floor Plan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cuQ-n4-4l9">
-                                <rect key="frame" x="122" y="273" width="76" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YXi-Wp-DlS" userLabel="Header View">
+                                <rect key="frame" x="0.0" y="20" width="320" height="35"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eFO-zo-gil">
+                                        <rect key="frame" x="137" y="3" width="46" height="30"/>
+                                        <state key="normal" title="Button">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="didTouchFloorButton:" destination="Gat-vg-07H" eventType="touchUpInside" id="a1P-JS-AbG"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.49411764705882355" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="1cT-OV-LDe"/>
+                                    <constraint firstItem="eFO-zo-gil" firstAttribute="centerX" secondItem="YXi-Wp-DlS" secondAttribute="centerX" id="ItI-eH-Tbc"/>
+                                    <constraint firstItem="eFO-zo-gil" firstAttribute="centerY" secondItem="YXi-Wp-DlS" secondAttribute="centerY" id="YUb-1J-0hr"/>
+                                </constraints>
+                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L5H-sT-A4G">
+                                <rect key="frame" x="0.0" y="55" width="320" height="513"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="cuQ-n4-4l9" firstAttribute="centerX" secondItem="3uX-lj-i8Y" secondAttribute="centerX" id="JFA-8u-bLw"/>
-                            <constraint firstItem="cuQ-n4-4l9" firstAttribute="centerY" secondItem="3uX-lj-i8Y" secondAttribute="centerY" id="l8y-nA-eqC"/>
+                            <constraint firstAttribute="trailing" secondItem="L5H-sT-A4G" secondAttribute="trailing" id="JNv-HR-d5E"/>
+                            <constraint firstItem="YXi-Wp-DlS" firstAttribute="top" secondItem="b95-FO-mKA" secondAttribute="bottom" id="Xp6-Qe-tXR"/>
+                            <constraint firstItem="EyO-7Q-TyA" firstAttribute="top" secondItem="L5H-sT-A4G" secondAttribute="bottom" id="ds9-Mw-Zyb"/>
+                            <constraint firstItem="L5H-sT-A4G" firstAttribute="top" secondItem="YXi-Wp-DlS" secondAttribute="bottom" id="r3i-DS-BFR"/>
+                            <constraint firstItem="L5H-sT-A4G" firstAttribute="leading" secondItem="3uX-lj-i8Y" secondAttribute="leading" id="wGp-Dr-kOy"/>
+                            <constraint firstAttribute="trailing" secondItem="YXi-Wp-DlS" secondAttribute="trailing" id="ySK-h8-00n"/>
+                            <constraint firstItem="YXi-Wp-DlS" firstAttribute="leading" secondItem="3uX-lj-i8Y" secondAttribute="leading" id="zs0-Ry-cre"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="floorButton" destination="eFO-zo-gil" id="3QQ-j9-4bV"/>
+                        <outlet property="headerView" destination="YXi-Wp-DlS" id="g3a-tn-3Sl"/>
+                        <outlet property="scrollView" destination="L5H-sT-A4G" id="YOF-Me-Fec"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ikG-iU-dqW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -7,31 +7,65 @@
 //
 
 #import "DCFloorPlanController.h"
+#import "LESelectedActionSheetController.h"
 
-@interface DCFloorPlanController ()
+@interface DCFloorPlanController () <LESelectedActionSheetControllerProtocol>
+
+@property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (weak, nonatomic) IBOutlet UIButton *floorButton;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
+@property (strong, nonatomic) NSArray *floors;
+@property (nonatomic) NSUInteger selectedActionIndex;
 
 @end
 
 @implementation DCFloorPlanController
 
+#pragma mark - Lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+  
+  // Test data
+  self.floors = @[@"Floor1", @"Floor2", @"Floor3", @"Floor4"];
+  self.selectedActionIndex = 2;
+  [self.floorButton setTitle:self.floors[self.selectedActionIndex] forState:UIControlStateNormal];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - Private
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+  return UIStatusBarStyleLightContent;
 }
 
-/*
-#pragma mark - Navigation
+- (void)showActionSheet {
+  LESelectedActionSheetController *actionSheetController = [[LESelectedActionSheetController alloc] init];
+  actionSheetController.delegate = self;
+  actionSheetController.selectedItemIndex = self.selectedActionIndex;
+  [self presentViewController:actionSheetController animated:YES completion:nil];
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
 }
-*/
+
+#pragma mark - IBAction
+
+- (IBAction)didTouchFloorButton:(UIButton *)sender {
+  [self showActionSheet];
+}
+
+#pragma mark - LESelectedActionSheetControllerProtocol
+
+- (NSInteger)numberOfActions {
+  return self.floors.count;
+}
+
+- (NSString *)titleForActionAtIndex:(NSInteger)index {
+  return self.floors[index];
+}
+
+- (void)performActionAtIndex:(NSInteger)index {
+  self.selectedActionIndex = index;
+  [self.floorButton setTitle:self.floors[index] forState:UIControlStateNormal];
+}
 
 @end

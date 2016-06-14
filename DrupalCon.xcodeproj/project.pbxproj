@@ -152,6 +152,8 @@
 		A6C5F3751BF4E9C60093AD65 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2541BF4E9C60093AD65 /* UIImageView+WebCache.m */; };
 		A6C5F3771BF4E9C60093AD65 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2561BF4E9C60093AD65 /* UIView+WebCacheOperation.m */; };
 		A6D12F0E1BF4F04F00B85FD1 /* DC-Theme.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2121BF4E9C60093AD65 /* DC-Theme.bundle */; };
+		F580ED6C1D0FDE2B00F289F8 /* LESelectedActionSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = F580ED6A1D0FDE2B00F289F8 /* LESelectedActionSheetController.m */; };
+		F580ED6D1D0FDE2B00F289F8 /* LESelectedActionSheetController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F580ED6B1D0FDE2B00F289F8 /* LESelectedActionSheetController.xib */; };
 		F5D072CE1D0844AD00331E07 /* DCFloorPlanController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D072CD1D0844AD00331E07 /* DCFloorPlanController.m */; };
 /* End PBXBuildFile section */
 
@@ -437,6 +439,9 @@
 		A6C5F2551BF4E9C60093AD65 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		A6C5F2561BF4E9C60093AD65 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		F54B3D721CF5FB960031BAF4 /* main_2.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = main_2.1.xcdatamodel; sourceTree = "<group>"; };
+		F580ED691D0FDE2B00F289F8 /* LESelectedActionSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LESelectedActionSheetController.h; sourceTree = "<group>"; };
+		F580ED6A1D0FDE2B00F289F8 /* LESelectedActionSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LESelectedActionSheetController.m; sourceTree = "<group>"; };
+		F580ED6B1D0FDE2B00F289F8 /* LESelectedActionSheetController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LESelectedActionSheetController.xib; sourceTree = "<group>"; };
 		F5D072CC1D0844AD00331E07 /* DCFloorPlanController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCFloorPlanController.h; path = FloorPlan/DCFloorPlanController.h; sourceTree = "<group>"; };
 		F5D072CD1D0844AD00331E07 /* DCFloorPlanController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCFloorPlanController.m; path = FloorPlan/DCFloorPlanController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -679,6 +684,7 @@
 		A6C5F11A1BF4E9C50093AD65 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				F580ED681D0FDE2B00F289F8 /* LESelectedActionSheetController */,
 				A66BD0BC1C5BBAA100C568EE /* AlertView */,
 				A6C5F11B1BF4E9C50093AD65 /* AppConfiuguration */,
 				A6C5F11E1BF4E9C50093AD65 /* Collections */,
@@ -1337,6 +1343,16 @@
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
+		F580ED681D0FDE2B00F289F8 /* LESelectedActionSheetController */ = {
+			isa = PBXGroup;
+			children = (
+				F580ED691D0FDE2B00F289F8 /* LESelectedActionSheetController.h */,
+				F580ED6A1D0FDE2B00F289F8 /* LESelectedActionSheetController.m */,
+				F580ED6B1D0FDE2B00F289F8 /* LESelectedActionSheetController.xib */,
+			);
+			path = LESelectedActionSheetController;
+			sourceTree = "<group>";
+		};
 		F5D072CB1D08325600331E07 /* FloorPlan */ = {
 			isa = PBXGroup;
 			children = (
@@ -1407,6 +1423,7 @@
 				A690C2AE1BFDDD2400DC5EB8 /* DC-Images.xcassets in Resources */,
 				A6C5F3431BF4E9C60093AD65 /* Speakers.storyboard in Resources */,
 				A6C5F3571BF4E9C60093AD65 /* LICENSE in Resources */,
+				F580ED6D1D0FDE2B00F289F8 /* LESelectedActionSheetController.xib in Resources */,
 				A6C5F3491BF4E9C60093AD65 /* style.css in Resources */,
 				A6C5F33D1BF4E9C60093AD65 /* Events.storyboard in Resources */,
 				A6C5F34B1BF4E9C60093AD65 /* DrupalCon-Info.plist in Resources */,
@@ -1474,6 +1491,7 @@
 				A6C5F2AF1BF4E9C60093AD65 /* DCTime+DC.m in Sources */,
 				A6C5F32B1BF4E9C60093AD65 /* DCSpeakerCell.m in Sources */,
 				A6C5F36B1BF4E9C60093AD65 /* UIButton+WebCache.m in Sources */,
+				F580ED6C1D0FDE2B00F289F8 /* LESelectedActionSheetController.m in Sources */,
 				A6C5F2591BF4E9C60093AD65 /* DCAppFacade.m in Sources */,
 				A6C5F2AB1BF4E9C60093AD65 /* DCSocialEvent+DC.m in Sources */,
 				A6C5F2CB1BF4E9C60093AD65 /* DCType.m in Sources */,
