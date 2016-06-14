@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "1465935832_ic_keyboard_arrow_down_48px.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "poster_large_2x.jpg",
       "scale" : "2x"
     },
     {
@@ -17,5 +17,8 @@
   "info" : {
     "version" : 1,
     "author" : "xcode"
+  },
+  "properties" : {
+    "template-rendering-intent" : "template"
   }
 }
