@@ -76,13 +76,12 @@
 }
 
 - (void)reloadImage {
-  [UIApplication sharedApplication]
-  
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
   DCHousePlan *floorPlan = self.floors[self.selectedActionIndex];
   NSURL *URL = [NSURL URLWithString:floorPlan.imageURL];
   [self.imageView sd_setImageWithURL:URL placeholderImage:nil
                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-    
+      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
   }];
 }
 
