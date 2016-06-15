@@ -129,8 +129,8 @@ static NSBundle* themeBundle;
     },
     @{
       kMenuItemTitle : @"Social Media",
-      kMenuItemIcon : @"menu_icon_points",
-      kMenuItemSelectedIcon : @"menu_icon_points_sel",
+      kMenuItemIcon : @"menu_icon_social_media",
+      kMenuItemSelectedIcon : @"menu_icon_social_media_sel",
       kMenuItemControllerId : @"DCSocialMediaViewController",
       kMenuType : @(DCMENU_SOCIALMEDIA_ITEM)
     },
@@ -162,8 +162,7 @@ static NSBundle* themeBundle;
 }
 
 + (NSString*)googleAnalyticsID {
-  return NSBundle.mainBundle
-      .infoDictionary[@"GoogleAnalytics"][@"GoogleAnalyticsID"];
+  return GOOGLE_ANALYTICS_APP_ID;
 }
 
 + (UIFont *)fontWithName:(NSString *)name andSize:(CGFloat)size {
