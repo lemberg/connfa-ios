@@ -21,6 +21,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UIButton *floorButton;
+@property (weak, nonatomic) IBOutlet UIButton *downArrowButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) NSArray *floors;
@@ -35,16 +36,18 @@
 #pragma mark - Lifecycle
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-  
-  self.imageView.image = [UIImage imageNamed:@"testFloor"];
-  
+  [super viewDidLoad];
+
   [self configureTapGestureRecognizers];
-  
   [self checkProxyState];
 }
 
 #pragma mark - Private
+
+- (void)configureUI {
+  self.headerView.backgroundColor = [DCAppConfiguration eventDetailHeaderColour];
+  [self.floorButton setTitleColor:[DCAppConfiguration eventDetailNavBarTextColor] forState:UIControlStateNormal];
+}
 
 - (void)checkProxyState {
   [[DCMainProxy sharedProxy]
@@ -71,7 +74,7 @@
     [floorTitles addObject:floorPlan.name];
   }
   self.floorTitles = [NSArray arrayWithArray:floorTitles];
-  [self.floorButton setTitle:floorTitles[self.selectedActionIndex] forState:UIControlStateNormal];
+  [self.floorButton setTitle:[floorTitles[self.selectedActionIndex] uppercaseString] forState:UIControlStateNormal];
   [self reloadImage];
 }
 
@@ -93,6 +96,7 @@
   LESelectedActionSheetController *actionSheetController = [[LESelectedActionSheetController alloc] init];
   actionSheetController.delegate = self;
   actionSheetController.selectedItemIndex = self.selectedActionIndex;
+  actionSheetController.selectedActionTitleColor = [DCAppConfiguration favoriteEventColor];
   [self presentViewController:actionSheetController animated:YES completion:nil];
 }
 
@@ -175,7 +179,7 @@
 
 - (void)performActionAtIndex:(NSInteger)index {
   self.selectedActionIndex = index;
-  [self.floorButton setTitle:self.floorTitles[index] forState:UIControlStateNormal];
+  [self.floorButton setTitle:[self.floorTitles[index] uppercaseString] forState:UIControlStateNormal];
   [self reloadImage];
 }
 
