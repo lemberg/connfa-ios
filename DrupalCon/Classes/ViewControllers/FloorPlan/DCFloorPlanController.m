@@ -56,11 +56,12 @@
      dispatch_async(dispatch_get_main_queue(), ^{
        NSLog(@"Data ready callback %d", mainProxyState);
        if (!self.previousState) {
+         [self reloadData];
          self.previousState = mainProxyState;
        }
        
        if (mainProxyState == DCMainProxyStateDataUpdated) {
-         [self reloadData];
+//         [self reloadData];
        }
      });
    }];
@@ -68,17 +69,25 @@
 
 - (void)reloadData {
   NSMutableArray *floors = [NSMutableArray arrayWithArray:[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCHousePlan class] inMainQueue:YES]];
-  NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"order" ascending:YES];
-  [floors sortUsingDescriptors:@[sort]];
-  self.floors = floors;
-  
-  NSMutableArray *floorTitles = [[NSMutableArray alloc] init];
-  for (DCHousePlan *floorPlan in self.floors) {
-    [floorTitles addObject:floorPlan.name];
+  if (floors.count > 0) {
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"order" ascending:YES];
+    [floors sortUsingDescriptors:@[sort]];
+    self.floors = floors;
+    
+    NSMutableArray *floorTitles = [[NSMutableArray alloc] init];
+    for (DCHousePlan *floorPlan in self.floors) {
+      [floorTitles addObject:floorPlan.name];
+    }
+    self.floorTitles = [NSArray arrayWithArray:floorTitles];
+    [self.floorButton setTitle:[floorTitles[self.selectedActionIndex] uppercaseString] forState:UIControlStateNormal];
+    [self reloadImage];
+    self.floorButton.enabled = YES;
+    self.downArrowButton.hidden = NO;
+  } else {
+    [self.floorButton setTitle:[@"No Floors " uppercaseString] forState:UIControlStateNormal];
+    self.floorButton.enabled = NO;
+    self.downArrowButton.hidden = YES;
   }
-  self.floorTitles = [NSArray arrayWithArray:floorTitles];
-  [self.floorButton setTitle:[floorTitles[self.selectedActionIndex] uppercaseString] forState:UIControlStateNormal];
-  [self reloadImage];
 }
 
 - (void)reloadImage {
