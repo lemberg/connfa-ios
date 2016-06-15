@@ -3,10 +3,9 @@
 
 #define SERVER_URL @"http://connfa-integration.uat.link"
 #define BUNDLE_NAME @"DC-Theme"
-#define GOOGLE_ANALYTICS_APP_ID @"Google Analytics API key stub"
-#define TWITTER_API_KEY @"Twitter API key stub"
-#define TWITTER_API_SECRET @"Twitter API secret stub"
-
+#define GOOGLE_ANALYTICS_APP_ID @"UA-267362-67"
+#define TWITTER_API_KEY @"Mxl1GoGSM98T3jTIWdlUuqXmh"
+#define TWITTER_API_SECRET @"UM74rykaGhxPhhKED2KxJrd6zGBLNWgVsGdlzjdSwSNqLTiyqY"
 
 
 #define BASE_URL [NSString stringWithFormat:@"%@/api/v2/", SERVER_URL]
