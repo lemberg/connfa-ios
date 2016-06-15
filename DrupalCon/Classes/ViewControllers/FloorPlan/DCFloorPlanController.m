@@ -21,6 +21,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UIButton *floorButton;
+@property (weak, nonatomic) IBOutlet UIButton *downArrowButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) NSArray *floors;
@@ -35,16 +36,19 @@
 #pragma mark - Lifecycle
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-  
-//  self.imageView.image = [UIImage imageNamed:@"testFloor"];
-  
+  [super viewDidLoad];
+
+  [self configureUI];
   [self configureTapGestureRecognizers];
-  
   [self checkProxyState];
 }
 
 #pragma mark - Private
+
+- (void)configureUI {
+  self.headerView.backgroundColor = [DCAppConfiguration navigationBarColor];
+  [self.floorButton setTitleColor:[DCAppConfiguration eventDetailNavBarTextColor] forState:UIControlStateNormal];
+}
 
 - (void)checkProxyState {
   [[DCMainProxy sharedProxy]
@@ -52,7 +56,6 @@
      dispatch_async(dispatch_get_main_queue(), ^{
        NSLog(@"Data ready callback %d", mainProxyState);
        if (!self.previousState) {
-         [self reloadData];
          self.previousState = mainProxyState;
        }
        
@@ -64,20 +67,18 @@
 }
 
 - (void)reloadData {
-  self.floors = [[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCHousePlan class] inMainQueue:YES];
+  NSMutableArray *floors = [NSMutableArray arrayWithArray:[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCHousePlan class] inMainQueue:YES]];
+  NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"order" ascending:YES];
+  [floors sortUsingDescriptors:@[sort]];
+  self.floors = floors;
   
   NSMutableArray *floorTitles = [[NSMutableArray alloc] init];
   for (DCHousePlan *floorPlan in self.floors) {
     [floorTitles addObject:floorPlan.name];
   }
   self.floorTitles = [NSArray arrayWithArray:floorTitles];
-  if(floorTitles.count > 0){
-      [self.floorButton setTitle:floorTitles[self.selectedActionIndex] forState:UIControlStateNormal];
-  }else{
-      [self.floorButton setTitle:@"No Plans" forState:UIControlStateNormal];
-  }
+  [self.floorButton setTitle:[floorTitles[self.selectedActionIndex] uppercaseString] forState:UIControlStateNormal];
   [self reloadImage];
-        
 }
 
 - (void)reloadImage {
@@ -98,6 +99,7 @@
   LESelectedActionSheetController *actionSheetController = [[LESelectedActionSheetController alloc] init];
   actionSheetController.delegate = self;
   actionSheetController.selectedItemIndex = self.selectedActionIndex;
+  actionSheetController.selectedActionTitleColor = [DCAppConfiguration favoriteEventColor];
   [self presentViewController:actionSheetController animated:YES completion:nil];
 }
 
@@ -180,7 +182,7 @@
 
 - (void)performActionAtIndex:(NSInteger)index {
   self.selectedActionIndex = index;
-  [self.floorButton setTitle:self.floorTitles[index] forState:UIControlStateNormal];
+  [self.floorButton setTitle:[self.floorTitles[index] uppercaseString] forState:UIControlStateNormal];
   [self reloadImage];
 }
 

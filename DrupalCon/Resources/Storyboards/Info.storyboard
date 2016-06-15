@@ -224,10 +224,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YXi-Wp-DlS" userLabel="Header View">
                                 <rect key="frame" x="0.0" y="20" width="320" height="35"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eFO-zo-gil">
-                                        <rect key="frame" x="135" y="1" width="51" height="33"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <state key="normal" title="Button">
+                                    <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="0.0" placeholderIntrinsicHeight="30" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eFO-zo-gil">
+                                        <rect key="frame" x="160" y="3" width="0.0" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" id="X47-BN-nO9"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                        <state key="normal">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -235,10 +238,24 @@
                                             <action selector="didTouchFloorButton:" destination="Gat-vg-07H" eventType="touchUpInside" id="a1P-JS-AbG"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kNE-1S-neJ">
+                                        <rect key="frame" x="162" y="8" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="NPB-wL-bOd"/>
+                                            <constraint firstAttribute="width" constant="20" id="Skn-s7-zh7"/>
+                                        </constraints>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" image="arrow_down"/>
+                                        <connections>
+                                            <action selector="didTouchFloorButton:" destination="xJp-X6-qI9" eventType="touchUpInside" id="0OF-xn-c0g"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.49411764705882355" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="kNE-1S-neJ" firstAttribute="leading" secondItem="eFO-zo-gil" secondAttribute="trailing" constant="2" id="2FP-jf-Rfx"/>
                                     <constraint firstItem="eFO-zo-gil" firstAttribute="centerY" secondItem="YXi-Wp-DlS" secondAttribute="centerY" id="HK8-Un-wbm"/>
+                                    <constraint firstItem="kNE-1S-neJ" firstAttribute="centerY" secondItem="eFO-zo-gil" secondAttribute="centerY" id="Lcc-Ef-k9u"/>
                                     <constraint firstItem="eFO-zo-gil" firstAttribute="centerX" secondItem="YXi-Wp-DlS" secondAttribute="centerX" id="MA2-Bc-X3y"/>
                                     <constraint firstAttribute="height" constant="35" id="lZG-RN-snh"/>
                                 </constraints>
@@ -275,6 +292,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="downArrowButton" destination="kNE-1S-neJ" id="lXl-yL-OmN"/>
                         <outlet property="floorButton" destination="eFO-zo-gil" id="SFt-ia-YSV"/>
                         <outlet property="headerView" destination="YXi-Wp-DlS" id="gou-Rc-aAI"/>
                         <outlet property="headerViewHeightConstraint" destination="lZG-RN-snh" id="Ssb-Rs-YlO"/>
@@ -292,6 +310,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow_down" width="20" height="20"/>
         <image name="ic_experience_advanced" width="12" height="12"/>
         <image name="info_header" width="320" height="246"/>
         <image name="testFloor" width="848" height="480"/>
