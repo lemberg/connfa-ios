@@ -116,7 +116,7 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
 }
 
 - (BOOL)isHeaderEmpty {
-  NSString* track = [[_event.tracks allObjects].firstObject name];
+  NSString* track = [[_event.tracks allObjects].lastObject name];
   NSString* level = _event.level.name;
   return [level length] == 0 && [track length] == 0;
 }

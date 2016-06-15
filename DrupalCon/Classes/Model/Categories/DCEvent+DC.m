@@ -130,6 +130,11 @@ const NSString* kDCEventOrderKey = @"order";
 }
 
 - (void)addTrackForId:(int)trackId {
+    
+  for(DCTrack* track in self.tracks){
+      [track removeEventsObject:self];
+  }
+    
   DCTrack* track = (DCTrack*)
       [[DCMainProxy sharedProxy] objectForID:trackId
                                      ofClass:[DCTrack class]
