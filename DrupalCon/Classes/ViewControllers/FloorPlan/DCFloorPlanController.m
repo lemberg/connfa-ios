@@ -38,6 +38,7 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
 
+  [self configureUI];
   [self configureTapGestureRecognizers];
   [self checkProxyState];
 }
@@ -45,7 +46,7 @@
 #pragma mark - Private
 
 - (void)configureUI {
-  self.headerView.backgroundColor = [DCAppConfiguration eventDetailHeaderColour];
+  self.headerView.backgroundColor = [DCAppConfiguration navigationBarColor];
   [self.floorButton setTitleColor:[DCAppConfiguration eventDetailNavBarTextColor] forState:UIControlStateNormal];
 }
 
@@ -55,7 +56,6 @@
      dispatch_async(dispatch_get_main_queue(), ^{
        NSLog(@"Data ready callback %d", mainProxyState);
        if (!self.previousState) {
-         [self reloadData];
          self.previousState = mainProxyState;
        }
        
@@ -67,7 +67,10 @@
 }
 
 - (void)reloadData {
-  self.floors = [[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCHousePlan class] inMainQueue:YES];
+  NSMutableArray *floors = [NSMutableArray arrayWithArray:[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCHousePlan class] inMainQueue:YES]];
+  NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"order" ascending:YES];
+  [floors sortUsingDescriptors:@[sort]];
+  self.floors = floors;
   
   NSMutableArray *floorTitles = [[NSMutableArray alloc] init];
   for (DCHousePlan *floorPlan in self.floors) {

@@ -3,6 +3,7 @@
 #import "NSDictionary+DC.h"
 #import "DCMainProxy.h"
 #import "NSManagedObject+DC.h"
+#import "SDWebImagePrefetcher.h"
 
 static NSString* kDCHousePlansKey = @"floorPlans";
 static NSString* kDCHousePlanIdKey = @"floorPlanId";
@@ -17,6 +18,7 @@ static NSString* kDCHouseEntityPlanIdKey = @"housePlanId";
 + (void)updateFromDictionary:(NSDictionary*)housePlans
                    inContext:(NSManagedObjectContext*)context {
   // adding
+  NSMutableArray *imageURLs = [[NSMutableArray alloc] init];
   for (NSDictionary* dictionary in housePlans[kDCHousePlansKey]) {
     DCHousePlan* housePlan = (DCHousePlan*)[[DCMainProxy sharedProxy]
         objectForID:[dictionary[kDCHousePlanIdKey] intValue]
@@ -38,12 +40,21 @@ static NSString* kDCHouseEntityPlanIdKey = @"housePlanId";
       housePlan.imageURL = dictionary[kDCHousePlanImageURLKey];
       housePlan.order = [NSNumber
           numberWithFloat:[dictionary[kDCParseObjectOrderKey] floatValue]];
+      [imageURLs  addObject:[NSURL URLWithString:dictionary[kDCHousePlanImageURLKey]]];
     }
   }
+  
+  [DCHousePlan prefetchImageForURLs:imageURLs];
 }
 
 + (NSString*)idKey {
   return (NSString*)kDCHouseEntityPlanIdKey;
+}
+
++ (void)prefetchImageForURLs:(NSArray *)prefetchURLs {
+  if (prefetchURLs.count > 0) {
+    [[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:prefetchURLs];
+  }
 }
 
 @end
