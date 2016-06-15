@@ -4,10 +4,11 @@
 #import "DCMainProxy.h"
 #import "NSManagedObject+DC.h"
 
-static NSString* kDCHousePlansKey = @"housePlans";
-static NSString* kDCHousePlanIdKey = @"housePlanId";
-static NSString* kDCHousePlanNameKey = @"housePlanName";
-static NSString* kDCHousePlanImageURLKey = @"housePlanImageURL";
+static NSString* kDCHousePlansKey = @"floorPlans";
+static NSString* kDCHousePlanIdKey = @"floorPlanId";
+static NSString* kDCHousePlanNameKey = @"floorPlanName";
+static NSString* kDCHousePlanImageURLKey = @"floorPlanImageURL";
+static NSString* kDCHouseEntityPlanIdKey = @"housePlanId";
 
 @implementation DCHousePlan (DC)
 
@@ -42,7 +43,7 @@ static NSString* kDCHousePlanImageURLKey = @"housePlanImageURL";
 }
 
 + (NSString*)idKey {
-  return (NSString*)kDCHousePlanIdKey;
+  return (NSString*)kDCHouseEntityPlanIdKey;
 }
 
 @end

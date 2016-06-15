@@ -44,7 +44,7 @@
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
-  return UIStatusBarStyleDefault;
+  return UIStatusBarStyleLightContent;
 }
 
 - (UIImageView*)findHairlineImageViewUnder:(UIView*)view {
@@ -69,5 +69,11 @@
                                        NSStringFromClass(self.class), message]];
   [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
+
+- (void)updateLabel:(UILabel *)label withFontName:(NSString *)fontName {
+  CGFloat fontHeight = label.font.pointSize;
+  label.font = [DCAppConfiguration fontWithName:fontName andSize:fontHeight];
+}
+
 
 @end

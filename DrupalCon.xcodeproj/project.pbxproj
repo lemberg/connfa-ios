@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		283A1F351CB4E5B5007F6BCB /* Smythe-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 283A1F341CB4E5B5007F6BCB /* Smythe-Regular.ttf */; };
 		5DC8C415198656DA00BF5816 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C414198656DA00BF5816 /* Foundation.framework */; };
 		5DC8C417198656DA00BF5816 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C416198656DA00BF5816 /* CoreGraphics.framework */; };
 		5DC8C419198656DA00BF5816 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C418198656DA00BF5816 /* UIKit.framework */; };
@@ -16,6 +17,10 @@
 		842B5E631AC579C2009614A5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 842B5E621AC579C2009614A5 /* libz.dylib */; };
 		842B5E651AC579D0009614A5 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 842B5E641AC579D0009614A5 /* AdSupport.framework */; };
 		849EFDDB19A4ACB800C43E05 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849EFDDA19A4ACB800C43E05 /* CoreData.framework */; };
+		A06091171CD0BF1A00B8C2FD /* DCSocialMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A06091161CD0BF1A00B8C2FD /* DCSocialMediaViewController.m */; };
+		A06091301CD0E13500B8C2FD /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A060912D1CD0E13500B8C2FD /* TwitterKit.framework */; };
+		A06091311CD0E13500B8C2FD /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A060912E1CD0E13500B8C2FD /* TwitterKitResources.bundle */; };
+		A06091321CD0E13500B8C2FD /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A060912F1CD0E13500B8C2FD /* TwitterCore.framework */; };
 		A6580B7D1C5F60F5001B0D62 /* DCAlertsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6580B7C1C5F60F5001B0D62 /* DCAlertsManager.m */; };
 		A66BD0BF1C5BBAB700C568EE /* UIAlertView+DCWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A66BD0BE1C5BBAB700C568EE /* UIAlertView+DCWrapper.m */; };
 		A678FD441C03590B00F24105 /* main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A678FD421C03590B00F24105 /* main.xcdatamodeld */; };
@@ -23,6 +28,9 @@
 		A678FD511C0366AF00F24105 /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A678FD4C1C0366AF00F24105 /* MFSideMenuContainerViewController.m */; };
 		A678FD521C0366AF00F24105 /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = A678FD4E1C0366AF00F24105 /* MFSideMenuShadow.m */; };
 		A678FD531C0366AF00F24105 /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A678FD501C0366AF00F24105 /* UIViewController+MFSideMenuAdditions.m */; };
+		A68AE7C11C626470002E862D /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A68AE7BE1C626470002E862D /* OpenSans-Bold.ttf */; };
+		A68AE7C21C626470002E862D /* OpenSans-CondBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A68AE7BF1C626470002E862D /* OpenSans-CondBold.ttf */; };
+		A68AE7C31C626470002E862D /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A68AE7C01C626470002E862D /* OpenSans-Regular.ttf */; };
 		A690C2AE1BFDDD2400DC5EB8 /* DC-Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2111BF4E9C60093AD65 /* DC-Images.xcassets */; };
 		A6C5F2571BF4E9C60093AD65 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F0F61BF4E9C50093AD65 /* AppDelegate.m */; };
 		A6C5F2591BF4E9C60093AD65 /* DCAppFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F0F91BF4E9C50093AD65 /* DCAppFacade.m */; };
@@ -51,7 +59,6 @@
 		A6C5F28D1BF4E9C60093AD65 /* UIWebView+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1411BF4E9C50093AD65 /* UIWebView+DC.m */; };
 		A6C5F28F1BF4E9C60093AD65 /* DCHousePlan.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1451BF4E9C50093AD65 /* DCHousePlan.m */; };
 		A6C5F2911BF4E9C60093AD65 /* DCLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1471BF4E9C50093AD65 /* DCLocation.m */; };
-		A6C5F2931BF4E9C60093AD65 /* DCTwitter.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1491BF4E9C50093AD65 /* DCTwitter.m */; };
 		A6C5F2951BF4E9C60093AD65 /* DCAppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F14C1BF4E9C50093AD65 /* DCAppSettings.m */; };
 		A6C5F2971BF4E9C60093AD65 /* DCAppSettings+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F14F1BF4E9C50093AD65 /* DCAppSettings+DC.m */; };
 		A6C5F2991BF4E9C60093AD65 /* DCBof+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1511BF4E9C50093AD65 /* DCBof+DC.m */; };
@@ -68,7 +75,6 @@
 		A6C5F2AF1BF4E9C60093AD65 /* DCTime+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1681BF4E9C50093AD65 /* DCTime+DC.m */; };
 		A6C5F2B11BF4E9C60093AD65 /* DCTimeRange+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F16A1BF4E9C50093AD65 /* DCTimeRange+DC.m */; };
 		A6C5F2B31BF4E9C60093AD65 /* DCTrack+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F16C1BF4E9C50093AD65 /* DCTrack+DC.m */; };
-		A6C5F2B51BF4E9C60093AD65 /* DCTwitter+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F16E1BF4E9C50093AD65 /* DCTwitter+DC.m */; };
 		A6C5F2B71BF4E9C60093AD65 /* DCType+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1701BF4E9C50093AD65 /* DCType+DC.m */; };
 		A6C5F2B91BF4E9C60093AD65 /* DCBof.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1741BF4E9C50093AD65 /* DCBof.m */; };
 		A6C5F2BB1BF4E9C60093AD65 /* DCEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1761BF4E9C50093AD65 /* DCEvent.m */; };
@@ -150,9 +156,14 @@
 		A6C5F3751BF4E9C60093AD65 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2541BF4E9C60093AD65 /* UIImageView+WebCache.m */; };
 		A6C5F3771BF4E9C60093AD65 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2561BF4E9C60093AD65 /* UIView+WebCacheOperation.m */; };
 		A6D12F0E1BF4F04F00B85FD1 /* DC-Theme.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2121BF4E9C60093AD65 /* DC-Theme.bundle */; };
+		F580ED6C1D0FDE2B00F289F8 /* LESelectedActionSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = F580ED6A1D0FDE2B00F289F8 /* LESelectedActionSheetController.m */; };
+		F580ED6D1D0FDE2B00F289F8 /* LESelectedActionSheetController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F580ED6B1D0FDE2B00F289F8 /* LESelectedActionSheetController.xib */; };
+		F5D072CE1D0844AD00331E07 /* DCFloorPlanController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D072CD1D0844AD00331E07 /* DCFloorPlanController.m */; };
+		A6F456401C6B490900EF3DCD /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6F4563F1C6B490900EF3DCD /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		565951671CFDB497002158F5 /* main_2. 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "main_2. 2.xcdatamodel"; sourceTree = "<group>"; };
 		5DC8C411198656DA00BF5816 /* DrupalCon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrupalCon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC8C414198656DA00BF5816 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5DC8C416198656DA00BF5816 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -164,6 +175,11 @@
 		842B5E641AC579D0009614A5 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		849EFDDA19A4ACB800C43E05 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		84D654641ACC5C1D0099B461 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A06091151CD0BF1A00B8C2FD /* DCSocialMediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCSocialMediaViewController.h; sourceTree = "<group>"; };
+		A06091161CD0BF1A00B8C2FD /* DCSocialMediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCSocialMediaViewController.m; sourceTree = "<group>"; };
+		A060912D1CD0E13500B8C2FD /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
+		A060912E1CD0E13500B8C2FD /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = TwitterKit.framework/Versions/A/Resources/TwitterKitResources.bundle; sourceTree = "<group>"; };
+		A060912F1CD0E13500B8C2FD /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterCore.framework; sourceTree = "<group>"; };
 		A6580B7B1C5F60F5001B0D62 /* DCAlertsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCAlertsManager.h; sourceTree = "<group>"; };
 		A6580B7C1C5F60F5001B0D62 /* DCAlertsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCAlertsManager.m; sourceTree = "<group>"; };
 		A66BD0BD1C5BBAB700C568EE /* UIAlertView+DCWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertView+DCWrapper.h"; sourceTree = "<group>"; };
@@ -178,6 +194,9 @@
 		A678FD4E1C0366AF00F24105 /* MFSideMenuShadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuShadow.m; sourceTree = "<group>"; };
 		A678FD4F1C0366AF00F24105 /* UIViewController+MFSideMenuAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MFSideMenuAdditions.h"; sourceTree = "<group>"; };
 		A678FD501C0366AF00F24105 /* UIViewController+MFSideMenuAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MFSideMenuAdditions.m"; sourceTree = "<group>"; };
+		A68AE7BE1C626470002E862D /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		A68AE7BF1C626470002E862D /* OpenSans-CondBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-CondBold.ttf"; sourceTree = "<group>"; };
+		A68AE7C01C626470002E862D /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		A6C5F0F51BF4E9C50093AD65 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A6C5F0F61BF4E9C50093AD65 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		A6C5F0F81BF4E9C50093AD65 /* DCAppFacade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCAppFacade.h; sourceTree = "<group>"; };
@@ -232,8 +251,6 @@
 		A6C5F1451BF4E9C50093AD65 /* DCHousePlan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCHousePlan.m; sourceTree = "<group>"; };
 		A6C5F1461BF4E9C50093AD65 /* DCLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCLocation.h; sourceTree = "<group>"; };
 		A6C5F1471BF4E9C50093AD65 /* DCLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCLocation.m; sourceTree = "<group>"; };
-		A6C5F1481BF4E9C50093AD65 /* DCTwitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCTwitter.h; sourceTree = "<group>"; };
-		A6C5F1491BF4E9C50093AD65 /* DCTwitter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCTwitter.m; sourceTree = "<group>"; };
 		A6C5F14B1BF4E9C50093AD65 /* DCAppSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCAppSettings.h; sourceTree = "<group>"; };
 		A6C5F14C1BF4E9C50093AD65 /* DCAppSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCAppSettings.m; sourceTree = "<group>"; };
 		A6C5F14E1BF4E9C50093AD65 /* DCAppSettings+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DCAppSettings+DC.h"; sourceTree = "<group>"; };
@@ -267,8 +284,6 @@
 		A6C5F16A1BF4E9C50093AD65 /* DCTimeRange+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DCTimeRange+DC.m"; sourceTree = "<group>"; };
 		A6C5F16B1BF4E9C50093AD65 /* DCTrack+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DCTrack+DC.h"; sourceTree = "<group>"; };
 		A6C5F16C1BF4E9C50093AD65 /* DCTrack+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DCTrack+DC.m"; sourceTree = "<group>"; };
-		A6C5F16D1BF4E9C50093AD65 /* DCTwitter+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DCTwitter+DC.h"; sourceTree = "<group>"; };
-		A6C5F16E1BF4E9C50093AD65 /* DCTwitter+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DCTwitter+DC.m"; sourceTree = "<group>"; };
 		A6C5F16F1BF4E9C50093AD65 /* DCType+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DCType+DC.h"; sourceTree = "<group>"; };
 		A6C5F1701BF4E9C50093AD65 /* DCType+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DCType+DC.m"; sourceTree = "<group>"; };
 		A6C5F1731BF4E9C50093AD65 /* DCBof.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCBof.h; sourceTree = "<group>"; };
@@ -431,6 +446,12 @@
 		A6C5F2541BF4E9C60093AD65 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		A6C5F2551BF4E9C60093AD65 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		A6C5F2561BF4E9C60093AD65 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		F54B3D721CF5FB960031BAF4 /* main_2.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = main_2.1.xcdatamodel; sourceTree = "<group>"; };
+		F580ED691D0FDE2B00F289F8 /* LESelectedActionSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LESelectedActionSheetController.h; sourceTree = "<group>"; };
+		F580ED6A1D0FDE2B00F289F8 /* LESelectedActionSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LESelectedActionSheetController.m; sourceTree = "<group>"; };
+		F580ED6B1D0FDE2B00F289F8 /* LESelectedActionSheetController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LESelectedActionSheetController.xib; sourceTree = "<group>"; };
+		F5D072CC1D0844AD00331E07 /* DCFloorPlanController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCFloorPlanController.h; path = FloorPlan/DCFloorPlanController.h; sourceTree = "<group>"; };
+		F5D072CD1D0844AD00331E07 /* DCFloorPlanController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCFloorPlanController.m; path = FloorPlan/DCFloorPlanController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -447,8 +468,10 @@
 				A6C5F3511BF4E9C60093AD65 /* Crashlytics.framework in Frameworks */,
 				5DC8C417198656DA00BF5816 /* CoreGraphics.framework in Frameworks */,
 				5DC8C419198656DA00BF5816 /* UIKit.framework in Frameworks */,
+				A06091321CD0E13500B8C2FD /* TwitterCore.framework in Frameworks */,
 				5DC8C415198656DA00BF5816 /* Foundation.framework in Frameworks */,
 				A6C5F3531BF4E9C60093AD65 /* Fabric.framework in Frameworks */,
+				A06091301CD0E13500B8C2FD /* TwitterKit.framework in Frameworks */,
 				A6C5F3551BF4E9C60093AD65 /* libGoogleAnalyticsServices.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -490,6 +513,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A06091141CD0BF1A00B8C2FD /* SocialMedia */ = {
+			isa = PBXGroup;
+			children = (
+				A06091151CD0BF1A00B8C2FD /* DCSocialMediaViewController.h */,
+				A06091161CD0BF1A00B8C2FD /* DCSocialMediaViewController.m */,
+			);
+			path = SocialMedia;
+			sourceTree = "<group>";
+		};
 		A6580B7A1C5F60F5001B0D62 /* Alerts */ = {
 			isa = PBXGroup;
 			children = (
@@ -529,6 +561,17 @@
 				A678FD501C0366AF00F24105 /* UIViewController+MFSideMenuAdditions.m */,
 			);
 			path = Sidebar;
+			sourceTree = "<group>";
+		};
+		A68AE7BD1C626470002E862D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				283A1F341CB4E5B5007F6BCB /* Smythe-Regular.ttf */,
+				A68AE7BE1C626470002E862D /* OpenSans-Bold.ttf */,
+				A68AE7BF1C626470002E862D /* OpenSans-CondBold.ttf */,
+				A68AE7C01C626470002E862D /* OpenSans-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		A6C5F0F21BF4E9C50093AD65 /* DrupalCon */ = {
@@ -660,6 +703,7 @@
 		A6C5F11A1BF4E9C50093AD65 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				F580ED681D0FDE2B00F289F8 /* LESelectedActionSheetController */,
 				A66BD0BC1C5BBAA100C568EE /* AlertView */,
 				A6C5F11B1BF4E9C50093AD65 /* AppConfiuguration */,
 				A6C5F11E1BF4E9C50093AD65 /* Collections */,
@@ -777,8 +821,6 @@
 				A6C5F1451BF4E9C50093AD65 /* DCHousePlan.m */,
 				A6C5F1461BF4E9C50093AD65 /* DCLocation.h */,
 				A6C5F1471BF4E9C50093AD65 /* DCLocation.m */,
-				A6C5F1481BF4E9C50093AD65 /* DCTwitter.h */,
-				A6C5F1491BF4E9C50093AD65 /* DCTwitter.m */,
 			);
 			path = AppInfo;
 			sourceTree = "<group>";
@@ -826,8 +868,6 @@
 				A6C5F16A1BF4E9C50093AD65 /* DCTimeRange+DC.m */,
 				A6C5F16B1BF4E9C50093AD65 /* DCTrack+DC.h */,
 				A6C5F16C1BF4E9C50093AD65 /* DCTrack+DC.m */,
-				A6C5F16D1BF4E9C50093AD65 /* DCTwitter+DC.h */,
-				A6C5F16E1BF4E9C50093AD65 /* DCTwitter+DC.m */,
 				A6C5F16F1BF4E9C50093AD65 /* DCType+DC.h */,
 				A6C5F1701BF4E9C50093AD65 /* DCType+DC.m */,
 			);
@@ -995,9 +1035,11 @@
 		A6C5F1AC1BF4E9C50093AD65 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				F5D072CB1D08325600331E07 /* FloorPlan */,
 				A6C5F1AD1BF4E9C50093AD65 /* Base */,
 				A6C5F1B21BF4E9C50093AD65 /* EventFilter */,
 				A6C5F1B91BF4E9C50093AD65 /* Info */,
+				A06091141CD0BF1A00B8C2FD /* SocialMedia */,
 				A6C5F1C01BF4E9C50093AD65 /* Location */,
 				A6C5F1C51BF4E9C50093AD65 /* LoginViewController */,
 				A6C5F1CA1BF4E9C50093AD65 /* MainNavigation */,
@@ -1198,6 +1240,7 @@
 		A6C5F2101BF4E9C60093AD65 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A68AE7BD1C626470002E862D /* Fonts */,
 				A6C5F2111BF4E9C60093AD65 /* DC-Images.xcassets */,
 				A6C5F2121BF4E9C60093AD65 /* DC-Theme.bundle */,
 				A6C5F2161BF4E9C60093AD65 /* Storyboards */,
@@ -1213,6 +1256,7 @@
 				A6C5F2181BF4E9C60093AD65 /* Info.storyboard */,
 				A6C5F2191BF4E9C60093AD65 /* Main.storyboard */,
 				A6C5F21A1BF4E9C60093AD65 /* Speakers.storyboard */,
+				A6F4563F1C6B490900EF3DCD /* Launch Screen.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1252,6 +1296,9 @@
 		A6C5F2251BF4E9C60093AD65 /* Crashlytics */ = {
 			isa = PBXGroup;
 			children = (
+				A060912D1CD0E13500B8C2FD /* TwitterKit.framework */,
+				A060912E1CD0E13500B8C2FD /* TwitterKitResources.bundle */,
+				A060912F1CD0E13500B8C2FD /* TwitterCore.framework */,
 				A6C5F2261BF4E9C60093AD65 /* Crashlytics.framework */,
 				A6C5F2271BF4E9C60093AD65 /* Fabric.framework */,
 			);
@@ -1317,6 +1364,25 @@
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
+		F580ED681D0FDE2B00F289F8 /* LESelectedActionSheetController */ = {
+			isa = PBXGroup;
+			children = (
+				F580ED691D0FDE2B00F289F8 /* LESelectedActionSheetController.h */,
+				F580ED6A1D0FDE2B00F289F8 /* LESelectedActionSheetController.m */,
+				F580ED6B1D0FDE2B00F289F8 /* LESelectedActionSheetController.xib */,
+			);
+			path = LESelectedActionSheetController;
+			sourceTree = "<group>";
+		};
+		F5D072CB1D08325600331E07 /* FloorPlan */ = {
+			isa = PBXGroup;
+			children = (
+				F5D072CC1D0844AD00331E07 /* DCFloorPlanController.h */,
+				F5D072CD1D0844AD00331E07 /* DCFloorPlanController.m */,
+			);
+			name = FloorPlan;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1373,14 +1439,21 @@
 			files = (
 				A6C5F33F1BF4E9C60093AD65 /* Info.storyboard in Resources */,
 				A6C5F3471BF4E9C60093AD65 /* event_detail_style.css in Resources */,
+				A06091311CD0E13500B8C2FD /* TwitterKitResources.bundle in Resources */,
 				A6C5F3411BF4E9C60093AD65 /* Main.storyboard in Resources */,
 				A690C2AE1BFDDD2400DC5EB8 /* DC-Images.xcassets in Resources */,
+				283A1F351CB4E5B5007F6BCB /* Smythe-Regular.ttf in Resources */,
+				A68AE7C21C626470002E862D /* OpenSans-CondBold.ttf in Resources */,
 				A6C5F3431BF4E9C60093AD65 /* Speakers.storyboard in Resources */,
 				A6C5F3571BF4E9C60093AD65 /* LICENSE in Resources */,
+				F580ED6D1D0FDE2B00F289F8 /* LESelectedActionSheetController.xib in Resources */,
 				A6C5F3491BF4E9C60093AD65 /* style.css in Resources */,
 				A6C5F33D1BF4E9C60093AD65 /* Events.storyboard in Resources */,
 				A6C5F34B1BF4E9C60093AD65 /* DrupalCon-Info.plist in Resources */,
+				A6F456401C6B490900EF3DCD /* Launch Screen.storyboard in Resources */,
+				A68AE7C31C626470002E862D /* OpenSans-Regular.ttf in Resources */,
 				A6C5F3211BF4E9C60093AD65 /* DCEventCell.xib in Resources */,
+				A68AE7C11C626470002E862D /* OpenSans-Bold.ttf in Resources */,
 				A6D12F0E1BF4F04F00B85FD1 /* DC-Theme.bundle in Resources */,
 				A6C5F3451BF4E9C60093AD65 /* about_img.png in Resources */,
 			);
@@ -1444,15 +1517,14 @@
 				A6C5F2AF1BF4E9C60093AD65 /* DCTime+DC.m in Sources */,
 				A6C5F32B1BF4E9C60093AD65 /* DCSpeakerCell.m in Sources */,
 				A6C5F36B1BF4E9C60093AD65 /* UIButton+WebCache.m in Sources */,
+				F580ED6C1D0FDE2B00F289F8 /* LESelectedActionSheetController.m in Sources */,
 				A6C5F2591BF4E9C60093AD65 /* DCAppFacade.m in Sources */,
-				A6C5F2931BF4E9C60093AD65 /* DCTwitter.m in Sources */,
 				A6C5F2AB1BF4E9C60093AD65 /* DCSocialEvent+DC.m in Sources */,
 				A6C5F2CB1BF4E9C60093AD65 /* DCType.m in Sources */,
 				A6C5F2A91BF4E9C60093AD65 /* DCPoi+DC.m in Sources */,
 				A6C5F2CD1BF4E9C60093AD65 /* DCInfo.m in Sources */,
 				A6C5F2BD1BF4E9C60093AD65 /* DCMainEvent.m in Sources */,
 				A6C5F3291BF4E9C60093AD65 /* DCEventDetailHeaderCell.m in Sources */,
-				A6C5F2B51BF4E9C60093AD65 /* DCTwitter+DC.m in Sources */,
 				A6C5F2751BF4E9C60093AD65 /* NSDictionary+DC.m in Sources */,
 				A6C5F2651BF4E9C60093AD65 /* DCEventDataSource.m in Sources */,
 				A6C5F2F11BF4E9C60093AD65 /* DCInfoViewController.m in Sources */,
@@ -1493,11 +1565,13 @@
 				A6C5F2891BF4E9C60093AD65 /* NSManagedObject+DC.m in Sources */,
 				A6C5F3251BF4E9C60093AD65 /* DCProgramHeaderCellView.m in Sources */,
 				A6C5F3771BF4E9C60093AD65 /* UIView+WebCacheOperation.m in Sources */,
+				F5D072CE1D0844AD00331E07 /* DCFloorPlanController.m in Sources */,
 				A6C5F29F1BF4E9C60093AD65 /* DCInfo+DC.m in Sources */,
 				A6C5F3691BF4E9C60093AD65 /* SDWebImagePrefetcher.m in Sources */,
 				A6C5F2E91BF4E9C60093AD65 /* DCEventFilterHeaderCell.m in Sources */,
 				A6C5F28F1BF4E9C60093AD65 /* DCHousePlan.m in Sources */,
 				A6C5F2771BF4E9C60093AD65 /* UIColor+Helper.m in Sources */,
+				A06091171CD0BF1A00B8C2FD /* DCSocialMediaViewController.m in Sources */,
 				A6C5F2851BF4E9C60093AD65 /* UIImage+Extension.m in Sources */,
 				A6C5F27F1BF4E9C60093AD65 /* DCDateHelper.m in Sources */,
 				A6C5F2731BF4E9C60093AD65 /* NSArray+DC.m in Sources */,
@@ -1611,19 +1685,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Lyubomyr Dutko (FN2T3UCV4E)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Lyubomyr Dutko (FN2T3UCV4E)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DrupalCon",
-					"$(PROJECT_DIR)/DrupalCon/CrashLytics",
 					"$(PROJECT_DIR)/DrupalCon/Vendor/Crashlytics",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "DrupalCon/SupportingFiles/DrupalCon-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/DrupalCon/SupportingFiles/DrupalCon-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1631,7 +1704,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon.qa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f55145e2-0b5e-4175-92a7-ddd2376e97f9";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1642,19 +1715,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Lyubomyr Dutko (FN2T3UCV4E)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Lyubomyr Dutko (FN2T3UCV4E)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/DrupalCon",
-					"$(PROJECT_DIR)/DrupalCon/CrashLytics",
 					"$(PROJECT_DIR)/DrupalCon/Vendor/Crashlytics",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "DrupalCon/SupportingFiles/DrupalCon-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/DrupalCon/SupportingFiles/DrupalCon-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1662,7 +1734,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon.qa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f55145e2-0b5e-4175-92a7-ddd2376e97f9";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1695,9 +1767,11 @@
 		A678FD421C03590B00F24105 /* main.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				565951671CFDB497002158F5 /* main_2. 2.xcdatamodel */,
+				F54B3D721CF5FB960031BAF4 /* main_2.1.xcdatamodel */,
 				A678FD431C03590B00F24105 /* main_2.0.xcdatamodel */,
 			);
-			currentVersion = A678FD431C03590B00F24105 /* main_2.0.xcdatamodel */;
+			currentVersion = 565951671CFDB497002158F5 /* main_2. 2.xcdatamodel */;
 			path = main.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

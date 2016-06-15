@@ -4,6 +4,10 @@
 #import "DCSideMenuType.h"
 #import "UIColor+Helper.h"
 
+const NSString*  kFontOpenSansBold = @"OpenSans-Bold";
+const NSString*  kFontOpenSansCondBold = @"Open Sans Condensed";
+const NSString*  kFontOpenSansRegular = @"Open Sans";
+
 @implementation DCAppConfiguration
 
 static NSString* const kNavigationBarColour = @"NavigationBarColour";
@@ -17,6 +21,7 @@ static NSString* const kEventDate = @"EventDate";
 static NSString* const kEventPlace = @"EventPlace";
 
 static NSBundle* themeBundle;
+
 
 + (void)initialize {
   NSString* bundlePath =
@@ -109,11 +114,25 @@ static NSBundle* themeBundle;
       kMenuType : @(DCMENU_MYSCHEDULE_ITEM)
     },
     @{
+      kMenuItemTitle : @"Floor Plan",
+      kMenuItemIcon : @"menu_icon_floor_plan",
+      kMenuItemSelectedIcon : @"menu_icon_floor_plan_sel",
+      kMenuItemControllerId : @"DCFloorPlanController",
+      kMenuType : @(DCMENU_FLOORPLAN_ITEM)
+    },
+    @{
       kMenuItemTitle : @"Location",
       kMenuItemIcon : @"menu_icon_location",
       kMenuItemSelectedIcon : @"menu_icon_location_sel",
       kMenuItemControllerId : @"LocationViewController",
       kMenuType : @(DCMENU_LOCATION_ITEM)
+    },
+    @{
+      kMenuItemTitle : @"Social Media",
+      kMenuItemIcon : @"menu_icon_social_media",
+      kMenuItemSelectedIcon : @"menu_icon_social_media_sel",
+      kMenuItemControllerId : @"DCSocialMediaViewController",
+      kMenuType : @(DCMENU_SOCIALMEDIA_ITEM)
     },
     @{
       kMenuItemTitle : @"Info",
@@ -143,8 +162,11 @@ static NSBundle* themeBundle;
 }
 
 + (NSString*)googleAnalyticsID {
-  return NSBundle.mainBundle
-      .infoDictionary[@"GoogleAnalytics"][@"GoogleAnalyticsID"];
+  return GOOGLE_ANALYTICS_APP_ID;
+}
+
++ (UIFont *)fontWithName:(NSString *)name andSize:(CGFloat)size {
+  return [UIFont fontWithName:name size:size];
 }
 
 @end

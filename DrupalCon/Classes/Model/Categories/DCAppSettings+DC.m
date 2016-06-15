@@ -6,6 +6,8 @@
 @implementation DCAppSettings (DC)
 static NSString* kDCAppSettingsTimeZoneValue = @"timezone";
 static NSString* kDCAppSettings = @"settings";
+static NSString* kDCTwitterWidgetHTML = @"twitterWidgetHTML";
+static NSString* ksearchQuery = @"twitterSearchQuery";
 
 + (void)updateFromDictionary:(NSDictionary*)dictionary
                    inContext:(NSManagedObjectContext*)context {
@@ -24,8 +26,11 @@ static NSString* kDCAppSettings = @"settings";
   }
 
   if ([[dictionary allKeys] containsObject:kDCAppSettings]) {
-    NSString *eventTimeZoneName = dictionary[kDCAppSettings][kDCAppSettingsTimeZoneValue];
+    NSDictionary* settingsDict = dictionary[kDCAppSettings];
+    NSString *eventTimeZoneName = settingsDict[kDCAppSettingsTimeZoneValue];
     appSettings.timeZoneName = eventTimeZoneName;
+    appSettings.widgetHTML = settingsDict[kDCTwitterWidgetHTML];
+    appSettings.searchQuery = settingsDict[ksearchQuery];
   }
 }
 @end

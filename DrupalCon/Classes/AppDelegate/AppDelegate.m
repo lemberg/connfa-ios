@@ -7,6 +7,7 @@
 #import "DCLevel+DC.h"
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+#import <TwitterKit/TwitterKit.h>
 #import "NSUserDefaults+DC.h"
 
 @interface AppDelegate ()
@@ -19,7 +20,8 @@
 - (BOOL)application:(UIApplication*)application
     didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
   // Initialise crashlytics
-  [Fabric with:@[ CrashlyticsKit ]];
+  [[Twitter sharedInstance] startWithConsumerKey:TWITTER_API_KEY consumerSecret:TWITTER_API_SECRET];
+  [Fabric with:@[[Crashlytics class], [Twitter class]]];
 
   [self initializeGoogleAnalytics];
   [self handleUpdateData];
@@ -31,6 +33,14 @@
   NSLog(@"====DEBUG MODE======");
   NSLog(@"====================");
 #endif
+  
+  [[UIBarButtonItem appearance]
+   setTitleTextAttributes: @{NSForegroundColorAttributeName:[UIColor whiteColor],
+                             NSFontAttributeName:
+                               [UIFont fontWithName:kFontOpenSansRegular size:16.0]
+                            }
+   forState: UIControlStateNormal];
+
 
   return YES;
 }

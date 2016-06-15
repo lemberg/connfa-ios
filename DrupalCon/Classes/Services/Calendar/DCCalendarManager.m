@@ -104,7 +104,7 @@ NSString* kCalendarIdKey = @"CalendarIdKey";
     case EKAuthorizationStatusDenied:
     case EKAuthorizationStatusRestricted: {
       [self showAlertWithTitle:@"Privacy Warning"
-                       message:@"Permission was not granted for Calendar"];
+                       message:@"Permission was not granted for Calendar."];
 
     } break;
     default:

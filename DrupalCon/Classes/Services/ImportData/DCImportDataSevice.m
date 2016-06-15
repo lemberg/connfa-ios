@@ -16,7 +16,6 @@
 #import "DCHousePlan+DC.h"
 #import "DCPoi+DC.h"
 #import "DCInfo+DC.h"
-#import "DCTwitter+DC.h"
 #import "DCAppSettings+DC.h"
 
 #import "DCWebService.h"
@@ -31,13 +30,12 @@ static NSString* const LEVELS_URI = @"getLevels";
 static NSString* const TRACKS_URI = @"getTracks";
 static NSString* const SPEAKERS_URI = @"getSpeakers";
 static NSString* const LOCATIONS_URI = @"getLocations";
-static NSString* const HOUSEPLANS_URI = @"getHousePlans";
+static NSString* const HOUSEPLANS_URI = @"getFloorPlans";
 static NSString* const SESSIONS_URI = @"getSessions";
 static NSString* const BOFS_URI = @"getBofs";
 static NSString* const SOCIAL_EVENTS_URI = @"getSocialEvents";
 static NSString* const POI_URI = @"getPOI";
 static NSString* const INFO_URI = @"getInfo";
-static NSString* const TWITTER_URI = @"getTwitter";
 static NSString* const SETTINGS_URI = @"getSettings";
 
 @interface DCImportDataSevice ()
@@ -91,8 +89,7 @@ static NSString* const SETTINGS_URI = @"getSettings";
       SOCIAL_EVENTS_URI : [DCSocialEvent class],
       LOCATIONS_URI : [DCLocation class],
       POI_URI : [DCPoi class],
-      INFO_URI : [DCInfo class],
-      TWITTER_URI : [DCTwitter class]
+      INFO_URI : [DCInfo class]     
     };
   }
   return _classesMap;
@@ -328,12 +325,10 @@ static NSString* const SETTINGS_URI = @"getSettings";
       result = INFO_URI;
       break;
 
-    case 12:
-      result = TWITTER_URI;
-      break;
-
-    default:
+    case 0:
       result = SETTINGS_URI;
+      break;
+    default:
       break;
   }
 

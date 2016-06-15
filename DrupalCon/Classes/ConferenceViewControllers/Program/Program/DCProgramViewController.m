@@ -219,7 +219,7 @@
 
   NSDate* date = _days[day];
   self.dateLabel.text =
-      date ? [DCDateHelper convertDate:date toDefaultTimeFormat:@"EEEE dd"]
+      date ? [[DCDateHelper convertDate:date toApplicationFormat:@"EEEE dd"] uppercaseString]
            : nil;
 }
 

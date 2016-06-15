@@ -153,7 +153,7 @@ typedef void (^UpdateDataFail)(NSString* reason);
         dispatch_async(dispatch_get_main_queue(), ^{
 
           [DCAlertsManager showAlertWithTitle:@"Attention"
-                                      message:@"Internet connection is not available at this moment. Please, try later"];
+                                      message:@"Internet connection is not available at this moment. Please, try later."];
         });
       }
     }
