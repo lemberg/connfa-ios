@@ -17,5 +17,5 @@ typedef enum {
 
 - (void)arrangeNavigationBar;
 - (void)registerScreenLoadAtGA:(NSString*)message;
-
+- (void)updateLabel:(UILabel *)label withFontName:(NSString *)fontName;
 @end

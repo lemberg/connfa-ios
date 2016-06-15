@@ -37,7 +37,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   
-  self.imageView.image = [UIImage imageNamed:@"testFloor"];
+//  self.imageView.image = [UIImage imageNamed:@"testFloor"];
   
   [self configureTapGestureRecognizers];
   
@@ -71,8 +71,13 @@
     [floorTitles addObject:floorPlan.name];
   }
   self.floorTitles = [NSArray arrayWithArray:floorTitles];
-  [self.floorButton setTitle:floorTitles[self.selectedActionIndex] forState:UIControlStateNormal];
+  if(floorTitles.count > 0){
+      [self.floorButton setTitle:floorTitles[self.selectedActionIndex] forState:UIControlStateNormal];
+  }else{
+      [self.floorButton setTitle:@"No Plans" forState:UIControlStateNormal];
+  }
   [self reloadImage];
+        
 }
 
 - (void)reloadImage {

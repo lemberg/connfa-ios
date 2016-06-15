@@ -6,7 +6,9 @@
   [NSDictionary dictionaryWithObjectsAndKeys:                              \
                     [UIColor whiteColor], NSForegroundColorAttributeName,  \
                     [UIColor whiteColor], NSBackgroundColorAttributeName,  \
-                    [UIFont fontWithName:@"HelveticaNeue-Medium" size:17], \
+                    [UIFont fontWithName:kFontOpenSansBold size:17], \
                     NSFontAttributeName, nil]
 
 #endif
+
+

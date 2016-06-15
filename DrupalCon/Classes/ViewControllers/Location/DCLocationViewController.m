@@ -39,7 +39,7 @@
                                              inMainQueue:YES] lastObject];
   [self updateLocation];
   self.titlesContainerView.backgroundColor =
-      [DCAppConfiguration speakerDetailBarColor];
+      [DCAppConfiguration navigationBarColor];
 
 }
 
@@ -49,7 +49,7 @@
   [super arrangeNavigationBar];
 
   self.navigationController.navigationBar.barTintColor =
-      [DCAppConfiguration speakerDetailBarColor];
+      [DCAppConfiguration navigationBarColor];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -64,7 +64,7 @@
   NSArray* parts;
 
   if (self.location.address)
-    parts = [self.location.address componentsSeparatedByString:@", "];
+    parts = [self.location.address componentsSeparatedByString:@","];
 
   if (parts.count) {
     NSString* streetAndHouse = parts[0];
@@ -75,19 +75,19 @@
       [cityAndProvince appendString:parts[1]];
 
       for (int i = 2; i < parts.count - 1; i++)
-        [cityAndProvince appendFormat:@", %@", parts[i]];
+        [cityAndProvince appendFormat:@" %@", parts[i]];
     }
 
     self.addressLabel.text = self.location.name;
     self.streetAndNumberLabel.text =
         streetAndHouse.length
             ? [NSString stringWithFormat:@"%@,", streetAndHouse]
-            : nil;
-    self.cityAndProvinceLabel.text =
-        cityAndProvince.length
-            ? [NSString stringWithFormat:@"%@,", cityAndProvince]
-            : nil;
-    self.stateLabel.text = state;
+            : @"";
+    self.cityAndProvinceLabel.text = cityAndProvince.length ? [NSString stringWithFormat:@"%@,", cityAndProvince] : @"";
+    NSString *cityAndState = [NSString stringWithFormat:@"%@ %@", self.cityAndProvinceLabel.text, state];
+    self.cityAndProvinceLabel.text = [cityAndState stringByTrimmingCharactersInSet:
+                                        [NSCharacterSet whitespaceCharacterSet]];;
+    self.stateLabel.text = @"";
   } else {
     self.addressLabel.text = @"Location is not available";
     self.streetAndNumberLabel.text = @"";

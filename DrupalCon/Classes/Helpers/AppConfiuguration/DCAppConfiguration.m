@@ -4,6 +4,10 @@
 #import "DCSideMenuType.h"
 #import "UIColor+Helper.h"
 
+const NSString*  kFontOpenSansBold = @"OpenSans-Bold";
+const NSString*  kFontOpenSansCondBold = @"Open Sans Condensed";
+const NSString*  kFontOpenSansRegular = @"Open Sans";
+
 @implementation DCAppConfiguration
 
 static NSString* const kNavigationBarColour = @"NavigationBarColour";
@@ -17,6 +21,7 @@ static NSString* const kEventDate = @"EventDate";
 static NSString* const kEventPlace = @"EventPlace";
 
 static NSBundle* themeBundle;
+
 
 + (void)initialize {
   NSString* bundlePath =
@@ -159,6 +164,10 @@ static NSBundle* themeBundle;
 + (NSString*)googleAnalyticsID {
   return NSBundle.mainBundle
       .infoDictionary[@"GoogleAnalytics"][@"GoogleAnalyticsID"];
+}
+
++ (UIFont *)fontWithName:(NSString *)name andSize:(CGFloat)size {
+  return [UIFont fontWithName:name size:size];
 }
 
 @end
