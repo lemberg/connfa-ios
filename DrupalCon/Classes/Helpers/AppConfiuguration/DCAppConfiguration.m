@@ -109,6 +109,13 @@ static NSBundle* themeBundle;
       kMenuType : @(DCMENU_MYSCHEDULE_ITEM)
     },
     @{
+      kMenuItemTitle : @"Floor Plan",
+      kMenuItemIcon : @"menu_icon_floor_plan",
+      kMenuItemSelectedIcon : @"menu_icon_floor_plan_sel",
+      kMenuItemControllerId : @"DCFloorPlanController",
+      kMenuType : @(DCMENU_FLOORPLAN_ITEM)
+    },
+    @{
       kMenuItemTitle : @"Location",
       kMenuItemIcon : @"menu_icon_location",
       kMenuItemSelectedIcon : @"menu_icon_location_sel",
