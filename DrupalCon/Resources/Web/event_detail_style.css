@@ -1,6 +1,6 @@
  body {
 
-                  font-family: "HelveticaNeue-Light";
+                  font-family: "Open Sans";
                   font-size: 15px;
                   margin-top:0px;
                   margin-left:0px;
@@ -13,7 +13,7 @@
               }
               
               p{
-               font-family: "HelveticaNeue-Light";
+               font-family: "Open Sans";
                font-size: 15px;
                color: #333333;
                line-height: 20px;
@@ -23,7 +23,7 @@
                 margin: 0px 0;
               }
               ul li, ol li{
-                                 font-family: "HelveticaNeue-Light";
+                                 font-family: "Open Sans";
                font-size: 15px;
                color: #333333;
                line-height: 20px;
@@ -31,7 +31,7 @@
 
 
               strong{
-               font-family: "HelveticaNeue-Light";
+               font-family: "Open Sans";
                font-size: 15px;
                color: #333333;
                line-height: 22px;
@@ -43,15 +43,15 @@
                   margin: 15px auto;
               }
               a{
-               font-family: "HelveticaNeue-Light";
+               font-family: "Open Sans";
                font-size: 15px;
                line-height: 22px;
-               color: #be2626;
+               color: #79782E;
                text-decoration: none;
               }
               h1{
-               font-family: "HelveticaNeue-Light";
-               color: #142048;
+               font-family: "Open Sans";
+               color: #333333;
                 font-weight: normal;
                 font-size: 15px;
                 line-height: 20px;
@@ -59,18 +59,18 @@
                 margin-bottom: 26px;
               }
             h2 {
-                font-family: "HelveticaNeue-Light";
+                font-family: "Open Sans";
                 font-size: 15px;
                 font-weight: bold;
-                color: #142048;
+                color: #333333;
                 margin-top: 20px;
                 margin-bottom: 20px;
 
             }
             h3 {
-               font-family: "HelveticaNeue-Light";
+               font-family: "Open Sans";
                font-size: 15px;
-               color: #142048;
+               color: #333333;
                margin-top: 20px;
                margin-bottom: 20px;
                line-height: 20px;

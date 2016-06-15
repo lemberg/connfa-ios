@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>41</string>
+	<string>2</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -34,17 +34,6 @@
 				<key>KitName</key>
 				<string>Crashlytics</string>
 			</dict>
-			<dict>
-				<key>KitInfo</key>
-				<dict>
-					<key>consumerKey</key>
-					<string>Mxl1GoGSM98T3jTIWdlUuqXmh</string>
-					<key>consumerSecret</key>
-					<string>UM74rykaGhxPhhKED2KxJrd6zGBLNWgVsGdlzjdSwSNqLTiyqY</string>
-				</dict>
-				<key>KitName</key>
-				<string>Twitter</string>
-			</dict>
 		</array>
 	</dict>
 	<key>GoogleAnalytics</key>
@@ -53,8 +42,6 @@
 		<integer>50</integer>
 		<key>DryRun</key>
 		<false/>
-		<key>GoogleAnalyticsID</key>
-		<string></string>
 	</dict>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -63,6 +50,13 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>OpenSans-CondBold.ttf</string>
+		<string>Smythe-Regular.ttf</string>
+		<string>OpenSans-Regular.ttf</string>
+		<string>OpenSans-Bold.ttf</string>
+	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>

@@ -20,6 +20,7 @@
 - (BOOL)application:(UIApplication*)application
     didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
   // Initialise crashlytics
+  [[Twitter sharedInstance] startWithConsumerKey:TWITTER_API_KEY consumerSecret:TWITTER_API_SECRET];
   [Fabric with:@[[Crashlytics class], [Twitter class]]];
 
   [self initializeGoogleAnalytics];
@@ -32,6 +33,14 @@
   NSLog(@"====DEBUG MODE======");
   NSLog(@"====================");
 #endif
+  
+  [[UIBarButtonItem appearance]
+   setTitleTextAttributes: @{NSForegroundColorAttributeName:[UIColor whiteColor],
+                             NSFontAttributeName:
+                               [UIFont fontWithName:kFontOpenSansRegular size:16.0]
+                            }
+   forState: UIControlStateNormal];
+
 
   return YES;
 }

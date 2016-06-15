@@ -1,11 +1,19 @@
 
 #import <Foundation/Foundation.h>
 
-//#define SERVER_URL @"http://drupalconbarcelona2015.uat.link"
 #define SERVER_URL @"http://connfa-integration.uat.link"
 #define BUNDLE_NAME @"DC-Theme"
+#define GOOGLE_ANALYTICS_APP_ID @"Google Analytics API key stub"
+#define TWITTER_API_KEY @"Twitter API key stub"
+#define TWITTER_API_SECRET @"Twitter API secret stub"
+
+
 
 #define BASE_URL [NSString stringWithFormat:@"%@/api/v2/", SERVER_URL]
+
+extern NSString* kFontOpenSansBold;
+extern NSString* kFontOpenSansCondBold;
+extern NSString* kFontOpenSansRegular;
 
 @interface DCAppConfiguration : NSObject
 
@@ -23,5 +31,7 @@
 + (NSInteger)dispatchInvervalGA;
 + (BOOL)dryRunGA;
 + (NSString*)googleAnalyticsID;
+
++ (UIFont *)fontWithName:(NSString *)name andSize:(CGFloat)size;
 
 @end

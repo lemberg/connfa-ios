@@ -103,9 +103,6 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
   [self arrangeNavigationBar];
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-  return UIStatusBarStyleDefault;
-}
 
 #pragma mark - UI initialization
 
