@@ -224,7 +224,16 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YXi-Wp-DlS" userLabel="Header View">
                                 <rect key="frame" x="0.0" y="20" width="320" height="35"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="0.0" placeholderIntrinsicHeight="30" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eFO-zo-gil">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eXS-OJ-9pW" userLabel="Show Action Sheet Button">
+                                        <rect key="frame" x="60" y="0.0" width="200" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="4sK-SN-Anh"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="didTouchFloorButton:" destination="xJp-X6-qI9" eventType="touchUpInside" id="ycG-Vl-Jco"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="0.0" placeholderIntrinsicHeight="30" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eFO-zo-gil">
                                         <rect key="frame" x="160" y="3" width="0.0" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" id="X47-BN-nO9"/>
@@ -238,7 +247,7 @@
                                             <action selector="didTouchFloorButton:" destination="Gat-vg-07H" eventType="touchUpInside" id="a1P-JS-AbG"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kNE-1S-neJ">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kNE-1S-neJ">
                                         <rect key="frame" x="162" y="8" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="NPB-wL-bOd"/>
@@ -254,9 +263,13 @@
                                 <color key="backgroundColor" red="0.0" green="0.49411764705882355" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="kNE-1S-neJ" firstAttribute="leading" secondItem="eFO-zo-gil" secondAttribute="trailing" constant="2" id="2FP-jf-Rfx"/>
+                                    <constraint firstItem="eXS-OJ-9pW" firstAttribute="top" secondItem="YXi-Wp-DlS" secondAttribute="top" id="9ou-Xu-obq"/>
                                     <constraint firstItem="eFO-zo-gil" firstAttribute="centerY" secondItem="YXi-Wp-DlS" secondAttribute="centerY" id="HK8-Un-wbm"/>
                                     <constraint firstItem="kNE-1S-neJ" firstAttribute="centerY" secondItem="eFO-zo-gil" secondAttribute="centerY" id="Lcc-Ef-k9u"/>
                                     <constraint firstItem="eFO-zo-gil" firstAttribute="centerX" secondItem="YXi-Wp-DlS" secondAttribute="centerX" id="MA2-Bc-X3y"/>
+                                    <constraint firstItem="eXS-OJ-9pW" firstAttribute="centerY" secondItem="YXi-Wp-DlS" secondAttribute="centerY" id="Xhh-qi-DTD"/>
+                                    <constraint firstAttribute="bottom" secondItem="eXS-OJ-9pW" secondAttribute="bottom" id="fU1-FJ-PAF"/>
+                                    <constraint firstItem="eXS-OJ-9pW" firstAttribute="centerX" secondItem="YXi-Wp-DlS" secondAttribute="centerX" id="g9U-s5-dLs"/>
                                     <constraint firstAttribute="height" constant="35" id="lZG-RN-snh"/>
                                 </constraints>
                             </view>
