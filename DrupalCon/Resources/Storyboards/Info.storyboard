@@ -312,7 +312,7 @@
     <resources>
         <image name="arrow_down" width="20" height="20"/>
         <image name="ic_experience_advanced" width="12" height="12"/>
-        <image name="info_header" width="320" height="246"/>
+        <image name="info_header" width="320" height="245"/>
         <image name="testFloor" width="848" height="480"/>
     </resources>
 </document>

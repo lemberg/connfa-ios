@@ -108,7 +108,6 @@
   LESelectedActionSheetController *actionSheetController = [[LESelectedActionSheetController alloc] init];
   actionSheetController.delegate = self;
   actionSheetController.selectedItemIndex = self.selectedActionIndex;
-  actionSheetController.selectedActionTitleColor = [DCAppConfiguration favoriteEventColor];
   [self presentViewController:actionSheetController animated:YES completion:nil];
 }
 
@@ -186,7 +185,7 @@
 }
 
 - (NSString *)titleForActionAtIndex:(NSInteger)index {
-  return self.floorTitles[index];
+  return [self.floorTitles[index] uppercaseString];
 }
 
 - (void)performActionAtIndex:(NSInteger)index {
