@@ -37,7 +37,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-
+  
   [self configureUI];
   [self configureTapGestureRecognizers];
   [self checkProxyState];
@@ -61,7 +61,7 @@
        }
        
        if (mainProxyState == DCMainProxyStateDataUpdated) {
-//         [self reloadData];
+         //         [self reloadData];
        }
      });
    }];
@@ -81,8 +81,8 @@
     self.floorTitles = [NSArray arrayWithArray:floorTitles];
     [self.floorButton setTitle:[floorTitles[self.selectedActionIndex] uppercaseString] forState:UIControlStateNormal];
     [self reloadImage];
-    self.floorButton.enabled = YES;
-    self.downArrowButton.hidden = NO;
+    self.floorButton.enabled =  floors.count > 1 ? YES : NO;
+    self.downArrowButton.hidden = floors.count > 1 ? NO : YES;
   } else {
     [self.floorButton setTitle:[@"No Floors " uppercaseString] forState:UIControlStateNormal];
     self.floorButton.enabled = NO;
@@ -91,13 +91,13 @@
 }
 
 - (void)reloadImage {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+  [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
   DCHousePlan *floorPlan = self.floors[self.selectedActionIndex];
   NSURL *URL = [NSURL URLWithString:floorPlan.imageURL];
   [self.imageView sd_setImageWithURL:URL placeholderImage:nil
                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-  }];
+                             [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                           }];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
