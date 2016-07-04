@@ -247,8 +247,8 @@
                                             <action selector="didTouchFloorButton:" destination="Gat-vg-07H" eventType="touchUpInside" id="a1P-JS-AbG"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kNE-1S-neJ">
-                                        <rect key="frame" x="162" y="8" width="20" height="20"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kNE-1S-neJ">
+                                        <rect key="frame" x="168" y="8" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="NPB-wL-bOd"/>
                                             <constraint firstAttribute="width" constant="20" id="Skn-s7-zh7"/>
@@ -262,7 +262,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.49411764705882355" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="kNE-1S-neJ" firstAttribute="leading" secondItem="eFO-zo-gil" secondAttribute="trailing" constant="2" id="2FP-jf-Rfx"/>
+                                    <constraint firstItem="kNE-1S-neJ" firstAttribute="leading" secondItem="eFO-zo-gil" secondAttribute="trailing" constant="8" id="2FP-jf-Rfx"/>
                                     <constraint firstItem="eXS-OJ-9pW" firstAttribute="top" secondItem="YXi-Wp-DlS" secondAttribute="top" id="9ou-Xu-obq"/>
                                     <constraint firstItem="eFO-zo-gil" firstAttribute="centerY" secondItem="YXi-Wp-DlS" secondAttribute="centerY" id="HK8-Un-wbm"/>
                                     <constraint firstItem="kNE-1S-neJ" firstAttribute="centerY" secondItem="eFO-zo-gil" secondAttribute="centerY" id="Lcc-Ef-k9u"/>
