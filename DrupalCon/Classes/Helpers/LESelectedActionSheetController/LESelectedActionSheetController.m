@@ -125,11 +125,8 @@ static NSString * const cellIdentifier = @"cellIdenifier";
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-  UIVisualEffectView *cellBackground = [[UIVisualEffectView alloc] initWithFrame:cell.frame];
-  cellBackground.effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
-  cell.backgroundView = cellBackground;
   cell.backgroundView.alpha = 1.0;
-  cell.backgroundColor = [UIColor clearColor];
+  cell.backgroundColor = [UIColor colorWithWhite:255.0/255.0 alpha:0.85];
   cell.textLabel.font = self.actionTitleFont;
   cell.textLabel.textAlignment = NSTextAlignmentCenter;
   cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -147,7 +144,6 @@ static NSString * const cellIdentifier = @"cellIdenifier";
   cell.tintColor = self.selectedActionTitleColor;
   cell.textLabel.textColor = cell.tintColor;
   cell.layoutMargins = UIEdgeInsetsMake(0, 45, 0, 0);
-  cell.backgroundView.alpha = 0.4;
 }
 
 - (void)deselectCell:(UITableViewCell *)cell {
@@ -155,7 +151,6 @@ static NSString * const cellIdentifier = @"cellIdenifier";
   cell.textLabel.textColor = cell.tintColor;
   cell.accessoryType = UITableViewCellAccessoryNone;
   cell.layoutMargins = UIEdgeInsetsMake(0, 0, 0, 0);
-  cell.backgroundView.alpha = 1.0;
 }
 
 #pragma mark - Overrides
