@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		283A1F351CB4E5B5007F6BCB /* Smythe-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 283A1F341CB4E5B5007F6BCB /* Smythe-Regular.ttf */; };
+		283A1F351CB4E5B5007F6BCB /* (null) in Resources */ = {isa = PBXBuildFile; };
 		5DC8C415198656DA00BF5816 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C414198656DA00BF5816 /* Foundation.framework */; };
 		5DC8C417198656DA00BF5816 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C416198656DA00BF5816 /* CoreGraphics.framework */; };
 		5DC8C419198656DA00BF5816 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C418198656DA00BF5816 /* UIKit.framework */; };
@@ -156,10 +156,10 @@
 		A6C5F3751BF4E9C60093AD65 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2541BF4E9C60093AD65 /* UIImageView+WebCache.m */; };
 		A6C5F3771BF4E9C60093AD65 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2561BF4E9C60093AD65 /* UIView+WebCacheOperation.m */; };
 		A6D12F0E1BF4F04F00B85FD1 /* DC-Theme.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2121BF4E9C60093AD65 /* DC-Theme.bundle */; };
+		A6F456401C6B490900EF3DCD /* (null) in Resources */ = {isa = PBXBuildFile; };
 		F580ED6C1D0FDE2B00F289F8 /* LESelectedActionSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = F580ED6A1D0FDE2B00F289F8 /* LESelectedActionSheetController.m */; };
 		F580ED6D1D0FDE2B00F289F8 /* LESelectedActionSheetController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F580ED6B1D0FDE2B00F289F8 /* LESelectedActionSheetController.xib */; };
 		F5D072CE1D0844AD00331E07 /* DCFloorPlanController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D072CD1D0844AD00331E07 /* DCFloorPlanController.m */; };
-		A6F456401C6B490900EF3DCD /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6F4563F1C6B490900EF3DCD /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -566,7 +566,6 @@
 		A68AE7BD1C626470002E862D /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				283A1F341CB4E5B5007F6BCB /* Smythe-Regular.ttf */,
 				A68AE7BE1C626470002E862D /* OpenSans-Bold.ttf */,
 				A68AE7BF1C626470002E862D /* OpenSans-CondBold.ttf */,
 				A68AE7C01C626470002E862D /* OpenSans-Regular.ttf */,
@@ -1256,7 +1255,6 @@
 				A6C5F2181BF4E9C60093AD65 /* Info.storyboard */,
 				A6C5F2191BF4E9C60093AD65 /* Main.storyboard */,
 				A6C5F21A1BF4E9C60093AD65 /* Speakers.storyboard */,
-				A6F4563F1C6B490900EF3DCD /* Launch Screen.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -1442,7 +1440,7 @@
 				A06091311CD0E13500B8C2FD /* TwitterKitResources.bundle in Resources */,
 				A6C5F3411BF4E9C60093AD65 /* Main.storyboard in Resources */,
 				A690C2AE1BFDDD2400DC5EB8 /* DC-Images.xcassets in Resources */,
-				283A1F351CB4E5B5007F6BCB /* Smythe-Regular.ttf in Resources */,
+				283A1F351CB4E5B5007F6BCB /* (null) in Resources */,
 				A68AE7C21C626470002E862D /* OpenSans-CondBold.ttf in Resources */,
 				A6C5F3431BF4E9C60093AD65 /* Speakers.storyboard in Resources */,
 				A6C5F3571BF4E9C60093AD65 /* LICENSE in Resources */,
@@ -1450,7 +1448,7 @@
 				A6C5F3491BF4E9C60093AD65 /* style.css in Resources */,
 				A6C5F33D1BF4E9C60093AD65 /* Events.storyboard in Resources */,
 				A6C5F34B1BF4E9C60093AD65 /* DrupalCon-Info.plist in Resources */,
-				A6F456401C6B490900EF3DCD /* Launch Screen.storyboard in Resources */,
+				A6F456401C6B490900EF3DCD /* (null) in Resources */,
 				A68AE7C31C626470002E862D /* OpenSans-Regular.ttf in Resources */,
 				A6C5F3211BF4E9C60093AD65 /* DCEventCell.xib in Resources */,
 				A68AE7C11C626470002E862D /* OpenSans-Bold.ttf in Resources */,

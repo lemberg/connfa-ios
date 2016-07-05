@@ -13,17 +13,13 @@
 
 @interface DCFloorPlanController () <LESelectedActionSheetControllerProtocol, UIScrollViewDelegate>
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageViewBottomConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageViewTopConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageViewTrailingConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageViewLeadingConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerViewHeightConstraint;
 
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UIButton *floorButton;
 @property (weak, nonatomic) IBOutlet UIButton *downArrowButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic)  UIImageView *imageView;
 @property (strong, nonatomic) NSArray *floors;
 @property (strong, nonatomic) NSArray *floorTitles;
 @property (nonatomic) NSUInteger selectedActionIndex;
@@ -38,12 +34,48 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   
+  self.imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+  [self.scrollView addSubview:self.imageView];
+  
+  [self setZoomScale];
+  [self setupGestureRecognizer];
+  
+  
   [self configureUI];
-  [self configureTapGestureRecognizers];
+  [self setupGestureRecognizer];
   [self checkProxyState];
 }
 
+#pragma mark - Overrides
+
+#pragma mark - Overrides
+
+- (void)viewDidLayoutSubviews {
+  [super viewDidLayoutSubviews];
+  
+  [self setZoomScale];
+}
+
 #pragma mark - Private
+
+- (void)setZoomScale {
+  CGSize imageViewSize = self.imageView.bounds.size;
+  CGSize scrollViewSize = self.scrollView.bounds.size;
+  CGFloat widthScale = scrollViewSize.width / imageViewSize.width;
+  CGFloat heightScale = scrollViewSize.height / imageViewSize.height;
+  
+  self.scrollView.minimumZoomScale =  MIN(widthScale, heightScale);
+  self.scrollView.zoomScale = self.scrollView.minimumZoomScale;
+  self.scrollView.maximumZoomScale = 1.0;
+}
+
+- (void)setContentInsets {
+  CGSize imageViewSize = self.imageView.frame.size;
+  CGSize scrollViewSize = self.scrollView.bounds.size;
+  CGFloat verticalPadding = imageViewSize.height < scrollViewSize.height ? (scrollViewSize.height - imageViewSize.height) / 2 : 0;
+  CGFloat horizontalPadding = imageViewSize.width < scrollViewSize.width ? (scrollViewSize.width - imageViewSize.width) / 2 : 0;
+  self.scrollView.contentInset = UIEdgeInsetsMake(verticalPadding, horizontalPadding, verticalPadding, horizontalPadding);
+}
 
 - (void)configureUI {
   self.headerView.backgroundColor = [DCAppConfiguration navigationBarColor];
@@ -61,7 +93,6 @@
        }
        
        if (mainProxyState == DCMainProxyStateDataUpdated) {
-         //         [self reloadData];
        }
      });
    }];
@@ -97,6 +128,12 @@
   [self.imageView sd_setImageWithURL:URL placeholderImage:nil
                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                              [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                             self.imageView.image = image;
+                             CGRect frame = self.imageView.frame;
+                             frame.size = image.size;
+                             self.imageView.frame = frame;
+                             self.scrollView.contentSize = image.size;
+                             [self setZoomScale];
                            }];
 }
 
@@ -111,65 +148,21 @@
   [self presentViewController:actionSheetController animated:YES completion:nil];
 }
 
-- (void)updateMinZoomScaleForSize:(CGSize)size {
-  CGFloat widthScale = size.width / self.imageView.bounds.size.width;
-  CGFloat heightScale = (size.height - self.headerViewHeightConstraint.constant) / self.imageView.bounds.size.height;
-  CGFloat minScale = MIN(widthScale, heightScale);
-  
-  self.scrollView.minimumZoomScale = minScale;
-  self.scrollView.zoomScale = minScale;
+#pragma mark - Gesture Recognizer
+
+- (void)setupGestureRecognizer {
+  UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+  doubleTap.numberOfTapsRequired = 2;
+  [self.scrollView addGestureRecognizer:doubleTap];
 }
 
-- (void)updateConstraintsForSize:(CGSize)size {
-  CGFloat yOffset = MAX(0, ((size.height - self.headerViewHeightConstraint.constant) - self.imageView.frame.size.height) / 2);
-  self.imageViewTopConstraint.constant = yOffset;
-  self.imageViewBottomConstraint.constant = yOffset;
-  
-  CGFloat xOffset = MAX(0, (size.width - self.imageView.frame.size.width) / 2);
-  self.imageViewLeadingConstraint.constant = xOffset;
-  self.imageViewTrailingConstraint.constant = xOffset;
-  [self.view layoutIfNeeded];
-}
-
-- (void)configureTapGestureRecognizers {
-  UITapGestureRecognizer *doubleTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollViewDoubleTapped:)];
-  doubleTapRecognizer.numberOfTapsRequired = 2;
-  doubleTapRecognizer.numberOfTouchesRequired = 1;
-  [self.scrollView addGestureRecognizer:doubleTapRecognizer];
-  
-  UITapGestureRecognizer *twoFingerTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollViewTwoFingerTapped:)];
-  twoFingerTapRecognizer.numberOfTapsRequired = 1;
-  twoFingerTapRecognizer.numberOfTouchesRequired = 2;
-  [self.scrollView addGestureRecognizer:twoFingerTapRecognizer];
-}
-
-- (void)scrollViewDoubleTapped:(UITapGestureRecognizer *)recognizer {
-  CGPoint pointInView = [recognizer locationInView:self.imageView];
-  CGFloat newZoomScale = self.scrollView.zoomScale * 1.5;
-  newZoomScale = MIN(newZoomScale, self.scrollView.maximumZoomScale);
-  CGSize scrollViewSize = self.scrollView.bounds.size;
-  CGFloat w = scrollViewSize.width / newZoomScale;
-  CGFloat h = scrollViewSize.height / newZoomScale;
-  CGFloat x = pointInView.x - (w / 2.0);
-  CGFloat y = pointInView.y - (h / 2.0);
-  CGRect rectToZoomTo = CGRectMake(x, y, w, h);
-  [self.scrollView zoomToRect:rectToZoomTo animated:YES];
-  [self updateConstraintsForSize:self.view.bounds.size];
-}
-
-- (void)scrollViewTwoFingerTapped:(UITapGestureRecognizer*)recognizer {
-  CGFloat newZoomScale = self.scrollView.zoomScale / 1.5f;
-  newZoomScale = MAX(newZoomScale, self.scrollView.minimumZoomScale);
-  [self.scrollView setZoomScale:newZoomScale animated:YES];
-}
-
-#pragma mark - Overrides
-
-- (void)viewDidLayoutSubviews {
-  [super viewDidLayoutSubviews];
-  [self.view layoutIfNeeded];
-  [self updateMinZoomScaleForSize:self.view.bounds.size];
-  [self updateConstraintsForSize:self.view.bounds.size];
+- (void)handleDoubleTap:(UITapGestureRecognizer*)recoginzer{
+  if (self.scrollView.zoomScale > self.scrollView.minimumZoomScale) {
+    [self.scrollView setZoomScale:self.scrollView.minimumZoomScale animated:YES];
+  }
+  else{
+    [self.scrollView setZoomScale:self.scrollView.maximumZoomScale animated:YES];
+  }
 }
 
 #pragma mark - IBAction
@@ -200,8 +193,8 @@
   return self.imageView;
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-  [self updateConstraintsForSize:self.view.bounds.size];
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+  [self setContentInsets];
 }
 
 @end

@@ -275,17 +275,6 @@
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SKb-ay-0Oy">
                                 <rect key="frame" x="0.0" y="54" width="320" height="514"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testFloor" translatesAutoresizingMaskIntoConstraints="NO" id="jXu-mE-Cst">
-                                        <rect key="frame" x="0.0" y="0.0" width="848" height="480"/>
-                                    </imageView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="jXu-mE-Cst" secondAttribute="bottom" id="2My-ir-1Yt"/>
-                                    <constraint firstItem="jXu-mE-Cst" firstAttribute="top" secondItem="SKb-ay-0Oy" secondAttribute="top" id="8fe-a5-b92"/>
-                                    <constraint firstAttribute="trailing" secondItem="jXu-mE-Cst" secondAttribute="trailing" id="mHY-pY-0BD"/>
-                                    <constraint firstItem="jXu-mE-Cst" firstAttribute="leading" secondItem="SKb-ay-0Oy" secondAttribute="leading" id="uwf-XL-jYR"/>
-                                </constraints>
                                 <connections>
                                     <outlet property="delegate" destination="xJp-X6-qI9" id="Ktl-rg-mRU"/>
                                 </connections>
@@ -309,11 +298,6 @@
                         <outlet property="floorButton" destination="eFO-zo-gil" id="SFt-ia-YSV"/>
                         <outlet property="headerView" destination="YXi-Wp-DlS" id="gou-Rc-aAI"/>
                         <outlet property="headerViewHeightConstraint" destination="lZG-RN-snh" id="Ssb-Rs-YlO"/>
-                        <outlet property="imageView" destination="jXu-mE-Cst" id="g9B-AA-N6M"/>
-                        <outlet property="imageViewBottomConstraint" destination="2My-ir-1Yt" id="9Vl-cF-xte"/>
-                        <outlet property="imageViewLeadingConstraint" destination="uwf-XL-jYR" id="EMp-dt-cgd"/>
-                        <outlet property="imageViewTopConstraint" destination="8fe-a5-b92" id="3NA-zq-DQz"/>
-                        <outlet property="imageViewTrailingConstraint" destination="mHY-pY-0BD" id="Umv-4H-CQl"/>
                         <outlet property="scrollView" destination="SKb-ay-0Oy" id="oBU-tC-kpo"/>
                     </connections>
                 </viewController>
@@ -326,6 +310,5 @@
         <image name="arrow_down" width="20" height="20"/>
         <image name="ic_experience_advanced" width="12" height="12"/>
         <image name="info_header" width="320" height="245"/>
-        <image name="testFloor" width="848" height="480"/>
     </resources>
 </document>
