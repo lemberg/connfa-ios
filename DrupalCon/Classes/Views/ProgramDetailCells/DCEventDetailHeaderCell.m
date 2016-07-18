@@ -51,7 +51,7 @@
   if (!shouldHideTrackAndLevelView) {
     self.trackLabel.text = [(DCTrack*)[event.tracks anyObject] name];
     self.experienceLabel.text =
-        event.level.name ? [NSString stringWithFormat:@"Experience level: %@",
+    event.level.name ? [NSString stringWithFormat:@"Experience level: %@",
                                                       event.level.name]
                          : nil;
 
@@ -74,6 +74,13 @@
     self.trackAndLevelViewHeight.priority = 900;
     self.TrackAndLevelView.hidden = YES;
   }
+  
+  
+  self.experienceLabel.text =
+  event.level.levelId !=0 ? [NSString stringWithFormat:@"Experience level: %@",
+                      event.level.name] : nil;
+  self.experienceLabel.hidden = level.levelId.integerValue == 0;
+  self.experienceIcon.hidden = level.levelId.integerValue == 0;
 }
 
 @end
