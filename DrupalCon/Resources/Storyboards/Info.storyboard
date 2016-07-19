@@ -307,7 +307,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="arrow_down" width="20" height="20"/>
+        <image name="arrow_down" width="10" height="10"/>
         <image name="ic_experience_advanced" width="12" height="12"/>
         <image name="info_header" width="320" height="245"/>
     </resources>

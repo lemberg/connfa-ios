@@ -110,12 +110,12 @@
       [floorTitles addObject:floorPlan.name];
     }
     self.floorTitles = [NSArray arrayWithArray:floorTitles];
-    [self.floorButton setTitle:[floorTitles[self.selectedActionIndex] uppercaseString] forState:UIControlStateNormal];
+    [self.floorButton setTitle:floorTitles[self.selectedActionIndex] forState:UIControlStateNormal];
     [self reloadImage];
     self.floorButton.enabled =  floors.count > 1 ? YES : NO;
     self.downArrowButton.hidden = floors.count > 1 ? NO : YES;
   } else {
-    [self.floorButton setTitle:[@"No Floors " uppercaseString] forState:UIControlStateNormal];
+    [self.floorButton setTitle:@"No Floors " forState:UIControlStateNormal];
     self.floorButton.enabled = NO;
     self.downArrowButton.hidden = YES;
   }
@@ -178,12 +178,12 @@
 }
 
 - (NSString *)titleForActionAtIndex:(NSInteger)index {
-  return [self.floorTitles[index] uppercaseString];
+  return self.floorTitles[index];
 }
 
 - (void)performActionAtIndex:(NSInteger)index {
   self.selectedActionIndex = index;
-  [self.floorButton setTitle:[self.floorTitles[index] uppercaseString] forState:UIControlStateNormal];
+  [self.floorButton setTitle:self.floorTitles[index] forState:UIControlStateNormal];
   [self reloadImage];
 }
 

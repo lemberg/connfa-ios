@@ -24,6 +24,7 @@
 @property (nonatomic) CGFloat itemHeight;
 @property (nonatomic) CGFloat cornerRadius;
 @property (strong, nonatomic) UIColor *actionTitleColor;
+@property (strong, nonatomic) UIColor *actionTextColor;
 @property (strong, nonatomic) UIColor *selectedActionTitleColor;
 @property (strong, nonatomic) UIFont *actionTitleFont;
 @property (strong, nonatomic) NSString *dismissTitle;

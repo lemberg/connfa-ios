@@ -40,14 +40,15 @@ static NSString * const cellIdentifier = @"cellIdenifier";
   self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
   self.cornerRadius = 12.0;
   self.itemHeight = 58.0;
-  self.actionTitleColor = [UIColor blackColor];
-  self.selectedActionTitleColor = [UIColor blackColor];
+  self.actionTextColor = [UIColor colorWithRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1.0];
+  self.actionTitleColor = [DCAppConfiguration favoriteEventColor];
+  self.selectedActionTitleColor = [DCAppConfiguration favoriteEventColor];
   self.selectedItemIndex = 0;
-  self.dismissTitle = [@"Cancel" uppercaseString];
-  self.dismissTitleColor = [UIColor blackColor];
-  self.dismissTintColor = [UIColor blackColor];
-  self.actionTitleFont = [UIFont systemFontOfSize:17.0];
-  self.dismissTitleFont = [UIFont systemFontOfSize:17.0];
+  self.dismissTitle = @"Cancel";
+  self.dismissTitleColor = [DCAppConfiguration favoriteEventColor];
+  self.dismissTintColor = [DCAppConfiguration favoriteEventColor];
+  self.actionTitleFont = [UIFont systemFontOfSize:17.0 weight:UIFontWeightSemibold];
+  self.dismissTitleFont = [UIFont systemFontOfSize:17.0 weight:UIFontWeightSemibold];
   self.requiredSelection = NO;
 }
 
@@ -119,21 +120,22 @@ static NSString * const cellIdentifier = @"cellIdenifier";
   [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellIdentifier];
   self.tableView.layer.cornerRadius = self.cornerRadius;
   self.tableView.clipsToBounds = YES;
-  UIVisualEffectView *tableBackground = [[UIVisualEffectView alloc] initWithFrame: self.tableView.frame];
-  tableBackground.effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+  UIView *tableBackground = [[UIView alloc] initWithFrame: self.tableView.frame];
+  tableBackground.backgroundColor = [UIColor colorWithRed:218.0/255.0 green:218.0/255.0 blue:222.0/255.0 alpha:1.0];
   self.tableView.backgroundView = tableBackground;
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
   cell.backgroundView.alpha = 1.0;
-  cell.backgroundColor = [UIColor colorWithWhite:255.0/255.0 alpha:0.85];
+  cell.backgroundColor = [UIColor colorWithRed:249.0/255.0 green:249.0/255.0 blue:249.0/255.0 alpha:1.0];
   cell.textLabel.font = self.actionTitleFont;
-  cell.textLabel.textAlignment = NSTextAlignmentCenter;
+  cell.textLabel.textAlignment = NSTextAlignmentLeft;
+  //cell.contentView.alignmentRectInsets = UIEdgeInsetsMake(0, 50, 0, 0);
   cell.selectionStyle = UITableViewCellSelectionStyleNone;
-  cell.layoutMargins = UIEdgeInsetsMake(0, 0, 0, 0);
+  cell.layoutMargins = UIEdgeInsetsMake(0, 57, 0, 0);
   cell.accessoryType = UITableViewCellAccessoryNone;
   cell.tintColor = self.actionTitleColor;
-  cell.textLabel.textColor = cell.tintColor;
+  cell.textLabel.textColor = self.actionTextColor;
   cell.textLabel.text = [self.delegate titleForActionAtIndex:indexPath.section];
   if (indexPath.section == self.selectedItemIndex)
     [self selectCell:cell];
@@ -142,15 +144,15 @@ static NSString * const cellIdentifier = @"cellIdenifier";
 - (void)selectCell:(UITableViewCell *)cell {
   cell.accessoryType = UITableViewCellAccessoryCheckmark;
   cell.tintColor = self.selectedActionTitleColor;
-  cell.textLabel.textColor = cell.tintColor;
-  cell.layoutMargins = UIEdgeInsetsMake(0, 45, 0, 0);
+  cell.textLabel.textColor = self.actionTextColor;
+  cell.layoutMargins = UIEdgeInsetsMake(0, 57, 0, 0); //45
 }
 
 - (void)deselectCell:(UITableViewCell *)cell {
   cell.tintColor = self.actionTitleColor;
   cell.textLabel.textColor = cell.tintColor;
   cell.accessoryType = UITableViewCellAccessoryNone;
-  cell.layoutMargins = UIEdgeInsetsMake(0, 0, 0, 0);
+  cell.layoutMargins = UIEdgeInsetsMake(0, 57, 0, 0);
 }
 
 #pragma mark - Overrides
