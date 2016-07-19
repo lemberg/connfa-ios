@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -380,6 +380,35 @@
                                     <outlet property="delegate" destination="ON0-IG-lh7" id="75b-iq-r6S"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cID-Tq-1A3" userLabel="No Details View">
+                                <rect key="frame" x="0.0" y="250" width="320" height="298"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_details" translatesAutoresizingMaskIntoConstraints="NO" id="EYf-at-J5b">
+                                        <rect key="frame" x="133" y="55" width="54" height="60"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eZG-8Y-9wn">
+                                        <rect key="frame" x="121" y="130" width="79" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="EYf-at-J5b" firstAttribute="top" secondItem="cID-Tq-1A3" secondAttribute="top" constant="55" id="9TY-vj-bhd"/>
+                                    <constraint firstItem="eZG-8Y-9wn" firstAttribute="leading" secondItem="cID-Tq-1A3" secondAttribute="leading" id="AV1-ei-gdT"/>
+                                    <constraint firstItem="eZG-8Y-9wn" firstAttribute="centerX" secondItem="EYf-at-J5b" secondAttribute="centerX" id="Lo2-vi-c2A"/>
+                                    <constraint firstAttribute="trailing" secondItem="eZG-8Y-9wn" secondAttribute="trailing" id="bya-mI-nDd"/>
+                                    <constraint firstItem="EYf-at-J5b" firstAttribute="centerX" secondItem="cID-Tq-1A3" secondAttribute="centerX" id="cYM-GH-lET"/>
+                                    <constraint firstItem="eZG-8Y-9wn" firstAttribute="top" secondItem="EYf-at-J5b" secondAttribute="bottom" constant="15" id="v4r-WJ-Mvt"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="AV1-ei-gdT"/>
+                                        <exclude reference="bya-mI-nDd"/>
+                                    </mask>
+                                </variation>
+                            </view>
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9XV-I2-mco" userLabel="nav bar background">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                 <subviews>
@@ -404,12 +433,16 @@
                             <constraint firstAttribute="trailing" secondItem="lAE-7I-eW9" secondAttribute="trailing" id="CZD-sK-0tB"/>
                             <constraint firstItem="9XV-I2-mco" firstAttribute="left" secondItem="Kza-K4-VGM" secondAttribute="left" id="ClG-xG-grg"/>
                             <constraint firstItem="tJi-XF-l6U" firstAttribute="top" secondItem="Kza-K4-VGM" secondAttribute="top" id="EAF-To-m6X"/>
+                            <constraint firstItem="JmO-6Y-QMG" firstAttribute="top" secondItem="cID-Tq-1A3" secondAttribute="bottom" id="JO9-Gv-0Cp"/>
                             <constraint firstItem="lAE-7I-eW9" firstAttribute="top" secondItem="Kza-K4-VGM" secondAttribute="top" id="Jgx-4G-vVc"/>
+                            <constraint firstItem="cID-Tq-1A3" firstAttribute="leading" secondItem="Kza-K4-VGM" secondAttribute="leading" id="KTP-2m-IGs"/>
                             <constraint firstAttribute="trailing" secondItem="tJi-XF-l6U" secondAttribute="trailing" id="Prs-mg-clX"/>
                             <constraint firstAttribute="right" secondItem="9XV-I2-mco" secondAttribute="right" id="WOr-Op-zQz"/>
+                            <constraint firstItem="cID-Tq-1A3" firstAttribute="top" secondItem="lAE-7I-eW9" secondAttribute="bottom" id="Wvt-gd-X1Y"/>
                             <constraint firstItem="lAE-7I-eW9" firstAttribute="leading" secondItem="Kza-K4-VGM" secondAttribute="leading" id="c1E-ZW-IcH"/>
                             <constraint firstItem="tJi-XF-l6U" firstAttribute="leading" secondItem="Kza-K4-VGM" secondAttribute="leading" id="oZr-5M-D9u"/>
                             <constraint firstAttribute="bottom" secondItem="tJi-XF-l6U" secondAttribute="bottom" id="qzM-Yu-Oap"/>
+                            <constraint firstAttribute="trailing" secondItem="cID-Tq-1A3" secondAttribute="trailing" id="wmA-d0-Gin"/>
                             <constraint firstItem="9XV-I2-mco" firstAttribute="top" secondItem="Kza-K4-VGM" secondAttribute="top" id="zpj-Ce-bHN"/>
                         </constraints>
                     </view>
@@ -422,6 +455,7 @@
                         <outlet property="backgroundViewTop" destination="Jgx-4G-vVc" id="1Df-Aa-W9S"/>
                         <outlet property="navBarBackgroundTitleLabel" destination="adT-8j-OUI" id="FmU-DN-APP"/>
                         <outlet property="navBarBackgroundView" destination="9XV-I2-mco" id="qeg-q4-XSa"/>
+                        <outlet property="noDetailsView" destination="cID-Tq-1A3" id="BhM-KR-LfE"/>
                         <outlet property="speakerTable" destination="tJi-XF-l6U" id="htp-1M-VeQ"/>
                     </connections>
                 </viewController>
@@ -433,8 +467,9 @@
     <resources>
         <image name="avatar_placeholder" width="40" height="40"/>
         <image name="ic_experience_advanced" width="12" height="12"/>
+        <image name="no_details" width="54" height="60"/>
         <image name="speaker_detail_top" width="320" height="201"/>
-        <image name="twitter" width="90" height="31"/>
-        <image name="website" width="90" height="31"/>
+        <image name="twitter" width="80" height="27"/>
+        <image name="website" width="80" height="27"/>
     </resources>
 </document>

@@ -12,9 +12,10 @@
   if (self.twitterButton.hidden) {
     [self.twitterButton setImage:[UIImage new] forState:UIControlStateNormal];
     self.webButtonLeftPadding.constant = 0;
-
   }
 
+  self.separatorView.hidden = self.twitterButton.hidden && self.webButton.hidden;
+  
   // if there is no description below, remove bottom padding
 //  if (speaker.characteristic.length) {
 //    self.twitterButtonBottomPadding.constant = 0;

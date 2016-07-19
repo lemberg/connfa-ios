@@ -40,6 +40,7 @@ static NSString* eventCellId = @"SpeakerEventCellId";
 @property(nonatomic, strong) UIColor* currentBarColor;
 
 @property(nonatomic, strong) NSDictionary* cellPrototypes;
+@property (weak, nonatomic) IBOutlet UIView *noDetailsView;
 
 @end
 
@@ -66,6 +67,8 @@ static NSString* eventCellId = @"SpeakerEventCellId";
     buttonsCellId :
         [self.speakerTable dequeueReusableCellWithIdentifier:buttonsCellId]
   };
+  
+  [self showNoDetailViewIfNeed];
 }
 
 - (void)arrangeNavigationBar {
@@ -110,6 +113,16 @@ static NSString* eventCellId = @"SpeakerEventCellId";
 
 - (BOOL)isFirstEvent:(NSIndexPath*)indexPath {
   return (indexPath.row == 3);
+}
+
+- (void)showNoDetailViewIfNeed {
+  BOOL show = NO;
+  if (self.speaker.twitterName.length == 0 && self.speaker.webSite.length == 0 &&
+      self.speaker.characteristic.length == 0 && self.speaker.events.count == 0) {
+    show = YES;
+  }
+  
+  self.noDetailsView.hidden = !show;
 }
 
 #pragma mark - UITableView Delegate/DataSourse methods

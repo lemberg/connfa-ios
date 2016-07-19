@@ -743,6 +743,6 @@
         <image name="event_detail_top" width="320" height="112"/>
         <image name="filter_sessions" width="21" height="21"/>
         <image name="ic_experience_advanced" width="12" height="12"/>
-        <image name="no_details" width="90" height="95"/>
+        <image name="no_details" width="54" height="60"/>
     </resources>
 </document>
