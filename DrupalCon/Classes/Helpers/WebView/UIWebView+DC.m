@@ -6,6 +6,7 @@
 
 - (void)loadHTMLString:(NSString*)string style:(NSString*)styleSource {
   string = (IsEmpty(string)) ? @"" : string;
+  NSString *chekedString = [self replaceOccurrencesOfUrlHyperlink:string];
   NSString* html = [NSString
       stringWithFormat:@" <!DOCTYPE html> <html> <head><meta "
                        @"http-equiv=\"content-type\" content=\"text/html; "
@@ -14,7 +15,7 @@
                        @"href=\"%@.css\">"
                        @"<meta name=\"format-detection\" content=\"telephone=no\">"
                        @"</head><body>%@</body></html> ",
-                       styleSource, string];
+                       styleSource, chekedString];
 
   [self loadHTMLString:html baseURL:[self baseURL]];
   self.scrollView.scrollEnabled = NO;
@@ -40,6 +41,26 @@ static inline BOOL IsEmpty(id thing) {
          ([thing respondsToSelector:@selector(count)]
 
           && [(NSArray*)thing count] == 0);
+}
+
+- (NSString *)replaceOccurrencesOfUrlHyperlink:(NSString *)string {
+  NSError *error = nil;
+  NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink
+                                                             error:&error];
+  NSString *stringValue = string;
+  __block NSMutableString *newString = [[NSMutableString alloc] initWithString:stringValue];
+  [detector enumerateMatchesInString:stringValue
+                             options:0
+                               range:NSMakeRange(0, stringValue.length)
+                          usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
+     if (result.resultType == NSTextCheckingTypeLink) {
+       NSString *strURL =  [stringValue substringWithRange:result.range];
+       NSString *link = [NSString stringWithFormat:@"<a href=\"%@\">%@</a>", strURL, strURL];
+       [newString replaceOccurrencesOfString:strURL withString:link options:NSCaseInsensitiveSearch range:NSMakeRange(0, [stringValue length])];
+     }
+   }];
+  
+  return [newString copy];
 }
 
 @end
