@@ -45,6 +45,7 @@ typedef enum {
 
 #pragma mark - work with instances
 - (NSTimeZone*)eventTimeZone;
+- (void)resetEventTimeZone;
 
 - (NSArray*)getAllInstancesOfClass:(Class)aClass inMainQueue:(BOOL)mainQueue;
 - (NSArray*)getAllInstancesOfClass:(Class)aClass

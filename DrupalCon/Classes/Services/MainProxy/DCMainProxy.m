@@ -103,6 +103,10 @@ typedef void (^UpdateDataFail)(NSString* reason);
   return self.applicationTimeZone;
 }
 
+- (void)resetEventTimeZone {
+  self.applicationTimeZone = nil;
+}
+
 - (NSTimeZone *)isSystemTimeCoincidencWithEventTimezone {
   NSTimeZone *eventTimeZone = [self eventTimeZone];
   NSTimeZone *systemTimeZone = [NSTimeZone systemTimeZone];

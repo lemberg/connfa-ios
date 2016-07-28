@@ -60,7 +60,6 @@
          [[DCMainProxy sharedProxy] setDataUpdatedCallback:nil];
        }];
     }
-
   }];
 }
 
@@ -79,11 +78,14 @@
   // application to its current state in case it is terminated later.
   // If your application supports background execution, this method is called
   // instead of applicationWillTerminate: when the user quits.
+  
+  [[DCMainProxy sharedProxy] resetEventTimeZone];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication*)application {
   if ([self.window.rootViewController
           isKindOfClass:[UINavigationController class]]) {
+    [self handleUpdateData];
     [[DCMainProxy sharedProxy] update];
   }
 }
