@@ -59,23 +59,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-
-  [self arrangeNavigationBar];
-}
-
-- (void)arrangeNavigationBar {
-  self.navigationController.navigationBar.tintColor =
-      [DCAppConfiguration navigationBarColor];
-  ;
-  self.navigationItem.title = nil;
-
-  [self.navigationController.navigationBar
-      setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]]
-           forBarMetrics:UIBarMetricsDefault];
-  self.navigationController.navigationBar.shadowImage = [UIImage new];
-  self.navigationController.navigationBar.translucent = YES;
-  self.navigationController.navigationBar.backgroundColor =
-      [UIColor clearColor];
 }
 
 #pragma mark - UITableView delegate and source
