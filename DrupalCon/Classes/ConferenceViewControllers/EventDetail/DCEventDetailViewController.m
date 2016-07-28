@@ -149,17 +149,20 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
   // tag 2: selected state
   favoriteButton.tag = self.event.favorite.boolValue ? 2 : 1;
 
+  if (self.event.link.length > 0) {
   UIBarButtonItem* sharedButton = [[UIBarButtonItem alloc]
       initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                            target:self
                            action:@selector(shareButtonDidClick)];
+    self.navigationItem.rightBarButtonItems = @[ sharedButton, favoriteButton ];
+  } else {
+    self.navigationItem.rightBarButtonItem = favoriteButton;
+  }
 
   UIColor* eventNavColor = [DCAppConfiguration eventDetailNavBarTextColor];
   self.navigationController.navigationBar.tintColor = eventNavColor;
   self.topTitleLabel.textColor = eventNavColor;
   self.currentBarColor = eventNavColor;
-
-  self.navigationItem.rightBarButtonItems = @[ sharedButton, favoriteButton ];
 }
 
 - (BOOL)showEmptyDetailIcon {
