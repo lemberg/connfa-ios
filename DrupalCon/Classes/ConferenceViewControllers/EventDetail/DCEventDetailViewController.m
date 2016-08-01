@@ -115,12 +115,6 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
   [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
-- (BOOL)isHeaderEmpty {
-  NSString* track = [[_event.tracks allObjects].lastObject name];
-  NSString* level = _event.level.name;
-  return [level length] == 0 && [track length] == 0;
-}
-
 - (void)arrangeNavigationBar {
   self.navigatorBarStyle = EBaseViewControllerNatigatorBarStyleTransparrent;
   [super arrangeNavigationBar];
@@ -166,10 +160,11 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
 }
 
 - (BOOL)showEmptyDetailIcon {
-  BOOL isHeaderEmpty = [self isHeaderEmpty];
+  BOOL isTrackEmpty = [[self.event.tracks allObjects].lastObject name].length == 0;
+  BOOL isExperienceEmpty = self.event.level.name.length == 0;
   BOOL isNoSpeakers = [self.speakers count] == 0;
-  BOOL isDescriptionEmpty = _event.desctiptText.length == 0;
-  return isHeaderEmpty && isNoSpeakers && isDescriptionEmpty;
+  BOOL isDescriptionEmpty = self.event.desctiptText.length == 0;
+  return isTrackEmpty && isExperienceEmpty && isNoSpeakers && isDescriptionEmpty;
 }
 
 #pragma mark - Private
