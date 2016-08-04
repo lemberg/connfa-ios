@@ -63,6 +63,8 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
 - (void)viewDidLoad {
   [super viewDidLoad];
 
+  [self setNeedsStatusBarAppearanceUpdate];
+  
   self.cellsForSizeEstimation = @{
     cellIdHeader :
         [self.tableView dequeueReusableCellWithIdentifier:cellIdHeader],
@@ -166,6 +168,10 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
   BOOL isNoSpeakers = [self.speakers count] == 0;
   BOOL isDescriptionEmpty = self.event.desctiptText.length == 0;
   return isTrackEmpty && isExperienceEmpty && isNoSpeakers && isDescriptionEmpty;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+  return UIStatusBarStyleDefault;
 }
 
 #pragma mark - Private
