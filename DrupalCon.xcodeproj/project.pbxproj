@@ -157,6 +157,7 @@
 		A6C5F3771BF4E9C60093AD65 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2561BF4E9C60093AD65 /* UIView+WebCacheOperation.m */; };
 		A6D12F0E1BF4F04F00B85FD1 /* DC-Theme.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2121BF4E9C60093AD65 /* DC-Theme.bundle */; };
 		A6F456401C6B490900EF3DCD /* (null) in Resources */ = {isa = PBXBuildFile; };
+		F547A7E21D537C3200CD24F2 /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F547A7E11D537C3200CD24F2 /* Montserrat-Regular.otf */; };
 		F580ED6C1D0FDE2B00F289F8 /* LESelectedActionSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = F580ED6A1D0FDE2B00F289F8 /* LESelectedActionSheetController.m */; };
 		F580ED6D1D0FDE2B00F289F8 /* LESelectedActionSheetController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F580ED6B1D0FDE2B00F289F8 /* LESelectedActionSheetController.xib */; };
 		F5D072CE1D0844AD00331E07 /* DCFloorPlanController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D072CD1D0844AD00331E07 /* DCFloorPlanController.m */; };
@@ -446,6 +447,7 @@
 		A6C5F2541BF4E9C60093AD65 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		A6C5F2551BF4E9C60093AD65 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		A6C5F2561BF4E9C60093AD65 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		F547A7E11D537C3200CD24F2 /* Montserrat-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.otf"; sourceTree = "<group>"; };
 		F54B3D721CF5FB960031BAF4 /* main_2.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = main_2.1.xcdatamodel; sourceTree = "<group>"; };
 		F580ED691D0FDE2B00F289F8 /* LESelectedActionSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LESelectedActionSheetController.h; sourceTree = "<group>"; };
 		F580ED6A1D0FDE2B00F289F8 /* LESelectedActionSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LESelectedActionSheetController.m; sourceTree = "<group>"; };
@@ -566,6 +568,7 @@
 		A68AE7BD1C626470002E862D /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				F547A7E01D537C3200CD24F2 /* Montserrat */,
 				A68AE7BE1C626470002E862D /* OpenSans-Bold.ttf */,
 				A68AE7BF1C626470002E862D /* OpenSans-CondBold.ttf */,
 				A68AE7C01C626470002E862D /* OpenSans-Regular.ttf */,
@@ -1362,6 +1365,14 @@
 			path = SDWebImage;
 			sourceTree = "<group>";
 		};
+		F547A7E01D537C3200CD24F2 /* Montserrat */ = {
+			isa = PBXGroup;
+			children = (
+				F547A7E11D537C3200CD24F2 /* Montserrat-Regular.otf */,
+			);
+			path = Montserrat;
+			sourceTree = "<group>";
+		};
 		F580ED681D0FDE2B00F289F8 /* LESelectedActionSheetController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1438,6 +1449,7 @@
 				A6C5F33F1BF4E9C60093AD65 /* Info.storyboard in Resources */,
 				A6C5F3471BF4E9C60093AD65 /* event_detail_style.css in Resources */,
 				A06091311CD0E13500B8C2FD /* TwitterKitResources.bundle in Resources */,
+				F547A7E21D537C3200CD24F2 /* Montserrat-Regular.otf in Resources */,
 				A6C5F3411BF4E9C60093AD65 /* Main.storyboard in Resources */,
 				A690C2AE1BFDDD2400DC5EB8 /* DC-Images.xcassets in Resources */,
 				283A1F351CB4E5B5007F6BCB /* (null) in Resources */,
