@@ -6,6 +6,9 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
+        <mutableArray key="Montserrat-Regular.otf">
+            <string>Montserrat-Regular</string>
+        </mutableArray>
         <mutableArray key="OpenSans-CondBold.ttf">
             <string>OpenSans-CondensedBold</string>
             <string>OpenSans-CondensedBold</string>
@@ -20,9 +23,6 @@
             <string>OpenSans</string>
             <string>OpenSans</string>
             <string>OpenSans</string>
-        </mutableArray>
-        <mutableArray key="Smythe-Regular.ttf">
-            <string>Smythe</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -553,9 +553,9 @@
                                                         <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nnb-h4-c6e" userLabel="Part1">
                                                             <rect key="frame" x="0.0" y="0.0" width="320" height="94"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" misplaced="YES" text="Modernizing Testbot: The Future of Drupal.org Automated Testing" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="340" translatesAutoresizingMaskIntoConstraints="NO" id="CQL-fM-7yr" userLabel="Title">
-                                                                    <rect key="frame" x="15" y="12" width="290" height="36"/>
-                                                                    <fontDescription key="fontDescription" name="Smythe" family="Smythe" pointSize="24"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" text="Modernizing Testbot: The Future of Drupal.org Automated Testing" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="340" translatesAutoresizingMaskIntoConstraints="NO" id="CQL-fM-7yr" userLabel="Title">
+                                                                    <rect key="frame" x="15" y="12" width="290" height="48"/>
+                                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="20"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>

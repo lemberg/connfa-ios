@@ -35,7 +35,7 @@
 #endif
   
   [[UIBarButtonItem appearance]
-   setTitleTextAttributes: @{NSForegroundColorAttributeName:[UIColor whiteColor],
+   setTitleTextAttributes: @{NSForegroundColorAttributeName: [DCAppConfiguration eventDetailNavBarTextColor],
                              NSFontAttributeName:
                                [UIFont fontWithName:kFontOpenSansRegular size:16.0]
                             }

@@ -128,12 +128,13 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
   self.navigationController.navigationBar.translucent = YES;
   self.navigationController.navigationBar.backgroundColor =
       [UIColor clearColor];
+  UIColor* eventNavColor = [DCAppConfiguration eventDetailNavBarTextColor];
   UIImage* startImage =
       self.event.favorite.boolValue
           ? [[UIImage imageNamedFromBundle:@"star+"]
-                imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+                imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
           : [[UIImage imageNamedFromBundle:@"star-"]
-                imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+                imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   UIBarButtonItem* favoriteButton = [[UIBarButtonItem alloc]
       initWithImage:startImage
               style:UIBarButtonItemStylePlain
@@ -142,6 +143,7 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
   // tag 1: unselected state
   // tag 2: selected state
   favoriteButton.tag = self.event.favorite.boolValue ? 2 : 1;
+  favoriteButton.tintColor = eventNavColor;
 
   if (self.event.link.length > 0) {
   UIBarButtonItem* sharedButton = [[UIBarButtonItem alloc]
@@ -153,7 +155,6 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
     self.navigationItem.rightBarButtonItem = favoriteButton;
   }
 
-  UIColor* eventNavColor = [DCAppConfiguration eventDetailNavBarTextColor];
   self.navigationController.navigationBar.tintColor = eventNavColor;
   self.topTitleLabel.textColor = eventNavColor;
   self.currentBarColor = eventNavColor;
@@ -397,10 +398,12 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
   sender.image =
       isSelected
           ? [[UIImage imageNamedFromBundle:@"star+"]
-                imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+                imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
           : [[UIImage imageNamedFromBundle:@"star-"]
-                imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+                imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 
+  sender.tintColor = [DCAppConfiguration eventDetailNavBarTextColor];
+  
   if (isSelected) {
     [[DCMainProxy sharedProxy] addToFavoriteEvent:self.event];
   } else {
