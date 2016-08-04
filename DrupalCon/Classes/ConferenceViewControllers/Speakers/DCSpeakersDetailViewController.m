@@ -73,16 +73,14 @@ static NSString* eventCellId = @"SpeakerEventCellId";
 
 - (void)arrangeNavigationBar {
   [super arrangeNavigationBar];
-
-  //    self.navigationController.navigationBar.tintColor = NAV_BAR_COLOR;
+  
   [self.navigationController.navigationBar
-      setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]]
-           forBarMetrics:UIBarMetricsDefault];
+   setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]]
+   forBarMetrics:UIBarMetricsDefault];
   self.navigationController.navigationBar.shadowImage = [UIImage new];
   self.navigationController.navigationBar.translucent = YES;
   self.navigationController.navigationBar.backgroundColor =
-      [UIColor clearColor];
-
+  [UIColor clearColor];
   self.navBarBackgroundView.alpha = 0;
   self.navBarBackgroundTitleLabel.text = self.speaker.name;
 }

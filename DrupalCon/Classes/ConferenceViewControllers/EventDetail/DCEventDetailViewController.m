@@ -118,43 +118,43 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
 - (void)arrangeNavigationBar {
   self.navigatorBarStyle = EBaseViewControllerNatigatorBarStyleTransparrent;
   [super arrangeNavigationBar];
-
+  
   self.navigationController.navigationBar.tintColor =
-      [DCAppConfiguration navigationBarColor];
+  [DCAppConfiguration navigationBarColor];
   [self.navigationController.navigationBar
-      setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]]
-           forBarMetrics:UIBarMetricsDefault];
+   setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]]
+   forBarMetrics:UIBarMetricsDefault];
   self.navigationController.navigationBar.shadowImage = [UIImage new];
   self.navigationController.navigationBar.translucent = YES;
   self.navigationController.navigationBar.backgroundColor =
-      [UIColor clearColor];
+  [UIColor clearColor];
   UIColor* eventNavColor = [DCAppConfiguration eventDetailNavBarTextColor];
   UIImage* startImage =
-      self.event.favorite.boolValue
-          ? [[UIImage imageNamedFromBundle:@"star+"]
-                imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
-          : [[UIImage imageNamedFromBundle:@"star-"]
-                imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+  self.event.favorite.boolValue
+  ? [[UIImage imageNamedFromBundle:@"star+"]
+     imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
+  : [[UIImage imageNamedFromBundle:@"star-"]
+     imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   UIBarButtonItem* favoriteButton = [[UIBarButtonItem alloc]
-      initWithImage:startImage
-              style:UIBarButtonItemStylePlain
-             target:self
-             action:@selector(favoriteButtonDidClick:)];
+                                     initWithImage:startImage
+                                     style:UIBarButtonItemStylePlain
+                                     target:self
+                                     action:@selector(favoriteButtonDidClick:)];
   // tag 1: unselected state
   // tag 2: selected state
   favoriteButton.tag = self.event.favorite.boolValue ? 2 : 1;
   favoriteButton.tintColor = eventNavColor;
-
+  
   if (self.event.link.length > 0) {
-  UIBarButtonItem* sharedButton = [[UIBarButtonItem alloc]
-      initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                           target:self
-                           action:@selector(shareButtonDidClick)];
+    UIBarButtonItem* sharedButton = [[UIBarButtonItem alloc]
+                                     initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                     target:self
+                                     action:@selector(shareButtonDidClick)];
     self.navigationItem.rightBarButtonItems = @[ sharedButton, favoriteButton ];
   } else {
     self.navigationItem.rightBarButtonItem = favoriteButton;
   }
-
+  
   self.navigationController.navigationBar.tintColor = eventNavColor;
   self.topTitleLabel.textColor = eventNavColor;
   self.currentBarColor = eventNavColor;
