@@ -20,13 +20,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="info_header" translatesAutoresizingMaskIntoConstraints="NO" id="Dth-08-nlc">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="246"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="181"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="Dth-08-nlc" secondAttribute="height" multiplier="160:123" id="wxH-7n-wFB"/>
+                                    <constraint firstAttribute="width" secondItem="Dth-08-nlc" secondAttribute="height" multiplier="320:181" id="VbR-wO-ysT"/>
                                 </constraints>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="100" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="cil-f8-zAa">
-                                <rect key="frame" x="0.0" y="246" width="320" height="354"/>
+                                <rect key="frame" x="0.0" y="181" width="320" height="419"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="InfoMenuItemCellId" id="zCZ-fc-6Cg" customClass="DCInfoMenuCell">
@@ -307,6 +307,6 @@
     <resources>
         <image name="arrow_down" width="10" height="10"/>
         <image name="ic_experience_advanced" width="12" height="12"/>
-        <image name="info_header" width="320" height="245"/>
+        <image name="info_header" width="320" height="181"/>
     </resources>
 </document>
