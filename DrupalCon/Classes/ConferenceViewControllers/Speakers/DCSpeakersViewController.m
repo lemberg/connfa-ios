@@ -24,7 +24,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  UIColor *speakerColor = [DCAppConfiguration speakerDetailBarColor];
+  UIColor *speakerColor = [DCAppConfiguration navigationBarColor];
   [[UITableView appearance]
       setSectionIndexBackgroundColor:[UIColor clearColor]];
   [[UITableView appearance]
@@ -48,7 +48,7 @@
   [super arrangeNavigationBar];
   
   self.navigationController.navigationBar.barTintColor =
-  [DCAppConfiguration speakerDetailBarColor];
+  [DCAppConfiguration navigationBarColor];
 }
 
 #pragma mark - UISearchBarDelegate
