@@ -184,7 +184,7 @@
                                 </connections>
                             </tableView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P0a-XF-FKd" userLabel="NoDataView">
-                                <rect key="frame" x="0.0" y="171" width="320" height="139"/>
+                                <rect key="frame" x="0.0" y="166" width="320" height="148"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_details" translatesAutoresizingMaskIntoConstraints="NO" id="snM-S4-k4Z" userLabel="NoEventsImageView">
                                         <rect key="frame" x="110" y="0.0" width="100" height="100"/>
@@ -194,8 +194,8 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Matching Events" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l5d-eC-FFW" userLabel="NoEventsLabel">
-                                        <rect key="frame" x="40" y="111" width="240" height="20"/>
-                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
+                                        <rect key="frame" x="15" y="112" width="290" height="28"/>
+                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="21"/>
                                         <color key="textColor" red="0.63921568627450975" green="0.63921568627450975" blue="0.63921568627450975" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -204,11 +204,10 @@
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="l5d-eC-FFW" secondAttribute="bottom" constant="8" id="5AW-bp-Nq2"/>
                                     <constraint firstItem="snM-S4-k4Z" firstAttribute="centerX" secondItem="P0a-XF-FKd" secondAttribute="centerX" id="AQ2-T8-Skg"/>
-                                    <constraint firstAttribute="trailing" secondItem="l5d-eC-FFW" secondAttribute="trailing" constant="40" id="EBE-ur-MgU"/>
-                                    <constraint firstItem="l5d-eC-FFW" firstAttribute="top" secondItem="snM-S4-k4Z" secondAttribute="bottom" constant="11" id="Rdm-aN-Afx"/>
-                                    <constraint firstItem="l5d-eC-FFW" firstAttribute="leading" secondItem="P0a-XF-FKd" secondAttribute="leading" constant="40" id="USo-dl-oat"/>
+                                    <constraint firstAttribute="trailing" secondItem="l5d-eC-FFW" secondAttribute="trailing" constant="15" id="EBE-ur-MgU"/>
+                                    <constraint firstItem="l5d-eC-FFW" firstAttribute="top" secondItem="snM-S4-k4Z" secondAttribute="bottom" constant="12" id="Rdm-aN-Afx"/>
+                                    <constraint firstItem="l5d-eC-FFW" firstAttribute="leading" secondItem="P0a-XF-FKd" secondAttribute="leading" constant="15" id="USo-dl-oat"/>
                                     <constraint firstItem="snM-S4-k4Z" firstAttribute="top" secondItem="P0a-XF-FKd" secondAttribute="top" id="p1H-6V-vq3"/>
-                                    <constraint firstItem="l5d-eC-FFW" firstAttribute="centerX" secondItem="P0a-XF-FKd" secondAttribute="centerX" id="znD-22-X3p"/>
                                 </constraints>
                             </view>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="8pe-Ox-AMj">
