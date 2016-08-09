@@ -24,6 +24,7 @@
 @property (strong, nonatomic) NSArray *floorTitles;
 @property (nonatomic) NSUInteger selectedActionIndex;
 @property(nonatomic) __block DCMainProxyState previousState;
+@property (weak, nonatomic) IBOutlet UIView *noDataView;
 
 @end
 
@@ -100,6 +101,7 @@
 
 - (void)reloadData {
   NSMutableArray *floors = [NSMutableArray arrayWithArray:[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCHousePlan class] inMainQueue:YES]];
+  self.noDataView.hidden = floors.count > 0;
   if (floors.count > 0) {
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"order" ascending:YES];
     [floors sortUsingDescriptors:@[sort]];
