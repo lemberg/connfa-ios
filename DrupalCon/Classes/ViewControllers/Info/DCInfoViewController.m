@@ -15,6 +15,7 @@
 @property(nonatomic, weak) IBOutlet UITableView* tableView;
 @property(nonatomic, strong) NSArray* items;
 @property(nonatomic) __block DCMainProxyState previousState;
+@property (weak, nonatomic) IBOutlet UIView *noDataView;
 
 @end
 
@@ -24,7 +25,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-
+  
   [[DCMainProxy sharedProxy]
       setDataReadyCallback:^(DCMainProxyState mainProxyState) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -55,6 +56,8 @@
       sortedArrayUsingDescriptors:@[ orderDescriptor, iDDescriptor ]];
 
   [self.tableView reloadData];
+  self.noDataView.hidden = self.items.count > 0;
+  self.tableView.hidden = !(self.items.count > 0);
 }
 
 - (void)viewWillAppear:(BOOL)animated {

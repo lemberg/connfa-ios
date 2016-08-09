@@ -9,6 +9,7 @@
     <customFonts key="customFonts">
         <mutableArray key="OpenSans-Regular.ttf">
             <string>OpenSans</string>
+            <string>OpenSans</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -76,12 +77,42 @@
                                     <constraint firstAttribute="width" secondItem="Dth-08-nlc" secondAttribute="height" multiplier="320:181" id="Y4U-Go-7Xc"/>
                                 </constraints>
                             </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kmA-Wd-A6O" userLabel="NoDataView">
+                                <rect key="frame" x="0.0" y="241" width="320" height="175"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_details" translatesAutoresizingMaskIntoConstraints="NO" id="cHl-bz-ttL" userLabel="NoEventsImageView">
+                                        <rect key="frame" x="110" y="0.0" width="100" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="7EP-9L-P8X"/>
+                                            <constraint firstAttribute="width" secondItem="cHl-bz-ttL" secondAttribute="height" multiplier="1:1" id="cFp-aP-vBC"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currently there are no flor plans" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iIx-IJ-GpI" userLabel="NoEventsLabel">
+                                        <rect key="frame" x="60" y="112" width="200" height="55"/>
+                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="21"/>
+                                        <color key="textColor" red="0.63921568630000003" green="0.63921568630000003" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="iIx-IJ-GpI" firstAttribute="top" secondItem="cHl-bz-ttL" secondAttribute="bottom" constant="12" id="3YL-uZ-Ryh"/>
+                                    <constraint firstItem="cHl-bz-ttL" firstAttribute="top" secondItem="kmA-Wd-A6O" secondAttribute="top" id="KOe-ZD-6yp"/>
+                                    <constraint firstAttribute="trailing" secondItem="iIx-IJ-GpI" secondAttribute="trailing" constant="60" id="R7L-dA-1Pz"/>
+                                    <constraint firstItem="cHl-bz-ttL" firstAttribute="centerX" secondItem="kmA-Wd-A6O" secondAttribute="centerX" id="XLU-ds-YIT"/>
+                                    <constraint firstItem="iIx-IJ-GpI" firstAttribute="leading" secondItem="kmA-Wd-A6O" secondAttribute="leading" constant="60" id="iAa-f7-cz2"/>
+                                    <constraint firstAttribute="bottom" secondItem="iIx-IJ-GpI" secondAttribute="bottom" constant="8" id="skF-jB-6bE"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="cil-f8-zAa" firstAttribute="leading" secondItem="4rw-eC-jzZ" secondAttribute="leading" id="54y-Kt-eGE"/>
                             <constraint firstAttribute="bottom" secondItem="cil-f8-zAa" secondAttribute="bottom" id="7vo-kl-MGq"/>
                             <constraint firstItem="Dth-08-nlc" firstAttribute="top" secondItem="4rw-eC-jzZ" secondAttribute="top" id="E9s-y2-3ae"/>
+                            <constraint firstAttribute="trailing" secondItem="kmA-Wd-A6O" secondAttribute="trailing" id="Lv3-rm-A2d"/>
+                            <constraint firstItem="kmA-Wd-A6O" firstAttribute="top" secondItem="Dth-08-nlc" secondAttribute="bottom" constant="60" id="Q4T-ve-BMW"/>
+                            <constraint firstItem="kmA-Wd-A6O" firstAttribute="leading" secondItem="4rw-eC-jzZ" secondAttribute="leading" id="VG7-Fb-WPb"/>
                             <constraint firstItem="Dth-08-nlc" firstAttribute="leading" secondItem="4rw-eC-jzZ" secondAttribute="leading" id="jNl-S8-azs"/>
                             <constraint firstItem="cil-f8-zAa" firstAttribute="top" secondItem="Dth-08-nlc" secondAttribute="bottom" id="pu5-mY-k4y"/>
                             <constraint firstAttribute="trailing" secondItem="Dth-08-nlc" secondAttribute="trailing" id="sDg-bs-JRG"/>
@@ -93,6 +124,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="600"/>
                     <connections>
+                        <outlet property="noDataView" destination="kmA-Wd-A6O" id="uT6-4O-7Um"/>
                         <outlet property="tableView" destination="cil-f8-zAa" id="2CJ-wi-Y7Q"/>
                     </connections>
                 </viewController>
