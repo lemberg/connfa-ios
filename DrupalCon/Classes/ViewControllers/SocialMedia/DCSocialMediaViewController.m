@@ -86,9 +86,9 @@
 }
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
-  NSString *text = @"No Data";
-  NSDictionary *attributes = @{NSFontAttributeName: [UIFont fontWithName:kFontOpenSansRegular size:16.0],
-                               NSForegroundColorAttributeName: [UIColor colorWithRed:193.0/255.0 green:193.0/255.0 blue:193.0/255.0 alpha:1.0]};
+  NSString *text = @"Currently there are no twits";
+  NSDictionary *attributes = @{NSFontAttributeName: [UIFont fontWithName:kFontOpenSansRegular size:21.0],
+                               NSForegroundColorAttributeName: [UIColor colorWithRed:163.0/255.0 green:163.0/255.0 blue:163.0/255.0 alpha:1.0]};
   return [[NSAttributedString alloc] initWithString:text attributes:attributes];
 }
 
