@@ -86,7 +86,6 @@
 - (void)applicationWillEnterForeground:(UIApplication*)application {
   if ([self.window.rootViewController
           isKindOfClass:[UINavigationController class]]) {
-//    [self handleUpdateData];
     [[DCMainProxy sharedProxy] update];
   }
 }
