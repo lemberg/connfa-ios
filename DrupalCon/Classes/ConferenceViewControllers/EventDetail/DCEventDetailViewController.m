@@ -28,7 +28,7 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
 @interface DCEventDetailViewController ()
 
 @property(nonatomic, weak) IBOutlet UITableView* tableView;
-@property(weak, nonatomic) IBOutlet UIImageView* noDetailImageView;
+@property(weak, nonatomic) IBOutlet UIView* noDataView;
 @property(weak, nonatomic) IBOutlet UIImageView* topBackgroundView;
 @property(weak, nonatomic) IBOutlet UIView* topBackgroundShadowView;
 @property(weak, nonatomic) IBOutlet UILabel* topTitleLabel;
@@ -83,7 +83,7 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
       [DCAppConfiguration eventDetailHeaderColour];
   [self initSpeakers];
     
-  self.noDetailImageView.hidden = ![self showEmptyDetailIcon];
+  self.noDataView.hidden = ![self showEmptyDetailIcon];
   self.tableView.scrollEnabled = ![self showEmptyDetailIcon];
 }
 

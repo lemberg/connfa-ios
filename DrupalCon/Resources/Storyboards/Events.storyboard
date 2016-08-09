@@ -20,6 +20,7 @@
             <string>OpenSans</string>
             <string>OpenSans</string>
             <string>OpenSans</string>
+            <string>OpenSans</string>
         </mutableArray>
         <mutableArray key="Smythe-Regular.ttf">
             <string>Smythe</string>
@@ -478,19 +479,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_details" translatesAutoresizingMaskIntoConstraints="NO" id="htM-00-tdR">
-                                <rect key="frame" x="115" y="298" width="90" height="95"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="95" id="FwM-UX-gSW"/>
-                                    <constraint firstAttribute="width" constant="90" id="Nuz-Qv-dnI"/>
-                                </constraints>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="event_detail_top" translatesAutoresizingMaskIntoConstraints="NO" id="DWN-jN-BQe" userLabel="Top background">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="112"/>
                                 <constraints>
                                     <constraint firstAttribute="height" secondItem="DWN-jN-BQe" secondAttribute="width" multiplier="224:640" id="dFs-1R-QEq"/>
                                 </constraints>
                             </imageView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OQf-lw-Ov8" userLabel="No Details View">
+                                <rect key="frame" x="0.0" y="162" width="320" height="318"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="no_details" translatesAutoresizingMaskIntoConstraints="NO" id="gIR-vT-o4w">
+                                        <rect key="frame" x="110" y="29" width="100" height="100"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="No details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YUR-Ry-L5j">
+                                        <rect key="frame" x="111" y="144" width="99" height="28"/>
+                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="21"/>
+                                        <color key="textColor" red="0.63921568630000003" green="0.63921568630000003" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="YUR-Ry-L5j" secondAttribute="trailing" id="Jzb-Lv-fMR"/>
+                                    <constraint firstItem="gIR-vT-o4w" firstAttribute="top" secondItem="OQf-lw-Ov8" secondAttribute="top" constant="52" id="KGe-T7-CJk"/>
+                                    <constraint firstItem="YUR-Ry-L5j" firstAttribute="centerX" secondItem="gIR-vT-o4w" secondAttribute="centerX" id="NVe-C2-D1v"/>
+                                    <constraint firstItem="YUR-Ry-L5j" firstAttribute="top" secondItem="gIR-vT-o4w" secondAttribute="bottom" constant="15" id="S1t-l0-w5l"/>
+                                    <constraint firstItem="YUR-Ry-L5j" firstAttribute="leading" secondItem="OQf-lw-Ov8" secondAttribute="leading" id="Ynp-X2-c0n"/>
+                                    <constraint firstItem="gIR-vT-o4w" firstAttribute="centerX" secondItem="OQf-lw-Ov8" secondAttribute="centerX" id="agt-eE-Hby"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Ynp-X2-c0n"/>
+                                        <exclude reference="Jzb-Lv-fMR"/>
+                                    </mask>
+                                </variation>
+                            </view>
                             <view opaque="NO" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9cX-Fi-Qcx" userLabel="Top background shadow">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                 <subviews>
@@ -728,22 +751,30 @@
                         <constraints>
                             <constraint firstItem="oWL-xb-vpP" firstAttribute="top" secondItem="DWN-jN-BQe" secondAttribute="bottom" id="0Mx-ti-lnp"/>
                             <constraint firstItem="DWN-jN-BQe" firstAttribute="top" secondItem="dYu-xA-CYo" secondAttribute="top" id="4rp-fz-Bxn"/>
+                            <constraint firstItem="OQf-lw-Ov8" firstAttribute="top" secondItem="rn1-VT-AkR" secondAttribute="bottom" constant="142" id="5gj-wM-u25"/>
                             <constraint firstAttribute="trailing" secondItem="oWL-xb-vpP" secondAttribute="trailing" id="6GO-0E-LxS"/>
                             <constraint firstItem="9cX-Fi-Qcx" firstAttribute="leading" secondItem="dYu-xA-CYo" secondAttribute="leading" id="8ph-n9-j7g"/>
                             <constraint firstAttribute="trailing" secondItem="DWN-jN-BQe" secondAttribute="trailing" id="EfM-Ej-yIN"/>
                             <constraint firstItem="oWL-xb-vpP" firstAttribute="leading" secondItem="dYu-xA-CYo" secondAttribute="leading" id="GYK-uF-Ewc"/>
                             <constraint firstAttribute="trailing" secondItem="9cX-Fi-Qcx" secondAttribute="trailing" id="KgY-Fg-jk6"/>
-                            <constraint firstAttribute="centerX" secondItem="htM-00-tdR" secondAttribute="centerX" id="hbo-vJ-nzd"/>
+                            <constraint firstItem="OQf-lw-Ov8" firstAttribute="top" secondItem="DWN-jN-BQe" secondAttribute="bottom" id="S4t-V6-fwb"/>
+                            <constraint firstAttribute="trailing" secondItem="OQf-lw-Ov8" secondAttribute="trailing" id="dSn-AB-CoF"/>
+                            <constraint firstItem="OQf-lw-Ov8" firstAttribute="leading" secondItem="dYu-xA-CYo" secondAttribute="leading" id="liu-Ur-8Ax"/>
                             <constraint firstItem="DWN-jN-BQe" firstAttribute="leading" secondItem="dYu-xA-CYo" secondAttribute="leading" id="mD1-xe-DCj"/>
+                            <constraint firstAttribute="bottom" secondItem="OQf-lw-Ov8" secondAttribute="bottom" id="pNv-8z-fIQ"/>
                             <constraint firstAttribute="bottom" secondItem="oWL-xb-vpP" secondAttribute="bottom" id="vza-qP-0R8"/>
                             <constraint firstItem="9cX-Fi-Qcx" firstAttribute="top" secondItem="dYu-xA-CYo" secondAttribute="top" id="xdO-kL-ny3"/>
-                            <constraint firstItem="htM-00-tdR" firstAttribute="top" secondItem="DWN-jN-BQe" secondAttribute="bottom" constant="186" id="zwE-nr-47u"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="S4t-V6-fwb"/>
+                            </mask>
+                        </variation>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="480"/>
                     <connections>
-                        <outlet property="noDetailImageView" destination="htM-00-tdR" id="86m-EL-gTj"/>
+                        <outlet property="noDataView" destination="OQf-lw-Ov8" id="VPe-8F-HFB"/>
                         <outlet property="tableView" destination="oWL-xb-vpP" id="7xR-Hq-8LT"/>
                         <outlet property="topBackgroundShadowView" destination="9cX-Fi-Qcx" id="bkc-56-CAN"/>
                         <outlet property="topBackgroundTop" destination="4rp-fz-Bxn" id="6hq-iU-ZX8"/>
