@@ -243,7 +243,7 @@
 
   BOOL itemsEnabled = self.fetchedResultsController.fetchedObjects.count;
 
-  self.noDataView.hidden = !itemsEnabled;
+  self.noDataView.hidden = itemsEnabled;
   self.speakersTbl.hidden = !itemsEnabled;
 
   if (itemsEnabled)
