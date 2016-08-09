@@ -12,7 +12,7 @@
 @interface DCSpeakersViewController ()
 
 @property(nonatomic, weak) IBOutlet UITableView* speakersTbl;
-@property(nonatomic, weak) IBOutlet UILabel* noItemsLabel;
+@property(nonatomic, weak) IBOutlet UIView* noDataView;
 
 @property(nonatomic, strong) IBOutlet UISearchBar* searchBar;
 @property(nonatomic, strong)
@@ -243,7 +243,7 @@
 
   BOOL itemsEnabled = self.fetchedResultsController.fetchedObjects.count;
 
-  self.noItemsLabel.hidden = itemsEnabled;
+  self.noDataView.hidden = !itemsEnabled;
   self.speakersTbl.hidden = !itemsEnabled;
 
   if (itemsEnabled)
