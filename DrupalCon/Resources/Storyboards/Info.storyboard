@@ -367,6 +367,7 @@
                         <outlet property="headerViewHeightConstraint" destination="lZG-RN-snh" id="Ssb-Rs-YlO"/>
                         <outlet property="noDataView" destination="AZi-J7-4da" id="lrA-aA-q15"/>
                         <outlet property="scrollView" destination="SKb-ay-0Oy" id="oBU-tC-kpo"/>
+                        <outlet property="showActionSheetButton" destination="eXS-OJ-9pW" id="YRX-xs-fAC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dsb-5Y-KzT" userLabel="First Responder" sceneMemberID="firstResponder"/>
