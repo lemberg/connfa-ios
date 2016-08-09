@@ -89,30 +89,30 @@
                                         [NSCharacterSet whitespaceCharacterSet]];;
     self.stateLabel.text = @"";
   } else {
-    self.addressLabel.text = @"Location is not available";
+    self.addressLabel.text = @"The address is not specified";
     self.streetAndNumberLabel.text = @"";
     self.cityAndProvinceLabel.text = @"";
     self.stateLabel.text = @"";
   }
 }
 
-
 #define METERS_PER_MILE 1609.344
 
 - (void)setAnnotation {
-  CLLocation* location = [[CLLocation alloc]
-      initWithLatitude:[self.location.latitude doubleValue]
-             longitude:[self.location.longitude doubleValue]];
-
-  DCPin* pinAnnotation =
-      [[DCPin alloc] initWithCoordinate:location.coordinate title:@""];
-  [self.mapView addAnnotation:pinAnnotation];
-
-  // Set view region
-  MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(
-      location.coordinate, 0.5 * METERS_PER_MILE, 0.5 * METERS_PER_MILE);
-  if (CLLocationCoordinate2DIsValid(location.coordinate)) {
-    [_mapView setRegion:viewRegion animated:YES];
+  if (self.location.address) {
+    CLLocation* location = [[CLLocation alloc]
+                            initWithLatitude:[self.location.latitude doubleValue]
+                            longitude:[self.location.longitude doubleValue]];
+    DCPin* pinAnnotation =
+    [[DCPin alloc] initWithCoordinate:location.coordinate title:@""];
+    [self.mapView addAnnotation:pinAnnotation];
+    
+    // Set view region
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(
+                                                                       location.coordinate, 0.5 * METERS_PER_MILE, 0.5 * METERS_PER_MILE);
+    if (CLLocationCoordinate2DIsValid(location.coordinate)) {
+      [_mapView setRegion:viewRegion animated:YES];
+    }
   }
 }
 
