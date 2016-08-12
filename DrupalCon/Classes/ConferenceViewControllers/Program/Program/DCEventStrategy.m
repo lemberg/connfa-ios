@@ -56,8 +56,13 @@
 }
 
 - (BOOL)isEnableFilter {
-  return self.strategy == EDCEventStrategyPrograms &&
-         [DCAppConfiguration isFilterEnable];
+    BOOL result = NO;
+    if ((self.strategy == EDCEventStrategyPrograms || self.strategy == EDCEventStrategyBofs || self.strategy == EDCEventStrategySocialEvents) &&
+        [DCAppConfiguration isFilterEnable]) {
+        result = YES;
+    }
+
+  return result;
 }
 
 - (NSPredicate*)eventStretegyPredicate {
