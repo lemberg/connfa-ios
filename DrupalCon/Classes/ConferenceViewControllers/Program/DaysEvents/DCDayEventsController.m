@@ -58,7 +58,6 @@
 - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
   
-  [self configureState];
 }
 
 #pragma mark - Public
