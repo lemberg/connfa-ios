@@ -42,6 +42,12 @@
         });
       }];
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self registerScreenLoadAtGA:[NSString stringWithFormat:@"%@", self.navigationItem.title]];
+}
+
 - (void)reloadData {
   DCInfo* info =
       [[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCInfo class]
@@ -58,10 +64,6 @@
   [self.tableView reloadData];
   self.noDataView.hidden = self.items.count > 0;
   self.tableView.hidden = !(self.items.count > 0);
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-  [super viewWillAppear:animated];
 }
 
 #pragma mark - UITableView delegate and source

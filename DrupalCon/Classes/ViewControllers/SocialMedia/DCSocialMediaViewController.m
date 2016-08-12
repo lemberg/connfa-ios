@@ -47,6 +47,11 @@
    }];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self registerScreenLoadAtGA:[NSString stringWithFormat:@"%@", self.navigationItem.title]];
+}
+
 #pragma mark - View appearance
 - (void)arrangeNavigationBar {
   self.navigationController.navigationBar.barTintColor = [DCAppConfiguration navigationBarColor];
@@ -101,5 +106,17 @@
   NSString *searchQuery = settings.searchQuery;
   return searchQuery.length == 0;
 }
+
+#pragma mark - Google Analytics
+
+- (void)registerScreenLoadAtGA:(NSString*)message {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker
+     set:kGAIScreenName
+     value:[NSString stringWithFormat:@"%@ loaded, message: %@",
+            NSStringFromClass(self.class), message]];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+}
+
 
 @end

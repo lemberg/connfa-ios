@@ -68,9 +68,9 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-  [super viewDidAppear:animated];
-
-  [self arrangePreviousAndNextDayButtons];
+    [super viewDidAppear:animated];
+    [self arrangePreviousAndNextDayButtons];
+    [self registerScreenLoadAtGA:[NSString stringWithFormat:@"%@", self.navigationItem.title]];
 }
 
 #pragma mark - Public

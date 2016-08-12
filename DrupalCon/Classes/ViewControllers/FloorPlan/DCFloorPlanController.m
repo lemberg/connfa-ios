@@ -48,6 +48,11 @@
   [self checkProxyState];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self registerScreenLoadAtGA:[NSString stringWithFormat:@"%@", self.navigationItem.title]];
+}
+
 #pragma mark - Overrides
 
 #pragma mark - Overrides

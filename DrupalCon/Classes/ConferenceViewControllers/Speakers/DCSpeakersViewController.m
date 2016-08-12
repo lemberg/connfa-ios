@@ -44,6 +44,11 @@
   [self reload];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self registerScreenLoadAtGA:[NSString stringWithFormat:@"%@", self.navigationItem.title]];
+}
+
 - (void)arrangeNavigationBar {
   [super arrangeNavigationBar];
   
