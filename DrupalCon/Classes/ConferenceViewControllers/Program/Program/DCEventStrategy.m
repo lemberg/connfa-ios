@@ -30,11 +30,13 @@
 
       case EDCEventStrategyBofs:
         _eventClass = [DCBof class];
+        _predicate = [self eventStretegyPredicate];
         break;
       case EDCEventStrategySocialEvents:
         _eventClass = [DCSocialEvent class];
-
+        _predicate = [self eventStretegyPredicate];
         break;
+            
       case EDCEeventStrategyFavorites:
         _eventClass = [DCEvent class];
         _predicate = [self favoritesPredicate];
