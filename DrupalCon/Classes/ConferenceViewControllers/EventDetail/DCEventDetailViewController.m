@@ -158,7 +158,7 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
   }
   
   self.navigationController.navigationBar.tintColor = eventNavColor;
-  self.topTitleLabel.textColor = eventNavColor;
+  self.topTitleLabel.textColor = [UIColor whiteColor];
   self.currentBarColor = eventNavColor;
 }
 
