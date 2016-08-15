@@ -109,9 +109,10 @@ const NSString* kDCTimeslotEventKEY = @"timeslot_event_key";
 
   for (NSDictionary* sectionInfo in array) {
     DCTimeRange* timeRange = sectionInfo[kDCTimeslotKEY];
-
-    float from = [NSDate hoursFromDate:timeRange.from];
-    float to = [NSDate hoursFromDate:timeRange.to];
+    NSDate *fromDate = [timeRange.from dateByAddingTimeInterval:[DCMainProxy sharedProxy].eventTimeZone.secondsFromGMT];
+    NSDate *toDate = [timeRange.to dateByAddingTimeInterval:[DCMainProxy sharedProxy].eventTimeZone.secondsFromGMT];
+    float from = [NSDate hoursFromDate:fromDate];
+    float to = [NSDate hoursFromDate:toDate];
 
     // if Current hour is before Current time range, return Current time range
     if (currentHour < from) {
