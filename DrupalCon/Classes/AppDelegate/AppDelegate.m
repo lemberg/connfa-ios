@@ -59,6 +59,24 @@
   }];
 }
 
+- (void)handleUpdateTimeZone {
+  // Handle it only when application start
+  [[DCMainProxy sharedProxy] setDataUpdatedCallback:^(DCMainProxyState mainProxyState) {
+    NSTimeZone *eventTimeZone = [[DCMainProxy sharedProxy]
+                                 isSystemTimeCoincidencWithEventTimezone];
+    if (eventTimeZone && [NSUserDefaults isEnabledTimeZoneAlert] && [DCMainProxy sharedProxy].isTimeZoneChanged == YES) {
+      [DCAlertsManager
+       showTimeZoneAlertForTimeZone:eventTimeZone
+       withSuccess:^(BOOL isSuccess){
+         if (isSuccess) {
+           [NSUserDefaults disableTimeZoneNotification];
+         }
+         [[DCMainProxy sharedProxy] setDataUpdatedCallback:nil];
+       }];
+    }
+  }];
+}
+
 - (void)applicationWillResignActive:(UIApplication*)application {
   // Sent when the application is about to move from active to inactive state.
   // This can occur for certain types of temporary interruptions (such as an
@@ -77,11 +95,14 @@
   
   [[DCMainProxy sharedProxy] resetEventTimeZone];
   [[DCMainProxy sharedProxy] setDataUpdatedCallback:nil];
+  [DCMainProxy sharedProxy].isTimeZoneChanged = NO;
 }
 
 - (void)applicationWillEnterForeground:(UIApplication*)application {
   if ([self.window.rootViewController
           isKindOfClass:[UINavigationController class]]) {
+    
+    [self handleUpdateTimeZone];
     [[DCMainProxy sharedProxy] update];
   }
 }
