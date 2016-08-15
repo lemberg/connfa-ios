@@ -76,12 +76,12 @@
   // instead of applicationWillTerminate: when the user quits.
   
   [[DCMainProxy sharedProxy] resetEventTimeZone];
+  [[DCMainProxy sharedProxy] setDataUpdatedCallback:nil];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication*)application {
   if ([self.window.rootViewController
           isKindOfClass:[UINavigationController class]]) {
-    [self handleUpdateData];
     [[DCMainProxy sharedProxy] update];
   }
 }

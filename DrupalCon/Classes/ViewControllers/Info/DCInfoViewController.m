@@ -15,6 +15,7 @@
 @property(nonatomic, weak) IBOutlet UITableView* tableView;
 @property(nonatomic, strong) NSArray* items;
 @property(nonatomic) __block DCMainProxyState previousState;
+@property (weak, nonatomic) IBOutlet UIView *noDataView;
 
 @end
 
@@ -24,7 +25,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-
+  
   [[DCMainProxy sharedProxy]
       setDataReadyCallback:^(DCMainProxyState mainProxyState) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -41,6 +42,12 @@
         });
       }];
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self registerScreenLoadAtGA:[NSString stringWithFormat:@"%@", self.navigationItem.title]];
+}
+
 - (void)reloadData {
   DCInfo* info =
       [[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCInfo class]
@@ -55,10 +62,8 @@
       sortedArrayUsingDescriptors:@[ orderDescriptor, iDDescriptor ]];
 
   [self.tableView reloadData];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-  [super viewWillAppear:animated];
+  self.noDataView.hidden = self.items.count > 0;
+  self.tableView.hidden = !(self.items.count > 0);
 }
 
 #pragma mark - UITableView delegate and source

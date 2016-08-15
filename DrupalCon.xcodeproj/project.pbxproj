@@ -158,6 +158,7 @@
 		A6D12F0E1BF4F04F00B85FD1 /* DC-Theme.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2121BF4E9C60093AD65 /* DC-Theme.bundle */; };
 		A6F456401C6B490900EF3DCD /* (null) in Resources */ = {isa = PBXBuildFile; };
 		F547A7E21D537C3200CD24F2 /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F547A7E11D537C3200CD24F2 /* Montserrat-Regular.otf */; };
+		F547A7E61D54D2FF00CD24F2 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = F547A7E51D54D2FF00CD24F2 /* UIScrollView+EmptyDataSet.m */; };
 		F580ED6C1D0FDE2B00F289F8 /* LESelectedActionSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = F580ED6A1D0FDE2B00F289F8 /* LESelectedActionSheetController.m */; };
 		F580ED6D1D0FDE2B00F289F8 /* LESelectedActionSheetController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F580ED6B1D0FDE2B00F289F8 /* LESelectedActionSheetController.xib */; };
 		F5D072CE1D0844AD00331E07 /* DCFloorPlanController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D072CD1D0844AD00331E07 /* DCFloorPlanController.m */; };
@@ -448,6 +449,8 @@
 		A6C5F2551BF4E9C60093AD65 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		A6C5F2561BF4E9C60093AD65 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		F547A7E11D537C3200CD24F2 /* Montserrat-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.otf"; sourceTree = "<group>"; };
+		F547A7E41D54D2FF00CD24F2 /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
+		F547A7E51D54D2FF00CD24F2 /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
 		F54B3D721CF5FB960031BAF4 /* main_2.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = main_2.1.xcdatamodel; sourceTree = "<group>"; };
 		F580ED691D0FDE2B00F289F8 /* LESelectedActionSheetController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LESelectedActionSheetController.h; sourceTree = "<group>"; };
 		F580ED6A1D0FDE2B00F289F8 /* LESelectedActionSheetController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LESelectedActionSheetController.m; sourceTree = "<group>"; };
@@ -1285,6 +1288,7 @@
 		A6C5F2241BF4E9C60093AD65 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				F547A7E31D54D2FF00CD24F2 /* EmptyDataSet */,
 				A678FD491C0366AF00F24105 /* Sidebar */,
 				A678FD451C03666600F24105 /* Reachability */,
 				A6C5F2251BF4E9C60093AD65 /* Crashlytics */,
@@ -1371,6 +1375,15 @@
 				F547A7E11D537C3200CD24F2 /* Montserrat-Regular.otf */,
 			);
 			path = Montserrat;
+			sourceTree = "<group>";
+		};
+		F547A7E31D54D2FF00CD24F2 /* EmptyDataSet */ = {
+			isa = PBXGroup;
+			children = (
+				F547A7E41D54D2FF00CD24F2 /* UIScrollView+EmptyDataSet.h */,
+				F547A7E51D54D2FF00CD24F2 /* UIScrollView+EmptyDataSet.m */,
+			);
+			path = EmptyDataSet;
 			sourceTree = "<group>";
 		};
 		F580ED681D0FDE2B00F289F8 /* LESelectedActionSheetController */ = {
@@ -1569,6 +1582,7 @@
 				A6C5F35B1BF4E9C60093AD65 /* NSData+ImageContentType.m in Sources */,
 				A6580B7D1C5F60F5001B0D62 /* DCAlertsManager.m in Sources */,
 				A6C5F2F51BF4E9C60093AD65 /* DCPin.m in Sources */,
+				F547A7E61D54D2FF00CD24F2 /* UIScrollView+EmptyDataSet.m in Sources */,
 				A6C5F2C51BF4E9C60093AD65 /* DCTime.m in Sources */,
 				A6C5F2631BF4E9C60093AD65 /* DCDayEventsDataSource.m in Sources */,
 				A6C5F3071BF4E9C60093AD65 /* DCFilterCheckBox.m in Sources */,

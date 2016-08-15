@@ -2,10 +2,12 @@
 #import "DCSocialMediaViewController.h"
 #import "UIConstants.h"
 #import "DCAppSettings.h"
+#import "UIScrollView+EmptyDataSet.h"
 
-@interface DCSocialMediaViewController ()
+@interface DCSocialMediaViewController () <DZNEmptyDataSetSource, DZNEmptyDataSetDelegate>
 
 @property(nonatomic) __block DCMainProxyState previousState;
+@property (weak, nonatomic) IBOutlet UIView *placeholderView;
 
 @end
 
@@ -16,7 +18,6 @@
 - (id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil {
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
-    // Custom initialization
   }
   return self;
 }
@@ -25,6 +26,10 @@
   [super viewDidLoad];
   [self setNeedsStatusBarAppearanceUpdate];
   [self arrangeNavigationBar];
+  
+  self.tableView.emptyDataSetSource = self;
+  self.tableView.emptyDataSetDelegate = self;
+  self.tableView.tableFooterView = [UIView new];
   
   [[DCMainProxy sharedProxy]
    setDataReadyCallback:^(DCMainProxyState mainProxyState) {
@@ -40,6 +45,11 @@
        }
      });
    }];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self registerScreenLoadAtGA:[NSString stringWithFormat:@"%@", self.navigationItem.title]];
 }
 
 #pragma mark - View appearance
@@ -62,15 +72,51 @@
 
 #pragma mark - Private
 
-
 - (void)reloadData {
-    DCAppSettings* settings =
-    [[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCAppSettings class]
-                                           inMainQueue:YES] lastObject];
-  
+  DCAppSettings* settings =
+  [[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCAppSettings class]
+                                         inMainQueue:YES] lastObject];
+  NSString *searchQuery = settings.searchQuery;
+  if (searchQuery.length > 0) {
     TWTRAPIClient *client = [[TWTRAPIClient alloc] init];
-    self.dataSource = [[TWTRSearchTimelineDataSource alloc] initWithSearchQuery:settings.searchQuery //@"#drupalcon OR @lemberg_co_uk"
+    self.dataSource = [[TWTRSearchTimelineDataSource alloc] initWithSearchQuery:settings.searchQuery
                                                                       APIClient:client];
+  }
 }
+
+#pragma mark - DZNEmptyDataSetSource
+
+- (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView {
+  return [UIImage imageNamed:@"no_details"];
+}
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
+  NSString *text = @"Currently there are no twits";
+  NSDictionary *attributes = @{NSFontAttributeName: [UIFont fontWithName:kFontOpenSansRegular size:21.0],
+                               NSForegroundColorAttributeName: [UIColor colorWithRed:163.0/255.0 green:163.0/255.0 blue:163.0/255.0 alpha:1.0]};
+  return [[NSAttributedString alloc] initWithString:text attributes:attributes];
+}
+
+#pragma mark - DZNEmptyDataSetDelegate
+
+- (BOOL)emptyDataSetShouldDisplay:(UIScrollView *)scrollView {
+  DCAppSettings* settings =
+  [[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCAppSettings class]
+                                         inMainQueue:YES] lastObject];
+  NSString *searchQuery = settings.searchQuery;
+  return searchQuery.length == 0;
+}
+
+#pragma mark - Google Analytics
+
+- (void)registerScreenLoadAtGA:(NSString*)message {
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker
+     set:kGAIScreenName
+     value:[NSString stringWithFormat:@"%@ loaded, message: %@",
+            NSStringFromClass(self.class), message]];
+    [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+}
+
 
 @end

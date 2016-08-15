@@ -48,6 +48,11 @@
   [self.tableView reloadData];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self registerScreenLoadAtGA:[NSString stringWithFormat:@"%@", self.navigationItem.title]];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
   [super viewWillAppear:animated];
 

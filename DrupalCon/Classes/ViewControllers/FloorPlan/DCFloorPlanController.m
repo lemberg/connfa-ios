@@ -24,6 +24,8 @@
 @property (strong, nonatomic) NSArray *floorTitles;
 @property (nonatomic) NSUInteger selectedActionIndex;
 @property(nonatomic) __block DCMainProxyState previousState;
+@property (weak, nonatomic) IBOutlet UIView *noDataView;
+@property (weak, nonatomic) IBOutlet UIButton *showActionSheetButton;
 
 @end
 
@@ -44,6 +46,11 @@
   [self configureUI];
   [self setupGestureRecognizer];
   [self checkProxyState];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self registerScreenLoadAtGA:[NSString stringWithFormat:@"%@", self.navigationItem.title]];
 }
 
 #pragma mark - Overrides
@@ -100,6 +107,8 @@
 
 - (void)reloadData {
   NSMutableArray *floors = [NSMutableArray arrayWithArray:[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCHousePlan class] inMainQueue:YES]];
+  self.noDataView.hidden = floors.count > 0;
+  self.showActionSheetButton.enabled = floors.count > 0;
   if (floors.count > 0) {
     NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"order" ascending:YES];
     [floors sortUsingDescriptors:@[sort]];
@@ -115,8 +124,7 @@
     self.floorButton.enabled =  floors.count > 1 ? YES : NO;
     self.downArrowButton.hidden = floors.count > 1 ? NO : YES;
   } else {
-    [self.floorButton setTitle:@"No Floors " forState:UIControlStateNormal];
-    self.floorButton.enabled = NO;
+    self.floorButton.hidden = YES;
     self.downArrowButton.hidden = YES;
   }
 }

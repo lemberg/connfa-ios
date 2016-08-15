@@ -12,7 +12,7 @@
 @interface DCSpeakersViewController ()
 
 @property(nonatomic, weak) IBOutlet UITableView* speakersTbl;
-@property(nonatomic, weak) IBOutlet UILabel* noItemsLabel;
+@property(nonatomic, weak) IBOutlet UIView* noDataView;
 
 @property(nonatomic, strong) IBOutlet UISearchBar* searchBar;
 @property(nonatomic, strong)
@@ -42,6 +42,11 @@
       setTintColor:[UIColor darkGrayColor]];
 
   [self reload];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self registerScreenLoadAtGA:[NSString stringWithFormat:@"%@", self.navigationItem.title]];
 }
 
 - (void)arrangeNavigationBar {
@@ -243,7 +248,7 @@
 
   BOOL itemsEnabled = self.fetchedResultsController.fetchedObjects.count;
 
-  self.noItemsLabel.hidden = itemsEnabled;
+  self.noDataView.hidden = itemsEnabled;
   self.speakersTbl.hidden = !itemsEnabled;
 
   if (itemsEnabled)

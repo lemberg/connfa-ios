@@ -30,11 +30,13 @@
 
       case EDCEventStrategyBofs:
         _eventClass = [DCBof class];
+        _predicate = [self eventStretegyPredicate];
         break;
       case EDCEventStrategySocialEvents:
         _eventClass = [DCSocialEvent class];
-
+        _predicate = [self eventStretegyPredicate];
         break;
+            
       case EDCEeventStrategyFavorites:
         _eventClass = [DCEvent class];
         _predicate = [self favoritesPredicate];
@@ -56,8 +58,13 @@
 }
 
 - (BOOL)isEnableFilter {
-  return self.strategy == EDCEventStrategyPrograms &&
-         [DCAppConfiguration isFilterEnable];
+    BOOL result = NO;
+    if ((self.strategy == EDCEventStrategyPrograms || self.strategy == EDCEventStrategyBofs || self.strategy == EDCEventStrategySocialEvents) &&
+        [DCAppConfiguration isFilterEnable]) {
+        result = YES;
+    }
+
+  return result;
 }
 
 - (NSPredicate*)eventStretegyPredicate {
