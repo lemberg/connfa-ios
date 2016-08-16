@@ -88,7 +88,7 @@
 
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView {
   if ([DCMainProxy sharedProxy].checkReachable) {
-    return [UIImage imageNamed:@"no_details"];
+    return [UIImage imageNamed:@"ic_no_social_media"];
   }
   return nil;
 }

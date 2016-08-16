@@ -108,7 +108,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xsX-Zl-ca4" userLabel="NoDataView">
                                 <rect key="frame" x="0.0" y="153" width="320" height="175"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_details" translatesAutoresizingMaskIntoConstraints="NO" id="00v-fl-2Pw" userLabel="NoEventsImageView">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_no_speakers" translatesAutoresizingMaskIntoConstraints="NO" id="00v-fl-2Pw" userLabel="NoEventsImageView">
                                         <rect key="frame" x="110" y="0.0" width="100" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="00v-fl-2Pw" secondAttribute="height" multiplier="1:1" id="2C6-NL-12x"/>
@@ -494,6 +494,7 @@
     <resources>
         <image name="avatar_placeholder" width="40" height="40"/>
         <image name="ic_experience_advanced" width="12" height="12"/>
+        <image name="ic_no_speakers" width="100" height="100"/>
         <image name="no_details" width="100" height="100"/>
         <image name="speaker_detail_top" width="320" height="201"/>
         <image name="twitter" width="80" height="27"/>

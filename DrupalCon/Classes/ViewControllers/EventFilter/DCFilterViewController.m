@@ -82,6 +82,10 @@
       [NSPredicate predicateWithFormat:@"NOT (levelId = 0)"];
   self.levelsToShow =
       [self.levelsAll filteredArrayUsingPredicate:whichLevelsWillBeShown];
+  
+  NSSortDescriptor* levelsSort =
+  [NSSortDescriptor sortDescriptorWithKey:@"order" ascending:YES];
+  self.levelsToShow = [self.levelsToShow sortedArrayUsingDescriptors:@[levelsSort]];
 
   self.tracksAll =
       [[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCTrack class]
@@ -121,28 +125,6 @@
   }
 
   return YES;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView {
-  return FilterCellTypeCount;
-}
-
-- (NSInteger)tableView:(UITableView*)tableView
- numberOfRowsInSection:(NSInteger)section {
-  FilterCellType type = [self getCellType:section];
-
-  switch (type) {
-    case FilterCellTypeLevel:
-      return self.levelsToShow.count;
-
-    case FilterCellTypeTrack:
-      return self.tracksToShow.count;
-
-    default:
-      NSAssert(false, @"unhanled Filter type");
-  }
-
-  return 0;
 }
 
 - (NSString*)getHeaderTitle:(FilterCellType)cellType {
@@ -241,7 +223,54 @@
   return NO;
 }
 
-#pragma mark - UITabelViewDataSource delegate
+#pragma mark - UITabelViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView {
+  return FilterCellTypeCount;
+}
+
+- (NSInteger)tableView:(UITableView*)tableView
+ numberOfRowsInSection:(NSInteger)section {
+  FilterCellType type = [self getCellType:section];
+  
+  switch (type) {
+    case FilterCellTypeLevel:
+      return self.levelsToShow.count;
+      
+    case FilterCellTypeTrack:
+      return self.tracksToShow.count;
+      
+    default:
+      NSAssert(false, @"unhanled Filter type");
+  }
+  
+  return 0;
+}
+
+- (UITableViewCell*)tableView:(UITableView*)tableView
+        cellForRowAtIndexPath:(NSIndexPath*)indexPath {
+  FilterCellType cellType = [self getCellType:indexPath.section];
+  
+  DCEventFilterCell* cell = (DCEventFilterCell*)[tableView
+                                                 dequeueReusableCellWithIdentifier:@"EventFilterCellIdentifier"];
+  
+  cell.type = cellType;
+  cell.relatedObjectId = [self getCellId:cellType row:indexPath.row];
+  cell.title.text = [self getCellTitle:cellType row:indexPath.row];
+  
+  BOOL properFilterCleared = (cellType == FilterCellTypeLevel)
+  ? self.isLevelFilterCleared
+  : self.isTrackFilterCleared;
+  cell.checkBox.selected =
+  properFilterCleared ? NO
+  : [self getCellSelected:cellType row:indexPath.row];
+  cell.checkBox.userInteractionEnabled = NO;
+  cell.separator.hidden = [self isLastCellInSection:indexPath];
+  
+  return cell;
+}
+
+#pragma mark - UITabelViewDataDelegate
 
 - (UIView*)tableView:(UITableView*)tableView
     viewForHeaderInSection:(NSInteger)section {
@@ -268,29 +297,6 @@
 - (CGFloat)tableView:(UITableView*)tableView
     heightForFooterInSection:(NSInteger)section {
   return 1.0f;
-}
-
-- (UITableViewCell*)tableView:(UITableView*)tableView
-        cellForRowAtIndexPath:(NSIndexPath*)indexPath {
-  FilterCellType cellType = [self getCellType:indexPath.section];
-
-  DCEventFilterCell* cell = (DCEventFilterCell*)[tableView
-      dequeueReusableCellWithIdentifier:@"EventFilterCellIdentifier"];
-
-  cell.type = cellType;
-  cell.relatedObjectId = [self getCellId:cellType row:indexPath.row];
-  cell.title.text = [self getCellTitle:cellType row:indexPath.row];
-
-  BOOL properFilterCleared = (cellType == FilterCellTypeLevel)
-                                 ? self.isLevelFilterCleared
-                                 : self.isTrackFilterCleared;
-  cell.checkBox.selected =
-      properFilterCleared ? NO
-                          : [self getCellSelected:cellType row:indexPath.row];
-  cell.checkBox.userInteractionEnabled = NO;
-  cell.separator.hidden = [self isLastCellInSection:indexPath];
-
-  return cell;
 }
 
 - (CGFloat)tableView:(UITableView*)tableView

@@ -101,7 +101,6 @@
 - (void)applicationWillEnterForeground:(UIApplication*)application {
   if ([self.window.rootViewController
           isKindOfClass:[UINavigationController class]]) {
-    
     [self handleUpdateTimeZone];
     [[DCMainProxy sharedProxy] update];
   }

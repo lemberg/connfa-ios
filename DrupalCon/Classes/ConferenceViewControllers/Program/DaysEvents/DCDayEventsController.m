@@ -88,18 +88,22 @@
  
   switch (self.eventsStrategy.strategy) {
     case EDCEventStrategyPrograms: {
+      self.stubImage = [UIImage imageNamed:@"ic_no_sessions"];
       self.stubMessage = isFilterEnabled ? @"No Matching Events" : @"Currently there are no sessions";
     }
       break;
     case EDCEeventStrategyFavorites: {
+      self.stubImage = [UIImage imageNamed:@"ic_no_my_schedule"];
       self.stubMessage = @"Your schedule is empty.\nPlease add some events";
     }
       break;
     case EDCEventStrategyBofs: {
+      self.stubImage = [UIImage imageNamed:@"ic_no_bofs"];
       self.stubMessage = isFilterEnabled ? @"No Matching BoFs" : @"Currently there are no BoFs";
     }
       break;
     case EDCEventStrategySocialEvents: {
+      self.stubImage = [UIImage imageNamed:@"ic_no_social_events"];
       self.stubMessage = isFilterEnabled ? @"No Matching social events" : @"Currently there are no social events";
     }
       break;
@@ -109,6 +113,7 @@
   self.tableView.hidden = YES;
   [self.activityIndicatorView stopAnimating];
   self.noItemsLabel.text = self.stubMessage;
+  self.noItemsImageView.image = self.stubImage;
   [self.noItemsImageView layoutIfNeeded];
 }
 
