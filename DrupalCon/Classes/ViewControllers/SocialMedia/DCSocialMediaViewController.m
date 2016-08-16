@@ -87,11 +87,14 @@
 #pragma mark - DZNEmptyDataSetSource
 
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView {
-  return [UIImage imageNamed:@"no_details"];
+  if ([DCMainProxy sharedProxy].checkReachable) {
+    return [UIImage imageNamed:@"no_details"];
+  }
+  return nil;
 }
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
-  NSString *text = @"Currently there are no twits";
+  NSString *text = [DCMainProxy sharedProxy].checkReachable ? @"Currently there are no twits" : @"Internet connection is not available at this moment.\nPlease, try later.";
   NSDictionary *attributes = @{NSFontAttributeName: [UIFont fontWithName:kFontOpenSansRegular size:21.0],
                                NSForegroundColorAttributeName: [UIColor colorWithRed:163.0/255.0 green:163.0/255.0 blue:163.0/255.0 alpha:1.0]};
   return [[NSAttributedString alloc] initWithString:text attributes:attributes];
@@ -104,7 +107,7 @@
   [[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCAppSettings class]
                                          inMainQueue:YES] lastObject];
   NSString *searchQuery = settings.searchQuery;
-  return searchQuery.length == 0;
+  return searchQuery.length == 0 || [DCMainProxy sharedProxy].checkReachable == NO;
 }
 
 #pragma mark - Google Analytics
