@@ -87,7 +87,7 @@
 #pragma mark - DZNEmptyDataSetSource
 
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView {
-  return [UIImage imageNamed:@"no_details"];
+  return [UIImage imageNamed:@"ic_no_social_media"];
 }
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
