@@ -142,7 +142,7 @@ static NSString * const cellIdentifier = @"cellIdenifier";
   cell.backgroundColor = [UIColor colorWithRed:249.0/255.0 green:249.0/255.0 blue:249.0/255.0 alpha:1.0];
   cell.textLabel.font = self.actionTitleFont;
   cell.textLabel.textAlignment = NSTextAlignmentLeft;
-  cell.selectionStyle = UITableViewCellSelectionStyleNone;
+  cell.selectionStyle = UITableViewCellSelectionStyleGray;
   cell.layoutMargins = UIEdgeInsetsMake(0, 16, 0, 0);
   cell.accessoryType = UITableViewCellAccessoryNone;
   cell.tintColor = self.actionTitleColor;
@@ -155,8 +155,8 @@ static NSString * const cellIdentifier = @"cellIdenifier";
 - (void)selectCell:(UITableViewCell *)cell {
   cell.accessoryType = UITableViewCellAccessoryCheckmark;
   cell.tintColor = self.selectedActionTitleColor;
-  cell.textLabel.textColor = self.selectedActionTitleColor; //self.actionTextColor;
-  cell.layoutMargins = UIEdgeInsetsMake(0, 16, 0, 0); //45
+  cell.textLabel.textColor = self.selectedActionTitleColor;
+  cell.layoutMargins = UIEdgeInsetsMake(0, 16, 0, 0);
 }
 
 - (void)deselectCell:(UITableViewCell *)cell {
