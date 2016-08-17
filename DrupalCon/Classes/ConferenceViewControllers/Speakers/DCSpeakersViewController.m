@@ -13,6 +13,9 @@
 
 @property(nonatomic, weak) IBOutlet UITableView* speakersTbl;
 @property(nonatomic, weak) IBOutlet UIView* noDataView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *noDataImage_heightConstraint;
+@property (weak, nonatomic) IBOutlet UILabel *noDataLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *noDataImageView;
 
 @property(nonatomic, strong) IBOutlet UISearchBar* searchBar;
 @property(nonatomic, strong)
@@ -248,6 +251,10 @@
 
   BOOL itemsEnabled = self.fetchedResultsController.fetchedObjects.count;
 
+  self.noDataLabel.text = self.searchBar.text.length ? @"No Search Result" : @"Currently there are no speakers";
+  self.noDataImage_heightConstraint.constant = self.searchBar.text.length ? 0 : 100;
+  
+  [self.noDataImageView layoutIfNeeded];
   self.noDataView.hidden = itemsEnabled;
   self.speakersTbl.hidden = !itemsEnabled;
 

@@ -151,6 +151,9 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="noDataImageView" destination="00v-fl-2Pw" id="OY9-1o-bvJ"/>
+                        <outlet property="noDataImage_heightConstraint" destination="X4X-4w-K6y" id="ybR-O1-RXe"/>
+                        <outlet property="noDataLabel" destination="akp-PP-JB1" id="rdT-cO-P5h"/>
                         <outlet property="noDataView" destination="xsX-Zl-ca4" id="n34-cD-g9C"/>
                         <outlet property="searchBar" destination="coi-og-QUw" id="t8t-Rw-pDQ"/>
                         <outlet property="speakersTbl" destination="Rtg-Kq-JJf" id="B0Y-mk-aPj"/>
