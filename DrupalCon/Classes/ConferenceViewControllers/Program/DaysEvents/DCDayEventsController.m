@@ -147,8 +147,8 @@
         // Some conditions for favorite events
         NSString* titleForNextSection = [weakSelf.eventsDataSource
             titleForSectionAtIdexPath:indexPath.section + 1];
-        cell.separatorCellView.hidden =
-            (titleForNextSection && cell.isLastCellInSection) ? YES : NO;
+//        cell.separatorCellView.hidden =
+//            (titleForNextSection && cell.isLastCellInSection) ? YES : NO;
         if ([weakSelf.eventsStrategy leftSectionContainerColor]) {
           cell.leftSectionContainerView.backgroundColor =
               [weakSelf.eventsStrategy leftSectionContainerColor];
