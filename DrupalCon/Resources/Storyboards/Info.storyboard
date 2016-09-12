@@ -77,7 +77,7 @@
                                     <constraint firstAttribute="width" secondItem="Dth-08-nlc" secondAttribute="height" multiplier="320:181" id="Y4U-Go-7Xc"/>
                                 </constraints>
                             </imageView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kmA-Wd-A6O" userLabel="NoDataView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kmA-Wd-A6O" userLabel="NoDataView">
                                 <rect key="frame" x="0.0" y="241" width="320" height="175"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_no_about" translatesAutoresizingMaskIntoConstraints="NO" id="cHl-bz-ttL" userLabel="NoEventsImageView">
@@ -87,7 +87,7 @@
                                             <constraint firstAttribute="width" secondItem="cHl-bz-ttL" secondAttribute="height" multiplier="1:1" id="cFp-aP-vBC"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Currently there is no information" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iIx-IJ-GpI" userLabel="NoEventsLabel">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currently there is no information" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iIx-IJ-GpI" userLabel="NoEventsLabel">
                                         <rect key="frame" x="60" y="112" width="200" height="55"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="21"/>
                                         <color key="textColor" red="0.63921568630000003" green="0.63921568630000003" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -316,7 +316,7 @@
                                     <outlet property="delegate" destination="xJp-X6-qI9" id="Ktl-rg-mRU"/>
                                 </connections>
                             </scrollView>
-                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AZi-J7-4da" userLabel="NoDataView">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AZi-J7-4da" userLabel="NoDataView">
                                 <rect key="frame" x="0.0" y="197" width="320" height="175"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_no_floor_plan" translatesAutoresizingMaskIntoConstraints="NO" id="ZwL-oM-dlF" userLabel="NoEventsImageView">
@@ -326,7 +326,7 @@
                                             <constraint firstAttribute="height" constant="100" id="QZN-uz-Ek4"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Currently there are no floor plans" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X1d-fL-dlT" userLabel="NoEventsLabel">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currently there are no floor plans" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X1d-fL-dlT" userLabel="NoEventsLabel">
                                         <rect key="frame" x="35" y="112" width="250" height="55"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="21"/>
                                         <color key="textColor" red="0.63921568630000003" green="0.63921568630000003" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
