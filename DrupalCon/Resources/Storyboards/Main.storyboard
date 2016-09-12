@@ -38,17 +38,17 @@
                                 <color key="backgroundColor" red="0.8980392157" green="0.070588235289999995" blue="0.070588235289999995" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="VSv-PR-47m">
-                                <rect key="frame" x="142" y="266" width="37" height="37"/>
+                                <rect key="frame" x="142" y="507" width="37" height="37"/>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.8980392157" green="0.070588235289999995" blue="0.070588235289999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="centerY" secondItem="VSv-PR-47m" secondAttribute="centerY" id="1cd-LY-iGE"/>
                             <constraint firstAttribute="centerX" secondItem="VSv-PR-47m" secondAttribute="centerX" id="Nu2-w0-fpx"/>
                             <constraint firstAttribute="trailing" secondItem="pNf-SA-FQa" secondAttribute="trailing" id="WqC-9L-edh"/>
                             <constraint firstItem="pNf-SA-FQa" firstAttribute="leading" secondItem="AfV-oq-yUP" secondAttribute="leading" id="crX-Jd-hNG"/>
                             <constraint firstItem="h11-4l-oWE" firstAttribute="top" secondItem="pNf-SA-FQa" secondAttribute="bottom" id="hS7-Xt-Bdy"/>
                             <constraint firstItem="pNf-SA-FQa" firstAttribute="top" secondItem="AfV-oq-yUP" secondAttribute="top" id="jS2-0a-q0q"/>
+                            <constraint firstItem="h11-4l-oWE" firstAttribute="top" secondItem="VSv-PR-47m" secondAttribute="bottom" constant="24" id="yKo-D6-ww5"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xA4-QL-iKP"/>
