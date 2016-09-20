@@ -26,7 +26,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="100" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="cil-f8-zAa">
-                                <rect key="frame" x="0.0" y="181" width="320" height="419"/>
+                                <rect key="frame" x="0.0" y="145" width="320" height="455"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="InfoMenuItemCellId" id="zCZ-fc-6Cg" customClass="DCInfoMenuCell">
@@ -114,7 +114,7 @@
                             <constraint firstItem="kmA-Wd-A6O" firstAttribute="top" secondItem="Dth-08-nlc" secondAttribute="bottom" constant="60" id="Q4T-ve-BMW"/>
                             <constraint firstItem="kmA-Wd-A6O" firstAttribute="leading" secondItem="4rw-eC-jzZ" secondAttribute="leading" id="VG7-Fb-WPb"/>
                             <constraint firstItem="Dth-08-nlc" firstAttribute="leading" secondItem="4rw-eC-jzZ" secondAttribute="leading" id="jNl-S8-azs"/>
-                            <constraint firstItem="cil-f8-zAa" firstAttribute="top" secondItem="Dth-08-nlc" secondAttribute="bottom" id="pu5-mY-k4y"/>
+                            <constraint firstItem="cil-f8-zAa" firstAttribute="top" secondItem="Dth-08-nlc" secondAttribute="bottom" constant="-36" id="pu5-mY-k4y"/>
                             <constraint firstAttribute="trailing" secondItem="Dth-08-nlc" secondAttribute="trailing" id="sDg-bs-JRG"/>
                             <constraint firstAttribute="trailing" secondItem="cil-f8-zAa" secondAttribute="trailing" id="toY-nE-0Nk"/>
                         </constraints>
