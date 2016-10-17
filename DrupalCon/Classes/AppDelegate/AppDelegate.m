@@ -111,6 +111,7 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication*)application {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"applicationDidBecomeActive" object:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication*)application {

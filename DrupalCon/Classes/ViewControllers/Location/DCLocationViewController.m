@@ -34,10 +34,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  self.location =
-      [[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCLocation class]
-                                             inMainQueue:YES] lastObject];
-  [self updateLocation];
+    [self createNewLocation];
   self.titlesContainerView.backgroundColor =
       [DCAppConfiguration navigationBarColor];
 
@@ -46,6 +43,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self registerScreenLoadAtGA:[NSString stringWithFormat:@"%@", self.navigationItem.title]];
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(appBecameActive) name:@"applicationDidBecomeActive" object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - View appearance
@@ -62,6 +65,13 @@
 }
 
 #pragma mark - Private
+
+- (void)createNewLocation {
+    self.location =
+    [[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCLocation class]
+                                           inMainQueue:YES] lastObject];
+    [self updateLocation];
+}
 
 - (void)updateLocation {
   [self setAnnotation];
@@ -143,6 +153,12 @@
     }
   }
   return annotationView;
+}
+
+#pragma mark - Notification handler
+
+- (void)appBecameActive {
+    [self createNewLocation];
 }
 
 @end
