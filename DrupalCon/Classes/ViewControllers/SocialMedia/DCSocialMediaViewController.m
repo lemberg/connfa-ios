@@ -8,6 +8,7 @@
 
 @property(nonatomic) __block DCMainProxyState previousState;
 @property (weak, nonatomic) IBOutlet UIView *placeholderView;
+@property (nonatomic, strong) UIActivityIndicatorView *activityView;
 
 @end
 
@@ -30,7 +31,13 @@
   self.tableView.emptyDataSetSource = self;
   self.tableView.emptyDataSetDelegate = self;
   self.tableView.tableFooterView = [UIView new];
-  
+    
+    // spinner
+    self.activityView = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.activityView.frame = CGRectMake(round((self.view.frame.size.width - 25) / 2), round((self.view.frame.size.height - 25) / 2) - 40, 40, 40);
+    [self.view addSubview:self.activityView];
+    [self.activityView startAnimating];
+
   [[DCMainProxy sharedProxy]
    setDataReadyCallback:^(DCMainProxyState mainProxyState) {
      dispatch_async(dispatch_get_main_queue(), ^{
@@ -104,6 +111,11 @@
   [[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCAppSettings class]
                                          inMainQueue:YES] lastObject];
   NSString *searchQuery = settings.searchQuery;
+
+    if (self.previousState == DCmainProxyStateDataNotChange) {
+        [self.activityView stopAnimating];
+    }
+    
   return searchQuery.length == 0;
 }
 
