@@ -119,8 +119,6 @@
                             <constraint firstAttribute="trailing" secondItem="cil-f8-zAa" secondAttribute="trailing" id="toY-nE-0Nk"/>
                         </constraints>
                     </view>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackOpaque"/>
-                    <nil key="simulatedTopBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="600"/>
                     <connections>

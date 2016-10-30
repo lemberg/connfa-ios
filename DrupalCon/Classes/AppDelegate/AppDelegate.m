@@ -35,12 +35,8 @@
 #endif
   
   [[UIBarButtonItem appearance]
-   setTitleTextAttributes: @{NSForegroundColorAttributeName:[UIColor whiteColor],
-                             NSFontAttributeName:
-                               [UIFont fontWithName:kFontOpenSansRegular size:16.0]
-                            }
-   forState: UIControlStateNormal];
-
+   setTitleTextAttributes: @{NSFontAttributeName:[UIFont fontWithName:kFontOpenSansRegular size:16.0]}
+                 forState: UIControlStateNormal];
 
   return YES;
 }

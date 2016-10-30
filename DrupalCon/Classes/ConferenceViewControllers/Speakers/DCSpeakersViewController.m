@@ -27,7 +27,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  UIColor *speakerColor = [DCAppConfiguration speakerDetailBarColor];
+  UIColor *speakerColor = [DCAppConfiguration favoriteEventColor];
   [[UITableView appearance]
       setSectionIndexBackgroundColor:[UIColor clearColor]];
   [[UITableView appearance]
@@ -36,10 +36,10 @@
       setSectionIndexColor:speakerColor];
 
   [self.searchBar setTintColor:[UIColor whiteColor]];
-  self.searchBar.barTintColor = speakerColor;
+  self.searchBar.barTintColor =  [DCAppConfiguration navigationBarColor];
   self.searchBar.layer.borderWidth = 1;
   self.searchBar.layer.borderColor =
-      [speakerColor CGColor];
+      [ [DCAppConfiguration navigationBarColor] CGColor];
   
   [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil]
       setTintColor:[UIColor darkGrayColor]];
@@ -56,7 +56,7 @@
   [super arrangeNavigationBar];
   
   self.navigationController.navigationBar.barTintColor =
-  [DCAppConfiguration speakerDetailBarColor];
+  [DCAppConfiguration navigationBarColor];
 }
 
 #pragma mark - UISearchBarDelegate

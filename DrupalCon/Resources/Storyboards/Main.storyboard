@@ -192,7 +192,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="lgm-iP-ToF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.0" green="0.4941176471" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.027450980392156862" green="0.1764705882352941" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </textAttributes>
@@ -217,8 +217,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu_bg" translatesAutoresizingMaskIntoConstraints="NO" id="4g4-X3-bWs" userLabel="background">
-                                <rect key="frame" x="0.0" y="-8" width="320" height="584"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menu_bg" translatesAutoresizingMaskIntoConstraints="NO" id="4g4-X3-bWs" userLabel="background">
+                                <rect key="frame" x="0.0" y="-8" width="320" height="576"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="rA1-f8-M65">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -321,7 +321,7 @@
                             <constraint firstItem="rA1-f8-M65" firstAttribute="leading" secondItem="kbZ-NQ-H3b" secondAttribute="leading" id="GU5-h2-S8J"/>
                             <constraint firstItem="rA1-f8-M65" firstAttribute="top" secondItem="kbZ-NQ-H3b" secondAttribute="top" id="KvZ-rR-PG7"/>
                             <constraint firstItem="4g4-X3-bWs" firstAttribute="leading" secondItem="kbZ-NQ-H3b" secondAttribute="leading" id="Ync-zc-bFx"/>
-                            <constraint firstItem="4g4-X3-bWs" firstAttribute="bottom" secondItem="kbZ-NQ-H3b" secondAttribute="bottomMargin" constant="8" id="inC-LO-sbk"/>
+                            <constraint firstItem="4g4-X3-bWs" firstAttribute="bottom" secondItem="kbZ-NQ-H3b" secondAttribute="bottomMargin" id="inC-LO-sbk"/>
                             <constraint firstItem="4g4-X3-bWs" firstAttribute="top" secondItem="kbZ-NQ-H3b" secondAttribute="topMargin" constant="-8" id="iog-7G-67n"/>
                             <constraint firstAttribute="trailing" secondItem="rA1-f8-M65" secondAttribute="trailing" id="jTg-aY-41a"/>
                             <constraint firstAttribute="bottom" secondItem="rA1-f8-M65" secondAttribute="bottom" id="lhi-z6-tKq"/>
@@ -452,6 +452,6 @@
         <image name="login_bg" width="21" height="21"/>
         <image name="login_btn" width="189" height="39"/>
         <image name="login_lock" width="112" height="147"/>
-        <image name="menu_bg" width="640" height="960"/>
+        <image name="menu_bg" width="455" height="960"/>
     </resources>
 </document>

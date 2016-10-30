@@ -7,16 +7,16 @@
 	<key>EventPlace</key>
 	<string></string>
 	<key>NavigationBarColour</key>
-	<string>#62388E</string>
+	<string>#072D50</string>
 	<key>EventDetailHeaderColour</key>
-	<string>#62388E</string>
+	<string>#4077aa</string>
 	<key>EventDetailNavBarTextColour</key>
-	<string>#ffffff</string>
+	<string>#1f3e98</string>
 	<key>FavoriteEventColour</key>
-	<string>#79782E</string>
+	<string>#4f3b9a</string>
 	<key>IsFilterEnable</key>
 	<true/>
 	<key>SpeakerDetailBarColour</key>
-	<string>#62388E</string>
+	<string>#072D50</string>
 </dict>
 </plist>

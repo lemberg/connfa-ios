@@ -86,7 +86,7 @@
 
 - (void)configureUI {
   self.headerView.backgroundColor = [DCAppConfiguration navigationBarColor];
-  [self.floorButton setTitleColor:[DCAppConfiguration eventDetailNavBarTextColor] forState:UIControlStateNormal];
+  [self.floorButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }
 
 - (void)checkProxyState {

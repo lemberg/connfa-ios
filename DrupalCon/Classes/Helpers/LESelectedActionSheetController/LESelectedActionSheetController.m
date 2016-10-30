@@ -155,8 +155,8 @@ static NSString * const cellIdentifier = @"cellIdenifier";
 - (void)selectCell:(UITableViewCell *)cell {
   cell.accessoryType = UITableViewCellAccessoryCheckmark;
   cell.tintColor = self.selectedActionTitleColor;
-  cell.textLabel.textColor = self.selectedActionTitleColor; //self.actionTextColor;
-  cell.layoutMargins = UIEdgeInsetsMake(0, 16, 0, 0); //45
+  cell.textLabel.textColor = self.selectedActionTitleColor;
+  cell.layoutMargins = UIEdgeInsetsMake(0, 16, 0, 0);
 }
 
 - (void)deselectCell:(UITableViewCell *)cell {

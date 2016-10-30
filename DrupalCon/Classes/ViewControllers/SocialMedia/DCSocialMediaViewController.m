@@ -8,7 +8,6 @@
 
 @property(nonatomic) __block DCMainProxyState previousState;
 @property (weak, nonatomic) IBOutlet UIView *placeholderView;
-@property (nonatomic, strong) UIActivityIndicatorView *activityView;
 
 @end
 
@@ -31,13 +30,7 @@
   self.tableView.emptyDataSetSource = self;
   self.tableView.emptyDataSetDelegate = self;
   self.tableView.tableFooterView = [UIView new];
-    
-    // spinner
-    self.activityView = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    self.activityView.frame = CGRectMake(round((self.view.frame.size.width - 25) / 2), round((self.view.frame.size.height - 25) / 2) - 40, 40, 40);
-    [self.view addSubview:self.activityView];
-    [self.activityView startAnimating];
-
+  
   [[DCMainProxy sharedProxy]
    setDataReadyCallback:^(DCMainProxyState mainProxyState) {
      dispatch_async(dispatch_get_main_queue(), ^{
@@ -94,11 +87,14 @@
 #pragma mark - DZNEmptyDataSetSource
 
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView {
-  return [UIImage imageNamed:@"ic_no_social_media"];
+  if ([DCMainProxy sharedProxy].checkReachable) {
+    return [UIImage imageNamed:@"ic_no_social_media"];
+  }
+  return nil;
 }
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
-  NSString *text = @"Currently there are no twits";
+  NSString *text = [DCMainProxy sharedProxy].checkReachable ? @"Currently there are no twits" : @"Internet connection is not available at this moment.\nPlease, try later.";
   NSDictionary *attributes = @{NSFontAttributeName: [UIFont fontWithName:kFontOpenSansRegular size:21.0],
                                NSForegroundColorAttributeName: [UIColor colorWithRed:163.0/255.0 green:163.0/255.0 blue:163.0/255.0 alpha:1.0]};
   return [[NSAttributedString alloc] initWithString:text attributes:attributes];
@@ -111,12 +107,7 @@
   [[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCAppSettings class]
                                          inMainQueue:YES] lastObject];
   NSString *searchQuery = settings.searchQuery;
-
-    if (self.previousState == DCmainProxyStateDataNotChange) {
-        [self.activityView stopAnimating];
-    }
-    
-  return searchQuery.length == 0;
+  return searchQuery.length == 0 || [DCMainProxy sharedProxy].checkReachable == NO;
 }
 
 #pragma mark - Google Analytics

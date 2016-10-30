@@ -54,12 +54,10 @@
                                              inMainQueue:YES] lastObject];
 
   NSSortDescriptor* orderDescriptor =
-      [[NSSortDescriptor alloc] initWithKey:@"order" ascending:NO];
-  NSSortDescriptor* iDDescriptor =
-      [[NSSortDescriptor alloc] initWithKey:@"infoId" ascending:YES];
+      [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
 
   self.items = [[info.infoCategory allObjects]
-      sortedArrayUsingDescriptors:@[ orderDescriptor, iDDescriptor ]];
+      sortedArrayUsingDescriptors:@[orderDescriptor]];
 
   [self.tableView reloadData];
   self.noDataView.hidden = self.items.count > 0;
