@@ -63,7 +63,7 @@
 - (NSString*)titleForClass:(Class) class {
   if ([NSStringFromClass(class)
           isEqualToString:NSStringFromClass([DCBof class])]) {
-    return @"Bofs";
+    return @"BoFs";
   } else if ([NSStringFromClass(class)
                  isEqualToString:NSStringFromClass([DCMainEvent class])]) {
     return @"Sessions";
