@@ -35,12 +35,8 @@
 #endif
   
   [[UIBarButtonItem appearance]
-   setTitleTextAttributes: @{NSForegroundColorAttributeName:[UIColor whiteColor],
-                             NSFontAttributeName:
-                               [UIFont fontWithName:kFontOpenSansRegular size:16.0]
-                            }
-   forState: UIControlStateNormal];
-
+   setTitleTextAttributes: @{NSFontAttributeName:[UIFont fontWithName:kFontOpenSansRegular size:16.0]}
+                 forState: UIControlStateNormal];
 
   return YES;
 }
@@ -60,7 +56,24 @@
          [[DCMainProxy sharedProxy] setDataUpdatedCallback:nil];
        }];
     }
+  }];
+}
 
+- (void)handleUpdateTimeZone {
+  // Handle it only when application start
+  [[DCMainProxy sharedProxy] setDataUpdatedCallback:^(DCMainProxyState mainProxyState) {
+    NSTimeZone *eventTimeZone = [[DCMainProxy sharedProxy]
+                                 isSystemTimeCoincidencWithEventTimezone];
+    if (eventTimeZone && [NSUserDefaults isEnabledTimeZoneAlert] && [DCMainProxy sharedProxy].isTimeZoneChanged == YES) {
+      [DCAlertsManager
+       showTimeZoneAlertForTimeZone:eventTimeZone
+       withSuccess:^(BOOL isSuccess){
+         if (isSuccess) {
+           [NSUserDefaults disableTimeZoneNotification];
+         }
+         [[DCMainProxy sharedProxy] setDataUpdatedCallback:nil];
+       }];
+    }
   }];
 }
 
@@ -79,16 +92,22 @@
   // application to its current state in case it is terminated later.
   // If your application supports background execution, this method is called
   // instead of applicationWillTerminate: when the user quits.
+  
+  [[DCMainProxy sharedProxy] resetEventTimeZone];
+  [[DCMainProxy sharedProxy] setDataUpdatedCallback:nil];
+  [DCMainProxy sharedProxy].isTimeZoneChanged = NO;
 }
 
 - (void)applicationWillEnterForeground:(UIApplication*)application {
   if ([self.window.rootViewController
           isKindOfClass:[UINavigationController class]]) {
+    [self handleUpdateTimeZone];
     [[DCMainProxy sharedProxy] update];
   }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication*)application {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"applicationDidBecomeActive" object:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication*)application {

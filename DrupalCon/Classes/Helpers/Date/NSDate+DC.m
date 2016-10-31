@@ -82,11 +82,12 @@ static NSString* kDCSpeakerEventCellFormat = @"dd LLLL";
 
 + (float)currentHour {
   NSDate* date = [NSDate date];
+  NSDate *dateInEventTimeZone = [date dateByAddingTimeInterval:[DCMainProxy sharedProxy].eventTimeZone.secondsFromGMT];
   NSCalendar* calendar = [NSCalendar currentGregorianCalendar];
   [calendar setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_GB"]];
   NSDateComponents* components =
       [calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit)
-                  fromDate:date];
+                  fromDate:dateInEventTimeZone];
   float hour = (float)[components hour] + (float)[components minute] / 60;
   return hour;
 }

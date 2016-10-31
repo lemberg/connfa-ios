@@ -13,6 +13,8 @@
 #import "DCTrack+DC.h"
 #import "DCInfoEventCell.h"
 #import "DCFavoriteEventsDataSource.h"
+#import "DCMainProxy+Additions.h"
+
 @interface DCDayEventsController ()<DCEventCellProtocol,
                                     DCDayEventSourceDelegate>
 
@@ -28,64 +30,91 @@
 @property(weak, nonatomic)
     IBOutlet UIActivityIndicatorView* activityIndicatorView;
 
+@property (weak, nonatomic) IBOutlet UIView *noDataView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *noEventsImageView_heightConstraint;
+@property (nonatomic) CGFloat noEventsImageViewDefaultHeight;
+
 @end
 
 @implementation DCDayEventsController
 
-- (void)didReceiveMemoryWarning {
-  [super didReceiveMemoryWarning];
-  // Dispose of any resources that can be recreated.
-}
+#pragma mark - Life cycle
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-
-  if (!self.stubMessage && !self.stubImage) {
-    // this controller is not Stub controller and contains events
-    [self registerCells];
-    [self initDataSource];
-
-    self.cellPrototype = [self.tableView
-        dequeueReusableCellWithIdentifier:NSStringFromClass(
-                                              [DCEventCell class])];
-  } else {
-    // this controller does not have events and will show stub Message or Image
-    self.tableView.dataSource = nil;
-    self.tableView.hidden = YES;
-
-    self.noItemsLabel.hidden = !self.stubMessage;
-    self.noItemsImageView.hidden = !self.stubImage;
-    [self.activityIndicatorView stopAnimating];
-    
-    if (self.stubMessage) {
-      self.noItemsLabel.text = self.stubMessage;
-    } else if (self.stubImage) {
-      self.noItemsImageView.image = self.stubImage;
-    }
-  }
+  
+  self.noEventsImageViewDefaultHeight = 100.0;
+  
+  [self configureState];
 }
 
 - (void)dealloc {
   self.stubMessage = nil;
   self.stubImage = nil;
-
+  
   self.cellPrototype = nil;
 }
 
-- (void)initAsStubControllerWithString:(NSString*)noEventMessage {
-  self.stubMessage = noEventMessage;
+- (void)viewDidAppear:(BOOL)animated {
+  [super viewDidAppear:animated];
+  
 }
 
-- (void)initAsStubControllerWithImage:(UIImage*)noEventsImage {
-  self.stubImage = noEventsImage;
-}
+#pragma mark - Public
 
 - (void)updateEvents {
   [self.eventsDataSource reloadEvents];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-  [super viewDidAppear:animated];
+#pragma mark - Private
+
+- (void)configureState {
+  if (self.state == DCStateNormal) {
+    self.noDataView.hidden = YES;
+    [self registerCells];
+    [self initDataSource];
+    self.cellPrototype = [self.tableView
+                          dequeueReusableCellWithIdentifier:NSStringFromClass([DCEventCell class])];
+  } else {
+    [self configureEmptyView];
+  }
+}
+
+- (void)configureEmptyView {
+  self.noDataView.hidden = NO;
+  BOOL isFilterEnabled = ![[DCMainProxy sharedProxy] isFilterCleared];
+  if (self.eventsStrategy.strategy != EDCEeventStrategyFavorites)
+    self.noEventsImageView_heightConstraint.constant =  isFilterEnabled ? 0 : self.noEventsImageViewDefaultHeight;
+ 
+  switch (self.eventsStrategy.strategy) {
+    case EDCEventStrategyPrograms: {
+      self.stubImage = [UIImage imageNamed:@"ic_no_sessions"];
+      self.stubMessage = isFilterEnabled ? @"No Matching Events" : @"Currently there are no sessions";
+    }
+      break;
+    case EDCEeventStrategyFavorites: {
+      self.stubImage = [UIImage imageNamed:@"ic_no_my_schedule"];
+      self.stubMessage = @"Your schedule is empty.\nPlease add some events";
+    }
+      break;
+    case EDCEventStrategyBofs: {
+      self.stubImage = [UIImage imageNamed:@"ic_no_bofs"];
+      self.stubMessage = isFilterEnabled ? @"No Matching BoFs" : @"Currently there are no BoFs";
+    }
+      break;
+    case EDCEventStrategySocialEvents: {
+      self.stubImage = [UIImage imageNamed:@"ic_no_social_events"];
+      self.stubMessage = isFilterEnabled ? @"No Matching social events" : @"Currently there are no social events";
+    }
+      break;
+  }
+  
+  self.tableView.dataSource = nil;
+  self.tableView.hidden = YES;
+  [self.activityIndicatorView stopAnimating];
+  self.noItemsLabel.text = self.stubMessage;
+  self.noItemsImageView.image = self.stubImage;
+  [self.noItemsImageView layoutIfNeeded];
 }
 
 - (void)registerCells {
@@ -118,8 +147,8 @@
         // Some conditions for favorite events
         NSString* titleForNextSection = [weakSelf.eventsDataSource
             titleForSectionAtIdexPath:indexPath.section + 1];
-        cell.separatorCellView.hidden =
-            (titleForNextSection && cell.isLastCellInSection) ? YES : NO;
+//        cell.separatorCellView.hidden =
+//            (titleForNextSection && cell.isLastCellInSection) ? YES : NO;
         if ([weakSelf.eventsStrategy leftSectionContainerColor]) {
           cell.leftSectionContainerView.backgroundColor =
               [weakSelf.eventsStrategy leftSectionContainerColor];

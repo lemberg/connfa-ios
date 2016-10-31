@@ -20,6 +20,7 @@ static NSString * const cellIdentifier = @"cellIdenifier";
 @property (weak, nonatomic) IBOutlet UIVisualEffectView *cancelView;
 @property (weak, nonatomic) IBOutlet UIButton *dismissButton;
 @property (strong, nonatomic) UIView *shadowView;
+@property (nonatomic) NSInteger maxNumberOfItems;
 
 @end
 
@@ -40,15 +41,17 @@ static NSString * const cellIdentifier = @"cellIdenifier";
   self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
   self.cornerRadius = 12.0;
   self.itemHeight = 58.0;
-  self.actionTitleColor = [UIColor blackColor];
-  self.selectedActionTitleColor = [UIColor redColor];
+  self.actionTextColor = [UIColor colorWithRed:51.0/255.0 green:51.0/255.0 blue:51.0/255.0 alpha:1.0];
+  self.actionTitleColor = [DCAppConfiguration favoriteEventColor];
+  self.selectedActionTitleColor = [DCAppConfiguration favoriteEventColor];
   self.selectedItemIndex = 0;
   self.dismissTitle = @"Cancel";
-  self.dismissTitleColor = [UIColor blackColor];
-  self.dismissTintColor = [UIColor redColor];
-  self.actionTitleFont = [UIFont systemFontOfSize:17.0];
-  self.dismissTitleFont = [UIFont systemFontOfSize:17.0];
+  self.dismissTitleColor = [DCAppConfiguration favoriteEventColor];
+  self.dismissTintColor = [DCAppConfiguration favoriteEventColor];
+  self.actionTitleFont = [UIFont systemFontOfSize:17.0 weight:UIFontWeightSemibold];
+  self.dismissTitleFont = [UIFont systemFontOfSize:17.0 weight:UIFontWeightSemibold];
   self.requiredSelection = NO;
+  self.maxNumberOfItems = [UIScreen mainScreen].bounds.size.height == 480 ? 6 : 8;
 }
 
 - (void)viewDidLoad {
@@ -114,29 +117,36 @@ static NSString * const cellIdentifier = @"cellIdenifier";
 }
 
 - (void)configureTableView {
-  self.tableView.scrollEnabled = NO;
-  self.tableViewHeightConstraint.constant = self.itemHeight * [self.delegate numberOfActions];
+  [self configureTableViewHeight];
   [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellIdentifier];
   self.tableView.layer.cornerRadius = self.cornerRadius;
   self.tableView.clipsToBounds = YES;
-  UIVisualEffectView *tableBackground = [[UIVisualEffectView alloc] initWithFrame: self.tableView.frame];
-  tableBackground.effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+  UIView *tableBackground = [[UIView alloc] initWithFrame: self.tableView.frame];
+  tableBackground.backgroundColor = [UIColor colorWithRed:249.0/255.0 green:249.0/255.0 blue:249.0/255.0 alpha:1.0];
   self.tableView.backgroundView = tableBackground;
 }
 
+- (void)configureTableViewHeight {
+  NSInteger numberOfItems = [self.delegate numberOfActions];
+  if (numberOfItems <= self.maxNumberOfItems) {
+    self.tableView.scrollEnabled = NO;
+    self.tableViewHeightConstraint.constant = self.itemHeight * numberOfItems + numberOfItems - 1;
+  } else {
+    self.tableView.scrollEnabled = YES;
+    self.tableViewHeightConstraint.constant = self.itemHeight * self.maxNumberOfItems + self.maxNumberOfItems - 1;
+  }
+}
+
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-  UIVisualEffectView *cellBackground = [[UIVisualEffectView alloc] initWithFrame:cell.frame];
-  cellBackground.effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
-  cell.backgroundView = cellBackground;
   cell.backgroundView.alpha = 1.0;
-  cell.backgroundColor = [UIColor clearColor];
+  cell.backgroundColor = [UIColor colorWithRed:249.0/255.0 green:249.0/255.0 blue:249.0/255.0 alpha:1.0];
   cell.textLabel.font = self.actionTitleFont;
-  cell.textLabel.textAlignment = NSTextAlignmentCenter;
-  cell.selectionStyle = UITableViewCellSelectionStyleNone;
-  cell.layoutMargins = UIEdgeInsetsMake(0, 0, 0, 0);
+  cell.textLabel.textAlignment = NSTextAlignmentLeft;
+  cell.selectionStyle = UITableViewCellSelectionStyleGray;
+  cell.layoutMargins = UIEdgeInsetsMake(0, 16, 0, 0);
   cell.accessoryType = UITableViewCellAccessoryNone;
   cell.tintColor = self.actionTitleColor;
-  cell.textLabel.textColor = cell.tintColor;
+  cell.textLabel.textColor = self.actionTextColor;
   cell.textLabel.text = [self.delegate titleForActionAtIndex:indexPath.section];
   if (indexPath.section == self.selectedItemIndex)
     [self selectCell:cell];
@@ -145,17 +155,15 @@ static NSString * const cellIdentifier = @"cellIdenifier";
 - (void)selectCell:(UITableViewCell *)cell {
   cell.accessoryType = UITableViewCellAccessoryCheckmark;
   cell.tintColor = self.selectedActionTitleColor;
-  cell.textLabel.textColor = cell.tintColor;
-  cell.layoutMargins = UIEdgeInsetsMake(0, 45, 0, 0);
-  cell.backgroundView.alpha = 0.4;
+  cell.textLabel.textColor = self.selectedActionTitleColor;
+  cell.layoutMargins = UIEdgeInsetsMake(0, 16, 0, 0);
 }
 
 - (void)deselectCell:(UITableViewCell *)cell {
   cell.tintColor = self.actionTitleColor;
   cell.textLabel.textColor = cell.tintColor;
   cell.accessoryType = UITableViewCellAccessoryNone;
-  cell.layoutMargins = UIEdgeInsetsMake(0, 0, 0, 0);
-  cell.backgroundView.alpha = 1.0;
+  cell.layoutMargins = UIEdgeInsetsMake(0, 16, 0, 0);
 }
 
 #pragma mark - Overrides
@@ -207,7 +215,7 @@ static NSString * const cellIdentifier = @"cellIdenifier";
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
   UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 1)];
-  view.backgroundColor = [UIColor clearColor];
+  view.backgroundColor = [UIColor colorWithRed:218.0/255.0 green:218.0/255.0 blue:222.0/255.0 alpha:1.0];
   
   return view;
 }

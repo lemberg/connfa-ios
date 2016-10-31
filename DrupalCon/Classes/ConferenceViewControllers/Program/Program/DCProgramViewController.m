@@ -27,7 +27,7 @@
 
 @implementation DCProgramViewController
 
-#pragma mark - Lifecycle
+#pragma mark - Init
 
 - (id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil {
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -35,6 +35,8 @@
   }
   return self;
 }
+
+#pragma mark - Lifecycle
 
 - (void)viewDidLoad {
   [super viewDidLoad];
@@ -66,10 +68,12 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-  [super viewDidAppear:animated];
-
-  [self arrangePreviousAndNextDayButtons];
+    [super viewDidAppear:animated];
+    [self arrangePreviousAndNextDayButtons];
+    [self registerScreenLoadAtGA:[NSString stringWithFormat:@"%@", self.navigationItem.title]];
 }
+
+#pragma mark - Public
 
 - (void)openDetailScreenForEvent:(DCEvent*)event {
   DCEventDetailViewController* detailController = [self.storyboard
@@ -218,9 +222,7 @@
   [self.dateLabel.layer addAnimation:animation forKey:@"kCATransitionFade"];
 
   NSDate* date = _days[day];
-  self.dateLabel.text =
-      date ? [[DCDateHelper convertDate:date toApplicationFormat:@"EEEE dd"] uppercaseString]
-           : nil;
+  self.dateLabel.text = date ? [[date dateToStringWithFormat:@"EEEE dd"] uppercaseString] : nil;
 }
 
 - (NSArray*)createViewControllersForDays:(NSArray*)aDays {
@@ -242,24 +244,18 @@
       dayEventsController.parentProgramController = self;
       dayEventsController.date = date;
       dayEventsController.eventsStrategy = self.eventsStrategy;
+      dayEventsController.state = DCStateNormal;
 
       [controllers addObject:dayEventsController];
       currentDatePageIndex++;
     }
     return controllers;
-  } else  // make stub controller with no items
-  {
+  } else { // make stub controller with no items
     DCDayEventsController* dayEventsController =
         [self.storyboard instantiateViewControllerWithIdentifier:
                              NSStringFromClass([DCDayEventsController class])];
-
-    if (self.eventsStrategy.strategy == EDCEeventStrategyFavorites)
-      [dayEventsController
-          initAsStubControllerWithImage:[UIImage imageNamed:@"empty_icon"]];
-    else
-      [dayEventsController
-          initAsStubControllerWithString:@"No Matching Events"];
-
+    dayEventsController.eventsStrategy = self.eventsStrategy;
+    dayEventsController.state = DCStateEmpty;
     return @[ dayEventsController ];
   }
 }
@@ -295,19 +291,6 @@
   [(DCFilterViewController*)filterController.viewControllers[0]
       setDelegate:self];
   [self presentViewController:filterController animated:YES completion:nil];
-}
-
-- (void)filterControllerWillDismiss:(BOOL)cancel {
-  if (!cancel) {
-    self.pageViewController.dataSource = nil;
-    self.currentPageDate = self.days[self.currentDayIndex];
-
-    [self setFilterButton];
-    [self reloadData];
-
-    self.pageViewController.dataSource = self;
-    [self setCurrentDayControllerAtIndex:self.currentDayIndex];
-  }
 }
 
 - (void)updateControllersaToFilterValues {
@@ -360,6 +343,21 @@
               completion:nil];
 }
 
+#pragma mark - DCFilterViewControllerDelegate
+
+- (void)filterControllerWillDismiss:(BOOL)cancel {
+  if (!cancel) {
+    self.pageViewController.dataSource = nil;
+    self.currentPageDate = self.days[self.currentDayIndex];
+    
+    [self setFilterButton];
+    [self reloadData];
+    
+    self.pageViewController.dataSource = self;
+    [self setCurrentDayControllerAtIndex:self.currentDayIndex];
+  }
+}
+
 #pragma mark - UIPageViewController delegate and datasource
 
 - (UIViewController*)pageViewController:
@@ -410,7 +408,7 @@
   }
 }
 
-#pragma mark - UIStoryboardSegue delegate
+#pragma mark - UIStoryboardSegue
 
 - (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender {
   if ([[segue identifier] isEqualToString:@"EmbeddedDaysPageVC"]) {

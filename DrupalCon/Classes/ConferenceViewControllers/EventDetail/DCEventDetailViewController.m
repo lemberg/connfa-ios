@@ -28,7 +28,7 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
 @interface DCEventDetailViewController ()
 
 @property(nonatomic, weak) IBOutlet UITableView* tableView;
-@property(weak, nonatomic) IBOutlet UIImageView* noDetailImageView;
+@property(weak, nonatomic) IBOutlet UIView* noDataView;
 @property(weak, nonatomic) IBOutlet UIImageView* topBackgroundView;
 @property(weak, nonatomic) IBOutlet UIView* topBackgroundShadowView;
 @property(weak, nonatomic) IBOutlet UILabel* topTitleLabel;
@@ -63,6 +63,8 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
 - (void)viewDidLoad {
   [super viewDidLoad];
 
+  [self setNeedsStatusBarAppearanceUpdate];
+  
   self.cellsForSizeEstimation = @{
     cellIdHeader :
         [self.tableView dequeueReusableCellWithIdentifier:cellIdHeader],
@@ -83,7 +85,7 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
       [DCAppConfiguration eventDetailHeaderColour];
   [self initSpeakers];
     
-  self.noDetailImageView.hidden = ![self showEmptyDetailIcon];
+  self.noDataView.hidden = ![self showEmptyDetailIcon];
   self.tableView.scrollEnabled = ![self showEmptyDetailIcon];
 }
 
@@ -115,58 +117,61 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
   [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
-- (BOOL)isHeaderEmpty {
-  NSString* track = [[_event.tracks allObjects].lastObject name];
-  NSString* level = _event.level.name;
-  return [level length] == 0 && [track length] == 0;
-}
-
 - (void)arrangeNavigationBar {
   self.navigatorBarStyle = EBaseViewControllerNatigatorBarStyleTransparrent;
   [super arrangeNavigationBar];
-
+  
   self.navigationController.navigationBar.tintColor =
-      [DCAppConfiguration navigationBarColor];
+  [DCAppConfiguration navigationBarColor];
   [self.navigationController.navigationBar
-      setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]]
-           forBarMetrics:UIBarMetricsDefault];
+   setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]]
+   forBarMetrics:UIBarMetricsDefault];
   self.navigationController.navigationBar.shadowImage = [UIImage new];
   self.navigationController.navigationBar.translucent = YES;
   self.navigationController.navigationBar.backgroundColor =
-      [UIColor clearColor];
+  [UIColor clearColor];
+  UIColor* eventNavColor = [DCAppConfiguration eventDetailNavBarTextColor];
   UIImage* startImage =
-      self.event.favorite.boolValue
-          ? [[UIImage imageNamedFromBundle:@"star+"]
-                imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
-          : [[UIImage imageNamedFromBundle:@"star-"]
-                imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+  self.event.favorite.boolValue
+  ? [[UIImage imageNamedFromBundle:@"star+"]
+     imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
+  : [[UIImage imageNamedFromBundle:@"star-"]
+     imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   UIBarButtonItem* favoriteButton = [[UIBarButtonItem alloc]
-      initWithImage:startImage
-              style:UIBarButtonItemStylePlain
-             target:self
-             action:@selector(favoriteButtonDidClick:)];
+                                     initWithImage:startImage
+                                     style:UIBarButtonItemStylePlain
+                                     target:self
+                                     action:@selector(favoriteButtonDidClick:)];
   // tag 1: unselected state
   // tag 2: selected state
   favoriteButton.tag = self.event.favorite.boolValue ? 2 : 1;
-
-  UIBarButtonItem* sharedButton = [[UIBarButtonItem alloc]
-      initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                           target:self
-                           action:@selector(shareButtonDidClick)];
-
-  UIColor* eventNavColor = [DCAppConfiguration eventDetailNavBarTextColor];
+  favoriteButton.tintColor = eventNavColor;
+  
+  if (self.event.link.length > 0) {
+    UIBarButtonItem* sharedButton = [[UIBarButtonItem alloc]
+                                     initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                     target:self
+                                     action:@selector(shareButtonDidClick)];
+    self.navigationItem.rightBarButtonItems = @[ sharedButton, favoriteButton ];
+  } else {
+    self.navigationItem.rightBarButtonItem = favoriteButton;
+  }
+  
   self.navigationController.navigationBar.tintColor = eventNavColor;
-  self.topTitleLabel.textColor = eventNavColor;
+  self.topTitleLabel.textColor = [UIColor whiteColor];
   self.currentBarColor = eventNavColor;
-
-  self.navigationItem.rightBarButtonItems = @[ sharedButton, favoriteButton ];
 }
 
 - (BOOL)showEmptyDetailIcon {
-  BOOL isHeaderEmpty = [self isHeaderEmpty];
+  BOOL isTrackEmpty = [[self.event.tracks allObjects].lastObject name].length == 0;
+  BOOL isExperienceEmpty = self.event.level.name.length == 0;
   BOOL isNoSpeakers = [self.speakers count] == 0;
-  BOOL isDescriptionEmpty = _event.desctiptText.length == 0;
-  return isHeaderEmpty && isNoSpeakers && isDescriptionEmpty;
+  BOOL isDescriptionEmpty = self.event.desctiptText.length == 0;
+  return isTrackEmpty && isExperienceEmpty && isNoSpeakers && isDescriptionEmpty;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle {
+  return UIStatusBarStyleDefault;
 }
 
 #pragma mark - Private
@@ -399,10 +404,12 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
   sender.image =
       isSelected
           ? [[UIImage imageNamedFromBundle:@"star+"]
-                imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
+                imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
           : [[UIImage imageNamedFromBundle:@"star-"]
-                imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+                imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
 
+  sender.tintColor = [DCAppConfiguration eventDetailNavBarTextColor];
+  
   if (isSelected) {
     [[DCMainProxy sharedProxy] addToFavoriteEvent:self.event];
   } else {

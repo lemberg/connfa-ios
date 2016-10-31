@@ -29,6 +29,7 @@ typedef enum {
     NSPersistentStoreCoordinator* persistentStoreCoordinator;
 
 @property(nonatomic) DCMainProxyState state;
+@property (nonatomic) BOOL isTimeZoneChanged;
 
 + (DCMainProxy*)sharedProxy;
 - (NSManagedObjectContext*)newMainQueueContext;
@@ -45,6 +46,7 @@ typedef enum {
 
 #pragma mark - work with instances
 - (NSTimeZone*)eventTimeZone;
+- (void)resetEventTimeZone;
 
 - (NSArray*)getAllInstancesOfClass:(Class)aClass inMainQueue:(BOOL)mainQueue;
 - (NSArray*)getAllInstancesOfClass:(Class)aClass

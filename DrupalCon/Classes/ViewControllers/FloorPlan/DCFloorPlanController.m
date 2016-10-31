@@ -13,21 +13,19 @@
 
 @interface DCFloorPlanController () <LESelectedActionSheetControllerProtocol, UIScrollViewDelegate>
 
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageViewBottomConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageViewTopConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageViewTrailingConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *imageViewLeadingConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerViewHeightConstraint;
 
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet UIButton *floorButton;
 @property (weak, nonatomic) IBOutlet UIButton *downArrowButton;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (strong, nonatomic)  UIImageView *imageView;
 @property (strong, nonatomic) NSArray *floors;
 @property (strong, nonatomic) NSArray *floorTitles;
 @property (nonatomic) NSUInteger selectedActionIndex;
 @property(nonatomic) __block DCMainProxyState previousState;
+@property (weak, nonatomic) IBOutlet UIView *noDataView;
+@property (weak, nonatomic) IBOutlet UIButton *showActionSheetButton;
 
 @end
 
@@ -37,17 +35,58 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-
+  
+  self.imageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+  [self.scrollView addSubview:self.imageView];
+  
+  [self setZoomScale];
+  [self setupGestureRecognizer];
+  
+  
   [self configureUI];
-  [self configureTapGestureRecognizers];
+  [self setupGestureRecognizer];
   [self checkProxyState];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self registerScreenLoadAtGA:[NSString stringWithFormat:@"%@", self.navigationItem.title]];
+}
+
+#pragma mark - Overrides
+
+#pragma mark - Overrides
+
+- (void)viewDidLayoutSubviews {
+  [super viewDidLayoutSubviews];
+  
+  [self setZoomScale];
 }
 
 #pragma mark - Private
 
+- (void)setZoomScale {
+  CGSize imageViewSize = self.imageView.bounds.size;
+  CGSize scrollViewSize = self.scrollView.bounds.size;
+  CGFloat widthScale = scrollViewSize.width / imageViewSize.width;
+  CGFloat heightScale = scrollViewSize.height / imageViewSize.height;
+  
+  self.scrollView.minimumZoomScale =  MIN(widthScale, heightScale);
+  self.scrollView.zoomScale = self.scrollView.minimumZoomScale;
+  self.scrollView.maximumZoomScale = 1.0;
+}
+
+- (void)setContentInsets {
+  CGSize imageViewSize = self.imageView.frame.size;
+  CGSize scrollViewSize = self.scrollView.bounds.size;
+  CGFloat verticalPadding = imageViewSize.height < scrollViewSize.height ? (scrollViewSize.height - imageViewSize.height) / 2 : 0;
+  CGFloat horizontalPadding = imageViewSize.width < scrollViewSize.width ? (scrollViewSize.width - imageViewSize.width) / 2 : 0;
+  self.scrollView.contentInset = UIEdgeInsetsMake(verticalPadding, horizontalPadding, verticalPadding, horizontalPadding);
+}
+
 - (void)configureUI {
   self.headerView.backgroundColor = [DCAppConfiguration navigationBarColor];
-  [self.floorButton setTitleColor:[DCAppConfiguration eventDetailNavBarTextColor] forState:UIControlStateNormal];
+  [self.floorButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 }
 
 - (void)checkProxyState {
@@ -56,11 +95,11 @@
      dispatch_async(dispatch_get_main_queue(), ^{
        NSLog(@"Data ready callback %d", mainProxyState);
        if (!self.previousState) {
+         [self reloadData];
          self.previousState = mainProxyState;
        }
        
        if (mainProxyState == DCMainProxyStateDataUpdated) {
-         [self reloadData];
        }
      });
    }];
@@ -68,27 +107,42 @@
 
 - (void)reloadData {
   NSMutableArray *floors = [NSMutableArray arrayWithArray:[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCHousePlan class] inMainQueue:YES]];
-  NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"order" ascending:YES];
-  [floors sortUsingDescriptors:@[sort]];
-  self.floors = floors;
-  
-  NSMutableArray *floorTitles = [[NSMutableArray alloc] init];
-  for (DCHousePlan *floorPlan in self.floors) {
-    [floorTitles addObject:floorPlan.name];
+  self.noDataView.hidden = floors.count > 0;
+  self.showActionSheetButton.enabled = floors.count > 0;
+  if (floors.count > 0) {
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"order" ascending:YES];
+    [floors sortUsingDescriptors:@[sort]];
+    self.floors = floors;
+    
+    NSMutableArray *floorTitles = [[NSMutableArray alloc] init];
+    for (DCHousePlan *floorPlan in self.floors) {
+      [floorTitles addObject:floorPlan.name];
+    }
+    self.floorTitles = [NSArray arrayWithArray:floorTitles];
+    [self.floorButton setTitle:floorTitles[self.selectedActionIndex] forState:UIControlStateNormal];
+    [self reloadImage];
+    self.floorButton.enabled =  floors.count > 1 ? YES : NO;
+    self.downArrowButton.hidden = floors.count > 1 ? NO : YES;
+  } else {
+    self.floorButton.hidden = YES;
+    self.downArrowButton.hidden = YES;
   }
-  self.floorTitles = [NSArray arrayWithArray:floorTitles];
-  [self.floorButton setTitle:[floorTitles[self.selectedActionIndex] uppercaseString] forState:UIControlStateNormal];
-  [self reloadImage];
 }
 
 - (void)reloadImage {
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+  [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
   DCHousePlan *floorPlan = self.floors[self.selectedActionIndex];
   NSURL *URL = [NSURL URLWithString:floorPlan.imageURL];
   [self.imageView sd_setImageWithURL:URL placeholderImage:nil
                            completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-  }];
+                             [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                             self.imageView.image = image;
+                             CGRect frame = self.imageView.frame;
+                             frame.size = image.size;
+                             self.imageView.frame = frame;
+                             self.scrollView.contentSize = image.size;
+                             [self setZoomScale];
+                           }];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -99,69 +153,24 @@
   LESelectedActionSheetController *actionSheetController = [[LESelectedActionSheetController alloc] init];
   actionSheetController.delegate = self;
   actionSheetController.selectedItemIndex = self.selectedActionIndex;
-  actionSheetController.selectedActionTitleColor = [DCAppConfiguration favoriteEventColor];
   [self presentViewController:actionSheetController animated:YES completion:nil];
 }
 
-- (void)updateMinZoomScaleForSize:(CGSize)size {
-  CGFloat widthScale = size.width / self.imageView.bounds.size.width;
-  CGFloat heightScale = (size.height - self.headerViewHeightConstraint.constant) / self.imageView.bounds.size.height;
-  CGFloat minScale = MIN(widthScale, heightScale);
-  
-  self.scrollView.minimumZoomScale = minScale;
-  self.scrollView.zoomScale = minScale;
+#pragma mark - Gesture Recognizer
+
+- (void)setupGestureRecognizer {
+  UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+  doubleTap.numberOfTapsRequired = 2;
+  [self.scrollView addGestureRecognizer:doubleTap];
 }
 
-- (void)updateConstraintsForSize:(CGSize)size {
-  CGFloat yOffset = MAX(0, ((size.height - self.headerViewHeightConstraint.constant) - self.imageView.frame.size.height) / 2);
-  self.imageViewTopConstraint.constant = yOffset;
-  self.imageViewBottomConstraint.constant = yOffset;
-  
-  CGFloat xOffset = MAX(0, (size.width - self.imageView.frame.size.width) / 2);
-  self.imageViewLeadingConstraint.constant = xOffset;
-  self.imageViewTrailingConstraint.constant = xOffset;
-  [self.view layoutIfNeeded];
-}
-
-- (void)configureTapGestureRecognizers {
-  UITapGestureRecognizer *doubleTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollViewDoubleTapped:)];
-  doubleTapRecognizer.numberOfTapsRequired = 2;
-  doubleTapRecognizer.numberOfTouchesRequired = 1;
-  [self.scrollView addGestureRecognizer:doubleTapRecognizer];
-  
-  UITapGestureRecognizer *twoFingerTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollViewTwoFingerTapped:)];
-  twoFingerTapRecognizer.numberOfTapsRequired = 1;
-  twoFingerTapRecognizer.numberOfTouchesRequired = 2;
-  [self.scrollView addGestureRecognizer:twoFingerTapRecognizer];
-}
-
-- (void)scrollViewDoubleTapped:(UITapGestureRecognizer *)recognizer {
-  CGPoint pointInView = [recognizer locationInView:self.imageView];
-  CGFloat newZoomScale = self.scrollView.zoomScale * 1.5;
-  newZoomScale = MIN(newZoomScale, self.scrollView.maximumZoomScale);
-  CGSize scrollViewSize = self.scrollView.bounds.size;
-  CGFloat w = scrollViewSize.width / newZoomScale;
-  CGFloat h = scrollViewSize.height / newZoomScale;
-  CGFloat x = pointInView.x - (w / 2.0);
-  CGFloat y = pointInView.y - (h / 2.0);
-  CGRect rectToZoomTo = CGRectMake(x, y, w, h);
-  [self.scrollView zoomToRect:rectToZoomTo animated:YES];
-  [self updateConstraintsForSize:self.view.bounds.size];
-}
-
-- (void)scrollViewTwoFingerTapped:(UITapGestureRecognizer*)recognizer {
-  CGFloat newZoomScale = self.scrollView.zoomScale / 1.5f;
-  newZoomScale = MAX(newZoomScale, self.scrollView.minimumZoomScale);
-  [self.scrollView setZoomScale:newZoomScale animated:YES];
-}
-
-#pragma mark - Overrides
-
-- (void)viewDidLayoutSubviews {
-  [super viewDidLayoutSubviews];
-  [self.view layoutIfNeeded];
-  [self updateMinZoomScaleForSize:self.view.bounds.size];
-  [self updateConstraintsForSize:self.view.bounds.size];
+- (void)handleDoubleTap:(UITapGestureRecognizer*)recoginzer{
+  if (self.scrollView.zoomScale > self.scrollView.minimumZoomScale) {
+    [self.scrollView setZoomScale:self.scrollView.minimumZoomScale animated:YES];
+  }
+  else{
+    [self.scrollView setZoomScale:self.scrollView.maximumZoomScale animated:YES];
+  }
 }
 
 #pragma mark - IBAction
@@ -182,7 +191,7 @@
 
 - (void)performActionAtIndex:(NSInteger)index {
   self.selectedActionIndex = index;
-  [self.floorButton setTitle:[self.floorTitles[index] uppercaseString] forState:UIControlStateNormal];
+  [self.floorButton setTitle:self.floorTitles[index] forState:UIControlStateNormal];
   [self reloadImage];
 }
 
@@ -192,8 +201,8 @@
   return self.imageView;
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-  [self updateConstraintsForSize:self.view.bounds.size];
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+  [self setContentInsets];
 }
 
 @end

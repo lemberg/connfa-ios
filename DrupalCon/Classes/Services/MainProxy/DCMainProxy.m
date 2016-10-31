@@ -103,6 +103,10 @@ typedef void (^UpdateDataFail)(NSString* reason);
   return self.applicationTimeZone;
 }
 
+- (void)resetEventTimeZone {
+  self.applicationTimeZone = nil;
+}
+
 - (NSTimeZone *)isSystemTimeCoincidencWithEventTimezone {
   NSTimeZone *eventTimeZone = [self eventTimeZone];
   NSTimeZone *systemTimeZone = [NSTimeZone systemTimeZone];
@@ -210,15 +214,11 @@ typedef void (^UpdateDataFail)(NSString* reason);
     }
   });
   
-  if (self.state == DCMainProxyStateDataUpdated) {
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-      if (self.dataUpdatedCallback) {
-        self.dataUpdatedCallback(self.state);
-      }
-    });
-  }
-  
+  dispatch_async(dispatch_get_main_queue(), ^{
+    if (self.dataUpdatedCallback) {
+      self.dataUpdatedCallback(self.state);
+    }
+  });
 }
 
 #pragma mark - getting instances

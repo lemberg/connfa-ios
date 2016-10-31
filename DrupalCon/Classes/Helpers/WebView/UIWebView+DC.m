@@ -14,7 +14,7 @@
                        @"href=\"%@.css\">"
                        @"<meta name=\"format-detection\" content=\"telephone=no\">"
                        @"</head><body>%@</body></html> ",
-                       styleSource, string];
+                    styleSource, string];
 
   [self loadHTMLString:html baseURL:[self baseURL]];
   self.scrollView.scrollEnabled = NO;
@@ -31,6 +31,7 @@
 
 static inline BOOL IsEmpty(id thing) {
   return thing == nil
+  
 
          || ([thing respondsToSelector:@selector(length)]
 

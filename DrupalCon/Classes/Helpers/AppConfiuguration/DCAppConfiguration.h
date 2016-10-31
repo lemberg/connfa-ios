@@ -1,7 +1,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define SERVER_URL @"http://connfa-integration.uat.link"
+#define SERVER_URL @"http://dublin2016.drupalcon.uat.link"
 #define BUNDLE_NAME @"DC-Theme"
 #define GOOGLE_ANALYTICS_APP_ID @"Google Analytics API key stub"
 #define TWITTER_API_KEY @"Twitter API key stub"

@@ -15,6 +15,7 @@
 @property(nonatomic, weak) IBOutlet UITableView* tableView;
 @property(nonatomic, strong) NSArray* items;
 @property(nonatomic) __block DCMainProxyState previousState;
+@property (weak, nonatomic) IBOutlet UIView *noDataView;
 
 @end
 
@@ -24,7 +25,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-
+  
   [[DCMainProxy sharedProxy]
       setDataReadyCallback:^(DCMainProxyState mainProxyState) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -41,41 +42,26 @@
         });
       }];
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self registerScreenLoadAtGA:[NSString stringWithFormat:@"%@", self.navigationItem.title]];
+}
+
 - (void)reloadData {
   DCInfo* info =
       [[[DCMainProxy sharedProxy] getAllInstancesOfClass:[DCInfo class]
                                              inMainQueue:YES] lastObject];
 
   NSSortDescriptor* orderDescriptor =
-      [[NSSortDescriptor alloc] initWithKey:@"order" ascending:NO];
-  NSSortDescriptor* iDDescriptor =
-      [[NSSortDescriptor alloc] initWithKey:@"infoId" ascending:YES];
+      [[NSSortDescriptor alloc] initWithKey:@"order" ascending:YES];
 
   self.items = [[info.infoCategory allObjects]
-      sortedArrayUsingDescriptors:@[ orderDescriptor, iDDescriptor ]];
+      sortedArrayUsingDescriptors:@[orderDescriptor]];
 
   [self.tableView reloadData];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-  [super viewWillAppear:animated];
-
-  [self arrangeNavigationBar];
-}
-
-- (void)arrangeNavigationBar {
-  self.navigationController.navigationBar.tintColor =
-      [DCAppConfiguration navigationBarColor];
-  ;
-  self.navigationItem.title = nil;
-
-  [self.navigationController.navigationBar
-      setBackgroundImage:[UIImage imageWithColor:[UIColor clearColor]]
-           forBarMetrics:UIBarMetricsDefault];
-  self.navigationController.navigationBar.shadowImage = [UIImage new];
-  self.navigationController.navigationBar.translucent = YES;
-  self.navigationController.navigationBar.backgroundColor =
-      [UIColor clearColor];
+  self.noDataView.hidden = self.items.count > 0;
+  self.tableView.hidden = !(self.items.count > 0);
 }
 
 #pragma mark - UITableView delegate and source

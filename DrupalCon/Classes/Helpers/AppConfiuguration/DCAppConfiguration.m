@@ -100,6 +100,13 @@ static NSBundle* themeBundle;
       kMenuType : @(DCMENU_SOCIAL_EVENTS_ITEM)
     },
     @{
+      kMenuItemTitle : @"Social Media",
+      kMenuItemIcon : @"menu_icon_social_media",
+      kMenuItemSelectedIcon : @"menu_icon_social_media_sel",
+      kMenuItemControllerId : @"DCSocialMediaViewController",
+      kMenuType : @(DCMENU_SOCIALMEDIA_ITEM)
+      },
+    @{
       kMenuItemTitle : @"Speakers",
       kMenuItemIcon : @"menu_icon_speakers",
       kMenuItemSelectedIcon : @"menu_icon_speakers_sel",
@@ -114,7 +121,7 @@ static NSBundle* themeBundle;
       kMenuType : @(DCMENU_MYSCHEDULE_ITEM)
     },
     @{
-      kMenuItemTitle : @"Floor Plan",
+      kMenuItemTitle : @"Floor Plans",
       kMenuItemIcon : @"menu_icon_floor_plan",
       kMenuItemSelectedIcon : @"menu_icon_floor_plan_sel",
       kMenuItemControllerId : @"DCFloorPlanController",
@@ -126,13 +133,6 @@ static NSBundle* themeBundle;
       kMenuItemSelectedIcon : @"menu_icon_location_sel",
       kMenuItemControllerId : @"LocationViewController",
       kMenuType : @(DCMENU_LOCATION_ITEM)
-    },
-    @{
-      kMenuItemTitle : @"Social Media",
-      kMenuItemIcon : @"menu_icon_social_media",
-      kMenuItemSelectedIcon : @"menu_icon_social_media_sel",
-      kMenuItemControllerId : @"DCSocialMediaViewController",
-      kMenuType : @(DCMENU_SOCIALMEDIA_ITEM)
     },
     @{
       kMenuItemTitle : @"Info",

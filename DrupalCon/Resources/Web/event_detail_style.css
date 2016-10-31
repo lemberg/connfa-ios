@@ -46,7 +46,8 @@
                font-family: "Open Sans";
                font-size: 15px;
                line-height: 22px;
-               color: #79782E;
+               color: #4f3b9a;
+                word-wrap: break-word;
                text-decoration: none;
               }
               h1{

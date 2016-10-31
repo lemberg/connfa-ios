@@ -28,6 +28,9 @@ static NSString* ksearchQuery = @"twitterSearchQuery";
   if ([[dictionary allKeys] containsObject:kDCAppSettings]) {
     NSDictionary* settingsDict = dictionary[kDCAppSettings];
     NSString *eventTimeZoneName = settingsDict[kDCAppSettingsTimeZoneValue];
+    NSTimeZone *previousTimeZone = [NSTimeZone timeZoneWithName:appSettings.timeZoneName];
+    NSTimeZone *currentTimeZone = [NSTimeZone timeZoneWithName:eventTimeZoneName];
+    [DCMainProxy sharedProxy].isTimeZoneChanged = ![previousTimeZone isEqualToTimeZone:currentTimeZone];
     appSettings.timeZoneName = eventTimeZoneName;
     appSettings.widgetHTML = settingsDict[kDCTwitterWidgetHTML];
     appSettings.searchQuery = settingsDict[ksearchQuery];

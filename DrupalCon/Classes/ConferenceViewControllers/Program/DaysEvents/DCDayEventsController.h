@@ -3,6 +3,11 @@
 #import "DCEventStrategy.h"
 #import "DCProgramViewController.h"
 
+typedef enum : NSUInteger {
+  DCStateNormal,
+  DCStateEmpty,
+} DCState;
+
 @protocol DCUpdateDayEventProtocol<NSObject>
 
 - (void)updateEvents;
@@ -26,6 +31,7 @@
 
 @property(nonatomic, weak) DCProgramViewController* parentProgramController;
 @property(nonatomic, strong) DCEventStrategy* eventsStrategy;
+@property(nonatomic) DCState state;
 
 - (void)updateEvents;
 - (void)initAsStubControllerWithString:(NSString*)noEventMessage;

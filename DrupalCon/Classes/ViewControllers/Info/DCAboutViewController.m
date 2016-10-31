@@ -23,7 +23,15 @@
                                    stringWithFormat:@"infoID: %d",
                                                     self.data.infoId.intValue]];
 
-  self.navigationItem.title = self.data.name;
+    NSDictionary *titleTextAtributes = self.navigationController.navigationBar.titleTextAttributes;
+    UILabel *titleLabel = [[UILabel alloc] init];
+    titleLabel.text = self.data.name;
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.backgroundColor = [UIColor clearColor];
+    titleLabel.font = [titleTextAtributes valueForKey:@"NSFont"];
+    [titleLabel sizeToFit];
+    
+    self.navigationItem.titleView = titleLabel;
 
   [self.webView loadHTMLString:self.data.html];
   self.webView.scrollView.scrollEnabled = YES;

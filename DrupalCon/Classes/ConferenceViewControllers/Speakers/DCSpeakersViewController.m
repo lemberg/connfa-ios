@@ -12,7 +12,10 @@
 @interface DCSpeakersViewController ()
 
 @property(nonatomic, weak) IBOutlet UITableView* speakersTbl;
-@property(nonatomic, weak) IBOutlet UILabel* noItemsLabel;
+@property(nonatomic, weak) IBOutlet UIView* noDataView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *noDataImage_heightConstraint;
+@property (weak, nonatomic) IBOutlet UILabel *noDataLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *noDataImageView;
 
 @property(nonatomic, strong) IBOutlet UISearchBar* searchBar;
 @property(nonatomic, strong)
@@ -24,7 +27,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  UIColor *speakerColor = [DCAppConfiguration speakerDetailBarColor];
+  UIColor *speakerColor = [DCAppConfiguration favoriteEventColor];
   [[UITableView appearance]
       setSectionIndexBackgroundColor:[UIColor clearColor]];
   [[UITableView appearance]
@@ -33,10 +36,10 @@
       setSectionIndexColor:speakerColor];
 
   [self.searchBar setTintColor:[UIColor whiteColor]];
-  self.searchBar.barTintColor = speakerColor;
+  self.searchBar.barTintColor =  [DCAppConfiguration navigationBarColor];
   self.searchBar.layer.borderWidth = 1;
   self.searchBar.layer.borderColor =
-      [speakerColor CGColor];
+      [ [DCAppConfiguration navigationBarColor] CGColor];
   
   [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil]
       setTintColor:[UIColor darkGrayColor]];
@@ -44,11 +47,16 @@
   [self reload];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self registerScreenLoadAtGA:[NSString stringWithFormat:@"%@", self.navigationItem.title]];
+}
+
 - (void)arrangeNavigationBar {
   [super arrangeNavigationBar];
   
   self.navigationController.navigationBar.barTintColor =
-  [DCAppConfiguration speakerDetailBarColor];
+  [DCAppConfiguration navigationBarColor];
 }
 
 #pragma mark - UISearchBarDelegate
@@ -243,7 +251,11 @@
 
   BOOL itemsEnabled = self.fetchedResultsController.fetchedObjects.count;
 
-  self.noItemsLabel.hidden = itemsEnabled;
+  self.noDataLabel.text = self.searchBar.text.length ? @"No Search Result" : @"Currently there are no speakers";
+  self.noDataImage_heightConstraint.constant = self.searchBar.text.length ? 0 : 100;
+  
+  [self.noDataImageView layoutIfNeeded];
+  self.noDataView.hidden = itemsEnabled;
   self.speakersTbl.hidden = !itemsEnabled;
 
   if (itemsEnabled)
