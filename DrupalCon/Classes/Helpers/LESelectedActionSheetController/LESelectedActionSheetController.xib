@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LESelectedActionSheetController">
+            <connections>
+                <outlet property="cancelButtonHeightConstraint" destination="e7B-WZ-0rA" id="1Sz-Hc-OeK"/>
+                <outlet property="cancelView" destination="zXc-2o-ZRT" id="JJg-MH-N38"/>
+                <outlet property="cancelViewBoottomConstraint" destination="9a5-Hn-rJF" id="aRm-YB-oAJ"/>
+                <outlet property="dismissButton" destination="Q7R-B7-mwS" id="4cR-st-GxL"/>
+                <outlet property="tableView" destination="Fcf-EC-2JQ" id="XgT-22-CiI"/>
+                <outlet property="tableViewHeightConstraint" destination="Ca5-ic-rOL" id="OQS-wI-ag9"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="Fcf-EC-2JQ">
+                    <rect key="frame" x="8" y="55" width="584" height="471"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="471" id="Ca5-ic-rOL"/>
+                    </constraints>
+                    <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="xza-W9-t2F"/>
+                        <outlet property="delegate" destination="-1" id="ysl-3h-QIw"/>
+                    </connections>
+                </tableView>
+                <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zXc-2o-ZRT">
+                    <rect key="frame" x="8" y="534" width="584" height="58"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="2bB-qQ-Pt7">
+                        <rect key="frame" x="0.0" y="0.0" width="584" height="58"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q7R-B7-mwS">
+                                <rect key="frame" x="0.0" y="0.0" width="584" height="58"/>
+                                <color key="backgroundColor" white="1" alpha="0.84812721631205679" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="58" id="e7B-WZ-0rA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancel:" destination="-1" eventType="touchUpInside" id="mRM-y6-1Vx"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Q7R-B7-mwS" secondAttribute="bottom" id="85S-RI-hdR"/>
+                            <constraint firstItem="Q7R-B7-mwS" firstAttribute="leading" secondItem="2bB-qQ-Pt7" secondAttribute="leading" id="I6D-yM-qAI"/>
+                            <constraint firstAttribute="trailing" secondItem="Q7R-B7-mwS" secondAttribute="trailing" id="M0k-rn-ddK"/>
+                            <constraint firstItem="Q7R-B7-mwS" firstAttribute="top" secondItem="2bB-qQ-Pt7" secondAttribute="top" id="QHz-Qw-Fgm"/>
+                        </constraints>
+                    </view>
+                    <blurEffect style="extraLight"/>
+                </visualEffectView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="zXc-2o-ZRT" firstAttribute="top" secondItem="Fcf-EC-2JQ" secondAttribute="bottom" constant="8" id="9Fj-mW-rzU"/>
+                <constraint firstAttribute="bottom" secondItem="zXc-2o-ZRT" secondAttribute="bottom" constant="8" id="9a5-Hn-rJF"/>
+                <constraint firstItem="zXc-2o-ZRT" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="HX8-hf-7QK"/>
+                <constraint firstAttribute="trailing" secondItem="Fcf-EC-2JQ" secondAttribute="trailing" constant="8" id="NwO-Zh-9uS"/>
+                <constraint firstAttribute="trailing" secondItem="zXc-2o-ZRT" secondAttribute="trailing" constant="8" id="pnK-d2-CKx"/>
+                <constraint firstItem="Fcf-EC-2JQ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="shY-M4-knz"/>
+            </constraints>
+            <point key="canvasLocation" x="123" y="367"/>
+        </view>
+        <viewController id="8iB-S7-r58">
+            <layoutGuides>
+                <viewControllerLayoutGuide type="top" id="DgL-Uo-hpv"/>
+                <viewControllerLayoutGuide type="bottom" id="eix-oa-Lg0"/>
+            </layoutGuides>
+            <view key="view" contentMode="scaleToFill" id="2ou-dI-lyy">
+                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EVQ-mb-3qm">
+                        <rect key="frame" x="0.0" y="51" width="600" height="403"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <imageView key="tableHeaderView" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="klF-no-tgc">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                    </tableView>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            </view>
+            <point key="canvasLocation" x="285" y="1027"/>
+        </viewController>
+    </objects>
+</document>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>EventDate</key>
+	<string></string>
+	<key>EventPlace</key>
+	<string></string>
+	<key>NavigationBarColour</key>
+	<string>#072D50</string>
+	<key>EventDetailHeaderColour</key>
+	<string>#4077aa</string>
+	<key>EventDetailNavBarTextColour</key>
+	<string>#1f3e98</string>
+	<key>FavoriteEventColour</key>
+	<string>#4f3b9a</string>
+	<key>IsFilterEnable</key>
+	<true/>
+	<key>SpeakerDetailBarColour</key>
+	<string>#072D50</string>
+</dict>
+</plist>

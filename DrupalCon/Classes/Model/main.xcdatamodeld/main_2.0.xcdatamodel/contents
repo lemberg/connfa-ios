@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="14F27" minimumToolsVersion="Xcode 4.3">
+    <entity name="DCAppSettings" representedClassName="DCAppSettings" syncable="YES">
+        <attribute name="timeZoneName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="DCBof" representedClassName="DCBof" parentEntity="DCEvent" syncable="YES">
+        <fetchedProperty name="fetchedProperty" optional="YES" syncable="YES">
+            <fetchRequest name="fetchedPropertyFetchRequest" entity="DCBof"/>
+        </fetchedProperty>
+    </entity>
+    <entity name="DCEvent" representedClassName="DCEvent" isAbstract="YES" syncable="YES">
+        <attribute name="calendarId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="desctiptText" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="eventId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="favorite" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="link" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="place" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="level" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DCLevel" inverseName="events" inverseEntity="DCLevel" syncable="YES"/>
+        <relationship name="speakers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DCSpeaker" inverseName="events" inverseEntity="DCSpeaker" syncable="YES"/>
+        <relationship name="timeRange" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DCTimeRange" syncable="YES"/>
+        <relationship name="tracks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DCTrack" inverseName="events" inverseEntity="DCTrack" syncable="YES"/>
+        <relationship name="type" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DCType" inverseName="events" inverseEntity="DCType" syncable="YES"/>
+    </entity>
+    <entity name="DCHousePlan" representedClassName="DCHousePlan" syncable="YES">
+        <attribute name="housePlanId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+    </entity>
+    <entity name="DCInfo" representedClassName="DCInfo" syncable="YES">
+        <attribute name="titleMajor" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="titleMinor" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="infoCategory" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DCInfoCategory" inverseName="info" inverseEntity="DCInfoCategory" syncable="YES"/>
+    </entity>
+    <entity name="DCInfoCategory" representedClassName="DCInfoCategory" syncable="YES">
+        <attribute name="html" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="infoId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <relationship name="info" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DCInfo" inverseName="infoCategory" inverseEntity="DCInfo" syncable="YES"/>
+    </entity>
+    <entity name="DCLevel" representedClassName="DCLevel" syncable="YES">
+        <attribute name="levelId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
+        <attribute name="selectedInFilter" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DCEvent" inverseName="level" inverseEntity="DCEvent" syncable="YES"/>
+    </entity>
+    <entity name="DCLocation" representedClassName="DCLocation" syncable="YES">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="locationId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+    </entity>
+    <entity name="DCMainEvent" representedClassName="DCMainEvent" parentEntity="DCEvent" syncable="YES"/>
+    <entity name="DCPoi" representedClassName="DCPoi" syncable="YES">
+        <attribute name="descript" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="detailURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="poiId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="DCSocialEvent" representedClassName="DCSocialEvent" parentEntity="DCEvent" syncable="YES"/>
+    <entity name="DCSpeaker" representedClassName="DCSpeaker" syncable="YES">
+        <attribute name="avatarPath" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="characteristic" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="jobTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="organizationName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sectionKey" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="speakerId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="twitterName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="webSite" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DCEvent" inverseName="speakers" inverseEntity="DCEvent" syncable="YES"/>
+    </entity>
+    <entity name="DCTimeRange" representedClassName="DCTimeRange" syncable="YES">
+        <attribute name="from" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="to" optional="YES" attributeType="Date" syncable="YES"/>
+    </entity>
+    <entity name="DCTrack" representedClassName="DCTrack" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="selectedInFilter" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="trackId" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DCEvent" inverseName="tracks" inverseEntity="DCEvent" syncable="YES"/>
+    </entity>
+    <entity name="DCTwitter" representedClassName="DCTwitter" syncable="YES">
+        <attribute name="widgetHTML" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="DCType" representedClassName="DCType" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="order" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="typeIcon" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="typeID" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DCEvent" inverseName="type" inverseEntity="DCEvent" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="DCAppSettings" positionX="-6012" positionY="-1638" width="128" height="58"/>
+        <element name="DCBof" positionX="-5427" positionY="-2142" width="128" height="74"/>
+        <element name="DCEvent" positionX="-5744" positionY="-2142" width="128" height="255"/>
+        <element name="DCHousePlan" positionX="-5141" positionY="-1626" width="128" height="103"/>
+        <element name="DCInfo" positionX="-5330" positionY="-1989" width="128" height="90"/>
+        <element name="DCInfoCategory" positionX="-5123" positionY="-1998" width="128" height="118"/>
+        <element name="DCLevel" positionX="-5978" positionY="-2214" width="128" height="120"/>
+        <element name="DCLocation" positionX="-5465" positionY="-1645" width="128" height="133"/>
+        <element name="DCMainEvent" positionX="-5571" positionY="-2142" width="128" height="45"/>
+        <element name="DCPoi" positionX="-5301" positionY="-1654" width="128" height="133"/>
+        <element name="DCSocialEvent" positionX="-5499" positionY="-2016" width="128" height="45"/>
+        <element name="DCSpeaker" positionX="-5733" positionY="-1744" width="128" height="223"/>
+        <element name="DCTimeRange" positionX="-5562" positionY="-1944" width="128" height="73"/>
+        <element name="DCTrack" positionX="-5994" positionY="-1998" width="128" height="120"/>
+        <element name="DCTwitter" positionX="-5373" positionY="-1827" width="128" height="58"/>
+        <element name="DCType" positionX="-5969" positionY="-1879" width="128" height="118"/>
+    </elements>
+</model>
