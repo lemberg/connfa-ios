@@ -1435,6 +1435,11 @@
 				CLASSPREFIX = DC;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Lemberg Solution";
+				TargetAttributes = {
+					5DC8C410198656DA00BF5816 = {
+						DevelopmentTeam = FN2T3UCV4E;
+					};
+				};
 			};
 			buildConfigurationList = 5DC8C40C198656DA00BF5816 /* Build configuration list for PBXProject "DrupalCon" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1711,6 +1716,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
+				DEVELOPMENT_TEAM = FN2T3UCV4E;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1728,7 +1734,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon.qa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "9fcaf0b0-f648-4066-8b5a-4a1cb45042a2";
+				PROVISIONING_PROFILE_SPECIFIER = DrupalCon_dev;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1741,6 +1748,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
+				DEVELOPMENT_TEAM = FN2T3UCV4E;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1758,7 +1766,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon.qa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "9fcaf0b0-f648-4066-8b5a-4a1cb45042a2";
+				PROVISIONING_PROFILE_SPECIFIER = DrupalCon_dev;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
