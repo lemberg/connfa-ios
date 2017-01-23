@@ -20,10 +20,12 @@
 #import "UIImage+Extension.h"
 #import "DCCoreDataStore.h"
 #import "DCDayEventsController.h"
+#import "DCGoldSponsorBannerHeandler.h"
 
 static NSString* cellIdHeader = @"DetailCellIdHeader";
 static NSString* cellIdSpeaker = @"DetailCellIdSpeaker";
 static NSString* cellIdDescription = @"DetailCellIdDescription";
+
 
 @interface DCEventDetailViewController ()
 
@@ -57,9 +59,6 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
   return self;
 }
 
-- (void)awakeFromNib {
-}
-
 - (void)viewDidLoad {
   [super viewDidLoad];
 
@@ -87,6 +86,12 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
     
   self.noDataView.hidden = ![self showEmptyDetailIcon];
   self.tableView.scrollEnabled = ![self showEmptyDetailIcon];
+  
+  if ([self.event isKindOfClass:[DCMainEvent class]]) {
+    NSString *bannerName = [[DCGoldSponsorBannerHeandler sharedManager] getSponsorBannerName];
+    [self trackSponsorBannerViaGAI:bannerName];
+    self.topBackgroundView.image = [UIImage imageNamed:bannerName];
+  }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -230,6 +235,16 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
   }
   return descriptionCellHeight;
 }
+
+- (void)trackSponsorBannerViaGAI:(NSString *)sponsorName {
+  id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+  [tracker set:kGAIScreenName
+         value:[NSString
+                stringWithFormat:@"Sponsor banner: %@",
+                sponsorName]];
+  [tracker send:[[GAIDictionaryBuilder createAppView] build]];
+}
+
 
 #pragma mark - UITableView DataSource/Delegate methods
 
