@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		283A1F351CB4E5B5007F6BCB /* (null) in Resources */ = {isa = PBXBuildFile; };
+		289301531E3770F300BB933B /* DCGoldSponsorBannerHeandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 289301521E3770F300BB933B /* DCGoldSponsorBannerHeandler.m */; };
+		289301551E3770FD00BB933B /* ImageStorage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 289301541E3770FD00BB933B /* ImageStorage.xcassets */; };
 		5DC8C415198656DA00BF5816 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C414198656DA00BF5816 /* Foundation.framework */; };
 		5DC8C417198656DA00BF5816 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C416198656DA00BF5816 /* CoreGraphics.framework */; };
 		5DC8C419198656DA00BF5816 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C418198656DA00BF5816 /* UIKit.framework */; };
@@ -165,6 +167,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		289301511E3770F300BB933B /* DCGoldSponsorBannerHeandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCGoldSponsorBannerHeandler.h; sourceTree = "<group>"; };
+		289301521E3770F300BB933B /* DCGoldSponsorBannerHeandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCGoldSponsorBannerHeandler.m; sourceTree = "<group>"; };
+		289301541E3770FD00BB933B /* ImageStorage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImageStorage.xcassets; sourceTree = "<group>"; };
 		565951671CFDB497002158F5 /* main_2. 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "main_2. 2.xcdatamodel"; sourceTree = "<group>"; };
 		5DC8C411198656DA00BF5816 /* DrupalCon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrupalCon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC8C414198656DA00BF5816 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -484,6 +489,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		289301501E3770F300BB933B /* GoldSponsorBanners */ = {
+			isa = PBXGroup;
+			children = (
+				289301511E3770F300BB933B /* DCGoldSponsorBannerHeandler.h */,
+				289301521E3770F300BB933B /* DCGoldSponsorBannerHeandler.m */,
+			);
+			path = GoldSponsorBanners;
+			sourceTree = "<group>";
+		};
 		5DC8C408198656DA00BF5816 = {
 			isa = PBXGroup;
 			children = (
@@ -809,6 +823,7 @@
 		A6C5F1421BF4E9C50093AD65 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				289301501E3770F300BB933B /* GoldSponsorBanners */,
 				A678FD421C03590B00F24105 /* main.xcdatamodeld */,
 				A6C5F1431BF4E9C50093AD65 /* AppInfo */,
 				A6C5F14A1BF4E9C50093AD65 /* AppSettings */,
@@ -1246,6 +1261,7 @@
 			isa = PBXGroup;
 			children = (
 				A68AE7BD1C626470002E862D /* Fonts */,
+				289301541E3770FD00BB933B /* ImageStorage.xcassets */,
 				A6C5F2111BF4E9C60093AD65 /* DC-Images.xcassets */,
 				A6C5F2121BF4E9C60093AD65 /* DC-Theme.bundle */,
 				A6C5F2161BF4E9C60093AD65 /* Storyboards */,
@@ -1474,6 +1490,7 @@
 				A68AE7C21C626470002E862D /* OpenSans-CondBold.ttf in Resources */,
 				A6C5F3431BF4E9C60093AD65 /* Speakers.storyboard in Resources */,
 				A6C5F3571BF4E9C60093AD65 /* LICENSE in Resources */,
+				289301551E3770FD00BB933B /* ImageStorage.xcassets in Resources */,
 				F580ED6D1D0FDE2B00F289F8 /* LESelectedActionSheetController.xib in Resources */,
 				A6C5F3491BF4E9C60093AD65 /* style.css in Resources */,
 				A6C5F33D1BF4E9C60093AD65 /* Events.storyboard in Resources */,
@@ -1622,6 +1639,7 @@
 				A6C5F2DF1BF4E9C60093AD65 /* DCMainProxy.m in Sources */,
 				A6C5F2D91BF4E9C60093AD65 /* DCImportDataSevice.m in Sources */,
 				A678FD441C03590B00F24105 /* main.xcdatamodeld in Sources */,
+				289301531E3770F300BB933B /* DCGoldSponsorBannerHeandler.m in Sources */,
 				A6C5F2691BF4E9C60093AD65 /* DCEventStrategy.m in Sources */,
 				A6C5F2B91BF4E9C60093AD65 /* DCBof.m in Sources */,
 				A6C5F2B11BF4E9C60093AD65 /* DCTimeRange+DC.m in Sources */,
