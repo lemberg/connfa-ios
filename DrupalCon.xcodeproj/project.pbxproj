@@ -10,7 +10,6 @@
 		283A1F351CB4E5B5007F6BCB /* (null) in Resources */ = {isa = PBXBuildFile; };
 		288577671E48A53200F39569 /* DC-Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 288577661E48A53200F39569 /* DC-Images.xcassets */; };
 		288577691E48A53800F39569 /* DC-Theme.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 288577681E48A53800F39569 /* DC-Theme.bundle */; };
-		2885776E1E48A55100F39569 /* DrupalCamp-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 28EA539C1E488D140046547E /* DrupalCamp-Info.plist */; };
 		288577711E48A60A00F39569 /* DCConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 288577701E48A60A00F39569 /* DCConstants.m */; };
 		288577741E48A61A00F39569 /* DCConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 288577731E48A61A00F39569 /* DCConstants.m */; };
 		288577771E48B5C400F39569 /* DC-Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 288577751E48B5C400F39569 /* DC-Images.xcassets */; };
@@ -291,7 +290,6 @@
 		A6C5F3451BF4E9C60093AD65 /* about_img.png in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F21C1BF4E9C60093AD65 /* about_img.png */; };
 		A6C5F3471BF4E9C60093AD65 /* event_detail_style.css in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F21D1BF4E9C60093AD65 /* event_detail_style.css */; };
 		A6C5F3491BF4E9C60093AD65 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F21E1BF4E9C60093AD65 /* style.css */; };
-		A6C5F34B1BF4E9C60093AD65 /* DrupalCon-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2201BF4E9C60093AD65 /* DrupalCon-Info.plist */; };
 		A6C5F34F1BF4E9C60093AD65 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2231BF4E9C60093AD65 /* main.m */; };
 		A6C5F3511BF4E9C60093AD65 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6C5F2261BF4E9C60093AD65 /* Crashlytics.framework */; };
 		A6C5F3531BF4E9C60093AD65 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6C5F2271BF4E9C60093AD65 /* Fabric.framework */; };
@@ -1699,7 +1697,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = DC;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Lemberg Solution";
 				TargetAttributes = {
 					28EA52F81E488D140046547E = {
@@ -1753,7 +1751,6 @@
 				28EA53931E488D140046547E /* DCEventCell.xib in Resources */,
 				28EA53941E488D140046547E /* OpenSans-Bold.ttf in Resources */,
 				28EA53961E488D140046547E /* about_img.png in Resources */,
-				2885776E1E48A55100F39569 /* DrupalCamp-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1774,7 +1771,6 @@
 				F580ED6D1D0FDE2B00F289F8 /* LESelectedActionSheetController.xib in Resources */,
 				A6C5F3491BF4E9C60093AD65 /* style.css in Resources */,
 				A6C5F33D1BF4E9C60093AD65 /* Events.storyboard in Resources */,
-				A6C5F34B1BF4E9C60093AD65 /* DrupalCon-Info.plist in Resources */,
 				288577691E48A53800F39569 /* DC-Theme.bundle in Resources */,
 				A6F456401C6B490900EF3DCD /* (null) in Resources */,
 				A68AE7C31C626470002E862D /* OpenSans-Regular.ttf in Resources */,
@@ -2154,13 +2150,19 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
@@ -2172,7 +2174,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -2191,13 +2193,18 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
 				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = "";
@@ -2207,7 +2214,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

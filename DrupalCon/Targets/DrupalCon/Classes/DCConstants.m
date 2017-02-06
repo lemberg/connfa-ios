@@ -10,6 +10,11 @@
 
 @implementation DCConstants
 
-NSString *const testString = @"This is drupal CON :)";
+NSString *const BASE_URL = @"http://dublin2016.drupalcon.uat.link/api/v2/";;
+NSString *const SERVER_URL = @"http://dublin2016.drupalcon.uat.link";
+NSString *const BUNDLE_NAME = @"DC-Theme";
+NSString *const GOOGLE_ANALYTICS_APP_ID = @"UA-267362-67";
+NSString *const TWITTER_API_KEY = @"Mxl1GoGSM98T3jTIWdlUuqXmh";
+NSString *const TWITTER_API_SECRET = @"UM74rykaGhxPhhKED2KxJrd6zGBLNWgVsGdlzjdSwSNqLTiyqY";
 
 @end

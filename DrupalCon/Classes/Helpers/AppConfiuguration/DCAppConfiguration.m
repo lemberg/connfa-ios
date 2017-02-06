@@ -3,6 +3,7 @@
 #import "DCSideMenuViewController.h"
 #import "DCSideMenuType.h"
 #import "UIColor+Helper.h"
+#import "DCConstants.h"
 
 const NSString*  kFontOpenSansBold = @"OpenSans-Bold";
 const NSString*  kFontOpenSansCondBold = @"Open Sans Condensed";

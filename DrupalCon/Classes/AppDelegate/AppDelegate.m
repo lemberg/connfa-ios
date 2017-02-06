@@ -38,8 +38,6 @@
   [[UIBarButtonItem appearance]
    setTitleTextAttributes: @{NSFontAttributeName:[UIFont fontWithName:kFontOpenSansRegular size:16.0]}
                  forState: UIControlStateNormal];
-  
-  NSLog(@"%@", testString);
 
   return YES;
 }
