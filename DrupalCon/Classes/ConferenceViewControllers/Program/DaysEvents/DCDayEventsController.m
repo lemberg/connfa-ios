@@ -145,8 +145,8 @@
 
         [cell initData:event delegate:weakSelf];
         // Some conditions for favorite events
-        NSString* titleForNextSection = [weakSelf.eventsDataSource
-            titleForSectionAtIdexPath:indexPath.section + 1];
+//        NSString* titleForNextSection = [weakSelf.eventsDataSource
+//            titleForSectionAtIdexPath:indexPath.section + 1];
 //        cell.separatorCellView.hidden =
 //            (titleForNextSection && cell.isLastCellInSection) ? YES : NO;
         if ([weakSelf.eventsStrategy leftSectionContainerColor]) {

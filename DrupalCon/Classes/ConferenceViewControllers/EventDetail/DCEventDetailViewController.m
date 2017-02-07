@@ -58,6 +58,7 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
 }
 
 - (void)awakeFromNib {
+  [super awakeFromNib];
 }
 
 - (void)viewDidLoad {

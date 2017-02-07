@@ -7,6 +7,7 @@
 @implementation DCSpeakerHeaderCell
 
 - (void)awakeFromNib {
+  [super awakeFromNib];
   [self.photoImageView cutCircle];
 }
 

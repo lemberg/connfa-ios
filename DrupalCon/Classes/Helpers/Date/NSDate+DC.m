@@ -20,12 +20,12 @@ static NSString* kDCSpeakerEventCellFormat = @"dd LLLL";
 
 + (BOOL)dc_isDateInToday:(NSDate*)date {
   NSDateComponents* otherDay = [[NSCalendar currentGregorianCalendar]
-      components:NSEraCalendarUnit | NSYearCalendarUnit | NSMonthCalendarUnit |
-                 NSDayCalendarUnit
+      components:NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth |
+                 NSCalendarUnitDay
         fromDate:date];
   NSDateComponents* today = [[NSCalendar currentGregorianCalendar]
-      components:NSEraCalendarUnit | NSYearCalendarUnit | NSMonthCalendarUnit |
-                 NSDayCalendarUnit
+      components:NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth |
+                 NSCalendarUnitDay
         fromDate:[NSDate date]];
   today.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
   if ([today day] == [otherDay day] && [today month] == [otherDay month] &&
@@ -73,7 +73,7 @@ static NSString* kDCSpeakerEventCellFormat = @"dd LLLL";
 + (float)hoursFromDate:(NSDate*)date {
   NSCalendar* calendar = [NSCalendar currentGregorianCalendar];
   NSDateComponents* components =
-      [calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit)
+      [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute)
                   fromDate:date];
   float hour = (float)[components hour];
   float minute = (float)[components minute];
@@ -86,7 +86,7 @@ static NSString* kDCSpeakerEventCellFormat = @"dd LLLL";
   NSCalendar* calendar = [NSCalendar currentGregorianCalendar];
   [calendar setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_GB"]];
   NSDateComponents* components =
-      [calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit)
+      [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute)
                   fromDate:dateInEventTimeZone];
   float hour = (float)[components hour] + (float)[components minute] / 60;
   return hour;

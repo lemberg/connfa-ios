@@ -34,8 +34,8 @@ typedef enum : NSUInteger {
 @property(nonatomic) DCState state;
 
 - (void)updateEvents;
-- (void)initAsStubControllerWithString:(NSString*)noEventMessage;
-- (void)initAsStubControllerWithImage:(UIImage*)noEventsImage;
+//- (void)initAsStubControllerWithString:(NSString*)noEventMessage;
+//- (void)initAsStubControllerWithImage:(UIImage*)noEventsImage;
 
 @end
 
