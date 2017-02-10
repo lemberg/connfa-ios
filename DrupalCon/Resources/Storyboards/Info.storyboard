@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -81,7 +81,7 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kmA-Wd-A6O" userLabel="NoDataView">
-                                <rect key="frame" x="0.0" y="241" width="320" height="174.5"/>
+                                <rect key="frame" x="0.0" y="241" width="320" height="169"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_no_about" translatesAutoresizingMaskIntoConstraints="NO" id="cHl-bz-ttL" userLabel="NoEventsImageView">
                                         <rect key="frame" x="110" y="0.0" width="100" height="100"/>
@@ -91,7 +91,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currently there is no information" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iIx-IJ-GpI" userLabel="NoEventsLabel">
-                                        <rect key="frame" x="60" y="112" width="200" height="54.5"/>
+                                        <rect key="frame" x="60" y="112" width="200" height="49"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="21"/>
                                         <color key="textColor" red="0.63921568630000003" green="0.63921568630000003" blue="0.63921568630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -170,7 +170,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aqr-Jw-wrs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1934" y="736"/>
+            <point key="canvasLocation" x="2141" y="736"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="c6F-K3-frl">
@@ -225,7 +225,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ikG-iU-dqW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1721" y="1395"/>
+            <point key="canvasLocation" x="780" y="1411"/>
         </scene>
         <!--Social Media View Controller-->
         <scene sceneID="WNu-gt-qA2">
@@ -320,7 +320,7 @@
                                 </connections>
                             </scrollView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AZi-J7-4da" userLabel="NoDataView">
-                                <rect key="frame" x="0.0" y="246.5" width="375" height="174.5"/>
+                                <rect key="frame" x="0.0" y="249.5" width="375" height="169"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_no_floor_plan" translatesAutoresizingMaskIntoConstraints="NO" id="ZwL-oM-dlF" userLabel="NoEventsImageView">
                                         <rect key="frame" x="137.5" y="0.0" width="100" height="100"/>
@@ -330,7 +330,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Currently there are no floor plans" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X1d-fL-dlT" userLabel="NoEventsLabel">
-                                        <rect key="frame" x="35" y="112" width="305" height="54.5"/>
+                                        <rect key="frame" x="35" y="112" width="305" height="49"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="21"/>
                                         <color key="textColor" red="0.63921568630000003" green="0.63921568630000003" blue="0.63921568630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>

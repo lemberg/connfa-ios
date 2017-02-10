@@ -1,6 +1,7 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString* kFontMontserratRegular;
 extern NSString* kFontOpenSansBold;
 extern NSString* kFontOpenSansCondBold;
 extern NSString* kFontOpenSansRegular;

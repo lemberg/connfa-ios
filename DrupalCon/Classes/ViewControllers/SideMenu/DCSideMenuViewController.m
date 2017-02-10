@@ -48,6 +48,7 @@
   self.activeCellPath =
       [NSIndexPath indexPathForRow:DCMENU_PROGRAM_ITEM inSection:0];
   [self tableView:self.tableView didSelectRowAtIndexPath:self.activeCellPath];
+  
 }
 
 - (void)dealloc {
@@ -142,6 +143,8 @@
 - (void)openEventFromFavorite:(DCEvent*)event {
   self.event = event;
 }
+
+
 
 #pragma mark - User actions
 

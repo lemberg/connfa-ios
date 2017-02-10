@@ -5,6 +5,7 @@
 #import "UIColor+Helper.h"
 #import "DCConstants.h"
 
+const NSString*  kFontMontserratRegular = @"Montserrat-Regular";
 const NSString*  kFontOpenSansBold = @"OpenSans-Bold";
 const NSString*  kFontOpenSansCondBold = @"Open Sans Condensed";
 const NSString*  kFontOpenSansRegular = @"Open Sans";
@@ -76,7 +77,7 @@ static NSBundle* themeBundle;
 }
 
 + (NSArray*)appMenuItems {
-  return [DCConstants appsMenuItems];
+  return [DCConstants appMenuItems];
 }
 
 // GA

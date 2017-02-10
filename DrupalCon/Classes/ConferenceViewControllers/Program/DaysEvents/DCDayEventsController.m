@@ -44,7 +44,6 @@
   [super viewDidLoad];
   
   self.noEventsImageViewDefaultHeight = 100.0;
-  
   [self configureState];
 }
 

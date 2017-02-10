@@ -5,6 +5,7 @@
 #import "DCPin.h"
 #import "DCLocation.h"
 #import "DCMainProxy.h"
+#import "DCConstants.h"
 
 @interface DCLocationViewController ()
 
@@ -37,7 +38,7 @@
     [self createNewLocation];
   self.titlesContainerView.backgroundColor =
       [DCAppConfiguration navigationBarColor];
-
+  [self setCustomFonts];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -45,6 +46,7 @@
     [self registerScreenLoadAtGA:[NSString stringWithFormat:@"%@", self.navigationItem.title]];
     [[NSNotificationCenter defaultCenter]addObserver:self
                                             selector:@selector(appBecameActive) name:@"applicationDidBecomeActive" object:nil];
+  [self.view layoutIfNeeded];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -129,6 +131,16 @@
       [_mapView setRegion:viewRegion animated:YES];
     }
   }
+}
+
+- (void)setCustomFonts {
+  
+  NSDictionary *fonts = [[DCConstants appFonts] objectForKey:kFontMapItemsScreen];
+  self.addressLabel.font = [fonts objectForKey:kFontTitle];
+  self.streetAndNumberLabel.font = [fonts objectForKey:kFontDescription];
+  self.cityAndProvinceLabel.font = [fonts objectForKey:kFontDescription];
+  self.stateLabel.font = [fonts objectForKey:kFontDescription];
+  
 }
 
 #pragma mark -

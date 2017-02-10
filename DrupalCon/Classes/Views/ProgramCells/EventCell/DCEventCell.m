@@ -8,7 +8,7 @@
 #import "DCLevel.h"
 #import "DCType.h"
 #import "UIImage+Extension.h"
-
+#import "DCConstants.h"
 
 
 // These values are hardcoded because cells are get by "dequeueREusableCells"
@@ -55,6 +55,12 @@ static NSInteger eventCellImageHeight = 16;
 @end
 
 @implementation DCEventCell
+
+- (void) awakeFromNib {
+  [super awakeFromNib];
+  [self setCustomFonts];
+  [self layoutIfNeeded];
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
   [super setSelected:NO animated:animated];
@@ -219,6 +225,19 @@ static NSInteger eventCellImageHeight = 16;
                               NSFontAttributeName : label.font
                             } context:nil];
   return textRect.size.height;
+}
+
+- (void)setCustomFonts {
+  
+  NSDictionary *fonts = [[DCConstants appFonts] objectForKey:kFontEventListScreen];
+  UIFont *timeFont = [fonts objectForKey:kFontDescription];
+  self.startTimeLabel.font = timeFont;
+  self.endTimeLabel.font = timeFont;
+  self.endTimeLabel.font=[self.endTimeLabel.font fontWithSize:self.startTimeLabel.font.pointSize - 2.0];
+  self.eventTitleLabel.font = [fonts objectForKey:kFontName];
+  self.trackLabel.font = [fonts objectForKey:kFontDescription];
+  self.speakersLabel.font = [fonts objectForKey:kFontDescription];
+  self.placeLabel.font = [fonts objectForKey:kFontDescription];
 }
 
 #pragma mark - User actions

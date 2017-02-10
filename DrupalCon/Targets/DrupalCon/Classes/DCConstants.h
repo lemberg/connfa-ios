@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DCSideMenuType.h"
+#import "DCAppConfiguration.h"
 
 
 @interface DCConstants : NSObject
@@ -20,6 +21,7 @@ extern NSString *const GOOGLE_ANALYTICS_APP_ID;
 extern NSString *const TWITTER_API_KEY;
 extern NSString *const TWITTER_API_SECRET;
 
-+(NSArray*)appsMenuItems;
++(NSArray*)appMenuItems;
++(NSDictionary*)appFonts;
 
 @end

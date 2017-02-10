@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>EventDate</key>
-	<string></string>
+	<string>Event Title</string>
 	<key>EventPlace</key>
-	<string></string>
+	<string>Lviv, Ukraine</string>
 	<key>NavigationBarColour</key>
 	<string>#072D50</string>
 	<key>EventDetailHeaderColour</key>

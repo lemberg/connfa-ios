@@ -312,6 +312,7 @@
 		A6C5F3751BF4E9C60093AD65 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2541BF4E9C60093AD65 /* UIImageView+WebCache.m */; };
 		A6C5F3771BF4E9C60093AD65 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2561BF4E9C60093AD65 /* UIView+WebCacheOperation.m */; };
 		A6F456401C6B490900EF3DCD /* (null) in Resources */ = {isa = PBXBuildFile; };
+		E03D33841E4DC415003E8A14 /* DrupalCamp-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E03D33831E4DC415003E8A14 /* DrupalCamp-Info.plist */; };
 		F547A7E21D537C3200CD24F2 /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F547A7E11D537C3200CD24F2 /* Montserrat-Regular.otf */; };
 		F547A7E61D54D2FF00CD24F2 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = F547A7E51D54D2FF00CD24F2 /* UIScrollView+EmptyDataSet.m */; };
 		F580ED6C1D0FDE2B00F289F8 /* LESelectedActionSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = F580ED6A1D0FDE2B00F289F8 /* LESelectedActionSheetController.m */; };
@@ -328,7 +329,6 @@
 		288577751E48B5C400F39569 /* DC-Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "DC-Images.xcassets"; sourceTree = "<group>"; };
 		288577761E48B5C400F39569 /* DC-Theme.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "DC-Theme.bundle"; sourceTree = "<group>"; };
 		28EA539B1E488D140046547E /* DrupalCamp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrupalCamp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		28EA539C1E488D140046547E /* DrupalCamp-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "DrupalCamp-Info.plist"; path = "/Users/RomanM/Documents/Projects/connfa/DrupalCamp-Info.plist"; sourceTree = "<absolute>"; };
 		565951671CFDB497002158F5 /* main_2. 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "main_2. 2.xcdatamodel"; sourceTree = "<group>"; };
 		5DC8C411198656DA00BF5816 /* DrupalCon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrupalCon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC8C414198656DA00BF5816 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -610,6 +610,7 @@
 		A6C5F2541BF4E9C60093AD65 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		A6C5F2551BF4E9C60093AD65 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		A6C5F2561BF4E9C60093AD65 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		E03D33831E4DC415003E8A14 /* DrupalCamp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DrupalCamp-Info.plist"; sourceTree = "<group>"; };
 		F547A7E11D537C3200CD24F2 /* Montserrat-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.otf"; sourceTree = "<group>"; };
 		F547A7E41D54D2FF00CD24F2 /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
 		F547A7E51D54D2FF00CD24F2 /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
@@ -679,7 +680,7 @@
 		28EA539E1E488D7B0046547E /* DrupalCamp */ = {
 			isa = PBXGroup;
 			children = (
-				28EA539C1E488D140046547E /* DrupalCamp-Info.plist */,
+				E03D33831E4DC415003E8A14 /* DrupalCamp-Info.plist */,
 				28EA539F1E488D7B0046547E /* Classes */,
 				28EA53A01E488D7B0046547E /* Resources */,
 			);
@@ -737,7 +738,9 @@
 				5DC8C413198656DA00BF5816 /* Frameworks */,
 				5DC8C412198656DA00BF5816 /* Products */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		5DC8C412198656DA00BF5816 /* Products */ = {
 			isa = PBXGroup;
@@ -1749,6 +1752,7 @@
 				288577781E48B5C400F39569 /* DC-Theme.bundle in Resources */,
 				28EA53921E488D140046547E /* OpenSans-Regular.ttf in Resources */,
 				28EA53931E488D140046547E /* DCEventCell.xib in Resources */,
+				E03D33841E4DC415003E8A14 /* DrupalCamp-Info.plist in Resources */,
 				28EA53941E488D140046547E /* OpenSans-Bold.ttf in Resources */,
 				28EA53961E488D140046547E /* about_img.png in Resources */,
 			);

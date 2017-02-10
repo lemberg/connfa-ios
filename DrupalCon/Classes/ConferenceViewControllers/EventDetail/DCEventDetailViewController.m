@@ -14,7 +14,6 @@
 #import "DCTime+DC.h"
 #import "DCLevel+DC.h"
 #import "DCInfo.h"
-
 #import "UIImageView+WebCache.h"
 #import "UIConstants.h"
 #import "UIImage+Extension.h"
@@ -187,6 +186,7 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
 
   self.speakers = sortedSpeakers;
 }
+
 
 - (void)updateCellAtIndexPath {
   [self.tableView beginUpdates];
