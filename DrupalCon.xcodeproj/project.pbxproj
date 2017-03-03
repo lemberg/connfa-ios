@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		283A1F351CB4E5B5007F6BCB /* (null) in Resources */ = {isa = PBXBuildFile; };
+		284A05391E6998F800903396 /* DCMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 284A05381E6998F800903396 /* DCMenuItem.m */; };
 		288577671E48A53200F39569 /* DC-Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 288577661E48A53200F39569 /* DC-Images.xcassets */; };
 		288577691E48A53800F39569 /* DC-Theme.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 288577681E48A53800F39569 /* DC-Theme.bundle */; };
 		288577711E48A60A00F39569 /* DCConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 288577701E48A60A00F39569 /* DCConstants.m */; };
@@ -321,6 +322,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		284A05371E6998F800903396 /* DCMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCMenuItem.h; path = ../DCMenuItem.h; sourceTree = "<group>"; };
+		284A05381E6998F800903396 /* DCMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCMenuItem.m; path = ../DCMenuItem.m; sourceTree = "<group>"; };
 		288577661E48A53200F39569 /* DC-Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "DC-Images.xcassets"; sourceTree = "<group>"; };
 		288577681E48A53800F39569 /* DC-Theme.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "DC-Theme.bundle"; sourceTree = "<group>"; };
 		2885776F1E48A60A00F39569 /* DCConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCConstants.h; path = ../../Targets/DrupalCon/Classes/DCConstants.h; sourceTree = "<group>"; };
@@ -1074,6 +1077,8 @@
 		A6C5F1431BF4E9C50093AD65 /* AppInfo */ = {
 			isa = PBXGroup;
 			children = (
+				284A05371E6998F800903396 /* DCMenuItem.h */,
+				284A05381E6998F800903396 /* DCMenuItem.m */,
 				A6C5F1441BF4E9C50093AD65 /* DCHousePlan.h */,
 				A6C5F1451BF4E9C50093AD65 /* DCHousePlan.m */,
 				A6C5F1461BF4E9C50093AD65 /* DCLocation.h */,
@@ -1996,6 +2001,7 @@
 				A6C5F2751BF4E9C60093AD65 /* NSDictionary+DC.m in Sources */,
 				A6C5F2651BF4E9C60093AD65 /* DCEventDataSource.m in Sources */,
 				A6C5F2F11BF4E9C60093AD65 /* DCInfoViewController.m in Sources */,
+				284A05391E6998F800903396 /* DCMenuItem.m in Sources */,
 				A6C5F2971BF4E9C60093AD65 /* DCAppSettings+DC.m in Sources */,
 				A6C5F2EB1BF4E9C60093AD65 /* DCFilterViewController.m in Sources */,
 				A678FD481C03666600F24105 /* Reachability.m in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import "DCConstants.h"
+#import "DCMenuItem.h"
 
 @implementation DCConstants
 
@@ -18,75 +19,26 @@ NSString *const TWITTER_API_KEY = @"Mxl1GoGSM98T3jTIWdlUuqXmh";
 NSString *const TWITTER_API_SECRET = @"UM74rykaGhxPhhKED2KxJrd6zGBLNWgVsGdlzjdSwSNqLTiyqY";
 
 +(NSArray*)appMenuItems {
-  NSArray* menuItems;
-
-  menuItems = @[
-    @{
-    kMenuItemTitle : @"Sessions",
-    kMenuItemIcon : @"menu_icon_program",
-    kMenuItemSelectedIcon : @"menu_icon_program_sel",
-    kMenuItemControllerId : @"DCProgramViewController",
-    kMenuType : @(DCMENU_PROGRAM_ITEM)
-    },
-    @{
-    kMenuItemTitle : @"BoFs",
-    kMenuItemIcon : @"menu_icon_bofs",
-    kMenuItemSelectedIcon : @"menu_icon_bofs_sel",
-    kMenuItemControllerId : @"DCProgramViewController",
-    kMenuType : @(DCMENU_BOFS_ITEM)
-    },
-    @{
-    kMenuItemTitle : @"Social Events",
-    kMenuItemIcon : @"menu_icon_social",
-    kMenuItemSelectedIcon : @"menu_icon_social_sel",
-    kMenuItemControllerId : @"DCProgramViewController",
-    kMenuType : @(DCMENU_SOCIAL_EVENTS_ITEM)
-    },
-    @{
-    kMenuItemTitle : @"Social Media",
-    kMenuItemIcon : @"menu_icon_social_media",
-    kMenuItemSelectedIcon : @"menu_icon_social_media_sel",
-    kMenuItemControllerId : @"DCSocialMediaViewController",
-    kMenuType : @(DCMENU_SOCIALMEDIA_ITEM)
-    },
-    @{
-    kMenuItemTitle : @"Speakers",
-    kMenuItemIcon : @"menu_icon_speakers",
-    kMenuItemSelectedIcon : @"menu_icon_speakers_sel",
-    kMenuItemControllerId : @"SpeakersViewController",
-    kMenuType : @(DCMENU_SPEAKERS_ITEM)
-    },
-    @{
-    kMenuItemTitle : @"My Schedule",
-    kMenuItemIcon : @"menu_icon_my_schedule",
-    kMenuItemSelectedIcon : @"menu_icon_my_schedule_sel",
-    kMenuItemControllerId : @"DCProgramViewController",
-    kMenuType : @(DCMENU_MYSCHEDULE_ITEM)
-    },
-    @{
-    kMenuItemTitle : @"Floor Plans",
-    kMenuItemIcon : @"menu_icon_floor_plan",
-    kMenuItemSelectedIcon : @"menu_icon_floor_plan_sel",
-    kMenuItemControllerId : @"DCFloorPlanController",
-    kMenuType : @(DCMENU_FLOORPLAN_ITEM)
-    },
-    @{
-    kMenuItemTitle : @"Location",
-    kMenuItemIcon : @"menu_icon_location",
-    kMenuItemSelectedIcon : @"menu_icon_location_sel",
-    kMenuItemControllerId : @"LocationViewController",
-    kMenuType : @(DCMENU_LOCATION_ITEM)
-    },
-    @{
-    kMenuItemTitle : @"Info",
-    kMenuItemIcon : @"menu_icon_about",
-    kMenuItemSelectedIcon : @"menu_icon_about_sel",
-    kMenuItemControllerId : @"InfoViewController",
-    kMenuType : @(DCMENU_INFO_ITEM)
-    },
-    @{
-    kMenuItemTitle : @"Time and event place"
-    }
+  NSArray* menuItems = @[
+    [DCMenuItem initWithTitle:@"Sessions" icon:@"menu_icon_program" selectedIcon:@"menu_icon_program_sel" controllerId:@"DCProgramViewController" andMenuType:@(DCMENU_PROGRAM_ITEM)],
+    
+    [DCMenuItem initWithTitle:@"BoFs" icon:@"menu_icon_bofs" selectedIcon:@"menu_icon_bofs_sel" controllerId:@"DCProgramViewController" andMenuType:@(DCMENU_BOFS_ITEM)],
+    
+    [DCMenuItem initWithTitle:@"Social Events" icon:@"menu_icon_social" selectedIcon:@"menu_icon_social_sel" controllerId:@"DCProgramViewController" andMenuType:@(DCMENU_SOCIAL_EVENTS_ITEM)],
+    
+    [DCMenuItem initWithTitle:@"Social Media" icon:@"menu_icon_social_media" selectedIcon:@"menu_icon_social_media_sel" controllerId:@"DCSocialMediaViewController" andMenuType:@(DCMENU_SOCIALMEDIA_ITEM)],
+    
+    [DCMenuItem initWithTitle:@"Speakers" icon:@"menu_icon_speakers" selectedIcon:@"menu_icon_speakers_sel" controllerId:@"SpeakersViewController" andMenuType:@(DCMENU_SPEAKERS_ITEM)],
+    
+    [DCMenuItem initWithTitle:@"My Schedule" icon:@"menu_icon_my_schedule" selectedIcon:@"menu_icon_my_schedule_sel" controllerId:@"DCProgramViewController" andMenuType:@(DCMENU_MYSCHEDULE_ITEM)],
+    
+    [DCMenuItem initWithTitle:@"Floor Plans" icon:@"menu_icon_floor_plan" selectedIcon:@"menu_icon_floor_plan_sel" controllerId:@"DCFloorPlanController" andMenuType:@(DCMENU_FLOORPLAN_ITEM)],
+    
+    [DCMenuItem initWithTitle:@"Location" icon:@"menu_icon_location" selectedIcon:@"menu_icon_location_sel" controllerId:@"LocationViewController" andMenuType:@(DCMENU_LOCATION_ITEM)],
+    
+    [DCMenuItem initWithTitle:@"Info" icon:@"menu_icon_about" selectedIcon:@"menu_icon_about_sel" controllerId:@"InfoViewController" andMenuType:@(DCMENU_INFO_ITEM)],
+    
+    [DCMenuItem initWithTitle:@"No available" icon:@"No available" selectedIcon:@"No available" controllerId:@"No available" andMenuType:@(DCMENU_SIZE)]
   ];
 
   return menuItems;

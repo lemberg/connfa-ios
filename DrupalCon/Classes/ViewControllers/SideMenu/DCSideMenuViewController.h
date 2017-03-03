@@ -5,7 +5,7 @@
 @class DCEvent;
 
 
-@interface DCSideMenuViewController : UIViewController<UITableViewDelegate>
+@interface DCSideMenuViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
 @property(nonatomic, weak) MFSideMenuContainerViewController* sideMenuContainer;
 
