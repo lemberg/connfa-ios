@@ -7,13 +7,6 @@
 #define kMenuItemControllerId @"MenuItemControllerId"
 #define kMenuType @"MenuType"
 
-#define kFontEventListScreen @"kFontEventListScreen"
-#define kFontEventDetailsScreen @"kFontEventDetailsScreen"
-#define kFontSpeakerListScreen @"kFontSpeakerListScreen"
-#define kFontSpeakerDetailsScreen @"kFontSpeakerDetailsScreen"
-#define kFontMenuItemsScreen @"kFontMenuItemsScreen"
-#define kFontMapItemsScreen @"kFontMapItemsScreen"
-
 #define kFontTitle @"kFontTitle"
 #define kFontDescription @"kFontDescription"
 #define kFontName @"kFontName"

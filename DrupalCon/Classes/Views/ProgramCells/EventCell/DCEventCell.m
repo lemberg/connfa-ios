@@ -228,16 +228,15 @@ static NSInteger eventCellImageHeight = 16;
 }
 
 - (void)setCustomFonts {
-  
-  NSDictionary *fonts = [[DCConstants appFonts] objectForKey:kFontEventListScreen];
-  UIFont *timeFont = [fonts objectForKey:kFontDescription];
-  self.startTimeLabel.font = timeFont;
-  self.endTimeLabel.font = timeFont;
-  self.endTimeLabel.font=[self.endTimeLabel.font fontWithSize:self.startTimeLabel.font.pointSize - 2.0];
-  self.eventTitleLabel.font = [fonts objectForKey:kFontName];
-  self.trackLabel.font = [fonts objectForKey:kFontDescription];
-  self.speakersLabel.font = [fonts objectForKey:kFontDescription];
-  self.placeLabel.font = [fonts objectForKey:kFontDescription];
+
+  //UIFont *timeFont = [fonts objectForKey:kFontDescription];
+  self.startTimeLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontDescription] size:self.startTimeLabel.font.pointSize];
+  self.endTimeLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontDescription] size:self.endTimeLabel.font.pointSize];
+  self.endTimeLabel.font= [self.endTimeLabel.font fontWithSize:self.startTimeLabel.font.pointSize - 2.0];
+  self.eventTitleLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontName] size:self.eventTitleLabel.font.pointSize];;
+  self.trackLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontDescription] size:self.trackLabel.font.pointSize];
+  self.speakersLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontDescription] size:self.speakersLabel.font.pointSize];
+  self.placeLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontDescription] size:self.placeLabel.font.pointSize];
 }
 
 #pragma mark - User actions

@@ -18,10 +18,9 @@
 }
 
 - (void)setCustomFonts {
-  
-  NSDictionary *fonts = [[DCConstants appFonts] objectForKey:kFontMenuItemsScreen];
-  self.dateLabel.font = [fonts objectForKey:kFontName];
-  self.placeLabel.font = [fonts objectForKey:kFontDescription];
+
+  self.dateLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontName] size:self.dateLabel.font.pointSize];
+  self.placeLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontDescription] size:self.placeLabel.font.pointSize];
   
 }
 

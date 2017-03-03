@@ -52,9 +52,8 @@
 
 - (void)setCustomFonts {
   
-  NSDictionary *fonts = [[DCConstants appFonts] objectForKey:kFontSpeakerDetailsScreen];
-  self.nameLabel.font = [fonts objectForKey:kFontTitle];
-  self.jobAndCompanyLabel.font = [fonts objectForKey:kFontDescription];
+  self.nameLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontTitle] size:self.nameLabel.font.pointSize];
+  self.jobAndCompanyLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontDescription] size:self.jobAndCompanyLabel.font.pointSize];
   
 }
 

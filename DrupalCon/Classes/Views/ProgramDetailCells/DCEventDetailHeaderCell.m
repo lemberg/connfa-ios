@@ -91,12 +91,11 @@
 }
 
 - (void)setCustomFonts {
-    
-  NSDictionary *fonts = [[DCConstants appFonts] objectForKey:kFontEventDetailsScreen];
-  self.titleLabel.font = [fonts objectForKey:kFontTitle];
-  self.dateAndPlaceLabel.font = [fonts objectForKey:kFontDescription];
-  self.trackLabel.font = [fonts objectForKey:kFontDescription];
-  self.experienceLabel.font = [fonts objectForKey:kFontDescription];
+  
+  self.titleLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontTitle] size:self.titleLabel.font.pointSize];
+  self.dateAndPlaceLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontDescription] size:self.dateAndPlaceLabel.font.pointSize];
+  self.trackLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontDescription] size:self.trackLabel.font.pointSize];
+  self.experienceLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontDescription] size:self.experienceLabel.font.pointSize];
   
 }
 

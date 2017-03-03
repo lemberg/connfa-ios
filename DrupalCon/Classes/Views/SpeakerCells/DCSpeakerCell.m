@@ -54,9 +54,9 @@
 }
 
 - (void)setCustomFonts {
-  NSDictionary *fonts = [[DCConstants appFonts] objectForKey:kFontSpeakerListScreen];
-  self.nameLbl.font = [fonts objectForKey:kFontName];
-  self.positionTitleLbl.font = [fonts objectForKey:kFontDescription];
+
+  self.nameLbl.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontName] size:self.nameLbl.font.pointSize];
+  self.positionTitleLbl.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontDescription] size:self.positionTitleLbl.font.pointSize];
 }
 
 - (NSString*)positionTitleForSpeaker:(DCSpeaker*)speaker {

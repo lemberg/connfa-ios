@@ -135,11 +135,10 @@
 
 - (void)setCustomFonts {
   
-  NSDictionary *fonts = [[DCConstants appFonts] objectForKey:kFontMapItemsScreen];
-  self.addressLabel.font = [fonts objectForKey:kFontTitle];
-  self.streetAndNumberLabel.font = [fonts objectForKey:kFontDescription];
-  self.cityAndProvinceLabel.font = [fonts objectForKey:kFontDescription];
-  self.stateLabel.font = [fonts objectForKey:kFontDescription];
+  self.addressLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontTitle] size:self.addressLabel.font.pointSize];
+  self.streetAndNumberLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontDescription] size:self.streetAndNumberLabel.font.pointSize];
+  self.cityAndProvinceLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontDescription] size:self.cityAndProvinceLabel.font.pointSize];
+  self.stateLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontDescription] size:self.stateLabel.font.pointSize];
   
 }
 
