@@ -75,35 +75,34 @@
 
 - (void)updateLocation {
   [self setAnnotation];
-
+  
   NSArray* parts;
-
+  
   if (self.location.address)
     parts = [self.location.address componentsSeparatedByString:@","];
-
+  
   if (parts.count) {
-    NSString* streetAndHouse = parts[0];
-    NSString* state = (parts.count > 1) ? parts.lastObject : @"";
-    NSMutableString* cityAndProvince = [@"" mutableCopy];
-
-    if (parts.count > 2) {
-      [cityAndProvince appendString:parts[1]];
-
-      for (int i = 2; i < parts.count - 1; i++)
-        [cityAndProvince appendFormat:@" %@", parts[i]];
+    
+    NSMutableArray *tempArr = [NSMutableArray new];
+    for (NSString *string in parts) {
+      NSString *finalString = [string stringByReplacingOccurrencesOfString:@"," withString:@""];
+      [tempArr addObject:finalString];
     }
-
+    
+    parts = [NSArray arrayWithArray:tempArr];
+    
     self.addressLabel.text = self.location.name;
-    self.streetAndNumberLabel.text =
-        streetAndHouse.length
-            ? [NSString stringWithFormat:@"%@,", streetAndHouse]
-            : @"";
-    self.cityAndProvinceLabel.text = cityAndProvince.length ? [NSString stringWithFormat:@"%@,", cityAndProvince] : @"";
-    NSString *cityAndState = [NSString stringWithFormat:@"%@ %@", self.cityAndProvinceLabel.text, state];
-    self.cityAndProvinceLabel.text = [cityAndState stringByTrimmingCharactersInSet:
-                                        [NSCharacterSet whitespaceCharacterSet]];;
-    self.stateLabel.text = @"";
+    
+    NSString *street = [parts objectAtIndex:0];
+    NSString *city = [parts objectAtIndex:1];
+    NSString *state = [parts objectAtIndex:2];
+    
+    self.streetAndNumberLabel.text = street;
+    self.cityAndProvinceLabel.text = city;
+    self.stateLabel.text = state;
+    
   } else {
+    
     self.addressLabel.text = @"The address is not specified";
     self.streetAndNumberLabel.text = @"";
     self.cityAndProvinceLabel.text = @"";
