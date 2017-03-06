@@ -9,6 +9,7 @@ const NSString*  kFontMontserratRegular = @"Montserrat-Regular";
 const NSString*  kFontOpenSansBold = @"OpenSans-Bold";
 const NSString*  kFontOpenSansCondBold = @"Open Sans Condensed";
 const NSString*  kFontOpenSansRegular = @"Open Sans";
+const NSString*  kFontHelveticaNeueRegular = @"Helvetica Neue";
 
 @implementation DCAppConfiguration
 

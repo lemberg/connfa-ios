@@ -61,9 +61,6 @@
   self.navigationController.navigationBar.translucent = NO;
   
   [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-  
-  self.navigationController.navigationBar.barTintColor =
-  [DCAppConfiguration speakerDetailBarColor];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {

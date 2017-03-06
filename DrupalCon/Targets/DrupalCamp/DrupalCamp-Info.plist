@@ -74,4 +74,9 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 </dict>
+<key>GoldSponsorHeaders</key>
+<array>
+  <string>event_detail_top</string>
+</array>
+</dict>
 </plist>
