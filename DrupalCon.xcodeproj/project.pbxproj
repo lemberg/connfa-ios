@@ -492,7 +492,6 @@
 /* Begin PBXFileReference section */
 		288C5ED51E6D9E3C00F07CB4 /* DrupalCamp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrupalCamp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		288C5F7C1E6D9E4A00F07CB4 /* Connfa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Connfa.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		288C5F811E6D9E7D00F07CB4 /* DCConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCConstants.h; sourceTree = "<group>"; };
 		288C5F821E6D9E7D00F07CB4 /* DCConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCConstants.m; sourceTree = "<group>"; };
 		288C5F831E6D9E7D00F07CB4 /* DrupalCon-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DrupalCon-Info.plist"; sourceTree = "<group>"; };
 		288C5F851E6D9E7D00F07CB4 /* DC-Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "DC-Images.xcassets"; sourceTree = "<group>"; };
@@ -901,7 +900,6 @@
 		288C5F801E6D9E7D00F07CB4 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				288C5F811E6D9E7D00F07CB4 /* DCConstants.h */,
 				288C5F821E6D9E7D00F07CB4 /* DCConstants.m */,
 			);
 			path = Classes;

@@ -21,10 +21,10 @@ NSString *const TWITTER_API_SECRET = @"UM74rykaGhxPhhKED2KxJrd6zGBLNWgVsGdlzjdSw
 +(NSArray*)appMenuItems {
   NSArray* menuItems = @[
    [DCMenuItem initWithTitle:@"Sessions" icon:@"menu_icon_program" selectedIcon:@"menu_icon_program_sel" controllerId:@"DCProgramViewController" andMenuType:@(DCMENU_PROGRAM_ITEM)],
-   
-   [DCMenuItem initWithTitle:@"BoFs" icon:@"menu_icon_bofs" selectedIcon:@"menu_icon_bofs_sel" controllerId:@"DCProgramViewController" andMenuType:@(DCMENU_BOFS_ITEM)],
-   
-   [DCMenuItem initWithTitle:@"Social Events" icon:@"menu_icon_social" selectedIcon:@"menu_icon_social_sel" controllerId:@"DCProgramViewController" andMenuType:@(DCMENU_SOCIAL_EVENTS_ITEM)],
+//   
+//   [DCMenuItem initWithTitle:@"BoFs" icon:@"menu_icon_bofs" selectedIcon:@"menu_icon_bofs_sel" controllerId:@"DCProgramViewController" andMenuType:@(DCMENU_BOFS_ITEM)],
+//   
+//   [DCMenuItem initWithTitle:@"Social Events" icon:@"menu_icon_social" selectedIcon:@"menu_icon_social_sel" controllerId:@"DCProgramViewController" andMenuType:@(DCMENU_SOCIAL_EVENTS_ITEM)],
    
    [DCMenuItem initWithTitle:@"Social Media" icon:@"menu_icon_social_media" selectedIcon:@"menu_icon_social_media_sel" controllerId:@"DCSocialMediaViewController" andMenuType:@(DCMENU_SOCIALMEDIA_ITEM)],
    
