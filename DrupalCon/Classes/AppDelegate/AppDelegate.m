@@ -42,6 +42,7 @@
 }
 
 - (void)handleUpdateData {
+
   // Handle it only when application start
   [[DCMainProxy sharedProxy] setDataUpdatedCallback:^(DCMainProxyState mainProxyState) {
     NSTimeZone *eventTimeZone = [[DCMainProxy sharedProxy]
@@ -92,10 +93,7 @@
   // application to its current state in case it is terminated later.
   // If your application supports background execution, this method is called
   // instead of applicationWillTerminate: when the user quits.
-  
-  [[DCMainProxy sharedProxy] resetEventTimeZone];
-  [[DCMainProxy sharedProxy] setDataUpdatedCallback:nil];
-  [DCMainProxy sharedProxy].isTimeZoneChanged = NO;
+
 }
 
 - (void)applicationWillEnterForeground:(UIApplication*)application {

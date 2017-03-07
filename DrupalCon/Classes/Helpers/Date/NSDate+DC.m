@@ -20,14 +20,14 @@ static NSString* kDCSpeakerEventCellFormat = @"dd LLLL";
 
 + (BOOL)dc_isDateInToday:(NSDate*)date {
   NSDateComponents* otherDay = [[NSCalendar currentGregorianCalendar]
-      components:NSEraCalendarUnit | NSYearCalendarUnit | NSMonthCalendarUnit |
-                 NSDayCalendarUnit
+      components:NSCalendarUnitEra| NSCalendarUnitYear | NSCalendarUnitMonth |
+                 NSCalendarUnitDay
         fromDate:date];
   NSDateComponents* today = [[NSCalendar currentGregorianCalendar]
-      components:NSEraCalendarUnit | NSYearCalendarUnit | NSMonthCalendarUnit |
-                 NSDayCalendarUnit
+      components:NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth |
+                 NSCalendarUnitDay
         fromDate:[NSDate date]];
-  today.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+  today.timeZone = [DCMainProxy sharedProxy].eventTimeZone;
   if ([today day] == [otherDay day] && [today month] == [otherDay month] &&
       [today year] == [otherDay year] && [today era] == [otherDay era]) {
     return YES;
@@ -35,16 +35,13 @@ static NSString* kDCSpeakerEventCellFormat = @"dd LLLL";
     return NO;
 }
 
-+ (BOOL)is24hourFormat {
++ (NSString *)currentDateFormat {
   NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
   [formatter setLocale:[NSLocale currentLocale]];
   [formatter setDateStyle:NSDateFormatterNoStyle];
   [formatter setTimeStyle:NSDateFormatterShortStyle];
-  NSString *dateString = [formatter stringFromDate:[NSDate date]];
-  NSRange amRange = [dateString rangeOfString:[formatter AMSymbol]];
-  NSRange pmRange = [dateString rangeOfString:[formatter PMSymbol]];
-  BOOL is24h = (amRange.location == NSNotFound && pmRange.location == NSNotFound);
-  return is24h;
+  
+  return  formatter.dateFormat;
 }
 
 + (NSDate*)dateFromString:(NSString*)formattedDate
@@ -72,8 +69,9 @@ static NSString* kDCSpeakerEventCellFormat = @"dd LLLL";
 
 + (float)hoursFromDate:(NSDate*)date {
   NSCalendar* calendar = [NSCalendar currentGregorianCalendar];
+  calendar.timeZone = [DCMainProxy sharedProxy].eventTimeZone;
   NSDateComponents* components =
-      [calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit)
+      [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute)
                   fromDate:date];
   float hour = (float)[components hour];
   float minute = (float)[components minute];
@@ -85,8 +83,9 @@ static NSString* kDCSpeakerEventCellFormat = @"dd LLLL";
   NSDate *dateInEventTimeZone = [date dateByAddingTimeInterval:[DCMainProxy sharedProxy].eventTimeZone.secondsFromGMT];
   NSCalendar* calendar = [NSCalendar currentGregorianCalendar];
   [calendar setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_GB"]];
+  calendar.timeZone = [DCMainProxy sharedProxy].eventTimeZone;
   NSDateComponents* components =
-      [calendar components:(NSHourCalendarUnit | NSMinuteCalendarUnit)
+      [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute)
                   fromDate:dateInEventTimeZone];
   float hour = (float)[components hour] + (float)[components minute] / 60;
   return hour;
