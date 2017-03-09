@@ -22,6 +22,6 @@ extern NSString *const TWITTER_API_KEY;
 extern NSString *const TWITTER_API_SECRET;
 
 +(NSArray*)appMenuItems;
-+(NSDictionary*)appFonts;
++(NSArray*)appFonts;
 
 @end

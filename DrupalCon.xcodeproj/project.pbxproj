@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		282BD3B21E7191A0009763EC /* DCFontItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 282BD3B11E7191A0009763EC /* DCFontItem.m */; };
 		283A1F351CB4E5B5007F6BCB /* (null) in Resources */ = {isa = PBXBuildFile; };
 		288C5E321E6D9E3C00F07CB4 /* DCAppSignMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1E71BF4E9C50093AD65 /* DCAppSignMenuCell.m */; };
 		288C5E331E6D9E3C00F07CB4 /* NSUserDefaults+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F12C1BF4E9C50093AD65 /* NSUserDefaults+DC.m */; };
@@ -490,6 +491,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		282BD3B01E7191A0009763EC /* DCFontItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCFontItem.h; sourceTree = "<group>"; };
+		282BD3B11E7191A0009763EC /* DCFontItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCFontItem.m; sourceTree = "<group>"; };
 		288C5ED51E6D9E3C00F07CB4 /* DrupalCamp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrupalCamp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		288C5F7C1E6D9E4A00F07CB4 /* Connfa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Connfa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		288C5F821E6D9E7D00F07CB4 /* DCConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCConstants.m; sourceTree = "<group>"; };
@@ -1340,6 +1343,8 @@
 				288C5FBF1E6D9FE100F07CB4 /* DCConstants.h */,
 				288C5FBA1E6D9FB900F07CB4 /* DCMenuItem.h */,
 				288C5FBB1E6D9FBA00F07CB4 /* DCMenuItem.m */,
+				282BD3B01E7191A0009763EC /* DCFontItem.h */,
+				282BD3B11E7191A0009763EC /* DCFontItem.m */,
 				289301501E3770F300BB933B /* GoldSponsorBanners */,
 				A678FD421C03590B00F24105 /* main.xcdatamodeld */,
 				A6C5F1431BF4E9C50093AD65 /* AppInfo */,
@@ -2526,6 +2531,7 @@
 				A6C5F2ED1BF4E9C60093AD65 /* DCAboutViewController.m in Sources */,
 				A6C5F2D11BF4E9C60093AD65 /* DCPoi.m in Sources */,
 				A6C5F2DD1BF4E9C60093AD65 /* DCMainProxy+Additions.m in Sources */,
+				282BD3B21E7191A0009763EC /* DCFontItem.m in Sources */,
 				A6C5F2AD1BF4E9C60093AD65 /* DCSpeaker+DC.m in Sources */,
 				A6C5F3091BF4E9C60093AD65 /* DCLabel.m in Sources */,
 				A6C5F2BF1BF4E9C60093AD65 /* DCSocialEvent.m in Sources */,

@@ -8,6 +8,7 @@
 
 #import "DCConstants.h"
 #import "DCMenuItem.h"
+#import "DCFontItem.h"
 
 @implementation DCConstants
 
@@ -42,14 +43,11 @@ NSString *const TWITTER_API_SECRET = @"UM74rykaGhxPhhKED2KxJrd6zGBLNWgVsGdlzjdSw
   return menuItems;
 }
 
-+(NSDictionary*)appFonts {
++(NSArray*)appFonts {
   
-  NSDictionary* fonts = @{
-                          
-          kFontTitle : kFontMontserratRegular,
-          kFontDescription : kFontOpenSansRegular,
-          kFontName : kFontOpenSansCondBold
-          };
+  NSArray* fonts = @[
+                     [DCFontItem initWithTitleFont:kFontHelveticaNeueRegular andNameFont:kFontHelveticaNeueRegular andDescriptionFont:kFontHelveticaNeueRegular]
+                     ];
   
   return fonts;
 }

@@ -3,6 +3,7 @@
 #import "UIImageView+DC.h"
 #import "UIImageView+WebCache.h"
 #import "DCConstants.h"
+#import "DCFontItem.h"
 
 @implementation DCSpeakerCell
 
@@ -55,8 +56,10 @@
 
 - (void)setCustomFonts {
 
-  self.nameLbl.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontName] size:self.nameLbl.font.pointSize];
-  self.positionTitleLbl.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontDescription] size:self.positionTitleLbl.font.pointSize];
+  DCFontItem *fonts = [DCConstants appFonts].firstObject;
+  
+  self.nameLbl.font = [UIFont fontWithName:fonts.nameFont size:self.nameLbl.font.pointSize];
+  self.positionTitleLbl.font = [UIFont fontWithName:fonts.descriptionFont size:self.positionTitleLbl.font.pointSize];
 }
 
 - (NSString*)positionTitleForSpeaker:(DCSpeaker*)speaker {

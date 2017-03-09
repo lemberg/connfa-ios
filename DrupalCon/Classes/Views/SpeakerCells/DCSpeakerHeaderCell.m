@@ -4,6 +4,7 @@
 #import "UIImageView+DC.h"
 #import "DCSpeaker.h"
 #import "DCConstants.h"
+#import "DCFontItem.h"
 
 @implementation DCSpeakerHeaderCell
 
@@ -52,8 +53,10 @@
 
 - (void)setCustomFonts {
   
-  self.nameLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontTitle] size:self.nameLabel.font.pointSize];
-  self.jobAndCompanyLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontDescription] size:self.jobAndCompanyLabel.font.pointSize];
+  DCFontItem *fonts = [DCConstants appFonts].firstObject;
+  
+  self.nameLabel.font = [UIFont fontWithName:fonts.titleFont size:self.nameLabel.font.pointSize];
+  self.jobAndCompanyLabel.font = [UIFont fontWithName:fonts.descriptionFont size:self.jobAndCompanyLabel.font.pointSize];
   
 }
 

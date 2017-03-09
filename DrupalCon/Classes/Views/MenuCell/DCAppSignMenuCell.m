@@ -1,6 +1,7 @@
 
 #import "DCAppSignMenuCell.h"
 #import "DCConstants.h"
+#import "DCFontItem.h"
 
 @implementation DCAppSignMenuCell
 
@@ -19,8 +20,10 @@
 
 - (void)setCustomFonts {
 
-  self.dateLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontName] size:self.dateLabel.font.pointSize];
-  self.placeLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontDescription] size:self.placeLabel.font.pointSize];
+  DCFontItem *fonts = [DCConstants appFonts].firstObject;
+  
+  self.dateLabel.font = [UIFont fontWithName:fonts.nameFont size:self.dateLabel.font.pointSize];
+  self.placeLabel.font = [UIFont fontWithName:fonts.descriptionFont size:self.placeLabel.font.pointSize];
   
 }
 

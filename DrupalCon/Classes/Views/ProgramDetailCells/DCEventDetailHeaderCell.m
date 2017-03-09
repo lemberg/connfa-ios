@@ -7,6 +7,7 @@
 #import "DCEvent+DC.h"
 #import "UIImage+Extension.h"
 #import "DCConstants.h"
+#import "DCFontItem.h"
 
 @implementation DCEventDetailHeaderCell
 
@@ -92,10 +93,12 @@
 
 - (void)setCustomFonts {
   
-  self.titleLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontTitle] size:self.titleLabel.font.pointSize];
-  self.dateAndPlaceLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontDescription] size:self.dateAndPlaceLabel.font.pointSize];
-  self.trackLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontDescription] size:self.trackLabel.font.pointSize];
-  self.experienceLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontDescription] size:self.experienceLabel.font.pointSize];
+   DCFontItem *fonts = [DCConstants appFonts].firstObject;
+  
+  self.titleLabel.font = [UIFont fontWithName:fonts.titleFont size:self.titleLabel.font.pointSize];
+  self.dateAndPlaceLabel.font = [UIFont fontWithName:fonts.descriptionFont size:self.dateAndPlaceLabel.font.pointSize];
+  self.trackLabel.font = [UIFont fontWithName:fonts.descriptionFont size:self.trackLabel.font.pointSize];
+  self.experienceLabel.font = [UIFont fontWithName:fonts.descriptionFont size:self.experienceLabel.font.pointSize];
   
 }
 

@@ -6,6 +6,7 @@
 #import "DCLocation.h"
 #import "DCMainProxy.h"
 #import "DCConstants.h"
+#import "DCFontItem.h"
 
 @interface DCLocationViewController ()
 
@@ -134,10 +135,12 @@
 
 - (void)setCustomFonts {
   
-  self.addressLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontTitle] size:self.addressLabel.font.pointSize];
-  self.streetAndNumberLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontDescription] size:self.streetAndNumberLabel.font.pointSize];
-  self.cityAndProvinceLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontDescription] size:self.cityAndProvinceLabel.font.pointSize];
-  self.stateLabel.font = [UIFont fontWithName:[[DCConstants appFonts] objectForKey:kFontDescription] size:self.stateLabel.font.pointSize];
+   DCFontItem *fonts = [DCConstants appFonts].firstObject;
+  
+  self.addressLabel.font = [UIFont fontWithName:fonts.titleFont size:self.addressLabel.font.pointSize];
+  self.streetAndNumberLabel.font = [UIFont fontWithName:fonts.descriptionFont size:self.streetAndNumberLabel.font.pointSize];
+  self.cityAndProvinceLabel.font = [UIFont fontWithName:fonts.descriptionFont size:self.cityAndProvinceLabel.font.pointSize];
+  self.stateLabel.font = [UIFont fontWithName:fonts.descriptionFont size:self.stateLabel.font.pointSize];
   
 }
 
