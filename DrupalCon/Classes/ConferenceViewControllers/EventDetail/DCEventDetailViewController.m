@@ -86,12 +86,11 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
     
   self.noDataView.hidden = ![self showEmptyDetailIcon];
   self.tableView.scrollEnabled = ![self showEmptyDetailIcon];
-  
-  if ([self.event isKindOfClass:[DCMainEvent class]]) {
-    NSString *bannerName = [[DCGoldSponsorBannerHeandler sharedManager] getSponsorBannerName];
-    [self trackSponsorBannerViaGAI:bannerName];
-    self.topBackgroundView.image = [UIImage imageNamed:bannerName];
-  }
+
+  NSString *bannerName = [[DCGoldSponsorBannerHeandler sharedManager] getSponsorBannerName];
+  [self trackSponsorBannerViaGAI:bannerName];
+  self.topBackgroundView.image = [UIImage imageNamed:bannerName];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
