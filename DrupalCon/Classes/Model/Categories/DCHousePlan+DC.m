@@ -40,7 +40,9 @@ static NSString* kDCHouseEntityPlanIdKey = @"housePlanId";
       housePlan.imageURL = dictionary[kDCHousePlanImageURLKey];
       housePlan.order = [NSNumber
           numberWithFloat:[dictionary[kDCParseObjectOrderKey] floatValue]];
-      [imageURLs  addObject:[NSURL URLWithString:dictionary[kDCHousePlanImageURLKey]]];
+      
+      NSString *encodedURL = [dictionary[kDCHousePlanImageURLKey] stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+      [imageURLs  addObject:[NSURL URLWithString:encodedURL]];
     }
   }
   
