@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		282BD3B21E7191A0009763EC /* DCFontItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 282BD3B11E7191A0009763EC /* DCFontItem.m */; };
 		283A1F351CB4E5B5007F6BCB /* (null) in Resources */ = {isa = PBXBuildFile; };
+		287118711E72DFBA00CD0498 /* DCFontItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 282BD3B11E7191A0009763EC /* DCFontItem.m */; };
+		287118721E72DFBB00CD0498 /* DCFontItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 282BD3B11E7191A0009763EC /* DCFontItem.m */; };
 		288C5E321E6D9E3C00F07CB4 /* DCAppSignMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1E71BF4E9C50093AD65 /* DCAppSignMenuCell.m */; };
 		288C5E331E6D9E3C00F07CB4 /* NSUserDefaults+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F12C1BF4E9C50093AD65 /* NSUserDefaults+DC.m */; };
 		288C5E341E6D9E3C00F07CB4 /* DCBof+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1511BF4E9C50093AD65 /* DCBof+DC.m */; };
@@ -2269,6 +2271,7 @@
 				288C5E951E6D9E3C00F07CB4 /* DCAboutViewController.m in Sources */,
 				288C5E961E6D9E3C00F07CB4 /* DCPoi.m in Sources */,
 				288C5E971E6D9E3C00F07CB4 /* DCMainProxy+Additions.m in Sources */,
+				287118721E72DFBB00CD0498 /* DCFontItem.m in Sources */,
 				288C5E981E6D9E3C00F07CB4 /* DCSpeaker+DC.m in Sources */,
 				288C5E991E6D9E3C00F07CB4 /* DCLabel.m in Sources */,
 				288C5E9A1E6D9E3C00F07CB4 /* DCSocialEvent.m in Sources */,
@@ -2400,6 +2403,7 @@
 				288C5F3C1E6D9E4A00F07CB4 /* DCAboutViewController.m in Sources */,
 				288C5F3D1E6D9E4A00F07CB4 /* DCPoi.m in Sources */,
 				288C5F3E1E6D9E4A00F07CB4 /* DCMainProxy+Additions.m in Sources */,
+				287118711E72DFBA00CD0498 /* DCFontItem.m in Sources */,
 				288C5F3F1E6D9E4A00F07CB4 /* DCSpeaker+DC.m in Sources */,
 				288C5F401E6D9E4A00F07CB4 /* DCLabel.m in Sources */,
 				288C5F411E6D9E4A00F07CB4 /* DCSocialEvent.m in Sources */,

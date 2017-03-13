@@ -9,7 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "DCSideMenuType.h"
 #import "DCAppConfiguration.h"
-
+#import "DCFontItem.h"
+#import "DCMenuItem.h"
 
 @interface DCConstants : NSObject
 
