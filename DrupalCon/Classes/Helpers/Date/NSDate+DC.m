@@ -44,6 +44,18 @@ static NSString* kDCSpeakerEventCellFormat = @"dd LLLL";
   return  formatter.dateFormat;
 }
 
++ (BOOL) is24hourFormat {
+  NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+  [formatter setLocale:[NSLocale currentLocale]];
+  [formatter setDateStyle:NSDateFormatterNoStyle];
+  [formatter setTimeStyle:NSDateFormatterShortStyle];
+  BOOL is24h = [formatter.dateFormat containsString:@"a"];
+
+  return !is24h;
+}
+
+
+
 + (NSDate*)dateFromString:(NSString*)formattedDate
                    format:(NSString*)dateFormat {
   if (![formattedDate isKindOfClass:[NSString class]]) {

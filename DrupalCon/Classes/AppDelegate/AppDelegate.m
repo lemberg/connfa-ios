@@ -53,8 +53,10 @@
        withSuccess:^(BOOL isSuccess){
          if (isSuccess) {
            [NSUserDefaults disableTimeZoneNotification];
+           dispatch_async(dispatch_get_main_queue(), ^{
+             [[DCMainProxy sharedProxy] setDataUpdatedCallback:nil];
+           });
          }
-         [[DCMainProxy sharedProxy] setDataUpdatedCallback:nil];
        }];
     }
   }];

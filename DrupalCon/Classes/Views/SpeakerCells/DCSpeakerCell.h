@@ -12,5 +12,6 @@
 + (float)cellHeight;
 
 - (void)initData:(DCSpeaker*)speaker;
+- (void)setSpeaker:(DCSpeaker*)speaker;
 
 @end

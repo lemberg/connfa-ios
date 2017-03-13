@@ -124,27 +124,16 @@
 - (UITableViewCell*)tableView:(UITableView*)tableView
         cellForRowAtIndexPath:(NSIndexPath*)indexPath {
   static NSString* cellIdSpeaker = @"DetailCellIdentifierSpeaker";
+  DCSpeaker* speaker =
+  [self.fetchedResultsController objectAtIndexPath:indexPath];
   DCSpeakerCell* _cell = (DCSpeakerCell*)
       [tableView dequeueReusableCellWithIdentifier:cellIdSpeaker];
 
-  DCSpeaker* speaker =
-      [self.fetchedResultsController objectAtIndexPath:indexPath];
-
-  [_cell.nameLbl setText:speaker.name];
-
-  [_cell.positionTitleLbl setText:[self positionTitleForSpeaker:speaker]];
-  [_cell.pictureImg
-      sd_setImageWithURL:[NSURL URLWithString:speaker.avatarPath]
-        placeholderImage:[UIImage imageNamed:@"avatar_placeholder"]
-               completed:^(UIImage* image, NSError* error,
-                           SDImageCacheType cacheType, NSURL* imageURL) {
-                 dispatch_async(dispatch_get_main_queue(), ^{
-                   [_cell setNeedsDisplay];
-                 });
-               }];
+  [_cell setSpeaker:speaker];
   _cell.separator.hidden =
-      (indexPath.row ==
-       [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1);
+  (indexPath.row ==
+   [self tableView:tableView numberOfRowsInSection:indexPath.section] - 1);
+
   return _cell;
 }
 

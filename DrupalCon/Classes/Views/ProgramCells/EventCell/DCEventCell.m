@@ -56,6 +56,10 @@ static NSInteger eventCellImageHeight = 16;
 
 @implementation DCEventCell
 
+- (void)awakeFromNib {
+  [super awakeFromNib];
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
   [super setSelected:NO animated:animated];
 }

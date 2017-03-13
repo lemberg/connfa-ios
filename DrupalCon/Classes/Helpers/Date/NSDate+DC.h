@@ -10,4 +10,5 @@
 + (float)hoursFromDate:(NSDate*)date;
 + (float)currentHour;
 + (NSString *)currentDateFormat;
++ (BOOL) is24hourFormat;
 @end

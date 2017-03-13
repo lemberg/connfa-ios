@@ -206,8 +206,6 @@
   if ([self isLastMenuItemAtIndexPath:indexPath]) {
     DCAppSignMenuCell* cell =
         [tableView dequeueReusableCellWithIdentifier:@"DCAppSignMenuCell"];
-    cell.dateLabel.text = [DCAppConfiguration eventTime];
-    cell.placeLabel.text = [DCAppConfiguration eventPlace];
     return cell;
   }
   DCSideMenuCell* cell = (DCSideMenuCell*)

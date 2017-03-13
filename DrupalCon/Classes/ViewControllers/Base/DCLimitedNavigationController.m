@@ -3,14 +3,6 @@
 
 #define DEFAULT_MAX_DEPTH 2
 
-// block that performs after NavigationController Dismisses
-CompletionBlock completion;
-
-// block that performs when NavigationController should dismiss. If it isn't
-// nil, developer is responsible for
-// hiding NavigationController. CompletionBlock won't be performed in this case
-BackButtonBlock dismissAction;
-
 @interface DCLimitedNavigationController ()
 
 @property(nonatomic) int backPressCount;
@@ -25,8 +17,7 @@ BackButtonBlock dismissAction;
                                      depth:(NSInteger)maxDepth {
   self = [super initWithRootViewController:rootViewController];
   if (self) {
-    completion = aBlock;
-    dismissAction = nil;
+
     self.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     self.maxDepth = (maxDepth >= 2) ? maxDepth : DEFAULT_MAX_DEPTH;
   }
@@ -47,7 +38,7 @@ BackButtonBlock dismissAction;
                                completion:nil
                                     depth:maxDepth];
   if (self) {
-    dismissAction = aBlock;
+
   }
   return self;
 }
@@ -100,13 +91,10 @@ BackButtonBlock dismissAction;
   if ((self.backPressCount == self.maxDepth) ||
       (self.viewControllers.count == 2)) {
     self.shouldAnimateNavigationBar = NO;
-    if (dismissAction) {
-      // custom dismiss action
-      dismissAction();
-    } else {
-      // usual dismiss. In this case NavigationController mus te shown modally
-      [self dismissViewControllerAnimated:YES completion:completion];
-    }
+
+    // usual dismiss. In this case NavigationController mus te shown modally
+    [self dismissViewControllerAnimated:YES completion:nil];
+
     return nil;
   } else  // just do as usual...
   {
