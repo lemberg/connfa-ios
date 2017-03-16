@@ -70,10 +70,12 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
     cellIdSpeaker :
         [self.tableView dequeueReusableCellWithIdentifier:cellIdSpeaker]
   };
+  NSLog(@"%@", [NSString stringWithFormat:@"Event Details: %@",
+                self.event.name]);
+  
+  [self registerScreenLoadAtGA:[NSString stringWithFormat:@"Event Details: %@",
+                                self.event.name]];
 
-  [self registerScreenLoadAtGA:[NSString stringWithFormat:@"eventID: %d",
-                                                          self.event.eventId
-                                                              .intValue]];
 
   self.cellsHeight = [NSMutableDictionary dictionary];
 

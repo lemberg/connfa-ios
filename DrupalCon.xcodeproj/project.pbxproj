@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28274F401E7AAECC004F3C61 /* DCConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 28274F3F1E7AAECC004F3C61 /* DCConstants.m */; };
 		282BD3B21E7191A0009763EC /* DCFontItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 282BD3B11E7191A0009763EC /* DCFontItem.m */; };
 		283A1F351CB4E5B5007F6BCB /* (null) in Resources */ = {isa = PBXBuildFile; };
 		287118711E72DFBA00CD0498 /* DCFontItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 282BD3B11E7191A0009763EC /* DCFontItem.m */; };
@@ -315,7 +316,6 @@
 		288C5F731E6D9E4A00F07CB4 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A68AE7C01C626470002E862D /* OpenSans-Regular.ttf */; };
 		288C5F741E6D9E4A00F07CB4 /* DCEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F1FC1BF4E9C60093AD65 /* DCEventCell.xib */; };
 		288C5F751E6D9E4A00F07CB4 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A68AE7BE1C626470002E862D /* OpenSans-Bold.ttf */; };
-		288C5F8B1E6D9E7D00F07CB4 /* DCConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 288C5F821E6D9E7D00F07CB4 /* DCConstants.m */; };
 		288C5F8C1E6D9E7D00F07CB4 /* DrupalCon-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 288C5F831E6D9E7D00F07CB4 /* DrupalCon-Info.plist */; };
 		288C5F8D1E6D9E7D00F07CB4 /* DC-Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 288C5F851E6D9E7D00F07CB4 /* DC-Images.xcassets */; };
 		288C5F8E1E6D9E7D00F07CB4 /* DC-Theme.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 288C5F861E6D9E7D00F07CB4 /* DC-Theme.bundle */; };
@@ -493,11 +493,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		28274F3F1E7AAECC004F3C61 /* DCConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCConstants.m; sourceTree = "<group>"; };
 		282BD3B01E7191A0009763EC /* DCFontItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCFontItem.h; sourceTree = "<group>"; };
 		282BD3B11E7191A0009763EC /* DCFontItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCFontItem.m; sourceTree = "<group>"; };
 		288C5ED51E6D9E3C00F07CB4 /* DrupalCamp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrupalCamp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		288C5F7C1E6D9E4A00F07CB4 /* Connfa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Connfa.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		288C5F821E6D9E7D00F07CB4 /* DCConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCConstants.m; sourceTree = "<group>"; };
 		288C5F831E6D9E7D00F07CB4 /* DrupalCon-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DrupalCon-Info.plist"; sourceTree = "<group>"; };
 		288C5F851E6D9E7D00F07CB4 /* DC-Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "DC-Images.xcassets"; sourceTree = "<group>"; };
 		288C5F861E6D9E7D00F07CB4 /* DC-Theme.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "DC-Theme.bundle"; sourceTree = "<group>"; };
@@ -905,7 +905,7 @@
 		288C5F801E6D9E7D00F07CB4 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				288C5F821E6D9E7D00F07CB4 /* DCConstants.m */,
+				28274F3F1E7AAECC004F3C61 /* DCConstants.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -2475,6 +2475,7 @@
 				A6C5F2CD1BF4E9C60093AD65 /* DCInfo.m in Sources */,
 				A6C5F2BD1BF4E9C60093AD65 /* DCMainEvent.m in Sources */,
 				A6C5F3291BF4E9C60093AD65 /* DCEventDetailHeaderCell.m in Sources */,
+				28274F401E7AAECC004F3C61 /* DCConstants.m in Sources */,
 				A6C5F2751BF4E9C60093AD65 /* NSDictionary+DC.m in Sources */,
 				A6C5F2651BF4E9C60093AD65 /* DCEventDataSource.m in Sources */,
 				A6C5F2F11BF4E9C60093AD65 /* DCInfoViewController.m in Sources */,
@@ -2530,7 +2531,6 @@
 				A678FD511C0366AF00F24105 /* MFSideMenuContainerViewController.m in Sources */,
 				A6C5F3611BF4E9C60093AD65 /* SDWebImageDecoder.m in Sources */,
 				A6C5F27B1BF4E9C60093AD65 /* NSString+HTML.m in Sources */,
-				288C5F8B1E6D9E7D00F07CB4 /* DCConstants.m in Sources */,
 				A6C5F2DB1BF4E9C60093AD65 /* DCParserService.m in Sources */,
 				A6C5F2ED1BF4E9C60093AD65 /* DCAboutViewController.m in Sources */,
 				A6C5F2D11BF4E9C60093AD65 /* DCPoi.m in Sources */,

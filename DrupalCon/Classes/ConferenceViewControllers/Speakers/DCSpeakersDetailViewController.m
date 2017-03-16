@@ -51,9 +51,9 @@ static NSString* eventCellId = @"SpeakerEventCellId";
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  [self registerScreenLoadAtGA:[NSString stringWithFormat:@"speakerID: %d",
-                                                          self.speaker.speakerId
-                                                              .intValue]];
+  [self registerScreenLoadAtGA:[NSString stringWithFormat:@"Speaker Details: %@ %@",
+                                self.speaker.firstName, self.speaker.lastName]];
+
 
   self.cellsHeight = [NSMutableDictionary dictionary];
   self.currentBarColor = [UIColor whiteColor];  // NAV_BAR_COLOR;
