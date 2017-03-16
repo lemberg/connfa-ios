@@ -27,7 +27,7 @@ static NSString* kDCSpeakerEventCellFormat = @"dd LLLL";
       components:NSCalendarUnitEra | NSCalendarUnitYear | NSCalendarUnitMonth |
                  NSCalendarUnitDay
         fromDate:[NSDate date]];
-  today.timeZone = [DCMainProxy sharedProxy].eventTimeZone;
+  today.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
   if ([today day] == [otherDay day] && [today month] == [otherDay month] &&
       [today year] == [otherDay year] && [today era] == [otherDay era]) {
     return YES;
