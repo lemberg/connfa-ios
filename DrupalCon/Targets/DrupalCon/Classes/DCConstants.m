@@ -8,7 +8,6 @@
 
 #import "DCConstants.h"
 
-
 @implementation DCConstants
 
 NSString *const BASE_URL = @"http://dublin2016.drupalcon.uat.link/api/v2/";;
