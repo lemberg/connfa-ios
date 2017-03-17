@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		283058551E76DB140059E5A7 /* DrupalCon-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 283058541E76DB140059E5A7 /* DrupalCon-Info.plist */; };
 		283A1F351CB4E5B5007F6BCB /* (null) in Resources */ = {isa = PBXBuildFile; };
 		5DC8C415198656DA00BF5816 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C414198656DA00BF5816 /* Foundation.framework */; };
 		5DC8C417198656DA00BF5816 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C416198656DA00BF5816 /* CoreGraphics.framework */; };
@@ -133,7 +134,6 @@
 		A6C5F3451BF4E9C60093AD65 /* about_img.png in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F21C1BF4E9C60093AD65 /* about_img.png */; };
 		A6C5F3471BF4E9C60093AD65 /* event_detail_style.css in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F21D1BF4E9C60093AD65 /* event_detail_style.css */; };
 		A6C5F3491BF4E9C60093AD65 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F21E1BF4E9C60093AD65 /* style.css */; };
-		A6C5F34B1BF4E9C60093AD65 /* DrupalCon-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2201BF4E9C60093AD65 /* DrupalCon-Info.plist */; };
 		A6C5F34F1BF4E9C60093AD65 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2231BF4E9C60093AD65 /* main.m */; };
 		A6C5F3511BF4E9C60093AD65 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6C5F2261BF4E9C60093AD65 /* Crashlytics.framework */; };
 		A6C5F3531BF4E9C60093AD65 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6C5F2271BF4E9C60093AD65 /* Fabric.framework */; };
@@ -165,6 +165,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		283058541E76DB140059E5A7 /* DrupalCon-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DrupalCon-Info.plist"; sourceTree = "<group>"; };
 		565951671CFDB497002158F5 /* main_2. 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "main_2. 2.xcdatamodel"; sourceTree = "<group>"; };
 		5DC8C411198656DA00BF5816 /* DrupalCon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrupalCon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC8C414198656DA00BF5816 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -398,7 +399,6 @@
 		A6C5F21C1BF4E9C60093AD65 /* about_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_img.png; sourceTree = "<group>"; };
 		A6C5F21D1BF4E9C60093AD65 /* event_detail_style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = event_detail_style.css; sourceTree = "<group>"; };
 		A6C5F21E1BF4E9C60093AD65 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
-		A6C5F2201BF4E9C60093AD65 /* DrupalCon-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DrupalCon-Info.plist"; sourceTree = "<group>"; };
 		A6C5F2211BF4E9C60093AD65 /* DrupalCon-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DrupalCon-Prefix.pch"; sourceTree = "<group>"; };
 		A6C5F2231BF4E9C60093AD65 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A6C5F2261BF4E9C60093AD65 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
@@ -1278,7 +1278,7 @@
 		A6C5F21F1BF4E9C60093AD65 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				A6C5F2201BF4E9C60093AD65 /* DrupalCon-Info.plist */,
+				283058541E76DB140059E5A7 /* DrupalCon-Info.plist */,
 				A6C5F2211BF4E9C60093AD65 /* DrupalCon-Prefix.pch */,
 				A6C5F2231BF4E9C60093AD65 /* main.m */,
 			);
@@ -1475,9 +1475,9 @@
 				A6C5F3431BF4E9C60093AD65 /* Speakers.storyboard in Resources */,
 				A6C5F3571BF4E9C60093AD65 /* LICENSE in Resources */,
 				F580ED6D1D0FDE2B00F289F8 /* LESelectedActionSheetController.xib in Resources */,
+				283058551E76DB140059E5A7 /* DrupalCon-Info.plist in Resources */,
 				A6C5F3491BF4E9C60093AD65 /* style.css in Resources */,
 				A6C5F33D1BF4E9C60093AD65 /* Events.storyboard in Resources */,
-				A6C5F34B1BF4E9C60093AD65 /* DrupalCon-Info.plist in Resources */,
 				A6F456401C6B490900EF3DCD /* (null) in Resources */,
 				A68AE7C31C626470002E862D /* OpenSans-Regular.ttf in Resources */,
 				A6C5F3211BF4E9C60093AD65 /* DCEventCell.xib in Resources */,

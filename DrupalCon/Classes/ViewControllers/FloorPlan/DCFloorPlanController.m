@@ -40,8 +40,6 @@
   [self.scrollView addSubview:self.imageView];
   
   [self setZoomScale];
-  [self setupGestureRecognizer];
-  
   
   [self configureUI];
   [self setupGestureRecognizer];
@@ -90,6 +88,7 @@
 }
 
 - (void)checkProxyState {
+
   [[DCMainProxy sharedProxy]
    setDataReadyCallback:^(DCMainProxyState mainProxyState) {
      dispatch_async(dispatch_get_main_queue(), ^{
@@ -97,9 +96,6 @@
        if (!self.previousState) {
          [self reloadData];
          self.previousState = mainProxyState;
-       }
-       
-       if (mainProxyState == DCMainProxyStateDataUpdated) {
        }
      });
    }];

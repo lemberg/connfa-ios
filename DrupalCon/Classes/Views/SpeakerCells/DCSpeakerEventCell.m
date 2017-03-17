@@ -26,16 +26,24 @@
 - (void)initData:(DCEvent*)event {
   // event Name
   self.eventNameLabel.text = event.name;
-
+  NSString *timeFormat;
+  
+  if ([NSDate is24hourFormat]) {
+    timeFormat = @"H:mm aaa";
+  } else {
+    timeFormat = @"h:mm aaa";
+  }
+  
+  
   // event Date
   NSString* date =
       event.date
           ? [DCDateHelper convertDate:event.date toApplicationFormat:@"EEE"]
           : @"";
   NSString* startTime = [DCDateHelper convertDate:event.startDate
-                              toApplicationFormat:@"h:mm aaa"];
+                              toApplicationFormat:timeFormat];
   NSString* endTime =
-      [DCDateHelper convertDate:event.endDate toApplicationFormat:@"h:mm aaa"];
+      [DCDateHelper convertDate:event.endDate toApplicationFormat:timeFormat];
   date = [NSString
       stringWithFormat:@"%@, %@ - %@", [date uppercaseString],
                        startTime,  //[NSDate hourFormatForDate:event.startDate

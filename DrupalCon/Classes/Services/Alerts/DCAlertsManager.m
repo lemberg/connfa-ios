@@ -16,13 +16,18 @@
   NSInteger hoursFromGmt = zone.secondsFromGMT / 3600;
   NSString *timeZoneName = zone.name;//[zone localizedName:NSTimeZoneNameStyleGeneric locale:[NSLocale currentLocale]];
   
-  NSString *title = [NSString stringWithFormat:@"Event dates are provided in %@ timezone (%li).", timeZoneName, hoursFromGmt];
+  NSString *title = [NSString stringWithFormat:@"Event dates are provided in %@ timezone (%li).", timeZoneName, (long)hoursFromGmt];
   UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Attention" message:title delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:@"Don't show", nil];
+  
+  
   [alertView showWithCompletion:^(UIAlertView *alertView, NSInteger buttonIndex) {
-    BOOL isSuccess = buttonIndex != 0;
-    if (success) {
-      success(isSuccess);
+    // Ok == 0 and Don't Show == 1
+    if (buttonIndex == 0) {
+      success(YES);
+    } else if (buttonIndex == 1) {
+      success(NO);
     }
+
   }];
 }
 

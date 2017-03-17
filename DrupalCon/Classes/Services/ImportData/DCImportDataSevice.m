@@ -112,6 +112,21 @@ static NSString* const SETTINGS_URI = @"getSettings";
   if (status == DCDataUpdateSuccess) {
     [self updatelastModify:self.preLastModified];
   }
+  
+  switch (status) {
+    case DCDataUpdateSuccess:
+      [self updatelastModify:self.preLastModified];
+      break;
+    case DCDataNotChanged:
+      NSLog(@"Data Not Changed");
+      break;
+    case DCDataUpdateFailed:
+      NSLog(@"Data Updating was Failed");
+      break;
+      
+    default:
+      break;
+  }
 
   if ([self.delegate
           conformsToProtocol:@protocol(DCImportDataSeviceDelegate)]) {
@@ -173,6 +188,7 @@ static NSString* const SETTINGS_URI = @"getSettings";
 }
 
 - (void)handleNetworkError {
+  
   if ([self isInitDataImport]) {
     [self importFinishedWithStatus:DCDataNotChanged];
   } else {

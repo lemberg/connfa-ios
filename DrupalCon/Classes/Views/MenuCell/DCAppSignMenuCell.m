@@ -5,6 +5,9 @@
 
 - (void)awakeFromNib {
   // Initialization code
+  [super awakeFromNib];
+  self.dateLabel.text = [DCAppConfiguration eventTime];
+  self.placeLabel.text = [DCAppConfiguration eventPlace];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

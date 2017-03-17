@@ -9,5 +9,6 @@
 - (NSString*)dateToStringWithFormat:(NSString*)dateFormat;
 + (float)hoursFromDate:(NSDate*)date;
 + (float)currentHour;
-+ (BOOL)is24hourFormat;
++ (NSString *)currentDateFormat;
++ (BOOL) is24hourFormat;
 @end

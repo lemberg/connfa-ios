@@ -2,6 +2,11 @@
 #import "DCSpeakerCell.h"
 #import "UIImageView+DC.h"
 #import "UIImageView+WebCache.h"
+#import "DCSpeaker.h"
+
+@interface DCSpeakerCell()
+@property(nonatomic, weak) DCSpeaker *currentSpeaker;
+@end
 
 @implementation DCSpeakerCell
 
@@ -15,7 +20,25 @@
 }
 
 - (void)awakeFromNib {
+  [super awakeFromNib];
+  [self setSpeaker:self.currentSpeaker];
   [_pictureImg cutCircle];
+}
+
+- (void)setSpeaker:(DCSpeaker*)speaker; {
+  self.currentSpeaker = speaker;
+  [self.nameLbl setText:self.currentSpeaker.name];
+  
+  [self.positionTitleLbl setText:[self positionTitleForSpeaker:self.currentSpeaker]];
+  [self.pictureImg
+   sd_setImageWithURL:[NSURL URLWithString:self.currentSpeaker.avatarPath]
+   placeholderImage:[UIImage imageNamed:@"avatar_placeholder"]
+   completed:^(UIImage* image, NSError* error,
+               SDImageCacheType cacheType, NSURL* imageURL) {
+     dispatch_async(dispatch_get_main_queue(), ^{
+       [self setNeedsDisplay];
+     });
+   }];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

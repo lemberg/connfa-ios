@@ -3,6 +3,7 @@
 
 @class DCEvent;
 
+
 @protocol DCEventCellProtocol;
 
 @interface DCEventCell : UITableViewCell
@@ -24,6 +25,7 @@
 @property(weak, nonatomic) IBOutlet UILabel* placeLabel;
 
 @property(weak, nonatomic) IBOutlet UIView* separatorCellView;
+
 
 @property(nonatomic, setter=isLastCellInSection:) BOOL isLastCellInSection;
 @property(nonatomic) BOOL isFirstCellInSection;

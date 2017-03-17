@@ -56,6 +56,10 @@ static NSInteger eventCellImageHeight = 16;
 
 @implementation DCEventCell
 
+- (void)awakeFromNib {
+  [super awakeFromNib];
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
   [super setSelected:NO animated:animated];
 }
@@ -149,7 +153,7 @@ static NSInteger eventCellImageHeight = 16;
   self.eventImageHeight.constant =
       self.eventImageView.image ? eventCellImageHeight : 0;
 
-  NSString *timeFormat = ([NSDate is24hourFormat])? @"HH:mm" : @"h:mm aaa";
+  NSString *timeFormat = [NSDate currentDateFormat];
   // Time  (left side)
   NSString* startTime = [DCDateHelper convertDate:event.startDate
                               toApplicationFormat:timeFormat];

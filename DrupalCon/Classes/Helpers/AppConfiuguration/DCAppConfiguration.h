@@ -1,7 +1,11 @@
 
 #import <Foundation/Foundation.h>
 
-#define SERVER_URL @"http://dublin2016.drupalcon.uat.link"
+
+//NSString *const BASE_URL = @"http://connfa-integration.uat.link/api/v2/";;
+//NSString *const SERVER_URL = @"http://connfa-integration.uat.link/";
+
+#define SERVER_URL @"http://connfa-integration.uat.link/"
 #define BUNDLE_NAME @"DC-Theme"
 #define GOOGLE_ANALYTICS_APP_ID @"UA-267362-67"
 #define TWITTER_API_KEY @"Mxl1GoGSM98T3jTIWdlUuqXmh"
