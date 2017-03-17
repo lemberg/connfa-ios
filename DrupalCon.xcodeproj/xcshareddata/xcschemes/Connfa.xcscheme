@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "5DC8C410198656DA00BF5816"
-               BuildableName = "DrupalCon.app"
-               BlueprintName = "DrupalCon"
+               BlueprintIdentifier = "288C5ED71E6D9E4A00F07CB4"
+               BuildableName = "Connfa.app"
+               BlueprintName = "Connfa"
                ReferencedContainer = "container:DrupalCon.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5DC8C410198656DA00BF5816"
-            BuildableName = "DrupalCon.app"
-            BlueprintName = "DrupalCon"
+            BlueprintIdentifier = "288C5ED71E6D9E4A00F07CB4"
+            BuildableName = "Connfa.app"
+            BlueprintName = "Connfa"
             ReferencedContainer = "container:DrupalCon.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -55,9 +55,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5DC8C410198656DA00BF5816"
-            BuildableName = "DrupalCon.app"
-            BlueprintName = "DrupalCon"
+            BlueprintIdentifier = "288C5ED71E6D9E4A00F07CB4"
+            BuildableName = "Connfa.app"
+            BlueprintName = "Connfa"
             ReferencedContainer = "container:DrupalCon.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -74,9 +74,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "5DC8C410198656DA00BF5816"
-            BuildableName = "DrupalCon.app"
-            BlueprintName = "DrupalCon"
+            BlueprintIdentifier = "288C5ED71E6D9E4A00F07CB4"
+            BuildableName = "Connfa.app"
+            BlueprintName = "Connfa"
             ReferencedContainer = "container:DrupalCon.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

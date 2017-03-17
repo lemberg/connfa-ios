@@ -5,7 +5,7 @@
 
 + (NSCalendar*)currentGregorianCalendar {
   NSCalendar* gregorian =
-      [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+      [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
   gregorian.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
 
   return gregorian;

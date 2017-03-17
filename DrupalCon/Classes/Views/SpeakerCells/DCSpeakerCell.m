@@ -2,11 +2,13 @@
 #import "DCSpeakerCell.h"
 #import "UIImageView+DC.h"
 #import "UIImageView+WebCache.h"
-#import "DCSpeaker.h"
+#import "DCConstants.h"
+#import "DCFontItem.h"
 
 @interface DCSpeakerCell()
 @property(nonatomic, weak) DCSpeaker *currentSpeaker;
 @end
+
 
 @implementation DCSpeakerCell
 
@@ -23,6 +25,8 @@
   [super awakeFromNib];
   [self setSpeaker:self.currentSpeaker];
   [_pictureImg cutCircle];
+  [self setCustomFonts];
+  [self layoutIfNeeded];
 }
 
 - (void)setSpeaker:(DCSpeaker*)speaker; {
@@ -70,6 +74,14 @@
   CGFloat preferredWidth = [UIScreen mainScreen].bounds.size.width - 85;
   self.nameLbl.preferredMaxLayoutWidth = preferredWidth;
   self.positionTitleLbl.preferredMaxLayoutWidth = preferredWidth;
+}
+
+- (void)setCustomFonts {
+
+  DCFontItem *fonts = [DCConstants appFonts].firstObject;
+  
+  self.nameLbl.font = [UIFont fontWithName:fonts.nameFont size:self.nameLbl.font.pointSize];
+  self.positionTitleLbl.font = [UIFont fontWithName:fonts.descriptionFont size:self.positionTitleLbl.font.pointSize];
 }
 
 - (NSString*)positionTitleForSpeaker:(DCSpeaker*)speaker {

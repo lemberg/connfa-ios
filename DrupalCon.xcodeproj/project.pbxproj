@@ -7,167 +7,187 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		283058551E76DB140059E5A7 /* DrupalCon-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 283058541E76DB140059E5A7 /* DrupalCon-Info.plist */; };
-		283A1F351CB4E5B5007F6BCB /* (null) in Resources */ = {isa = PBXBuildFile; };
-		5DC8C415198656DA00BF5816 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C414198656DA00BF5816 /* Foundation.framework */; };
-		5DC8C417198656DA00BF5816 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C416198656DA00BF5816 /* CoreGraphics.framework */; };
-		5DC8C419198656DA00BF5816 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C418198656DA00BF5816 /* UIKit.framework */; };
-		74356D5219BEE1D90055F13D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74356D5119BEE1D90055F13D /* SystemConfiguration.framework */; };
-		74A470E819B5EA3C00B01BC5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74A470E719B5EA3C00B01BC5 /* MapKit.framework */; };
-		74E67C7719B6FEF500DF9D71 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74E67C7619B6FEF500DF9D71 /* CoreLocation.framework */; };
-		842B5E631AC579C2009614A5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 842B5E621AC579C2009614A5 /* libz.dylib */; };
-		842B5E651AC579D0009614A5 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 842B5E641AC579D0009614A5 /* AdSupport.framework */; };
-		849EFDDB19A4ACB800C43E05 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849EFDDA19A4ACB800C43E05 /* CoreData.framework */; };
-		A06091171CD0BF1A00B8C2FD /* DCSocialMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A06091161CD0BF1A00B8C2FD /* DCSocialMediaViewController.m */; };
-		A06091301CD0E13500B8C2FD /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A060912D1CD0E13500B8C2FD /* TwitterKit.framework */; };
-		A06091311CD0E13500B8C2FD /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A060912E1CD0E13500B8C2FD /* TwitterKitResources.bundle */; };
-		A06091321CD0E13500B8C2FD /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A060912F1CD0E13500B8C2FD /* TwitterCore.framework */; };
-		A6580B7D1C5F60F5001B0D62 /* DCAlertsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6580B7C1C5F60F5001B0D62 /* DCAlertsManager.m */; };
-		A66BD0BF1C5BBAB700C568EE /* UIAlertView+DCWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A66BD0BE1C5BBAB700C568EE /* UIAlertView+DCWrapper.m */; };
-		A678FD441C03590B00F24105 /* main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A678FD421C03590B00F24105 /* main.xcdatamodeld */; };
-		A678FD481C03666600F24105 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A678FD471C03666600F24105 /* Reachability.m */; };
-		A678FD511C0366AF00F24105 /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A678FD4C1C0366AF00F24105 /* MFSideMenuContainerViewController.m */; };
-		A678FD521C0366AF00F24105 /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = A678FD4E1C0366AF00F24105 /* MFSideMenuShadow.m */; };
-		A678FD531C0366AF00F24105 /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A678FD501C0366AF00F24105 /* UIViewController+MFSideMenuAdditions.m */; };
-		A68AE7C11C626470002E862D /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A68AE7BE1C626470002E862D /* OpenSans-Bold.ttf */; };
-		A68AE7C21C626470002E862D /* OpenSans-CondBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A68AE7BF1C626470002E862D /* OpenSans-CondBold.ttf */; };
-		A68AE7C31C626470002E862D /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A68AE7C01C626470002E862D /* OpenSans-Regular.ttf */; };
-		A690C2AE1BFDDD2400DC5EB8 /* DC-Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2111BF4E9C60093AD65 /* DC-Images.xcassets */; };
-		A6C5F2571BF4E9C60093AD65 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F0F61BF4E9C50093AD65 /* AppDelegate.m */; };
-		A6C5F2591BF4E9C60093AD65 /* DCAppFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F0F91BF4E9C50093AD65 /* DCAppFacade.m */; };
-		A6C5F25B1BF4E9C60093AD65 /* DCEventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F0FD1BF4E9C50093AD65 /* DCEventDetailViewController.m */; };
-		A6C5F2611BF4E9C60093AD65 /* DCDayEventsController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1071BF4E9C50093AD65 /* DCDayEventsController.m */; };
-		A6C5F2631BF4E9C60093AD65 /* DCDayEventsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1091BF4E9C50093AD65 /* DCDayEventsDataSource.m */; };
-		A6C5F2651BF4E9C60093AD65 /* DCEventDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F10C1BF4E9C50093AD65 /* DCEventDataSource.m */; };
-		A6C5F2671BF4E9C60093AD65 /* DCFavoriteEventsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F10F1BF4E9C50093AD65 /* DCFavoriteEventsDataSource.m */; };
-		A6C5F2691BF4E9C60093AD65 /* DCEventStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1121BF4E9C50093AD65 /* DCEventStrategy.m */; };
-		A6C5F26B1BF4E9C60093AD65 /* DCProgramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1141BF4E9C50093AD65 /* DCProgramViewController.m */; };
-		A6C5F26D1BF4E9C60093AD65 /* DCSpeakersDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1171BF4E9C50093AD65 /* DCSpeakersDetailViewController.m */; };
-		A6C5F26F1BF4E9C60093AD65 /* DCSpeakersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1191BF4E9C50093AD65 /* DCSpeakersViewController.m */; };
-		A6C5F2711BF4E9C60093AD65 /* DCAppConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F11D1BF4E9C50093AD65 /* DCAppConfiguration.m */; };
-		A6C5F2731BF4E9C60093AD65 /* NSArray+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1201BF4E9C50093AD65 /* NSArray+DC.m */; };
-		A6C5F2751BF4E9C60093AD65 /* NSDictionary+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1221BF4E9C50093AD65 /* NSDictionary+DC.m */; };
-		A6C5F2771BF4E9C60093AD65 /* UIColor+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1251BF4E9C50093AD65 /* UIColor+Helper.m */; };
-		A6C5F2791BF4E9C60093AD65 /* NSFileManager+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1281BF4E9C50093AD65 /* NSFileManager+DC.m */; };
-		A6C5F27B1BF4E9C60093AD65 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F12A1BF4E9C50093AD65 /* NSString+HTML.m */; };
-		A6C5F27D1BF4E9C60093AD65 /* NSUserDefaults+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F12C1BF4E9C50093AD65 /* NSUserDefaults+DC.m */; };
-		A6C5F27F1BF4E9C60093AD65 /* DCDateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F12F1BF4E9C50093AD65 /* DCDateHelper.m */; };
-		A6C5F2811BF4E9C60093AD65 /* NSCalendar+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1311BF4E9C50093AD65 /* NSCalendar+DC.m */; };
-		A6C5F2831BF4E9C60093AD65 /* NSDate+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1331BF4E9C50093AD65 /* NSDate+DC.m */; };
-		A6C5F2851BF4E9C60093AD65 /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1361BF4E9C50093AD65 /* UIImage+Extension.m */; };
-		A6C5F2871BF4E9C60093AD65 /* UIImageView+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1381BF4E9C50093AD65 /* UIImageView+DC.m */; };
-		A6C5F2891BF4E9C60093AD65 /* NSManagedObject+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F13B1BF4E9C50093AD65 /* NSManagedObject+DC.m */; };
-		A6C5F28D1BF4E9C60093AD65 /* UIWebView+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1411BF4E9C50093AD65 /* UIWebView+DC.m */; };
-		A6C5F28F1BF4E9C60093AD65 /* DCHousePlan.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1451BF4E9C50093AD65 /* DCHousePlan.m */; };
-		A6C5F2911BF4E9C60093AD65 /* DCLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1471BF4E9C50093AD65 /* DCLocation.m */; };
-		A6C5F2951BF4E9C60093AD65 /* DCAppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F14C1BF4E9C50093AD65 /* DCAppSettings.m */; };
-		A6C5F2971BF4E9C60093AD65 /* DCAppSettings+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F14F1BF4E9C50093AD65 /* DCAppSettings+DC.m */; };
-		A6C5F2991BF4E9C60093AD65 /* DCBof+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1511BF4E9C50093AD65 /* DCBof+DC.m */; };
-		A6C5F29B1BF4E9C60093AD65 /* DCEvent+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1531BF4E9C50093AD65 /* DCEvent+DC.m */; };
-		A6C5F29D1BF4E9C60093AD65 /* DCHousePlan+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1551BF4E9C50093AD65 /* DCHousePlan+DC.m */; };
-		A6C5F29F1BF4E9C60093AD65 /* DCInfo+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1571BF4E9C50093AD65 /* DCInfo+DC.m */; };
-		A6C5F2A11BF4E9C60093AD65 /* DCInfoCategory+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1591BF4E9C50093AD65 /* DCInfoCategory+DC.m */; };
-		A6C5F2A31BF4E9C60093AD65 /* DCLevel+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F15B1BF4E9C50093AD65 /* DCLevel+DC.m */; };
-		A6C5F2A51BF4E9C60093AD65 /* DCLocation+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F15D1BF4E9C50093AD65 /* DCLocation+DC.m */; };
-		A6C5F2A71BF4E9C60093AD65 /* DCMainEvent+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F15F1BF4E9C50093AD65 /* DCMainEvent+DC.m */; };
-		A6C5F2A91BF4E9C60093AD65 /* DCPoi+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1621BF4E9C50093AD65 /* DCPoi+DC.m */; };
-		A6C5F2AB1BF4E9C60093AD65 /* DCSocialEvent+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1641BF4E9C50093AD65 /* DCSocialEvent+DC.m */; };
-		A6C5F2AD1BF4E9C60093AD65 /* DCSpeaker+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1661BF4E9C50093AD65 /* DCSpeaker+DC.m */; };
-		A6C5F2AF1BF4E9C60093AD65 /* DCTime+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1681BF4E9C50093AD65 /* DCTime+DC.m */; };
-		A6C5F2B11BF4E9C60093AD65 /* DCTimeRange+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F16A1BF4E9C50093AD65 /* DCTimeRange+DC.m */; };
-		A6C5F2B31BF4E9C60093AD65 /* DCTrack+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F16C1BF4E9C50093AD65 /* DCTrack+DC.m */; };
-		A6C5F2B71BF4E9C60093AD65 /* DCType+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1701BF4E9C50093AD65 /* DCType+DC.m */; };
-		A6C5F2B91BF4E9C60093AD65 /* DCBof.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1741BF4E9C50093AD65 /* DCBof.m */; };
-		A6C5F2BB1BF4E9C60093AD65 /* DCEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1761BF4E9C50093AD65 /* DCEvent.m */; };
-		A6C5F2BD1BF4E9C60093AD65 /* DCMainEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1781BF4E9C50093AD65 /* DCMainEvent.m */; };
-		A6C5F2BF1BF4E9C60093AD65 /* DCSocialEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F17A1BF4E9C50093AD65 /* DCSocialEvent.m */; };
-		A6C5F2C11BF4E9C60093AD65 /* DCLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F17D1BF4E9C50093AD65 /* DCLevel.m */; };
-		A6C5F2C31BF4E9C60093AD65 /* DCSpeaker.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1801BF4E9C50093AD65 /* DCSpeaker.m */; };
-		A6C5F2C51BF4E9C60093AD65 /* DCTime.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1831BF4E9C50093AD65 /* DCTime.m */; };
-		A6C5F2C71BF4E9C60093AD65 /* DCTimeRange.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1851BF4E9C50093AD65 /* DCTimeRange.m */; };
-		A6C5F2C91BF4E9C60093AD65 /* DCTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1881BF4E9C50093AD65 /* DCTrack.m */; };
-		A6C5F2CB1BF4E9C60093AD65 /* DCType.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F18B1BF4E9C50093AD65 /* DCType.m */; };
-		A6C5F2CD1BF4E9C60093AD65 /* DCInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F18E1BF4E9C50093AD65 /* DCInfo.m */; };
-		A6C5F2CF1BF4E9C60093AD65 /* DCInfoCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1901BF4E9C50093AD65 /* DCInfoCategory.m */; };
-		A6C5F2D11BF4E9C60093AD65 /* DCPoi.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1921BF4E9C50093AD65 /* DCPoi.m */; };
-		A6C5F2D51BF4E9C60093AD65 /* DCCalendarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1991BF4E9C50093AD65 /* DCCalendarManager.m */; };
-		A6C5F2D71BF4E9C60093AD65 /* DCCoreDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F19C1BF4E9C50093AD65 /* DCCoreDataStore.m */; };
-		A6C5F2D91BF4E9C60093AD65 /* DCImportDataSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F19F1BF4E9C50093AD65 /* DCImportDataSevice.m */; };
-		A6C5F2DB1BF4E9C60093AD65 /* DCParserService.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1A11BF4E9C50093AD65 /* DCParserService.m */; };
-		A6C5F2DD1BF4E9C60093AD65 /* DCMainProxy+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1A41BF4E9C50093AD65 /* DCMainProxy+Additions.m */; };
-		A6C5F2DF1BF4E9C60093AD65 /* DCMainProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1A61BF4E9C50093AD65 /* DCMainProxy.m */; };
-		A6C5F2E11BF4E9C60093AD65 /* DCWebService.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1A91BF4E9C50093AD65 /* DCWebService.m */; };
-		A6C5F2E31BF4E9C60093AD65 /* DCBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1AF1BF4E9C50093AD65 /* DCBaseViewController.m */; };
-		A6C5F2E51BF4E9C60093AD65 /* DCLimitedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1B11BF4E9C50093AD65 /* DCLimitedNavigationController.m */; };
-		A6C5F2E71BF4E9C60093AD65 /* DCEventFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1B41BF4E9C50093AD65 /* DCEventFilterCell.m */; };
-		A6C5F2E91BF4E9C60093AD65 /* DCEventFilterHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1B61BF4E9C50093AD65 /* DCEventFilterHeaderCell.m */; };
-		A6C5F2EB1BF4E9C60093AD65 /* DCFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1B81BF4E9C50093AD65 /* DCFilterViewController.m */; };
-		A6C5F2ED1BF4E9C60093AD65 /* DCAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1BB1BF4E9C50093AD65 /* DCAboutViewController.m */; };
-		A6C5F2EF1BF4E9C60093AD65 /* DCInfoMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1BD1BF4E9C50093AD65 /* DCInfoMenuCell.m */; };
-		A6C5F2F11BF4E9C60093AD65 /* DCInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1BF1BF4E9C50093AD65 /* DCInfoViewController.m */; };
-		A6C5F2F31BF4E9C60093AD65 /* DCLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1C21BF4E9C50093AD65 /* DCLocationViewController.m */; };
-		A6C5F2F51BF4E9C60093AD65 /* DCPin.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1C41BF4E9C50093AD65 /* DCPin.m */; };
-		A6C5F2F71BF4E9C60093AD65 /* DCFirstLoadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1C71BF4E9C50093AD65 /* DCFirstLoadViewController.m */; };
-		A6C5F2F91BF4E9C60093AD65 /* DCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1C91BF4E9C50093AD65 /* DCLoginViewController.m */; };
-		A6C5F2FB1BF4E9C60093AD65 /* DCMainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1CC1BF4E9C50093AD65 /* DCMainNavigationController.m */; };
-		A6C5F3031BF4E9C60093AD65 /* DCMenuStoryboardHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1D71BF4E9C50093AD65 /* DCMenuStoryboardHelper.m */; };
-		A6C5F3051BF4E9C60093AD65 /* DCSideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1DA1BF4E9C50093AD65 /* DCSideMenuViewController.m */; };
-		A6C5F3071BF4E9C60093AD65 /* DCFilterCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1DE1BF4E9C50093AD65 /* DCFilterCheckBox.m */; };
-		A6C5F3091BF4E9C60093AD65 /* DCLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1E11BF4E9C50093AD65 /* DCLabel.m */; };
-		A6C5F30B1BF4E9C60093AD65 /* DCTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1E41BF4E9C50093AD65 /* DCTextField.m */; };
-		A6C5F30D1BF4E9C60093AD65 /* DCAppSignMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1E71BF4E9C50093AD65 /* DCAppSignMenuCell.m */; };
-		A6C5F30F1BF4E9C60093AD65 /* DCSideMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1E91BF4E9C50093AD65 /* DCSideMenuCell.m */; };
-		A6C5F31F1BF4E9C60093AD65 /* DCEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1FB1BF4E9C60093AD65 /* DCEventCell.m */; };
-		A6C5F3211BF4E9C60093AD65 /* DCEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F1FC1BF4E9C60093AD65 /* DCEventCell.xib */; };
-		A6C5F3231BF4E9C60093AD65 /* DCInfoEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1FE1BF4E9C60093AD65 /* DCInfoEventCell.m */; };
-		A6C5F3251BF4E9C60093AD65 /* DCProgramHeaderCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2011BF4E9C60093AD65 /* DCProgramHeaderCellView.m */; };
-		A6C5F3271BF4E9C60093AD65 /* DCDescriptionTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2041BF4E9C60093AD65 /* DCDescriptionTextCell.m */; };
-		A6C5F3291BF4E9C60093AD65 /* DCEventDetailHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2061BF4E9C60093AD65 /* DCEventDetailHeaderCell.m */; };
-		A6C5F32B1BF4E9C60093AD65 /* DCSpeakerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2091BF4E9C60093AD65 /* DCSpeakerCell.m */; };
-		A6C5F32D1BF4E9C60093AD65 /* DCSpeakerDetailButtonsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F20B1BF4E9C60093AD65 /* DCSpeakerDetailButtonsCell.m */; };
-		A6C5F32F1BF4E9C60093AD65 /* DCSpeakerEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F20D1BF4E9C60093AD65 /* DCSpeakerEventCell.m */; };
-		A6C5F3311BF4E9C60093AD65 /* DCSpeakerHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F20F1BF4E9C60093AD65 /* DCSpeakerHeaderCell.m */; };
-		A6C5F33D1BF4E9C60093AD65 /* Events.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2171BF4E9C60093AD65 /* Events.storyboard */; };
-		A6C5F33F1BF4E9C60093AD65 /* Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2181BF4E9C60093AD65 /* Info.storyboard */; };
-		A6C5F3411BF4E9C60093AD65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2191BF4E9C60093AD65 /* Main.storyboard */; };
-		A6C5F3431BF4E9C60093AD65 /* Speakers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F21A1BF4E9C60093AD65 /* Speakers.storyboard */; };
-		A6C5F3451BF4E9C60093AD65 /* about_img.png in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F21C1BF4E9C60093AD65 /* about_img.png */; };
-		A6C5F3471BF4E9C60093AD65 /* event_detail_style.css in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F21D1BF4E9C60093AD65 /* event_detail_style.css */; };
-		A6C5F3491BF4E9C60093AD65 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F21E1BF4E9C60093AD65 /* style.css */; };
-		A6C5F34F1BF4E9C60093AD65 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2231BF4E9C60093AD65 /* main.m */; };
-		A6C5F3511BF4E9C60093AD65 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6C5F2261BF4E9C60093AD65 /* Crashlytics.framework */; };
-		A6C5F3531BF4E9C60093AD65 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6C5F2271BF4E9C60093AD65 /* Fabric.framework */; };
-		A6C5F3551BF4E9C60093AD65 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6C5F2331BF4E9C60093AD65 /* libGoogleAnalyticsServices.a */; };
-		A6C5F3571BF4E9C60093AD65 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2351BF4E9C60093AD65 /* LICENSE */; };
-		A6C5F3591BF4E9C60093AD65 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2371BF4E9C60093AD65 /* MKAnnotationView+WebCache.m */; };
-		A6C5F35B1BF4E9C60093AD65 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2391BF4E9C60093AD65 /* NSData+ImageContentType.m */; };
-		A6C5F35D1BF4E9C60093AD65 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F23B1BF4E9C60093AD65 /* SDImageCache.m */; };
-		A6C5F35F1BF4E9C60093AD65 /* SDWebImageCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F23D1BF4E9C60093AD65 /* SDWebImageCompat.m */; };
-		A6C5F3611BF4E9C60093AD65 /* SDWebImageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F23F1BF4E9C60093AD65 /* SDWebImageDecoder.m */; };
-		A6C5F3631BF4E9C60093AD65 /* SDWebImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2411BF4E9C60093AD65 /* SDWebImageDownloader.m */; };
-		A6C5F3651BF4E9C60093AD65 /* SDWebImageDownloaderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2431BF4E9C60093AD65 /* SDWebImageDownloaderOperation.m */; };
-		A6C5F3671BF4E9C60093AD65 /* SDWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2451BF4E9C60093AD65 /* SDWebImageManager.m */; };
-		A6C5F3691BF4E9C60093AD65 /* SDWebImagePrefetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2481BF4E9C60093AD65 /* SDWebImagePrefetcher.m */; };
-		A6C5F36B1BF4E9C60093AD65 /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F24A1BF4E9C60093AD65 /* UIButton+WebCache.m */; };
-		A6C5F36D1BF4E9C60093AD65 /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F24C1BF4E9C60093AD65 /* UIImage+GIF.m */; };
-		A6C5F36F1BF4E9C60093AD65 /* UIImage+MultiFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F24E1BF4E9C60093AD65 /* UIImage+MultiFormat.m */; };
-		A6C5F3711BF4E9C60093AD65 /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2501BF4E9C60093AD65 /* UIImage+WebP.m */; };
-		A6C5F3731BF4E9C60093AD65 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2521BF4E9C60093AD65 /* UIImageView+HighlightedWebCache.m */; };
-		A6C5F3751BF4E9C60093AD65 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2541BF4E9C60093AD65 /* UIImageView+WebCache.m */; };
-		A6C5F3771BF4E9C60093AD65 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2561BF4E9C60093AD65 /* UIView+WebCacheOperation.m */; };
-		A6D12F0E1BF4F04F00B85FD1 /* DC-Theme.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2121BF4E9C60093AD65 /* DC-Theme.bundle */; };
-		A6F456401C6B490900EF3DCD /* (null) in Resources */ = {isa = PBXBuildFile; };
-		F547A7E21D537C3200CD24F2 /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F547A7E11D537C3200CD24F2 /* Montserrat-Regular.otf */; };
-		F547A7E61D54D2FF00CD24F2 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = F547A7E51D54D2FF00CD24F2 /* UIScrollView+EmptyDataSet.m */; };
-		F580ED6C1D0FDE2B00F289F8 /* LESelectedActionSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = F580ED6A1D0FDE2B00F289F8 /* LESelectedActionSheetController.m */; };
-		F580ED6D1D0FDE2B00F289F8 /* LESelectedActionSheetController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F580ED6B1D0FDE2B00F289F8 /* LESelectedActionSheetController.xib */; };
-		F5D072CE1D0844AD00331E07 /* DCFloorPlanController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D072CD1D0844AD00331E07 /* DCFloorPlanController.m */; };
+		287118711E72DFBA00CD0498 /* DCFontItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 282BD3B11E7191A0009763EC /* DCFontItem.m */; };
+		288C5ED91E6D9E4A00F07CB4 /* DCAppSignMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1E71BF4E9C50093AD65 /* DCAppSignMenuCell.m */; };
+		288C5EDA1E6D9E4A00F07CB4 /* NSUserDefaults+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F12C1BF4E9C50093AD65 /* NSUserDefaults+DC.m */; };
+		288C5EDB1E6D9E4A00F07CB4 /* DCBof+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1511BF4E9C50093AD65 /* DCBof+DC.m */; };
+		288C5EDC1E6D9E4A00F07CB4 /* DCSpeaker.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1801BF4E9C50093AD65 /* DCSpeaker.m */; };
+		288C5EDD1E6D9E4A00F07CB4 /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2501BF4E9C60093AD65 /* UIImage+WebP.m */; };
+		288C5EDE1E6D9E4A00F07CB4 /* DCSpeakersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1191BF4E9C50093AD65 /* DCSpeakersViewController.m */; };
+		288C5EDF1E6D9E4A00F07CB4 /* DCLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F17D1BF4E9C50093AD65 /* DCLevel.m */; };
+		288C5EE01E6D9E4A00F07CB4 /* DCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1C91BF4E9C50093AD65 /* DCLoginViewController.m */; };
+		288C5EE11E6D9E4A00F07CB4 /* DCEventFilterCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1B41BF4E9C50093AD65 /* DCEventFilterCell.m */; };
+		288C5EE21E6D9E4A00F07CB4 /* UIWebView+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1411BF4E9C50093AD65 /* UIWebView+DC.m */; };
+		288C5EE31E6D9E4A00F07CB4 /* DCDescriptionTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2041BF4E9C60093AD65 /* DCDescriptionTextCell.m */; };
+		288C5EE41E6D9E4A00F07CB4 /* DCLocation+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F15D1BF4E9C50093AD65 /* DCLocation+DC.m */; };
+		288C5EE51E6D9E4A00F07CB4 /* DCMainEvent+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F15F1BF4E9C50093AD65 /* DCMainEvent+DC.m */; };
+		288C5EE61E6D9E4A00F07CB4 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2541BF4E9C60093AD65 /* UIImageView+WebCache.m */; };
+		288C5EE71E6D9E4A00F07CB4 /* DCTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1881BF4E9C50093AD65 /* DCTrack.m */; };
+		288C5EE81E6D9E4A00F07CB4 /* DCAppSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F14C1BF4E9C50093AD65 /* DCAppSettings.m */; };
+		288C5EE91E6D9E4A00F07CB4 /* DCCalendarManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1991BF4E9C50093AD65 /* DCCalendarManager.m */; };
+		288C5EEA1E6D9E4A00F07CB4 /* DCBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1AF1BF4E9C50093AD65 /* DCBaseViewController.m */; };
+		288C5EEB1E6D9E4A00F07CB4 /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F24C1BF4E9C60093AD65 /* UIImage+GIF.m */; };
+		288C5EEC1E6D9E4A00F07CB4 /* DCAppConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F11D1BF4E9C50093AD65 /* DCAppConfiguration.m */; };
+		288C5EED1E6D9E4A00F07CB4 /* DCLimitedNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1B11BF4E9C50093AD65 /* DCLimitedNavigationController.m */; };
+		288C5EEE1E6D9E4A00F07CB4 /* UIImageView+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1381BF4E9C50093AD65 /* UIImageView+DC.m */; };
+		288C5EEF1E6D9E4A00F07CB4 /* DCEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1761BF4E9C50093AD65 /* DCEvent.m */; };
+		288C5EF01E6D9E4A00F07CB4 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2371BF4E9C60093AD65 /* MKAnnotationView+WebCache.m */; };
+		288C5EF11E6D9E4A00F07CB4 /* DCHousePlan+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1551BF4E9C50093AD65 /* DCHousePlan+DC.m */; };
+		288C5EF21E6D9E4A00F07CB4 /* DCLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1C21BF4E9C50093AD65 /* DCLocationViewController.m */; };
+		288C5EF31E6D9E4A00F07CB4 /* NSDate+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1331BF4E9C50093AD65 /* NSDate+DC.m */; };
+		288C5EF41E6D9E4A00F07CB4 /* DCEventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F0FD1BF4E9C50093AD65 /* DCEventDetailViewController.m */; };
+		288C5EF51E6D9E4A00F07CB4 /* DCFavoriteEventsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F10F1BF4E9C50093AD65 /* DCFavoriteEventsDataSource.m */; };
+		288C5EF61E6D9E4A00F07CB4 /* DCLevel+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F15B1BF4E9C50093AD65 /* DCLevel+DC.m */; };
+		288C5EF71E6D9E4A00F07CB4 /* DCInfoCategory+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1591BF4E9C50093AD65 /* DCInfoCategory+DC.m */; };
+		288C5EF81E6D9E4A00F07CB4 /* DCEvent+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1531BF4E9C50093AD65 /* DCEvent+DC.m */; };
+		288C5EF91E6D9E4A00F07CB4 /* DCTime+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1681BF4E9C50093AD65 /* DCTime+DC.m */; };
+		288C5EFA1E6D9E4A00F07CB4 /* DCSpeakerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2091BF4E9C60093AD65 /* DCSpeakerCell.m */; };
+		288C5EFB1E6D9E4A00F07CB4 /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F24A1BF4E9C60093AD65 /* UIButton+WebCache.m */; };
+		288C5EFC1E6D9E4A00F07CB4 /* LESelectedActionSheetController.m in Sources */ = {isa = PBXBuildFile; fileRef = F580ED6A1D0FDE2B00F289F8 /* LESelectedActionSheetController.m */; };
+		288C5EFD1E6D9E4A00F07CB4 /* DCAppFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F0F91BF4E9C50093AD65 /* DCAppFacade.m */; };
+		288C5EFE1E6D9E4A00F07CB4 /* DCSocialEvent+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1641BF4E9C50093AD65 /* DCSocialEvent+DC.m */; };
+		288C5EFF1E6D9E4A00F07CB4 /* DCType.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F18B1BF4E9C50093AD65 /* DCType.m */; };
+		288C5F001E6D9E4A00F07CB4 /* DCPoi+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1621BF4E9C50093AD65 /* DCPoi+DC.m */; };
+		288C5F011E6D9E4A00F07CB4 /* DCInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F18E1BF4E9C50093AD65 /* DCInfo.m */; };
+		288C5F021E6D9E4A00F07CB4 /* DCMainEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1781BF4E9C50093AD65 /* DCMainEvent.m */; };
+		288C5F031E6D9E4A00F07CB4 /* DCEventDetailHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2061BF4E9C60093AD65 /* DCEventDetailHeaderCell.m */; };
+		288C5F041E6D9E4A00F07CB4 /* NSDictionary+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1221BF4E9C50093AD65 /* NSDictionary+DC.m */; };
+		288C5F051E6D9E4A00F07CB4 /* DCEventDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F10C1BF4E9C50093AD65 /* DCEventDataSource.m */; };
+		288C5F061E6D9E4A00F07CB4 /* DCInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1BF1BF4E9C50093AD65 /* DCInfoViewController.m */; };
+		288C5F071E6D9E4A00F07CB4 /* DCAppSettings+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F14F1BF4E9C50093AD65 /* DCAppSettings+DC.m */; };
+		288C5F081E6D9E4A00F07CB4 /* DCFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1B81BF4E9C50093AD65 /* DCFilterViewController.m */; };
+		288C5F091E6D9E4A00F07CB4 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = A678FD471C03666600F24105 /* Reachability.m */; };
+		288C5F0A1E6D9E4A00F07CB4 /* DCMenuStoryboardHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1D71BF4E9C50093AD65 /* DCMenuStoryboardHelper.m */; };
+		288C5F0B1E6D9E4A00F07CB4 /* UIImage+MultiFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F24E1BF4E9C60093AD65 /* UIImage+MultiFormat.m */; };
+		288C5F0C1E6D9E4A00F07CB4 /* MFSideMenuShadow.m in Sources */ = {isa = PBXBuildFile; fileRef = A678FD4E1C0366AF00F24105 /* MFSideMenuShadow.m */; };
+		288C5F0D1E6D9E4A00F07CB4 /* DCEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1FB1BF4E9C60093AD65 /* DCEventCell.m */; };
+		288C5F0E1E6D9E4A00F07CB4 /* SDWebImageDownloaderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2431BF4E9C60093AD65 /* SDWebImageDownloaderOperation.m */; };
+		288C5F0F1E6D9E4A00F07CB4 /* DCSpeakerEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F20D1BF4E9C60093AD65 /* DCSpeakerEventCell.m */; };
+		288C5F101E6D9E4A00F07CB4 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F23B1BF4E9C60093AD65 /* SDImageCache.m */; };
+		288C5F111E6D9E4A00F07CB4 /* UIViewController+MFSideMenuAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = A678FD501C0366AF00F24105 /* UIViewController+MFSideMenuAdditions.m */; };
+		288C5F121E6D9E4A00F07CB4 /* SDWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2451BF4E9C60093AD65 /* SDWebImageManager.m */; };
+		288C5F131E6D9E4A00F07CB4 /* DCType+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1701BF4E9C50093AD65 /* DCType+DC.m */; };
+		288C5F141E6D9E4A00F07CB4 /* DCSideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1DA1BF4E9C50093AD65 /* DCSideMenuViewController.m */; };
+		288C5F151E6D9E4A00F07CB4 /* DCCoreDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F19C1BF4E9C50093AD65 /* DCCoreDataStore.m */; };
+		288C5F161E6D9E4A00F07CB4 /* DCTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1E41BF4E9C50093AD65 /* DCTextField.m */; };
+		288C5F171E6D9E4A00F07CB4 /* DCInfoCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1901BF4E9C50093AD65 /* DCInfoCategory.m */; };
+		288C5F181E6D9E4A00F07CB4 /* DCSpeakerDetailButtonsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F20B1BF4E9C60093AD65 /* DCSpeakerDetailButtonsCell.m */; };
+		288C5F191E6D9E4A00F07CB4 /* DCWebService.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1A91BF4E9C50093AD65 /* DCWebService.m */; };
+		288C5F1A1E6D9E4A00F07CB4 /* UIAlertView+DCWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A66BD0BE1C5BBAB700C568EE /* UIAlertView+DCWrapper.m */; };
+		288C5F1B1E6D9E4A00F07CB4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2231BF4E9C60093AD65 /* main.m */; };
+		288C5F1C1E6D9E4A00F07CB4 /* DCSideMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1E91BF4E9C50093AD65 /* DCSideMenuCell.m */; };
+		288C5F1D1E6D9E4A00F07CB4 /* DCProgramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1141BF4E9C50093AD65 /* DCProgramViewController.m */; };
+		288C5F1E1E6D9E4A00F07CB4 /* DCInfoMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1BD1BF4E9C50093AD65 /* DCInfoMenuCell.m */; };
+		288C5F1F1E6D9E4A00F07CB4 /* NSCalendar+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1311BF4E9C50093AD65 /* NSCalendar+DC.m */; };
+		288C5F201E6D9E4A00F07CB4 /* SDWebImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2411BF4E9C60093AD65 /* SDWebImageDownloader.m */; };
+		288C5F211E6D9E4A00F07CB4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F0F61BF4E9C50093AD65 /* AppDelegate.m */; };
+		288C5F221E6D9E4A00F07CB4 /* DCFirstLoadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1C71BF4E9C50093AD65 /* DCFirstLoadViewController.m */; };
+		288C5F231E6D9E4A00F07CB4 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2391BF4E9C60093AD65 /* NSData+ImageContentType.m */; };
+		288C5F241E6D9E4A00F07CB4 /* DCAlertsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A6580B7C1C5F60F5001B0D62 /* DCAlertsManager.m */; };
+		288C5F251E6D9E4A00F07CB4 /* DCPin.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1C41BF4E9C50093AD65 /* DCPin.m */; };
+		288C5F261E6D9E4A00F07CB4 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = F547A7E51D54D2FF00CD24F2 /* UIScrollView+EmptyDataSet.m */; };
+		288C5F271E6D9E4A00F07CB4 /* DCTime.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1831BF4E9C50093AD65 /* DCTime.m */; };
+		288C5F281E6D9E4A00F07CB4 /* DCDayEventsDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1091BF4E9C50093AD65 /* DCDayEventsDataSource.m */; };
+		288C5F291E6D9E4A00F07CB4 /* DCFilterCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1DE1BF4E9C50093AD65 /* DCFilterCheckBox.m */; };
+		288C5F2A1E6D9E4A00F07CB4 /* NSManagedObject+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F13B1BF4E9C50093AD65 /* NSManagedObject+DC.m */; };
+		288C5F2B1E6D9E4A00F07CB4 /* DCProgramHeaderCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2011BF4E9C60093AD65 /* DCProgramHeaderCellView.m */; };
+		288C5F2C1E6D9E4A00F07CB4 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2561BF4E9C60093AD65 /* UIView+WebCacheOperation.m */; };
+		288C5F2D1E6D9E4A00F07CB4 /* DCFloorPlanController.m in Sources */ = {isa = PBXBuildFile; fileRef = F5D072CD1D0844AD00331E07 /* DCFloorPlanController.m */; };
+		288C5F2E1E6D9E4A00F07CB4 /* DCInfo+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1571BF4E9C50093AD65 /* DCInfo+DC.m */; };
+		288C5F2F1E6D9E4A00F07CB4 /* SDWebImagePrefetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2481BF4E9C60093AD65 /* SDWebImagePrefetcher.m */; };
+		288C5F301E6D9E4A00F07CB4 /* DCEventFilterHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1B61BF4E9C50093AD65 /* DCEventFilterHeaderCell.m */; };
+		288C5F311E6D9E4A00F07CB4 /* DCHousePlan.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1451BF4E9C50093AD65 /* DCHousePlan.m */; };
+		288C5F321E6D9E4A00F07CB4 /* UIColor+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1251BF4E9C50093AD65 /* UIColor+Helper.m */; };
+		288C5F331E6D9E4A00F07CB4 /* DCSocialMediaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A06091161CD0BF1A00B8C2FD /* DCSocialMediaViewController.m */; };
+		288C5F341E6D9E4A00F07CB4 /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1361BF4E9C50093AD65 /* UIImage+Extension.m */; };
+		288C5F351E6D9E4A00F07CB4 /* DCDateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F12F1BF4E9C50093AD65 /* DCDateHelper.m */; };
+		288C5F361E6D9E4A00F07CB4 /* NSArray+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1201BF4E9C50093AD65 /* NSArray+DC.m */; };
+		288C5F371E6D9E4A00F07CB4 /* DCSpeakersDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1171BF4E9C50093AD65 /* DCSpeakersDetailViewController.m */; };
+		288C5F381E6D9E4A00F07CB4 /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A678FD4C1C0366AF00F24105 /* MFSideMenuContainerViewController.m */; };
+		288C5F391E6D9E4A00F07CB4 /* SDWebImageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F23F1BF4E9C60093AD65 /* SDWebImageDecoder.m */; };
+		288C5F3A1E6D9E4A00F07CB4 /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F12A1BF4E9C50093AD65 /* NSString+HTML.m */; };
+		288C5F3B1E6D9E4A00F07CB4 /* DCParserService.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1A11BF4E9C50093AD65 /* DCParserService.m */; };
+		288C5F3C1E6D9E4A00F07CB4 /* DCAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1BB1BF4E9C50093AD65 /* DCAboutViewController.m */; };
+		288C5F3D1E6D9E4A00F07CB4 /* DCPoi.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1921BF4E9C50093AD65 /* DCPoi.m */; };
+		288C5F3E1E6D9E4A00F07CB4 /* DCMainProxy+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1A41BF4E9C50093AD65 /* DCMainProxy+Additions.m */; };
+		288C5F3F1E6D9E4A00F07CB4 /* DCSpeaker+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1661BF4E9C50093AD65 /* DCSpeaker+DC.m */; };
+		288C5F401E6D9E4A00F07CB4 /* DCLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1E11BF4E9C50093AD65 /* DCLabel.m */; };
+		288C5F411E6D9E4A00F07CB4 /* DCSocialEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F17A1BF4E9C50093AD65 /* DCSocialEvent.m */; };
+		288C5F421E6D9E4A00F07CB4 /* DCDayEventsController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1071BF4E9C50093AD65 /* DCDayEventsController.m */; };
+		288C5F431E6D9E4A00F07CB4 /* DCTrack+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F16C1BF4E9C50093AD65 /* DCTrack+DC.m */; };
+		288C5F441E6D9E4A00F07CB4 /* NSFileManager+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1281BF4E9C50093AD65 /* NSFileManager+DC.m */; };
+		288C5F451E6D9E4A00F07CB4 /* SDWebImageCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F23D1BF4E9C60093AD65 /* SDWebImageCompat.m */; };
+		288C5F461E6D9E4A00F07CB4 /* DCMainProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1A61BF4E9C50093AD65 /* DCMainProxy.m */; };
+		288C5F471E6D9E4A00F07CB4 /* DCImportDataSevice.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F19F1BF4E9C50093AD65 /* DCImportDataSevice.m */; };
+		288C5F481E6D9E4A00F07CB4 /* main.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A678FD421C03590B00F24105 /* main.xcdatamodeld */; };
+		288C5F491E6D9E4A00F07CB4 /* DCGoldSponsorBannerHeandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 289301521E3770F300BB933B /* DCGoldSponsorBannerHeandler.m */; };
+		288C5F4A1E6D9E4A00F07CB4 /* DCEventStrategy.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1121BF4E9C50093AD65 /* DCEventStrategy.m */; };
+		288C5F4B1E6D9E4A00F07CB4 /* DCBof.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1741BF4E9C50093AD65 /* DCBof.m */; };
+		288C5F4C1E6D9E4A00F07CB4 /* DCTimeRange+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F16A1BF4E9C50093AD65 /* DCTimeRange+DC.m */; };
+		288C5F4D1E6D9E4A00F07CB4 /* DCMainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1CC1BF4E9C50093AD65 /* DCMainNavigationController.m */; };
+		288C5F4E1E6D9E4A00F07CB4 /* DCInfoEventCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1FE1BF4E9C60093AD65 /* DCInfoEventCell.m */; };
+		288C5F4F1E6D9E4A00F07CB4 /* DCTimeRange.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1851BF4E9C50093AD65 /* DCTimeRange.m */; };
+		288C5F501E6D9E4A00F07CB4 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2521BF4E9C60093AD65 /* UIImageView+HighlightedWebCache.m */; };
+		288C5F511E6D9E4A00F07CB4 /* DCLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1471BF4E9C50093AD65 /* DCLocation.m */; };
+		288C5F521E6D9E4A00F07CB4 /* DCSpeakerHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F20F1BF4E9C60093AD65 /* DCSpeakerHeaderCell.m */; };
+		288C5F541E6D9E4A00F07CB4 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 842B5E641AC579D0009614A5 /* AdSupport.framework */; };
+		288C5F551E6D9E4A00F07CB4 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 842B5E621AC579C2009614A5 /* libz.dylib */; };
+		288C5F561E6D9E4A00F07CB4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74356D5119BEE1D90055F13D /* SystemConfiguration.framework */; };
+		288C5F571E6D9E4A00F07CB4 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74E67C7619B6FEF500DF9D71 /* CoreLocation.framework */; };
+		288C5F581E6D9E4A00F07CB4 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74A470E719B5EA3C00B01BC5 /* MapKit.framework */; };
+		288C5F591E6D9E4A00F07CB4 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 849EFDDA19A4ACB800C43E05 /* CoreData.framework */; };
+		288C5F5A1E6D9E4A00F07CB4 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6C5F2261BF4E9C60093AD65 /* Crashlytics.framework */; };
+		288C5F5B1E6D9E4A00F07CB4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C416198656DA00BF5816 /* CoreGraphics.framework */; };
+		288C5F5C1E6D9E4A00F07CB4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C418198656DA00BF5816 /* UIKit.framework */; };
+		288C5F5D1E6D9E4A00F07CB4 /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A060912F1CD0E13500B8C2FD /* TwitterCore.framework */; };
+		288C5F5E1E6D9E4A00F07CB4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC8C414198656DA00BF5816 /* Foundation.framework */; };
+		288C5F5F1E6D9E4A00F07CB4 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6C5F2271BF4E9C60093AD65 /* Fabric.framework */; };
+		288C5F601E6D9E4A00F07CB4 /* TwitterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A060912D1CD0E13500B8C2FD /* TwitterKit.framework */; };
+		288C5F611E6D9E4A00F07CB4 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A6C5F2331BF4E9C60093AD65 /* libGoogleAnalyticsServices.a */; };
+		288C5F631E6D9E4A00F07CB4 /* Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2181BF4E9C60093AD65 /* Info.storyboard */; };
+		288C5F651E6D9E4A00F07CB4 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A060912E1CD0E13500B8C2FD /* TwitterKitResources.bundle */; };
+		288C5F661E6D9E4A00F07CB4 /* Montserrat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F547A7E11D537C3200CD24F2 /* Montserrat-Regular.otf */; };
+		288C5F671E6D9E4A00F07CB4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2191BF4E9C60093AD65 /* Main.storyboard */; };
+		288C5F691E6D9E4A00F07CB4 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		288C5F6A1E6D9E4A00F07CB4 /* OpenSans-CondBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A68AE7BF1C626470002E862D /* OpenSans-CondBold.ttf */; };
+		288C5F6B1E6D9E4A00F07CB4 /* Speakers.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F21A1BF4E9C60093AD65 /* Speakers.storyboard */; };
+		288C5F6C1E6D9E4A00F07CB4 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2351BF4E9C60093AD65 /* LICENSE */; };
+		288C5F6D1E6D9E4A00F07CB4 /* ImageStorage.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 289301541E3770FD00BB933B /* ImageStorage.xcassets */; };
+		288C5F6E1E6D9E4A00F07CB4 /* LESelectedActionSheetController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F580ED6B1D0FDE2B00F289F8 /* LESelectedActionSheetController.xib */; };
+		288C5F701E6D9E4A00F07CB4 /* Events.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F2171BF4E9C60093AD65 /* Events.storyboard */; };
+		288C5F721E6D9E4A00F07CB4 /* (null) in Resources */ = {isa = PBXBuildFile; };
+		288C5F731E6D9E4A00F07CB4 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A68AE7C01C626470002E862D /* OpenSans-Regular.ttf */; };
+		288C5F741E6D9E4A00F07CB4 /* DCEventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6C5F1FC1BF4E9C60093AD65 /* DCEventCell.xib */; };
+		288C5F751E6D9E4A00F07CB4 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A68AE7BE1C626470002E862D /* OpenSans-Bold.ttf */; };
+		288C5FAF1E6D9E8C00F07CB4 /* DCConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 288C5FA61E6D9E8C00F07CB4 /* DCConstants.m */; };
+		288C5FB11E6D9E8C00F07CB4 /* DC-Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 288C5FA91E6D9E8C00F07CB4 /* DC-Images.xcassets */; };
+		288C5FB21E6D9E8C00F07CB4 /* DC-Theme.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 288C5FAA1E6D9E8C00F07CB4 /* DC-Theme.bundle */; };
+		288C5FB31E6D9E8C00F07CB4 /* about_img.png in Resources */ = {isa = PBXBuildFile; fileRef = 288C5FAC1E6D9E8C00F07CB4 /* about_img.png */; };
+		288C5FB41E6D9E8C00F07CB4 /* event_detail_style.css in Resources */ = {isa = PBXBuildFile; fileRef = 288C5FAD1E6D9E8C00F07CB4 /* event_detail_style.css */; };
+		288C5FB51E6D9E8C00F07CB4 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 288C5FAE1E6D9E8C00F07CB4 /* style.css */; };
+		288C5FB91E6D9F2900F07CB4 /* Connfa-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 288C5FB81E6D9F2900F07CB4 /* Connfa-Info.plist */; };
+		288C5FBE1E6D9FBA00F07CB4 /* DCMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 288C5FBB1E6D9FBA00F07CB4 /* DCMenuItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		283058541E76DB140059E5A7 /* DrupalCon-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "DrupalCon-Info.plist"; sourceTree = "<group>"; };
+		282910E81E7BD0C500BD6A4D /* Connfa-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Connfa-Prefix.pch"; sourceTree = "<group>"; };
+		282BD3B01E7191A0009763EC /* DCFontItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCFontItem.h; sourceTree = "<group>"; };
+		282BD3B11E7191A0009763EC /* DCFontItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCFontItem.m; sourceTree = "<group>"; };
+		288C5F7C1E6D9E4A00F07CB4 /* Connfa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Connfa.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		288C5FA61E6D9E8C00F07CB4 /* DCConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCConstants.m; sourceTree = "<group>"; };
+		288C5FA91E6D9E8C00F07CB4 /* DC-Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "DC-Images.xcassets"; sourceTree = "<group>"; };
+		288C5FAA1E6D9E8C00F07CB4 /* DC-Theme.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "DC-Theme.bundle"; sourceTree = "<group>"; };
+		288C5FAC1E6D9E8C00F07CB4 /* about_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_img.png; sourceTree = "<group>"; };
+		288C5FAD1E6D9E8C00F07CB4 /* event_detail_style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = event_detail_style.css; sourceTree = "<group>"; };
+		288C5FAE1E6D9E8C00F07CB4 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
+		288C5FB81E6D9F2900F07CB4 /* Connfa-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Connfa-Info.plist"; sourceTree = "<group>"; };
+		288C5FBA1E6D9FB900F07CB4 /* DCMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCMenuItem.h; sourceTree = "<group>"; };
+		288C5FBB1E6D9FBA00F07CB4 /* DCMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCMenuItem.m; sourceTree = "<group>"; };
+		288C5FBF1E6D9FE100F07CB4 /* DCConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCConstants.h; sourceTree = "<group>"; };
+		289301511E3770F300BB933B /* DCGoldSponsorBannerHeandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCGoldSponsorBannerHeandler.h; sourceTree = "<group>"; };
+		289301521E3770F300BB933B /* DCGoldSponsorBannerHeandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCGoldSponsorBannerHeandler.m; sourceTree = "<group>"; };
+		289301541E3770FD00BB933B /* ImageStorage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImageStorage.xcassets; sourceTree = "<group>"; };
 		565951671CFDB497002158F5 /* main_2. 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "main_2. 2.xcdatamodel"; sourceTree = "<group>"; };
-		5DC8C411198656DA00BF5816 /* DrupalCon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DrupalCon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DC8C414198656DA00BF5816 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5DC8C416198656DA00BF5816 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		5DC8C418198656DA00BF5816 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -390,16 +410,10 @@
 		A6C5F20D1BF4E9C60093AD65 /* DCSpeakerEventCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCSpeakerEventCell.m; sourceTree = "<group>"; };
 		A6C5F20E1BF4E9C60093AD65 /* DCSpeakerHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCSpeakerHeaderCell.h; sourceTree = "<group>"; };
 		A6C5F20F1BF4E9C60093AD65 /* DCSpeakerHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCSpeakerHeaderCell.m; sourceTree = "<group>"; };
-		A6C5F2111BF4E9C60093AD65 /* DC-Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "DC-Images.xcassets"; sourceTree = "<group>"; };
-		A6C5F2121BF4E9C60093AD65 /* DC-Theme.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "DC-Theme.bundle"; sourceTree = "<group>"; };
 		A6C5F2171BF4E9C60093AD65 /* Events.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Events.storyboard; sourceTree = "<group>"; };
 		A6C5F2181BF4E9C60093AD65 /* Info.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Info.storyboard; sourceTree = "<group>"; };
 		A6C5F2191BF4E9C60093AD65 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		A6C5F21A1BF4E9C60093AD65 /* Speakers.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Speakers.storyboard; sourceTree = "<group>"; };
-		A6C5F21C1BF4E9C60093AD65 /* about_img.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = about_img.png; sourceTree = "<group>"; };
-		A6C5F21D1BF4E9C60093AD65 /* event_detail_style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = event_detail_style.css; sourceTree = "<group>"; };
-		A6C5F21E1BF4E9C60093AD65 /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
-		A6C5F2211BF4E9C60093AD65 /* DrupalCon-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DrupalCon-Prefix.pch"; sourceTree = "<group>"; };
 		A6C5F2231BF4E9C60093AD65 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A6C5F2261BF4E9C60093AD65 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		A6C5F2271BF4E9C60093AD65 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
@@ -460,34 +474,91 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		5DC8C40E198656DA00BF5816 /* Frameworks */ = {
+		288C5F531E6D9E4A00F07CB4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				842B5E651AC579D0009614A5 /* AdSupport.framework in Frameworks */,
-				842B5E631AC579C2009614A5 /* libz.dylib in Frameworks */,
-				74356D5219BEE1D90055F13D /* SystemConfiguration.framework in Frameworks */,
-				74E67C7719B6FEF500DF9D71 /* CoreLocation.framework in Frameworks */,
-				74A470E819B5EA3C00B01BC5 /* MapKit.framework in Frameworks */,
-				849EFDDB19A4ACB800C43E05 /* CoreData.framework in Frameworks */,
-				A6C5F3511BF4E9C60093AD65 /* Crashlytics.framework in Frameworks */,
-				5DC8C417198656DA00BF5816 /* CoreGraphics.framework in Frameworks */,
-				5DC8C419198656DA00BF5816 /* UIKit.framework in Frameworks */,
-				A06091321CD0E13500B8C2FD /* TwitterCore.framework in Frameworks */,
-				5DC8C415198656DA00BF5816 /* Foundation.framework in Frameworks */,
-				A6C5F3531BF4E9C60093AD65 /* Fabric.framework in Frameworks */,
-				A06091301CD0E13500B8C2FD /* TwitterKit.framework in Frameworks */,
-				A6C5F3551BF4E9C60093AD65 /* libGoogleAnalyticsServices.a in Frameworks */,
+				288C5F541E6D9E4A00F07CB4 /* AdSupport.framework in Frameworks */,
+				288C5F551E6D9E4A00F07CB4 /* libz.dylib in Frameworks */,
+				288C5F561E6D9E4A00F07CB4 /* SystemConfiguration.framework in Frameworks */,
+				288C5F571E6D9E4A00F07CB4 /* CoreLocation.framework in Frameworks */,
+				288C5F581E6D9E4A00F07CB4 /* MapKit.framework in Frameworks */,
+				288C5F591E6D9E4A00F07CB4 /* CoreData.framework in Frameworks */,
+				288C5F5A1E6D9E4A00F07CB4 /* Crashlytics.framework in Frameworks */,
+				288C5F5B1E6D9E4A00F07CB4 /* CoreGraphics.framework in Frameworks */,
+				288C5F5C1E6D9E4A00F07CB4 /* UIKit.framework in Frameworks */,
+				288C5F5D1E6D9E4A00F07CB4 /* TwitterCore.framework in Frameworks */,
+				288C5F5E1E6D9E4A00F07CB4 /* Foundation.framework in Frameworks */,
+				288C5F5F1E6D9E4A00F07CB4 /* Fabric.framework in Frameworks */,
+				288C5F601E6D9E4A00F07CB4 /* TwitterKit.framework in Frameworks */,
+				288C5F611E6D9E4A00F07CB4 /* libGoogleAnalyticsServices.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		288C5F7E1E6D9E6D00F07CB4 /* Targets */ = {
+			isa = PBXGroup;
+			children = (
+				288C5FA41E6D9E8C00F07CB4 /* Connfa */,
+			);
+			name = Targets;
+			path = DrupalCon/Targets;
+			sourceTree = "<group>";
+		};
+		288C5FA41E6D9E8C00F07CB4 /* Connfa */ = {
+			isa = PBXGroup;
+			children = (
+				288C5FB81E6D9F2900F07CB4 /* Connfa-Info.plist */,
+				288C5FA51E6D9E8C00F07CB4 /* Classes */,
+				288C5FA81E6D9E8C00F07CB4 /* Resources */,
+				288C5FAB1E6D9E8C00F07CB4 /* Web */,
+			);
+			path = Connfa;
+			sourceTree = "<group>";
+		};
+		288C5FA51E6D9E8C00F07CB4 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				288C5FA61E6D9E8C00F07CB4 /* DCConstants.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		288C5FA81E6D9E8C00F07CB4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				288C5FA91E6D9E8C00F07CB4 /* DC-Images.xcassets */,
+				288C5FAA1E6D9E8C00F07CB4 /* DC-Theme.bundle */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		288C5FAB1E6D9E8C00F07CB4 /* Web */ = {
+			isa = PBXGroup;
+			children = (
+				288C5FAC1E6D9E8C00F07CB4 /* about_img.png */,
+				288C5FAD1E6D9E8C00F07CB4 /* event_detail_style.css */,
+				288C5FAE1E6D9E8C00F07CB4 /* style.css */,
+			);
+			path = Web;
+			sourceTree = "<group>";
+		};
+		289301501E3770F300BB933B /* GoldSponsorBanners */ = {
+			isa = PBXGroup;
+			children = (
+				289301511E3770F300BB933B /* DCGoldSponsorBannerHeandler.h */,
+				289301521E3770F300BB933B /* DCGoldSponsorBannerHeandler.m */,
+			);
+			path = GoldSponsorBanners;
+			sourceTree = "<group>";
+		};
 		5DC8C408198656DA00BF5816 = {
 			isa = PBXGroup;
 			children = (
 				A6C5F0F21BF4E9C50093AD65 /* DrupalCon */,
+				288C5F7E1E6D9E6D00F07CB4 /* Targets */,
 				5DC8C413198656DA00BF5816 /* Frameworks */,
 				5DC8C412198656DA00BF5816 /* Products */,
 			);
@@ -496,7 +567,7 @@
 		5DC8C412198656DA00BF5816 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5DC8C411198656DA00BF5816 /* DrupalCon.app */,
+				288C5F7C1E6D9E4A00F07CB4 /* Connfa.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -809,6 +880,12 @@
 		A6C5F1421BF4E9C50093AD65 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				288C5FBF1E6D9FE100F07CB4 /* DCConstants.h */,
+				288C5FBA1E6D9FB900F07CB4 /* DCMenuItem.h */,
+				288C5FBB1E6D9FBA00F07CB4 /* DCMenuItem.m */,
+				282BD3B01E7191A0009763EC /* DCFontItem.h */,
+				282BD3B11E7191A0009763EC /* DCFontItem.m */,
+				289301501E3770F300BB933B /* GoldSponsorBanners */,
 				A678FD421C03590B00F24105 /* main.xcdatamodeld */,
 				A6C5F1431BF4E9C50093AD65 /* AppInfo */,
 				A6C5F14A1BF4E9C50093AD65 /* AppSettings */,
@@ -1246,10 +1323,8 @@
 			isa = PBXGroup;
 			children = (
 				A68AE7BD1C626470002E862D /* Fonts */,
-				A6C5F2111BF4E9C60093AD65 /* DC-Images.xcassets */,
-				A6C5F2121BF4E9C60093AD65 /* DC-Theme.bundle */,
+				289301541E3770FD00BB933B /* ImageStorage.xcassets */,
 				A6C5F2161BF4E9C60093AD65 /* Storyboards */,
-				A6C5F21B1BF4E9C60093AD65 /* Web */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1265,21 +1340,10 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
-		A6C5F21B1BF4E9C60093AD65 /* Web */ = {
-			isa = PBXGroup;
-			children = (
-				A6C5F21C1BF4E9C60093AD65 /* about_img.png */,
-				A6C5F21D1BF4E9C60093AD65 /* event_detail_style.css */,
-				A6C5F21E1BF4E9C60093AD65 /* style.css */,
-			);
-			path = Web;
-			sourceTree = "<group>";
-		};
 		A6C5F21F1BF4E9C60093AD65 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				283058541E76DB140059E5A7 /* DrupalCon-Info.plist */,
-				A6C5F2211BF4E9C60093AD65 /* DrupalCon-Prefix.pch */,
+				282910E81E7BD0C500BD6A4D /* Connfa-Prefix.pch */,
 				A6C5F2231BF4E9C60093AD65 /* main.m */,
 			);
 			path = SupportingFiles;
@@ -1408,22 +1472,22 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5DC8C410198656DA00BF5816 /* DrupalCon */ = {
+		288C5ED71E6D9E4A00F07CB4 /* Connfa */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5DC8C443198656DB00BF5816 /* Build configuration list for PBXNativeTarget "DrupalCon" */;
+			buildConfigurationList = 288C5F791E6D9E4A00F07CB4 /* Build configuration list for PBXNativeTarget "Connfa" */;
 			buildPhases = (
-				5DC8C40D198656DA00BF5816 /* Sources */,
-				5DC8C40E198656DA00BF5816 /* Frameworks */,
-				5DC8C40F198656DA00BF5816 /* Resources */,
-				A6EBA9AC1B53CD8600C91E41 /* ShellScript */,
+				288C5ED81E6D9E4A00F07CB4 /* Sources */,
+				288C5F531E6D9E4A00F07CB4 /* Frameworks */,
+				288C5F621E6D9E4A00F07CB4 /* Resources */,
+				288C5F781E6D9E4A00F07CB4 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = DrupalCon;
+			name = Connfa;
 			productName = DrupalCon;
-			productReference = 5DC8C411198656DA00BF5816 /* DrupalCon.app */;
+			productReference = 288C5F7C1E6D9E4A00F07CB4 /* Connfa.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1436,7 +1500,7 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Lemberg Solution";
 				TargetAttributes = {
-					5DC8C410198656DA00BF5816 = {
+					288C5ED71E6D9E4A00F07CB4 = {
 						DevelopmentTeam = FN2T3UCV4E;
 					};
 				};
@@ -1454,43 +1518,44 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5DC8C410198656DA00BF5816 /* DrupalCon */,
+				288C5ED71E6D9E4A00F07CB4 /* Connfa */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		5DC8C40F198656DA00BF5816 /* Resources */ = {
+		288C5F621E6D9E4A00F07CB4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6C5F33F1BF4E9C60093AD65 /* Info.storyboard in Resources */,
-				A6C5F3471BF4E9C60093AD65 /* event_detail_style.css in Resources */,
-				A06091311CD0E13500B8C2FD /* TwitterKitResources.bundle in Resources */,
-				F547A7E21D537C3200CD24F2 /* Montserrat-Regular.otf in Resources */,
-				A6C5F3411BF4E9C60093AD65 /* Main.storyboard in Resources */,
-				A690C2AE1BFDDD2400DC5EB8 /* DC-Images.xcassets in Resources */,
-				283A1F351CB4E5B5007F6BCB /* (null) in Resources */,
-				A68AE7C21C626470002E862D /* OpenSans-CondBold.ttf in Resources */,
-				A6C5F3431BF4E9C60093AD65 /* Speakers.storyboard in Resources */,
-				A6C5F3571BF4E9C60093AD65 /* LICENSE in Resources */,
-				F580ED6D1D0FDE2B00F289F8 /* LESelectedActionSheetController.xib in Resources */,
-				283058551E76DB140059E5A7 /* DrupalCon-Info.plist in Resources */,
-				A6C5F3491BF4E9C60093AD65 /* style.css in Resources */,
-				A6C5F33D1BF4E9C60093AD65 /* Events.storyboard in Resources */,
-				A6F456401C6B490900EF3DCD /* (null) in Resources */,
-				A68AE7C31C626470002E862D /* OpenSans-Regular.ttf in Resources */,
-				A6C5F3211BF4E9C60093AD65 /* DCEventCell.xib in Resources */,
-				A68AE7C11C626470002E862D /* OpenSans-Bold.ttf in Resources */,
-				A6D12F0E1BF4F04F00B85FD1 /* DC-Theme.bundle in Resources */,
-				A6C5F3451BF4E9C60093AD65 /* about_img.png in Resources */,
+				288C5F631E6D9E4A00F07CB4 /* Info.storyboard in Resources */,
+				288C5FB41E6D9E8C00F07CB4 /* event_detail_style.css in Resources */,
+				288C5F651E6D9E4A00F07CB4 /* TwitterKitResources.bundle in Resources */,
+				288C5F661E6D9E4A00F07CB4 /* Montserrat-Regular.otf in Resources */,
+				288C5F671E6D9E4A00F07CB4 /* Main.storyboard in Resources */,
+				288C5FB91E6D9F2900F07CB4 /* Connfa-Info.plist in Resources */,
+				288C5F691E6D9E4A00F07CB4 /* (null) in Resources */,
+				288C5F6A1E6D9E4A00F07CB4 /* OpenSans-CondBold.ttf in Resources */,
+				288C5F6B1E6D9E4A00F07CB4 /* Speakers.storyboard in Resources */,
+				288C5F6C1E6D9E4A00F07CB4 /* LICENSE in Resources */,
+				288C5F6D1E6D9E4A00F07CB4 /* ImageStorage.xcassets in Resources */,
+				288C5FB11E6D9E8C00F07CB4 /* DC-Images.xcassets in Resources */,
+				288C5FB31E6D9E8C00F07CB4 /* about_img.png in Resources */,
+				288C5F6E1E6D9E4A00F07CB4 /* LESelectedActionSheetController.xib in Resources */,
+				288C5FB21E6D9E8C00F07CB4 /* DC-Theme.bundle in Resources */,
+				288C5F701E6D9E4A00F07CB4 /* Events.storyboard in Resources */,
+				288C5FB51E6D9E8C00F07CB4 /* style.css in Resources */,
+				288C5F721E6D9E4A00F07CB4 /* (null) in Resources */,
+				288C5F731E6D9E4A00F07CB4 /* OpenSans-Regular.ttf in Resources */,
+				288C5F741E6D9E4A00F07CB4 /* DCEventCell.xib in Resources */,
+				288C5F751E6D9E4A00F07CB4 /* OpenSans-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		A6EBA9AC1B53CD8600C91E41 /* ShellScript */ = {
+		288C5F781E6D9E4A00F07CB4 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1506,137 +1571,205 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		5DC8C40D198656DA00BF5816 /* Sources */ = {
+		288C5ED81E6D9E4A00F07CB4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6C5F30D1BF4E9C60093AD65 /* DCAppSignMenuCell.m in Sources */,
-				A6C5F27D1BF4E9C60093AD65 /* NSUserDefaults+DC.m in Sources */,
-				A6C5F2991BF4E9C60093AD65 /* DCBof+DC.m in Sources */,
-				A6C5F2C31BF4E9C60093AD65 /* DCSpeaker.m in Sources */,
-				A6C5F3711BF4E9C60093AD65 /* UIImage+WebP.m in Sources */,
-				A6C5F26F1BF4E9C60093AD65 /* DCSpeakersViewController.m in Sources */,
-				A6C5F2C11BF4E9C60093AD65 /* DCLevel.m in Sources */,
-				A6C5F2F91BF4E9C60093AD65 /* DCLoginViewController.m in Sources */,
-				A6C5F2E71BF4E9C60093AD65 /* DCEventFilterCell.m in Sources */,
-				A6C5F28D1BF4E9C60093AD65 /* UIWebView+DC.m in Sources */,
-				A6C5F3271BF4E9C60093AD65 /* DCDescriptionTextCell.m in Sources */,
-				A6C5F2A51BF4E9C60093AD65 /* DCLocation+DC.m in Sources */,
-				A6C5F2A71BF4E9C60093AD65 /* DCMainEvent+DC.m in Sources */,
-				A6C5F3751BF4E9C60093AD65 /* UIImageView+WebCache.m in Sources */,
-				A6C5F2C91BF4E9C60093AD65 /* DCTrack.m in Sources */,
-				A6C5F2951BF4E9C60093AD65 /* DCAppSettings.m in Sources */,
-				A6C5F2D51BF4E9C60093AD65 /* DCCalendarManager.m in Sources */,
-				A6C5F2E31BF4E9C60093AD65 /* DCBaseViewController.m in Sources */,
-				A6C5F36D1BF4E9C60093AD65 /* UIImage+GIF.m in Sources */,
-				A6C5F2711BF4E9C60093AD65 /* DCAppConfiguration.m in Sources */,
-				A6C5F2E51BF4E9C60093AD65 /* DCLimitedNavigationController.m in Sources */,
-				A6C5F2871BF4E9C60093AD65 /* UIImageView+DC.m in Sources */,
-				A6C5F2BB1BF4E9C60093AD65 /* DCEvent.m in Sources */,
-				A6C5F3591BF4E9C60093AD65 /* MKAnnotationView+WebCache.m in Sources */,
-				A6C5F29D1BF4E9C60093AD65 /* DCHousePlan+DC.m in Sources */,
-				A6C5F2F31BF4E9C60093AD65 /* DCLocationViewController.m in Sources */,
-				A6C5F2831BF4E9C60093AD65 /* NSDate+DC.m in Sources */,
-				A6C5F25B1BF4E9C60093AD65 /* DCEventDetailViewController.m in Sources */,
-				A6C5F2671BF4E9C60093AD65 /* DCFavoriteEventsDataSource.m in Sources */,
-				A6C5F2A31BF4E9C60093AD65 /* DCLevel+DC.m in Sources */,
-				A6C5F2A11BF4E9C60093AD65 /* DCInfoCategory+DC.m in Sources */,
-				A6C5F29B1BF4E9C60093AD65 /* DCEvent+DC.m in Sources */,
-				A6C5F2AF1BF4E9C60093AD65 /* DCTime+DC.m in Sources */,
-				A6C5F32B1BF4E9C60093AD65 /* DCSpeakerCell.m in Sources */,
-				A6C5F36B1BF4E9C60093AD65 /* UIButton+WebCache.m in Sources */,
-				F580ED6C1D0FDE2B00F289F8 /* LESelectedActionSheetController.m in Sources */,
-				A6C5F2591BF4E9C60093AD65 /* DCAppFacade.m in Sources */,
-				A6C5F2AB1BF4E9C60093AD65 /* DCSocialEvent+DC.m in Sources */,
-				A6C5F2CB1BF4E9C60093AD65 /* DCType.m in Sources */,
-				A6C5F2A91BF4E9C60093AD65 /* DCPoi+DC.m in Sources */,
-				A6C5F2CD1BF4E9C60093AD65 /* DCInfo.m in Sources */,
-				A6C5F2BD1BF4E9C60093AD65 /* DCMainEvent.m in Sources */,
-				A6C5F3291BF4E9C60093AD65 /* DCEventDetailHeaderCell.m in Sources */,
-				A6C5F2751BF4E9C60093AD65 /* NSDictionary+DC.m in Sources */,
-				A6C5F2651BF4E9C60093AD65 /* DCEventDataSource.m in Sources */,
-				A6C5F2F11BF4E9C60093AD65 /* DCInfoViewController.m in Sources */,
-				A6C5F2971BF4E9C60093AD65 /* DCAppSettings+DC.m in Sources */,
-				A6C5F2EB1BF4E9C60093AD65 /* DCFilterViewController.m in Sources */,
-				A678FD481C03666600F24105 /* Reachability.m in Sources */,
-				A6C5F3031BF4E9C60093AD65 /* DCMenuStoryboardHelper.m in Sources */,
-				A6C5F36F1BF4E9C60093AD65 /* UIImage+MultiFormat.m in Sources */,
-				A678FD521C0366AF00F24105 /* MFSideMenuShadow.m in Sources */,
-				A6C5F31F1BF4E9C60093AD65 /* DCEventCell.m in Sources */,
-				A6C5F3651BF4E9C60093AD65 /* SDWebImageDownloaderOperation.m in Sources */,
-				A6C5F32F1BF4E9C60093AD65 /* DCSpeakerEventCell.m in Sources */,
-				A6C5F35D1BF4E9C60093AD65 /* SDImageCache.m in Sources */,
-				A678FD531C0366AF00F24105 /* UIViewController+MFSideMenuAdditions.m in Sources */,
-				A6C5F3671BF4E9C60093AD65 /* SDWebImageManager.m in Sources */,
-				A6C5F2B71BF4E9C60093AD65 /* DCType+DC.m in Sources */,
-				A6C5F3051BF4E9C60093AD65 /* DCSideMenuViewController.m in Sources */,
-				A6C5F2D71BF4E9C60093AD65 /* DCCoreDataStore.m in Sources */,
-				A6C5F30B1BF4E9C60093AD65 /* DCTextField.m in Sources */,
-				A6C5F2CF1BF4E9C60093AD65 /* DCInfoCategory.m in Sources */,
-				A6C5F32D1BF4E9C60093AD65 /* DCSpeakerDetailButtonsCell.m in Sources */,
-				A6C5F2E11BF4E9C60093AD65 /* DCWebService.m in Sources */,
-				A66BD0BF1C5BBAB700C568EE /* UIAlertView+DCWrapper.m in Sources */,
-				A6C5F34F1BF4E9C60093AD65 /* main.m in Sources */,
-				A6C5F30F1BF4E9C60093AD65 /* DCSideMenuCell.m in Sources */,
-				A6C5F26B1BF4E9C60093AD65 /* DCProgramViewController.m in Sources */,
-				A6C5F2EF1BF4E9C60093AD65 /* DCInfoMenuCell.m in Sources */,
-				A6C5F2811BF4E9C60093AD65 /* NSCalendar+DC.m in Sources */,
-				A6C5F3631BF4E9C60093AD65 /* SDWebImageDownloader.m in Sources */,
-				A6C5F2571BF4E9C60093AD65 /* AppDelegate.m in Sources */,
-				A6C5F2F71BF4E9C60093AD65 /* DCFirstLoadViewController.m in Sources */,
-				A6C5F35B1BF4E9C60093AD65 /* NSData+ImageContentType.m in Sources */,
-				A6580B7D1C5F60F5001B0D62 /* DCAlertsManager.m in Sources */,
-				A6C5F2F51BF4E9C60093AD65 /* DCPin.m in Sources */,
-				F547A7E61D54D2FF00CD24F2 /* UIScrollView+EmptyDataSet.m in Sources */,
-				A6C5F2C51BF4E9C60093AD65 /* DCTime.m in Sources */,
-				A6C5F2631BF4E9C60093AD65 /* DCDayEventsDataSource.m in Sources */,
-				A6C5F3071BF4E9C60093AD65 /* DCFilterCheckBox.m in Sources */,
-				A6C5F2891BF4E9C60093AD65 /* NSManagedObject+DC.m in Sources */,
-				A6C5F3251BF4E9C60093AD65 /* DCProgramHeaderCellView.m in Sources */,
-				A6C5F3771BF4E9C60093AD65 /* UIView+WebCacheOperation.m in Sources */,
-				F5D072CE1D0844AD00331E07 /* DCFloorPlanController.m in Sources */,
-				A6C5F29F1BF4E9C60093AD65 /* DCInfo+DC.m in Sources */,
-				A6C5F3691BF4E9C60093AD65 /* SDWebImagePrefetcher.m in Sources */,
-				A6C5F2E91BF4E9C60093AD65 /* DCEventFilterHeaderCell.m in Sources */,
-				A6C5F28F1BF4E9C60093AD65 /* DCHousePlan.m in Sources */,
-				A6C5F2771BF4E9C60093AD65 /* UIColor+Helper.m in Sources */,
-				A06091171CD0BF1A00B8C2FD /* DCSocialMediaViewController.m in Sources */,
-				A6C5F2851BF4E9C60093AD65 /* UIImage+Extension.m in Sources */,
-				A6C5F27F1BF4E9C60093AD65 /* DCDateHelper.m in Sources */,
-				A6C5F2731BF4E9C60093AD65 /* NSArray+DC.m in Sources */,
-				A6C5F26D1BF4E9C60093AD65 /* DCSpeakersDetailViewController.m in Sources */,
-				A678FD511C0366AF00F24105 /* MFSideMenuContainerViewController.m in Sources */,
-				A6C5F3611BF4E9C60093AD65 /* SDWebImageDecoder.m in Sources */,
-				A6C5F27B1BF4E9C60093AD65 /* NSString+HTML.m in Sources */,
-				A6C5F2DB1BF4E9C60093AD65 /* DCParserService.m in Sources */,
-				A6C5F2ED1BF4E9C60093AD65 /* DCAboutViewController.m in Sources */,
-				A6C5F2D11BF4E9C60093AD65 /* DCPoi.m in Sources */,
-				A6C5F2DD1BF4E9C60093AD65 /* DCMainProxy+Additions.m in Sources */,
-				A6C5F2AD1BF4E9C60093AD65 /* DCSpeaker+DC.m in Sources */,
-				A6C5F3091BF4E9C60093AD65 /* DCLabel.m in Sources */,
-				A6C5F2BF1BF4E9C60093AD65 /* DCSocialEvent.m in Sources */,
-				A6C5F2611BF4E9C60093AD65 /* DCDayEventsController.m in Sources */,
-				A6C5F2B31BF4E9C60093AD65 /* DCTrack+DC.m in Sources */,
-				A6C5F2791BF4E9C60093AD65 /* NSFileManager+DC.m in Sources */,
-				A6C5F35F1BF4E9C60093AD65 /* SDWebImageCompat.m in Sources */,
-				A6C5F2DF1BF4E9C60093AD65 /* DCMainProxy.m in Sources */,
-				A6C5F2D91BF4E9C60093AD65 /* DCImportDataSevice.m in Sources */,
-				A678FD441C03590B00F24105 /* main.xcdatamodeld in Sources */,
-				A6C5F2691BF4E9C60093AD65 /* DCEventStrategy.m in Sources */,
-				A6C5F2B91BF4E9C60093AD65 /* DCBof.m in Sources */,
-				A6C5F2B11BF4E9C60093AD65 /* DCTimeRange+DC.m in Sources */,
-				A6C5F2FB1BF4E9C60093AD65 /* DCMainNavigationController.m in Sources */,
-				A6C5F3231BF4E9C60093AD65 /* DCInfoEventCell.m in Sources */,
-				A6C5F2C71BF4E9C60093AD65 /* DCTimeRange.m in Sources */,
-				A6C5F3731BF4E9C60093AD65 /* UIImageView+HighlightedWebCache.m in Sources */,
-				A6C5F2911BF4E9C60093AD65 /* DCLocation.m in Sources */,
-				A6C5F3311BF4E9C60093AD65 /* DCSpeakerHeaderCell.m in Sources */,
+				288C5ED91E6D9E4A00F07CB4 /* DCAppSignMenuCell.m in Sources */,
+				288C5EDA1E6D9E4A00F07CB4 /* NSUserDefaults+DC.m in Sources */,
+				288C5EDB1E6D9E4A00F07CB4 /* DCBof+DC.m in Sources */,
+				288C5EDC1E6D9E4A00F07CB4 /* DCSpeaker.m in Sources */,
+				288C5EDD1E6D9E4A00F07CB4 /* UIImage+WebP.m in Sources */,
+				288C5EDE1E6D9E4A00F07CB4 /* DCSpeakersViewController.m in Sources */,
+				288C5FBE1E6D9FBA00F07CB4 /* DCMenuItem.m in Sources */,
+				288C5EDF1E6D9E4A00F07CB4 /* DCLevel.m in Sources */,
+				288C5EE01E6D9E4A00F07CB4 /* DCLoginViewController.m in Sources */,
+				288C5EE11E6D9E4A00F07CB4 /* DCEventFilterCell.m in Sources */,
+				288C5EE21E6D9E4A00F07CB4 /* UIWebView+DC.m in Sources */,
+				288C5EE31E6D9E4A00F07CB4 /* DCDescriptionTextCell.m in Sources */,
+				288C5EE41E6D9E4A00F07CB4 /* DCLocation+DC.m in Sources */,
+				288C5EE51E6D9E4A00F07CB4 /* DCMainEvent+DC.m in Sources */,
+				288C5EE61E6D9E4A00F07CB4 /* UIImageView+WebCache.m in Sources */,
+				288C5EE71E6D9E4A00F07CB4 /* DCTrack.m in Sources */,
+				288C5EE81E6D9E4A00F07CB4 /* DCAppSettings.m in Sources */,
+				288C5EE91E6D9E4A00F07CB4 /* DCCalendarManager.m in Sources */,
+				288C5EEA1E6D9E4A00F07CB4 /* DCBaseViewController.m in Sources */,
+				288C5EEB1E6D9E4A00F07CB4 /* UIImage+GIF.m in Sources */,
+				288C5EEC1E6D9E4A00F07CB4 /* DCAppConfiguration.m in Sources */,
+				288C5EED1E6D9E4A00F07CB4 /* DCLimitedNavigationController.m in Sources */,
+				288C5EEE1E6D9E4A00F07CB4 /* UIImageView+DC.m in Sources */,
+				288C5EEF1E6D9E4A00F07CB4 /* DCEvent.m in Sources */,
+				288C5EF01E6D9E4A00F07CB4 /* MKAnnotationView+WebCache.m in Sources */,
+				288C5EF11E6D9E4A00F07CB4 /* DCHousePlan+DC.m in Sources */,
+				288C5EF21E6D9E4A00F07CB4 /* DCLocationViewController.m in Sources */,
+				288C5EF31E6D9E4A00F07CB4 /* NSDate+DC.m in Sources */,
+				288C5EF41E6D9E4A00F07CB4 /* DCEventDetailViewController.m in Sources */,
+				288C5EF51E6D9E4A00F07CB4 /* DCFavoriteEventsDataSource.m in Sources */,
+				288C5EF61E6D9E4A00F07CB4 /* DCLevel+DC.m in Sources */,
+				288C5EF71E6D9E4A00F07CB4 /* DCInfoCategory+DC.m in Sources */,
+				288C5EF81E6D9E4A00F07CB4 /* DCEvent+DC.m in Sources */,
+				288C5EF91E6D9E4A00F07CB4 /* DCTime+DC.m in Sources */,
+				288C5EFA1E6D9E4A00F07CB4 /* DCSpeakerCell.m in Sources */,
+				288C5EFB1E6D9E4A00F07CB4 /* UIButton+WebCache.m in Sources */,
+				288C5EFC1E6D9E4A00F07CB4 /* LESelectedActionSheetController.m in Sources */,
+				288C5EFD1E6D9E4A00F07CB4 /* DCAppFacade.m in Sources */,
+				288C5EFE1E6D9E4A00F07CB4 /* DCSocialEvent+DC.m in Sources */,
+				288C5EFF1E6D9E4A00F07CB4 /* DCType.m in Sources */,
+				288C5F001E6D9E4A00F07CB4 /* DCPoi+DC.m in Sources */,
+				288C5F011E6D9E4A00F07CB4 /* DCInfo.m in Sources */,
+				288C5F021E6D9E4A00F07CB4 /* DCMainEvent.m in Sources */,
+				288C5F031E6D9E4A00F07CB4 /* DCEventDetailHeaderCell.m in Sources */,
+				288C5F041E6D9E4A00F07CB4 /* NSDictionary+DC.m in Sources */,
+				288C5F051E6D9E4A00F07CB4 /* DCEventDataSource.m in Sources */,
+				288C5F061E6D9E4A00F07CB4 /* DCInfoViewController.m in Sources */,
+				288C5F071E6D9E4A00F07CB4 /* DCAppSettings+DC.m in Sources */,
+				288C5F081E6D9E4A00F07CB4 /* DCFilterViewController.m in Sources */,
+				288C5F091E6D9E4A00F07CB4 /* Reachability.m in Sources */,
+				288C5F0A1E6D9E4A00F07CB4 /* DCMenuStoryboardHelper.m in Sources */,
+				288C5F0B1E6D9E4A00F07CB4 /* UIImage+MultiFormat.m in Sources */,
+				288C5F0C1E6D9E4A00F07CB4 /* MFSideMenuShadow.m in Sources */,
+				288C5F0D1E6D9E4A00F07CB4 /* DCEventCell.m in Sources */,
+				288C5F0E1E6D9E4A00F07CB4 /* SDWebImageDownloaderOperation.m in Sources */,
+				288C5F0F1E6D9E4A00F07CB4 /* DCSpeakerEventCell.m in Sources */,
+				288C5F101E6D9E4A00F07CB4 /* SDImageCache.m in Sources */,
+				288C5F111E6D9E4A00F07CB4 /* UIViewController+MFSideMenuAdditions.m in Sources */,
+				288C5F121E6D9E4A00F07CB4 /* SDWebImageManager.m in Sources */,
+				288C5F131E6D9E4A00F07CB4 /* DCType+DC.m in Sources */,
+				288C5F141E6D9E4A00F07CB4 /* DCSideMenuViewController.m in Sources */,
+				288C5F151E6D9E4A00F07CB4 /* DCCoreDataStore.m in Sources */,
+				288C5F161E6D9E4A00F07CB4 /* DCTextField.m in Sources */,
+				288C5F171E6D9E4A00F07CB4 /* DCInfoCategory.m in Sources */,
+				288C5F181E6D9E4A00F07CB4 /* DCSpeakerDetailButtonsCell.m in Sources */,
+				288C5F191E6D9E4A00F07CB4 /* DCWebService.m in Sources */,
+				288C5F1A1E6D9E4A00F07CB4 /* UIAlertView+DCWrapper.m in Sources */,
+				288C5F1B1E6D9E4A00F07CB4 /* main.m in Sources */,
+				288C5F1C1E6D9E4A00F07CB4 /* DCSideMenuCell.m in Sources */,
+				288C5F1D1E6D9E4A00F07CB4 /* DCProgramViewController.m in Sources */,
+				288C5F1E1E6D9E4A00F07CB4 /* DCInfoMenuCell.m in Sources */,
+				288C5F1F1E6D9E4A00F07CB4 /* NSCalendar+DC.m in Sources */,
+				288C5F201E6D9E4A00F07CB4 /* SDWebImageDownloader.m in Sources */,
+				288C5F211E6D9E4A00F07CB4 /* AppDelegate.m in Sources */,
+				288C5F221E6D9E4A00F07CB4 /* DCFirstLoadViewController.m in Sources */,
+				288C5F231E6D9E4A00F07CB4 /* NSData+ImageContentType.m in Sources */,
+				288C5F241E6D9E4A00F07CB4 /* DCAlertsManager.m in Sources */,
+				288C5F251E6D9E4A00F07CB4 /* DCPin.m in Sources */,
+				288C5F261E6D9E4A00F07CB4 /* UIScrollView+EmptyDataSet.m in Sources */,
+				288C5F271E6D9E4A00F07CB4 /* DCTime.m in Sources */,
+				288C5F281E6D9E4A00F07CB4 /* DCDayEventsDataSource.m in Sources */,
+				288C5F291E6D9E4A00F07CB4 /* DCFilterCheckBox.m in Sources */,
+				288C5F2A1E6D9E4A00F07CB4 /* NSManagedObject+DC.m in Sources */,
+				288C5F2B1E6D9E4A00F07CB4 /* DCProgramHeaderCellView.m in Sources */,
+				288C5F2C1E6D9E4A00F07CB4 /* UIView+WebCacheOperation.m in Sources */,
+				288C5F2D1E6D9E4A00F07CB4 /* DCFloorPlanController.m in Sources */,
+				288C5F2E1E6D9E4A00F07CB4 /* DCInfo+DC.m in Sources */,
+				288C5F2F1E6D9E4A00F07CB4 /* SDWebImagePrefetcher.m in Sources */,
+				288C5F301E6D9E4A00F07CB4 /* DCEventFilterHeaderCell.m in Sources */,
+				288C5F311E6D9E4A00F07CB4 /* DCHousePlan.m in Sources */,
+				288C5F321E6D9E4A00F07CB4 /* UIColor+Helper.m in Sources */,
+				288C5F331E6D9E4A00F07CB4 /* DCSocialMediaViewController.m in Sources */,
+				288C5F341E6D9E4A00F07CB4 /* UIImage+Extension.m in Sources */,
+				288C5F351E6D9E4A00F07CB4 /* DCDateHelper.m in Sources */,
+				288C5F361E6D9E4A00F07CB4 /* NSArray+DC.m in Sources */,
+				288C5F371E6D9E4A00F07CB4 /* DCSpeakersDetailViewController.m in Sources */,
+				288C5F381E6D9E4A00F07CB4 /* MFSideMenuContainerViewController.m in Sources */,
+				288C5F391E6D9E4A00F07CB4 /* SDWebImageDecoder.m in Sources */,
+				288C5F3A1E6D9E4A00F07CB4 /* NSString+HTML.m in Sources */,
+				288C5FAF1E6D9E8C00F07CB4 /* DCConstants.m in Sources */,
+				288C5F3B1E6D9E4A00F07CB4 /* DCParserService.m in Sources */,
+				288C5F3C1E6D9E4A00F07CB4 /* DCAboutViewController.m in Sources */,
+				288C5F3D1E6D9E4A00F07CB4 /* DCPoi.m in Sources */,
+				288C5F3E1E6D9E4A00F07CB4 /* DCMainProxy+Additions.m in Sources */,
+				287118711E72DFBA00CD0498 /* DCFontItem.m in Sources */,
+				288C5F3F1E6D9E4A00F07CB4 /* DCSpeaker+DC.m in Sources */,
+				288C5F401E6D9E4A00F07CB4 /* DCLabel.m in Sources */,
+				288C5F411E6D9E4A00F07CB4 /* DCSocialEvent.m in Sources */,
+				288C5F421E6D9E4A00F07CB4 /* DCDayEventsController.m in Sources */,
+				288C5F431E6D9E4A00F07CB4 /* DCTrack+DC.m in Sources */,
+				288C5F441E6D9E4A00F07CB4 /* NSFileManager+DC.m in Sources */,
+				288C5F451E6D9E4A00F07CB4 /* SDWebImageCompat.m in Sources */,
+				288C5F461E6D9E4A00F07CB4 /* DCMainProxy.m in Sources */,
+				288C5F471E6D9E4A00F07CB4 /* DCImportDataSevice.m in Sources */,
+				288C5F481E6D9E4A00F07CB4 /* main.xcdatamodeld in Sources */,
+				288C5F491E6D9E4A00F07CB4 /* DCGoldSponsorBannerHeandler.m in Sources */,
+				288C5F4A1E6D9E4A00F07CB4 /* DCEventStrategy.m in Sources */,
+				288C5F4B1E6D9E4A00F07CB4 /* DCBof.m in Sources */,
+				288C5F4C1E6D9E4A00F07CB4 /* DCTimeRange+DC.m in Sources */,
+				288C5F4D1E6D9E4A00F07CB4 /* DCMainNavigationController.m in Sources */,
+				288C5F4E1E6D9E4A00F07CB4 /* DCInfoEventCell.m in Sources */,
+				288C5F4F1E6D9E4A00F07CB4 /* DCTimeRange.m in Sources */,
+				288C5F501E6D9E4A00F07CB4 /* UIImageView+HighlightedWebCache.m in Sources */,
+				288C5F511E6D9E4A00F07CB4 /* DCLocation.m in Sources */,
+				288C5F521E6D9E4A00F07CB4 /* DCSpeakerHeaderCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		288C5F7A1E6D9E4A00F07CB4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
+				DEVELOPMENT_TEAM = FN2T3UCV4E;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DrupalCon",
+					"$(PROJECT_DIR)/DrupalCon/Vendor/Crashlytics",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/DrupalCon/SupportingFiles/Connfa-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/DrupalCon/Targets/Connfa/Connfa-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/DrupalCon/Vendor/GoogleAnalytics",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon.qa;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9fcaf0b0-f648-4066-8b5a-4a1cb45042a2";
+				PROVISIONING_PROFILE_SPECIFIER = DrupalCon_dev;
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		288C5F7B1E6D9E4A00F07CB4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
+				DEVELOPMENT_TEAM = FN2T3UCV4E;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DrupalCon",
+					"$(PROJECT_DIR)/DrupalCon/Vendor/Crashlytics",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/DrupalCon/SupportingFiles/Connfa-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/DrupalCon/Targets/Connfa/Connfa-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/DrupalCon/Vendor/GoogleAnalytics",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon.qa;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "9fcaf0b0-f648-4066-8b5a-4a1cb45042a2";
+				PROVISIONING_PROFILE_SPECIFIER = DrupalCon_dev;
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		5DC8C441198656DB00BF5816 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1709,87 +1842,23 @@
 			};
 			name = Release;
 		};
-		5DC8C444198656DB00BF5816 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
-				DEVELOPMENT_TEAM = FN2T3UCV4E;
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/DrupalCon",
-					"$(PROJECT_DIR)/DrupalCon/Vendor/Crashlytics",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = "DrupalCon/SupportingFiles/DrupalCon-Prefix.pch";
-				INFOPLIST_FILE = "$(SRCROOT)/DrupalCon/SupportingFiles/DrupalCon-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/DrupalCon/Vendor/GoogleAnalytics",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon.qa;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9fcaf0b0-f648-4066-8b5a-4a1cb45042a2";
-				PROVISIONING_PROFILE_SPECIFIER = DrupalCon_dev;
-				TARGETED_DEVICE_FAMILY = 1;
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		5DC8C445198656DB00BF5816 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
-				DEVELOPMENT_TEAM = FN2T3UCV4E;
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/DrupalCon",
-					"$(PROJECT_DIR)/DrupalCon/Vendor/Crashlytics",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = "DrupalCon/SupportingFiles/DrupalCon-Prefix.pch";
-				INFOPLIST_FILE = "$(SRCROOT)/DrupalCon/SupportingFiles/DrupalCon-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/DrupalCon/Vendor/GoogleAnalytics",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon.qa;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9fcaf0b0-f648-4066-8b5a-4a1cb45042a2";
-				PROVISIONING_PROFILE_SPECIFIER = DrupalCon_dev;
-				TARGETED_DEVICE_FAMILY = 1;
-				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		288C5F791E6D9E4A00F07CB4 /* Build configuration list for PBXNativeTarget "Connfa" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				288C5F7A1E6D9E4A00F07CB4 /* Debug */,
+				288C5F7B1E6D9E4A00F07CB4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		5DC8C40C198656DA00BF5816 /* Build configuration list for PBXProject "DrupalCon" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5DC8C441198656DB00BF5816 /* Debug */,
 				5DC8C442198656DB00BF5816 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5DC8C443198656DB00BF5816 /* Build configuration list for PBXNativeTarget "DrupalCon" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5DC8C444198656DB00BF5816 /* Debug */,
-				5DC8C445198656DB00BF5816 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

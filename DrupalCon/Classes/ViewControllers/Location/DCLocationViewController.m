@@ -5,6 +5,8 @@
 #import "DCPin.h"
 #import "DCLocation.h"
 #import "DCMainProxy.h"
+#import "DCConstants.h"
+#import "DCFontItem.h"
 
 @interface DCLocationViewController ()
 
@@ -37,7 +39,7 @@
     [self createNewLocation];
   self.titlesContainerView.backgroundColor =
       [DCAppConfiguration navigationBarColor];
-
+  [self setCustomFonts];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -45,6 +47,7 @@
     [self registerScreenLoadAtGA:[NSString stringWithFormat:@"%@", self.navigationItem.title]];
     [[NSNotificationCenter defaultCenter]addObserver:self
                                             selector:@selector(appBecameActive) name:@"applicationDidBecomeActive" object:nil];
+  [self.view layoutIfNeeded];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -125,9 +128,20 @@
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(
                                                                        location.coordinate, 0.5 * METERS_PER_MILE, 0.5 * METERS_PER_MILE);
     if (CLLocationCoordinate2DIsValid(location.coordinate)) {
-      [_mapView setRegion:viewRegion animated:YES];
+      [_mapView setRegion:viewRegion animated:NO];
     }
   }
+}
+
+- (void)setCustomFonts {
+  
+   DCFontItem *fonts = [DCConstants appFonts].firstObject;
+  
+  self.addressLabel.font = [UIFont fontWithName:fonts.titleFont size:self.addressLabel.font.pointSize];
+  self.streetAndNumberLabel.font = [UIFont fontWithName:fonts.descriptionFont size:self.streetAndNumberLabel.font.pointSize];
+  self.cityAndProvinceLabel.font = [UIFont fontWithName:fonts.descriptionFont size:self.cityAndProvinceLabel.font.pointSize];
+  self.stateLabel.font = [UIFont fontWithName:fonts.descriptionFont size:self.stateLabel.font.pointSize];
+  
 }
 
 #pragma mark -

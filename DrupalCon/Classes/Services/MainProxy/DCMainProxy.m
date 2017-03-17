@@ -223,9 +223,7 @@ typedef void (^UpdateDataFail)(NSString* reason);
 
 #pragma mark - getting instances
 
-- (NSArray*)eventsWithIDs:(NSArray*)iDs
-#warning this method used by LocalNotification process. Can be obsolated
-{
+- (NSArray*)eventsWithIDs:(NSArray*)iDs {
   NSPredicate* predicate =
       [NSPredicate predicateWithFormat:@"%K IN %@", kDCEventIdKey, iDs];
   NSArray* results = [self instancesOfClass:[DCEvent class]

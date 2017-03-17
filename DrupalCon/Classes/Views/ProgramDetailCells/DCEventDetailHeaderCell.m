@@ -6,8 +6,16 @@
 #import "NSDate+DC.h"
 #import "DCEvent+DC.h"
 #import "UIImage+Extension.h"
+#import "DCConstants.h"
+#import "DCFontItem.h"
 
 @implementation DCEventDetailHeaderCell
+
+- (void) awakeFromNib {
+  [super awakeFromNib];
+  [self setCustomFonts];
+  [self layoutIfNeeded];
+}
 
 - (void)initData:(DCEvent*)event {
   // this code makes labels in Cell resizable relating to screen size. Cell
@@ -81,6 +89,17 @@
                       event.level.name] : nil;
   self.experienceLabel.hidden = level.levelId.integerValue == 0;
   self.experienceIcon.hidden = level.levelId.integerValue == 0;
+}
+
+- (void)setCustomFonts {
+  
+   DCFontItem *fonts = [DCConstants appFonts].firstObject;
+  
+  self.titleLabel.font = [UIFont fontWithName:fonts.titleFont size:self.titleLabel.font.pointSize];
+  self.dateAndPlaceLabel.font = [UIFont fontWithName:fonts.descriptionFont size:self.dateAndPlaceLabel.font.pointSize];
+  self.trackLabel.font = [UIFont fontWithName:fonts.descriptionFont size:self.trackLabel.font.pointSize];
+  self.experienceLabel.font = [UIFont fontWithName:fonts.descriptionFont size:self.experienceLabel.font.pointSize];
+  
 }
 
 @end

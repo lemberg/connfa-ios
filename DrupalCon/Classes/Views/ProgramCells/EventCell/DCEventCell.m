@@ -8,8 +8,8 @@
 #import "DCLevel.h"
 #import "DCType.h"
 #import "UIImage+Extension.h"
-
-
+#import "DCConstants.h"
+#import "DCFontItem.h"
 
 // These values are hardcoded because cells are get by "dequeueREusableCells"
 // method, so previous cell value might be set to 0.
@@ -56,8 +56,10 @@ static NSInteger eventCellImageHeight = 16;
 
 @implementation DCEventCell
 
-- (void)awakeFromNib {
+- (void) awakeFromNib {
   [super awakeFromNib];
+  [self setCustomFonts];
+  [self layoutIfNeeded];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -153,7 +155,7 @@ static NSInteger eventCellImageHeight = 16;
   self.eventImageHeight.constant =
       self.eventImageView.image ? eventCellImageHeight : 0;
 
-  NSString *timeFormat = [NSDate currentDateFormat];
+  NSString *timeFormat = ([NSDate is24hourFormat])? @"HH:mm" : @"h:mm aaa";
   // Time  (left side)
   NSString* startTime = [DCDateHelper convertDate:event.startDate
                               toApplicationFormat:timeFormat];
@@ -223,6 +225,19 @@ static NSInteger eventCellImageHeight = 16;
                               NSFontAttributeName : label.font
                             } context:nil];
   return textRect.size.height;
+}
+
+- (void)setCustomFonts {
+  
+  DCFontItem *fonts = [DCConstants appFonts].firstObject;
+  //UIFont *timeFont = [fonts objectForKey:kFontDescription];
+  self.startTimeLabel.font = [UIFont fontWithName:fonts.descriptionFont size:self.startTimeLabel.font.pointSize];
+  self.endTimeLabel.font = [UIFont fontWithName:fonts.descriptionFont size:self.endTimeLabel.font.pointSize];
+  self.endTimeLabel.font= [self.endTimeLabel.font fontWithSize:self.startTimeLabel.font.pointSize - 2.0];
+  self.eventTitleLabel.font = [UIFont fontWithName:fonts.nameFont size:self.eventTitleLabel.font.pointSize];;
+  self.trackLabel.font = [UIFont fontWithName:fonts.descriptionFont size:self.trackLabel.font.pointSize];
+  self.speakersLabel.font = [UIFont fontWithName:fonts.descriptionFont size:self.speakersLabel.font.pointSize];
+  self.placeLabel.font = [UIFont fontWithName:fonts.descriptionFont size:self.placeLabel.font.pointSize];
 }
 
 #pragma mark - User actions

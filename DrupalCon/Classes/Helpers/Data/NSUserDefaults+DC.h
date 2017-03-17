@@ -13,7 +13,7 @@ extern NSString* kBundleVersionMinor;
 + (BOOL)isEnabledTimeZoneAlert;
 
 #pragma mark - last modified timestamp
-#warning timestamp is substitute by last-modify parameter
+
 + (void)updateTimestampString:(NSString*)timestamp ForClass:(Class)aClass;
 + (NSString*)lastUpdateForClass:(Class)aClass;
 

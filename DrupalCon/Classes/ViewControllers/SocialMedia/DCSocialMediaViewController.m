@@ -61,9 +61,6 @@
   self.navigationController.navigationBar.translucent = NO;
   
   [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-  
-  self.navigationController.navigationBar.barTintColor =
-  [DCAppConfiguration speakerDetailBarColor];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -114,10 +111,7 @@
 
 - (void)registerScreenLoadAtGA:(NSString*)message {
     id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
-    [tracker
-     set:kGAIScreenName
-     value:[NSString stringWithFormat:@"%@ loaded, message: %@",
-            NSStringFromClass(self.class), message]];
+    [tracker set:kGAIScreenName value: message];
     [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 

@@ -7,12 +7,20 @@
 #import "DCTimeRange+DC.h"
 #import "NSDate+DC.h"
 #import "UIImage+Extension.h"
+#import "DCConstants.h"
+#import "DCFontItem.h"
 
 @interface DCSpeakerEventCell ()
 
 @end
 
 @implementation DCSpeakerEventCell
+
+- (void) awakeFromNib {
+  [super awakeFromNib];
+  [self setCustomFonts];
+  [self layoutIfNeeded];
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
   [super setSelected:selected animated:animated];
@@ -95,5 +103,17 @@
   self.eventTimeLabel.preferredMaxLayoutWidth = preferredWidth;
   self.eventTrackLabel.preferredMaxLayoutWidth = preferredWidth;
 }
+
+- (void)setCustomFonts {
+  
+  DCFontItem *fonts = [DCConstants appFonts].firstObject;
+
+  self.eventNameLabel.font = [UIFont fontWithName:fonts.nameFont size:self.eventNameLabel.font.pointSize];
+  self.eventTimeLabel.font = [UIFont fontWithName:fonts.descriptionFont size:self.eventTimeLabel.font.pointSize];
+  self.eventTrackLabel.font = [UIFont fontWithName:fonts.descriptionFont size:self.eventTrackLabel.font.pointSize];
+  self.eventLevelLabel.font = [UIFont fontWithName:fonts.descriptionFont size:self.eventLevelLabel.font.pointSize];
+  
+}
+
 
 @end

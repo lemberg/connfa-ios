@@ -4,12 +4,8 @@
 
 @class DCEvent;
 
-#define kMenuItemTitle @"MenuItemTitle"
-#define kMenuItemIcon @"MenuItemIcon"
-#define kMenuItemSelectedIcon @"MenuItemSelectedIcon"
-#define kMenuItemControllerId @"MenuItemControllerId"
-#define kMenuType @"MenuType"
-@interface DCSideMenuViewController : UIViewController<UITableViewDelegate>
+
+@interface DCSideMenuViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
 @property(nonatomic, weak) MFSideMenuContainerViewController* sideMenuContainer;
 

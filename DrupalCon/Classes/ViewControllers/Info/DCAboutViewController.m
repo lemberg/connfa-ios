@@ -19,9 +19,8 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  [self registerScreenLoadAtGA:[NSString
-                                   stringWithFormat:@"infoID: %d",
-                                                    self.data.infoId.intValue]];
+  [self registerScreenLoadAtGA:[NSString stringWithFormat:@"Info Details: %@", self.data.name]];
+
 
     NSDictionary *titleTextAtributes = self.navigationController.navigationBar.titleTextAttributes;
     UILabel *titleLabel = [[UILabel alloc] init];

@@ -3,11 +3,16 @@
 #import "UIImageView+WebCache.h"
 #import "UIImageView+DC.h"
 #import "DCSpeaker.h"
+#import "DCConstants.h"
+#import "DCFontItem.h"
 
 @implementation DCSpeakerHeaderCell
 
 - (void)awakeFromNib {
+  [super awakeFromNib];
   [self.photoImageView cutCircle];
+  [self setCustomFonts];
+  [self layoutIfNeeded];
 }
 
 - (void)initData:(DCSpeaker*)speaker {
@@ -44,6 +49,15 @@
                            self.labelsCommonSidePadding.constant * 2;
   self.nameLabel.preferredMaxLayoutWidth = preferredWidth;
   self.jobAndCompanyLabel.preferredMaxLayoutWidth = preferredWidth;
+}
+
+- (void)setCustomFonts {
+  
+  DCFontItem *fonts = [DCConstants appFonts].firstObject;
+  
+  self.nameLabel.font = [UIFont fontWithName:fonts.titleFont size:self.nameLabel.font.pointSize];
+  self.jobAndCompanyLabel.font = [UIFont fontWithName:fonts.descriptionFont size:self.jobAndCompanyLabel.font.pointSize];
+  
 }
 
 @end

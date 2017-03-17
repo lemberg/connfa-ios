@@ -12,6 +12,7 @@
 #import "DCAppConfiguration.h"
 #import "UIImage+Extension.h"
 #import "DCAppSignMenuCell.h"
+#import "DCMenuItem.h"
 
 @class DCEvent;
 
@@ -48,6 +49,7 @@
   self.activeCellPath =
       [NSIndexPath indexPathForRow:DCMENU_PROGRAM_ITEM inSection:0];
   [self tableView:self.tableView didSelectRowAtIndexPath:self.activeCellPath];
+  
 }
 
 - (void)dealloc {
@@ -58,7 +60,7 @@
   [super viewWillAppear:animated];
 
   if (self.event) {
-    NSDictionary* menuItem = self.arrayOfCaptions.firstObject;
+    DCMenuItem* menuItem = self.arrayOfCaptions.firstObject;
     [self showViewControllerAssociatedWithMenuItem:menuItem];
 
     UINavigationController* navCon =
@@ -93,9 +95,9 @@
   return UIStatusBarStyleLightContent;
 }
 
-- (void)showViewControllerAssociatedWithMenuItem:(NSDictionary*)menuItemInfo {
-  DCMenuSection menuSection = [menuItemInfo[kMenuType] intValue];
-  NSString* viewControllerId = menuItemInfo[kMenuItemControllerId];
+- (void)showViewControllerAssociatedWithMenuItem:(DCMenuItem*)menuItemInfo {
+  DCMenuSection menuSection = menuItemInfo.menuType.intValue;//[menuItemInfo[kMenuType] intValue];
+  NSString* viewControllerId = menuItemInfo.controllerName;//menuItemInfo[kMenuItemControllerId];
 
   NSAssert(viewControllerId.length,
            @"No Storyboard ID for Menu item view controller");
@@ -114,7 +116,7 @@
 
   [self arrangeNavigationBarForController:rootMenuVC
                                  menuItem:menuSection
-                                 andTitle:menuItemInfo[kMenuItemTitle]];
+                                  andTitle:menuItemInfo.titleName];//menuItemInfo[kMenuItemTitle]];
 
   self.sideMenuContainer.centerViewController = navigationController;
   [self.sideMenuContainer setMenuState:MFSideMenuStateClosed completion:nil];
@@ -142,6 +144,8 @@
 - (void)openEventFromFavorite:(DCEvent*)event {
   self.event = event;
 }
+
+
 
 #pragma mark - User actions
 
@@ -198,6 +202,7 @@
   return [self.arrayOfCaptions count] - 1 == indexPath.row;
 }
 
+#pragma mark -UITableViewDataSource
 #pragma mark - UITableView delegate
 
 - (UITableViewCell*)tableView:(UITableView*)tableView
@@ -211,17 +216,19 @@
   DCSideMenuCell* cell = (DCSideMenuCell*)
       [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
-  NSDictionary* itemDict = self.arrayOfCaptions[indexPath.row];
-  cell.captionLabel.text = itemDict[kMenuItemTitle];
+  DCMenuItem* item = self.arrayOfCaptions[indexPath.row];
+  cell.captionLabel.text = item.titleName;//itemDict[kMenuItemTitle];
 
   BOOL isActiveCell = indexPath.row == self.activeCellPath.row;
-  cell.leftImageView.image = [UIImage
-      imageNamedFromBundle:itemDict[isActiveCell ? kMenuItemSelectedIcon
-                                                 : kMenuItemIcon]];
+//  cell.leftImageView.image = [UIImage
+//      imageNamedFromBundle:itemDict[isActiveCell ? kMenuItemSelectedIcon
+//                                                 : kMenuItemIcon]];
   if (isActiveCell) {
     [self updateLabel:cell.captionLabel withFontName:kFontOpenSansBold];
+    cell.leftImageView.image = [UIImage imageNamed:item.selectedIconName];
   } else {
     [self updateLabel:cell.captionLabel withFontName:kFontOpenSansRegular];
+    cell.leftImageView.image = [UIImage imageNamed:item.iconName];
   }
 //  UIFontDescriptor* fontDescriptor = [cell.captionLabel.font.fontDescriptor
 //      fontDescriptorWithSymbolicTraits:isActiveCell ? UIFontDescriptorTraitBold
@@ -238,40 +245,39 @@
 
 - (void)tableView:(UITableView*)tableView
     didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
-  // Change cells view to display Selection
+
   DCSideMenuCell* lastSelected =
-      (DCSideMenuCell*)[tableView cellForRowAtIndexPath:self.activeCellPath];
+  (DCSideMenuCell*)[tableView cellForRowAtIndexPath:self.activeCellPath];
+    
+  DCMenuItem *lastSelectedItem = [self.arrayOfCaptions objectAtIndex:self.activeCellPath.row];
+    
+  lastSelected.leftImageView.image =
+  [UIImage imageNamedFromBundle:lastSelectedItem.iconName];
+    
+  [self updateLabel:lastSelected.captionLabel withFontName:kFontOpenSansRegular];
+  
+
   DCSideMenuCell* newSelected =
       (DCSideMenuCell*)[tableView cellForRowAtIndexPath:indexPath];
+  
 
-  lastSelected.leftImageView.image =
-      [UIImage imageNamedFromBundle:[self.arrayOfCaptions
-                                        objectAtIndex:self.activeCellPath
-                                                          .row][kMenuItemIcon]];
-
-
-//  lastSelected.captionLabel.font =
-//      [UIFont fontWithDescriptor:regularFontDescriptor size:0];
-  [self updateLabel:lastSelected.captionLabel withFontName:kFontOpenSansRegular];
+  DCMenuItem *newSelectedItem = [self.arrayOfCaptions objectAtIndex:indexPath.row];
 
   newSelected.leftImageView.image = [UIImage
-      imageNamedFromBundle:[self.arrayOfCaptions objectAtIndex:indexPath.row]
-                               [kMenuItemSelectedIcon]];
-
-//  newSelected.captionLabel.font =
-//      [UIFont fontWithDescriptor:boldFontDescriptor size:0];
+      imageNamedFromBundle:newSelectedItem.selectedIconName];
+  
   [self updateLabel:newSelected.captionLabel withFontName:kFontOpenSansBold];
 
   self.activeCellPath = indexPath;
-
-  NSDictionary* menuItem = self.arrayOfCaptions[indexPath.row];
+  DCMenuItem* menuItem = self.arrayOfCaptions[indexPath.row];
   [self showViewControllerAssociatedWithMenuItem:menuItem];
 }
 
-- (NSInteger)tableView:(UITableView*)tableView
- numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   return self.arrayOfCaptions.count;
 }
+
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView {
   return 1;

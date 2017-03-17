@@ -14,6 +14,7 @@
 #import "DCInfoEventCell.h"
 #import "DCFavoriteEventsDataSource.h"
 #import "DCMainProxy+Additions.h"
+#import "DCGoldSponsorBannerHeandler.h"
 
 @interface DCDayEventsController ()<DCEventCellProtocol,
                                     DCDayEventSourceDelegate>
@@ -44,7 +45,6 @@
   [super viewDidLoad];
   
   self.noEventsImageViewDefaultHeight = 100.0;
-  
   [self configureState];
 }
 
@@ -145,8 +145,8 @@
 
         [cell initData:event delegate:weakSelf];
         // Some conditions for favorite events
-        NSString* titleForNextSection = [weakSelf.eventsDataSource
-            titleForSectionAtIdexPath:indexPath.section + 1];
+//        NSString* titleForNextSection = [weakSelf.eventsDataSource
+//            titleForSectionAtIdexPath:indexPath.section + 1];
 //        cell.separatorCellView.hidden =
 //            (titleForNextSection && cell.isLastCellInSection) ? YES : NO;
         if ([weakSelf.eventsStrategy leftSectionContainerColor]) {
@@ -179,6 +179,7 @@
 
 - (void)didSelectCell:(DCEventCell*)eventCell {
   NSIndexPath* cellIndexPath = [self.tableView indexPathForCell:eventCell];
+  [[DCGoldSponsorBannerHeandler sharedManager] makeRandomGoldenSponsor];
   DCEvent* selectedEvent =
       [self.eventsDataSource eventForIndexPath:cellIndexPath];
   [self.parentProgramController openDetailScreenForEvent:selectedEvent];

@@ -1,6 +1,17 @@
 
 #ifndef DrupalCon_DCSideMenuType_h
 #define DrupalCon_DCSideMenuType_h
+#define kMenuItemTitle @"MenuItemTitle"
+#define kMenuItemIcon @"MenuItemIcon"
+#define kMenuItemSelectedIcon @"MenuItemSelectedIcon"
+#define kMenuItemControllerId @"MenuItemControllerId"
+#define kMenuType @"MenuType"
+
+#define kFontTitle @"kFontTitle"
+#define kFontDescription @"kFontDescription"
+#define kFontName @"kFontName"
+
+
 
 typedef NS_ENUM(int, DCMenuSection) {
   DCMENU_PROGRAM_ITEM = 0,
