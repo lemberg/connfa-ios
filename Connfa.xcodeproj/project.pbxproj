@@ -504,7 +504,7 @@
 				288C5FA41E6D9E8C00F07CB4 /* Connfa */,
 			);
 			name = Targets;
-			path = DrupalCon/Targets;
+			path = Connfa/Targets;
 			sourceTree = "<group>";
 		};
 		288C5FA41E6D9E8C00F07CB4 /* Connfa */ = {
@@ -557,7 +557,7 @@
 		5DC8C408198656DA00BF5816 = {
 			isa = PBXGroup;
 			children = (
-				A6C5F0F21BF4E9C50093AD65 /* DrupalCon */,
+				A6C5F0F21BF4E9C50093AD65 /* Connfa */,
 				288C5F7E1E6D9E6D00F07CB4 /* Targets */,
 				5DC8C413198656DA00BF5816 /* Frameworks */,
 				5DC8C412198656DA00BF5816 /* Products */,
@@ -650,7 +650,7 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		A6C5F0F21BF4E9C50093AD65 /* DrupalCon */ = {
+		A6C5F0F21BF4E9C50093AD65 /* Connfa */ = {
 			isa = PBXGroup;
 			children = (
 				A6C5F0F31BF4E9C50093AD65 /* Classes */,
@@ -658,7 +658,7 @@
 				A6C5F21F1BF4E9C60093AD65 /* SupportingFiles */,
 				A6C5F2241BF4E9C60093AD65 /* Vendor */,
 			);
-			path = DrupalCon;
+			path = Connfa;
 			sourceTree = "<group>";
 		};
 		A6C5F0F31BF4E9C50093AD65 /* Classes */ = {
@@ -1486,7 +1486,7 @@
 			dependencies = (
 			);
 			name = Connfa;
-			productName = DrupalCon;
+			productName = Connfa;
 			productReference = 288C5F7C1E6D9E4A00F07CB4 /* Connfa.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -1505,7 +1505,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5DC8C40C198656DA00BF5816 /* Build configuration list for PBXProject "DrupalCon" */;
+			buildConfigurationList = 5DC8C40C198656DA00BF5816 /* Build configuration list for PBXProject "Connfa" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1566,7 +1566,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./DrupalCon/Vendor/Crashlytics/Fabric.framework/run e92185b02a2fa31062b797232c3d5cccf9867952 86aa1940d27f46c329fc363de870071c4117aaea9b473564fef59b1783a54c8d";
+			shellScript = "./Connfa/Vendor/Crashlytics/Fabric.framework/run e92185b02a2fa31062b797232c3d5cccf9867952 86aa1940d27f46c329fc363de870071c4117aaea9b473564fef59b1783a54c8d";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1717,17 +1717,17 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/DrupalCon",
-					"$(PROJECT_DIR)/DrupalCon/Vendor/Crashlytics",
+					"$(PROJECT_DIR)/Connfa",
+					"$(PROJECT_DIR)/Connfa/Vendor/Crashlytics",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/DrupalCon/SupportingFiles/Connfa-Prefix.pch";
-				INFOPLIST_FILE = "$(SRCROOT)/DrupalCon/Targets/Connfa/Connfa-Info.plist";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Connfa/SupportingFiles/Connfa-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/Connfa/Targets/Connfa/Connfa-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/DrupalCon/Vendor/GoogleAnalytics",
+					"$(PROJECT_DIR)/Connfa/Vendor/GoogleAnalytics",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon.qa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1749,17 +1749,17 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/DrupalCon",
-					"$(PROJECT_DIR)/DrupalCon/Vendor/Crashlytics",
+					"$(PROJECT_DIR)/Connfa",
+					"$(PROJECT_DIR)/Connfa/Vendor/Crashlytics",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = NO;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/DrupalCon/SupportingFiles/Connfa-Prefix.pch";
-				INFOPLIST_FILE = "$(SRCROOT)/DrupalCon/Targets/Connfa/Connfa-Info.plist";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/Connfa/SupportingFiles/Connfa-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/Connfa/Targets/Connfa/Connfa-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					"$(PROJECT_DIR)/DrupalCon/Vendor/GoogleAnalytics",
+					"$(PROJECT_DIR)/Connfa/Vendor/GoogleAnalytics",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon.qa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1854,7 +1854,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5DC8C40C198656DA00BF5816 /* Build configuration list for PBXProject "DrupalCon" */ = {
+		5DC8C40C198656DA00BF5816 /* Build configuration list for PBXProject "Connfa" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5DC8C441198656DB00BF5816 /* Debug */,
