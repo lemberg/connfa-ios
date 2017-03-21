@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>EventDate</key>
-	<string> </string>
+	<string>  </string>
 	<key>EventPlace</key>
-	<string> </string>
+	<string>   </string>
 	<key>NavigationBarColour</key>
-	<string>#072D50</string>
+	<string>#3d4760</string>
 	<key>EventDetailHeaderColour</key>
 	<string>#3d4760</string>
 	<key>EventDetailNavBarTextColour</key>
