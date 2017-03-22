@@ -10,6 +10,11 @@
 #import "UIImage+Extension.h"
 #import "DCConstants.h"
 #import "DCFontItem.h"
+#import "DCMainEvent.h"
+#import "DCBof.h"
+#import "DCSocialEvent.h"
+#import "DCDayEventsController.h"
+#import "DCFavoriteEventsDataSource.h"
 
 // These values are hardcoded because cells are get by "dequeueREusableCells"
 // method, so previous cell value might be set to 0.
@@ -177,8 +182,43 @@ static NSInteger eventCellImageHeight = 16;
   // setting cell clickable
   self.isEnabled = [self isEnabled:event];
   [self setCellEnabled:self.isEnabled];
-
+  
+  if ([aDelegate isKindOfClass:[DCDayEventsController class]]) {
+    DCDayEventsController *newObj = (DCDayEventsController *)aDelegate;
+    if ([newObj.eventsDataSource isKindOfClass:[DCFavoriteEventsDataSource class]]) {
+      if ([event isKindOfClass:[DCMainEvent class]]) {
+        [self addHashtegWithType:@"Session"];
+      } else if ([event isKindOfClass:[DCBof class]]) {
+        [self addHashtegWithType:@"BoF"];
+      } else if ([event isKindOfClass:[DCSocialEvent class]]) {
+        [self addHashtegWithType:@"Social"];
+      }
+    }
+  }
+  
   self.delegate = aDelegate;
+}
+
+- (void)addHashtegWithType:(NSString*)type {
+  UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(50, 100, 0, 0)];
+  label.textAlignment = NSTextAlignmentCenter;
+  label.textColor = [UIColor whiteColor];
+  label.backgroundColor = [DCAppConfiguration eventDetailHeaderColour];
+  label.font = [UIFont fontWithName:@"Helvetica Neue" size:14];
+  label.text = type;
+  [label sizeToFit];
+  label.clipsToBounds = YES;
+  [label setFrame:CGRectMake(label.frame.origin.x, label.frame.origin.y, label.frame.size.width + 18, label.frame.size.height + 4)];
+  label.layer.cornerRadius = label.frame.size.height / 2;
+  UIImage *image = [UIImage grabImage:label];
+  
+  NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
+  attachment.image = image;
+  
+  NSAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:attachment];
+  NSMutableAttributedString *myString= [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ ", self.eventTitleLabel.text]];
+  [myString appendAttributedString:attachmentString];
+  self.eventTitleLabel.attributedText = myString;
 }
 
 - (NSString*)ratingsImagesName:(NSInteger)identifier{

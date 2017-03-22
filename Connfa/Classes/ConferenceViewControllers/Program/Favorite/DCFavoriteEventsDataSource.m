@@ -43,12 +43,40 @@
     NSArray* eventsByTimeRange =
         [self eventsSortedByTimeRange:[self eventsForDay]
                   withUniqueTimeRange:uniqueTimeSlotForDay];
+    
     if ([eventsByTimeRange count]) {
-      [sections addObject:@{kDCTimeslotKEY : [self titleForClass:class]}];
+      //[sections addObject:@{kDCTimeslotKEY : [self titleForClass:class]}];
       [sections addObjectsFromArray:eventsByTimeRange];
     }
   }
-  return [NSArray arrayWithArray:sections];
+  
+  NSArray *result = [self sortByTime:[NSArray arrayWithArray:sections]];
+  
+  return result;
+}
+
+- (NSArray *)sortByTime:(NSArray *)array {
+  
+  NSMutableArray *tempArr = [NSMutableArray new];
+  
+  for (NSDictionary *obj in array) {
+    DCTimeRange *timeRange = [obj valueForKey:@"timeslot_key"];
+    [tempArr addObject:timeRange];
+  }
+  
+  NSSortDescriptor *dateDescriptor = [NSSortDescriptor
+                                      sortDescriptorWithKey:@"from"
+                                      ascending:YES];
+  NSArray *sortDescriptors = [NSArray arrayWithObject:dateDescriptor];
+  
+  NSArray *sortedEventArray = [tempArr
+                               sortedArrayUsingDescriptors:sortDescriptors];
+  
+
+  
+  NSLog(@"!!!");
+
+  return array;
 }
 
 - (NSString*)titleForSectionAtIdexPath:(NSInteger)section {
@@ -61,16 +89,16 @@
 }
 
 - (NSString*)titleForClass:(Class) class {
-  if ([NSStringFromClass(class)
-          isEqualToString:NSStringFromClass([DCBof class])]) {
-    return @"BoFs";
-  } else if ([NSStringFromClass(class)
-                 isEqualToString:NSStringFromClass([DCMainEvent class])]) {
-    return @"Sessions";
-  } else {
-    return @"Social Events";
-  }
-
+//  if ([NSStringFromClass(class)
+//          isEqualToString:NSStringFromClass([DCBof class])]) {
+//    return @"BoFs";
+//  } else if ([NSStringFromClass(class)
+//                 isEqualToString:NSStringFromClass([DCMainEvent class])]) {
+//    return @"Sessions";
+//  } else {
+//    return @"Social Events";
+//  }
+  return @"";
 }
 
 - (void)reloadEvents {

@@ -24,4 +24,7 @@
 + (NSString*)splashImageNameForOrientation:(UIInterfaceOrientation)orientation;
 
 + (UIImage*)imageNamedFromBundle:(NSString*)imageName;
+
++ (UIImage *)grabImage:(UIView*)view;
+
 @end

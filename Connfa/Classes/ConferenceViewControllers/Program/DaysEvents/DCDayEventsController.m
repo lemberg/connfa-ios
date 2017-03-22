@@ -25,7 +25,6 @@
 @property(nonatomic, strong) NSString* stubMessage;
 @property(nonatomic, strong) UIImage* stubImage;
 
-@property(nonatomic) DCEventDataSource* eventsDataSource;
 
 @property(nonatomic, strong) DCEventCell* cellPrototype;
 @property(weak, nonatomic)
