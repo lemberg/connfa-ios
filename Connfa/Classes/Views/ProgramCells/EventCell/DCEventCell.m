@@ -214,11 +214,13 @@ static NSInteger eventCellImageHeight = 16;
   
   NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
   attachment.image = image;
-  
+
   NSAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:attachment];
   NSMutableAttributedString *myString= [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ ", self.eventTitleLabel.text]];
   [myString appendAttributedString:attachmentString];
+  self.eventTitleLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
   self.eventTitleLabel.attributedText = myString;
+
 }
 
 - (NSString*)ratingsImagesName:(NSInteger)identifier{
@@ -264,6 +266,7 @@ static NSInteger eventCellImageHeight = 16;
                             attributes:@{
                               NSFontAttributeName : label.font
                             } context:nil];
+
   return textRect.size.height;
 }
 

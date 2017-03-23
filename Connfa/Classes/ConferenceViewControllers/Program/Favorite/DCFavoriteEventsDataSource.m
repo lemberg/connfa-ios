@@ -14,6 +14,7 @@
       dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 
         NSArray* eventsByTimeRange = [self favoriteEventsSource];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
           //
           __strong __typeof__(weakSelf) strongSelf = weakSelf;
@@ -56,27 +57,13 @@
 }
 
 - (NSArray *)sortByTime:(NSArray *)array {
-  
-  NSMutableArray *tempArr = [NSMutableArray new];
-  
-  for (NSDictionary *obj in array) {
-    DCTimeRange *timeRange = [obj valueForKey:@"timeslot_key"];
-    [tempArr addObject:timeRange];
-  }
-  
-  NSSortDescriptor *dateDescriptor = [NSSortDescriptor
-                                      sortDescriptorWithKey:@"from"
-                                      ascending:YES];
-  NSArray *sortDescriptors = [NSArray arrayWithObject:dateDescriptor];
-  
-  NSArray *sortedEventArray = [tempArr
-                               sortedArrayUsingDescriptors:sortDescriptors];
-  
+  NSArray *sortedArray = [array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+    DCTimeRange * objectOne = [obj1 valueForKey:@"timeslot_key"];
+    DCTimeRange * objectTwo = [obj2 valueForKey:@"timeslot_key"];
+    return [objectOne.from compare:objectTwo.from];
+  }];
 
-  
-  NSLog(@"!!!");
-
-  return array;
+  return sortedArray;
 }
 
 - (NSString*)titleForSectionAtIdexPath:(NSInteger)section {
