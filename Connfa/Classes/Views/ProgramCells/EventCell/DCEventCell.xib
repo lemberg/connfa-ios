@@ -15,15 +15,15 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="121"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" verticalHuggingPriority="1" verticalCompressionResistancePriority="1" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="120.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P2l-bS-0fe" userLabel="RightContent">
                         <rect key="frame" x="77" y="0.0" width="243" height="120"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label Label LabelLabel Label Label Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cOT-Gi-ftB">
-                                <rect key="frame" x="9" y="12" width="201" height="33.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <rect key="frame" x="9" y="12" width="201" height="34"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
                                 <color key="textColor" red="0.15056313574314117" green="0.15055863559246063" blue="0.15056121349334717" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -31,7 +31,7 @@
                                 <rect key="frame" x="217" y="15" width="12" height="12"/>
                             </imageView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pDk-DV-pAD" userLabel="track">
-                                <rect key="frame" x="9" y="50.5" width="204" height="19"/>
+                                <rect key="frame" x="9" y="51" width="204" height="19"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="track track" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efH-VV-Jx5" userLabel="track">
                                         <rect key="frame" x="0.0" y="0.0" width="204" height="18"/>
@@ -49,7 +49,7 @@
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aaC-fh-4Ly" userLabel="speakers">
-                                <rect key="frame" x="9" y="74.5" width="204" height="14"/>
+                                <rect key="frame" x="9" y="75" width="204" height="14"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalCompressionResistancePriority="1000" image="ic_speakers" translatesAutoresizingMaskIntoConstraints="NO" id="Smd-7l-Nad">
                                         <rect key="frame" x="0.0" y="3" width="10" height="10"/>
@@ -76,7 +76,7 @@
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wwU-2B-kPy" userLabel="place">
-                                <rect key="frame" x="9" y="93.5" width="204" height="14"/>
+                                <rect key="frame" x="9" y="94" width="204" height="14"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalCompressionResistancePriority="1000" image="ic_place" translatesAutoresizingMaskIntoConstraints="NO" id="11u-ah-3H7">
                                         <rect key="frame" x="0.0" y="3" width="10" height="10"/>
@@ -158,16 +158,16 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="to 10:55 PM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="RC4-sf-WBu">
-                                <rect key="frame" x="0.0" y="35" width="80" height="14.5"/>
+                                <rect key="frame" x="0.0" y="35" width="80" height="15"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.50861334800720215" green="0.50859808921813965" blue="0.50860673189163208" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="1" verticalCompressionResistancePriority="1" image="ic_program_24_hour" translatesAutoresizingMaskIntoConstraints="NO" id="rQD-x0-Ygk">
-                                <rect key="frame" x="32" y="57.5" width="16" height="16"/>
+                                <rect key="frame" x="32" y="58" width="16" height="16"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="APf-ho-qaw" userLabel="CoverButton">
-                                <rect key="frame" x="0.0" y="0.0" width="77" height="120"/>
+                                <rect key="frame" x="0.0" y="0.0" width="77" height="122"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="          ">

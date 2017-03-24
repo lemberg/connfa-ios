@@ -3,20 +3,20 @@
 <plist version="1.0">
 <dict>
 	<key>EventDate</key>
-	<string>Event Title</string>
+	<string> </string>
 	<key>EventPlace</key>
-	<string>Lviv, Ukraine</string>
+	<string> </string>
 	<key>NavigationBarColour</key>
-	<string>#072D50</string>
+	<string>#17293c</string>
 	<key>EventDetailHeaderColour</key>
-	<string>#4077aa</string>
+	<string>#3d5275</string>
 	<key>EventDetailNavBarTextColour</key>
-	<string>#1f3e98</string>
+	<string>#ffffff</string>
 	<key>FavoriteEventColour</key>
-	<string>#4f3b9a</string>
+	<string>#806d27</string>
 	<key>IsFilterEnable</key>
 	<true/>
 	<key>SpeakerDetailBarColour</key>
-	<string>#072D50</string>
+	<string>#3d5275</string>
 </dict>
 </plist>

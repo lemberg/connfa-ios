@@ -328,6 +328,9 @@
 		281F87CC1E7FF1620065EA1B /* event_detail_style.css in Resources */ = {isa = PBXBuildFile; fileRef = 281F87C51E7FF1620065EA1B /* event_detail_style.css */; };
 		281F87CD1E7FF1620065EA1B /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 281F87C61E7FF1620065EA1B /* style.css */; };
 		287118711E72DFBA00CD0498 /* DCFontItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 282BD3B11E7191A0009763EC /* DCFontItem.m */; };
+		287E7BC91E8535A200E03F56 /* Merriweather-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 287E7BC81E8535A200E03F56 /* Merriweather-Regular.ttf */; };
+		287E7BCA1E8535A200E03F56 /* Merriweather-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 287E7BC81E8535A200E03F56 /* Merriweather-Regular.ttf */; };
+		287E7BCB1E8535A200E03F56 /* Merriweather-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 287E7BC81E8535A200E03F56 /* Merriweather-Regular.ttf */; };
 		288C5ED91E6D9E4A00F07CB4 /* DCAppSignMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1E71BF4E9C50093AD65 /* DCAppSignMenuCell.m */; };
 		288C5EDA1E6D9E4A00F07CB4 /* NSUserDefaults+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F12C1BF4E9C50093AD65 /* NSUserDefaults+DC.m */; };
 		288C5EDB1E6D9E4A00F07CB4 /* DCBof+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1511BF4E9C50093AD65 /* DCBof+DC.m */; };
@@ -509,6 +512,7 @@
 		282910E81E7BD0C500BD6A4D /* Connfa-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Connfa-Prefix.pch"; sourceTree = "<group>"; };
 		282BD3B01E7191A0009763EC /* DCFontItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCFontItem.h; sourceTree = "<group>"; };
 		282BD3B11E7191A0009763EC /* DCFontItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCFontItem.m; sourceTree = "<group>"; };
+		287E7BC81E8535A200E03F56 /* Merriweather-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Regular.ttf"; sourceTree = "<group>"; };
 		288C5F7C1E6D9E4A00F07CB4 /* Connfa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Connfa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		288C5FA61E6D9E8C00F07CB4 /* DCConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCConstants.m; sourceTree = "<group>"; };
 		288C5FA91E6D9E8C00F07CB4 /* DC-Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "DC-Images.xcassets"; sourceTree = "<group>"; };
@@ -1100,6 +1104,7 @@
 		A68AE7BD1C626470002E862D /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				287E7BC81E8535A200E03F56 /* Merriweather-Regular.ttf */,
 				F547A7E01D537C3200CD24F2 /* Montserrat */,
 				A68AE7BE1C626470002E862D /* OpenSans-Bold.ttf */,
 				A68AE7BF1C626470002E862D /* OpenSans-CondBold.ttf */,
@@ -2046,6 +2051,7 @@
 				281F86EE1E7FF0730065EA1B /* LESelectedActionSheetController.xib in Resources */,
 				281F87111E7FF0B40065EA1B /* style.css in Resources */,
 				281F870C1E7FF0B40065EA1B /* DrupalCon-Info.plist in Resources */,
+				287E7BCA1E8535A200E03F56 /* Merriweather-Regular.ttf in Resources */,
 				281F86F01E7FF0730065EA1B /* Events.storyboard in Resources */,
 				281F86F21E7FF0730065EA1B /* (null) in Resources */,
 				281F86F31E7FF0730065EA1B /* OpenSans-Regular.ttf in Resources */,
@@ -2074,6 +2080,7 @@
 				281F87CA1E7FF1620065EA1B /* DC-Theme.bundle in Resources */,
 				281F87AE1E7FF1550065EA1B /* LESelectedActionSheetController.xib in Resources */,
 				281F87CD1E7FF1620065EA1B /* style.css in Resources */,
+				287E7BCB1E8535A200E03F56 /* Merriweather-Regular.ttf in Resources */,
 				281F87B11E7FF1550065EA1B /* Events.storyboard in Resources */,
 				281F87B21E7FF1550065EA1B /* (null) in Resources */,
 				281F87B31E7FF1550065EA1B /* OpenSans-Regular.ttf in Resources */,
@@ -2102,6 +2109,7 @@
 				288C5F6E1E6D9E4A00F07CB4 /* LESelectedActionSheetController.xib in Resources */,
 				288C5FB21E6D9E8C00F07CB4 /* DC-Theme.bundle in Resources */,
 				288C5F701E6D9E4A00F07CB4 /* Events.storyboard in Resources */,
+				287E7BC91E8535A200E03F56 /* Merriweather-Regular.ttf in Resources */,
 				288C5FB51E6D9E8C00F07CB4 /* style.css in Resources */,
 				288C5F721E6D9E4A00F07CB4 /* (null) in Resources */,
 				288C5F731E6D9E4A00F07CB4 /* OpenSans-Regular.ttf in Resources */,

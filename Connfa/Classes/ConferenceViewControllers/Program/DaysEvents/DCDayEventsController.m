@@ -48,6 +48,12 @@
   [self configureState];
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+  //refresh favorite
+  [self configureState];
+}
+
 - (void)dealloc {
   self.stubMessage = nil;
   self.stubImage = nil;

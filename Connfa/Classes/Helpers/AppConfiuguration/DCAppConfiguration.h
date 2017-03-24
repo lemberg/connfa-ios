@@ -6,7 +6,7 @@ extern NSString* kFontOpenSansBold;
 extern NSString* kFontOpenSansCondBold;
 extern NSString* kFontOpenSansRegular;
 extern NSString* kFontHelveticaNeueRegular;
-
+extern NSString* kFontMerriweatherRegularRegular;
 
 
 @interface DCAppConfiguration : NSObject

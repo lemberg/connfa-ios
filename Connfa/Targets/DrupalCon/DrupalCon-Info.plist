@@ -54,6 +54,7 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
+		<string>Merriweather-Regular.ttf</string>
 		<string>OpenSans-CondBold.ttf</string>
 		<string>Smythe-Regular.ttf</string>
 		<string>OpenSans-Regular.ttf</string>
@@ -75,7 +76,7 @@
 	<true/>
 	<key>GoldSponsorHeaders</key>
 	<array>
-    <string>event_detail_top</string>
+		<string>event_detail_top</string>
 	</array>
 </dict>
 </plist>
