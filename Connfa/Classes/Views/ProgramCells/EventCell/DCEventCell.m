@@ -272,7 +272,7 @@ static NSInteger hashtagHeightOffset = 4;
   
   NSString *fontName = label.font.fontName;
   CGFloat fontSize = label.font.pointSize;
-  UIFont *customFont = [UIFont fontWithName:fontName size:fontSize + hashtagHeightOffset];
+  UIFont *customFont = [UIFont fontWithName:fontName size:fontSize + hashtagHeightOffset + 2];
   
   CGRect textRect =
       [label.text boundingRectWithSize:CGSizeMake(label.preferredMaxLayoutWidth,
