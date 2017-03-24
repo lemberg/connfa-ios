@@ -20,6 +20,7 @@
 // method, so previous cell value might be set to 0.
 static NSInteger eventCellSubtitleHeight = 16;
 static NSInteger eventCellImageHeight = 16;
+static NSInteger hashtagHeightOffset = 4;
 
 #define leftButonEnabledColor [UIColor colorWithWhite:247.0 / 255.0 alpha:1.0]
 #define leftButonDisabledColor [UIColor colorWithWhite:237.0 / 255.0 alpha:1.0]
@@ -27,6 +28,7 @@ static NSInteger eventCellImageHeight = 16;
 @interface DCEventCell ()
 
 @property(nonatomic) BOOL isEnabled;
+@property(nonatomic) BOOL isFavorite;
 @property(weak, nonatomic) IBOutlet UIView* rightContentView;
 @property(weak, nonatomic) IBOutlet UIView* leftContentView;
 @property(weak, nonatomic) IBOutlet UIButton* rightCoverButton;
@@ -106,6 +108,17 @@ static NSInteger eventCellImageHeight = 16;
 
 - (void)initData:(DCEvent*)event delegate:(id<DCEventCellProtocol>)aDelegate {
   NSString* trackName = [(DCTrack*)[event.tracks anyObject] name];
+  
+  if ([aDelegate isKindOfClass:[DCDayEventsController class]]) {
+    DCDayEventsController *newObj = (DCDayEventsController *)aDelegate;
+    if ([newObj.eventsDataSource isKindOfClass:[DCFavoriteEventsDataSource class]]) {
+      self.isFavorite = YES;
+    } else {
+      self.isFavorite = NO;
+    }
+  } else {
+    self.isFavorite = NO;
+  }
 
   // Name
   self.eventTitleLabel.text = event.name;
@@ -183,16 +196,14 @@ static NSInteger eventCellImageHeight = 16;
   self.isEnabled = [self isEnabled:event];
   [self setCellEnabled:self.isEnabled];
   
-  if ([aDelegate isKindOfClass:[DCDayEventsController class]]) {
-    DCDayEventsController *newObj = (DCDayEventsController *)aDelegate;
-    if ([newObj.eventsDataSource isKindOfClass:[DCFavoriteEventsDataSource class]]) {
-      if ([event isKindOfClass:[DCMainEvent class]]) {
-        [self addHashtegWithType:@"Session"];
-      } else if ([event isKindOfClass:[DCBof class]]) {
-        [self addHashtegWithType:@"BoF"];
-      } else if ([event isKindOfClass:[DCSocialEvent class]]) {
-        [self addHashtegWithType:@"Social"];
-      }
+  
+  if (self.isFavorite) {
+    if ([event isKindOfClass:[DCMainEvent class]]) {
+      [self addHashtegWithType:@"Session"];
+    } else if ([event isKindOfClass:[DCBof class]]) {
+      [self addHashtegWithType:@"BoF"];
+    } else if ([event isKindOfClass:[DCSocialEvent class]]) {
+      [self addHashtegWithType:@"Social event"];
     }
   }
   
@@ -208,7 +219,7 @@ static NSInteger eventCellImageHeight = 16;
   label.text = type;
   [label sizeToFit];
   label.clipsToBounds = YES;
-  [label setFrame:CGRectMake(label.frame.origin.x, label.frame.origin.y, label.frame.size.width + 18, label.frame.size.height + 4)];
+  [label setFrame:CGRectMake(label.frame.origin.x, label.frame.origin.y, label.frame.size.width + 18, label.frame.size.height + hashtagHeightOffset)];
   label.layer.cornerRadius = label.frame.size.height / 2;
   UIImage *image = [UIImage grabImage:label];
   
@@ -220,7 +231,6 @@ static NSInteger eventCellImageHeight = 16;
   [myString appendAttributedString:attachmentString];
   self.eventTitleLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
   self.eventTitleLabel.attributedText = myString;
-
 }
 
 - (NSString*)ratingsImagesName:(NSInteger)identifier{
@@ -259,15 +269,27 @@ static NSInteger eventCellImageHeight = 16;
 }
 
 - (CGFloat)getHeightForLabel:(UILabel*)label {
+  
+  NSString *fontName = label.font.fontName;
+  CGFloat fontSize = label.font.pointSize;
+  UIFont *customFont = [UIFont fontWithName:fontName size:fontSize + hashtagHeightOffset];
+  
   CGRect textRect =
       [label.text boundingRectWithSize:CGSizeMake(label.preferredMaxLayoutWidth,
                                                   NSIntegerMax)
                                options:NSStringDrawingUsesLineFragmentOrigin
                             attributes:@{
-                              NSFontAttributeName : label.font
+                              NSFontAttributeName : customFont
                             } context:nil];
+  CGFloat result;
 
-  return textRect.size.height;
+  if (self.isFavorite) {
+    result = textRect.size.height + hashtagHeightOffset;
+  } else {
+    result = textRect.size.height;
+  }
+  
+  return result;
 }
 
 - (void)setCustomFonts {
