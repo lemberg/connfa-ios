@@ -513,7 +513,6 @@
 		282BD3B01E7191A0009763EC /* DCFontItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCFontItem.h; sourceTree = "<group>"; };
 		282BD3B11E7191A0009763EC /* DCFontItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCFontItem.m; sourceTree = "<group>"; };
 		287E7BC81E8535A200E03F56 /* Merriweather-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Regular.ttf"; sourceTree = "<group>"; };
-		288C5F7C1E6D9E4A00F07CB4 /* Connfa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Connfa.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		288C5F7C1E6D9E4A00F07CB4 /* Connfa!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Connfa!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		288C5FA61E6D9E8C00F07CB4 /* DCConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCConstants.m; sourceTree = "<group>"; };
 		288C5FA91E6D9E8C00F07CB4 /* DC-Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "DC-Images.xcassets"; sourceTree = "<group>"; };
@@ -1028,7 +1027,6 @@
 		5DC8C412198656DA00BF5816 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				288C5F7C1E6D9E4A00F07CB4 /* Connfa.app */,
 				281F86FA1E7FF0730065EA1B /* DrupalCon.app */,
 				281F87BA1E7FF1550065EA1B /* DrupalCamp.app */,
 				288C5F7C1E6D9E4A00F07CB4 /* Connfa!.app */,
@@ -1973,9 +1971,9 @@
 			productReference = 281F87BA1E7FF1550065EA1B /* DrupalCamp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		288C5ED71E6D9E4A00F07CB4 /* Connfa */ = {
+		288C5ED71E6D9E4A00F07CB4 /* Connfa! */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 288C5F791E6D9E4A00F07CB4 /* Build configuration list for PBXNativeTarget "Connfa" */;
+			buildConfigurationList = 288C5F791E6D9E4A00F07CB4 /* Build configuration list for PBXNativeTarget "Connfa!" */;
 			buildPhases = (
 				288C5ED81E6D9E4A00F07CB4 /* Sources */,
 				288C5F531E6D9E4A00F07CB4 /* Frameworks */,
@@ -1986,7 +1984,7 @@
 			);
 			dependencies = (
 			);
-			name = Connfa;
+			name = "Connfa!";
 			productName = Connfa;
 			productReference = 288C5F7C1E6D9E4A00F07CB4 /* Connfa!.app */;
 			productType = "com.apple.product-type.application";
@@ -2025,7 +2023,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				288C5ED71E6D9E4A00F07CB4 /* Connfa */,
+				288C5ED71E6D9E4A00F07CB4 /* Connfa! */,
 				281F86521E7FF0730065EA1B /* DrupalCon */,
 				281F87121E7FF1550065EA1B /* DrupalCamp */,
 			);
@@ -2716,7 +2714,7 @@
 					"$(PROJECT_DIR)/Connfa/Vendor/GoogleAnalytics",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon.qa;
-				PRODUCT_NAME = "$(TARGET_NAME)!";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "9fcaf0b0-f648-4066-8b5a-4a1cb45042a2";
 				PROVISIONING_PROFILE_SPECIFIER = DrupalCon_dev;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2748,7 +2746,7 @@
 					"$(PROJECT_DIR)/Connfa/Vendor/GoogleAnalytics",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon.qa;
-				PRODUCT_NAME = "$(TARGET_NAME)!";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "9fcaf0b0-f648-4066-8b5a-4a1cb45042a2";
 				PROVISIONING_PROFILE_SPECIFIER = DrupalCon_dev;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2849,7 +2847,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		288C5F791E6D9E4A00F07CB4 /* Build configuration list for PBXNativeTarget "Connfa" */ = {
+		288C5F791E6D9E4A00F07CB4 /* Build configuration list for PBXNativeTarget "Connfa!" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				288C5F7A1E6D9E4A00F07CB4 /* Debug */,
