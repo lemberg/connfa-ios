@@ -1472,9 +1472,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		288C5ED71E6D9E4A00F07CB4 /* Connfa */ = {
+		288C5ED71E6D9E4A00F07CB4 /* Connfa! */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 288C5F791E6D9E4A00F07CB4 /* Build configuration list for PBXNativeTarget "Connfa" */;
+			buildConfigurationList = 288C5F791E6D9E4A00F07CB4 /* Build configuration list for PBXNativeTarget "Connfa!" */;
 			buildPhases = (
 				288C5ED81E6D9E4A00F07CB4 /* Sources */,
 				288C5F531E6D9E4A00F07CB4 /* Frameworks */,
@@ -1485,7 +1485,7 @@
 			);
 			dependencies = (
 			);
-			name = Connfa;
+			name = "Connfa!";
 			productName = Connfa;
 			productReference = 288C5F7C1E6D9E4A00F07CB4 /* Connfa!.app */;
 			productType = "com.apple.product-type.application";
@@ -1518,7 +1518,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				288C5ED71E6D9E4A00F07CB4 /* Connfa */,
+				288C5ED71E6D9E4A00F07CB4 /* Connfa! */,
 			);
 		};
 /* End PBXProject section */
@@ -1730,7 +1730,7 @@
 					"$(PROJECT_DIR)/Connfa/Vendor/GoogleAnalytics",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon.qa;
-				PRODUCT_NAME = "$(TARGET_NAME)!";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "9fcaf0b0-f648-4066-8b5a-4a1cb45042a2";
 				PROVISIONING_PROFILE_SPECIFIER = DrupalCon_dev;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1762,7 +1762,7 @@
 					"$(PROJECT_DIR)/Connfa/Vendor/GoogleAnalytics",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon.qa;
-				PRODUCT_NAME = "$(TARGET_NAME)!";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "9fcaf0b0-f648-4066-8b5a-4a1cb45042a2";
 				PROVISIONING_PROFILE_SPECIFIER = DrupalCon_dev;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1845,7 +1845,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		288C5F791E6D9E4A00F07CB4 /* Build configuration list for PBXNativeTarget "Connfa" */ = {
+		288C5F791E6D9E4A00F07CB4 /* Build configuration list for PBXNativeTarget "Connfa!" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				288C5F7A1E6D9E4A00F07CB4 /* Debug */,
