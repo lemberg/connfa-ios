@@ -225,7 +225,7 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SideMenuCellIdentifier" rowHeight="50" id="5x6-J4-yNI" customClass="DCSideMenuCell">
-                                        <rect key="frame" x="0.0" y="56" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="5x6-J4-yNI" id="gPj-8h-6Fw">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
@@ -271,7 +271,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DCAppSignMenuCell" rowHeight="79" id="lzn-Tu-Qmq" customClass="DCAppSignMenuCell">
-                                        <rect key="frame" x="0.0" y="106" width="375" height="79"/>
+                                        <rect key="frame" x="0.0" y="105.5" width="375" height="79"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lzn-Tu-Qmq" id="7B5-b7-t7V">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
@@ -352,28 +352,28 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tRu-8b-hDP" userLabel="Labels placeholder">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="113"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="106"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RoyalPark Metrotel" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="hQz-sT-h3H" userLabel="Name">
-                                        <rect key="frame" x="20" y="0.0" width="335" height="34"/>
+                                        <rect key="frame" x="20" y="0.0" width="335" height="33"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="28"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calle 74 # 13-27" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="2yf-nA-7Ch" userLabel="Street and number">
-                                        <rect key="frame" x="20" y="36" width="335" height="22"/>
+                                        <rect key="frame" x="20" y="35" width="335" height="20"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bogota, Cundinamarca" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="Tvz-q1-gvg" userLabel="City and province">
-                                        <rect key="frame" x="20" y="56" width="335" height="22"/>
+                                        <rect key="frame" x="20" y="53" width="335" height="20"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Colombia" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="Nil-uv-QF5" userLabel="State">
-                                        <rect key="frame" x="20" y="76" width="335" height="22"/>
+                                        <rect key="frame" x="20" y="71" width="335" height="20"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -397,7 +397,7 @@
                                 </constraints>
                             </view>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ZHF-Cn-Pkf">
-                                <rect key="frame" x="0.0" y="113" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="106" width="375" height="561"/>
                                 <connections>
                                     <outlet property="delegate" destination="HyN-5J-w0d" id="kSg-zJ-uSi"/>
                                 </connections>
