@@ -2000,7 +2000,8 @@
 				ORGANIZATIONNAME = "Lemberg Solution";
 				TargetAttributes = {
 					281F86521E7FF0730065EA1B = {
-						DevelopmentTeam = FN2T3UCV4E;
+						DevelopmentTeam = J7LBYY3B34;
+						ProvisioningStyle = Automatic;
 					};
 					281F87121E7FF1550065EA1B = {
 						DevelopmentTeam = FN2T3UCV4E;
@@ -2568,8 +2569,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
-				DEVELOPMENT_TEAM = FN2T3UCV4E;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = J7LBYY3B34;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2585,10 +2586,10 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Connfa/Vendor/GoogleAnalytics",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon.qa;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9fcaf0b0-f648-4066-8b5a-4a1cb45042a2";
-				PROVISIONING_PROFILE_SPECIFIER = DrupalCon_dev;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -2600,8 +2601,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
-				DEVELOPMENT_TEAM = FN2T3UCV4E;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = J7LBYY3B34;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2617,10 +2618,10 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Connfa/Vendor/GoogleAnalytics",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon.qa;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9fcaf0b0-f648-4066-8b5a-4a1cb45042a2";
-				PROVISIONING_PROFILE_SPECIFIER = DrupalCon_dev;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
