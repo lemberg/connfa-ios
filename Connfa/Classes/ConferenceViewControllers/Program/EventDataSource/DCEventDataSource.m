@@ -1,6 +1,8 @@
 
 #import "DCEventDataSource.h"
 #import "NSCalendar+DC.h"
+#import "DCSocialEvent.h"
+#import "DCType.h"
 
 @interface DCEventDataSource ()
 
@@ -42,22 +44,33 @@ const NSString* kDCTimeslotKEY = @"timeslot_key";
 const NSString* kDCTimeslotEventKEY = @"timeslot_event_key";
 
 - (NSArray*)eventsSortedByTimeRange:(NSArray*)events
-                withUniqueTimeRange:(NSArray*)unqueTimeRange {
+                withUniqueTimeRange:(NSArray*)unqueTimeRange
+                              class:(Class)eventClass{
   NSMutableArray* uniqueTimeSlotsSource = [NSMutableArray array];
 
   NSArray* eventsForDay = events;
   NSArray* uniqueTimeSlotForDay = unqueTimeRange;
-
-  for (DCTimeRange* timerange in uniqueTimeSlotForDay) {
-    NSArray* timeslotEvents =
+    
+    for (DCTimeRange* timerange in uniqueTimeSlotForDay) {
+        NSArray* timeslotEvents =
         [[[eventsForDay eventsForTimeRange:timerange] sortedByKey:kDCEventIdKey]
-            sortedByKey:kDCEventOrderKey];
-
-    NSDictionary* timeslotDict = [[NSDictionary alloc]
-        initWithObjects:@[ timerange, timeslotEvents ]
-                forKeys:@[ kDCTimeslotKEY, kDCTimeslotEventKEY ]];
-    [uniqueTimeSlotsSource addObject:timeslotDict];
-  }
+         sortedByKey:kDCEventOrderKey];
+        
+        NSDictionary* timeslotDict;
+        NSMutableArray *eventsForClass = [[NSMutableArray alloc] init];
+        
+        for (DCMainEvent* event in timeslotEvents) {
+            if(!eventClass || [event isKindOfClass:eventClass]){
+                [eventsForClass addObject:event];
+            }
+        }
+        if(eventsForClass.count){
+            timeslotDict = [[NSDictionary alloc]
+                            initWithObjects:@[ timerange, eventsForClass ]
+                            forKeys:@[ kDCTimeslotKEY, kDCTimeslotEventKEY ]];
+            [uniqueTimeSlotsSource addObject:timeslotDict];
+        }
+    }
 
   return [NSArray arrayWithArray:uniqueTimeSlotsSource];
 }

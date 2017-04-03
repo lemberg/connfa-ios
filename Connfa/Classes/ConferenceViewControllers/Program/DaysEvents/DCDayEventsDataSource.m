@@ -17,7 +17,8 @@
             [self.eventStrategy uniqueTimeRangesForDay:self.selectedDay];
         NSArray* eventsByTimeRange =
             [self eventsSortedByTimeRange:[self eventsForDay]
-                      withUniqueTimeRange:uniqueTimeSlotForDay];
+                      withUniqueTimeRange:uniqueTimeSlotForDay
+                                    class:nil];
         [self updateActualEventIndexPathForTimeRange:eventsByTimeRange];
         dispatch_async(dispatch_get_main_queue(), ^{
           //

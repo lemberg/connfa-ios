@@ -43,7 +43,8 @@
         [self uniqueTimeRangesForDay:self.selectedDay andEventClass:class];
     NSArray* eventsByTimeRange =
         [self eventsSortedByTimeRange:[self eventsForDay]
-                  withUniqueTimeRange:uniqueTimeSlotForDay];
+                  withUniqueTimeRange:uniqueTimeSlotForDay
+                                class: class];
     
     if ([eventsByTimeRange count]) {
       //[sections addObject:@{kDCTimeslotKEY : [self titleForClass:class]}];
