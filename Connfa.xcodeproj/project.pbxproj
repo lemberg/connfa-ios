@@ -1731,7 +1731,7 @@
 					"$(PROJECT_DIR)/Connfa/Vendor/GoogleAnalytics",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon.qa;
-				PRODUCT_NAME = "$(TARGET_NAME)!";
+				PRODUCT_NAME = "Connfa!";
 				PROVISIONING_PROFILE = "5aba95c8-469c-4d1e-a442-bf9f8da1f25f";
 				PROVISIONING_PROFILE_SPECIFIER = DrupalCon_dev;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1763,7 +1763,7 @@
 					"$(PROJECT_DIR)/Connfa/Vendor/GoogleAnalytics",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon.qa;
-				PRODUCT_NAME = "$(TARGET_NAME)!";
+				PRODUCT_NAME = "Connfa!";
 				PROVISIONING_PROFILE = "5aba95c8-469c-4d1e-a442-bf9f8da1f25f";
 				PROVISIONING_PROFILE_SPECIFIER = DrupalCon_dev;
 				TARGETED_DEVICE_FAMILY = 1;
