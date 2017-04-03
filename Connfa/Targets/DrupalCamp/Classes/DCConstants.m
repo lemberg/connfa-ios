@@ -11,7 +11,7 @@
 
 @implementation DCConstants
 
-NSString *const BASE_URL = @"http://london2017.drupalcon.uat.link/api/v2/";
+NSString *const BASE_URL = @"http://connfa-integration.uat.link/api/v2/euna-mcdermott-dds/";
 NSString *const SERVER_URL = @"http://london2017.drupalcon.uat.link";
 NSString *const BUNDLE_NAME = @"DC-Theme";
 NSString *const GOOGLE_ANALYTICS_APP_ID = @"UA-267362-74";
