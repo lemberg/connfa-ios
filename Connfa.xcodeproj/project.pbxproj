@@ -328,6 +328,9 @@
 		281F87CC1E7FF1620065EA1B /* event_detail_style.css in Resources */ = {isa = PBXBuildFile; fileRef = 281F87C51E7FF1620065EA1B /* event_detail_style.css */; };
 		281F87CD1E7FF1620065EA1B /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 281F87C61E7FF1620065EA1B /* style.css */; };
 		287118711E72DFBA00CD0498 /* DCFontItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 282BD3B11E7191A0009763EC /* DCFontItem.m */; };
+		287E7BC91E8535A200E03F56 /* Merriweather-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 287E7BC81E8535A200E03F56 /* Merriweather-Regular.ttf */; };
+		287E7BCA1E8535A200E03F56 /* Merriweather-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 287E7BC81E8535A200E03F56 /* Merriweather-Regular.ttf */; };
+		287E7BCB1E8535A200E03F56 /* Merriweather-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 287E7BC81E8535A200E03F56 /* Merriweather-Regular.ttf */; };
 		288C5ED91E6D9E4A00F07CB4 /* DCAppSignMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1E71BF4E9C50093AD65 /* DCAppSignMenuCell.m */; };
 		288C5EDA1E6D9E4A00F07CB4 /* NSUserDefaults+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F12C1BF4E9C50093AD65 /* NSUserDefaults+DC.m */; };
 		288C5EDB1E6D9E4A00F07CB4 /* DCBof+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1511BF4E9C50093AD65 /* DCBof+DC.m */; };
@@ -509,7 +512,8 @@
 		282910E81E7BD0C500BD6A4D /* Connfa-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Connfa-Prefix.pch"; sourceTree = "<group>"; };
 		282BD3B01E7191A0009763EC /* DCFontItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCFontItem.h; sourceTree = "<group>"; };
 		282BD3B11E7191A0009763EC /* DCFontItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCFontItem.m; sourceTree = "<group>"; };
-		288C5F7C1E6D9E4A00F07CB4 /* Connfa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Connfa.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		287E7BC81E8535A200E03F56 /* Merriweather-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Merriweather-Regular.ttf"; sourceTree = "<group>"; };
+		288C5F7C1E6D9E4A00F07CB4 /* Connfa!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Connfa!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		288C5FA61E6D9E8C00F07CB4 /* DCConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCConstants.m; sourceTree = "<group>"; };
 		288C5FA91E6D9E8C00F07CB4 /* DC-Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "DC-Images.xcassets"; sourceTree = "<group>"; };
 		288C5FAA1E6D9E8C00F07CB4 /* DC-Theme.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "DC-Theme.bundle"; sourceTree = "<group>"; };
@@ -1023,9 +1027,9 @@
 		5DC8C412198656DA00BF5816 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				288C5F7C1E6D9E4A00F07CB4 /* Connfa.app */,
 				281F86FA1E7FF0730065EA1B /* DrupalCon.app */,
 				281F87BA1E7FF1550065EA1B /* DrupalCamp.app */,
+				288C5F7C1E6D9E4A00F07CB4 /* Connfa!.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1100,6 +1104,7 @@
 		A68AE7BD1C626470002E862D /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				287E7BC81E8535A200E03F56 /* Merriweather-Regular.ttf */,
 				F547A7E01D537C3200CD24F2 /* Montserrat */,
 				A68AE7BE1C626470002E862D /* OpenSans-Bold.ttf */,
 				A68AE7BF1C626470002E862D /* OpenSans-CondBold.ttf */,
@@ -1966,9 +1971,9 @@
 			productReference = 281F87BA1E7FF1550065EA1B /* DrupalCamp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		288C5ED71E6D9E4A00F07CB4 /* Connfa */ = {
+		288C5ED71E6D9E4A00F07CB4 /* Connfa! */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 288C5F791E6D9E4A00F07CB4 /* Build configuration list for PBXNativeTarget "Connfa" */;
+			buildConfigurationList = 288C5F791E6D9E4A00F07CB4 /* Build configuration list for PBXNativeTarget "Connfa!" */;
 			buildPhases = (
 				288C5ED81E6D9E4A00F07CB4 /* Sources */,
 				288C5F531E6D9E4A00F07CB4 /* Frameworks */,
@@ -1979,9 +1984,9 @@
 			);
 			dependencies = (
 			);
-			name = Connfa;
+			name = "Connfa!";
 			productName = Connfa;
-			productReference = 288C5F7C1E6D9E4A00F07CB4 /* Connfa.app */;
+			productReference = 288C5F7C1E6D9E4A00F07CB4 /* Connfa!.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1995,7 +2000,8 @@
 				ORGANIZATIONNAME = "Lemberg Solution";
 				TargetAttributes = {
 					281F86521E7FF0730065EA1B = {
-						DevelopmentTeam = FN2T3UCV4E;
+						DevelopmentTeam = J7LBYY3B34;
+						ProvisioningStyle = Manual;
 					};
 					281F87121E7FF1550065EA1B = {
 						DevelopmentTeam = FN2T3UCV4E;
@@ -2018,7 +2024,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				288C5ED71E6D9E4A00F07CB4 /* Connfa */,
+				288C5ED71E6D9E4A00F07CB4 /* Connfa! */,
 				281F86521E7FF0730065EA1B /* DrupalCon */,
 				281F87121E7FF1550065EA1B /* DrupalCamp */,
 			);
@@ -2046,6 +2052,7 @@
 				281F86EE1E7FF0730065EA1B /* LESelectedActionSheetController.xib in Resources */,
 				281F87111E7FF0B40065EA1B /* style.css in Resources */,
 				281F870C1E7FF0B40065EA1B /* DrupalCon-Info.plist in Resources */,
+				287E7BCA1E8535A200E03F56 /* Merriweather-Regular.ttf in Resources */,
 				281F86F01E7FF0730065EA1B /* Events.storyboard in Resources */,
 				281F86F21E7FF0730065EA1B /* (null) in Resources */,
 				281F86F31E7FF0730065EA1B /* OpenSans-Regular.ttf in Resources */,
@@ -2074,6 +2081,7 @@
 				281F87CA1E7FF1620065EA1B /* DC-Theme.bundle in Resources */,
 				281F87AE1E7FF1550065EA1B /* LESelectedActionSheetController.xib in Resources */,
 				281F87CD1E7FF1620065EA1B /* style.css in Resources */,
+				287E7BCB1E8535A200E03F56 /* Merriweather-Regular.ttf in Resources */,
 				281F87B11E7FF1550065EA1B /* Events.storyboard in Resources */,
 				281F87B21E7FF1550065EA1B /* (null) in Resources */,
 				281F87B31E7FF1550065EA1B /* OpenSans-Regular.ttf in Resources */,
@@ -2102,6 +2110,7 @@
 				288C5F6E1E6D9E4A00F07CB4 /* LESelectedActionSheetController.xib in Resources */,
 				288C5FB21E6D9E8C00F07CB4 /* DC-Theme.bundle in Resources */,
 				288C5F701E6D9E4A00F07CB4 /* Events.storyboard in Resources */,
+				287E7BC91E8535A200E03F56 /* Merriweather-Regular.ttf in Resources */,
 				288C5FB51E6D9E8C00F07CB4 /* style.css in Resources */,
 				288C5F721E6D9E4A00F07CB4 /* (null) in Resources */,
 				288C5F731E6D9E4A00F07CB4 /* OpenSans-Regular.ttf in Resources */,
@@ -2560,8 +2569,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
-				DEVELOPMENT_TEAM = FN2T3UCV4E;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = J7LBYY3B34;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2577,10 +2586,10 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Connfa/Vendor/GoogleAnalytics",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon.qa;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9fcaf0b0-f648-4066-8b5a-4a1cb45042a2";
-				PROVISIONING_PROFILE_SPECIFIER = DrupalCon_dev;
+				PROVISIONING_PROFILE = "e61e0796-f8f6-4ab8-909f-b450d8b14890";
+				PROVISIONING_PROFILE_SPECIFIER = drupal_con_dev;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -2592,8 +2601,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
-				DEVELOPMENT_TEAM = FN2T3UCV4E;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = J7LBYY3B34;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2609,10 +2618,10 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Connfa/Vendor/GoogleAnalytics",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon.qa;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9fcaf0b0-f648-4066-8b5a-4a1cb45042a2";
-				PROVISIONING_PROFILE_SPECIFIER = DrupalCon_dev;
+				PROVISIONING_PROFILE = "4656a5cb-dcf7-4af3-9025-70fc1dc0e9ba";
+				PROVISIONING_PROFILE_SPECIFIER = DrupalCon_AppStore;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -2839,7 +2848,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		288C5F791E6D9E4A00F07CB4 /* Build configuration list for PBXNativeTarget "Connfa" */ = {
+		288C5F791E6D9E4A00F07CB4 /* Build configuration list for PBXNativeTarget "Connfa!" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				288C5F7A1E6D9E4A00F07CB4 /* Debug */,

@@ -43,8 +43,14 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  
   self.noEventsImageViewDefaultHeight = 100.0;
+  [self configureState];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+  //refresh favorite
+  // For updating favorities
   [self configureState];
 }
 
@@ -57,7 +63,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
-  
+
 }
 
 #pragma mark - Public
