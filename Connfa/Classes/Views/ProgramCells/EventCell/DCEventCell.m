@@ -203,7 +203,7 @@ static NSInteger hashtagHeightOffset = 4;
     } else if ([event isKindOfClass:[DCBof class]]) {
       [self addHashtegWithType:@"BoF"];
     } else if ([event isKindOfClass:[DCSocialEvent class]]) {
-      [self addHashtegWithType:@"Social event"];
+      [self addHashtegWithType:@"Social"];
     }
   }
   
@@ -270,16 +270,18 @@ static NSInteger hashtagHeightOffset = 4;
 
 - (CGFloat)getHeightForLabel:(UILabel*)label {
   
-  NSString *fontName = label.font.fontName;
-  CGFloat fontSize = label.font.pointSize;
-  UIFont *customFont = [UIFont fontWithName:fontName size:fontSize + hashtagHeightOffset + 2];
+  NSString *countHeightText;
   
-  CGRect textRect =
-      [label.text boundingRectWithSize:CGSizeMake(label.preferredMaxLayoutWidth,
-                                                  NSIntegerMax)
+  if (self.isFavorite) {
+    countHeightText = [NSString stringWithFormat:@"%@ %@", label.text, @"Session"];
+  } else {
+    countHeightText = label.text;
+  }
+  CGRect textRect = [countHeightText boundingRectWithSize:CGSizeMake(label.preferredMaxLayoutWidth,
+                                                  NSIntegerMin)
                                options:NSStringDrawingUsesLineFragmentOrigin
                             attributes:@{
-                              NSFontAttributeName : customFont
+                              NSFontAttributeName : label.font
                             } context:nil];
   CGFloat result;
 
