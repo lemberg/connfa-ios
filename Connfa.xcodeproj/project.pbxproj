@@ -2000,7 +2000,7 @@
 				ORGANIZATIONNAME = "Lemberg Solution";
 				TargetAttributes = {
 					281F86521E7FF0730065EA1B = {
-						DevelopmentTeam = J7LBYY3B34;
+						DevelopmentTeam = FN2T3UCV4E;
 						ProvisioningStyle = Manual;
 					};
 					281F87121E7FF1550065EA1B = {
@@ -2570,7 +2570,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = J7LBYY3B34;
+				DEVELOPMENT_TEAM = FN2T3UCV4E;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2586,10 +2586,10 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Connfa/Vendor/GoogleAnalytics",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon.qa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e61e0796-f8f6-4ab8-909f-b450d8b14890";
-				PROVISIONING_PROFILE_SPECIFIER = drupal_con_dev;
+				PROVISIONING_PROFILE = "5aba95c8-469c-4d1e-a442-bf9f8da1f25f";
+				PROVISIONING_PROFILE_SPECIFIER = DrupalCon_dev;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -2601,8 +2601,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = J7LBYY3B34;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = FN2T3UCV4E;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2618,10 +2618,10 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Connfa/Vendor/GoogleAnalytics",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon.qa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4656a5cb-dcf7-4af3-9025-70fc1dc0e9ba";
-				PROVISIONING_PROFILE_SPECIFIER = DrupalCon_AppStore;
+				PROVISIONING_PROFILE = "5aba95c8-469c-4d1e-a442-bf9f8da1f25f";
+				PROVISIONING_PROFILE_SPECIFIER = DrupalCon_dev;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
