@@ -166,6 +166,9 @@
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="1" verticalCompressionResistancePriority="1" image="ic_program_24_hour" translatesAutoresizingMaskIntoConstraints="NO" id="rQD-x0-Ygk">
                                 <rect key="frame" x="32" y="58" width="16" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="5EH-aj-0qb"/>
+                                </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="APf-ho-qaw" userLabel="CoverButton">
                                 <rect key="frame" x="0.0" y="0.0" width="77" height="120"/>
@@ -217,7 +220,9 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="endTimeBottomPadding" destination="0C6-dI-Dbq" id="pGa-Rz-JTL"/>
                 <outlet property="endTimeLabel" destination="RC4-sf-WBu" id="YNP-N1-bsg"/>
+                <outlet property="eventImageHeight" destination="5EH-aj-0qb" id="dbK-Ml-7I5"/>
                 <outlet property="eventImageView" destination="rQD-x0-Ygk" id="bph-ET-T9S"/>
                 <outlet property="eventLevelImageView" destination="O10-8Z-v0x" id="O6N-25-cWf"/>
                 <outlet property="eventTitleLabel" destination="cOT-Gi-ftB" id="AQ4-vr-jpC"/>
@@ -239,7 +244,9 @@
                 <outlet property="separatorLeadingConstraint" destination="NR7-jr-LHO" id="w5b-3B-TzN"/>
                 <outlet property="speakersLabel" destination="eRh-DH-v6a" id="vq4-7C-sub"/>
                 <outlet property="speakersViewHeight" destination="63V-jq-bR5" id="zis-Mb-2Qw"/>
+                <outlet property="startTimeBottomPadding" destination="hlW-qW-g85" id="gfs-ni-rrI"/>
                 <outlet property="startTimeLabel" destination="GJb-73-11f" id="eah-k7-XnX"/>
+                <outlet property="startTimeTopPadding" destination="OOb-A3-lz0" id="2Pl-mG-eM9"/>
                 <outlet property="subtitleBottomPadding" destination="3mE-Jq-H5S" id="Zsf-5h-4zs"/>
                 <outlet property="trackLabel" destination="efH-VV-Jx5" id="Cac-8r-pPb"/>
                 <outlet property="trackViewHeight" destination="FiS-8x-Z9J" id="3gP-8d-Rph"/>

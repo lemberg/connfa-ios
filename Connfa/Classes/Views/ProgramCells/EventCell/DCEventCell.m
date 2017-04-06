@@ -78,11 +78,14 @@ static NSInteger hashtagHeightOffset = 4;
   CGFloat startTimeLabelHeight = [self getHeightForLabel:self.startTimeLabel];
   CGFloat endTimeLabelHeight = [self getHeightForLabel:self.endTimeLabel];
 
-  CGFloat leftSideHeight =
-      self.startTimeTopPadding.constant + startTimeLabelHeight +
-      self.startTimeBottomPadding.constant + endTimeLabelHeight +
-      self.endTimeBottomPadding.constant + self.eventImageHeight.constant +
-      self.eventImageBottomPading.constant;
+    CGFloat leftSideHeight =
+    self.startTimeTopPadding.constant + startTimeLabelHeight +
+    self.startTimeBottomPadding.constant + endTimeLabelHeight +
+    self.endTimeBottomPadding.constant;
+    if(!self.eventImageView.hidden){
+        leftSideHeight += self.eventImageHeight.constant +
+        self.startTimeTopPadding.constant;
+    }
 
   // Right side height calculating
   CGFloat eventTitleHeight = [self getHeightForLabel:self.eventTitleLabel];
