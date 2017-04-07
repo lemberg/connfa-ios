@@ -14,6 +14,7 @@
       dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 
         NSArray* eventsByTimeRange = [self favoriteEventsSource];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
           //
           __strong __typeof__(weakSelf) strongSelf = weakSelf;
@@ -42,13 +43,28 @@
         [self uniqueTimeRangesForDay:self.selectedDay andEventClass:class];
     NSArray* eventsByTimeRange =
         [self eventsSortedByTimeRange:[self eventsForDay]
-                  withUniqueTimeRange:uniqueTimeSlotForDay];
+                  withUniqueTimeRange:uniqueTimeSlotForDay
+                                class: class];
+    
     if ([eventsByTimeRange count]) {
-      [sections addObject:@{kDCTimeslotKEY : [self titleForClass:class]}];
+      //[sections addObject:@{kDCTimeslotKEY : [self titleForClass:class]}];
       [sections addObjectsFromArray:eventsByTimeRange];
     }
   }
-  return [NSArray arrayWithArray:sections];
+  
+  NSArray *result = [self sortByTime:[NSArray arrayWithArray:sections]];
+  
+  return result;
+}
+
+- (NSArray *)sortByTime:(NSArray *)array {
+  NSArray *sortedArray = [array sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+    DCTimeRange * objectOne = [obj1 valueForKey:@"timeslot_key"];
+    DCTimeRange * objectTwo = [obj2 valueForKey:@"timeslot_key"];
+    return [objectOne.from compare:objectTwo.from];
+  }];
+
+  return sortedArray;
 }
 
 - (NSString*)titleForSectionAtIdexPath:(NSInteger)section {
@@ -61,16 +77,16 @@
 }
 
 - (NSString*)titleForClass:(Class) class {
-  if ([NSStringFromClass(class)
-          isEqualToString:NSStringFromClass([DCBof class])]) {
-    return @"BoFs";
-  } else if ([NSStringFromClass(class)
-                 isEqualToString:NSStringFromClass([DCMainEvent class])]) {
-    return @"Sessions";
-  } else {
-    return @"Social Events";
-  }
-
+//  if ([NSStringFromClass(class)
+//          isEqualToString:NSStringFromClass([DCBof class])]) {
+//    return @"BoFs";
+//  } else if ([NSStringFromClass(class)
+//                 isEqualToString:NSStringFromClass([DCMainEvent class])]) {
+//    return @"Sessions";
+//  } else {
+//    return @"Social Events";
+//  }
+  return @"";
 }
 
 - (void)reloadEvents {
