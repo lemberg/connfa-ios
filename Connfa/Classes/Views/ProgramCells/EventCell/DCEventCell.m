@@ -10,11 +10,17 @@
 #import "UIImage+Extension.h"
 #import "DCConstants.h"
 #import "DCFontItem.h"
+#import "DCMainEvent.h"
+#import "DCBof.h"
+#import "DCSocialEvent.h"
+#import "DCDayEventsController.h"
+#import "DCFavoriteEventsDataSource.h"
 
 // These values are hardcoded because cells are get by "dequeueREusableCells"
 // method, so previous cell value might be set to 0.
 static NSInteger eventCellSubtitleHeight = 16;
 static NSInteger eventCellImageHeight = 16;
+static NSInteger hashtagHeightOffset = 4;
 
 #define leftButonEnabledColor [UIColor colorWithWhite:247.0 / 255.0 alpha:1.0]
 #define leftButonDisabledColor [UIColor colorWithWhite:237.0 / 255.0 alpha:1.0]
@@ -22,6 +28,7 @@ static NSInteger eventCellImageHeight = 16;
 @interface DCEventCell ()
 
 @property(nonatomic) BOOL isEnabled;
+@property(nonatomic) BOOL isFavorite;
 @property(weak, nonatomic) IBOutlet UIView* rightContentView;
 @property(weak, nonatomic) IBOutlet UIView* leftContentView;
 @property(weak, nonatomic) IBOutlet UIButton* rightCoverButton;
@@ -71,11 +78,14 @@ static NSInteger eventCellImageHeight = 16;
   CGFloat startTimeLabelHeight = [self getHeightForLabel:self.startTimeLabel];
   CGFloat endTimeLabelHeight = [self getHeightForLabel:self.endTimeLabel];
 
-  CGFloat leftSideHeight =
-      self.startTimeTopPadding.constant + startTimeLabelHeight +
-      self.startTimeBottomPadding.constant + endTimeLabelHeight +
-      self.endTimeBottomPadding.constant + self.eventImageHeight.constant +
-      self.eventImageBottomPading.constant;
+    CGFloat leftSideHeight =
+    self.startTimeTopPadding.constant + startTimeLabelHeight +
+    self.startTimeBottomPadding.constant + endTimeLabelHeight +
+    self.endTimeBottomPadding.constant;
+    if(!self.eventImageView.hidden){
+        leftSideHeight += self.eventImageHeight.constant +
+        self.startTimeTopPadding.constant;
+    }
 
   // Right side height calculating
   CGFloat eventTitleHeight = [self getHeightForLabel:self.eventTitleLabel];
@@ -101,6 +111,17 @@ static NSInteger eventCellImageHeight = 16;
 
 - (void)initData:(DCEvent*)event delegate:(id<DCEventCellProtocol>)aDelegate {
   NSString* trackName = [(DCTrack*)[event.tracks anyObject] name];
+  
+  if ([aDelegate isKindOfClass:[DCDayEventsController class]]) {
+    DCDayEventsController *newObj = (DCDayEventsController *)aDelegate;
+    if ([newObj.eventsDataSource isKindOfClass:[DCFavoriteEventsDataSource class]]) {
+      self.isFavorite = YES;
+    } else {
+      self.isFavorite = NO;
+    }
+  } else {
+    self.isFavorite = NO;
+  }
 
   // Name
   self.eventTitleLabel.text = event.name;
@@ -177,8 +198,42 @@ static NSInteger eventCellImageHeight = 16;
   // setting cell clickable
   self.isEnabled = [self isEnabled:event];
   [self setCellEnabled:self.isEnabled];
-
+  
+  
+  if (self.isFavorite) {
+    if ([event isKindOfClass:[DCMainEvent class]]) {
+      [self addHashtegWithType:@"Session"];
+    } else if ([event isKindOfClass:[DCBof class]]) {
+      [self addHashtegWithType:@"BoF"];
+    } else if ([event isKindOfClass:[DCSocialEvent class]]) {
+      [self addHashtegWithType:@"Social"];
+    }
+  }
+  
   self.delegate = aDelegate;
+}
+
+- (void)addHashtegWithType:(NSString*)type {
+  UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(50, 100, 0, 0)];
+  label.textAlignment = NSTextAlignmentCenter;
+  label.textColor = [UIColor whiteColor];
+  label.backgroundColor = [DCAppConfiguration eventDetailHeaderColour];
+  label.font = [UIFont fontWithName:@"Helvetica Neue" size:14];
+  label.text = type;
+  [label sizeToFit];
+  label.clipsToBounds = YES;
+  [label setFrame:CGRectMake(label.frame.origin.x, label.frame.origin.y, label.frame.size.width + 18, label.frame.size.height + hashtagHeightOffset)];
+  label.layer.cornerRadius = label.frame.size.height / 2;
+  UIImage *image = [UIImage grabImage:label];
+  
+  NSTextAttachment *attachment = [[NSTextAttachment alloc] init];
+  attachment.image = image;
+
+  NSAttributedString *attachmentString = [NSAttributedString attributedStringWithAttachment:attachment];
+  NSMutableAttributedString *myString= [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"%@ ", self.eventTitleLabel.text]];
+  [myString appendAttributedString:attachmentString];
+  self.eventTitleLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;
+  self.eventTitleLabel.attributedText = myString;
 }
 
 - (NSString*)ratingsImagesName:(NSInteger)identifier{
@@ -217,14 +272,29 @@ static NSInteger eventCellImageHeight = 16;
 }
 
 - (CGFloat)getHeightForLabel:(UILabel*)label {
-  CGRect textRect =
-      [label.text boundingRectWithSize:CGSizeMake(label.preferredMaxLayoutWidth,
-                                                  NSIntegerMax)
+  
+  NSString *countHeightText;
+  
+  if (self.isFavorite) {
+    countHeightText = [NSString stringWithFormat:@"%@ %@", label.text, @"Session"];
+  } else {
+    countHeightText = label.text;
+  }
+  CGRect textRect = [countHeightText boundingRectWithSize:CGSizeMake(label.preferredMaxLayoutWidth,
+                                                  NSIntegerMin)
                                options:NSStringDrawingUsesLineFragmentOrigin
                             attributes:@{
                               NSFontAttributeName : label.font
                             } context:nil];
-  return textRect.size.height;
+  CGFloat result;
+
+  if (self.isFavorite) {
+    result = textRect.size.height + hashtagHeightOffset;
+  } else {
+    result = textRect.size.height;
+  }
+  
+  return result;
 }
 
 - (void)setCustomFonts {

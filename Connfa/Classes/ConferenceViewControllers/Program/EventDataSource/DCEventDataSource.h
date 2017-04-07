@@ -55,7 +55,8 @@ extern NSString* kDCTimeslotEventKEY;
                              date:(NSDate*)date;
 - (void)updateActualEventIndexPathForTimeRange:(NSArray*)array;
 - (NSArray*)eventsSortedByTimeRange:(NSArray*)events
-                withUniqueTimeRange:(NSArray*)unqueTimeRange;
+                withUniqueTimeRange:(NSArray*)unqueTimeRange
+                              class:(Class)eventClass;
 // Callbacks for update delegate methods
 - (void)dataSourceStartUpdateEvents;
 - (void)dataSourceEndUpdateEvents;

@@ -2,6 +2,7 @@
 #import "DCBaseViewController.h"
 #import "DCEventStrategy.h"
 #import "DCProgramViewController.h"
+#import "DCEventDataSource.h"
 
 typedef enum : NSUInteger {
   DCStateNormal,
@@ -27,6 +28,7 @@ typedef enum : NSUInteger {
  *  Day date for current events
  */
 @property(nonatomic, strong) NSDate* date;
+@property(nonatomic) DCEventDataSource* eventsDataSource;
 
 
 @property(nonatomic, weak) DCProgramViewController* parentProgramController;
