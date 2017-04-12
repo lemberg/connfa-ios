@@ -167,6 +167,7 @@
 		288C5FB51E6D9E8C00F07CB4 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 288C5FAE1E6D9E8C00F07CB4 /* style.css */; };
 		288C5FB91E6D9F2900F07CB4 /* Connfa-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 288C5FB81E6D9F2900F07CB4 /* Connfa-Info.plist */; };
 		288C5FBE1E6D9FBA00F07CB4 /* DCMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 288C5FBB1E6D9FBA00F07CB4 /* DCMenuItem.m */; };
+		FC6212911E9E229F008008C9 /* DCMyScheduleInstructionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6212901E9E229F008008C9 /* DCMyScheduleInstructionViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -471,6 +472,8 @@
 		F580ED6B1D0FDE2B00F289F8 /* LESelectedActionSheetController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LESelectedActionSheetController.xib; sourceTree = "<group>"; };
 		F5D072CC1D0844AD00331E07 /* DCFloorPlanController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DCFloorPlanController.h; path = FloorPlan/DCFloorPlanController.h; sourceTree = "<group>"; };
 		F5D072CD1D0844AD00331E07 /* DCFloorPlanController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DCFloorPlanController.m; path = FloorPlan/DCFloorPlanController.m; sourceTree = "<group>"; };
+		FC62128F1E9E229F008008C9 /* DCMyScheduleInstructionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCMyScheduleInstructionViewController.h; sourceTree = "<group>"; };
+		FC6212901E9E229F008008C9 /* DCMyScheduleInstructionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCMyScheduleInstructionViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1117,6 +1120,7 @@
 		A6C5F1AC1BF4E9C50093AD65 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				FC62128E1E9E2163008008C9 /* MyScheduleInstruction */,
 				F5D072CB1D08325600331E07 /* FloorPlan */,
 				A6C5F1AD1BF4E9C50093AD65 /* Base */,
 				A6C5F1B21BF4E9C50093AD65 /* EventFilter */,
@@ -1469,6 +1473,15 @@
 			name = FloorPlan;
 			sourceTree = "<group>";
 		};
+		FC62128E1E9E2163008008C9 /* MyScheduleInstruction */ = {
+			isa = PBXGroup;
+			children = (
+				FC62128F1E9E229F008008C9 /* DCMyScheduleInstructionViewController.h */,
+				FC6212901E9E229F008008C9 /* DCMyScheduleInstructionViewController.m */,
+			);
+			name = MyScheduleInstruction;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1629,6 +1642,7 @@
 				288C5F0A1E6D9E4A00F07CB4 /* DCMenuStoryboardHelper.m in Sources */,
 				288C5F0B1E6D9E4A00F07CB4 /* UIImage+MultiFormat.m in Sources */,
 				288C5F0C1E6D9E4A00F07CB4 /* MFSideMenuShadow.m in Sources */,
+				FC6212911E9E229F008008C9 /* DCMyScheduleInstructionViewController.m in Sources */,
 				288C5F0D1E6D9E4A00F07CB4 /* DCEventCell.m in Sources */,
 				288C5F0E1E6D9E4A00F07CB4 /* SDWebImageDownloaderOperation.m in Sources */,
 				288C5F0F1E6D9E4A00F07CB4 /* DCSpeakerEventCell.m in Sources */,
