@@ -10,8 +10,8 @@
 - (void)loadEvents {
   [self dataSourceStartUpdateEvents];
   __weak typeof(self) weakSelf = self;
-  dispatch_async(
-      dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+//  dispatch_async(
+//      dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
 
         NSArray* uniqueTimeSlotForDay =
             [self.eventStrategy uniqueTimeRangesForDay:self.selectedDay];
@@ -20,8 +20,8 @@
                       withUniqueTimeRange:uniqueTimeSlotForDay
                                     class:nil];
         [self updateActualEventIndexPathForTimeRange:eventsByTimeRange];
-        dispatch_async(dispatch_get_main_queue(), ^{
-          //
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//          //
           __strong __typeof__(weakSelf) strongSelf = weakSelf;
           strongSelf.eventsByTimeRange = eventsByTimeRange;
           [strongSelf.tableView reloadData];
@@ -32,8 +32,8 @@
           if (strongSelf.actualEventIndexPath)
             [strongSelf moveTableToCurrentTime];
 
-        });
-      });
+//        });
+//      });
 }
 
 - (void)moveTableToCurrentTime {
