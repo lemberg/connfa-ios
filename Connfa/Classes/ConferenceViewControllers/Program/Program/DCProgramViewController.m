@@ -71,6 +71,13 @@
     [super viewDidAppear:animated];
     [self arrangePreviousAndNextDayButtons];
     [self registerScreenLoadAtGA:[NSString stringWithFormat:@"%@", self.navigationItem.title]];
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  //TODO: add keys into constants
+  [defaults setBool:false forKey:@"MyScheduleTutorialShown"];
+  if (self.eventsStrategy.strategy == EDCEeventStrategyFavorites && ![defaults boolForKey:@"MyScheduleTutorialShown"]) {
+    [defaults setBool:true forKey:@"MyScheduleTutorialShown"];
+    [self performSegueWithIdentifier:@"toTutorial" sender:self];
+  }
 }
 
 #pragma mark - Public
