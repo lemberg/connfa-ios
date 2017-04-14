@@ -28,7 +28,7 @@
 
   NSString* date =
       event.date
-          ? [DCDateHelper convertDate:event.date toApplicationFormat:@"EEE"]
+          ? [event.date dateToStringWithFormat:@"EEE"]
           : @"";
   NSString *timeFormat = [NSDate currentDateFormat];
 
