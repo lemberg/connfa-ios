@@ -46,38 +46,42 @@
 
   // Handle it only when application start
   [[DCMainProxy sharedProxy] setDataUpdatedCallback:^(DCMainProxyState mainProxyState) {
-    NSTimeZone *eventTimeZone = [[DCMainProxy sharedProxy]
-                                 isSystemTimeCoincidencWithEventTimezone];
-    if (eventTimeZone && [NSUserDefaults isEnabledTimeZoneAlert]) {
-      [DCAlertsManager
-       showTimeZoneAlertForTimeZone:eventTimeZone
-       withSuccess:^(BOOL isSuccess){
-         if (isSuccess) {
-           [NSUserDefaults disableTimeZoneNotification];
-           dispatch_async(dispatch_get_main_queue(), ^{
-             [[DCMainProxy sharedProxy] setDataUpdatedCallback:nil];
-           });
-         }
-       }];
-    }
+      dispatch_async(dispatch_get_main_queue(), ^{
+          NSTimeZone *eventTimeZone = [[DCMainProxy sharedProxy]
+                                       isSystemTimeCoincidencWithEventTimezone];
+          if (eventTimeZone && [NSUserDefaults isEnabledTimeZoneAlert]) {
+              [DCAlertsManager
+               showTimeZoneAlertForTimeZone:eventTimeZone
+               withSuccess:^(BOOL isSuccess){
+                   if (isSuccess) {
+                       [NSUserDefaults disableTimeZoneNotification];
+                       dispatch_async(dispatch_get_main_queue(), ^{
+                           [[DCMainProxy sharedProxy] setDataUpdatedCallback:nil];
+                       });
+                   }
+               }];
+          }
+      });
   }];
 }
 
 - (void)handleUpdateTimeZone {
   // Handle it only when application start
   [[DCMainProxy sharedProxy] setDataUpdatedCallback:^(DCMainProxyState mainProxyState) {
-    NSTimeZone *eventTimeZone = [[DCMainProxy sharedProxy]
-                                 isSystemTimeCoincidencWithEventTimezone];
-    if (eventTimeZone && [NSUserDefaults isEnabledTimeZoneAlert] && [DCMainProxy sharedProxy].isTimeZoneChanged == YES) {
-      [DCAlertsManager
-       showTimeZoneAlertForTimeZone:eventTimeZone
-       withSuccess:^(BOOL isSuccess){
-         if (isSuccess) {
-           [NSUserDefaults disableTimeZoneNotification];
-         }
-         [[DCMainProxy sharedProxy] setDataUpdatedCallback:nil];
-       }];
-    }
+   dispatch_async(dispatch_get_main_queue(), ^{
+       NSTimeZone *eventTimeZone = [[DCMainProxy sharedProxy]
+                                    isSystemTimeCoincidencWithEventTimezone];
+       if (eventTimeZone && [NSUserDefaults isEnabledTimeZoneAlert] && [DCMainProxy sharedProxy].isTimeZoneChanged == YES) {
+           [DCAlertsManager
+            showTimeZoneAlertForTimeZone:eventTimeZone
+            withSuccess:^(BOOL isSuccess){
+                if (isSuccess) {
+                    [NSUserDefaults disableTimeZoneNotification];
+                }
+                [[DCMainProxy sharedProxy] setDataUpdatedCallback:nil];
+            }];
+       }
+   });
   }];
 }
 

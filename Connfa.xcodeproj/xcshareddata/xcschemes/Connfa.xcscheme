@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "288C5ED71E6D9E4A00F07CB4"
                BuildableName = "Connfa!.app"
-               BlueprintName = "Connfa"
+               BlueprintName = "Connfa!"
                ReferencedContainer = "container:Connfa.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -34,7 +34,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "288C5ED71E6D9E4A00F07CB4"
             BuildableName = "Connfa!.app"
-            BlueprintName = "Connfa"
+            BlueprintName = "Connfa!"
             ReferencedContainer = "container:Connfa.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -57,7 +57,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "288C5ED71E6D9E4A00F07CB4"
             BuildableName = "Connfa!.app"
-            BlueprintName = "Connfa"
+            BlueprintName = "Connfa!"
             ReferencedContainer = "container:Connfa.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -76,7 +76,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "288C5ED71E6D9E4A00F07CB4"
             BuildableName = "Connfa!.app"
-            BlueprintName = "Connfa"
+            BlueprintName = "Connfa!"
             ReferencedContainer = "container:Connfa.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

@@ -22,9 +22,9 @@
   
   [alertView showWithCompletion:^(UIAlertView *alertView, NSInteger buttonIndex) {
     // Ok == 0 and Don't Show == 1
-    if (buttonIndex == 0) {
+    if (buttonIndex == 1) {
       success(YES);
-    } else if (buttonIndex == 1) {
+    } else if (buttonIndex == 0) {
       success(NO);
     }
 

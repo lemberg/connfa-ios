@@ -10,6 +10,8 @@ const NSString*  kFontOpenSansBold = @"OpenSans-Bold";
 const NSString*  kFontOpenSansCondBold = @"Open Sans Condensed";
 const NSString*  kFontOpenSansRegular = @"Open Sans";
 const NSString*  kFontHelveticaNeueRegular = @"Helvetica Neue";
+const NSString*  kFontMerriweatherRegularRegular = @"Merriweather-Regular";
+
 
 @implementation DCAppConfiguration
 

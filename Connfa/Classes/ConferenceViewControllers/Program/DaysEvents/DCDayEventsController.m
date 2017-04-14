@@ -48,6 +48,7 @@
 
 -(void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
+  //refresh favorite
   // For updating favorities
   [self configureState];
 }

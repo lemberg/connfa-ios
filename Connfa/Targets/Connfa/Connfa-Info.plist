@@ -36,6 +36,11 @@
 			</dict>
 		</array>
 	</dict>
+	<key>GoldSponsorHeaders</key>
+	<array>
+		<string>event_detail_sponsors_top_2</string>
+		<string>event_detail_sponsors_top_1</string>
+	</array>
 	<key>GoogleAnalytics</key>
 	<dict>
 		<key>DispatchInterval</key>
@@ -75,10 +80,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-  <key>GoldSponsorHeaders</key>
-  <array>
-    <string>event_detail_sponsors_top_2</string>
-    <string>event_detail_sponsors_top_1</string>
-  </array>
 </dict>
 </plist>

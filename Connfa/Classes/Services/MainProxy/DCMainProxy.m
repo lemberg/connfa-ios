@@ -93,14 +93,15 @@ typedef void (^UpdateDataFail)(NSString* reason);
 }
 
 - (NSTimeZone*)eventTimeZone {
-  if (!self.applicationTimeZone) {
-    NSArray* settings = [[DCMainProxy sharedProxy]
-        getAllInstancesOfClass:[DCAppSettings class]
-                     inContext:[self defaultPrivateContext]];
-    DCAppSettings* appSetting = [settings lastObject];
-    self.applicationTimeZone = [NSTimeZone timeZoneWithName:appSetting.timeZoneName];
-  }
-  return self.applicationTimeZone;
+    if (!self.applicationTimeZone) {
+        NSArray* settings = [[DCMainProxy sharedProxy]
+                             getAllInstancesOfClass:[DCAppSettings class]
+                             inContext:[self defaultPrivateContext]];
+        DCAppSettings* appSetting = [settings lastObject];
+        NSString* timezoneName = appSetting.timeZoneName;
+        self.applicationTimeZone = [NSTimeZone timeZoneWithName:timezoneName];
+    }
+    return self.applicationTimeZone;
 }
 
 - (void)resetEventTimeZone {

@@ -112,42 +112,44 @@ const NSString* kDCTimeslotEventKEY = @"timeslot_event_key";
 }
 
 - (void)updateActualEventIndexPathForTimeRange:(NSArray*)array {
-  float currentHour = [NSDate currentHour];
-  NSInteger sectionNumber = 0;
-
-  if (![NSDate dc_isDateInToday:self.selectedDay]) {
-    self.actualEventIndexPath = nil;
-    return;
-  }
-
-  for (NSDictionary* sectionInfo in array) {
-    DCTimeRange* timeRange = sectionInfo[kDCTimeslotKEY];
-    NSDate *fromDate = [timeRange.from dateByAddingTimeInterval:[DCMainProxy sharedProxy].eventTimeZone.secondsFromGMT];
-    NSDate *toDate = [timeRange.to dateByAddingTimeInterval:[DCMainProxy sharedProxy].eventTimeZone.secondsFromGMT];
-    float from = [NSDate hoursFromDate:fromDate];
-    float to = [NSDate hoursFromDate:toDate];
-
-    // if Current hour is before Current time range, return Current time range
-    if (currentHour < from) {
-      self.actualEventIndexPath =
-          [NSIndexPath indexPathForItem:0 inSection:sectionNumber];
-      return;
-    }
-
-    // if Current hour is in time range, return this time range
-    if (from <= currentHour && currentHour <= to) {
-      self.actualEventIndexPath =
-          [NSIndexPath indexPathForItem:0 inSection:sectionNumber];
-      return;
-    }
-
-    sectionNumber++;
-  }
-
-  // set the last Range
-  self.actualEventIndexPath =
-      [NSIndexPath indexPathForItem:0
-                          inSection:sectionNumber > 0 ? sectionNumber - 1 : 0];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        float currentHour = [NSDate currentHour];
+        NSInteger sectionNumber = 0;
+        
+        if (![NSDate dc_isDateInToday:self.selectedDay]) {
+            self.actualEventIndexPath = nil;
+            return;
+        }
+        
+        for (NSDictionary* sectionInfo in array) {
+            DCTimeRange* timeRange = sectionInfo[kDCTimeslotKEY];
+            NSDate *fromDate = [timeRange.from dateByAddingTimeInterval:[DCMainProxy sharedProxy].eventTimeZone.secondsFromGMT];
+            NSDate *toDate = [timeRange.to dateByAddingTimeInterval:[DCMainProxy sharedProxy].eventTimeZone.secondsFromGMT];
+            float from = [NSDate hoursFromDate:fromDate];
+            float to = [NSDate hoursFromDate:toDate];
+            
+            // if Current hour is before Current time range, return Current time range
+            if (currentHour < from) {
+                self.actualEventIndexPath =
+                [NSIndexPath indexPathForItem:0 inSection:sectionNumber];
+                return;
+            }
+            
+            // if Current hour is in time range, return this time range
+            if (from <= currentHour && currentHour <= to) {
+                self.actualEventIndexPath =
+                [NSIndexPath indexPathForItem:0 inSection:sectionNumber];
+                return;
+            }
+            
+            sectionNumber++;
+        }
+        
+        // set the last Range
+        self.actualEventIndexPath =
+        [NSIndexPath indexPathForItem:0
+                            inSection:sectionNumber > 0 ? sectionNumber - 1 : 0];
+    });
 }
 
 - (NSIndexPath*)actualEventIndexPath {
