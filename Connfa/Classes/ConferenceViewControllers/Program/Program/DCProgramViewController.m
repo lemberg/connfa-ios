@@ -161,7 +161,7 @@
 
 - (void)arrangeNavigationBar {
   [super arrangeNavigationBar];
-
+  [self setMoreActionsButton];
   [self setFilterButton];
 }
 
@@ -274,6 +274,21 @@
                                                                      : NO);
 }
 
+-(void)setMoreActionsButton{
+  if (self.eventsStrategy.strategy != EDCEeventStrategyFavorites){
+    return;
+  }
+  UIImage* moreActionsImage = [UIImage
+                          imageNamed:@"More Actions Button_white"];
+  UIBarButtonItem* moreActionsButton =
+  [[UIBarButtonItem alloc] initWithImage:moreActionsImage
+                                   style:UIBarButtonItemStylePlain
+                                  target:self
+                                  action:@selector(onMoreActionsButtonClick)];
+  
+  self.navigationItem.rightBarButtonItem = moreActionsButton;
+}
+
 - (void)setFilterButton {
   if (![self.eventsStrategy isEnableFilter]) {
     return;
@@ -291,6 +306,9 @@
 }
 
 #pragma mark - User actions
+-(void)onMoreActionsButtonClick{
+  
+}
 
 - (void)onFilterButtonClick {
   UINavigationController* filterController = [self.storyboard
