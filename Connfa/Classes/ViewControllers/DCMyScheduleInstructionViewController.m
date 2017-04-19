@@ -36,7 +36,6 @@
 }
 
 -(void)setTutorialImage{
-  self.moreActionsImage.image = [[UIImage imageNamed:@"More Actions Button_white"] coloredImage:[DCAppConfiguration navigationBarColor]];
   if([DCDeviceType isIphone5]){
     [self setTutorialImageNamed:@"tutorial_iphone_5"];
   }else if([DCDeviceType isIphone7]){

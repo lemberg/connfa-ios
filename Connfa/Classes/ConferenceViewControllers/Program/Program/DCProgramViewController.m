@@ -162,6 +162,7 @@
 - (void)arrangeNavigationBar {
   [super arrangeNavigationBar];
   [self setMoreActionsButton];
+  [self setSchedulesTitle];
   [self setFilterButton];
 }
 
@@ -289,6 +290,23 @@
   self.navigationItem.rightBarButtonItem = moreActionsButton;
 }
 
+- (void)setSchedulesTitle{
+  if (self.eventsStrategy.strategy != EDCEeventStrategyFavorites){
+    return;
+  }
+  UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 40)];
+  UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 40)];
+  titleLabel.font = [UIFont fontWithName:@"SFUIText-Semibold" size:17];
+  titleLabel.textColor = [UIColor whiteColor];
+  titleLabel.text = @"My Schedule";
+  [titleView addSubview:titleLabel];
+  UITapGestureRecognizer *singleFingerTap =
+  [[UITapGestureRecognizer alloc] initWithTarget:self
+                                          action:@selector(onTitle)];
+  [titleView addGestureRecognizer:singleFingerTap];
+  self.navigationItem.titleView = titleView;
+}
+
 - (void)setFilterButton {
   if (![self.eventsStrategy isEnableFilter]) {
     return;
@@ -306,6 +324,10 @@
 }
 
 #pragma mark - User actions
+-(void)onTitle{
+  [self performSegueWithIdentifier:@"toSchedules" sender:self];
+}
+
 -(void)onMoreActionsButtonClick{
   UIAlertController* actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
   actionSheet.view.tintColor = [UIColor blackColor];

@@ -27,11 +27,11 @@
                         <viewControllerLayoutGuide type="bottom" id="Lbo-rS-uhw"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="sNW-pd-JUz">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="536"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6bO-pf-MPE" userLabel="Days navigation">
-                                <rect key="frame" x="0.0" y="20" width="320" height="35"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="35"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qU0-jE-nVu" userLabel="Date label">
                                         <rect key="frame" x="10" y="7" width="300" height="18"/>
@@ -94,7 +94,7 @@
                                 </variation>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8bi-cc-ytX">
-                                <rect key="frame" x="0.0" y="55" width="320" height="545"/>
+                                <rect key="frame" x="0.0" y="35" width="320" height="501"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <segue destination="D9W-92-0ZP" kind="embed" identifier="EmbeddedDaysPageVC" id="gHy-AJ-SqY"/>
@@ -114,6 +114,7 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="7wG-56-wdM"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="320" height="600"/>
                     <connections>
@@ -122,11 +123,12 @@
                         <outlet property="nextDayButton" destination="3Zq-rf-wWq" id="B4l-tN-fVA"/>
                         <outlet property="previousDayButton" destination="AED-7d-fwj" id="uzp-t6-KtK"/>
                         <segue destination="NIu-g3-hFp" kind="presentation" identifier="toTutorial" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="Ram-pF-Mm0"/>
+                        <segue destination="U0j-oc-HSd" kind="show" identifier="toSchedules" id="aYV-4d-TJQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MEd-Xf-Emf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2038" y="-585"/>
+            <point key="canvasLocation" x="-962" y="-643"/>
         </scene>
         <!--Day Events Controller-->
         <scene sceneID="ecg-BC-UbQ">
@@ -220,7 +222,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3eI-RH-Zcd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1994" y="82"/>
+            <point key="canvasLocation" x="-997.5" y="81.338028169014081"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="hj9-8H-Izl">
@@ -230,7 +232,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="da3-7f-yO8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1413" y="-584"/>
+            <point key="canvasLocation" x="-176.25" y="-614.26056338028172"/>
         </scene>
         <!--My Schedule Instruction View Controller-->
         <scene sceneID="rXM-N1-bqE">
@@ -297,7 +299,35 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="46w-RC-BSu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-748.125" y="-529.22535211267609"/>
+            <point key="canvasLocation" x="541.875" y="-568.30985915492954"/>
+        </scene>
+        <!--Schedules List Table View Controller-->
+        <scene sceneID="8Xh-vG-Kcu">
+            <objects>
+                <tableViewController id="U0j-oc-HSd" customClass="DCSchedulesListTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="foz-9b-z7S">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="oq6-eF-LaX">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oq6-eF-LaX" id="30X-uj-iSZ">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="U0j-oc-HSd" id="E48-Iz-o9v"/>
+                            <outlet property="delegate" destination="U0j-oc-HSd" id="H4n-XF-Xnu"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ChF-dM-oeM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1296" y="-574"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cFR-qF-SRW">
@@ -830,6 +860,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eSD-Pu-eVn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2904" y="59"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="f2C-Zs-CLm">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1uT-Nf-emJ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="p6c-Tp-heC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="DWH-Ko-YiN" kind="relationship" relationship="rootViewController" id="Eod-2A-PCo"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1My-o0-svW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2038.125" y="-585.21126760563379"/>
         </scene>
     </scenes>
     <resources>
