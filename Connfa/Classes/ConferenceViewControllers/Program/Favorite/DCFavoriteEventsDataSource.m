@@ -7,7 +7,7 @@
 
 @implementation DCFavoriteEventsDataSource
 
-- (void)loadEvents {
+- (void)loadEvents:(BOOL)isFromPullToRefresh {
   __weak typeof(self) weakSelf = self;
   [self dataSourceStartUpdateEvents];
   dispatch_async(
@@ -23,11 +23,14 @@
 
           [weakSelf dataSourceEndUpdateEvents];
 
+          if(!isFromPullToRefresh && strongSelf.actualEventIndexPath){
           [strongSelf.tableView
               scrollToRowAtIndexPath:strongSelf.actualEventIndexPath
                     atScrollPosition:UITableViewScrollPositionTop
                             animated:NO];
+          }
         });
+        
       });
 }
 // kDCTimeslotKEY
@@ -89,8 +92,8 @@
   return @"";
 }
 
-- (void)reloadEvents {
-  [self loadEvents];
+- (void)reloadEvents:(BOOL)isFromPullToRefresh {
+  [self loadEvents:isFromPullToRefresh];
 }
 
 - (NSArray*)eventsForDay {

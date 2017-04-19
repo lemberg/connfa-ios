@@ -39,7 +39,7 @@ typedef enum {
     (void (^)(DCMainProxyState mainProxyState))dataUpdatedCallback;
 
 #pragma mark - public
-
+- (void)updateEvents;
 - (void)update;
 - (BOOL)checkReachable;
 - (NSTimeZone *)isSystemTimeCoincidencWithEventTimezone;

@@ -17,7 +17,9 @@
 #import "DCGoldSponsorBannerHeandler.h"
 
 @interface DCDayEventsController ()<DCEventCellProtocol,
-                                    DCDayEventSourceDelegate>
+DCDayEventSourceDelegate> {
+  UIRefreshControl* refreshControl;
+}
 
 @property(nonatomic, weak) IBOutlet UILabel* noItemsLabel;
 @property(nonatomic, weak) IBOutlet UIImageView* noItemsImageView;
@@ -44,6 +46,7 @@
   [super viewDidLoad];
   self.noEventsImageViewDefaultHeight = 100.0;
   [self configureState];
+  [self addRefreshControl];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -68,10 +71,29 @@
 #pragma mark - Public
 
 - (void)updateEvents {
-  [self.eventsDataSource reloadEvents];
+  [self.eventsDataSource reloadEvents:false];
 }
 
 #pragma mark - Private
+-(void)addRefreshControl{
+  refreshControl = [[UIRefreshControl alloc]init];
+  [refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
+  NSOperatingSystemVersion systemVersion = [[NSProcessInfo processInfo] operatingSystemVersion];
+  if(systemVersion.majorVersion >= 10){
+    self.tableView.refreshControl = refreshControl;
+  }else{
+    [self.tableView addSubview:refreshControl];
+  }
+  
+}
+
+-(void)refreshTable{
+  [[DCMainProxy sharedProxy] setDataUpdatedCallback: nil];
+//  [self configureState];
+  [[DCMainProxy sharedProxy] updateEvents];
+  [self.eventsDataSource reloadEvents:true];
+
+}
 
 - (void)configureState {
   if (self.state == DCStateNormal) {
@@ -197,6 +219,7 @@
 
 - (void)dataSourceEndUpdateEvents:(DCEventDataSource*)dataSource {
   [self.activityIndicatorView stopAnimating];
+  [refreshControl endRefreshing];
 }
 
 #pragma mark - UITableView delegate
