@@ -8,6 +8,7 @@
 
 #import "DCMyScheduleInstructionViewController.h"
 #import "DCDeviceType.h"
+#import "UIImage+Extension.h"
 
 @interface DCMyScheduleInstructionViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *tutorialImageVIew;
@@ -35,8 +36,7 @@
 }
 
 -(void)setTutorialImage{
-  self.moreActionsImage.image = [[UIImage imageNamed:@"More Actions Button_white"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-  self.moreActionsImage.tintColor = [DCAppConfiguration navigationBarColor];
+  self.moreActionsImage.image = [[UIImage imageNamed:@"More Actions Button_white"] coloredImage:[DCAppConfiguration navigationBarColor]];
   if([DCDeviceType isIphone5]){
     [self setTutorialImageNamed:@"tutorial_iphone_5"];
   }else if([DCDeviceType isIphone7]){
@@ -48,7 +48,7 @@
 
 -(void)setTutorialImageNamed:(NSString *)name{
   //TODO: change image rendering mode
-  UIImage *image = [[UIImage imageNamed:name] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+  UIImage *image = [[UIImage imageNamed:name] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   self.tutorialImageVIew.image = image;
   self.tutorialImageVIew.tintColor = [DCAppConfiguration navigationBarColor];
 }
