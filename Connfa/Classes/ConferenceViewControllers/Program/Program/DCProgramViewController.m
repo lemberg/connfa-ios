@@ -8,7 +8,11 @@
 #import "DCAppFacade.h"
 #import "NSCalendar+DC.h"
 
-@interface DCProgramViewController ()
+@interface DCProgramViewController (){
+  NSString *titleString;
+  EScheduleType selectedScheduleType;
+  UIAlertAction *addFriendScheduleAction;
+}
 
 @property(nonatomic, strong) UIPageViewController* pageViewController;
 @property(weak, nonatomic) IBOutlet UIActivityIndicatorView* activityIndicator;
@@ -41,8 +45,12 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
 
+  titleString = @"My Schedule";
+  
   [self arrangeNavigationBar];
-
+  [self setSchedulesTitle];
+  selectedScheduleType = EMySchedule;
+  
   self.currentDayIndex = 0;
   self.currentPageDate = nil;
   self.dayContainerView.backgroundColor =
@@ -73,7 +81,6 @@
     [self registerScreenLoadAtGA:[NSString stringWithFormat:@"%@", self.navigationItem.title]];
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   //TODO: add keys into constants
-  [defaults setBool:false forKey:@"MyScheduleTutorialShown"];
   if (self.eventsStrategy.strategy == EDCEeventStrategyFavorites && ![defaults boolForKey:@"MyScheduleTutorialShown"]) {
     [defaults setBool:true forKey:@"MyScheduleTutorialShown"];
     [self performSegueWithIdentifier:@"toTutorial" sender:self];
@@ -162,7 +169,6 @@
 - (void)arrangeNavigationBar {
   [super arrangeNavigationBar];
   [self setMoreActionsButton];
-  [self setSchedulesTitle];
   [self setFilterButton];
 }
 
@@ -294,17 +300,38 @@
   if (self.eventsStrategy.strategy != EDCEeventStrategyFavorites){
     return;
   }
-  UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 40)];
-  UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 40)];
-  titleLabel.font = [UIFont fontWithName:@"SFUIText-Semibold" size:17];
-  titleLabel.textColor = [UIColor whiteColor];
-  titleLabel.text = @"My Schedule";
+  UIFont *titleFont = [UIFont fontWithName:@".SFUIText-Semibold" size:17];
+  NSDictionary *userAttributes = @{NSFontAttributeName: titleFont,
+                                   NSForegroundColorAttributeName: [UIColor whiteColor]};
+  CGSize textSize = [titleString sizeWithAttributes:userAttributes];
+  CGFloat textWidth = 200.0;
+  if (textSize.width < 200) {
+    textWidth = textSize.width;
+  }
+  
+  UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, textWidth + 20, textSize.height)];
+  
+  UILabel* titleLabel = [self createTitleLabelWithWidth:textWidth height:textSize.height font:titleFont];
+  titleLabel.center = titleView.center;
+  
+  UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTitle)];
+  
+  UIImageView *disclosureIndicator = [[UIImageView alloc] initWithFrame:CGRectMake(textWidth + 14, titleLabel.frame.size.height/2 - 1, 10, 4)];
+  disclosureIndicator.image = [UIImage imageNamed:@"Disclosure Indicator"];
+  
   [titleView addSubview:titleLabel];
-  UITapGestureRecognizer *singleFingerTap =
-  [[UITapGestureRecognizer alloc] initWithTarget:self
-                                          action:@selector(onTitle)];
+  [titleView addSubview:disclosureIndicator];
   [titleView addGestureRecognizer:singleFingerTap];
   self.navigationItem.titleView = titleView;
+}
+
+-(UILabel *)createTitleLabelWithWidth:(CGFloat)width height:(CGFloat)height font:(UIFont *)font{
+  UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+  titleLabel.font = font;
+  titleLabel.textColor = [UIColor whiteColor];
+  titleLabel.text = titleString;
+
+  return titleLabel;
 }
 
 - (void)setFilterButton {
@@ -323,25 +350,86 @@
   self.navigationItem.rightBarButtonItem = filterButton;
 }
 
-#pragma mark - User actions
--(void)onTitle{
-  [self performSegueWithIdentifier:@"toSchedules" sender:self];
-}
-
--(void)onMoreActionsButtonClick{
+-(void)showMyScheduleActions{
   UIAlertController* actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
   actionSheet.view.tintColor = [UIColor blackColor];
   UIAlertAction *addScheduleAction = [UIAlertAction actionWithTitle:@"Add a schedule" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    
+    [self addSchedule];
   }];
   UIAlertAction *shareMyScheduleAction = [UIAlertAction actionWithTitle:@"Share My Schedule" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    
+    [self shareMySchedule];
   }];
   UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
   [actionSheet addAction:addScheduleAction];
   [actionSheet addAction:shareMyScheduleAction];
   [actionSheet addAction:cancelAction];
   [self presentViewController:actionSheet animated:true completion:nil];
+}
+
+-(void)showFriendScheduleActions{
+  UIAlertController* actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+  actionSheet.view.tintColor = [UIColor blackColor];
+  UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"Edit" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    
+  }];
+  UIAlertAction *removeAction = [UIAlertAction actionWithTitle:@"Remove" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+    
+  }];
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+  [actionSheet addAction:editAction];
+  [actionSheet addAction:removeAction];
+  [actionSheet addAction:cancelAction];
+  [self presentViewController:actionSheet animated:true completion:nil];
+}
+
+-(void)addSchedule{
+  UIAlertController *addScheduleAlert = [UIAlertController alertControllerWithTitle:@"Add a schedule"
+                                                                            message:@"You may get this code from a person who has already shared his/her own schedule with you."
+                                                                     preferredStyle:UIAlertControllerStyleAlert];
+  [addScheduleAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+    textField.placeholder = @"Schedule unique code";
+    textField.delegate = self;
+  }];
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:nil];
+  //TODO: replace initialization
+  addFriendScheduleAction = [UIAlertAction actionWithTitle:@"Add" style:UIAlertActionStyleDefault
+                                                    handler:^(UIAlertAction * _Nonnull action) {
+    [self showAddScheduleNameAlert];
+  }];
+  addFriendScheduleAction.enabled = false;
+  [addScheduleAlert addAction:cancelAction];
+  [addScheduleAlert addAction:addFriendScheduleAction];
+  [self presentViewController:addScheduleAlert animated:true completion:nil];
+}
+
+-(void)shareMySchedule{
+  
+}
+
+-(void)showAddScheduleNameAlert{
+  UIAlertController *addScheduleAlert = [UIAlertController alertControllerWithTitle:@"Schedule name"
+                                                                            message:@"Enter a name for this schedule."
+                                                                     preferredStyle:UIAlertControllerStyleAlert];
+  [addScheduleAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+    textField.placeholder = @"Schedule name";
+    textField.text = @"User schedule 1";
+  }];
+  UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
+  [addScheduleAlert addAction:okAction];
+  [self presentViewController:addScheduleAlert animated:true completion:nil];
+}
+
+#pragma mark - User actions
+-(void)onTitle{
+  [self performSegueWithIdentifier:@"toSchedules" sender:self];
+}
+
+-(void)onMoreActionsButtonClick{
+  if (selectedScheduleType == EMySchedule) {
+    [self showMyScheduleActions];
+  }else {
+    [self showFriendScheduleActions];
+  }
 }
 
 - (void)onFilterButtonClick {
@@ -467,6 +555,28 @@
   }
 }
 
+#pragma mark - ScheduleListDelegate
+
+-(void)setScheduleName:(NSString *)name {
+  titleString = name;
+  [self setSchedulesTitle];
+}
+
+-(void)setScheduleType:(EScheduleType)scheduleType {
+  selectedScheduleType = scheduleType;
+}
+
+#pragma mark - TextFieldDelegate
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+  NSUInteger newLength = [textField.text length] + [string length] - range.length;
+  if(newLength > 0){
+    addFriendScheduleAction.enabled = true;
+  }else {
+    addFriendScheduleAction.enabled = false;
+  }
+  return true;
+}
+
 #pragma mark - UIStoryboardSegue
 
 - (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender {
@@ -474,6 +584,9 @@
     self.pageViewController = [segue destinationViewController];
     self.pageViewController.dataSource = self;
     self.pageViewController.delegate = self;
+  }else if([[segue identifier] isEqualToString:@"toSchedules"]){
+    DCSchedulesListTableViewController *controller = (DCSchedulesListTableViewController*)((UINavigationController *)segue.destinationViewController).topViewController;
+    controller.delegate = self;
   }
 }
 
