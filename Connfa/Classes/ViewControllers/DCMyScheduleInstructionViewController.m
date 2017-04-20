@@ -46,7 +46,6 @@
 }
 
 -(void)setTutorialImageNamed:(NSString *)name{
-  //TODO: change image rendering mode
   UIImage *image = [[UIImage imageNamed:name] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   self.tutorialImageVIew.image = image;
   self.tutorialImageVIew.tintColor = [DCAppConfiguration navigationBarColor];

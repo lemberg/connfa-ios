@@ -8,37 +8,68 @@
 
 #import "DCSchedulesListTableViewController.h"
 
-@interface DCSchedulesListTableViewController ()
+@interface DCSchedulesListTableViewController (){
+  NSString *scheduleName;
+  NSIndexPath *selectedIndexPath;
+  EScheduleType selectedScheduleType;
+}
 
 @end
 
 @implementation DCSchedulesListTableViewController
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    self.navigationItem.title = @"Choose schedule";
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+  [super viewDidLoad];
+  [self setupNavigationBar];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+  [super viewWillAppear:animated];
+  selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+  [self.tableView selectRowAtIndexPath:selectedIndexPath animated:false scrollPosition:UITableViewScrollPositionNone];
+  [self tableView:self.tableView didSelectRowAtIndexPath:selectedIndexPath];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+  [super viewWillDisappear:animated];
+  [self setScheduleType];
+  [_delegate setScheduleName:scheduleName];
+  [_delegate setScheduleType:selectedScheduleType];
+  
 }
 
 - (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+  [super didReceiveMemoryWarning];
+  // Dispose of any resources that can be recreated.
 }
 
+-(void)setupNavigationBar{
+  UIBarButtonItem *closeButton = [[UIBarButtonItem alloc] initWithTitle:@"Close" style:UIBarButtonItemStylePlain target:self action:@selector(closeController)];
+  self.navigationItem.leftBarButtonItem = closeButton;
+  self.navigationController.navigationBar.barTintColor =
+  [DCAppConfiguration navigationBarColor];
+}
 
+-(void)closeController{
+  [self.navigationController dismissViewControllerAnimated:true completion:nil];
+}
+
+-(void)setScheduleType {
+  if (selectedIndexPath.row == 0) {
+    selectedScheduleType = EMySchedule;
+  }else {
+    selectedScheduleType = EFriendSchedule;
+  }
+}
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+  return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+  return 2;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -46,12 +77,17 @@
   cell.textLabel.text = [NSString stringWithFormat:@"Schedule %ld", (long)indexPath.row];
   cell.selectionStyle = UITableViewCellSelectionStyleNone;
   cell.tintColor = [DCAppConfiguration navigationBarColor];
+  
   return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath   *)indexPath
 {
-  [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+  UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+  cell.accessoryType = UITableViewCellAccessoryCheckmark;
+  scheduleName = cell.textLabel.text;
+  
+  selectedIndexPath = indexPath;
 }
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -59,58 +95,5 @@
   [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
 }
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
