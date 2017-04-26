@@ -25,6 +25,9 @@ typedef void (^CompleteRequestCallback)(BOOL success, NSDictionary* result);
                    withHTTPMethod:(NSString*)httpMethod
                 withHeaderOptions:(NSDictionary*)options;
 
++(NSMutableURLRequest *)mutableURLRequestForURI:(NSString *)uri
+                                 withHTTPMethod:(NSString*)httpMethod;
+
 /**
  *  Fetch data from server synchronously accroding to urlRequest in the call
  *thread

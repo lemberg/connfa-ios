@@ -7,6 +7,7 @@
 #import "DCLimitedNavigationController.h"
 #import "DCAppFacade.h"
 #import "NSCalendar+DC.h"
+#import "DCWebService.h"
 
 @interface DCProgramViewController (){
   NSString *titleString;
@@ -79,11 +80,9 @@
     [super viewDidAppear:animated];
     [self arrangePreviousAndNextDayButtons];
     [self registerScreenLoadAtGA:[NSString stringWithFormat:@"%@", self.navigationItem.title]];
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  //TODO: add keys into constants
-  if (self.eventsStrategy.strategy == EDCEeventStrategyFavorites && ![defaults boolForKey:@"MyScheduleTutorialShown"]) {
-    [defaults setBool:true forKey:@"MyScheduleTutorialShown"];
-    [self performSegueWithIdentifier:@"toTutorial" sender:self];
+  if (self.eventsStrategy.strategy == EDCEeventStrategyFavorites){
+    [self showInstructionsScreen];
+    [self createSchedule];
   }
 }
 
@@ -164,6 +163,18 @@
         UIEdgeInsetsMake(0, padding, 0, 0);
     self.nextDayButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, padding);
   }
+}
+
+-(void)createSchedule{
+  NSMutableURLRequest* request = [DCWebService mutableURLRequestForURI:@"createSchedule" withHTTPMethod:@"POST" ];
+  [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+  [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+  
+  [DCWebService fetchDataFromURLRequest:request onSuccess:^(NSHTTPURLResponse *response, id data) {
+    NSLog(@"%@",response);
+  } onError:^(NSHTTPURLResponse *response, id data, NSError *error) {
+    NSLog(@"%@",error.description);
+  }];
 }
 
 - (void)arrangeNavigationBar {
@@ -350,6 +361,14 @@
   self.navigationItem.rightBarButtonItem = filterButton;
 }
 
+-(void)showInstructionsScreen{
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  if(![defaults boolForKey:@"MyScheduleTutorialShown"]) {
+    [defaults setBool:true forKey:@"MyScheduleTutorialShown"];
+    [self performSegueWithIdentifier:@"toTutorial" sender:self];
+  }
+}
+
 -(void)showMyScheduleActions{
   UIAlertController* actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
   actionSheet.view.tintColor = [UIColor blackColor];
@@ -370,7 +389,7 @@
   UIAlertController* actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
   actionSheet.view.tintColor = [UIColor blackColor];
   UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"Edit" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    
+    [self showEditAlertView];
   }];
   UIAlertAction *removeAction = [UIAlertAction actionWithTitle:@"Remove" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
     
@@ -403,12 +422,42 @@
 }
 
 -(void)shareMySchedule{
+  NSArray *items = @[@"Share my schedule"]; // build an activity view controller
+  UIActivityViewController *controller = [[UIActivityViewController alloc]initWithActivityItems:items applicationActivities:nil];
+  controller.excludedActivityTypes = @[
+                                               UIActivityTypePostToWeibo,
+                                               UIActivityTypeMessage,
+                                               UIActivityTypePrint,
+                                               UIActivityTypeCopyToPasteboard,
+                                               UIActivityTypeAssignToContact,
+                                               UIActivityTypeSaveToCameraRoll,
+                                               UIActivityTypeAddToReadingList,
+                                               UIActivityTypePostToFlickr,
+                                               UIActivityTypePostToVimeo,
+                                               UIActivityTypePostToTencentWeibo
+                                               ];
+  [controller setValue:@"Subject" forKey:@"subject"];
   
+  [self presentViewController:controller animated:true completion:nil];
+
 }
 
 -(void)showAddScheduleNameAlert{
   UIAlertController *addScheduleAlert = [UIAlertController alertControllerWithTitle:@"Schedule name"
                                                                             message:@"Enter a name for this schedule."
+                                                                     preferredStyle:UIAlertControllerStyleAlert];
+  [addScheduleAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+    textField.placeholder = @"Schedule name";
+    textField.text = @"User schedule 1";
+  }];
+  UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
+  [addScheduleAlert addAction:okAction];
+  [self presentViewController:addScheduleAlert animated:true completion:nil];
+}
+
+-(void)showEditAlertView{
+  UIAlertController *addScheduleAlert = [UIAlertController alertControllerWithTitle:@"Schedule name"
+                                                                            message:nil
                                                                      preferredStyle:UIAlertControllerStyleAlert];
   [addScheduleAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
     textField.placeholder = @"Schedule name";
