@@ -21,6 +21,8 @@
 #import "DCCoreDataStore.h"
 #import "DCDayEventsController.h"
 #import "DCGoldSponsorBannerHeandler.h"
+#import "DCDetailEventHeaderTableViewCell.h"
+#import "DCDetailEventScheduleTableViewCell.h"
 
 static NSString* cellIdHeader = @"DetailCellIdHeader";
 static NSString* cellIdSpeaker = @"DetailCellIdSpeaker";
@@ -264,9 +266,19 @@ static NSString* cellWhoIsgoingHeader = @"WhoIsGoingHeaderCell";
   if (indexPath.row == 0)
     return [self getHeaderCellHeight];
 
-  if (indexPath.row == (self.speakers.count + 1))
+  if(indexPath.row == self.speakers.count + 1){
     return 44;
-  if (indexPath.row == (self.speakers.count + 2))
+  }
+  if(_isWhoIsGoingExpanded && indexPath.row <= self.speakers.count + _schedules.count +2 && indexPath.row > _speakers.count + 1){
+    return 44;
+  }
+  
+  unsigned long additionalCounter = 2;
+  if(_isWhoIsGoingExpanded){
+    additionalCounter = 2 + self.schedules.count;
+  }
+
+  if (indexPath.row == (self.speakers.count + additionalCounter))
     return [self heightForDescriptionTextCell];
   else
     return [self getSpeakerCellHeight:self.speakers[indexPath.row - 1]];
@@ -293,11 +305,20 @@ static NSString* cellWhoIsgoingHeader = @"WhoIsGoingHeaderCell";
   }
 
   if(indexPath.row == self.speakers.count + 1){
-    UITableViewCell *whoIsGoingCell = [self.tableView dequeueReusableCellWithIdentifier:cellWhoIsgoingHeader];
+    DCDetailEventHeaderTableViewCell *whoIsGoingCell = (DCDetailEventHeaderTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:cellWhoIsgoingHeader];
     return whoIsGoingCell;
   }
+  if(_isWhoIsGoingExpanded && indexPath.row <= self.speakers.count + _schedules.count +2){
+    DCDetailEventHeaderTableViewCell *whoIsGoingCell = (DCDetailEventHeaderTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:cellWhoIsgoingHeader];
+    return whoIsGoingCell;
+  }
+  
   // description cell
-  if (indexPath.row == self.speakers.count + 2) {
+  unsigned long additionalCuunter = 2;
+  if(_isWhoIsGoingExpanded){
+    additionalCuunter = 2 + self.schedules.count;
+  }
+  if (indexPath.row == self.speakers.count + additionalCuunter) {
     DCDescriptionTextCell* cell = (DCDescriptionTextCell*)
         [tableView dequeueReusableCellWithIdentifier:cellIdDescription];
     cell.descriptionWebView.delegate = self;
@@ -319,13 +340,21 @@ static NSString* cellWhoIsgoingHeader = @"WhoIsGoingHeaderCell";
     didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-  if(!self.isWhoIsGoingExpanded && indexPath.row == self.speakers.count + 1){
+  if(indexPath.row == self.speakers.count + 1){
+    if(!self.isWhoIsGoingExpanded){
     self.isWhoIsGoingExpanded = true;
     [self.tableView beginUpdates];
     [self.schedules addObject:[NSIndexPath indexPathForRow:indexPath.row + 1 inSection:indexPath.section]];
     [self.schedules addObject:[NSIndexPath indexPathForRow:indexPath.row + 2 inSection:indexPath.section]];
     [self.tableView insertRowsAtIndexPaths:self.schedules withRowAnimation:UITableViewRowAnimationTop];
     [self.tableView endUpdates];
+    }else{
+      self.isWhoIsGoingExpanded = !self.isWhoIsGoingExpanded;
+      [self.tableView beginUpdates];
+      [self.tableView deleteRowsAtIndexPaths:self.schedules withRowAnimation:UITableViewRowAnimationTop];
+      [self.tableView endUpdates];
+      [self.schedules removeAllObjects];
+    }
   }
   
   if (![[tableView cellForRowAtIndexPath:indexPath]
@@ -342,6 +371,7 @@ static NSString* cellWhoIsgoingHeader = @"WhoIsGoingHeaderCell";
   [self.navigationController pushViewController:speakerViewController
                                        animated:YES];
 }
+
 
 #pragma mark - UIWebView delegate
 
