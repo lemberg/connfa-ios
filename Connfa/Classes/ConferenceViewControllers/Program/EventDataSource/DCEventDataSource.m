@@ -112,7 +112,7 @@ const NSString* kDCTimeslotEventKEY = @"timeslot_event_key";
 }
 
 - (void)updateActualEventIndexPathForTimeRange:(NSArray*)array {
-    dispatch_async(dispatch_get_main_queue(), ^{
+//    dispatch_async(dispatch_get_main_queue(), ^{
         float currentHour = [NSDate currentHour];
         NSInteger sectionNumber = 0;
         
@@ -149,7 +149,7 @@ const NSString* kDCTimeslotEventKEY = @"timeslot_event_key";
         self.actualEventIndexPath =
         [NSIndexPath indexPathForItem:0
                             inSection:sectionNumber > 0 ? sectionNumber - 1 : 0];
-    });
+//    });
 }
 
 - (NSIndexPath*)actualEventIndexPath {
