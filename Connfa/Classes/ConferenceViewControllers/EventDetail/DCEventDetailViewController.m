@@ -25,6 +25,7 @@
 static NSString* cellIdHeader = @"DetailCellIdHeader";
 static NSString* cellIdSpeaker = @"DetailCellIdSpeaker";
 static NSString* cellIdDescription = @"DetailCellIdDescription";
+static NSString* cellWhoIsgoingHeader = @"WhoIsGoingHeaderCell";
 
 
 @interface DCEventDetailViewController ()
@@ -44,6 +45,9 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
 @property(nonatomic, strong) UIColor* currentBarColor;
 
 @property(nonatomic, strong) NSDictionary* cellsForSizeEstimation;
+
+@property(nonatomic, strong) NSMutableArray* schedules;
+@property(nonatomic)BOOL isWhoIsGoingExpanded;
 
 @end
 
@@ -92,6 +96,8 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
   NSString *bannerName = [[DCGoldSponsorBannerHeandler sharedManager] getSponsorBannerName];
   [self trackSponsorBannerViaGAI:bannerName];
   self.topBackgroundView.image = [UIImage imageNamed:bannerName];
+  
+  self.schedules = [[NSMutableArray alloc] init];
 
 }
 
@@ -259,6 +265,8 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
     return [self getHeaderCellHeight];
 
   if (indexPath.row == (self.speakers.count + 1))
+    return 44;
+  if (indexPath.row == (self.speakers.count + 2))
     return [self heightForDescriptionTextCell];
   else
     return [self getSpeakerCellHeight:self.speakers[indexPath.row - 1]];
@@ -267,7 +275,11 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
 - (NSInteger)tableView:(UITableView*)tableView
  numberOfRowsInSection:(NSInteger)section {
   // speakers + description + header
-  return self.speakers.count + 2;
+  int additionalCount = 3;
+  if (self.isWhoIsGoingExpanded) {
+    additionalCount = 5;
+  }
+  return self.speakers.count + additionalCount;
 }
 
 - (UITableViewCell*)tableView:(UITableView*)tableView
@@ -280,8 +292,12 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
     return cell;
   }
 
+  if(indexPath.row == self.speakers.count + 1){
+    UITableViewCell *whoIsGoingCell = [self.tableView dequeueReusableCellWithIdentifier:cellWhoIsgoingHeader];
+    return whoIsGoingCell;
+  }
   // description cell
-  if (indexPath.row == self.speakers.count + 1) {
+  if (indexPath.row == self.speakers.count + 2) {
     DCDescriptionTextCell* cell = (DCDescriptionTextCell*)
         [tableView dequeueReusableCellWithIdentifier:cellIdDescription];
     cell.descriptionWebView.delegate = self;
@@ -303,6 +319,15 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
     didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
+  if(!self.isWhoIsGoingExpanded && indexPath.row == self.speakers.count + 1){
+    self.isWhoIsGoingExpanded = true;
+    [self.tableView beginUpdates];
+    [self.schedules addObject:[NSIndexPath indexPathForRow:indexPath.row + 1 inSection:indexPath.section]];
+    [self.schedules addObject:[NSIndexPath indexPathForRow:indexPath.row + 2 inSection:indexPath.section]];
+    [self.tableView insertRowsAtIndexPaths:self.schedules withRowAnimation:UITableViewRowAnimationTop];
+    [self.tableView endUpdates];
+  }
+  
   if (![[tableView cellForRowAtIndexPath:indexPath]
           isKindOfClass:[DCSpeakerCell class]])
     return;
