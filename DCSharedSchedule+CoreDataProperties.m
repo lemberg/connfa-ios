@@ -2,7 +2,7 @@
 //  DCSharedSchedule+CoreDataProperties.m
 //  Connfa
 //
-//  Created by Oleh Kurnenkov on 4/26/17.
+//  Created by Oleh Kurnenkov on 4/28/17.
 //  Copyright © 2017 Lemberg Solution. All rights reserved.
 //
 
@@ -14,8 +14,8 @@
 	return [[NSFetchRequest alloc] initWithEntityName:@"DCSharedSchedule"];
 }
 
-@dynamic scheduleId;
 @dynamic name;
+@dynamic scheduleId;
 @dynamic events;
 
 @end

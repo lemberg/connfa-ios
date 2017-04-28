@@ -69,7 +69,7 @@
         <attribute name="order" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="poiId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
     </entity>
-    <entity name="DCSharedSchedule" representedClassName=".DCSharedSchedule" syncable="YES" codeGenerationType="class">
+    <entity name="DCSharedSchedule" representedClassName="DCSharedSchedule" syncable="YES" codeGenerationType="class">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="scheduleId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DCEvent" inverseName="schedules" inverseEntity="DCEvent" syncable="YES"/>
@@ -119,11 +119,11 @@
         <element name="DCLocation" positionX="-5465" positionY="-1645" width="128" height="133"/>
         <element name="DCMainEvent" positionX="-5571" positionY="-2142" width="128" height="45"/>
         <element name="DCPoi" positionX="-5301" positionY="-1654" width="128" height="133"/>
+        <element name="DCSharedSchedule" positionX="-5922" positionY="-1737" width="128" height="90"/>
         <element name="DCSocialEvent" positionX="-5499" positionY="-2016" width="128" height="45"/>
         <element name="DCSpeaker" positionX="-5733" positionY="-1744" width="128" height="223"/>
         <element name="DCTimeRange" positionX="-5562" positionY="-1944" width="128" height="73"/>
         <element name="DCTrack" positionX="-5994" positionY="-1998" width="128" height="120"/>
         <element name="DCType" positionX="-5969" positionY="-1879" width="128" height="118"/>
-        <element name="DCSharedSchedule" positionX="-5922" positionY="-1737" width="128" height="88"/>
     </elements>
 </model>

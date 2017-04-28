@@ -6,9 +6,13 @@
 #import "DCTimeRange+DC.h"
 #import "DCLevel.h"
 #import "DCTrack.h"
+#import "DCSharedSchedule+CoreDataClass.h"
+#import "DCSharedSchedule+DC.h"
+#import "NSManagedObject+DC.h"
 
 #import "NSDate+DC.h"
 #import "NSArray+DC.h"
+#import "DCWebService.h"
 
 @implementation DCMainProxy (Additions)
 
@@ -210,6 +214,35 @@
 
   return YES;
 }
+
+-(void)createSchedule{
+  NSMutableURLRequest* request = [DCWebService mutableURLRequestForURI:@"createSchedule" withHTTPMethod:@"POST" ];
+  [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+  [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+  [request setHTTPBody:[self createDataForScheduleRequest]];
+  [DCWebService fetchDataFromURLRequest:request onSuccess:^(NSHTTPURLResponse *response, id data) {
+    NSLog(@"%@",response);
+    DCSharedSchedule* sharedSchedule = [DCSharedSchedule createManagedObjectInContext:self.workContext];
+    
+  } onError:^(NSHTTPURLResponse *response, id data, NSError *error) {
+    NSLog(@"%@",error.description);
+  }];
+}
+
+-(NSData *)createDataForScheduleRequest{
+  NSArray* events = [self favoriteEvents];
+  if(!events.count){
+    return nil;
+  }
+  NSMutableArray *ids = [[NSMutableArray alloc] init];
+  for(DCEvent* event in events){
+    [ids addObject:event.eventId];
+  }
+  NSDictionary* dataDictionary = [NSDictionary dictionaryWithObject:ids forKey:@"data"];
+  NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dataDictionary options:NSJSONWritingPrettyPrinted error:nil];
+  return jsonData;
+}
+
 
 #pragma mark -
 

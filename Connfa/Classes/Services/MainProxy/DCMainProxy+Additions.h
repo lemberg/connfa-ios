@@ -20,6 +20,6 @@
 
 - (BOOL)isFilterCleared;
 
-#pragma mark -
-
+#pragma mark - favorites
+-(void)createSchedule;
 @end

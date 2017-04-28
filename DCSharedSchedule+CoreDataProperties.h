@@ -2,7 +2,7 @@
 //  DCSharedSchedule+CoreDataProperties.h
 //  Connfa
 //
-//  Created by Oleh Kurnenkov on 4/26/17.
+//  Created by Oleh Kurnenkov on 4/28/17.
 //  Copyright © 2017 Lemberg Solution. All rights reserved.
 //
 
@@ -15,8 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSFetchRequest<DCSharedSchedule *> *)fetchRequest;
 
-@property (nullable, nonatomic, copy) NSNumber *scheduleId;
 @property (nullable, nonatomic, copy) NSString *name;
+@property (nullable, nonatomic, copy) NSNumber *scheduleId;
 @property (nullable, nonatomic, retain) NSSet<DCEvent *> *events;
 
 @end

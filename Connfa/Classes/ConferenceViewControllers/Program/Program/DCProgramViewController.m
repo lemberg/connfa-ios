@@ -82,7 +82,7 @@
     [self registerScreenLoadAtGA:[NSString stringWithFormat:@"%@", self.navigationItem.title]];
   if (self.eventsStrategy.strategy == EDCEeventStrategyFavorites){
     [self showInstructionsScreen];
-    [self createSchedule];
+    [[DCMainProxy sharedProxy] createSchedule];
   }
 }
 
@@ -163,18 +163,6 @@
         UIEdgeInsetsMake(0, padding, 0, 0);
     self.nextDayButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, padding);
   }
-}
-
--(void)createSchedule{
-  NSMutableURLRequest* request = [DCWebService mutableURLRequestForURI:@"createSchedule" withHTTPMethod:@"POST" ];
-  [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-  [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-  
-  [DCWebService fetchDataFromURLRequest:request onSuccess:^(NSHTTPURLResponse *response, id data) {
-    NSLog(@"%@",response);
-  } onError:^(NSHTTPURLResponse *response, id data, NSError *error) {
-    NSLog(@"%@",error.description);
-  }];
 }
 
 - (void)arrangeNavigationBar {
@@ -467,6 +455,8 @@
   [addScheduleAlert addAction:okAction];
   [self presentViewController:addScheduleAlert animated:true completion:nil];
 }
+
+
 
 #pragma mark - User actions
 -(void)onTitle{

@@ -22,6 +22,7 @@
 #import "DCParserService.h"
 
 #import "NSUserDefaults+DC.h"
+#import "DCSharedSchedule+CoreDataProperties.h"
 
 static NSString* const CHECK_UPDATES_URI = @"checkUpdates";
 static NSString* const IDS_FOR_UPDATE = @"idsForUpdate";
@@ -37,6 +38,7 @@ static NSString* const SOCIAL_EVENTS_URI = @"getSocialEvents";
 static NSString* const POI_URI = @"getPOI";
 static NSString* const INFO_URI = @"getInfo";
 static NSString* const SETTINGS_URI = @"getSettings";
+static NSString* const SCHEDULES_URI = @"getSchedules";
 
 @interface DCImportDataSevice ()
 
@@ -89,7 +91,8 @@ static NSString* const SETTINGS_URI = @"getSettings";
       SOCIAL_EVENTS_URI : [DCSocialEvent class],
       LOCATIONS_URI : [DCLocation class],
       POI_URI : [DCPoi class],
-      INFO_URI : [DCInfo class]     
+      INFO_URI : [DCInfo class],
+      SCHEDULES_URI: [DCSharedSchedule class]
     };
   }
   return _classesMap;
@@ -340,7 +343,10 @@ static NSString* const SETTINGS_URI = @"getSettings";
     case 11:
       result = INFO_URI;
       break;
-
+      
+      case 12:
+      result = SCHEDULES_URI;
+      break;
     case 0:
       result = SETTINGS_URI;
       break;
