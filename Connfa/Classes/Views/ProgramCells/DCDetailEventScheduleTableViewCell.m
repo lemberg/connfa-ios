@@ -11,14 +11,14 @@
 @implementation DCDetailEventScheduleTableViewCell
 
 - (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
+  [super awakeFromNib];
+  [self.scheduleName setFont:[UIFont fontWithName:@".SFUIText-Regular" size:16.5]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+  [super setSelected:selected animated:animated];
+  
+  // Configure the view for the selected state
 }
 
 @end

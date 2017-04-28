@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface DCDetailEventHeaderTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *headerLabel;
 
 @end

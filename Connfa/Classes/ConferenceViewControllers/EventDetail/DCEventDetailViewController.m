@@ -28,6 +28,7 @@ static NSString* cellIdHeader = @"DetailCellIdHeader";
 static NSString* cellIdSpeaker = @"DetailCellIdSpeaker";
 static NSString* cellIdDescription = @"DetailCellIdDescription";
 static NSString* cellWhoIsgoingHeader = @"WhoIsGoingHeaderCell";
+static NSString* cellSchedule = @"scheduleCell";
 
 
 @interface DCEventDetailViewController ()
@@ -100,8 +101,12 @@ static NSString* cellWhoIsgoingHeader = @"WhoIsGoingHeaderCell";
   self.topBackgroundView.image = [UIImage imageNamed:bannerName];
   
   self.schedules = [[NSMutableArray alloc] init];
+  [self.schedules addObject:[NSIndexPath indexPathForRow:self.speakers.count + 3 inSection:0]];
+  [self.schedules addObject:[NSIndexPath indexPathForRow:self.speakers.count + 4 inSection:0]];
+  self.isWhoIsGoingExpanded = true;
 
 }
+
 
 - (void)viewWillDisappear:(BOOL)animated {
   if (self.closeCallback)
@@ -177,11 +182,12 @@ static NSString* cellWhoIsgoingHeader = @"WhoIsGoingHeaderCell";
 }
 
 - (BOOL)showEmptyDetailIcon {
+  BOOL isSchedulesEmpty = self.schedules == 0;
   BOOL isTrackEmpty = [[self.event.tracks allObjects].lastObject name].length == 0;
   BOOL isExperienceEmpty = self.event.level.name.length == 0;
   BOOL isNoSpeakers = [self.speakers count] == 0;
   BOOL isDescriptionEmpty = self.event.desctiptText.length == 0;
-  return isTrackEmpty && isExperienceEmpty && isNoSpeakers && isDescriptionEmpty;
+  return isTrackEmpty && isExperienceEmpty && isNoSpeakers && isDescriptionEmpty && isSchedulesEmpty;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -266,30 +272,35 @@ static NSString* cellWhoIsgoingHeader = @"WhoIsGoingHeaderCell";
   if (indexPath.row == 0)
     return [self getHeaderCellHeight];
 
-  if(indexPath.row == self.speakers.count + 1){
-    return 44;
+  //TODO: refactor
+  if(indexPath.row == self.speakers.count + 2){
+    return 48;
   }
-  if(_isWhoIsGoingExpanded && indexPath.row <= self.speakers.count + _schedules.count +2 && indexPath.row > _speakers.count + 1){
-    return 44;
+  if(_isWhoIsGoingExpanded && indexPath.row <= self.speakers.count + _schedules.count + 2 && indexPath.row > _speakers.count + 2){
+    return 48;
   }
   
-  unsigned long additionalCounter = 2;
+  unsigned long additionalCounter = 3;
   if(_isWhoIsGoingExpanded){
-    additionalCounter = 2 + self.schedules.count;
+    additionalCounter += self.schedules.count;
   }
 
   if (indexPath.row == (self.speakers.count + additionalCounter))
     return [self heightForDescriptionTextCell];
-  else
-    return [self getSpeakerCellHeight:self.speakers[indexPath.row - 1]];
+  else{
+    if(indexPath.row == 1){
+      return 48.;
+    }
+    return [self getSpeakerCellHeight:self.speakers[indexPath.row - 2]];
+  }
 }
 
 - (NSInteger)tableView:(UITableView*)tableView
  numberOfRowsInSection:(NSInteger)section {
   // speakers + description + header
-  int additionalCount = 3;
+  int additionalCount = 4;
   if (self.isWhoIsGoingExpanded) {
-    additionalCount = 5;
+    additionalCount = 6;
   }
   return self.speakers.count + additionalCount;
 }
@@ -304,19 +315,24 @@ static NSString* cellWhoIsgoingHeader = @"WhoIsGoingHeaderCell";
     return cell;
   }
 
-  if(indexPath.row == self.speakers.count + 1){
+  if(indexPath.row == self.speakers.count + 2){
     DCDetailEventHeaderTableViewCell *whoIsGoingCell = (DCDetailEventHeaderTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:cellWhoIsgoingHeader];
     return whoIsGoingCell;
   }
-  if(_isWhoIsGoingExpanded && indexPath.row <= self.speakers.count + _schedules.count +2){
-    DCDetailEventHeaderTableViewCell *whoIsGoingCell = (DCDetailEventHeaderTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:cellWhoIsgoingHeader];
-    return whoIsGoingCell;
+  if(_isWhoIsGoingExpanded && indexPath.row < self.speakers.count + _schedules.count + 3 && indexPath.row > _speakers.count + 2){
+    DCDetailEventScheduleTableViewCell *scheduleCell = (DCDetailEventScheduleTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:cellSchedule];
+    if(indexPath.row == self.speakers.count + _schedules.count + 2){
+      scheduleCell.separator.hidden = false;
+    }else{
+      scheduleCell.separator.hidden = true;
+    }
+    return scheduleCell;
   }
   
   // description cell
-  unsigned long additionalCuunter = 2;
+  unsigned long additionalCuunter = 3;
   if(_isWhoIsGoingExpanded){
-    additionalCuunter = 2 + self.schedules.count;
+    additionalCuunter = 3 + self.schedules.count;
   }
   if (indexPath.row == self.speakers.count + additionalCuunter) {
     DCDescriptionTextCell* cell = (DCDescriptionTextCell*)
@@ -328,7 +344,13 @@ static NSString* cellWhoIsgoingHeader = @"WhoIsGoingHeaderCell";
     return cell;
   } else  // speaker cell
   {
-    DCSpeaker* speaker = self.speakers[indexPath.row - 1];
+    if(indexPath.row == 1){
+      DCDetailEventHeaderTableViewCell *speakersCell = (DCDetailEventHeaderTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:cellWhoIsgoingHeader];
+      speakersCell.headerLabel.text = @"Speakers";
+      speakersCell.selectionStyle = UITableViewCellSelectionStyleNone;
+      return speakersCell;
+    }
+    DCSpeaker* speaker = self.speakers[indexPath.row - 2];
     DCSpeakerCell* cell = (DCSpeakerCell*)
         [tableView dequeueReusableCellWithIdentifier:cellIdSpeaker];
     [cell initData:speaker];
@@ -340,7 +362,7 @@ static NSString* cellWhoIsgoingHeader = @"WhoIsGoingHeaderCell";
     didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-  if(indexPath.row == self.speakers.count + 1){
+  if(indexPath.row == self.speakers.count + 2){
     if(!self.isWhoIsGoingExpanded){
     self.isWhoIsGoingExpanded = true;
     [self.tableView beginUpdates];
