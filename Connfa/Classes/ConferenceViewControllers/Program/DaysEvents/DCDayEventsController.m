@@ -183,7 +183,6 @@
 
 - (void)didSelectCell:(DCEventCell*)eventCell {
   NSIndexPath* cellIndexPath = [self.tableView indexPathForCell:eventCell];
-  [[DCGoldSponsorBannerHeandler sharedManager] makeRandomGoldenSponsor];
   DCEvent* selectedEvent =
       [self.eventsDataSource eventForIndexPath:cellIndexPath];
   [self.parentProgramController openDetailScreenForEvent:selectedEvent];
