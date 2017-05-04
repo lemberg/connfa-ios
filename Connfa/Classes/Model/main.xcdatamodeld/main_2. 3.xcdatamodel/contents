@@ -69,7 +69,8 @@
         <attribute name="order" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="poiId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
     </entity>
-    <entity name="DCSharedSchedule" representedClassName="DCSharedSchedule" syncable="YES" codeGenerationType="class">
+    <entity name="DCSharedSchedule" representedClassName="DCSharedSchedule" syncable="YES">
+        <attribute name="isMySchedule" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="scheduleId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DCEvent" inverseName="schedules" inverseEntity="DCEvent" syncable="YES"/>
@@ -111,7 +112,7 @@
     <elements>
         <element name="DCAppSettings" positionX="-6012" positionY="-1638" width="128" height="90"/>
         <element name="DCBof" positionX="-5427" positionY="-2142" width="128" height="74"/>
-        <element name="DCEvent" positionX="-5744" positionY="-2142" width="128" height="268"/>
+        <element name="DCEvent" positionX="-5744" positionY="-2142" width="128" height="270"/>
         <element name="DCHousePlan" positionX="-5141" positionY="-1626" width="128" height="103"/>
         <element name="DCInfo" positionX="-5330" positionY="-1989" width="128" height="90"/>
         <element name="DCInfoCategory" positionX="-5123" positionY="-1998" width="128" height="118"/>
@@ -119,11 +120,11 @@
         <element name="DCLocation" positionX="-5465" positionY="-1645" width="128" height="133"/>
         <element name="DCMainEvent" positionX="-5571" positionY="-2142" width="128" height="45"/>
         <element name="DCPoi" positionX="-5301" positionY="-1654" width="128" height="133"/>
-        <element name="DCSharedSchedule" positionX="-5922" positionY="-1737" width="128" height="90"/>
+        <element name="DCSharedSchedule" positionX="-5933" positionY="-1737" width="128" height="105"/>
         <element name="DCSocialEvent" positionX="-5499" positionY="-2016" width="128" height="45"/>
-        <element name="DCSpeaker" positionX="-5733" positionY="-1744" width="128" height="223"/>
-        <element name="DCTimeRange" positionX="-5562" positionY="-1944" width="128" height="73"/>
+        <element name="DCSpeaker" positionX="-5733" positionY="-1744" width="128" height="240"/>
+        <element name="DCTimeRange" positionX="-5537" positionY="-1953" width="128" height="75"/>
         <element name="DCTrack" positionX="-5994" positionY="-1998" width="128" height="120"/>
-        <element name="DCType" positionX="-5969" positionY="-1879" width="128" height="118"/>
+        <element name="DCType" positionX="-5985" positionY="-1866" width="128" height="120"/>
     </elements>
 </model>

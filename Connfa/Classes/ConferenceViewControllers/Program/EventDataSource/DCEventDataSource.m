@@ -2,7 +2,7 @@
 #import "DCEventDataSource.h"
 #import "NSCalendar+DC.h"
 #import "DCSocialEvent.h"
-#import "DCType.h"
+#import "DCType+CoreDataProperties.h"
 
 @interface DCEventDataSource ()
 

@@ -2,7 +2,7 @@
 //  DCSharedSchedule+CoreDataProperties.m
 //  Connfa
 //
-//  Created by Oleh Kurnenkov on 4/28/17.
+//  Created by Oleh Kurnenkov on 5/4/17.
 //  Copyright © 2017 Lemberg Solution. All rights reserved.
 //
 
@@ -16,6 +16,7 @@
 
 @dynamic name;
 @dynamic scheduleId;
+@dynamic isMySchedule;
 @dynamic events;
 
 @end

@@ -1,6 +1,6 @@
 
 #import <Foundation/Foundation.h>
-#import "DCEvent.h"
+#import "DCEvent+CoreDataProperties.h"
 
 @class DCEvent;
 

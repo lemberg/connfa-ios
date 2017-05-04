@@ -1,8 +1,8 @@
 //
-//  DCSharedSchedule+CoreDataClass.h
+//  DCSpeaker+CoreDataClass.h
 //  Connfa
 //
-//  Created by Oleh Kurnenkov on 4/28/17.
+//  Created by Oleh Kurnenkov on 5/4/17.
 //  Copyright © 2017 Lemberg Solution. All rights reserved.
 //
 
@@ -13,10 +13,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DCSharedSchedule : NSManagedObject
+@interface DCSpeaker : NSManagedObject
 
 @end
 
 NS_ASSUME_NONNULL_END
 
-#import "DCSharedSchedule+CoreDataProperties.h"
+#import "DCSpeaker+CoreDataProperties.h"

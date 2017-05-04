@@ -2,7 +2,7 @@
 #import "DCSpeakerHeaderCell.h"
 #import "UIImageView+WebCache.h"
 #import "UIImageView+DC.h"
-#import "DCSpeaker.h"
+#import "DCSpeaker+CoreDataProperties.h"
 #import "DCConstants.h"
 #import "DCFontItem.h"
 
