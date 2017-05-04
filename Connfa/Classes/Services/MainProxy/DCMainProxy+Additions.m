@@ -9,6 +9,7 @@
 #import "DCSharedSchedule+CoreDataClass.h"
 #import "DCSharedSchedule+DC.h"
 #import "NSManagedObject+DC.h"
+#import "NSUserDefaults+DC.h"
 
 #import "NSDate+DC.h"
 #import "NSArray+DC.h"
@@ -215,18 +216,52 @@
   return YES;
 }
 
+-(void)updateSchedule{
+    NSNumber *code = [NSUserDefaults myScheduleCode];
+    if (!code) {
+        [self createSchedule];
+    }else{
+        NSMutableURLRequest* request = [DCWebService mutableURLRequestForURI:[NSString stringWithFormat:@"/updateSchedule/%@",[code stringValue]] withHTTPMethod:@"PUT" ];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        [request setHTTPBody:[self createDataForScheduleRequest]];
+        [DCWebService fetchDataFromURLRequest:request onSuccess:^(NSHTTPURLResponse *response, id data) {
+           
+        } onError:^(NSHTTPURLResponse *response, id data, NSError *error) {
+            NSLog(@"%@",error.description);
+        }];
+    }
+}
+
 -(void)createSchedule{
-  NSMutableURLRequest* request = [DCWebService mutableURLRequestForURI:@"createSchedule" withHTTPMethod:@"POST" ];
-  [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-  [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-  [request setHTTPBody:[self createDataForScheduleRequest]];
-  [DCWebService fetchDataFromURLRequest:request onSuccess:^(NSHTTPURLResponse *response, id data) {
-    NSLog(@"%@",response);
-    DCSharedSchedule* sharedSchedule = [DCSharedSchedule createManagedObjectInContext:self.workContext];
-    
-  } onError:^(NSHTTPURLResponse *response, id data, NSError *error) {
-    NSLog(@"%@",error.description);
-  }];
+    if(![NSUserDefaults myScheduleCode]){
+        NSMutableURLRequest* request = [DCWebService mutableURLRequestForURI:@"createSchedule" withHTTPMethod:@"POST" ];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        [request setHTTPBody:[self createDataForScheduleRequest]];
+        [DCWebService fetchDataFromURLRequest:request onSuccess:^(NSHTTPURLResponse *response, id data) {
+            NSLog(@"%@",response);
+            NSError* err = nil;
+            NSDictionary* dictionary =
+            [NSJSONSerialization JSONObjectWithData:data
+                                            options:kNilOptions
+                                              error:&err];
+            dictionary = [dictionary dictionaryByReplacingNullsWithStrings];
+            NSNumber *code = [dictionary objectForKey:@"code"];
+            
+            DCSharedSchedule* sharedSchedule = [DCSharedSchedule createManagedObjectInContext:self.workContext];
+            sharedSchedule.scheduleId = code;
+            sharedSchedule.isMySchedule = [NSNumber numberWithBool:true];
+            sharedSchedule.name = @"My Schedule";
+            [sharedSchedule addEventsForIds:[self getFavoritesIds]];
+            
+            [NSUserDefaults saveMyScheduleCode:code];
+        } onError:^(NSHTTPURLResponse *response, id data, NSError *error) {
+            NSLog(@"%@",error.description);
+        }];
+    }else{
+        [self updateSchedule];
+    }
 }
 
 -(NSData *)createDataForScheduleRequest{
@@ -234,15 +269,25 @@
   if(!events.count){
     return nil;
   }
-  NSMutableArray *ids = [[NSMutableArray alloc] init];
-  for(DCEvent* event in events){
-    [ids addObject:event.eventId];
-  }
+  NSArray *ids = [self getFavoritesIds];
   NSDictionary* dataDictionary = [NSDictionary dictionaryWithObject:ids forKey:@"data"];
   NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dataDictionary options:NSJSONWritingPrettyPrinted error:nil];
   return jsonData;
 }
 
+-(NSArray *)getFavoritesIds{
+    NSArray* events = [self favoriteEvents];
+    if(!events.count){
+        return nil;
+    }
+    NSMutableArray *ids = [[NSMutableArray alloc] init];
+    for(NSDictionary* eventDictionary in events){
+        NSArray *eventsArray = [eventDictionary objectForKey:@"events"];
+        DCEvent *event = [eventsArray firstObject];
+        [ids addObject:event.eventId];
+    }
+    return ids;
+}
 
 #pragma mark -
 

@@ -478,6 +478,8 @@
 		FC34ED7B1EBB208000EE9C22 /* DCEvent+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = FC34ED771EBB208000EE9C22 /* DCEvent+CoreDataProperties.m */; };
 		FC34ED7C1EBB208000EE9C22 /* DCEvent+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = FC34ED771EBB208000EE9C22 /* DCEvent+CoreDataProperties.m */; };
 		FC34ED7D1EBB208100EE9C22 /* DCEvent+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = FC34ED771EBB208000EE9C22 /* DCEvent+CoreDataProperties.m */; };
+		FC34ED7E1EBB573700EE9C22 /* DCSharedSchedule+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = FCACB8A61EB3681D000D6CB6 /* DCSharedSchedule+DC.m */; };
+		FC34ED7F1EBB573700EE9C22 /* DCSharedSchedule+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = FCACB8A61EB3681D000D6CB6 /* DCSharedSchedule+DC.m */; };
 		FC59A0251EA5F4C500F82DE0 /* DCDeviceType.m in Sources */ = {isa = PBXBuildFile; fileRef = FC59A0241EA5F4C500F82DE0 /* DCDeviceType.m */; };
 		FC59C59D1EBB0491008C1505 /* DCLevel+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FC59C59A1EBB0491008C1505 /* DCLevel+CoreDataClass.m */; };
 		FC59C59E1EBB0491008C1505 /* DCLevel+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = FC59C59C1EBB0491008C1505 /* DCLevel+CoreDataProperties.m */; };
@@ -2307,6 +2309,7 @@
 				281F866A1E7FF0730065EA1B /* UIImageView+DC.m in Sources */,
 				281F866C1E7FF0730065EA1B /* MKAnnotationView+WebCache.m in Sources */,
 				281F866D1E7FF0730065EA1B /* DCHousePlan+DC.m in Sources */,
+				FC34ED7F1EBB573700EE9C22 /* DCSharedSchedule+DC.m in Sources */,
 				281F866E1E7FF0730065EA1B /* DCLocationViewController.m in Sources */,
 				281F866F1E7FF0730065EA1B /* NSDate+DC.m in Sources */,
 				281F86701E7FF0730065EA1B /* DCEventDetailViewController.m in Sources */,
@@ -2439,6 +2442,7 @@
 				281F872A1E7FF1550065EA1B /* UIImageView+DC.m in Sources */,
 				281F872C1E7FF1550065EA1B /* MKAnnotationView+WebCache.m in Sources */,
 				281F872D1E7FF1550065EA1B /* DCHousePlan+DC.m in Sources */,
+				FC34ED7E1EBB573700EE9C22 /* DCSharedSchedule+DC.m in Sources */,
 				281F872E1E7FF1550065EA1B /* DCLocationViewController.m in Sources */,
 				281F872F1E7FF1550065EA1B /* NSDate+DC.m in Sources */,
 				281F87301E7FF1550065EA1B /* DCEventDetailViewController.m in Sources */,

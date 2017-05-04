@@ -7,6 +7,7 @@ const NSString* kAboutInfo = @"aboutHTML";
 const NSString* kBundleVersionMajor = @"kBundleVersionMajor";
 const NSString* kBundleVersionMinor = @"kBundleVersionMinor";
 const NSString* kNotShowTimeZoneEventAlert = @"kNotShowTimeZoneEventAlert";
+const NSString* kMyScheduleCreated = @"kMyScheduleCreated";
 
 @implementation NSUserDefaults (DC)
 
@@ -50,6 +51,15 @@ const NSString* kNotShowTimeZoneEventAlert = @"kNotShowTimeZoneEventAlert";
 
 + (NSString*)aboutString {
   return [NSUserDefaults DC_savedValueForKey:(NSString*)kAboutInfo];
+}
+
+#pragma mark - shared schedule
++ (void)saveMyScheduleCode:(NSNumber*)code {
+    [NSUserDefaults DC_saveObject:code forKey:(NSString *)kMyScheduleCreated];
+}
+
++ (NSNumber*)myScheduleCode {
+    return [NSUserDefaults DC_savedValueForKey:(NSString*)kMyScheduleCreated];
 }
 
 #pragma mark - private
