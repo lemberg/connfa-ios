@@ -88,8 +88,9 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
     
   self.noDataView.hidden = ![self showEmptyDetailIcon];
   self.tableView.scrollEnabled = ![self showEmptyDetailIcon];
-
-  NSString *bannerName = [[DCGoldSponsorBannerHeandler sharedManager] getSponsorBannerName];
+    DCGoldSponsorBannerHeandler *handler = [DCGoldSponsorBannerHeandler sharedManager];
+    [handler makeRandomGoldenSponsor];
+  NSString *bannerName = [handler getSponsorBannerName];
   [self trackSponsorBannerViaGAI:bannerName];
   self.topBackgroundView.image = [UIImage imageNamed:bannerName];
 
