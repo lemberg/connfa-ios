@@ -216,17 +216,25 @@
   return YES;
 }
 
+-(void)getSchedules:(NSArray*)codes {
+    
+}
+
+-(NSString*)createParametersStringForCodes:(NSArray *)codes{
+    return [NSString stringWithFormat:@""];
+}
+
 -(void)updateSchedule{
     NSNumber *code = [NSUserDefaults myScheduleCode];
     if (!code) {
         [self createSchedule];
     }else{
-        NSMutableURLRequest* request = [DCWebService mutableURLRequestForURI:[NSString stringWithFormat:@"/updateSchedule/%@",[code stringValue]] withHTTPMethod:@"PUT" ];
+        NSMutableURLRequest* request = [DCWebService mutableURLRequestForURI:[NSString stringWithFormat:@"updateSchedule/%@",[code stringValue]] withHTTPMethod:@"PUT" ];
         [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
         [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         [request setHTTPBody:[self createDataForScheduleRequest]];
         [DCWebService fetchDataFromURLRequest:request onSuccess:^(NSHTTPURLResponse *response, id data) {
-           
+            NSLog(@"%@",response);
         } onError:^(NSHTTPURLResponse *response, id data, NSError *error) {
             NSLog(@"%@",error.description);
         }];
