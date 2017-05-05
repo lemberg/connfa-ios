@@ -10,10 +10,10 @@
 #import "DCSharedSchedule+DC.h"
 #import "NSManagedObject+DC.h"
 #import "NSUserDefaults+DC.h"
+#import "DCWebService.h"
 
 #import "NSDate+DC.h"
 #import "NSArray+DC.h"
-#import "DCWebService.h"
 
 @implementation DCMainProxy (Additions)
 
@@ -216,7 +216,23 @@
   return YES;
 }
 
--(void)getSchedules:(NSArray*)codes {
+//TODO: Add error handling
+-(void)getSchedules:(NSArray*)codes callback:(void (^)(BOOL))callback{
+    NSString* url = [NSString stringWithFormat:@"getSchedules?%@",[self createParametersStringForCodes:codes]];
+    NSURLRequest* request = [DCWebService urlRequestForURI:url withHTTPMethod:@"GET" withHeaderOptions:nil];
+    [DCWebService fetchDataFromURLRequest:request onSuccess:^(NSHTTPURLResponse *response, id data) {
+        NSError* err = nil;
+        NSDictionary* dictionary =
+        [NSJSONSerialization JSONObjectWithData:data
+                                        options:kNilOptions
+                                          error:&err];
+        dictionary = [dictionary dictionaryByReplacingNullsWithStrings];
+
+        [DCSharedSchedule updateFromDictionary:dictionary inContext:self.workContext];
+        callback(true);
+    } onError:^(NSHTTPURLResponse *response, id data, NSError *error) {
+        
+    }];
     
 }
 

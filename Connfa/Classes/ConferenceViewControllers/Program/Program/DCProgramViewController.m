@@ -401,7 +401,11 @@
   //TODO: replace initialization
   addFriendScheduleAction = [UIAlertAction actionWithTitle:@"Add" style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction * _Nonnull action) {
-    [self showAddScheduleNameAlert];
+                                                        [[DCMainProxy sharedProxy] getSchedules:@[addScheduleAlert.textFields.firstObject.text] callback:^(BOOL success){
+                                                            if(success){
+                                                                [self showAddScheduleNameAlert];
+                                                            }
+                                                        }];
   }];
   addFriendScheduleAction.enabled = false;
   [addScheduleAlert addAction:cancelAction];

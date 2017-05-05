@@ -11,6 +11,8 @@
 #import "NSManagedObject+DC.h"
 
 const NSString* kDCSchduleIdKey = @"scheduleId";
+const NSString* kDCSchdulesKey = @"schedules";
+const NSString* kDCCodeKey = @"code";
 
 @implementation DCSharedSchedule (DC)
 
@@ -32,7 +34,16 @@ const NSString* kDCSchduleIdKey = @"scheduleId";
 
 + (void)updateFromDictionary:(NSDictionary*)schedules
                    inContext:(NSManagedObjectContext*)context{
-    
+    for (NSDictionary* scheduleDictionary in schedules[kDCSchdulesKey]) {
+        DCSharedSchedule* schedule = (DCSharedSchedule*)
+        [[DCMainProxy sharedProxy] objectForID:[scheduleDictionary[kDCCodeKey] intValue]
+                                       ofClass:[DCSharedSchedule class]
+                                     inContext:context];
+        if(!schedule){
+            //TODO: create schedule
+        }
+        [schedule addEventsForIds:(NSArray *)scheduleDictionary[kDCEventsKey]];
+    }
 }
 
 + (NSString*)idKey {

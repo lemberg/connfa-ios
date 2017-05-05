@@ -20,6 +20,7 @@
 
 - (BOOL)isFilterCleared;
 
-#pragma mark - favorites
+#pragma mark - Schedules
 -(void)createSchedule;
+-(void)getSchedules:(NSArray*)codes callback:(void (^)(BOOL))callback;
 @end
