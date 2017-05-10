@@ -505,6 +505,8 @@
 		FC63F6FD1EB21AAC00CA446A /* DCDetailEventHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC63F6FC1EB21AAC00CA446A /* DCDetailEventHeaderTableViewCell.m */; };
 		FC63F7001EB21ADD00CA446A /* DCDetailEventScheduleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC63F6FF1EB21ADD00CA446A /* DCDetailEventScheduleTableViewCell.m */; };
 		FC703B141EA7A0E200539E41 /* DCSchedulesListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC703B131EA7A0E200539E41 /* DCSchedulesListTableViewController.m */; };
+		FC7EE2001EC33D7600FC5AA0 /* DCSchedulesListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC703B131EA7A0E200539E41 /* DCSchedulesListTableViewController.m */; };
+		FC7EE2011EC33D7600FC5AA0 /* DCSchedulesListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC703B131EA7A0E200539E41 /* DCSchedulesListTableViewController.m */; };
 		FCACB8A71EB3681D000D6CB6 /* DCSharedSchedule+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = FCACB8A61EB3681D000D6CB6 /* DCSharedSchedule+DC.m */; };
 /* End PBXBuildFile section */
 
@@ -2304,6 +2306,7 @@
 				281F86661E7FF0730065EA1B /* DCBaseViewController.m in Sources */,
 				281F86671E7FF0730065EA1B /* UIImage+GIF.m in Sources */,
 				281F86681E7FF0730065EA1B /* DCAppConfiguration.m in Sources */,
+				FC7EE2001EC33D7600FC5AA0 /* DCSchedulesListTableViewController.m in Sources */,
 				281F86691E7FF0730065EA1B /* DCLimitedNavigationController.m in Sources */,
 				FC59C5A51EBB04EE008C1505 /* DCSpeaker+CoreDataProperties.m in Sources */,
 				281F866A1E7FF0730065EA1B /* UIImageView+DC.m in Sources */,
@@ -2437,6 +2440,7 @@
 				281F87261E7FF1550065EA1B /* DCBaseViewController.m in Sources */,
 				281F87271E7FF1550065EA1B /* UIImage+GIF.m in Sources */,
 				281F87281E7FF1550065EA1B /* DCAppConfiguration.m in Sources */,
+				FC7EE2011EC33D7600FC5AA0 /* DCSchedulesListTableViewController.m in Sources */,
 				281F87291E7FF1550065EA1B /* DCLimitedNavigationController.m in Sources */,
 				FC59C5A61EBB04EF008C1505 /* DCSpeaker+CoreDataProperties.m in Sources */,
 				281F872A1E7FF1550065EA1B /* UIImageView+DC.m in Sources */,

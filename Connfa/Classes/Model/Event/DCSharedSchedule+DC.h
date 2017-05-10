@@ -11,6 +11,11 @@
 
 @interface DCSharedSchedule (DC) <ManagedObjectUpdateProtocol>
 
--(void)addEventsForIds:(NSArray *)ids;
+extern NSString* kDCSchduleIdKey;
+extern NSString* kDCSchdulesKey;
+extern NSString* kDCCodeKey;
 
+-(void)addEventsForIds:(NSArray *)ids;
++ (DCSharedSchedule *)getScheduleFromDictionary:(NSDictionary*)scheduleDictionary
+                                      inContext:(NSManagedObjectContext*)context;
 @end

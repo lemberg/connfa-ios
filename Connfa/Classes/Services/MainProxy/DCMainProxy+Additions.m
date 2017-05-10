@@ -11,6 +11,7 @@
 #import "NSManagedObject+DC.h"
 #import "NSUserDefaults+DC.h"
 #import "DCWebService.h"
+#import "DCCoreDataStore.h"
 
 #import "NSDate+DC.h"
 #import "NSArray+DC.h"
@@ -216,8 +217,8 @@
   return YES;
 }
 
-//TODO: Add error handling
--(void)getSchedules:(NSArray*)codes callback:(void (^)(BOOL))callback{
+//TODO: Add error handling, refactor for 1 schedule
+-(void)getSchedules:(NSArray*)codes callback:(void (^)(BOOL, DCSharedSchedule*))callback{
     NSString* url = [NSString stringWithFormat:@"getSchedules?%@",[self createParametersStringForCodes:codes]];
     NSURLRequest* request = [DCWebService urlRequestForURI:url withHTTPMethod:@"GET" withHeaderOptions:nil];
     [DCWebService fetchDataFromURLRequest:request onSuccess:^(NSHTTPURLResponse *response, id data) {
@@ -229,15 +230,24 @@
         dictionary = [dictionary dictionaryByReplacingNullsWithStrings];
 
         [DCSharedSchedule updateFromDictionary:dictionary inContext:self.workContext];
-        callback(true);
+        NSDictionary *scheduleDictionary = [((NSArray *)[dictionary objectForKey:@"schedules"]) firstObject];
+        DCSharedSchedule *schedule = [DCSharedSchedule getScheduleFromDictionary:scheduleDictionary inContext:self.workContext];
+        callback(true, schedule);
     } onError:^(NSHTTPURLResponse *response, id data, NSError *error) {
         
     }];
     
 }
-
+//TODO: Replace
 -(NSString*)createParametersStringForCodes:(NSArray *)codes{
-    return [NSString stringWithFormat:@""];
+    NSMutableString* parametesString = [[NSMutableString alloc] init];
+    for (NSNumber* code in codes) {
+        [parametesString appendString:[NSString stringWithFormat:@"codes[]=%@", code]];
+        if(code != [codes lastObject]){
+            [parametesString appendString:@"&"];
+        }
+    }
+    return parametesString;
 }
 
 -(void)updateSchedule{
@@ -278,6 +288,7 @@
             sharedSchedule.isMySchedule = [NSNumber numberWithBool:true];
             sharedSchedule.name = @"My Schedule";
             [sharedSchedule addEventsForIds:[self getFavoritesIds]];
+            [[DCCoreDataStore defaultStore] saveWithCompletionBlock:nil];
             
             [NSUserDefaults saveMyScheduleCode:code];
         } onError:^(NSHTTPURLResponse *response, id data, NSError *error) {
@@ -289,20 +300,62 @@
 }
 
 -(NSData *)createDataForScheduleRequest{
-  NSArray* events = [self favoriteEvents];
-  if(!events.count){
-    return nil;
-  }
   NSArray *ids = [self getFavoritesIds];
   NSDictionary* dataDictionary = [NSDictionary dictionaryWithObject:ids forKey:@"data"];
   NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dataDictionary options:NSJSONWritingPrettyPrinted error:nil];
   return jsonData;
 }
 
+- (NSArray*)getAllSharedSchedules {
+    return [self sharedSchedulesWithPredicate:nil];
+}
+//TODO: replace methods into shredSchedule model
+- (NSArray*)sharedSchedulesWithPredicate:(NSPredicate*)aPredicate {
+    @try {
+        NSEntityDescription* entityDescription =
+        [NSEntityDescription entityForName:NSStringFromClass([DCSharedSchedule class])
+                    inManagedObjectContext:self.workContext];
+        NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
+        [fetchRequest setEntity:entityDescription];
+        [fetchRequest setReturnsObjectsAsFaults:NO];
+        NSPredicate* predicate = [NSPredicate
+                                  predicateWithFormat:@"isMySchedule=%@", [NSNumber numberWithBool:NO]];
+        [fetchRequest setPredicate:predicate];
+        
+        NSArray* result =
+        [self.workContext executeFetchRequest:fetchRequest error:nil];
+        
+        if (result && [result count]) {
+            return result;
+        }
+    } @catch (NSException* exception) {
+        NSLog(@"%@", NSStringFromClass([self class]));
+        NSLog(@"%@", [self.workContext description]);
+        NSLog(@"%@", [self.workContext.persistentStoreCoordinator description]);
+        NSLog(@"%@", [self.workContext.persistentStoreCoordinator
+                      .managedObjectModel description]);
+        NSLog(@"%@", [self.workContext.persistentStoreCoordinator.managedObjectModel
+                      .entities description]);
+        @throw exception;
+    } @finally {
+    }
+    
+    return nil;
+}
+
+-(NSArray *)getSchedulesIds{
+    NSArray *schedules = [[DCMainProxy sharedProxy] getAllSharedSchedules];
+    NSMutableArray* ids = [[NSMutableArray alloc] init];
+    for (DCSharedSchedule* schedule in schedules) {
+        [ids addObject:schedule.scheduleId];
+    }
+    return ids;
+}
+
 -(NSArray *)getFavoritesIds{
     NSArray* events = [self favoriteEvents];
     if(!events.count){
-        return nil;
+        return [[NSArray alloc] init];
     }
     NSMutableArray *ids = [[NSMutableArray alloc] init];
     for(NSDictionary* eventDictionary in events){

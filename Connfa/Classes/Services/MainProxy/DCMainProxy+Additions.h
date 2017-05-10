@@ -21,6 +21,8 @@
 - (BOOL)isFilterCleared;
 
 #pragma mark - Schedules
--(void)createSchedule;
--(void)getSchedules:(NSArray*)codes callback:(void (^)(BOOL))callback;
+-(void)updateSchedule;
+-(void)getSchedules:(NSArray*)codes callback:(void (^)(BOOL, DCSharedSchedule*))callback;
+- (NSArray*)getAllSharedSchedules;
+-(NSArray *)getSchedulesIds;
 @end

@@ -9,6 +9,7 @@
 #import "DCSharedSchedule+DC.h"
 #import "DCEvent+DC.h"
 #import "NSManagedObject+DC.h"
+#import "DCCoreDataStore.h"
 
 const NSString* kDCSchduleIdKey = @"scheduleId";
 const NSString* kDCSchdulesKey = @"schedules";
@@ -35,15 +36,25 @@ const NSString* kDCCodeKey = @"code";
 + (void)updateFromDictionary:(NSDictionary*)schedules
                    inContext:(NSManagedObjectContext*)context{
     for (NSDictionary* scheduleDictionary in schedules[kDCSchdulesKey]) {
-        DCSharedSchedule* schedule = (DCSharedSchedule*)
-        [[DCMainProxy sharedProxy] objectForID:[scheduleDictionary[kDCCodeKey] intValue]
-                                       ofClass:[DCSharedSchedule class]
-                                     inContext:context];
+        DCSharedSchedule* schedule = [self getScheduleFromDictionary:scheduleDictionary inContext:context];
         if(!schedule){
-            //TODO: create schedule
+            schedule = [DCSharedSchedule createManagedObjectInContext:context];
+            schedule.scheduleId = [scheduleDictionary objectForKey:@"code"];
         }
+        schedule.isMySchedule = [NSNumber numberWithBool:NO];
         [schedule addEventsForIds:(NSArray *)scheduleDictionary[kDCEventsKey]];
+        [[DCCoreDataStore defaultStore] saveWithCompletionBlock:nil];
     }
+}
+
++ (DCSharedSchedule *)getScheduleFromDictionary:(NSDictionary*)scheduleDictionary
+                                      inContext:(NSManagedObjectContext*)context{
+    NSNumber* code = scheduleDictionary[kDCCodeKey];
+    DCSharedSchedule* schedule = (DCSharedSchedule*)
+    [[DCMainProxy sharedProxy] objectForID:[code intValue]
+                                   ofClass:[DCSharedSchedule class]
+                                 inContext:context];
+    return schedule;
 }
 
 + (NSString*)idKey {

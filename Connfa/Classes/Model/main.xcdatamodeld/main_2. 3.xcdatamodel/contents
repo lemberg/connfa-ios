@@ -70,9 +70,9 @@
         <attribute name="poiId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
     </entity>
     <entity name="DCSharedSchedule" representedClassName="DCSharedSchedule" syncable="YES">
-        <attribute name="isMySchedule" optional="YES" attributeType="Boolean" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="isMySchedule" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="scheduleId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="scheduleId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DCEvent" inverseName="schedules" inverseEntity="DCEvent" syncable="YES"/>
     </entity>
     <entity name="DCSocialEvent" representedClassName="DCSocialEvent" parentEntity="DCEvent" syncable="YES"/>
