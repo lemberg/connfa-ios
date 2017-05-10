@@ -7,11 +7,14 @@
 //
 
 #import "DCSchedulesListTableViewController.h"
+#import "DCMainProxy+Additions.h"
+#import "DCSharedSchedule+DC.h"
 
 @interface DCSchedulesListTableViewController (){
   NSString *scheduleName;
   NSIndexPath *selectedIndexPath;
   EScheduleType selectedScheduleType;
+    NSArray* schedules;
 }
 
 @end
@@ -21,26 +24,39 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   [self setupNavigationBar];
+    schedules = [[DCMainProxy sharedProxy] getAllSharedSchedules];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
   [super viewWillAppear:animated];
-  selectedIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-  [self.tableView selectRowAtIndexPath:selectedIndexPath animated:false scrollPosition:UITableViewScrollPositionNone];
-  [self tableView:self.tableView didSelectRowAtIndexPath:selectedIndexPath];
+    [self selectCellForSelectedSchedule];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
   [super viewWillDisappear:animated];
   [self setScheduleType];
   [_delegate setScheduleName:scheduleName];
-  [_delegate setScheduleType:selectedScheduleType];
+  [_delegate setScheduleType:selectedScheduleType andSchedule:_selectedSchedule];
   
 }
 
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
+}
+
+-(void)selectCellForSelectedSchedule{
+    int row = 0;
+    if(_selectedSchedule){
+        for (DCSharedSchedule* schedule in schedules) {
+            if([schedule.scheduleId intValue] != [_selectedSchedule.scheduleId intValue]){
+                row++;
+            }
+        }
+    }
+    selectedIndexPath = [NSIndexPath indexPathForRow:row inSection:0];
+    [self.tableView selectRowAtIndexPath:selectedIndexPath animated:false scrollPosition:UITableViewScrollPositionNone];
+    [self tableView:self.tableView didSelectRowAtIndexPath:selectedIndexPath];
 }
 
 -(void)setupNavigationBar{
@@ -69,15 +85,25 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return 2;
+    int numberOfRows = 1;
+    if(schedules){
+        numberOfRows += schedules.count;
+    }
+  return numberOfRows;
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-  cell.textLabel.text = [NSString stringWithFormat:@"Schedule %ld", (long)indexPath.row];
   cell.selectionStyle = UITableViewCellSelectionStyleNone;
   cell.tintColor = [DCAppConfiguration navigationBarColor];
   
+    if (indexPath.row == 0) {
+        cell.textLabel.text = @"My Schedule";
+    }else {
+        DCSharedSchedule* sharedSchedule = [schedules objectAtIndex:indexPath.row - 1];
+        cell.textLabel.text = sharedSchedule.name;
+    }
+    
   return cell;
 }
 
@@ -88,6 +114,11 @@
   scheduleName = cell.textLabel.text;
   
   selectedIndexPath = indexPath;
+    if(indexPath.row == 0){
+        _selectedSchedule = nil;
+    }else{
+        _selectedSchedule = [schedules objectAtIndex:indexPath.row - 1];
+    }
 }
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath

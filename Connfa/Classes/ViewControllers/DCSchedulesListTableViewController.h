@@ -14,9 +14,10 @@ typedef enum {
 
 @protocol ScheduleListDelegate
 -(void)setScheduleName:(NSString *)name;
--(void)setScheduleType:(EScheduleType)scheduleType;
+-(void)setScheduleType:(EScheduleType)scheduleType andSchedule:(DCSharedSchedule *)schedule;
 @end
 
 @interface DCSchedulesListTableViewController : UITableViewController
 @property (nonatomic, weak) id <ScheduleListDelegate> delegate;
+@property (nonatomic, strong)DCSharedSchedule* selectedSchedule;
 @end

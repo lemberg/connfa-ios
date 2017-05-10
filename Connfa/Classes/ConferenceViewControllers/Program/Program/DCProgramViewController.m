@@ -8,11 +8,14 @@
 #import "DCAppFacade.h"
 #import "NSCalendar+DC.h"
 #import "DCWebService.h"
+#import "DCSharedSchedule+DC.h"
+#import "DCCoreDataStore.h"
 
 @interface DCProgramViewController (){
   NSString *titleString;
   EScheduleType selectedScheduleType;
   UIAlertAction *addFriendScheduleAction;
+    DCSharedSchedule* selectedSchedule;
 }
 
 @property(nonatomic, strong) UIPageViewController* pageViewController;
@@ -82,7 +85,7 @@
     [self registerScreenLoadAtGA:[NSString stringWithFormat:@"%@", self.navigationItem.title]];
   if (self.eventsStrategy.strategy == EDCEeventStrategyFavorites){
     [self showInstructionsScreen];
-    [[DCMainProxy sharedProxy] createSchedule];
+    [[DCMainProxy sharedProxy] updateSchedule];
   }
 }
 
@@ -401,9 +404,9 @@
   //TODO: replace initialization
   addFriendScheduleAction = [UIAlertAction actionWithTitle:@"Add" style:UIAlertActionStyleDefault
                                                     handler:^(UIAlertAction * _Nonnull action) {
-                                                        [[DCMainProxy sharedProxy] getSchedules:@[addScheduleAlert.textFields.firstObject.text] callback:^(BOOL success){
+                                                        [[DCMainProxy sharedProxy] getSchedules:@[addScheduleAlert.textFields.firstObject.text] callback:^(BOOL success, DCSharedSchedule* schedule){
                                                             if(success){
-                                                                [self showAddScheduleNameAlert];
+                                                                [self showAddScheduleNameAlert: schedule];
                                                             }
                                                         }];
   }];
@@ -434,7 +437,7 @@
 
 }
 
--(void)showAddScheduleNameAlert{
+-(void)showAddScheduleNameAlert:(DCSharedSchedule *)schedule{
   UIAlertController *addScheduleAlert = [UIAlertController alertControllerWithTitle:@"Schedule name"
                                                                             message:@"Enter a name for this schedule."
                                                                      preferredStyle:UIAlertControllerStyleAlert];
@@ -442,7 +445,12 @@
     textField.placeholder = @"Schedule name";
     textField.text = @"User schedule 1";
   }];
-  UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
+  UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+      UITextField *textField = [[addScheduleAlert textFields] firstObject];
+      schedule.name = textField.text;
+      //TODO: replace
+      [[DCCoreDataStore defaultStore] saveWithCompletionBlock:nil];
+  }];
   [addScheduleAlert addAction:okAction];
   [self presentViewController:addScheduleAlert animated:true completion:nil];
 }
@@ -453,9 +461,14 @@
                                                                      preferredStyle:UIAlertControllerStyleAlert];
   [addScheduleAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
     textField.placeholder = @"Schedule name";
-    textField.text = @"User schedule 1";
+    textField.text = selectedSchedule.name;
   }];
-  UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
+  UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+      selectedSchedule.name = addScheduleAlert.textFields.firstObject.text;
+      [[DCCoreDataStore defaultStore] saveWithCompletionBlock:nil];
+      titleString = selectedSchedule.name;
+      [self setSchedulesTitle];
+  }];
   [addScheduleAlert addAction:okAction];
   [self presentViewController:addScheduleAlert animated:true completion:nil];
 }
@@ -605,8 +618,9 @@
   [self setSchedulesTitle];
 }
 
--(void)setScheduleType:(EScheduleType)scheduleType {
+-(void)setScheduleType:(EScheduleType)scheduleType andSchedule:(DCSharedSchedule *)schedule {
   selectedScheduleType = scheduleType;
+    selectedSchedule = schedule;
 }
 
 #pragma mark - TextFieldDelegate
@@ -630,6 +644,7 @@
   }else if([[segue identifier] isEqualToString:@"toSchedules"]){
     DCSchedulesListTableViewController *controller = (DCSchedulesListTableViewController*)((UINavigationController *)segue.destinationViewController).topViewController;
     controller.delegate = self;
+      controller.selectedSchedule = selectedSchedule;
   }
 }
 
