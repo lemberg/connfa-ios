@@ -1,7 +1,7 @@
 
 #import "DCImportDataSevice.h"
 
-#import "DCMainProxy.h"
+#import "DCMainProxy+Additions.h"
 #import "DCEvent+DC.h"
 #import "DCMainEvent+DC.h"
 #import "DCBof+DC.h"
@@ -38,7 +38,7 @@ static NSString* const SOCIAL_EVENTS_URI = @"getSocialEvents";
 static NSString* const POI_URI = @"getPOI";
 static NSString* const INFO_URI = @"getInfo";
 static NSString* const SETTINGS_URI = @"getSettings";
-static NSString* const SCHEDULES_URI = @"getSchedules";
+static NSString* const SCHEDULES_URI = @"getSchedules?";
 
 @interface DCImportDataSevice ()
 
@@ -345,7 +345,7 @@ static NSString* const SCHEDULES_URI = @"getSchedules";
       break;
       
       case 12:
-      result = SCHEDULES_URI;
+      result = [self getSchedulesUrlString];
       break;
     case 0:
       result = SETTINGS_URI;
@@ -355,6 +355,18 @@ static NSString* const SCHEDULES_URI = @"getSchedules";
   }
 
   return result;
+}
+
+-(NSString *)getSchedulesUrlString{
+    NSMutableString* parametesString = [[NSMutableString alloc] init];
+    NSArray *codes = [[DCMainProxy sharedProxy] getSchedulesIds];
+    for (NSNumber* code in codes) {
+        [parametesString appendString:[NSString stringWithFormat:@"codes[]=%@", [code stringValue]]];
+        if(code != [codes lastObject]){
+            [parametesString appendString:@"&"];
+        }
+    }
+    return parametesString;
 }
 
 @end
