@@ -78,7 +78,7 @@ static NSString* const SCHEDULES_URI = @"getSchedules?";
 }
 
 - (NSDictionary*)classesMap {
-  if (!_classesMap) {
+//  if (!_classesMap) {
     _classesMap = @{
       TYPES_URI : [DCType class],
       SETTINGS_URI : [DCAppSettings class],
@@ -92,9 +92,9 @@ static NSString* const SCHEDULES_URI = @"getSchedules?";
       LOCATIONS_URI : [DCLocation class],
       POI_URI : [DCPoi class],
       INFO_URI : [DCInfo class],
-      SCHEDULES_URI: [DCSharedSchedule class]
+      [self getSchedulesUrlString]: [DCSharedSchedule class]
     };
-  }
+//  }
   return _classesMap;
 }
 
@@ -358,15 +358,16 @@ static NSString* const SCHEDULES_URI = @"getSchedules?";
 }
 
 -(NSString *)getSchedulesUrlString{
-    NSMutableString* parametesString = [[NSMutableString alloc] init];
-    NSArray *codes = [[DCMainProxy sharedProxy] getSchedulesIds];
-    for (NSNumber* code in codes) {
-        [parametesString appendString:[NSString stringWithFormat:@"codes[]=%@", [code stringValue]]];
-        if(code != [codes lastObject]){
-            [parametesString appendString:@"&"];
-        }
+  NSMutableString* parametesString = [[NSMutableString alloc] init];
+  [parametesString appendString:SCHEDULES_URI];
+  NSArray *codes = [[DCMainProxy sharedProxy] getSchedulesIds];
+  for (NSNumber* code in codes) {
+    [parametesString appendString:[NSString stringWithFormat:@"codes[]=%@", [code stringValue]]];
+    if(code != [codes lastObject]){
+      [parametesString appendString:@"&"];
     }
-    return parametesString;
+  }
+  return parametesString;
 }
 
 @end
