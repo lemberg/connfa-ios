@@ -31,7 +31,9 @@ static NSString* cellWhoIsgoingHeader = @"WhoIsGoingHeaderCell";
 static NSString* cellSchedule = @"scheduleCell";
 
 
-@interface DCEventDetailViewController ()
+@interface DCEventDetailViewController (){
+    NSSet* schedules;
+}
 
 @property(nonatomic, weak) IBOutlet UITableView* tableView;
 @property(weak, nonatomic) IBOutlet UIView* noDataView;
@@ -49,7 +51,7 @@ static NSString* cellSchedule = @"scheduleCell";
 
 @property(nonatomic, strong) NSDictionary* cellsForSizeEstimation;
 
-@property(nonatomic, strong) NSMutableArray* schedules;
+@property(nonatomic, strong) NSMutableArray* schedulesIndexPaths;
 @property(nonatomic)BOOL isWhoIsGoingExpanded;
 
 @end
@@ -99,12 +101,10 @@ static NSString* cellSchedule = @"scheduleCell";
   NSString *bannerName = [[DCGoldSponsorBannerHeandler sharedManager] getSponsorBannerName];
   [self trackSponsorBannerViaGAI:bannerName];
   self.topBackgroundView.image = [UIImage imageNamed:bannerName];
-  
-  self.schedules = [[NSMutableArray alloc] init];
-  [self.schedules addObject:[NSIndexPath indexPathForRow:self.speakers.count + 3 inSection:0]];
-  [self.schedules addObject:[NSIndexPath indexPathForRow:self.speakers.count + 4 inSection:0]];
-  self.isWhoIsGoingExpanded = true;
+  schedules = self.event.schedules;
+  [self addIndexPathsForWhoIsGoing];
 
+  self.isWhoIsGoingExpanded = true;
 }
 
 
@@ -182,7 +182,7 @@ static NSString* cellSchedule = @"scheduleCell";
 }
 
 - (BOOL)showEmptyDetailIcon {
-  BOOL isSchedulesEmpty = self.schedules == 0;
+  BOOL isSchedulesEmpty = self.schedulesIndexPaths == 0;
   BOOL isTrackEmpty = [[self.event.tracks allObjects].lastObject name].length == 0;
   BOOL isExperienceEmpty = self.event.level.name.length == 0;
   BOOL isNoSpeakers = [self.speakers count] == 0;
@@ -260,6 +260,14 @@ static NSString* cellSchedule = @"scheduleCell";
   [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
+- (void)addIndexPathsForWhoIsGoing{
+  self.schedulesIndexPaths = [[NSMutableArray alloc] init];
+  int index = 3;
+  for (DCSharedSchedule *schedule in schedules) {
+      [self.schedulesIndexPaths addObject:[NSIndexPath indexPathForRow:self.speakers.count +  index inSection:0]];
+    index++;
+  }
+}
 
 #pragma mark - UITableView DataSource/Delegate methods
 
@@ -276,13 +284,13 @@ static NSString* cellSchedule = @"scheduleCell";
   if(indexPath.row == self.speakers.count + 2){
     return 48;
   }
-  if(_isWhoIsGoingExpanded && indexPath.row <= self.speakers.count + _schedules.count + 2 && indexPath.row > _speakers.count + 2){
+  if(_isWhoIsGoingExpanded && indexPath.row <= self.speakers.count + _schedulesIndexPaths.count + 2 && indexPath.row > _speakers.count + 2){
     return 48;
   }
   
   unsigned long additionalCounter = 3;
   if(_isWhoIsGoingExpanded){
-    additionalCounter += self.schedules.count;
+    additionalCounter += self.schedulesIndexPaths.count;
   }
 
   if (indexPath.row == (self.speakers.count + additionalCounter))
@@ -300,7 +308,7 @@ static NSString* cellSchedule = @"scheduleCell";
   // speakers + description + header
   int additionalCount = 4;
   if (self.isWhoIsGoingExpanded) {
-    additionalCount = 6;
+    additionalCount += schedules.count;
   }
   return self.speakers.count + additionalCount;
 }
@@ -319,9 +327,9 @@ static NSString* cellSchedule = @"scheduleCell";
     DCDetailEventHeaderTableViewCell *whoIsGoingCell = (DCDetailEventHeaderTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:cellWhoIsgoingHeader];
     return whoIsGoingCell;
   }
-  if(_isWhoIsGoingExpanded && indexPath.row < self.speakers.count + _schedules.count + 3 && indexPath.row > _speakers.count + 2){
+  if(_isWhoIsGoingExpanded && indexPath.row < self.speakers.count + _schedulesIndexPaths.count + 3 && indexPath.row > _speakers.count + 2){
     DCDetailEventScheduleTableViewCell *scheduleCell = (DCDetailEventScheduleTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:cellSchedule];
-    if(indexPath.row == self.speakers.count + _schedules.count + 2){
+    if(indexPath.row == self.speakers.count + _schedulesIndexPaths.count + 2){
       scheduleCell.separator.hidden = false;
     }else{
       scheduleCell.separator.hidden = true;
@@ -332,7 +340,7 @@ static NSString* cellSchedule = @"scheduleCell";
   // description cell
   unsigned long additionalCuunter = 3;
   if(_isWhoIsGoingExpanded){
-    additionalCuunter = 3 + self.schedules.count;
+    additionalCuunter = 3 + self.schedulesIndexPaths.count;
   }
   if (indexPath.row == self.speakers.count + additionalCuunter) {
     DCDescriptionTextCell* cell = (DCDescriptionTextCell*)
@@ -364,18 +372,17 @@ static NSString* cellSchedule = @"scheduleCell";
 
   if(indexPath.row == self.speakers.count + 2){
     if(!self.isWhoIsGoingExpanded){
-    self.isWhoIsGoingExpanded = true;
-    [self.tableView beginUpdates];
-    [self.schedules addObject:[NSIndexPath indexPathForRow:indexPath.row + 1 inSection:indexPath.section]];
-    [self.schedules addObject:[NSIndexPath indexPathForRow:indexPath.row + 2 inSection:indexPath.section]];
-    [self.tableView insertRowsAtIndexPaths:self.schedules withRowAnimation:UITableViewRowAnimationTop];
-    [self.tableView endUpdates];
+      self.isWhoIsGoingExpanded = true;
+      [self.tableView beginUpdates];
+      [self addIndexPathsForWhoIsGoing];
+      [self.tableView insertRowsAtIndexPaths:self.schedulesIndexPaths withRowAnimation:UITableViewRowAnimationTop];
+      [self.tableView endUpdates];
     }else{
       self.isWhoIsGoingExpanded = !self.isWhoIsGoingExpanded;
       [self.tableView beginUpdates];
-      [self.tableView deleteRowsAtIndexPaths:self.schedules withRowAnimation:UITableViewRowAnimationTop];
+      [self.tableView deleteRowsAtIndexPaths:self.schedulesIndexPaths withRowAnimation:UITableViewRowAnimationTop];
       [self.tableView endUpdates];
-      [self.schedules removeAllObjects];
+      [self.schedulesIndexPaths removeAllObjects];
     }
   }
   
