@@ -151,20 +151,26 @@
   return [self favoriteEventsWithPredicate:nil];
 }
 
+-(NSArray*)getAllFavoritesEvents {
+  NSEntityDescription* entityDescription =
+  [NSEntityDescription entityForName:NSStringFromClass([DCEvent class])
+              inManagedObjectContext:self.workContext];
+  NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
+  [fetchRequest setEntity:entityDescription];
+  [fetchRequest setReturnsObjectsAsFaults:NO];
+  NSPredicate* predicate = [NSPredicate
+                            predicateWithFormat:@"favorite=%@", [NSNumber numberWithBool:YES]];
+  [fetchRequest setPredicate:predicate];
+  
+  NSArray* result =
+  [self.workContext executeFetchRequest:fetchRequest error:nil];
+  return result;
+}
+
 - (NSArray*)favoriteEventsWithPredicate:(NSPredicate*)aPredicate {
   @try {
-    NSEntityDescription* entityDescription =
-        [NSEntityDescription entityForName:NSStringFromClass([DCEvent class])
-                    inManagedObjectContext:self.workContext];
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:entityDescription];
-    [fetchRequest setReturnsObjectsAsFaults:NO];
-    NSPredicate* predicate = [NSPredicate
-        predicateWithFormat:@"favorite=%@", [NSNumber numberWithBool:YES]];
-    [fetchRequest setPredicate:predicate];
-
-    NSArray* result =
-        [self.workContext executeFetchRequest:fetchRequest error:nil];
+    
+    NSArray* result = [self getAllFavoritesEvents];
     NSArray* uniqueDates =
         [result valueForKeyPath:@"@distinctUnionOfObjects.date"];
     NSArray* sortDates = [uniqueDates sortedDates];
@@ -353,14 +359,12 @@
 }
 
 -(NSArray *)getFavoritesIds{
-    NSArray* events = [self favoriteEvents];
+    NSArray* events = [self getAllFavoritesEvents];
     if(!events.count){
         return [[NSArray alloc] init];
     }
     NSMutableArray *ids = [[NSMutableArray alloc] init];
-    for(NSDictionary* eventDictionary in events){
-        NSArray *eventsArray = [eventDictionary objectForKey:@"events"];
-        DCEvent *event = [eventsArray firstObject];
+    for(DCEvent* event in events){
         [ids addObject:event.eventId];
     }
     return ids;

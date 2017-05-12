@@ -43,9 +43,7 @@ const NSString* kDCCodeKey = @"code";
         }
         schedule.isMySchedule = [NSNumber numberWithBool:NO];
         [schedule addEventsForIds:(NSArray *)scheduleDictionary[kDCEventsKey]];
-        [[DCCoreDataStore defaultStore] saveWithCompletionBlock:^(BOOL isSuccess) {
-          NSLog(@"Success? %hhd", isSuccess);
-        }];
+        [[DCCoreDataStore defaultStore] saveWithCompletionBlock:nil];
     }
 }
 

@@ -252,7 +252,8 @@ static NSString* const SCHEDULES_URI = @"getSchedules?";
     Class model = self.classesMap[keyUri];
     // Check is model can update with dictionary
     if ([model conformsToProtocol:@protocol(ManagedObjectUpdateProtocol)]) {
-      [model updateFromDictionary:dict[keyUri] inContext:context];
+      NSString* key = [keyUri stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+      [model updateFromDictionary:dict[key] inContext:context];
     } else if (model) {
       NSAssert(NO, @"Model cann't be updated because it doesn't have "
                @"ManagedObjectUpdateProtocol");
