@@ -14,6 +14,7 @@
 #import "DCTime+DC.h"
 #import "DCLevel+DC.h"
 #import "DCInfo.h"
+#import "DCSharedSchedule+DC.h"
 
 #import "UIImageView+WebCache.h"
 #import "UIConstants.h"
@@ -32,7 +33,8 @@ static NSString* cellSchedule = @"scheduleCell";
 
 
 @interface DCEventDetailViewController (){
-    NSSet* schedules;
+  NSSet* schedulesSet;
+  NSArray* schedules;
 }
 
 @property(nonatomic, weak) IBOutlet UITableView* tableView;
@@ -101,7 +103,9 @@ static NSString* cellSchedule = @"scheduleCell";
   NSString *bannerName = [[DCGoldSponsorBannerHeandler sharedManager] getSponsorBannerName];
   [self trackSponsorBannerViaGAI:bannerName];
   self.topBackgroundView.image = [UIImage imageNamed:bannerName];
-  schedules = self.event.schedules;
+  schedulesSet = self.event.schedules;
+  schedules = [schedulesSet allObjects];
+  NSLog(@"%@", self.event.eventId);
   [self addIndexPathsForWhoIsGoing];
 
   self.isWhoIsGoingExpanded = true;
@@ -318,15 +322,16 @@ static NSString* cellSchedule = @"scheduleCell";
   // header cell
   if (indexPath.row == 0) {
     DCEventDetailHeaderCell* cell = (DCEventDetailHeaderCell*)
-        [tableView dequeueReusableCellWithIdentifier:cellIdHeader];
+    [tableView dequeueReusableCellWithIdentifier:cellIdHeader];
     [cell initData:self.event];
     return cell;
   }
-
+  
   if(indexPath.row == self.speakers.count + 2){
     DCDetailEventHeaderTableViewCell *whoIsGoingCell = (DCDetailEventHeaderTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:cellWhoIsgoingHeader];
     return whoIsGoingCell;
   }
+  //schedules cells
   if(_isWhoIsGoingExpanded && indexPath.row < self.speakers.count + _schedulesIndexPaths.count + 3 && indexPath.row > _speakers.count + 2){
     DCDetailEventScheduleTableViewCell *scheduleCell = (DCDetailEventScheduleTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:cellSchedule];
     if(indexPath.row == self.speakers.count + _schedulesIndexPaths.count + 2){
@@ -334,6 +339,10 @@ static NSString* cellSchedule = @"scheduleCell";
     }else{
       scheduleCell.separator.hidden = true;
     }
+    if(indexPath.row > _speakers.count + 2){
+      scheduleCell.scheduleName.text = ((DCSharedSchedule*)[schedules objectAtIndex:indexPath.row - (_speakers.count + 3)]).name;
+    }
+    
     return scheduleCell;
   }
   
