@@ -15,6 +15,7 @@
 #import "DCLevel+DC.h"
 #import "DCInfo.h"
 #import "DCSharedSchedule+DC.h"
+#import "DCMainProxy+Additions.h"
 
 #import "UIImageView+WebCache.h"
 #import "UIConstants.h"
@@ -524,6 +525,7 @@ static NSString* cellSchedule = @"scheduleCell";
   } else {
     [[DCMainProxy sharedProxy] removeFavoriteEventWithID:self.event];
   }
+    [[DCMainProxy sharedProxy] updateSchedule];
 }
 
 - (void)shareButtonDidClick {
