@@ -637,15 +637,15 @@
 #pragma mark - UIStoryboardSegue
 
 - (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender {
-  if ([[segue identifier] isEqualToString:@"EmbeddedDaysPageVC"]) {
-    self.pageViewController = [segue destinationViewController];
-    self.pageViewController.dataSource = self;
-    self.pageViewController.delegate = self;
-  }else if([[segue identifier] isEqualToString:@"toSchedules"]){
-    DCSchedulesListTableViewController *controller = (DCSchedulesListTableViewController*)((UINavigationController *)segue.destinationViewController).topViewController;
-    controller.delegate = self;
-      controller.selectedSchedule = selectedSchedule;
-  }
+    if ([[segue identifier] isEqualToString:@"EmbeddedDaysPageVC"]) {
+        self.pageViewController = [segue destinationViewController];
+        self.pageViewController.dataSource = self;
+        self.pageViewController.delegate = self;
+    }else if([[segue identifier] isEqualToString:@"toSchedules"]){
+        DCSchedulesListTableViewController *controller = (DCSchedulesListTableViewController*)((UINavigationController *)segue.destinationViewController).topViewController;
+        controller.delegate = self;
+        controller.selectedSchedule = selectedSchedule;
+    }
 }
 
 @end

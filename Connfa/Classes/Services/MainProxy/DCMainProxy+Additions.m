@@ -58,12 +58,24 @@
 
 - (NSArray*)eventsForDay:(NSDate*)day
                 forClass:(__unsafe_unretained Class)eventClass {
-  return [self eventsForDay:day forClass:eventClass predicate:nil];
+  return [self eventsForDay:day forClass:eventClass eventStrategy: nil predicate:nil];
 }
 
 - (NSArray*)eventsForDay:(NSDate*)day
                 forClass:(__unsafe_unretained Class)eventClass
+           eventStrategy:(DCEventStrategy *)eventStrategy
                predicate:(NSPredicate*)aPredicate {
+  if (eventStrategy.strategy == EDCEventStrategySharedSchedule) {
+    NSSet* events = eventStrategy.schedule.events;
+    NSMutableArray *eventsForDay = [[NSMutableArray alloc] init];
+    for (DCEvent* event in events) {
+      NSDate *eventDate = event.date;
+      NSDateComponents *eventDatecomponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:eventDate];
+      if () {
+        <#statements#>
+      }
+    }
+  }
   @try {
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription* entity =
@@ -104,11 +116,12 @@
 
 - (NSArray*)uniqueTimeRangesForDay:(NSDate*)day
                           forClass:(__unsafe_unretained Class)eventClass {
-  return [self uniqueTimeRangesForDay:day forClass:eventClass predicate:nil];
+  return [self uniqueTimeRangesForDay:day forClass:eventClass eventStrategy:nil predicate:nil];
 }
 
 - (NSArray*)uniqueTimeRangesForDay:(NSDate*)day
                           forClass:(__unsafe_unretained Class)eventClass
+                     eventStrategy:(DCEventStrategy *)eventStrategy
                          predicate:(NSPredicate*)aPredicate {
   @try {
     NSEntityDescription* entityDescription =

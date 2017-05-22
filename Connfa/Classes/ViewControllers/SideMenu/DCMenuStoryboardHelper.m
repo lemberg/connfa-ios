@@ -26,7 +26,7 @@
       break;
   }
   DCEventStrategy* strategy =
-      [[DCEventStrategy alloc] initWithStrategy:eStrategy];
+      [[DCEventStrategy alloc] initWithStrategy:eStrategy andSchedule:nil];
   return strategy;
 }
 

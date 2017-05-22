@@ -507,6 +507,7 @@
 		FC703B141EA7A0E200539E41 /* DCSchedulesListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC703B131EA7A0E200539E41 /* DCSchedulesListTableViewController.m */; };
 		FC7EE2001EC33D7600FC5AA0 /* DCSchedulesListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC703B131EA7A0E200539E41 /* DCSchedulesListTableViewController.m */; };
 		FC7EE2011EC33D7600FC5AA0 /* DCSchedulesListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC703B131EA7A0E200539E41 /* DCSchedulesListTableViewController.m */; };
+		FC9E3FAC1ED31843001B6265 /* DCSharedScheduleDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = FC9E3FAB1ED31843001B6265 /* DCSharedScheduleDataSource.m */; };
 		FCACB8A71EB3681D000D6CB6 /* DCSharedSchedule+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = FCACB8A61EB3681D000D6CB6 /* DCSharedSchedule+DC.m */; };
 /* End PBXBuildFile section */
 
@@ -856,6 +857,8 @@
 		FC63F6FF1EB21ADD00CA446A /* DCDetailEventScheduleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCDetailEventScheduleTableViewCell.m; sourceTree = "<group>"; };
 		FC703B121EA7A0E200539E41 /* DCSchedulesListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCSchedulesListTableViewController.h; sourceTree = "<group>"; };
 		FC703B131EA7A0E200539E41 /* DCSchedulesListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCSchedulesListTableViewController.m; sourceTree = "<group>"; };
+		FC9E3FAA1ED31843001B6265 /* DCSharedScheduleDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCSharedScheduleDataSource.h; sourceTree = "<group>"; };
+		FC9E3FAB1ED31843001B6265 /* DCSharedScheduleDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCSharedScheduleDataSource.m; sourceTree = "<group>"; };
 		FCACB8A51EB3681D000D6CB6 /* DCSharedSchedule+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DCSharedSchedule+DC.h"; sourceTree = "<group>"; };
 		FCACB8A61EB3681D000D6CB6 /* DCSharedSchedule+DC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DCSharedSchedule+DC.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1227,6 +1230,7 @@
 		A6C5F1041BF4E9C50093AD65 /* Program */ = {
 			isa = PBXGroup;
 			children = (
+				FC9E3FA91ED31805001B6265 /* Shared Schedule */,
 				A6C5F1051BF4E9C50093AD65 /* DaysEvents */,
 				A6C5F10A1BF4E9C50093AD65 /* EventDataSource */,
 				A6C5F10D1BF4E9C50093AD65 /* Favorite */,
@@ -2049,6 +2053,15 @@
 			name = SchedulesList;
 			sourceTree = "<group>";
 		};
+		FC9E3FA91ED31805001B6265 /* Shared Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				FC9E3FAA1ED31843001B6265 /* DCSharedScheduleDataSource.h */,
+				FC9E3FAB1ED31843001B6265 /* DCSharedScheduleDataSource.m */,
+			);
+			name = "Shared Schedule";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2655,6 +2668,7 @@
 				288C5F2F1E6D9E4A00F07CB4 /* SDWebImagePrefetcher.m in Sources */,
 				288C5F301E6D9E4A00F07CB4 /* DCEventFilterHeaderCell.m in Sources */,
 				288C5F311E6D9E4A00F07CB4 /* DCHousePlan.m in Sources */,
+				FC9E3FAC1ED31843001B6265 /* DCSharedScheduleDataSource.m in Sources */,
 				288C5F321E6D9E4A00F07CB4 /* UIColor+Helper.m in Sources */,
 				288C5F331E6D9E4A00F07CB4 /* DCSocialMediaViewController.m in Sources */,
 				288C5F341E6D9E4A00F07CB4 /* UIImage+Extension.m in Sources */,

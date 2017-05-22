@@ -1,5 +1,6 @@
 
 #import "DCMainProxy.h"
+#import "DCEventStrategy.h"
 
 @interface DCMainProxy (Additions)
 
@@ -10,10 +11,12 @@
 - (NSArray*)eventsForDay:(NSDate*)day forClass:(Class)eventClass;
 - (NSArray*)eventsForDay:(NSDate*)day
                 forClass:(Class)eventClass
+           eventStrategy:(DCEventStrategy *)eventStrategy
                predicate:(NSPredicate*)aPredicate;
 - (NSArray*)uniqueTimeRangesForDay:(NSDate*)day forClass:(Class)eventClass;
 - (NSArray*)uniqueTimeRangesForDay:(NSDate*)day
                           forClass:(Class)eventClass
+                     eventStrategy:(DCEventStrategy *)eventStrategy
                          predicate:(NSPredicate*)aPredicate;
 - (NSArray*)favoriteEvents;
 - (NSArray*)favoriteEventsWithPredicate:(NSPredicate*)aPredicate;

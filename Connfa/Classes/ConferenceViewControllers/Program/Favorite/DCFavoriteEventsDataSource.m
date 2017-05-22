@@ -103,15 +103,17 @@
 - (NSArray*)eventsForDay:(NSDate*)day andClass:(Class)eventClass {
   return [[DCMainProxy sharedProxy] eventsForDay:day
                                         forClass:eventClass
+                                   eventStrategy:self.eventStrategy
                                        predicate:self.eventStrategy.predicate];
 }
 
 - (NSArray*)uniqueTimeRangesForDay:(NSDate*)day
                      andEventClass:(Class)eventClass {
   return [[DCMainProxy sharedProxy]
-      uniqueTimeRangesForDay:day
-                    forClass:eventClass
-                   predicate:self.eventStrategy.predicate];
+          uniqueTimeRangesForDay:day
+          forClass:eventClass
+          eventStrategy:self.eventStrategy
+          predicate:self.eventStrategy.predicate];
 }
 
 @end
