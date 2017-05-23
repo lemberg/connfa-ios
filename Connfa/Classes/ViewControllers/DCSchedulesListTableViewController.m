@@ -49,8 +49,9 @@
     int row = 0;
     if(_selectedSchedule){
         for (DCSharedSchedule* schedule in schedules) {
-            if([schedule.scheduleId intValue] != [_selectedSchedule.scheduleId intValue]){
-                row++;
+          row++;
+            if([schedule.scheduleId intValue] == [_selectedSchedule.scheduleId intValue]){
+              break;
             }
         }
     }

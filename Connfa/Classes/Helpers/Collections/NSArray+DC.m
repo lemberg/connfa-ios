@@ -117,6 +117,18 @@
   return self;
 }
 
+-(NSArray*)uniqueDates{
+  if (self.count) {
+    if ([self.firstObject isKindOfClass:[NSDate class]]) {
+      NSSet* uniqueDates = [NSSet setWithArray:self];
+      NSArray* sortedDates = [[uniqueDates allObjects] sortedDates];
+      return sortedDates;
+    }
+  }
+  NSLog(@"WRONG! array for sort. dates");
+  return self;
+}
+
 #pragma mark - private
 
 - (NSArray*)dictionaryByReplacingNullsWithStrings {

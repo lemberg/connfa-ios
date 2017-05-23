@@ -21,10 +21,17 @@
 #pragma mark -
 
 - (NSArray*)daysForClass:(Class)eventClass {
-  return [self daysForClass:eventClass predicate:nil];
+  return [self daysForClass:eventClass eventStrategy: nil predicate:nil];
 }
 
-- (NSArray*)daysForClass:(Class)eventClass predicate:(NSPredicate*)aPredicate {
+- (NSArray*)daysForClass:(Class)eventClass eventStrategy:(DCEventStrategy *)eventStrategy predicate:(NSPredicate*)aPredicate {
+  if(eventStrategy.strategy == EDCEventStrategySharedSchedule){
+    NSMutableArray* dates = [[NSMutableArray alloc] init];
+    for (DCEvent* event in eventStrategy.schedule.events) {
+      [dates addObject:[event.date dateWithoutTime]];
+    }
+    return [dates uniqueDates];
+  }
   @try {
     NSEntityDescription* entityDescription =
         [NSEntityDescription entityForName:NSStringFromClass(eventClass)
@@ -71,10 +78,12 @@
     for (DCEvent* event in events) {
       NSDate *eventDate = event.date;
       NSDateComponents *eventDatecomponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:eventDate];
-      if () {
-        <#statements#>
+      NSDateComponents *dayDatecomponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:day];
+      if ((eventDatecomponents.year == dayDatecomponents.year) && (eventDatecomponents.month == dayDatecomponents.month) && (eventDatecomponents.day == dayDatecomponents.day)) {
+        [eventsForDay addObject:event];
       }
     }
+    return eventsForDay;
   }
   @try {
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
@@ -123,6 +132,10 @@
                           forClass:(__unsafe_unretained Class)eventClass
                      eventStrategy:(DCEventStrategy *)eventStrategy
                          predicate:(NSPredicate*)aPredicate {
+  if(eventStrategy.strategy == EDCEventStrategySharedSchedule){
+    NSArray* result = [self eventsForDay:day forClass:[DCEvent class] eventStrategy:eventStrategy predicate:nil];
+    return [[self DC_filterUniqueTimeRangeFromEvents:result] sortedByStartHour];
+  }
   @try {
     NSEntityDescription* entityDescription =
         [NSEntityDescription entityForName:NSStringFromClass(eventClass)

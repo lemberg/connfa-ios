@@ -110,7 +110,7 @@ DCDayEventSourceDelegate> {
 - (void)configureEmptyView {
   self.noDataView.hidden = NO;
   BOOL isFilterEnabled = ![[DCMainProxy sharedProxy] isFilterCleared];
-  if (self.eventsStrategy.strategy != EDCEeventStrategyFavorites)
+  if (self.eventsStrategy.strategy != EDCEeventStrategyFavorites && self.eventsStrategy.strategy != EDCEeventStrategyFavorites)
     self.noEventsImageView_heightConstraint.constant =  isFilterEnabled ? 0 : self.noEventsImageViewDefaultHeight;
  
   switch (self.eventsStrategy.strategy) {
@@ -132,6 +132,10 @@ DCDayEventSourceDelegate> {
     case EDCEventStrategySocialEvents: {
       self.stubImage = [UIImage imageNamed:@"ic_no_social_events"];
       self.stubMessage = isFilterEnabled ? @"No Matching social events" : @"Currently there are no social events";
+    }
+    case EDCEventStrategySharedSchedule: {
+      self.stubImage = [UIImage imageNamed:@"ic_no_my_schedule"];
+      self.stubMessage = @"Your schedule is empty.\nPlease add some events";
     }
       break;
   }

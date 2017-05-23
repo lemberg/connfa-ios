@@ -59,7 +59,6 @@
                           class: [DCEvent class]];
   
   if ([eventsByTimeRange count]) {
-    //[sections addObject:@{kDCTimeslotKEY : [self titleForClass:class]}];
     [sections addObjectsFromArray:eventsByTimeRange];
   }
   

@@ -7,7 +7,9 @@
 #pragma mark -
 
 - (NSArray*)daysForClass:(Class)eventClass;
-- (NSArray*)daysForClass:(Class)eventClass predicate:(NSPredicate*)aPredicate;
+- (NSArray*)daysForClass:(Class)eventClass
+           eventStrategy:(DCEventStrategy *)eventStrategy
+               predicate:(NSPredicate*)aPredicate;
 - (NSArray*)eventsForDay:(NSDate*)day forClass:(Class)eventClass;
 - (NSArray*)eventsForDay:(NSDate*)day
                 forClass:(Class)eventClass

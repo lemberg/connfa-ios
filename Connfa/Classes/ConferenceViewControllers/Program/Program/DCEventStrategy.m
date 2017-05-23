@@ -93,6 +93,7 @@
 
 - (NSArray*)days {
   return [[DCMainProxy sharedProxy] daysForClass:_eventClass
+                                   eventStrategy:self
                                        predicate:self.predicate];
 }
 

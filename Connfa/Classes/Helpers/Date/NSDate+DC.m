@@ -100,6 +100,13 @@ static NSString* kDCSpeakerEventCellFormat = @"dd LLLL";
   return hour;
 }
 
+-(NSDate *) dateWithoutTime
+{
+  NSCalendar *calendar = [NSCalendar currentGregorianCalendar];
+  NSDateComponents *components = [calendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:self];
+  return [calendar dateFromComponents:components];
+}
+
 #pragma mark - private
 
 + (NSDateFormatter*)eventDateFormatter {

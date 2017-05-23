@@ -15,7 +15,7 @@
   NSString *titleString;
   EScheduleType selectedScheduleType;
   UIAlertAction *addFriendScheduleAction;
-    DCSharedSchedule* selectedSchedule;
+  DCSharedSchedule* selectedSchedule;
 }
 
 @property(nonatomic, strong) UIPageViewController* pageViewController;
@@ -299,7 +299,7 @@
 }
 
 - (void)setSchedulesTitle{
-  if (self.eventsStrategy.strategy != EDCEeventStrategyFavorites){
+  if (self.eventsStrategy.strategy != EDCEeventStrategyFavorites && self.eventsStrategy.strategy != EDCEventStrategySharedSchedule){
     return;
   }
   UIFont *titleFont = [UIFont fontWithName:@".SFUIText-Semibold" size:17];
@@ -473,7 +473,9 @@
   [self presentViewController:addScheduleAlert animated:true completion:nil];
 }
 
-
+-(void)removeSchedule{
+  
+}
 
 #pragma mark - User actions
 -(void)onTitle{
@@ -620,7 +622,14 @@
 
 -(void)setScheduleType:(EScheduleType)scheduleType andSchedule:(DCSharedSchedule *)schedule {
   selectedScheduleType = scheduleType;
-    selectedSchedule = schedule;
+  selectedSchedule = schedule;
+  if(scheduleType == EFriendSchedule){
+    self.eventsStrategy = [[DCEventStrategy alloc] initWithStrategy:EDCEventStrategySharedSchedule andSchedule:schedule];
+  }else{
+    self.eventsStrategy = [[DCEventStrategy alloc] initWithStrategy:EDCEeventStrategyFavorites andSchedule:schedule];
+  }
+  [self createViewControllersForDays:self.eventsStrategy.days];
+  [self reloadData];
 }
 
 #pragma mark - TextFieldDelegate
