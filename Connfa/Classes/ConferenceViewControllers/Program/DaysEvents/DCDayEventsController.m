@@ -25,7 +25,6 @@
 @property(nonatomic, strong) NSString* stubMessage;
 @property(nonatomic, strong) UIImage* stubImage;
 
-@property(nonatomic) DCEventDataSource* eventsDataSource;
 
 @property(nonatomic, strong) DCEventCell* cellPrototype;
 @property(weak, nonatomic)
@@ -49,6 +48,7 @@
 
 -(void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
+  //refresh favorite
   // For updating favorities
   [self configureState];
 }
@@ -184,7 +184,6 @@
 
 - (void)didSelectCell:(DCEventCell*)eventCell {
   NSIndexPath* cellIndexPath = [self.tableView indexPathForCell:eventCell];
-  [[DCGoldSponsorBannerHeandler sharedManager] makeRandomGoldenSponsor];
   DCEvent* selectedEvent =
       [self.eventsDataSource eventForIndexPath:cellIndexPath];
   [self.parentProgramController openDetailScreenForEvent:selectedEvent];

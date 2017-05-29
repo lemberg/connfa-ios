@@ -224,9 +224,13 @@
         break;
       }
     }
+
+#warning need to call in main thread
+    
     if (isUnique) {
       [ranges addObject:event.timeRange];
     }
+
   }
   return ranges;
 }

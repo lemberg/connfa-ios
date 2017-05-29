@@ -46,7 +46,7 @@
   // event Date
   NSString* date =
       event.date
-          ? [DCDateHelper convertDate:event.date toApplicationFormat:@"EEE"]
+          ? [event.date dateToStringWithFormat:@"EEE"]
           : @"";
   NSString* startTime = [DCDateHelper convertDate:event.startDate
                               toApplicationFormat:timeFormat];

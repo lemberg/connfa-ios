@@ -80,7 +80,7 @@
 
   DCFontItem *fonts = [DCConstants appFonts].firstObject;
   
-  self.nameLbl.font = [UIFont fontWithName:fonts.nameFont size:self.nameLbl.font.pointSize];
+  self.nameLbl.font = [UIFont fontWithName:fonts.description size:self.nameLbl.font.pointSize];
   self.positionTitleLbl.font = [UIFont fontWithName:fonts.descriptionFont size:self.positionTitleLbl.font.pointSize];
 }
 

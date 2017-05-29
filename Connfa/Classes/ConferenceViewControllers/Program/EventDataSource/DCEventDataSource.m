@@ -1,6 +1,8 @@
 
 #import "DCEventDataSource.h"
 #import "NSCalendar+DC.h"
+#import "DCSocialEvent.h"
+#import "DCType.h"
 
 @interface DCEventDataSource ()
 
@@ -42,22 +44,33 @@ const NSString* kDCTimeslotKEY = @"timeslot_key";
 const NSString* kDCTimeslotEventKEY = @"timeslot_event_key";
 
 - (NSArray*)eventsSortedByTimeRange:(NSArray*)events
-                withUniqueTimeRange:(NSArray*)unqueTimeRange {
+                withUniqueTimeRange:(NSArray*)unqueTimeRange
+                              class:(Class)eventClass{
   NSMutableArray* uniqueTimeSlotsSource = [NSMutableArray array];
 
   NSArray* eventsForDay = events;
   NSArray* uniqueTimeSlotForDay = unqueTimeRange;
-
-  for (DCTimeRange* timerange in uniqueTimeSlotForDay) {
-    NSArray* timeslotEvents =
+    
+    for (DCTimeRange* timerange in uniqueTimeSlotForDay) {
+        NSArray* timeslotEvents =
         [[[eventsForDay eventsForTimeRange:timerange] sortedByKey:kDCEventIdKey]
-            sortedByKey:kDCEventOrderKey];
-
-    NSDictionary* timeslotDict = [[NSDictionary alloc]
-        initWithObjects:@[ timerange, timeslotEvents ]
-                forKeys:@[ kDCTimeslotKEY, kDCTimeslotEventKEY ]];
-    [uniqueTimeSlotsSource addObject:timeslotDict];
-  }
+         sortedByKey:kDCEventOrderKey];
+        
+        NSDictionary* timeslotDict;
+        NSMutableArray *eventsForClass = [[NSMutableArray alloc] init];
+        
+        for (DCMainEvent* event in timeslotEvents) {
+            if(!eventClass || [event isKindOfClass:eventClass]){
+                [eventsForClass addObject:event];
+            }
+        }
+        if(eventsForClass.count){
+            timeslotDict = [[NSDictionary alloc]
+                            initWithObjects:@[ timerange, eventsForClass ]
+                            forKeys:@[ kDCTimeslotKEY, kDCTimeslotEventKEY ]];
+            [uniqueTimeSlotsSource addObject:timeslotDict];
+        }
+    }
 
   return [NSArray arrayWithArray:uniqueTimeSlotsSource];
 }
@@ -99,42 +112,44 @@ const NSString* kDCTimeslotEventKEY = @"timeslot_event_key";
 }
 
 - (void)updateActualEventIndexPathForTimeRange:(NSArray*)array {
-  float currentHour = [NSDate currentHour];
-  NSInteger sectionNumber = 0;
-
-  if (![NSDate dc_isDateInToday:self.selectedDay]) {
-    self.actualEventIndexPath = nil;
-    return;
-  }
-
-  for (NSDictionary* sectionInfo in array) {
-    DCTimeRange* timeRange = sectionInfo[kDCTimeslotKEY];
-    NSDate *fromDate = [timeRange.from dateByAddingTimeInterval:[DCMainProxy sharedProxy].eventTimeZone.secondsFromGMT];
-    NSDate *toDate = [timeRange.to dateByAddingTimeInterval:[DCMainProxy sharedProxy].eventTimeZone.secondsFromGMT];
-    float from = [NSDate hoursFromDate:fromDate];
-    float to = [NSDate hoursFromDate:toDate];
-
-    // if Current hour is before Current time range, return Current time range
-    if (currentHour < from) {
-      self.actualEventIndexPath =
-          [NSIndexPath indexPathForItem:0 inSection:sectionNumber];
-      return;
-    }
-
-    // if Current hour is in time range, return this time range
-    if (from <= currentHour && currentHour <= to) {
-      self.actualEventIndexPath =
-          [NSIndexPath indexPathForItem:0 inSection:sectionNumber];
-      return;
-    }
-
-    sectionNumber++;
-  }
-
-  // set the last Range
-  self.actualEventIndexPath =
-      [NSIndexPath indexPathForItem:0
-                          inSection:sectionNumber > 0 ? sectionNumber - 1 : 0];
+//    dispatch_async(dispatch_get_main_queue(), ^{
+        float currentHour = [NSDate currentHour];
+        NSInteger sectionNumber = 0;
+        
+        if (![NSDate dc_isDateInToday:self.selectedDay]) {
+            self.actualEventIndexPath = nil;
+            return;
+        }
+        
+        for (NSDictionary* sectionInfo in array) {
+            DCTimeRange* timeRange = sectionInfo[kDCTimeslotKEY];
+            NSDate *fromDate = [timeRange.from dateByAddingTimeInterval:[DCMainProxy sharedProxy].eventTimeZone.secondsFromGMT];
+            NSDate *toDate = [timeRange.to dateByAddingTimeInterval:[DCMainProxy sharedProxy].eventTimeZone.secondsFromGMT];
+            float from = [NSDate hoursFromDate:fromDate];
+            float to = [NSDate hoursFromDate:toDate];
+            
+            // if Current hour is before Current time range, return Current time range
+            if (currentHour < from) {
+                self.actualEventIndexPath =
+                [NSIndexPath indexPathForItem:0 inSection:sectionNumber];
+                return;
+            }
+            
+            // if Current hour is in time range, return this time range
+            if (from <= currentHour && currentHour <= to) {
+                self.actualEventIndexPath =
+                [NSIndexPath indexPathForItem:0 inSection:sectionNumber];
+                return;
+            }
+            
+            sectionNumber++;
+        }
+        
+        // set the last Range
+        self.actualEventIndexPath =
+        [NSIndexPath indexPathForItem:0
+                            inSection:sectionNumber > 0 ? sectionNumber - 1 : 0];
+//    });
 }
 
 - (NSIndexPath*)actualEventIndexPath {
