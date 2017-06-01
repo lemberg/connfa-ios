@@ -383,7 +383,7 @@
     [self showEditAlertView];
   }];
   UIAlertAction *removeAction = [UIAlertAction actionWithTitle:@"Remove" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-    
+    [self showConfirmationAlertView];
   }];
   UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
   [actionSheet addAction:editAction];
@@ -473,8 +473,24 @@
   [self presentViewController:addScheduleAlert animated:true completion:nil];
 }
 
+-(void)showConfirmationAlertView{
+  UIAlertController *confirmationAlertController = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"\"%@\" will be removed from your app", selectedSchedule.name]
+                                                                            message:nil
+                                                                     preferredStyle:UIAlertControllerStyleAlert];
+  UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    [self removeSchedule];
+  }];
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:nil];
+  [confirmationAlertController addAction:cancelAction];
+  [confirmationAlertController addAction:okAction];
+  [self presentViewController:confirmationAlertController animated:true completion:nil];
+
+}
+
 -(void)removeSchedule{
-  
+  [[DCMainProxy sharedProxy] removeSchedule:selectedSchedule];
+  [self setScheduleType:EMySchedule andSchedule:nil];
+  [self setScheduleName:@"My Schedule"];
 }
 
 #pragma mark - User actions

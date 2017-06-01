@@ -135,7 +135,7 @@ DCDayEventSourceDelegate> {
     }
     case EDCEventStrategySharedSchedule: {
       self.stubImage = [UIImage imageNamed:@"ic_no_my_schedule"];
-      self.stubMessage = @"Your schedule is empty.\nPlease add some events";
+      self.stubMessage = @"Currently shared schedule is empty";
     }
       break;
   }

@@ -341,6 +341,13 @@
 - (NSArray*)getAllSharedSchedules {
     return [self sharedSchedulesWithPredicate:nil];
 }
+
+- (void)removeSchedule:(DCSharedSchedule *)schedule {
+  [self.workContext deleteObject:schedule];
+  [[DCCoreDataStore defaultStore]
+   saveMainContextWithCompletionBlock:^(BOOL isSuccess){
+   }];
+}
 //TODO: replace methods into shredSchedule model
 - (NSArray*)sharedSchedulesWithPredicate:(NSPredicate*)aPredicate {
     @try {
