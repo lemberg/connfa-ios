@@ -186,12 +186,16 @@ DCDayEventSourceDelegate> {
         }
 
         cell.eventTitleLabel.textColor = [UIColor blackColor];
-        if ([event.favorite boolValue] &&
+        if (weakSelf.eventsStrategy.strategy != EDCEeventStrategyFavorites && [event.favorite boolValue] &&
             [weakSelf.eventsStrategy favoriteTextColor]) {
           cell.eventTitleLabel.textColor =
               [weakSelf.eventsStrategy favoriteTextColor];
         }
 
+        if(weakSelf.eventsStrategy.strategy != EDCEventStrategySharedSchedule && event.schedules.count){
+          cell.friendScheduleIcon.hidden = false;
+        }
+        
         return cell;
       }];
 }

@@ -210,6 +210,7 @@ static NSInteger hashtagHeightOffset = 4;
     }
   }
   
+  
   self.delegate = aDelegate;
 }
 
