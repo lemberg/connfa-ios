@@ -110,7 +110,7 @@ DCDayEventSourceDelegate> {
 - (void)configureEmptyView {
   self.noDataView.hidden = NO;
   BOOL isFilterEnabled = ![[DCMainProxy sharedProxy] isFilterCleared];
-  if (self.eventsStrategy.strategy != EDCEeventStrategyFavorites && self.eventsStrategy.strategy != EDCEeventStrategyFavorites)
+  if (self.eventsStrategy.strategy != EDCEeventStrategyFavorites && self.eventsStrategy.strategy != EDCEventStrategySharedSchedule)
     self.noEventsImageView_heightConstraint.constant =  isFilterEnabled ? 0 : self.noEventsImageViewDefaultHeight;
  
   switch (self.eventsStrategy.strategy) {
@@ -192,7 +192,7 @@ DCDayEventSourceDelegate> {
               [weakSelf.eventsStrategy favoriteTextColor];
         }
 
-        if(weakSelf.eventsStrategy.strategy != EDCEventStrategySharedSchedule && event.schedules.count){
+        if(weakSelf.eventsStrategy.strategy != EDCEventStrategySharedSchedule && event.schedules && event.schedules.count){
           cell.friendScheduleIcon.hidden = false;
         }
         
