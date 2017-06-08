@@ -568,7 +568,7 @@
                                         <rect key="frame" x="110" y="52" width="100" height="100"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YUR-Ry-L5j">
-                                        <rect key="frame" x="111" y="167" width="98.5" height="27.5"/>
+                                        <rect key="frame" x="111.5" y="167" width="98.5" height="27.5"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="21"/>
                                         <color key="textColor" red="0.63921568630000003" green="0.63921568630000003" blue="0.63921568630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -830,6 +830,7 @@
                                             <outlet property="nameLbl" destination="OOt-ZX-l6d" id="BlG-5j-GUm"/>
                                             <outlet property="pictureImg" destination="r80-uE-haR" id="tvw-Ig-jcd"/>
                                             <outlet property="positionTitleLbl" destination="Gef-oK-pyl" id="i0Q-yK-bc5"/>
+                                            <outlet property="separator" destination="Vvt-Lc-Q4K" id="iyM-zk-7I5"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DetailCellIdDescription" rowHeight="50" id="vnH-MW-93F" customClass="DCDescriptionTextCell">
@@ -941,7 +942,7 @@
         <image name="arrow_r" width="21" height="21"/>
         <image name="event_detail_top" width="320" height="112"/>
         <image name="filter_sessions" width="21" height="21"/>
-        <image name="friend_schedule" width="96" height="96"/>
+        <image name="friend_schedule" width="24" height="24"/>
         <image name="ic_experience_advanced" width="12" height="12"/>
         <image name="no_details" width="100" height="100"/>
         <image name="tutorial_iphone_5" width="320" height="195"/>
