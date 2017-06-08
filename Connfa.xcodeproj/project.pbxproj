@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C6DDAC0399CC0EF390A5D44 /* libPods-Connfa!.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EBCA58BCBC62ACEF57BA2C5 /* libPods-Connfa!.a */; };
 		281F86541E7FF0730065EA1B /* DCAppSignMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1E71BF4E9C50093AD65 /* DCAppSignMenuCell.m */; };
 		281F86551E7FF0730065EA1B /* NSUserDefaults+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F12C1BF4E9C50093AD65 /* NSUserDefaults+DC.m */; };
 		281F86561E7FF0730065EA1B /* DCBof+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1511BF4E9C50093AD65 /* DCBof+DC.m */; };
@@ -472,6 +473,8 @@
 		288C5FB51E6D9E8C00F07CB4 /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 288C5FAE1E6D9E8C00F07CB4 /* style.css */; };
 		288C5FB91E6D9F2900F07CB4 /* Connfa-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 288C5FB81E6D9F2900F07CB4 /* Connfa-Info.plist */; };
 		288C5FBE1E6D9FBA00F07CB4 /* DCMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 288C5FBB1E6D9FBA00F07CB4 /* DCMenuItem.m */; };
+		7A87100DFF27C9D0718484BA /* libPods-DrupalCamp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E1FC207722DF3507C94BD16 /* libPods-DrupalCamp.a */; };
+		9BDEE22D3ED2F3087F8DD7D6 /* libPods-DrupalCon.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91C50BFC210E4A4082F829F7 /* libPods-DrupalCon.a */; };
 		FC34ED781EBB208000EE9C22 /* DCEvent+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FC34ED751EBB208000EE9C22 /* DCEvent+CoreDataClass.m */; };
 		FC34ED791EBB208000EE9C22 /* DCEvent+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FC34ED751EBB208000EE9C22 /* DCEvent+CoreDataClass.m */; };
 		FC34ED7A1EBB208000EE9C22 /* DCEvent+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FC34ED751EBB208000EE9C22 /* DCEvent+CoreDataClass.m */; };
@@ -480,6 +483,8 @@
 		FC34ED7D1EBB208100EE9C22 /* DCEvent+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = FC34ED771EBB208000EE9C22 /* DCEvent+CoreDataProperties.m */; };
 		FC34ED7E1EBB573700EE9C22 /* DCSharedSchedule+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = FCACB8A61EB3681D000D6CB6 /* DCSharedSchedule+DC.m */; };
 		FC34ED7F1EBB573700EE9C22 /* DCSharedSchedule+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = FCACB8A61EB3681D000D6CB6 /* DCSharedSchedule+DC.m */; };
+		FC4903821EE9884100E681BA /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FC4903811EE9884100E681BA /* libsqlite3.0.tbd */; };
+		FC4903841EE9885500E681BA /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FC4903831EE9885500E681BA /* libsqlite3.tbd */; };
 		FC59A0251EA5F4C500F82DE0 /* DCDeviceType.m in Sources */ = {isa = PBXBuildFile; fileRef = FC59A0241EA5F4C500F82DE0 /* DCDeviceType.m */; };
 		FC59C59D1EBB0491008C1505 /* DCLevel+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FC59C59A1EBB0491008C1505 /* DCLevel+CoreDataClass.m */; };
 		FC59C59E1EBB0491008C1505 /* DCLevel+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = FC59C59C1EBB0491008C1505 /* DCLevel+CoreDataProperties.m */; };
@@ -546,10 +551,15 @@
 		289301511E3770F300BB933B /* DCGoldSponsorBannerHeandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCGoldSponsorBannerHeandler.h; sourceTree = "<group>"; };
 		289301521E3770F300BB933B /* DCGoldSponsorBannerHeandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCGoldSponsorBannerHeandler.m; sourceTree = "<group>"; };
 		289301541E3770FD00BB933B /* ImageStorage.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImageStorage.xcassets; sourceTree = "<group>"; };
+		2C609EC541F45D64CF201136 /* Pods-DrupalCamp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrupalCamp.release.xcconfig"; path = "Pods/Target Support Files/Pods-DrupalCamp/Pods-DrupalCamp.release.xcconfig"; sourceTree = "<group>"; };
+		3EBCA58BCBC62ACEF57BA2C5 /* libPods-Connfa!.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Connfa!.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4C8937D88916B5DDA3542534 /* Pods-Connfa!.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connfa!.release.xcconfig"; path = "Pods/Target Support Files/Pods-Connfa!/Pods-Connfa!.release.xcconfig"; sourceTree = "<group>"; };
 		565951671CFDB497002158F5 /* main_2. 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "main_2. 2.xcdatamodel"; sourceTree = "<group>"; };
 		5DC8C414198656DA00BF5816 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		5DC8C416198656DA00BF5816 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		5DC8C418198656DA00BF5816 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		6E1FC207722DF3507C94BD16 /* libPods-DrupalCamp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DrupalCamp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6FFE87F431E57E6B2D297D00 /* Pods-DrupalCon.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrupalCon.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DrupalCon/Pods-DrupalCon.debug.xcconfig"; sourceTree = "<group>"; };
 		74356D5119BEE1D90055F13D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		74A470E719B5EA3C00B01BC5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		74E67C7619B6FEF500DF9D71 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -557,6 +567,9 @@
 		842B5E641AC579D0009614A5 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		849EFDDA19A4ACB800C43E05 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		84D654641ACC5C1D0099B461 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		91C50BFC210E4A4082F829F7 /* libPods-DrupalCon.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DrupalCon.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		93CC2693A033AD8B6C8DA38F /* Pods-DrupalCon.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrupalCon.release.xcconfig"; path = "Pods/Target Support Files/Pods-DrupalCon/Pods-DrupalCon.release.xcconfig"; sourceTree = "<group>"; };
+		967EF4BDF251124DF8E40AA0 /* Pods-DrupalCamp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrupalCamp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DrupalCamp/Pods-DrupalCamp.debug.xcconfig"; sourceTree = "<group>"; };
 		A06091151CD0BF1A00B8C2FD /* DCSocialMediaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCSocialMediaViewController.h; sourceTree = "<group>"; };
 		A06091161CD0BF1A00B8C2FD /* DCSocialMediaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCSocialMediaViewController.m; sourceTree = "<group>"; };
 		A060912D1CD0E13500B8C2FD /* TwitterKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterKit.framework; sourceTree = "<group>"; };
@@ -809,6 +822,7 @@
 		A6C5F2541BF4E9C60093AD65 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		A6C5F2551BF4E9C60093AD65 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		A6C5F2561BF4E9C60093AD65 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		AA1FBF7D99B261CC756CD33D /* Pods-Connfa!.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Connfa!.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Connfa!/Pods-Connfa!.debug.xcconfig"; sourceTree = "<group>"; };
 		F547A7E11D537C3200CD24F2 /* Montserrat-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.otf"; sourceTree = "<group>"; };
 		F547A7E41D54D2FF00CD24F2 /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
 		F547A7E51D54D2FF00CD24F2 /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
@@ -822,6 +836,8 @@
 		FC34ED751EBB208000EE9C22 /* DCEvent+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DCEvent+CoreDataClass.m"; sourceTree = "<group>"; };
 		FC34ED761EBB208000EE9C22 /* DCEvent+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DCEvent+CoreDataProperties.h"; sourceTree = "<group>"; };
 		FC34ED771EBB208000EE9C22 /* DCEvent+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DCEvent+CoreDataProperties.m"; sourceTree = "<group>"; };
+		FC4903811EE9884100E681BA /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		FC4903831EE9885500E681BA /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		FC59A0231EA5F4C500F82DE0 /* DCDeviceType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCDeviceType.h; sourceTree = "<group>"; };
 		FC59A0241EA5F4C500F82DE0 /* DCDeviceType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCDeviceType.m; sourceTree = "<group>"; };
 		FC59C5991EBB0491008C1505 /* DCLevel+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DCLevel+CoreDataClass.h"; sourceTree = "<group>"; };
@@ -882,6 +898,7 @@
 				281F86DD1E7FF0730065EA1B /* Fabric.framework in Frameworks */,
 				281F86DE1E7FF0730065EA1B /* TwitterKit.framework in Frameworks */,
 				281F86DF1E7FF0730065EA1B /* libGoogleAnalyticsServices.a in Frameworks */,
+				9BDEE22D3ED2F3087F8DD7D6 /* libPods-DrupalCon.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -903,6 +920,7 @@
 				281F879D1E7FF1550065EA1B /* Fabric.framework in Frameworks */,
 				281F879E1E7FF1550065EA1B /* TwitterKit.framework in Frameworks */,
 				281F879F1E7FF1550065EA1B /* libGoogleAnalyticsServices.a in Frameworks */,
+				7A87100DFF27C9D0718484BA /* libPods-DrupalCamp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -910,6 +928,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC4903841EE9885500E681BA /* libsqlite3.tbd in Frameworks */,
+				FC4903821EE9884100E681BA /* libsqlite3.0.tbd in Frameworks */,
 				288C5F541E6D9E4A00F07CB4 /* AdSupport.framework in Frameworks */,
 				288C5F551E6D9E4A00F07CB4 /* libz.dylib in Frameworks */,
 				288C5F561E6D9E4A00F07CB4 /* SystemConfiguration.framework in Frameworks */,
@@ -924,6 +944,7 @@
 				288C5F5F1E6D9E4A00F07CB4 /* Fabric.framework in Frameworks */,
 				288C5F601E6D9E4A00F07CB4 /* TwitterKit.framework in Frameworks */,
 				288C5F611E6D9E4A00F07CB4 /* libGoogleAnalyticsServices.a in Frameworks */,
+				1C6DDAC0399CC0EF390A5D44 /* libPods-Connfa!.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1071,6 +1092,7 @@
 				288C5F7E1E6D9E6D00F07CB4 /* Targets */,
 				5DC8C413198656DA00BF5816 /* Frameworks */,
 				5DC8C412198656DA00BF5816 /* Products */,
+				62FCD531304344412E7B656F /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1087,6 +1109,8 @@
 		5DC8C413198656DA00BF5816 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC4903831EE9885500E681BA /* libsqlite3.tbd */,
+				FC4903811EE9884100E681BA /* libsqlite3.0.tbd */,
 				84D654641ACC5C1D0099B461 /* QuartzCore.framework */,
 				842B5E641AC579D0009614A5 /* AdSupport.framework */,
 				842B5E621AC579C2009614A5 /* libz.dylib */,
@@ -1097,8 +1121,24 @@
 				5DC8C414198656DA00BF5816 /* Foundation.framework */,
 				5DC8C416198656DA00BF5816 /* CoreGraphics.framework */,
 				5DC8C418198656DA00BF5816 /* UIKit.framework */,
+				3EBCA58BCBC62ACEF57BA2C5 /* libPods-Connfa!.a */,
+				6E1FC207722DF3507C94BD16 /* libPods-DrupalCamp.a */,
+				91C50BFC210E4A4082F829F7 /* libPods-DrupalCon.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		62FCD531304344412E7B656F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AA1FBF7D99B261CC756CD33D /* Pods-Connfa!.debug.xcconfig */,
+				4C8937D88916B5DDA3542534 /* Pods-Connfa!.release.xcconfig */,
+				967EF4BDF251124DF8E40AA0 /* Pods-DrupalCamp.debug.xcconfig */,
+				2C609EC541F45D64CF201136 /* Pods-DrupalCamp.release.xcconfig */,
+				6FFE87F431E57E6B2D297D00 /* Pods-DrupalCon.debug.xcconfig */,
+				93CC2693A033AD8B6C8DA38F /* Pods-DrupalCon.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		A06091141CD0BF1A00B8C2FD /* SocialMedia */ = {
@@ -2069,10 +2109,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 281F86F71E7FF0730065EA1B /* Build configuration list for PBXNativeTarget "DrupalCon" */;
 			buildPhases = (
+				4BF3D87CB13B4A2E687AFCC6 /* [CP] Check Pods Manifest.lock */,
 				281F86531E7FF0730065EA1B /* Sources */,
 				281F86D11E7FF0730065EA1B /* Frameworks */,
 				281F86E01E7FF0730065EA1B /* Resources */,
 				281F86F61E7FF0730065EA1B /* ShellScript */,
+				1F165C4856B83FDD60FA6F58 /* [CP] Embed Pods Frameworks */,
+				326070FE9C2C017BEA85A071 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2087,10 +2130,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 281F87B71E7FF1550065EA1B /* Build configuration list for PBXNativeTarget "DrupalCamp" */;
 			buildPhases = (
+				04DEFECFA4E9D9CF4AFACCB3 /* [CP] Check Pods Manifest.lock */,
 				281F87131E7FF1550065EA1B /* Sources */,
 				281F87911E7FF1550065EA1B /* Frameworks */,
 				281F87A01E7FF1550065EA1B /* Resources */,
 				281F87B61E7FF1550065EA1B /* ShellScript */,
+				913D36B4C9210A0E7CF7FD7C /* [CP] Embed Pods Frameworks */,
+				9D0E36813BE087B484EA4DC9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2105,10 +2151,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 288C5F791E6D9E4A00F07CB4 /* Build configuration list for PBXNativeTarget "Connfa!" */;
 			buildPhases = (
+				A127D561D300C3A30D33AADF /* [CP] Check Pods Manifest.lock */,
 				288C5ED81E6D9E4A00F07CB4 /* Sources */,
 				288C5F531E6D9E4A00F07CB4 /* Frameworks */,
 				288C5F621E6D9E4A00F07CB4 /* Resources */,
 				288C5F781E6D9E4A00F07CB4 /* ShellScript */,
+				60830A490E14F8C7AD8EE794 /* [CP] Embed Pods Frameworks */,
+				CBD41565BF75B6633777CD37 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2253,6 +2302,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		04DEFECFA4E9D9CF4AFACCB3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		1F165C4856B83FDD60FA6F58 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DrupalCon/Pods-DrupalCon-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		281F86F61E7FF0730065EA1B /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2291,6 +2370,111 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "./Connfa/Vendor/Crashlytics/Fabric.framework/run e92185b02a2fa31062b797232c3d5cccf9867952 86aa1940d27f46c329fc363de870071c4117aaea9b473564fef59b1783a54c8d";
+		};
+		326070FE9C2C017BEA85A071 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DrupalCon/Pods-DrupalCon-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4BF3D87CB13B4A2E687AFCC6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		60830A490E14F8C7AD8EE794 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Connfa!/Pods-Connfa!-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		913D36B4C9210A0E7CF7FD7C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DrupalCamp/Pods-DrupalCamp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9D0E36813BE087B484EA4DC9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DrupalCamp/Pods-DrupalCamp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A127D561D300C3A30D33AADF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		CBD41565BF75B6633777CD37 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Connfa!/Pods-Connfa!-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2715,6 +2899,7 @@
 /* Begin XCBuildConfiguration section */
 		281F86F81E7FF0730065EA1B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6FFE87F431E57E6B2D297D00 /* Pods-DrupalCon.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -2747,6 +2932,7 @@
 		};
 		281F86F91E7FF0730065EA1B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 93CC2693A033AD8B6C8DA38F /* Pods-DrupalCon.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -2779,6 +2965,7 @@
 		};
 		281F87B81E7FF1550065EA1B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 967EF4BDF251124DF8E40AA0 /* Pods-DrupalCamp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -2811,6 +2998,7 @@
 		};
 		281F87B91E7FF1550065EA1B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2C609EC541F45D64CF201136 /* Pods-DrupalCamp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -2843,6 +3031,7 @@
 		};
 		288C5F7A1E6D9E4A00F07CB4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA1FBF7D99B261CC756CD33D /* Pods-Connfa!.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -2875,6 +3064,7 @@
 		};
 		288C5F7B1E6D9E4A00F07CB4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4C8937D88916B5DDA3542534 /* Pods-Connfa!.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

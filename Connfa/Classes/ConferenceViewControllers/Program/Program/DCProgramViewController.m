@@ -10,6 +10,7 @@
 #import "DCWebService.h"
 #import "DCSharedSchedule+DC.h"
 #import "DCCoreDataStore.h"
+#import <SVProgressHUD.h>
 
 @interface DCProgramViewController (){
   NSString *titleString;
@@ -403,12 +404,17 @@
   UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:nil];
   //TODO: replace initialization
   addFriendScheduleAction = [UIAlertAction actionWithTitle:@"Add" style:UIAlertActionStyleDefault
-                                                    handler:^(UIAlertAction * _Nonnull action) {
-                                                        [[DCMainProxy sharedProxy] getSchedules:@[addScheduleAlert.textFields.firstObject.text] callback:^(BOOL success, DCSharedSchedule* schedule){
-                                                            if(success){
-                                                                [self showAddScheduleNameAlert: schedule];
-                                                            }
-                                                        }];
+                                                   handler:^(UIAlertAction * _Nonnull action) {
+                                                     [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
+                                                     [SVProgressHUD setDefaultAnimationType:SVProgressHUDAnimationTypeNative];
+                                                     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
+                                                     [SVProgressHUD showWithStatus: @"Loading schedule..."];
+                                                     [[DCMainProxy sharedProxy] getSchedules:@[addScheduleAlert.textFields.firstObject.text] callback:^(BOOL success, DCSharedSchedule* schedule){
+                                                       if(success){
+                                                         [SVProgressHUD dismiss];
+                                                         [self showAddScheduleNameAlert: schedule];
+                                                       }
+                                                     }];
   }];
   addFriendScheduleAction.enabled = false;
   [addScheduleAlert addAction:cancelAction];
@@ -443,7 +449,7 @@
                                                                      preferredStyle:UIAlertControllerStyleAlert];
   [addScheduleAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
     textField.placeholder = @"Schedule name";
-    textField.text = @"User schedule 1";
+    textField.text = [NSString stringWithFormat:@"Schedule %@",schedule.scheduleId];
   }];
   UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
       UITextField *textField = [[addScheduleAlert textFields] firstObject];
