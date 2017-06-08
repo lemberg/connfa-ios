@@ -405,16 +405,20 @@
   //TODO: replace initialization
   addFriendScheduleAction = [UIAlertAction actionWithTitle:@"Add" style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * _Nonnull action) {
-                                                     [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
-                                                     [SVProgressHUD setDefaultAnimationType:SVProgressHUDAnimationTypeNative];
-                                                     [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
-                                                     [SVProgressHUD showWithStatus: @"Loading schedule..."];
-                                                     [[DCMainProxy sharedProxy] getSchedules:@[addScheduleAlert.textFields.firstObject.text] callback:^(BOOL success, DCSharedSchedule* schedule){
-                                                       if(success){
-                                                         [SVProgressHUD dismiss];
-                                                         [self showAddScheduleNameAlert: schedule];
-                                                       }
-                                                     }];
+                                                     if(![[DCMainProxy sharedProxy] isScheduleAdded:addScheduleAlert.textFields.firstObject.text]){
+                                                       [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
+                                                       [SVProgressHUD setDefaultAnimationType:SVProgressHUDAnimationTypeNative];
+                                                       [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
+                                                       [SVProgressHUD showWithStatus: @"Loading schedule..."];
+                                                       [[DCMainProxy sharedProxy] getSchedules:@[addScheduleAlert.textFields.firstObject.text] callback:^(BOOL success, DCSharedSchedule* schedule){
+                                                         if(success){
+                                                           [SVProgressHUD dismiss];
+                                                           [self showAddScheduleNameAlert: schedule];
+                                                         }
+                                                       }];
+                                                     } else {
+                                                       
+                                                     }
   }];
   addFriendScheduleAction.enabled = false;
   [addScheduleAlert addAction:cancelAction];

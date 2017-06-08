@@ -268,7 +268,9 @@
     } onError:^(NSHTTPURLResponse *response, id data, NSError *error) {
         
     }];
-    
+}
+-(BOOL)isScheduleAdded:(NSString *)idString {
+  return [[DCMainProxy sharedProxy] getScheduleWithId:idString].count;
 }
 //TODO: Replace
 -(NSString*)createParametersStringForCodes:(NSArray *)codes{
@@ -380,6 +382,22 @@
     }
     
     return nil;
+}
+
+-(NSArray *)getScheduleWithId:(NSString *)idString{
+    NSEntityDescription* entityDescription =
+    [NSEntityDescription entityForName:NSStringFromClass([DCSharedSchedule class])
+                inManagedObjectContext:self.workContext];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:entityDescription];
+    [fetchRequest setReturnsObjectsAsFaults:NO];
+    NSPredicate* predicate = [NSPredicate
+                              predicateWithFormat:@"scheduleId=%ul", [idString integerValue]];
+    [fetchRequest setPredicate:predicate];
+    
+    NSArray* result =
+    [self.workContext executeFetchRequest:fetchRequest error:nil];
+    return result;
 }
 
 -(NSArray *)getSchedulesIds{
