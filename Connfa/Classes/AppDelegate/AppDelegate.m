@@ -17,7 +17,6 @@
 
 @end
 @implementation AppDelegate
-
 - (BOOL)application:(UIApplication*)application
     didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
   // Initialise crashlytics
@@ -107,6 +106,31 @@
 
 
 }
+-(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+//  defaultStoryboardName = @"Events";
+//  NSString* storyboardName = [self storyboardNameForMenuItem:menuItem];
+//  UIStoryboard* storyboard =
+//  [UIStoryboard storyboardWithName:storyboardName bundle:nil];
+//  
+//  DCBaseViewController* viewController =
+//  [storyboard instantiateViewControllerWithIdentifier:controllerId];
+//  
+//  if ([viewController isKindOfClass:[DCProgramViewController class]]) {
+//    [(DCProgramViewController*)viewController
+//     setEventsStrategy:[DCMenuStoryboardHelper
+//                        strategyForEventMenuType:menuItem]];
+//  }
+  return true;
+}
+
+-(BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
+  if(userActivity.webpageURL.description){
+    NSInteger lenght = userActivity.webpageURL.description.length;
+    NSString* code = [userActivity.webpageURL.description substringFromIndex:lenght - 4];
+  }
+  return true;
+}
+
 
 - (void)applicationWillEnterForeground:(UIApplication*)application {
   if ([self.window.rootViewController

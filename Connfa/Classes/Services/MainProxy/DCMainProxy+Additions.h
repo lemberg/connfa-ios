@@ -31,5 +31,5 @@
 - (NSArray*)getAllSharedSchedules;
 - (NSArray *)getSchedulesIds;
 - (void)removeSchedule:(DCSharedSchedule *)schedule;
-- (BOOL)isScheduleAdded:(NSString *)idString;
+- (NSArray *)getScheduleWithId:(NSString *)idString;
 @end

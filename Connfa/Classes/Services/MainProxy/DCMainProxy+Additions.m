@@ -269,9 +269,7 @@
         
     }];
 }
--(BOOL)isScheduleAdded:(NSString *)idString {
-  return [[DCMainProxy sharedProxy] getScheduleWithId:idString].count;
-}
+
 //TODO: Replace
 -(NSString*)createParametersStringForCodes:(NSArray *)codes{
     NSMutableString* parametesString = [[NSMutableString alloc] init];

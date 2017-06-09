@@ -10,6 +10,8 @@
 #import "DCWebService.h"
 #import "DCSharedSchedule+DC.h"
 #import "DCCoreDataStore.h"
+#import "DCConstants.h"
+#import "NSUserDefaults+DC.h"
 #import <SVProgressHUD.h>
 
 @interface DCProgramViewController (){
@@ -405,7 +407,8 @@
   //TODO: replace initialization
   addFriendScheduleAction = [UIAlertAction actionWithTitle:@"Add" style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * _Nonnull action) {
-                                                     if(![[DCMainProxy sharedProxy] isScheduleAdded:addScheduleAlert.textFields.firstObject.text]){
+                                                     NSArray* schedulesForId = [[DCMainProxy sharedProxy] getScheduleWithId:addScheduleAlert.textFields.firstObject.text];
+                                                     if(!schedulesForId.count){
                                                        [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
                                                        [SVProgressHUD setDefaultAnimationType:SVProgressHUDAnimationTypeNative];
                                                        [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
@@ -417,7 +420,11 @@
                                                          }
                                                        }];
                                                      } else {
-                                                       
+                                                       dispatch_async(dispatch_get_main_queue(), ^{
+                                                         DCSharedSchedule *scheduleToSwitch = schedulesForId.firstObject;
+                                                         [self setScheduleName:scheduleToSwitch.name];
+                                                         [self setScheduleType:EFriendSchedule andSchedule:scheduleToSwitch];
+                                                       });
                                                      }
   }];
   addFriendScheduleAction.enabled = false;
@@ -427,7 +434,11 @@
 }
 
 -(void)shareMySchedule{
-  NSArray *items = @[@"Share my schedule"]; // build an activity view controller
+  NSNumber* myCode = [NSUserDefaults myScheduleCode];
+  NSArray *items = @[[NSString stringWithFormat:@"Hi, I have just published/shared my schedule for %@ where I will be an attendee.", EVENT_NAME],
+                     [NSString stringWithFormat: @"Here is the link to add my schedule into the app: %@%@%@", BASE_URL, @"schedule/share/", myCode],
+                     @"If you have any issues with the link, use the Schedule Unique Code in the app to add my schedule manually.",
+                     [NSString stringWithFormat:@"Schedule Unique Code: %@", myCode]]; // build an activity view controller
   UIActivityViewController *controller = [[UIActivityViewController alloc]initWithActivityItems:items applicationActivities:nil];
   controller.excludedActivityTypes = @[
                                                UIActivityTypePostToWeibo,
