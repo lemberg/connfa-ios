@@ -24,6 +24,7 @@
 @property(nonatomic, strong) NSArray* arrayOfCaptions;
 @property(nonatomic, strong) NSIndexPath* activeCellPath;
 @property(nonatomic, strong) DCEvent* event;
+@property(nonatomic, strong) NSString* scheduleId;
 
 @end
 
@@ -59,6 +60,24 @@
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
 
+  if(self.scheduleId){
+    DCMenuItem* menuItem = [self.arrayOfCaptions objectAtIndex:5];
+    [self showViewControllerAssociatedWithMenuItem:menuItem];
+    
+    UINavigationController* navCon =
+    self.sideMenuContainer.centerViewController;
+    if ([navCon isKindOfClass:[UINavigationController class]]) {
+      DCProgramViewController* programController =
+      (DCProgramViewController*)navCon.topViewController;
+//      if ([programController
+//           respondsToSelector:@selector(openDetailScreenForEvent:)]) {
+//        [programController openDetailScreenForEvent:self.event];
+//        self.event = nil;
+//      }
+      self.scheduleId = nil;
+    }
+  }
+  
   if (self.event) {
     DCMenuItem* menuItem = self.arrayOfCaptions.firstObject;
     [self showViewControllerAssociatedWithMenuItem:menuItem];
@@ -145,7 +164,9 @@
   self.event = event;
 }
 
-
+- (void)openScheduleForSchduleId:(NSString *)scheduleId {
+  self.scheduleId = scheduleId;
+}
 
 #pragma mark - User actions
 

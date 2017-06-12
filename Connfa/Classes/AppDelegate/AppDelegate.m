@@ -127,6 +127,8 @@
   if(userActivity.webpageURL.description){
     NSInteger lenght = userActivity.webpageURL.description.length;
     NSString* code = [userActivity.webpageURL.description substringFromIndex:lenght - 4];
+    //TODO: - add in NSUserDefaults + DC
+    [[NSUserDefaults standardUserDefaults] setObject:code forKey:@"codeFromLink"];
   }
   return true;
 }

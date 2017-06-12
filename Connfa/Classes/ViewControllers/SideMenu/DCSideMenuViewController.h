@@ -10,5 +10,6 @@
 @property(nonatomic, weak) MFSideMenuContainerViewController* sideMenuContainer;
 
 - (void)openEventFromFavorite:(DCEvent*)event;
+- (void)openScheduleForSchduleId:(NSString *)scheduleId;
 
 @end
