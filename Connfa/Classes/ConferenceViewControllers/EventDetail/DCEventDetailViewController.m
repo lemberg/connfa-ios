@@ -110,6 +110,11 @@ static NSString* cellSchedule = @"scheduleCell";
   [self addIndexPathsForWhoIsGoing];
 
   self.isWhoIsGoingExpanded = true;
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(openMyScheduleFromUrl)
+                                               name:@"openMyScheduleFromUrl"
+                                             object:nil];
 }
 
 
@@ -294,6 +299,10 @@ static NSString* cellSchedule = @"scheduleCell";
     rowNumber += 1 + _speakers.count;
   }
   return rowNumber;
+}
+
+-(void)openMyScheduleFromUrl {
+  [self.navigationController popViewControllerAnimated:true];
 }
 
 #pragma mark - UITableView DataSource/Delegate methods

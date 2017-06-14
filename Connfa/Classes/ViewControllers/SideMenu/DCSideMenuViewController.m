@@ -42,6 +42,11 @@
          selector:@selector(menuStateDidChange:)
              name:MFSideMenuStateNotificationEvent
            object:nil];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(openMyScheduleFromUrl)
+                                               name:@"openMyScheduleFromUrl"
+                                             object:nil];
 
   // our first menu item is Program, this is actually the screen that we should
   // see right after the login page, thats why lets just add it on top as if the
@@ -60,22 +65,8 @@
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
 
-  if(self.scheduleId){
-    DCMenuItem* menuItem = [self.arrayOfCaptions objectAtIndex:5];
-    [self showViewControllerAssociatedWithMenuItem:menuItem];
-    
-    UINavigationController* navCon =
-    self.sideMenuContainer.centerViewController;
-    if ([navCon isKindOfClass:[UINavigationController class]]) {
-      DCProgramViewController* programController =
-      (DCProgramViewController*)navCon.topViewController;
-//      if ([programController
-//           respondsToSelector:@selector(openDetailScreenForEvent:)]) {
-//        [programController openDetailScreenForEvent:self.event];
-//        self.event = nil;
-//      }
-      self.scheduleId = nil;
-    }
+  if([[NSUserDefaults standardUserDefaults] objectForKey:@"codeFromLink"]){
+    [self openMyScheduleFromUrl];
   }
   
   if (self.event) {
@@ -164,8 +155,10 @@
   self.event = event;
 }
 
-- (void)openScheduleForSchduleId:(NSString *)scheduleId {
-  self.scheduleId = scheduleId;
+-(void)openMyScheduleFromUrl {
+  DCMenuItem* menuItem = [self.arrayOfCaptions objectAtIndex:5];
+  [self showViewControllerAssociatedWithMenuItem:menuItem];
+  self.scheduleId = nil;
 }
 
 #pragma mark - User actions

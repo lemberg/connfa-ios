@@ -129,6 +129,8 @@
     NSString* code = [userActivity.webpageURL.description substringFromIndex:lenght - 4];
     //TODO: - add in NSUserDefaults + DC
     [[NSUserDefaults standardUserDefaults] setObject:code forKey:@"codeFromLink"];
+    //TODO: - add in Constants
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"openMyScheduleFromUrl" object:nil];
   }
   return true;
 }

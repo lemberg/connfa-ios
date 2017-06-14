@@ -6,6 +6,5 @@
 
 - (void)openEventFromFavoriteController:(DCEvent*)event;
 - (void)goToSideMenuContainer:(BOOL)animated;
-- (void)openFavoritesForScheduleCode:(NSString *)code;
 
 @end

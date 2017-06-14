@@ -83,13 +83,20 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [self arrangePreviousAndNextDayButtons];
-    [self registerScreenLoadAtGA:[NSString stringWithFormat:@"%@", self.navigationItem.title]];
+  [super viewDidAppear:animated];
+  [self arrangePreviousAndNextDayButtons];
+  [self registerScreenLoadAtGA:[NSString stringWithFormat:@"%@", self.navigationItem.title]];
   if (self.eventsStrategy.strategy == EDCEeventStrategyFavorites){
     [self showInstructionsScreen];
     [[DCMainProxy sharedProxy] updateSchedule];
   }
+  
+  NSString* code = [[NSUserDefaults standardUserDefaults] objectForKey:@"codeFromLink"];
+  if(code){
+    [self addSchedule:code];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"codeFromLink"];
+  }
+  
 }
 
 #pragma mark - Public
@@ -222,13 +229,28 @@
 }
 
 - (void)updatePageController {
-  [self.pageViewController
-      setViewControllers:@[ self.viewControllers[self.currentDayIndex] ]
-               direction:UIPageViewControllerNavigationDirectionForward
-                animated:NO
-              completion:nil];
+  if(self.viewControllers){
+    [self.pageViewController
+     setViewControllers:@[ self.viewControllers[self.currentDayIndex] ]
+     direction:UIPageViewControllerNavigationDirectionForward
+     animated:NO
+     completion:nil];
+    
+    [self displayDateForDay:self.currentDayIndex];
+  }else {
+    DCDayEventsController* dayEventsController =
+    [self.storyboard instantiateViewControllerWithIdentifier:
+     NSStringFromClass([DCDayEventsController class])];
+    dayEventsController.eventsStrategy = self.eventsStrategy;
+    dayEventsController.state = DCStateEmpty;
+    
+    [self.pageViewController
+     setViewControllers:@[ dayEventsController ]
+     direction:UIPageViewControllerNavigationDirectionForward
+     animated:NO
+     completion:nil];
 
-  [self displayDateForDay:self.currentDayIndex];
+  }
 }
 
 - (void)displayDateForDay:(NSInteger)day {
@@ -367,7 +389,7 @@
   UIAlertController* actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
   actionSheet.view.tintColor = [UIColor blackColor];
   UIAlertAction *addScheduleAction = [UIAlertAction actionWithTitle:@"Add a schedule" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    [self addSchedule];
+    [self addSchedule:nil];
   }];
   UIAlertAction *shareMyScheduleAction = [UIAlertAction actionWithTitle:@"Share My Schedule" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     [self shareMySchedule];
@@ -395,13 +417,14 @@
   [self presentViewController:actionSheet animated:true completion:nil];
 }
 
--(void)addSchedule{
+-(void)addSchedule:(NSString *)code{
   UIAlertController *addScheduleAlert = [UIAlertController alertControllerWithTitle:@"Add a schedule"
                                                                             message:@"You may get this code from a person who has already shared his/her own schedule with you."
                                                                      preferredStyle:UIAlertControllerStyleAlert];
   [addScheduleAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
     textField.placeholder = @"Schedule unique code";
     textField.delegate = self;
+    textField.text = code;
   }];
   UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:nil];
   //TODO: replace initialization
@@ -427,7 +450,9 @@
                                                        });
                                                      }
   }];
-  addFriendScheduleAction.enabled = false;
+  if(!code){
+    addFriendScheduleAction.enabled = false;
+  }
   [addScheduleAlert addAction:cancelAction];
   [addScheduleAlert addAction:addFriendScheduleAction];
   [self presentViewController:addScheduleAlert animated:true completion:nil];

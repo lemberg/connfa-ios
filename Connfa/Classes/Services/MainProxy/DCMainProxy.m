@@ -327,21 +327,6 @@ typedef void (^UpdateDataFail)(NSString* reason);
   }
 }
 
--(void)openFavoritesForScheduleCode:(NSString *)code{
-  DCMainNavigationController* navigation =
-  (DCMainNavigationController*)
-  [(AppDelegate*)[[UIApplication sharedApplication] delegate] window]
-  .rootViewController;
-  
-  [navigation popToRootViewControllerAnimated:NO];
-  
-  if ([navigation
-       respondsToSelector:@selector(openFavoritesForScheduleCode:)]) {
-    [navigation openFavoritesForScheduleCode:code];
-  }
- 
-}
-
 - (void)loadHtmlAboutInfo:(void (^)(NSString*))callback {
   callback([NSUserDefaults aboutString]);
 }

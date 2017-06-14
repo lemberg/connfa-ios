@@ -89,7 +89,6 @@ DCDayEventSourceDelegate> {
 
 -(void)refreshTable{
   [[DCMainProxy sharedProxy] setDataUpdatedCallback: nil];
-//  [self configureState];
   [[DCMainProxy sharedProxy] updateEvents];
   [self.eventsDataSource reloadEvents:true];
 

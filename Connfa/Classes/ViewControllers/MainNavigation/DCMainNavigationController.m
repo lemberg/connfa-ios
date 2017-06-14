@@ -26,11 +26,6 @@
   [self.sideMenuController openEventFromFavorite:event];
 }
 
-- (void)openFavoritesForScheduleCode:(NSString *)code{
-  [self goToSideMenuContainer:NO];
-  [self.sideMenuController openScheduleForSchduleId:code];
-}
-
 - (void)goToSideMenuContainer:(BOOL)animated {
   DCSideMenuViewController* sideMenuViewController = [self.storyboard
       instantiateViewControllerWithIdentifier:@"SideMenuViewController"];

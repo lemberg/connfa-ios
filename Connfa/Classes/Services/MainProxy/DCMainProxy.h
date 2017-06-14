@@ -72,6 +72,5 @@ typedef enum {
 - (void)removeFavoriteEventWithID:(DCEvent*)event;
 - (NSArray*)eventsWithIDs:(NSArray*)iDs;
 - (void)openLocalNotification:(UILocalNotification*)localNotification;
-- (void)openFavoritesForScheduleCode:(NSString *)code;
 
 @end
