@@ -95,10 +95,10 @@ DCDayEventSourceDelegate> {
 }
 
 - (void)configureState {
+  [self initDataSource];
   if (self.state == DCStateNormal) {
     self.noDataView.hidden = YES;
     [self registerCells];
-    [self initDataSource];
     self.cellPrototype = [self.tableView
                           dequeueReusableCellWithIdentifier:NSStringFromClass([DCEventCell class])];
   } else {
@@ -140,7 +140,8 @@ DCDayEventSourceDelegate> {
   }
   
   self.tableView.dataSource = nil;
-  self.tableView.hidden = YES;
+  self.tableView.hidden = NO;
+  self.tableView.backgroundColor = [UIColor clearColor];
   [self.activityIndicatorView stopAnimating];
   self.noItemsLabel.text = self.stubMessage;
   self.noItemsImageView.image = self.stubImage;
@@ -227,6 +228,9 @@ DCDayEventSourceDelegate> {
 - (void)dataSourceEndUpdateEvents:(DCEventDataSource*)dataSource {
   [self.activityIndicatorView stopAnimating];
   [refreshControl endRefreshing];
+  if(self.tableView.indexPathsForVisibleRows.count){
+    self.tableView.backgroundColor = [UIColor whiteColor];
+  }
 }
 
 #pragma mark - UITableView delegate
