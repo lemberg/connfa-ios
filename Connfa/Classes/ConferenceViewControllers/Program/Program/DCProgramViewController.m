@@ -436,10 +436,12 @@
                                                        [SVProgressHUD setDefaultAnimationType:SVProgressHUDAnimationTypeNative];
                                                        [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
                                                        [SVProgressHUD showWithStatus: @"Loading schedule..."];
-                                                       [[DCMainProxy sharedProxy] getSchedules:@[addScheduleAlert.textFields.firstObject.text] callback:^(BOOL success, DCSharedSchedule* schedule){
+                                                       [[DCMainProxy sharedProxy] getSchedule:addScheduleAlert.textFields.firstObject.text callback:^(BOOL success, DCSharedSchedule* schedule){
                                                          if(success){
                                                            [SVProgressHUD dismiss];
                                                            [self showAddScheduleNameAlert: schedule];
+                                                         } else {
+                                                           [SVProgressHUD dismiss];
                                                          }
                                                        }];
                                                      } else {
@@ -495,7 +497,9 @@
       UITextField *textField = [[addScheduleAlert textFields] firstObject];
       schedule.name = textField.text;
       //TODO: replace
+    dispatch_async(dispatch_get_main_queue(), ^{
       [[DCCoreDataStore defaultStore] saveWithCompletionBlock:nil];
+    });
   }];
   [addScheduleAlert addAction:okAction];
   [self presentViewController:addScheduleAlert animated:true completion:nil];

@@ -35,17 +35,31 @@ const NSString* kDCCodeKey = @"code";
 
 + (void)updateFromDictionary:(NSDictionary*)schedules
                    inContext:(NSManagedObjectContext*)context{
-    for (NSDictionary* scheduleDictionary in schedules[kDCSchdulesKey]) {
-        DCSharedSchedule* schedule = [self getScheduleFromDictionary:scheduleDictionary inContext:context];
-        if(!schedule){
-            schedule = [DCSharedSchedule createManagedObjectInContext:context];
-            schedule.scheduleId = [scheduleDictionary objectForKey:@"code"];
-        }
-        schedule.isMySchedule = [NSNumber numberWithBool:NO];
-        [schedule removeEvents:schedule.events];
-        [schedule addEventsForIds:(NSArray *)scheduleDictionary[kDCEventsKey]];
-        [[DCCoreDataStore defaultStore] saveWithCompletionBlock:nil];
+    if(schedules[kDCSchdulesKey]){
+      for (NSDictionary* scheduleDictionary in schedules[kDCSchdulesKey]) {
+        [self addScheduleFromDictionary:scheduleDictionary andContext:context];
+      }
+    } else {
+      [self addScheduleFromDictionary:schedules andContext:context];
     }
+    if([DCCoreDataStore mainQueueContext]){
+    [[DCCoreDataStore defaultStore] saveWithCompletionBlock:nil];
+    }
+}
+
++ (void)addScheduleFromDictionary:(NSDictionary *)scheduleDictionary
+                       andContext:(NSManagedObjectContext*)context {
+  if(scheduleDictionary){
+    DCSharedSchedule* schedule = [self getScheduleFromDictionary:scheduleDictionary inContext:context];
+    if(!schedule){
+      schedule = [DCSharedSchedule createManagedObjectInContext:context];
+      schedule.scheduleId = [scheduleDictionary objectForKey:kDCCodeKey];
+    }
+    NSLog(@"%@", schedule.scheduleId);
+    schedule.isMySchedule = [NSNumber numberWithBool:NO];
+    [schedule removeEvents:schedule.events];
+    [schedule addEventsForIds:(NSArray *)scheduleDictionary[kDCEventsKey]];
+  }
 }
 
 + (DCSharedSchedule *)getScheduleFromDictionary:(NSDictionary*)scheduleDictionary

@@ -15,6 +15,7 @@
 
 #import "NSDate+DC.h"
 #import "NSArray+DC.h"
+#import "DCAlertsManager.h"
 
 @implementation DCMainProxy (Additions)
 
@@ -249,25 +250,35 @@
   return YES;
 }
 
-//TODO: Add error handling, refactor for 1 schedule
--(void)getSchedules:(NSArray*)codes callback:(void (^)(BOOL, DCSharedSchedule*))callback{
-    NSString* url = [NSString stringWithFormat:@"getSchedules?%@",[self createParametersStringForCodes:codes]];
-    NSURLRequest* request = [DCWebService urlRequestForURI:url withHTTPMethod:@"GET" withHeaderOptions:nil];
-    [DCWebService fetchDataFromURLRequest:request onSuccess:^(NSHTTPURLResponse *response, id data) {
-        NSError* err = nil;
-        NSDictionary* dictionary =
-        [NSJSONSerialization JSONObjectWithData:data
-                                        options:kNilOptions
-                                          error:&err];
-        dictionary = [dictionary dictionaryByReplacingNullsWithStrings];
-
-        [DCSharedSchedule updateFromDictionary:dictionary inContext:self.workContext];
-        NSDictionary *scheduleDictionary = [((NSArray *)[dictionary objectForKey:@"schedules"]) firstObject];
-        DCSharedSchedule *schedule = [DCSharedSchedule getScheduleFromDictionary:scheduleDictionary inContext:self.workContext];
-        callback(true, schedule);
-    } onError:^(NSHTTPURLResponse *response, id data, NSError *error) {
-        
-    }];
+- (void)getSchedule:(NSString*)code callback:(void (^)(BOOL, DCSharedSchedule*))callback{
+  NSString* url = [NSString stringWithFormat:@"getSchedule/%@",code];
+  NSURLRequest* request = [DCWebService urlRequestForURI:url withHTTPMethod:@"GET" withHeaderOptions:nil];
+  [DCWebService fetchDataFromURLRequest:request onSuccess:^(NSHTTPURLResponse *response, id data) {
+    NSError* err = nil;
+    NSDictionary* dictionary =
+    [NSJSONSerialization JSONObjectWithData:data
+                                    options:kNilOptions
+                                      error:&err];
+    dictionary = [dictionary dictionaryByReplacingNullsWithStrings];
+    if([dictionary[@"status_code"] integerValue] == 404){
+      callback(false, nil);
+      [DCAlertsManager showAlertWithTitle:@"Schedule not found."
+                                  message:@"Please check your code."];
+      return;
+    }
+    
+    [DCSharedSchedule updateFromDictionary:dictionary inContext:self.workContext];
+    NSDictionary *scheduleDictionary = [((NSArray *)[dictionary objectForKey:@"schedules"]) firstObject];
+    if(!scheduleDictionary){
+      scheduleDictionary = dictionary;
+    }
+    DCSharedSchedule *schedule = [DCSharedSchedule getScheduleFromDictionary:scheduleDictionary inContext:self.workContext];
+    callback(true, schedule);
+  } onError:^(NSHTTPURLResponse *response, id data, NSError *error) {
+    [DCAlertsManager showAlertWithTitle:@"Schedule not found."
+                                message:@"Please check your code."];
+    callback(false, nil);
+  }];
 }
 
 //TODO: Replace

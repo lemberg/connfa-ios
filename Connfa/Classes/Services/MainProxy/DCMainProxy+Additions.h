@@ -27,7 +27,7 @@
 
 #pragma mark - Schedules
 - (void)updateSchedule;
-- (void)getSchedules:(NSArray*)codes callback:(void (^)(BOOL, DCSharedSchedule*))callback;
+- (void)getSchedule:(NSString*)code callback:(void (^)(BOOL, DCSharedSchedule*))callback;
 - (NSArray*)getAllSharedSchedules;
 - (NSArray *)getSchedulesIds;
 - (void)removeSchedule:(DCSharedSchedule *)schedule;
