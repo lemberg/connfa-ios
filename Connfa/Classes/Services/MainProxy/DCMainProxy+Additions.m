@@ -262,8 +262,6 @@
     dictionary = [dictionary dictionaryByReplacingNullsWithStrings];
     if([dictionary[@"status_code"] integerValue] == 404){
       callback(false, nil);
-      [DCAlertsManager showAlertWithTitle:@"Schedule not found."
-                                  message:@"Please check your code."];
       return;
     }
     

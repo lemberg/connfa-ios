@@ -12,6 +12,7 @@
 #import "DCCoreDataStore.h"
 #import "DCConstants.h"
 #import "NSUserDefaults+DC.h"
+#import "DCAlertsManager.h"
 #import <SVProgressHUD.h>
 
 @interface DCProgramViewController (){
@@ -438,10 +439,13 @@
                                                        [SVProgressHUD showWithStatus: @"Loading schedule..."];
                                                        [[DCMainProxy sharedProxy] getSchedule:addScheduleAlert.textFields.firstObject.text callback:^(BOOL success, DCSharedSchedule* schedule){
                                                          if(success){
-                                                           [SVProgressHUD dismiss];
+                                                           [self dismissProgressHUD];
                                                            [self showAddScheduleNameAlert: schedule];
                                                          } else {
-                                                           [SVProgressHUD dismiss];
+                                                           [self dismissProgressHUD];
+                                                           [DCAlertsManager showAlertControllerWithTitle:@"Schedule not found."
+                                                                                                 message:@"Please check your code."
+                                                                                           forController:self];
                                                          }
                                                        }];
                                                      } else {
@@ -612,6 +616,12 @@
                direction:UIPageViewControllerNavigationDirectionForward
                 animated:YES
               completion:nil];
+}
+
+-(void)dismissProgressHUD{
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [SVProgressHUD dismiss];
+  });
 }
 
 #pragma mark - DCFilterViewControllerDelegate

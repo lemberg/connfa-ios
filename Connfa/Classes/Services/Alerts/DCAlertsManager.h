@@ -13,5 +13,7 @@
                          withSuccess:(void(^)(BOOL))success;
 
 + (void)showAlertWithTitle:(NSString*)title message:(NSString*)msg;
-
++ (void)showAlertControllerWithTitle:(NSString*)title
+                             message:(NSString*)msg
+                       forController:(UIViewController *)controller;
 @end
