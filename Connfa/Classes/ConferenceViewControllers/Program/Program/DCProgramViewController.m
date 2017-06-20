@@ -483,7 +483,7 @@
                                                UIActivityTypePostToVimeo,
                                                UIActivityTypePostToTencentWeibo
                                                ];
-  [controller setValue:@"Subject" forKey:@"subject"];
+  [controller setValue:@"My Schedule" forKey:@"subject"];
   
   [self presentViewController:controller animated:true completion:nil];
 

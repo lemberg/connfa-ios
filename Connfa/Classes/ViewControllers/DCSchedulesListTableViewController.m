@@ -14,7 +14,7 @@
   NSString *scheduleName;
   NSIndexPath *selectedIndexPath;
   EScheduleType selectedScheduleType;
-    NSArray* schedules;
+  NSArray* schedules;
 }
 
 @end
@@ -114,12 +114,16 @@
   cell.accessoryType = UITableViewCellAccessoryCheckmark;
   scheduleName = cell.textLabel.text;
   
-  selectedIndexPath = indexPath;
-    if(indexPath.row == 0){
-        _selectedSchedule = nil;
-    }else{
-        _selectedSchedule = [schedules objectAtIndex:indexPath.row - 1];
-    }
+  if(indexPath.row == 0){
+    _selectedSchedule = nil;
+  }else{
+    _selectedSchedule = [schedules objectAtIndex:indexPath.row - 1];
+  }
+  
+  if(selectedIndexPath.row != indexPath.row){
+    selectedIndexPath = indexPath;
+    [self closeController];
+  }
 }
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
