@@ -192,8 +192,10 @@ DCDayEventSourceDelegate> {
               [weakSelf.eventsStrategy favoriteTextColor];
         }
 
-        if(weakSelf.eventsStrategy.strategy != EDCEventStrategySharedSchedule && event.schedules && event.schedules.count){
+        if(weakSelf.eventsStrategy.strategy != EDCEventStrategySharedSchedule && event.schedules.count){
           cell.friendScheduleIcon.hidden = false;
+        }else{
+          cell.friendScheduleIcon.hidden = true;
         }
         
         return cell;

@@ -446,10 +446,10 @@
                                                        [SVProgressHUD setDefaultAnimationType:SVProgressHUDAnimationTypeNative];
                                                        [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeBlack];
                                                        [SVProgressHUD showWithStatus: @"Loading schedule..."];
-                                                       [[DCMainProxy sharedProxy] getSchedule:addScheduleAlert.textFields.firstObject.text callback:^(BOOL success, DCSharedSchedule* schedule){
+                                                       [[DCMainProxy sharedProxy] getSchedule:addScheduleAlert.textFields.firstObject.text callback:^(BOOL success, NSDictionary* scheduleDictionary){
                                                          if(success){
                                                            [self dismissProgressHUD];
-                                                           [self showAddScheduleNameAlert: schedule];
+                                                           [self showAddScheduleNameAlert: scheduleDictionary];
                                                          } else {
                                                            [self dismissProgressHUD];
                                                            [DCAlertsManager showAlertControllerWithTitle:@"Schedule not found."
@@ -498,22 +498,27 @@
 
 }
 
--(void)showAddScheduleNameAlert:(DCSharedSchedule *)schedule{
+-(void)showAddScheduleNameAlert:(NSDictionary *)scheduleDictionary{
   UIAlertController *addScheduleAlert = [UIAlertController alertControllerWithTitle:@"Schedule name"
                                                                             message:@"Enter a name for this schedule."
                                                                      preferredStyle:UIAlertControllerStyleAlert];
   [addScheduleAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
     textField.placeholder = @"Schedule name";
-    textField.text = [NSString stringWithFormat:@"Schedule %@",schedule.scheduleId];
+    textField.text = [NSString stringWithFormat:@"Schedule %@",scheduleDictionary[kDCCodeKey]];
     textField.delegate = self;
   }];
   okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    [self setSchedulesTitle];
     UITextField *textField = [[addScheduleAlert textFields] firstObject];
+    NSManagedObjectContext *context = [DCMainProxy sharedProxy].workContext;
+    [DCSharedSchedule updateFromDictionary:scheduleDictionary inContext:context];
+    DCSharedSchedule* schedule = [DCSharedSchedule getScheduleFromDictionary:scheduleDictionary inContext:context];
     schedule.name = textField.text;
-    //TODO: replace
     dispatch_async(dispatch_get_main_queue(), ^{
-      [[DCCoreDataStore defaultStore] saveWithCompletionBlock:nil];
+      [[DCCoreDataStore defaultStore] saveWithCompletionBlock:^(BOOL isSuccess) {
+        if (isSuccess) {
+          [self setSchedulesTitle];
+        }
+      }];
     });
   }];
   [addScheduleAlert addAction:okAction];
