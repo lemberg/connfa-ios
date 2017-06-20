@@ -250,6 +250,8 @@
   return YES;
 }
 
+#pragma mark - Schedule
+
 - (void)getSchedule:(NSString*)code callback:(void (^)(BOOL, DCSharedSchedule*))callback{
   NSString* url = [NSString stringWithFormat:@"getSchedule/%@",code];
   NSURLRequest* request = [DCWebService urlRequestForURI:url withHTTPMethod:@"GET" withHeaderOptions:nil];

@@ -19,6 +19,7 @@
   NSString *titleString;
   EScheduleType selectedScheduleType;
   UIAlertAction *addFriendScheduleAction;
+  UIAlertAction *okAction;
   DCSharedSchedule* selectedSchedule;
 }
 
@@ -499,8 +500,9 @@
   [addScheduleAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
     textField.placeholder = @"Schedule name";
     textField.text = [NSString stringWithFormat:@"Schedule %@",schedule.scheduleId];
+    textField.delegate = self;
   }];
-  UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+  okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     [self setSchedulesTitle];
     UITextField *textField = [[addScheduleAlert textFields] firstObject];
     schedule.name = textField.text;
@@ -520,8 +522,9 @@
   [addScheduleAlert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
     textField.placeholder = @"Schedule name";
     textField.text = selectedSchedule.name;
+    textField.delegate = self;
   }];
-  UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+  okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
       selectedSchedule.name = addScheduleAlert.textFields.firstObject.text;
       [[DCCoreDataStore defaultStore] saveWithCompletionBlock:nil];
       titleString = selectedSchedule.name;
@@ -717,8 +720,10 @@
   NSUInteger newLength = [textField.text length] + [string length] - range.length;
   if(newLength > 0){
     addFriendScheduleAction.enabled = true;
+    okAction.enabled = true;
   }else {
     addFriendScheduleAction.enabled = false;
+    okAction.enabled = false;
   }
   return true;
 }
