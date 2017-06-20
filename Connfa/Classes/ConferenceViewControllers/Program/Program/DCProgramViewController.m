@@ -391,6 +391,8 @@
 }
 
 -(void)showMyScheduleActions{
+  NSArray* schedules = [[DCMainProxy sharedProxy] getAllSharedSchedules];
+  
   UIAlertController* actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
   actionSheet.view.tintColor = [UIColor blackColor];
   UIAlertAction *addScheduleAction = [UIAlertAction actionWithTitle:@"Add a schedule" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -399,6 +401,9 @@
   UIAlertAction *shareMyScheduleAction = [UIAlertAction actionWithTitle:@"Share My Schedule" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     [self shareMySchedule];
   }];
+  if(!schedules.count){
+    shareMyScheduleAction.enabled = false;
+  }
   UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
   [actionSheet addAction:addScheduleAction];
   [actionSheet addAction:shareMyScheduleAction];
