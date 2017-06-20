@@ -88,10 +88,10 @@ DCDayEventSourceDelegate> {
 }
 
 -(void)refreshTable{
-  [[DCMainProxy sharedProxy] setDataUpdatedCallback: nil];
-  [[DCMainProxy sharedProxy] updateEvents];
+  if ([[DCMainProxy sharedProxy] checkReachable]){
+    [[DCMainProxy sharedProxy] updateEvents];
+  }
   [self.eventsDataSource reloadEvents:true];
-
 }
 
 - (void)configureState {
