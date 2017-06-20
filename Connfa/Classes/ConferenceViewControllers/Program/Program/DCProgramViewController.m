@@ -342,14 +342,17 @@
   UILabel* titleLabel = [self createTitleLabelWithWidth:textWidth height:textSize.height font:titleFont];
   titleLabel.center = titleView.center;
   
-  UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTitle)];
+  NSArray* schedules = [[DCMainProxy sharedProxy] getAllSharedSchedules];
   
-  UIImageView *disclosureIndicator = [[UIImageView alloc] initWithFrame:CGRectMake(textWidth + 14, titleLabel.frame.size.height/2 - 1, 10, 4)];
-  disclosureIndicator.image = [UIImage imageNamed:@"Disclosure Indicator"];
-  
+  if(schedules.count){
+    UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTitle)];
+    UIImageView *disclosureIndicator = [[UIImageView alloc] initWithFrame:CGRectMake(textWidth + 14, titleLabel.frame.size.height/2 - 1, 10, 4)];
+    disclosureIndicator.image = [UIImage imageNamed:@"Disclosure Indicator"];
+    [titleView addGestureRecognizer:singleFingerTap];
+    [titleView addSubview:disclosureIndicator];
+  }
   [titleView addSubview:titleLabel];
-  [titleView addSubview:disclosureIndicator];
-  [titleView addGestureRecognizer:singleFingerTap];
+  
   self.navigationItem.titleView = titleView;
 }
 
@@ -498,9 +501,10 @@
     textField.text = [NSString stringWithFormat:@"Schedule %@",schedule.scheduleId];
   }];
   UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-      UITextField *textField = [[addScheduleAlert textFields] firstObject];
-      schedule.name = textField.text;
-      //TODO: replace
+    [self setSchedulesTitle];
+    UITextField *textField = [[addScheduleAlert textFields] firstObject];
+    schedule.name = textField.text;
+    //TODO: replace
     dispatch_async(dispatch_get_main_queue(), ^{
       [[DCCoreDataStore defaultStore] saveWithCompletionBlock:nil];
     });
