@@ -3044,7 +3044,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "Connfa!.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Alexei Dolgov (K77NWM2756)";
 				DEVELOPMENT_TEAM = J7LBYY3B34;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3078,7 +3078,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "Connfa!.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Lemberg Solutions Limited (J7LBYY3B34)";
 				DEVELOPMENT_TEAM = J7LBYY3B34;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
