@@ -736,6 +736,12 @@
 #pragma mark - TextFieldDelegate
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
   NSUInteger newLength = [textField.text length] + [string length] - range.length;
+  NSString* stringWithoutSpaces = [textField.text stringByReplacingOccurrencesOfString:@" " withString:@""];
+  if(!stringWithoutSpaces.length){
+    addFriendScheduleAction.enabled = false;
+    okAction.enabled = false;
+    return true;
+  }
   if(newLength > 0){
     addFriendScheduleAction.enabled = true;
     okAction.enabled = true;
@@ -745,6 +751,7 @@
   }
   return true;
 }
+
 
 #pragma mark - UIStoryboardSegue
 
