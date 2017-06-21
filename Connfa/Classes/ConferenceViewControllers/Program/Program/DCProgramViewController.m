@@ -393,7 +393,7 @@
 }
 
 -(void)showMyScheduleActions{
-  NSArray* schedules = [[DCMainProxy sharedProxy] getAllSharedSchedules];
+  NSArray* events = [[DCMainProxy sharedProxy] favoriteEvents];
   
   UIAlertController* actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
   actionSheet.view.tintColor = [UIColor blackColor];
@@ -405,7 +405,7 @@
   }];
   
   BOOL isReachable = [[DCMainProxy sharedProxy] checkReachable];
-  if(!schedules.count || !isReachable){
+  if(!events.count || !isReachable){
     shareMyScheduleAction.enabled = false;
   }
   if(!isReachable){
@@ -484,7 +484,7 @@
 -(void)shareMySchedule{
   NSNumber* myCode = [NSUserDefaults myScheduleCode];
   NSArray *items = @[[NSString stringWithFormat:@"Hi, I have just published/shared my schedule for %@ where I will be an attendee.", EVENT_NAME],
-                     [NSString stringWithFormat: @"Here is the link to add my schedule into the app: %@%@%@", BASE_URL, @"schedule/share/", myCode],
+                     [NSString stringWithFormat: @"Here is the link to add my schedule into the app: %@%@%@", SERVER_URL, @"schedule/share?code=", myCode],
                      @"If you have any issues with the link, use the Schedule Unique Code in the app to add my schedule manually.",
                      [NSString stringWithFormat:@"Schedule Unique Code: %@", myCode]]; // build an activity view controller
   UIActivityViewController *controller = [[UIActivityViewController alloc]initWithActivityItems:items applicationActivities:nil];
