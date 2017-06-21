@@ -98,7 +98,9 @@
     [self addSchedule:code];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"codeFromLink"];
   }
-  
+  if (self.eventsStrategy.strategy == EDCEeventStrategyFavorites || self.eventsStrategy.strategy == EDCEventStrategySharedSchedule){
+    [self reloadData];
+  }
 }
 
 #pragma mark - Public
