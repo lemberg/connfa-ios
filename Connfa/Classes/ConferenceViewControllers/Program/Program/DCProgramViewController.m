@@ -401,9 +401,15 @@
   UIAlertAction *shareMyScheduleAction = [UIAlertAction actionWithTitle:@"Share My Schedule" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     [self shareMySchedule];
   }];
-  if(!schedules.count){
+  
+  BOOL isReachable = [[DCMainProxy sharedProxy] checkReachable];
+  if(!schedules.count || !isReachable){
     shareMyScheduleAction.enabled = false;
   }
+  if(!isReachable){
+    addScheduleAction.enabled = false;
+  }
+  
   UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
   [actionSheet addAction:addScheduleAction];
   [actionSheet addAction:shareMyScheduleAction];
