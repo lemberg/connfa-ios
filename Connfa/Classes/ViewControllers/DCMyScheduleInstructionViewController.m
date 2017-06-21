@@ -12,7 +12,8 @@
 
 @interface DCMyScheduleInstructionViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *tutorialImageVIew;
-@property (weak, nonatomic) IBOutlet UIImageView *moreActionsImage;
+@property (weak, nonatomic) IBOutlet UIView *backgroundView;
+@property (weak, nonatomic) IBOutlet UIButton *okButton;
 
 @end
 
@@ -20,11 +21,7 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  UITapGestureRecognizer *singleFingerTap =
-  [[UITapGestureRecognizer alloc] initWithTarget:self
-                                          action:@selector(dismissSelf)];
-  [self.view addGestureRecognizer:singleFingerTap];
-  [self setTutorialImage];
+  [self setupUI];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -35,20 +32,20 @@
   [self dismissViewControllerAnimated:true completion:nil];
 }
 
--(void)setTutorialImage{
-  if([DCDeviceType isIphone5]){
-    [self setTutorialImageNamed:@"tutorial_iphone_5"];
-  }else if([DCDeviceType isIphone7]){
-    [self setTutorialImageNamed:@"tutorial_iphone_7"];
-  }else if ([DCDeviceType isIphone7plus]){
-    [self setTutorialImageNamed:@"tutorial_iphone_7_plus"];
-  }
-}
-
 -(void)setTutorialImageNamed:(NSString *)name{
   UIImage *image = [[UIImage imageNamed:name] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   self.tutorialImageVIew.image = image;
   self.tutorialImageVIew.tintColor = [DCAppConfiguration navigationBarColor];
+}
+
+-(void)setupUI{
+  self.okButton.layer.cornerRadius = 6.;
+  self.okButton.layer.borderWidth = 1.;
+  self.okButton.layer.borderColor = [UIColor whiteColor].CGColor;
+  self.backgroundView.backgroundColor = [DCAppConfiguration navigationBarColor];
+}
+- (IBAction)onOkButton:(id)sender {
+  [self dismissSelf];
 }
 
 - (void)didReceiveMemoryWarning {
