@@ -54,10 +54,10 @@
                withSuccess:^(BOOL isSuccess){
                    if (isSuccess) {
                        [NSUserDefaults disableTimeZoneNotification];
-                       dispatch_async(dispatch_get_main_queue(), ^{
-                           [[DCMainProxy sharedProxy] setDataUpdatedCallback:nil];
-                       });
                    }
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                   [[DCMainProxy sharedProxy] setDataUpdatedCallback:nil];
+                 });
                }];
           }
       });
@@ -106,22 +106,7 @@
 
 
 }
--(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
-//  defaultStoryboardName = @"Events";
-//  NSString* storyboardName = [self storyboardNameForMenuItem:menuItem];
-//  UIStoryboard* storyboard =
-//  [UIStoryboard storyboardWithName:storyboardName bundle:nil];
-//  
-//  DCBaseViewController* viewController =
-//  [storyboard instantiateViewControllerWithIdentifier:controllerId];
-//  
-//  if ([viewController isKindOfClass:[DCProgramViewController class]]) {
-//    [(DCProgramViewController*)viewController
-//     setEventsStrategy:[DCMenuStoryboardHelper
-//                        strategyForEventMenuType:menuItem]];
-//  }
-  return true;
-}
+
 
 -(BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
   if(userActivity.webpageURL.description){
@@ -137,15 +122,21 @@
 
 
 - (void)applicationWillEnterForeground:(UIApplication*)application {
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"applicationDidBecomeActive" object:nil];
   if ([self.window.rootViewController
-          isKindOfClass:[UINavigationController class]]) {
+       isKindOfClass:[UINavigationController class]]) {
     [self handleUpdateTimeZone];
     [[DCMainProxy sharedProxy] update];
   }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication*)application {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"applicationDidBecomeActive" object:nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"applicationDidBecomeActive" object:nil];
+  if ([self.window.rootViewController
+       isKindOfClass:[UINavigationController class]]) {
+    [self handleUpdateData];
+    [[DCMainProxy sharedProxy] update];
+  }
 }
 
 - (void)applicationWillTerminate:(UIApplication*)application {
