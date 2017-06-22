@@ -6,7 +6,7 @@ target 'Connfa!' do
   # use_frameworks!
 
   # Pods for Connfa!
-  pod 'SVProgressHUD'
+  pod 'SVProgressHUD', '2.1.2'
 end
 
 target 'DrupalCamp' do
@@ -14,7 +14,7 @@ target 'DrupalCamp' do
   # use_frameworks!
 
   # Pods for DrupalCamp
-  pod 'SVProgressHUD'
+  pod 'SVProgressHUD', '2.1.2'
 end
 
 target 'DrupalCon' do
@@ -22,5 +22,5 @@ target 'DrupalCon' do
   # use_frameworks!
 
   # Pods for DrupalCon
-  pod 'SVProgressHUD'
+  pod 'SVProgressHUD', '2.1.2'
 end
