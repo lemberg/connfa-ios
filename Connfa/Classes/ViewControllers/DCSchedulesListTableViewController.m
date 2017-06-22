@@ -110,9 +110,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath   *)indexPath
 {
-  UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-  cell.accessoryType = UITableViewCellAccessoryCheckmark;
-  scheduleName = cell.textLabel.text;
+  UITableViewCell* currentCell = [tableView cellForRowAtIndexPath:indexPath];
+  currentCell.accessoryType = UITableViewCellAccessoryCheckmark;
+  currentCell.tintColor = [DCAppConfiguration favoriteEventColor];
+  currentCell.textLabel.textColor = [DCAppConfiguration favoriteEventColor];
+
+  scheduleName = currentCell.textLabel.text;
   
   if(indexPath.row == 0){
     _selectedSchedule = nil;
@@ -128,7 +131,10 @@
 
 -(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
+  UITableViewCell *previousCell = [tableView cellForRowAtIndexPath:indexPath];
+  previousCell.accessoryType = UITableViewCellAccessoryNone;
+  previousCell.tintColor = [UIColor blackColor];
+  previousCell.textLabel.textColor = [UIColor blackColor];
 }
 
 
