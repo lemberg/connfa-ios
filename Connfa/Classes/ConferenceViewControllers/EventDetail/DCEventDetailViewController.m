@@ -32,6 +32,11 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
 static NSString* cellWhoIsgoingHeader = @"WhoIsGoingHeaderCell";
 static NSString* cellSchedule = @"scheduleCell";
 
+static int headerSectionIndex = 0;
+static int speakersSectionIndex = 1;
+static int schedulesSectionIndex = 2;
+static int descriptionSectionIndex = 3;
+
 
 @interface DCEventDetailViewController (){
   NSSet* schedulesSet;
@@ -274,31 +279,9 @@ static NSString* cellSchedule = @"scheduleCell";
   self.schedulesIndexPaths = [[NSMutableArray alloc] init];
   int index = 1;
   for (DCSharedSchedule *schedule in schedules) {
-      [self.schedulesIndexPaths addObject:[NSIndexPath indexPathForRow:[self getRowNumberForSchedulesHeader] +  index inSection:0]];
+      [self.schedulesIndexPaths addObject:[NSIndexPath indexPathForRow:index inSection:schedulesSectionIndex]];
     index++;
   }
-}
-
-- (int)getNumberOfRows{
-  int numberOfRows = 1;
-  if(_speakers.count > 0){
-    numberOfRows += 1 + _speakers.count;
-  }
-  if(schedules.count > 0 ){
-    numberOfRows += 1;
-    if( _isWhoIsGoingExpanded){
-      numberOfRows += schedules.count;
-    }
-  }
-  return numberOfRows;
-}
-
-- (int)getRowNumberForSchedulesHeader{
-  int rowNumber = 1;
-  if(_speakers.count){
-    rowNumber += 1 + _speakers.count;
-  }
-  return rowNumber;
 }
 
 -(void)openMyScheduleFromUrl {
@@ -308,128 +291,114 @@ static NSString* cellSchedule = @"scheduleCell";
 #pragma mark - UITableView DataSource/Delegate methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView {
-  return 1;
+  return 4;
 }
 
 - (CGFloat)tableView:(UITableView*)tableView
     heightForRowAtIndexPath:(NSIndexPath*)indexPath {
   
-  // header cell
-  if (indexPath.row == 0)
-    return [self getHeaderCellHeight];
-  
-  //speakers cell
-  if(_speakers.count > 0 && indexPath.row < [self getRowNumberForSchedulesHeader]){
-    if(indexPath.row == 1){
+  if(indexPath.section == headerSectionIndex){
+    if (indexPath.row == 0) {
+      return [self getHeaderCellHeight];
+    }
+  }else if(indexPath.section == speakersSectionIndex){
+    if(indexPath.row == 0){
       return 48.;
     }
-    return [self getSpeakerCellHeight:self.speakers[indexPath.row - 2]];
-  }
-  
-  //TODO: refactor
-  //schedule cells
-  if( schedules.count > 0 && indexPath.row ==  [self getRowNumberForSchedulesHeader]){
-    return 48;
-  }
-  
-  
-  if(schedules.count > 0 && indexPath.row < [self getNumberOfRows] && _isWhoIsGoingExpanded){
+    return [self getSpeakerCellHeight:self.speakers[indexPath.row - 1]];
+  }else if(indexPath.section == schedulesSectionIndex){
       return 48.;
-  }
-  
-  //Description cell
-  if (indexPath.row == [self getNumberOfRows]) {
+  }else{
     return [self heightForDescriptionTextCell];
   }
-  return 48;
+  return 48.;
 }
 
 - (NSInteger)tableView:(UITableView*)tableView
  numberOfRowsInSection:(NSInteger)section {
-  // speakers + description + header
-  int additionalCount = 2;
-  if(_speakers.count > 0){
-    additionalCount++;
+  if(section == headerSectionIndex){
+    return 1;
+  }else if(section == speakersSectionIndex){
+    if(_speakers.count){
+      return _speakers.count + 1;
+    }
+  }else if(section == schedulesSectionIndex){
+    if(schedules.count){
+      if(_isWhoIsGoingExpanded){
+        return schedules.count + 1;
+      }else {
+        return 1;
+      }
+    }
+  }else{
+    return 1;
   }
-  if(schedules.count > 0){
-    additionalCount ++;
-  }
-  
-  if (self.isWhoIsGoingExpanded) {
-    additionalCount += schedules.count;
-  }
-  return self.speakers.count + additionalCount;
+  return 0;
 }
 
 - (UITableViewCell*)tableView:(UITableView*)tableView
         cellForRowAtIndexPath:(NSIndexPath*)indexPath {
-  // header cell
-  if (indexPath.row == 0) {
-    DCEventDetailHeaderCell* cell = (DCEventDetailHeaderCell*)
-    [tableView dequeueReusableCellWithIdentifier:cellIdHeader];
-    [cell initData:self.event];
-    return cell;
-  }
-  
-  //speakers cell
-  if(_speakers.count > 0 && indexPath.row < [self getRowNumberForSchedulesHeader]){
-    if(indexPath.row == 1){
+  if(indexPath.section == headerSectionIndex){
+    if (indexPath.row == 0) {
+      DCEventDetailHeaderCell* cell = (DCEventDetailHeaderCell*)
+      [tableView dequeueReusableCellWithIdentifier:cellIdHeader];
+      [cell initData:self.event];
+      return cell;
+    }
+    
+  }else if(indexPath.section == speakersSectionIndex){
+    if(indexPath.row == 0){
       DCDetailEventHeaderTableViewCell *speakersCell = (DCDetailEventHeaderTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:cellWhoIsgoingHeader];
       speakersCell.headerLabel.text = @"Speakers";
       speakersCell.selectionStyle = UITableViewCellSelectionStyleNone;
       return speakersCell;
     }
-    DCSpeaker* speaker = self.speakers[indexPath.row - 2];
+    
+    DCSpeaker* speaker = self.speakers[indexPath.row - 1];
     DCSpeakerCell* cell = (DCSpeakerCell*)
     [tableView dequeueReusableCellWithIdentifier:cellIdSpeaker];
     [cell initData:speaker];
-    if(indexPath.row != [self getRowNumberForSchedulesHeader] - 1){
+    if(indexPath.row != _speakers.count){
       cell.separator.hidden = true;
     } else {
       cell.separator.hidden = false;
     }
     return cell;
-
-  }
-  
-  //schedule cells
-  if(schedules.count > 0 && indexPath.row < [self getNumberOfRows]){
-    if(indexPath.row == [self getRowNumberForSchedulesHeader]){
+    
+  }else if(indexPath.section == schedulesSectionIndex){
+    if(indexPath.row == 0){
       DCDetailEventHeaderTableViewCell *whoIsGoingCell = (DCDetailEventHeaderTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:cellWhoIsgoingHeader];
       return whoIsGoingCell;
     }
-    if(_isWhoIsGoingExpanded){
-      DCDetailEventScheduleTableViewCell *scheduleCell = (DCDetailEventScheduleTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:cellSchedule];
-      if(indexPath.row != [self getNumberOfRows] - 1){
-        scheduleCell.separator.hidden = true;
-      } else{
-        scheduleCell.separator.hidden = false;
-      }
-      scheduleCell.scheduleName.text = ((DCSharedSchedule*)[schedules objectAtIndex:indexPath.row - [self getRowNumberForSchedulesHeader] - 1]).name;
-      scheduleCell.selectionStyle = UITableViewCellSelectionStyleNone;
-      return scheduleCell;
+    
+    DCDetailEventScheduleTableViewCell *scheduleCell = (DCDetailEventScheduleTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:cellSchedule];
+    if(indexPath.row != schedules.count){
+      scheduleCell.separator.hidden = true;
+    } else{
+      scheduleCell.separator.hidden = false;
     }
-  }
-  
-  //Description cell
-  if (indexPath.row == [self getNumberOfRows]) {
+    scheduleCell.scheduleName.text = ((DCSharedSchedule*)[schedules objectAtIndex:indexPath.row - 1]).name;
+    scheduleCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return scheduleCell;
+    
+  }else{
     DCDescriptionTextCell* cell = (DCDescriptionTextCell*)
-        [tableView dequeueReusableCellWithIdentifier:cellIdDescription];
+    [tableView dequeueReusableCellWithIdentifier:cellIdDescription];
     cell.descriptionWebView.delegate = self;
     self.lastIndexPath = indexPath;
     [cell.descriptionWebView loadHTMLString:_event.desctiptText
                                       style:@"event_detail_style"];
     return cell;
-  }else {
-    return [[UITableViewCell alloc] init];
   }
+
+    return [[UITableViewCell alloc] init];
 }
 
 - (void)tableView:(UITableView*)tableView
     didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-  if(indexPath.row == [self getRowNumberForSchedulesHeader]){
+  if(indexPath.section == schedulesSectionIndex && indexPath.row == 0){
     if(!self.isWhoIsGoingExpanded){
       self.isWhoIsGoingExpanded = true;
       [self.tableView beginUpdates];
@@ -445,14 +414,13 @@ static NSString* cellSchedule = @"scheduleCell";
     }
   }
   
-  if (![[tableView cellForRowAtIndexPath:indexPath]
-          isKindOfClass:[DCSpeakerCell class]])
+  if (indexPath.section != speakersSectionIndex || indexPath.row == 0)
     return;
   UIStoryboard* mainStoryboard =
       [UIStoryboard storyboardWithName:@"Speakers" bundle:nil];
   DCSpeakersDetailViewController* speakerViewController = [mainStoryboard
       instantiateViewControllerWithIdentifier:@"SpeakersDetailViewController"];
-  speakerViewController.speaker = self.speakers[indexPath.row - 2];
+  speakerViewController.speaker = self.speakers[indexPath.row - 1];
   speakerViewController.closeCallback = ^{
     [self.tableView reloadData];
   };
