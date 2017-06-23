@@ -43,6 +43,8 @@
   self.okButton.layer.borderWidth = 1.;
   self.okButton.layer.borderColor = [UIColor whiteColor].CGColor;
   self.backgroundView.backgroundColor = [DCAppConfiguration navigationBarColor];
+  UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissSelf)];
+  [self.backgroundView addGestureRecognizer:gestureRecognizer];
 }
 - (IBAction)onOkButton:(id)sender {
   [self dismissSelf];
