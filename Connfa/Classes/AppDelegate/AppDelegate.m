@@ -122,7 +122,6 @@
 
 
 - (void)applicationWillEnterForeground:(UIApplication*)application {
-  [[NSNotificationCenter defaultCenter] postNotificationName:@"applicationDidBecomeActive" object:nil];
   if ([self.window.rootViewController
        isKindOfClass:[UINavigationController class]]) {
     [self handleUpdateTimeZone];
@@ -132,11 +131,6 @@
 
 - (void)applicationDidBecomeActive:(UIApplication*)application {
   [[NSNotificationCenter defaultCenter] postNotificationName:@"applicationDidBecomeActive" object:nil];
-  if ([self.window.rootViewController
-       isKindOfClass:[UINavigationController class]]) {
-    [self handleUpdateData];
-    [[DCMainProxy sharedProxy] update];
-  }
 }
 
 - (void)applicationWillTerminate:(UIApplication*)application {
