@@ -2189,7 +2189,7 @@
 					};
 					288C5ED71E6D9E4A00F07CB4 = {
 						DevelopmentTeam = J7LBYY3B34;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.SafariKeychain = {
 								enabled = 1;
@@ -3045,7 +3045,7 @@
 				CODE_SIGN_ENTITLEMENTS = "Connfa!.entitlements";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = J7LBYY3B34;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3063,8 +3063,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "721a3dd7-f925-4a06-a8c8-96e7f1faa8df";
+				PROVISIONING_PROFILE_SPECIFIER = drupal_con_dev;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -3078,8 +3078,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = "Connfa!.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Lemberg Solutions Limited (J7LBYY3B34)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = J7LBYY3B34;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3097,8 +3097,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "4f23798c-369c-41f5-a145-07b89683c9d7";
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS Ad Hoc: com.lemberg.drupalcon";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
