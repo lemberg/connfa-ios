@@ -113,7 +113,6 @@
   UITableViewCell* currentCell = [tableView cellForRowAtIndexPath:indexPath];
   currentCell.accessoryType = UITableViewCellAccessoryCheckmark;
   currentCell.tintColor = [DCAppConfiguration favoriteEventColor];
-  currentCell.textLabel.textColor = [DCAppConfiguration favoriteEventColor];
 
   scheduleName = currentCell.textLabel.text;
   
@@ -134,7 +133,6 @@
   UITableViewCell *previousCell = [tableView cellForRowAtIndexPath:indexPath];
   previousCell.accessoryType = UITableViewCellAccessoryNone;
   previousCell.tintColor = [UIColor blackColor];
-  previousCell.textLabel.textColor = [UIColor blackColor];
 }
 
 
