@@ -8,17 +8,17 @@
 
 - (NSArray*)daysForClass:(Class)eventClass;
 - (NSArray*)daysForClass:(Class)eventClass
-           eventStrategy:(DCEventStrategy *)eventStrategy
+          sharedSchedule:(DCSharedSchedule *)schedule
                predicate:(NSPredicate*)aPredicate;
 - (NSArray*)eventsForDay:(NSDate*)day forClass:(Class)eventClass;
 - (NSArray*)eventsForDay:(NSDate*)day
                 forClass:(Class)eventClass
-           eventStrategy:(DCEventStrategy *)eventStrategy
+          sharedSchedule:(DCSharedSchedule *)schedule
                predicate:(NSPredicate*)aPredicate;
 - (NSArray*)uniqueTimeRangesForDay:(NSDate*)day forClass:(Class)eventClass;
 - (NSArray*)uniqueTimeRangesForDay:(NSDate*)day
                           forClass:(Class)eventClass
-                     eventStrategy:(DCEventStrategy *)eventStrategy
+                    sharedSchedule:(DCSharedSchedule *)schedule
                          predicate:(NSPredicate*)aPredicate;
 - (NSArray*)favoriteEvents;
 - (NSArray*)favoriteEventsWithPredicate:(NSPredicate*)aPredicate;

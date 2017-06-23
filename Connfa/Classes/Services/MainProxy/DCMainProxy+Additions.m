@@ -22,13 +22,16 @@
 #pragma mark -
 
 - (NSArray*)daysForClass:(Class)eventClass {
-  return [self daysForClass:eventClass eventStrategy: nil predicate:nil];
+  return [self daysForClass:eventClass sharedSchedule:nil predicate:nil];
 }
 
-- (NSArray*)daysForClass:(Class)eventClass eventStrategy:(DCEventStrategy *)eventStrategy predicate:(NSPredicate*)aPredicate {
-  if(eventStrategy.strategy == EDCEventStrategySharedSchedule){
+- (NSArray*)daysForClass:(Class)eventClass
+          sharedSchedule:(DCSharedSchedule *)schedule
+               predicate:(NSPredicate*)aPredicate {
+  
+  if(schedule){
     NSMutableArray* dates = [[NSMutableArray alloc] init];
-    for (DCEvent* event in eventStrategy.schedule.events) {
+    for (DCEvent* event in schedule.events) {
       [dates addObject:[event.date dateWithoutTime]];
     }
     return [dates uniqueDates];
@@ -66,15 +69,15 @@
 
 - (NSArray*)eventsForDay:(NSDate*)day
                 forClass:(__unsafe_unretained Class)eventClass {
-  return [self eventsForDay:day forClass:eventClass eventStrategy: nil predicate:nil];
+  return [self eventsForDay:day forClass:eventClass sharedSchedule: nil predicate:nil];
 }
 
 - (NSArray*)eventsForDay:(NSDate*)day
                 forClass:(__unsafe_unretained Class)eventClass
-           eventStrategy:(DCEventStrategy *)eventStrategy
+          sharedSchedule:(DCSharedSchedule *)schedule
                predicate:(NSPredicate*)aPredicate {
-  if (eventStrategy.strategy == EDCEventStrategySharedSchedule) {
-    NSSet* events = eventStrategy.schedule.events;
+  if (schedule) {
+    NSSet* events = schedule.events;
     NSMutableArray *eventsForDay = [[NSMutableArray alloc] init];
     for (DCEvent* event in events) {
       NSDate *eventDate = event.date;
@@ -126,15 +129,15 @@
 
 - (NSArray*)uniqueTimeRangesForDay:(NSDate*)day
                           forClass:(__unsafe_unretained Class)eventClass {
-  return [self uniqueTimeRangesForDay:day forClass:eventClass eventStrategy:nil predicate:nil];
+  return [self uniqueTimeRangesForDay:day forClass:eventClass sharedSchedule:nil predicate:nil];
 }
 
 - (NSArray*)uniqueTimeRangesForDay:(NSDate*)day
                           forClass:(__unsafe_unretained Class)eventClass
-                     eventStrategy:(DCEventStrategy *)eventStrategy
+                     sharedSchedule:(DCSharedSchedule *)schedule
                          predicate:(NSPredicate*)aPredicate {
-  if(eventStrategy.strategy == EDCEventStrategySharedSchedule){
-    NSArray* result = [self eventsForDay:day forClass:[DCEvent class] eventStrategy:eventStrategy predicate:nil];
+  if(schedule){
+    NSArray* result = [self eventsForDay:day forClass:[DCEvent class] sharedSchedule:schedule predicate:nil];
     return [[self DC_filterUniqueTimeRangeFromEvents:result] sortedByStartHour];
   }
   @try {

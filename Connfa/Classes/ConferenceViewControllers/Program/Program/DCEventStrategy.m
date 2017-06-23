@@ -93,21 +93,21 @@
 
 - (NSArray*)days {
   return [[DCMainProxy sharedProxy] daysForClass:_eventClass
-                                   eventStrategy:self
+                                   sharedSchedule:self.schedule
                                        predicate:self.predicate];
 }
 
 - (NSArray*)eventsForDay:(NSDate*)day {
   return [[DCMainProxy sharedProxy] eventsForDay:day
                                         forClass:_eventClass
-                                        eventStrategy: self
+                                  sharedSchedule: self.schedule
                                        predicate:self.predicate];
 }
 
 - (NSArray*)uniqueTimeRangesForDay:(NSDate*)day {
   return [[DCMainProxy sharedProxy] uniqueTimeRangesForDay:day
                                                   forClass:_eventClass
-                                             eventStrategy:self
+                                            sharedSchedule:self.schedule
                                                  predicate:self.predicate];
 }
 
