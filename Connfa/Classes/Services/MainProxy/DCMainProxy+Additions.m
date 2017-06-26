@@ -332,7 +332,6 @@
             sharedSchedule.scheduleId = code;
             sharedSchedule.isMySchedule = [NSNumber numberWithBool:true];
             sharedSchedule.name = @"My Schedule";
-            [sharedSchedule addEventsForIds:[self getFavoritesIds]];
             [[DCCoreDataStore defaultStore] saveWithCompletionBlock:nil];
             
             [NSUserDefaults saveMyScheduleCode:code];
