@@ -393,7 +393,6 @@
 }
 
 -(void)showMyScheduleActions{
-  NSArray* events = [[DCMainProxy sharedProxy] favoriteEvents];
   
   UIAlertController* actionSheet = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
   actionSheet.view.tintColor = [UIColor blackColor];
@@ -403,14 +402,6 @@
   UIAlertAction *shareMyScheduleAction = [UIAlertAction actionWithTitle:@"Share My Schedule" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     [self shareMySchedule];
   }];
-  
-  BOOL isReachable = [[DCMainProxy sharedProxy] checkReachable];
-  if(!events.count || !isReachable){
-    shareMyScheduleAction.enabled = false;
-  }
-  if(!isReachable){
-    addScheduleAction.enabled = false;
-  }
   
   UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
   [actionSheet addAction:addScheduleAction];
@@ -436,6 +427,10 @@
 }
 
 -(void)addSchedule:(NSString *)code{
+  if(![[DCMainProxy sharedProxy] checkReachable]){
+    [DCAlertsManager showAlertControllerWithTitle:@"Internet connection is not available at this moment. Please, try later." message:nil forController:self];
+    return;
+  }
   UIAlertController *addScheduleAlert = [UIAlertController alertControllerWithTitle:@"Add a schedule"
                                                                             message:@"You may get this code from a person who has already shared his/her own schedule with you."
                                                                      preferredStyle:UIAlertControllerStyleAlert];
@@ -482,6 +477,16 @@
 }
 
 -(void)shareMySchedule{
+  DCMainProxy* proxy = [DCMainProxy sharedProxy];
+  if(![proxy favoriteEvents]){
+    [DCAlertsManager showAlertControllerWithTitle:@"Currently you have no favourites" message:nil forController:self];
+    return;
+  }
+  if(![proxy checkReachable]){
+    [DCAlertsManager showAlertControllerWithTitle:@"Internet connection is not available at this moment. Please, try later." message:nil forController:self];
+    return;
+  }
+  
   NSNumber* myCode = [NSUserDefaults myScheduleCode];
   NSArray *items = @[[NSString stringWithFormat:@"Hi, I have just published/shared my schedule for %@ where I will be an attendee.", EVENT_NAME],
                      [NSString stringWithFormat: @"Here is the link to add my schedule into the app: %@%@%@", SERVER_URL, @"schedule/share?code=", myCode],
