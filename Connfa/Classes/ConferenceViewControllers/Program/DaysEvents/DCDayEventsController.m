@@ -15,6 +15,7 @@
 #import "DCFavoriteEventsDataSource.h"
 #import "DCMainProxy+Additions.h"
 #import "DCGoldSponsorBannerHeandler.h"
+#import "DCAlertsManager.h"
 
 @interface DCDayEventsController ()<DCEventCellProtocol,
 DCDayEventSourceDelegate> {
@@ -232,6 +233,11 @@ DCDayEventSourceDelegate> {
   [refreshControl endRefreshing];
   if(self.tableView.indexPathsForVisibleRows.count){
     self.tableView.backgroundColor = [UIColor whiteColor];
+  }
+  if(![[DCMainProxy sharedProxy] checkReachable]){
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+      [DCAlertsManager showAlertControllerWithTitle:nil message:@"Internet connection is not available at this moment. Please, try later" forController:self];
+    });
   }
 }
 
