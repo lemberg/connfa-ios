@@ -469,6 +469,9 @@
                                                          DCSharedSchedule *scheduleToSwitch = schedulesForId.firstObject;
                                                          [self setScheduleName:scheduleToSwitch.name];
                                                          [self setScheduleType:EFriendSchedule andSchedule:scheduleToSwitch];
+                                                         [DCAlertsManager showAlertControllerWithTitle:nil
+                                                                                               message:@"This schedule already exist"
+                                                                                         forController:self];
                                                        });
                                                      }
   }];
