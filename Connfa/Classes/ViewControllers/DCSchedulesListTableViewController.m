@@ -68,7 +68,9 @@
 }
 
 -(void)closeController{
-  [self.navigationController dismissViewControllerAnimated:true completion:nil];
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [self dismissViewControllerAnimated:true completion:nil];
+  });
 }
 
 -(void)setScheduleType {
@@ -96,7 +98,7 @@
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
   cell.selectionStyle = UITableViewCellSelectionStyleNone;
-  cell.tintColor = [DCAppConfiguration navigationBarColor];
+  cell.tintColor = [DCAppConfiguration favoriteEventColor];
   
     if (indexPath.row == 0) {
         cell.textLabel.text = @"My Schedule";
@@ -104,7 +106,11 @@
         DCSharedSchedule* sharedSchedule = [schedules objectAtIndex:indexPath.row - 1];
         cell.textLabel.text = sharedSchedule.name;
     }
-    
+  
+  if(indexPath.row == selectedIndexPath.row){
+    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+  }
+  
   return cell;
 }
 
@@ -112,7 +118,6 @@
 {
   UITableViewCell* currentCell = [tableView cellForRowAtIndexPath:indexPath];
   currentCell.accessoryType = UITableViewCellAccessoryCheckmark;
-  currentCell.tintColor = [DCAppConfiguration favoriteEventColor];
 
   scheduleName = currentCell.textLabel.text;
   
