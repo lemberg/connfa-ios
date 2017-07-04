@@ -443,6 +443,10 @@
   //TODO: replace initialization
   addFriendScheduleAction = [UIAlertAction actionWithTitle:@"Add" style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * _Nonnull action) {
+                                                     NSString* myCode = [NSUserDefaults myScheduleCode].stringValue;
+                                                     if([myCode isEqualToString:addScheduleAlert.textFields.firstObject.text]){
+                                                       return;
+                                                     }
                                                      NSArray* schedulesForId = [[DCMainProxy sharedProxy] getScheduleWithId:addScheduleAlert.textFields.firstObject.text];
                                                      if(!schedulesForId.count){
                                                        [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
