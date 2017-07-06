@@ -47,4 +47,14 @@
   [alertController addAction:okAction];
   [controller presentViewController:alertController animated:true completion:nil];
 }
+
++ (void)showAlertControllerWithTitle:(NSString*)title
+                             message:(NSString*)msg
+                       forController:(UIViewController *)controller
+                              action:(void (^)(UIAlertAction*)) action{
+  UIAlertController* alertController = [UIAlertController alertControllerWithTitle:title message:msg preferredStyle:UIAlertControllerStyleAlert];
+  UIAlertAction* okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleCancel handler:action];
+  [alertController addAction:okAction];
+  [controller presentViewController:alertController animated:true completion:nil];
+}
 @end

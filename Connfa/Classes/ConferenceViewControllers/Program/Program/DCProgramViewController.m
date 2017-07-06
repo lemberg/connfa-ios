@@ -88,15 +88,12 @@
   [super viewDidAppear:animated];
   [self arrangePreviousAndNextDayButtons];
   [self registerScreenLoadAtGA:[NSString stringWithFormat:@"%@", self.navigationItem.title]];
-  if (self.eventsStrategy.strategy == EDCEeventStrategyFavorites){
-    [self showInstructionsScreen];
-    [[DCMainProxy sharedProxy] updateSchedule];
-  }
-  
   NSString* code = [[NSUserDefaults standardUserDefaults] objectForKey:@"codeFromLink"];
   if(code){
     [self addSchedule:code];
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"codeFromLink"];
+  }else {
+    [self checkInstructionScreen];
   }
   if (self.eventsStrategy.strategy == EDCEeventStrategyFavorites || self.eventsStrategy.strategy == EDCEventStrategySharedSchedule){
     [self reloadData];
@@ -439,7 +436,9 @@
     textField.delegate = self;
     textField.text = code;
   }];
-  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:nil];
+  UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    [self checkInstructionScreen];
+  }];
   //TODO: replace initialization
   addFriendScheduleAction = [UIAlertAction actionWithTitle:@"Add" style:UIAlertActionStyleDefault
                                                    handler:^(UIAlertAction * _Nonnull action) {
@@ -461,7 +460,10 @@
                                                            [self dismissProgressHUD];
                                                            [DCAlertsManager showAlertControllerWithTitle:@"Schedule not found."
                                                                                                  message:@"Please check your code."
-                                                                                           forController:self];
+                                                                                           forController:self
+                                                            action:^(UIAlertAction *action){
+                                                              [self checkInstructionScreen];
+                                                            }];
                                                          }
                                                        }];
                                                      } else {
@@ -540,6 +542,7 @@
         }
       }];
     });
+    [self checkInstructionScreen];
   }];
   [addScheduleAlert addAction:okAction];
   [self presentViewController:addScheduleAlert animated:true completion:nil];
@@ -582,6 +585,13 @@
   [[DCMainProxy sharedProxy] removeSchedule:selectedSchedule];
   [self setScheduleType:EMySchedule andSchedule:nil];
   [self setScheduleName:@"My Schedule"];
+}
+
+-(void)checkInstructionScreen {
+  if (self.eventsStrategy.strategy == EDCEeventStrategyFavorites){
+    [self showInstructionsScreen];
+    [[DCMainProxy sharedProxy] updateSchedule];
+  }
 }
 
 #pragma mark - User actions
