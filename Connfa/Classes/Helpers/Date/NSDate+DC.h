@@ -11,4 +11,5 @@
 + (float)currentHour;
 + (NSString *)currentDateFormat;
 + (BOOL) is24hourFormat;
+- (NSDate *) dateWithoutTime;
 @end

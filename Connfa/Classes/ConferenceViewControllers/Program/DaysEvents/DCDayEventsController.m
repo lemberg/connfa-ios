@@ -15,9 +15,12 @@
 #import "DCFavoriteEventsDataSource.h"
 #import "DCMainProxy+Additions.h"
 #import "DCGoldSponsorBannerHeandler.h"
+#import "DCAlertsManager.h"
 
 @interface DCDayEventsController ()<DCEventCellProtocol,
-                                    DCDayEventSourceDelegate>
+DCDayEventSourceDelegate> {
+  UIRefreshControl* refreshControl;
+}
 
 @property(nonatomic, weak) IBOutlet UILabel* noItemsLabel;
 @property(nonatomic, weak) IBOutlet UIImageView* noItemsImageView;
@@ -44,6 +47,7 @@
   [super viewDidLoad];
   self.noEventsImageViewDefaultHeight = 100.0;
   [self configureState];
+  [self addRefreshControl];
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -68,16 +72,34 @@
 #pragma mark - Public
 
 - (void)updateEvents {
-  [self.eventsDataSource reloadEvents];
+  [self.eventsDataSource reloadEvents:false];
 }
 
 #pragma mark - Private
+-(void)addRefreshControl{
+  refreshControl = [[UIRefreshControl alloc]init];
+  [refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
+  NSOperatingSystemVersion systemVersion = [[NSProcessInfo processInfo] operatingSystemVersion];
+  if(systemVersion.majorVersion >= 10){
+    self.tableView.refreshControl = refreshControl;
+  }else{
+    [self.tableView addSubview:refreshControl];
+  }
+  
+}
+
+-(void)refreshTable{
+  if ([[DCMainProxy sharedProxy] checkReachable]){
+    [[DCMainProxy sharedProxy] updateEvents];
+  }
+  [self.eventsDataSource reloadEvents:true];
+}
 
 - (void)configureState {
+  [self initDataSource];
   if (self.state == DCStateNormal) {
     self.noDataView.hidden = YES;
     [self registerCells];
-    [self initDataSource];
     self.cellPrototype = [self.tableView
                           dequeueReusableCellWithIdentifier:NSStringFromClass([DCEventCell class])];
   } else {
@@ -88,7 +110,7 @@
 - (void)configureEmptyView {
   self.noDataView.hidden = NO;
   BOOL isFilterEnabled = ![[DCMainProxy sharedProxy] isFilterCleared];
-  if (self.eventsStrategy.strategy != EDCEeventStrategyFavorites)
+  if (self.eventsStrategy.strategy != EDCEeventStrategyFavorites && self.eventsStrategy.strategy != EDCEventStrategySharedSchedule)
     self.noEventsImageView_heightConstraint.constant =  isFilterEnabled ? 0 : self.noEventsImageViewDefaultHeight;
  
   switch (self.eventsStrategy.strategy) {
@@ -111,11 +133,16 @@
       self.stubImage = [UIImage imageNamed:@"ic_no_social_events"];
       self.stubMessage = isFilterEnabled ? @"No Matching social events" : @"Currently there are no social events";
     }
+    case EDCEventStrategySharedSchedule: {
+      self.stubImage = [UIImage imageNamed:@"ic_no_my_schedule"];
+      self.stubMessage = @"Currently shared schedule is empty";
+    }
       break;
   }
   
   self.tableView.dataSource = nil;
-  self.tableView.hidden = YES;
+  self.tableView.hidden = NO;
+  self.tableView.backgroundColor = [UIColor clearColor];
   [self.activityIndicatorView stopAnimating];
   self.noItemsLabel.text = self.stubMessage;
   self.noItemsImageView.image = self.stubImage;
@@ -160,12 +187,18 @@
         }
 
         cell.eventTitleLabel.textColor = [UIColor blackColor];
-        if ([event.favorite boolValue] &&
+        if (weakSelf.eventsStrategy.strategy != EDCEeventStrategyFavorites && [event.favorite boolValue] &&
             [weakSelf.eventsStrategy favoriteTextColor]) {
           cell.eventTitleLabel.textColor =
               [weakSelf.eventsStrategy favoriteTextColor];
         }
 
+        if(weakSelf.eventsStrategy.strategy != EDCEventStrategySharedSchedule && event.schedules.count){
+          cell.friendScheduleIcon.hidden = false;
+        }else{
+          cell.friendScheduleIcon.hidden = true;
+        }
+        
         return cell;
       }];
 }
@@ -196,6 +229,15 @@
 
 - (void)dataSourceEndUpdateEvents:(DCEventDataSource*)dataSource {
   [self.activityIndicatorView stopAnimating];
+  [refreshControl endRefreshing];
+  if(self.tableView.indexPathsForVisibleRows.count){
+    self.tableView.backgroundColor = [UIColor whiteColor];
+  }
+  if(![[DCMainProxy sharedProxy] checkReachable]){
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+      [DCAlertsManager showAlertControllerWithTitle:nil message:@"Internet connection is not available at this moment. Please, try later" forController:self];
+    });
+  }
 }
 
 #pragma mark - UITableView delegate

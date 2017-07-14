@@ -33,4 +33,8 @@ extern NSString* kBundleVersionMinor;
 + (NSString*)bundleVersionMajor;
 + (NSString*)bundleVersionMinor;
 
+
++ (void)saveMyScheduleCode:(NSNumber*)code;
++ (NSNumber*)myScheduleCode;
+
 @end

@@ -17,7 +17,6 @@
 
 @end
 @implementation AppDelegate
-
 - (BOOL)application:(UIApplication*)application
     didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
   // Initialise crashlytics
@@ -55,10 +54,10 @@
                withSuccess:^(BOOL isSuccess){
                    if (isSuccess) {
                        [NSUserDefaults disableTimeZoneNotification];
-                       dispatch_async(dispatch_get_main_queue(), ^{
-                           [[DCMainProxy sharedProxy] setDataUpdatedCallback:nil];
-                       });
                    }
+                 dispatch_async(dispatch_get_main_queue(), ^{
+                   [[DCMainProxy sharedProxy] setDataUpdatedCallback:nil];
+                 });
                }];
           }
       });
@@ -108,16 +107,31 @@
 
 }
 
+
+-(BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
+  if(userActivity.webpageURL.description){
+    NSString* codeQuery = userActivity.webpageURL.query;
+    NSUInteger firstIndex = [codeQuery rangeOfString:@"="].location + 1;
+    NSString* code = [codeQuery substringFromIndex:firstIndex];
+    //TODO: - add in NSUserDefaults + DC
+    [[NSUserDefaults standardUserDefaults] setObject:code forKey:@"codeFromLink"];
+    //TODO: - add in Constants
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"openMyScheduleFromUrl" object:nil];
+  }
+  return true;
+}
+
+
 - (void)applicationWillEnterForeground:(UIApplication*)application {
   if ([self.window.rootViewController
-          isKindOfClass:[UINavigationController class]]) {
+       isKindOfClass:[UINavigationController class]]) {
     [self handleUpdateTimeZone];
     [[DCMainProxy sharedProxy] update];
   }
 }
 
 - (void)applicationDidBecomeActive:(UIApplication*)application {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"applicationDidBecomeActive" object:nil];
+  [[NSNotificationCenter defaultCenter] postNotificationName:@"applicationDidBecomeActive" object:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication*)application {

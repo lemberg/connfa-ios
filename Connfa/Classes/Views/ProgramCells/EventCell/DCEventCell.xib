@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="121"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" verticalHuggingPriority="1" verticalCompressionResistancePriority="1" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="120.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P2l-bS-0fe" userLabel="RightContent">
@@ -32,10 +32,10 @@
                                 <rect key="frame" x="214" y="15" width="12" height="12"/>
                             </imageView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pDk-DV-pAD" userLabel="track">
-                                <rect key="frame" x="9" y="29.5" width="201" height="19"/>
+                                <rect key="frame" x="9" y="29.5" width="191" height="19"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="track track" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="efH-VV-Jx5" userLabel="track">
-                                        <rect key="frame" x="0.0" y="0.0" width="201" height="19"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="191" height="19"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.5296475887298584" green="0.52963173389434814" blue="0.52964073419570923" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -117,6 +117,13 @@
                                     <action selector="rightContentViewDidClick" destination="KGk-i7-Jjw" eventType="touchUpInside" id="xpu-Dg-sNS"/>
                                 </connections>
                             </button>
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="friend_schedule" translatesAutoresizingMaskIntoConstraints="NO" id="LqZ-Vn-W2N">
+                                <rect key="frame" x="208" y="27" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="kaC-d1-GFO"/>
+                                    <constraint firstAttribute="height" constant="24" id="uiC-uX-RDk"/>
+                                </constraints>
+                            </imageView>
                             <view hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bAw-z3-zya" userLabel="Highlight view">
                                 <rect key="frame" x="0.0" y="1" width="240" height="117.5"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.14999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
@@ -128,7 +135,7 @@
                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="wwU-2B-kPy" secondAttribute="bottom" constant="8" id="3mE-Jq-H5S"/>
                             <constraint firstAttribute="trailing" secondItem="O10-8Z-v0x" secondAttribute="trailing" constant="14" id="6H5-Kn-BiX"/>
                             <constraint firstItem="bAw-z3-zya" firstAttribute="leading" secondItem="P2l-bS-0fe" secondAttribute="leading" id="8Ak-hX-i8G"/>
-                            <constraint firstAttribute="trailing" secondItem="pDk-DV-pAD" secondAttribute="trailing" constant="30" id="C9L-aN-ftR"/>
+                            <constraint firstAttribute="trailing" secondItem="pDk-DV-pAD" secondAttribute="trailing" constant="40" id="C9L-aN-ftR"/>
                             <constraint firstAttribute="trailing" secondItem="bAw-z3-zya" secondAttribute="trailing" id="Exo-e7-PSh"/>
                             <constraint firstItem="cOT-Gi-ftB" firstAttribute="leading" secondItem="P2l-bS-0fe" secondAttribute="leading" constant="9" id="Hv1-py-14r"/>
                             <constraint firstAttribute="bottom" secondItem="bAw-z3-zya" secondAttribute="bottom" constant="2" id="NFJ-Bj-LFd"/>
@@ -136,8 +143,10 @@
                             <constraint firstAttribute="trailing" secondItem="aaC-fh-4Ly" secondAttribute="trailing" constant="30" id="Rks-z7-PpZ"/>
                             <constraint firstItem="pDk-DV-pAD" firstAttribute="leading" secondItem="P2l-bS-0fe" secondAttribute="leading" constant="9" id="S2q-4z-hTe"/>
                             <constraint firstAttribute="trailing" secondItem="IzX-XD-gON" secondAttribute="trailing" id="TUw-MS-Zpd"/>
+                            <constraint firstItem="LqZ-Vn-W2N" firstAttribute="top" secondItem="O10-8Z-v0x" secondAttribute="bottom" id="V6T-3I-lP5"/>
                             <constraint firstItem="O10-8Z-v0x" firstAttribute="top" secondItem="P2l-bS-0fe" secondAttribute="top" constant="15" id="X7L-TA-rz6"/>
                             <constraint firstItem="bAw-z3-zya" firstAttribute="top" secondItem="P2l-bS-0fe" secondAttribute="top" constant="1" id="c3v-eD-fER"/>
+                            <constraint firstAttribute="trailing" secondItem="LqZ-Vn-W2N" secondAttribute="trailing" constant="8" id="fkS-Ib-GTM"/>
                             <constraint firstItem="cOT-Gi-ftB" firstAttribute="leading" secondItem="wwU-2B-kPy" secondAttribute="leading" id="hIt-6m-Bsq"/>
                             <constraint firstItem="IzX-XD-gON" firstAttribute="top" secondItem="P2l-bS-0fe" secondAttribute="top" id="lEs-NU-hIo"/>
                             <constraint firstAttribute="bottom" secondItem="IzX-XD-gON" secondAttribute="bottom" id="nLC-bW-kIu"/>
@@ -230,6 +239,7 @@
                 <outlet property="eventTitleLabelLeftPadding" destination="Hv1-py-14r" id="43c-HA-7Cx"/>
                 <outlet property="eventTitleLabelRightPadding" destination="uZb-cS-fLt" id="2XC-XF-1WA"/>
                 <outlet property="eventTitleLabelTopPadding" destination="qV0-Ta-Cnq" id="eJM-8R-TEs"/>
+                <outlet property="friendScheduleIcon" destination="LqZ-Vn-W2N" id="E42-y7-yV8"/>
                 <outlet property="highlightedView" destination="bAw-z3-zya" id="u5V-LL-U9N"/>
                 <outlet property="leftContentView" destination="8Nq-xq-iNG" id="jFn-ia-Fy5"/>
                 <outlet property="leftCoverButton" destination="APf-ho-qaw" id="CEM-3u-WvY"/>
@@ -255,6 +265,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="friend_schedule" width="24" height="24"/>
         <image name="ic_experience_advanced" width="12" height="12"/>
         <image name="ic_place" width="10" height="10"/>
         <image name="ic_program_24_hour" width="16" height="16"/>

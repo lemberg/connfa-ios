@@ -10,6 +10,7 @@
 #import "DCLevel+DC.h"
 #import "DCTrack+DC.h"
 #import "DCLocation+DC.h"
+#import "DCSharedSchedule+DC.h"
 
 #import "NSDate+DC.h"
 #import "NSUserDefaults+DC.h"

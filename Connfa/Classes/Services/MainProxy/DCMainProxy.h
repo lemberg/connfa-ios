@@ -1,11 +1,12 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "DCEvent+CoreDataProperties.h"
 
 extern NSString* INVALID_JSON_EXCEPTION;
 
 @class DCMainEvent, DCBof, DCType, DCTime, DCTimeRange, DCSpeaker, DCLevel,
-    DCTrack, DCLocation, DCEvent;
+    DCTrack, DCLocation;
 
 typedef enum {
   DCMainProxyStateNone = 0,
@@ -39,7 +40,7 @@ typedef enum {
     (void (^)(DCMainProxyState mainProxyState))dataUpdatedCallback;
 
 #pragma mark - public
-
+- (void)updateEvents;
 - (void)update;
 - (BOOL)checkReachable;
 - (NSTimeZone *)isSystemTimeCoincidencWithEventTimezone;

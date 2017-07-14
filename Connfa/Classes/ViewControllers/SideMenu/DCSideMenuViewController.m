@@ -24,6 +24,7 @@
 @property(nonatomic, strong) NSArray* arrayOfCaptions;
 @property(nonatomic, strong) NSIndexPath* activeCellPath;
 @property(nonatomic, strong) DCEvent* event;
+@property(nonatomic, strong) NSString* scheduleId;
 
 @end
 
@@ -41,6 +42,11 @@
          selector:@selector(menuStateDidChange:)
              name:MFSideMenuStateNotificationEvent
            object:nil];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(openMyScheduleFromUrl)
+                                               name:@"openMyScheduleFromUrl"
+                                             object:nil];
 
   // our first menu item is Program, this is actually the screen that we should
   // see right after the login page, thats why lets just add it on top as if the
@@ -59,6 +65,10 @@
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
 
+  if([[NSUserDefaults standardUserDefaults] objectForKey:@"codeFromLink"]){
+    [self openMyScheduleFromUrl];
+  }
+  
   if (self.event) {
     DCMenuItem* menuItem = self.arrayOfCaptions.firstObject;
     [self showViewControllerAssociatedWithMenuItem:menuItem];
@@ -145,7 +155,11 @@
   self.event = event;
 }
 
-
+-(void)openMyScheduleFromUrl {
+  DCMenuItem* menuItem = [self.arrayOfCaptions objectAtIndex:5];
+  [self showViewControllerAssociatedWithMenuItem:menuItem];
+  self.scheduleId = nil;
+}
 
 #pragma mark - User actions
 

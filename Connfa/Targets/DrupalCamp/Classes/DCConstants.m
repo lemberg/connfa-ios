@@ -17,6 +17,7 @@ NSString *const BUNDLE_NAME = @"DC-Theme";
 NSString *const GOOGLE_ANALYTICS_APP_ID = @"UA-267362-74";
 NSString *const TWITTER_API_KEY = @"Mxl1GoGSM98T3jTIWdlUuqXmh";
 NSString *const TWITTER_API_SECRET = @"UM74rykaGhxPhhKED2KxJrd6zGBLNWgVsGdlzjdSwSNqLTiyqY";
+NSString *const EVENT_NAME = @"DrupalCamp";
 
 +(NSArray*)appMenuItems {
   NSArray* menuItems = @[

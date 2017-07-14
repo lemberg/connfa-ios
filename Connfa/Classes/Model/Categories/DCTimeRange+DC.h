@@ -1,5 +1,5 @@
 
-#import "DCTimeRange.h"
+#import "DCTimeRange+CoreDataProperties.h"
 
 @interface DCTimeRange (DC)
 

@@ -1,10 +1,11 @@
 
 #import <UIKit/UIKit.h>
 #import "DCBaseViewController.h"
+#import "DCEvent+CoreDataProperties.h"
 
 
 typedef void (^CloseCallback)();
-@class DCEvent, DCProgram, DCBof;
+@class  DCProgram, DCBof;
 
 @interface DCEventDetailViewController
     : DCBaseViewController<UITableViewDataSource,

@@ -1,7 +1,7 @@
 
 #import "DCSpeakerEventCell.h"
-#import "DCTrack.h"
-#import "DCLevel.h"
+#import "DCTrack+CoreDataProperties.h"
+#import "DCLevel+CoreDataProperties.h"
 #import "DCEvent+DC.h"
 #import "DCTime+DC.h"
 #import "DCTimeRange+DC.h"

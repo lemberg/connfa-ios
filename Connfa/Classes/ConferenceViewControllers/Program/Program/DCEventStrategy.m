@@ -14,7 +14,7 @@
 
 @implementation DCEventStrategy
 
-- (instancetype)initWithStrategy:(EDCEventStrategy)strategy {
+- (instancetype)initWithStrategy:(EDCEventStrategy)strategy andSchedule:(DCSharedSchedule *)schedule{
   self = [super init];
   if (self) {
     _predicate = nil;
@@ -41,6 +41,10 @@
         _eventClass = [DCEvent class];
         _predicate = [self favoritesPredicate];
         _leftSectionContainerColor = [UIColor whiteColor];
+        break;
+      case EDCEventStrategySharedSchedule:
+        _eventClass = [DCEvent class];
+        _schedule = schedule;
         break;
       default:
         break;
@@ -89,18 +93,21 @@
 
 - (NSArray*)days {
   return [[DCMainProxy sharedProxy] daysForClass:_eventClass
+                                   sharedSchedule:self.schedule
                                        predicate:self.predicate];
 }
 
 - (NSArray*)eventsForDay:(NSDate*)day {
   return [[DCMainProxy sharedProxy] eventsForDay:day
                                         forClass:_eventClass
+                                  sharedSchedule: self.schedule
                                        predicate:self.predicate];
 }
 
 - (NSArray*)uniqueTimeRangesForDay:(NSDate*)day {
   return [[DCMainProxy sharedProxy] uniqueTimeRangesForDay:day
                                                   forClass:_eventClass
+                                            sharedSchedule:self.schedule
                                                  predicate:self.predicate];
 }
 

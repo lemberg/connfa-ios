@@ -1,6 +1,6 @@
 
 #import <UIKit/UIKit.h>
-#import "DCEvent.h"
+#import "DCEvent+CoreDataProperties.h"
 
 @interface DCEventDetailHeaderCell : UITableViewCell
 

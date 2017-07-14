@@ -1,6 +1,6 @@
 
 #import <UIKit/UIKit.h>
-#import "DCSpeaker.h"
+#import "DCSpeaker+CoreDataProperties.h"
 
 @interface DCSpeakerHeaderCell : UITableViewCell
 

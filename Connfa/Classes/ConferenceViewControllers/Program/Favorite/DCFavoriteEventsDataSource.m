@@ -7,7 +7,7 @@
 
 @implementation DCFavoriteEventsDataSource
 
-- (void)loadEvents {
+- (void)loadEvents:(BOOL)isFromPullToRefresh {
   __weak typeof(self) weakSelf = self;
   [self dataSourceStartUpdateEvents];
   dispatch_async(
@@ -23,11 +23,14 @@
 
           [weakSelf dataSourceEndUpdateEvents];
 
+          if(!isFromPullToRefresh && strongSelf.actualEventIndexPath){
           [strongSelf.tableView
               scrollToRowAtIndexPath:strongSelf.actualEventIndexPath
                     atScrollPosition:UITableViewScrollPositionTop
                             animated:NO];
+          }
         });
+        
       });
 }
 // kDCTimeslotKEY
@@ -89,8 +92,8 @@
   return @"";
 }
 
-- (void)reloadEvents {
-  [self loadEvents];
+- (void)reloadEvents:(BOOL)isFromPullToRefresh {
+  [self loadEvents:isFromPullToRefresh];
 }
 
 - (NSArray*)eventsForDay {
@@ -100,15 +103,17 @@
 - (NSArray*)eventsForDay:(NSDate*)day andClass:(Class)eventClass {
   return [[DCMainProxy sharedProxy] eventsForDay:day
                                         forClass:eventClass
+                                  sharedSchedule:self.eventStrategy.schedule
                                        predicate:self.eventStrategy.predicate];
 }
 
 - (NSArray*)uniqueTimeRangesForDay:(NSDate*)day
                      andEventClass:(Class)eventClass {
   return [[DCMainProxy sharedProxy]
-      uniqueTimeRangesForDay:day
-                    forClass:eventClass
-                   predicate:self.eventStrategy.predicate];
+          uniqueTimeRangesForDay:day
+          forClass:eventClass
+          sharedSchedule:self.eventStrategy.schedule
+          predicate:self.eventStrategy.predicate];
 }
 
 @end

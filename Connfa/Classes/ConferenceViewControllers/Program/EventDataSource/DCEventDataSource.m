@@ -2,7 +2,7 @@
 #import "DCEventDataSource.h"
 #import "NSCalendar+DC.h"
 #import "DCSocialEvent.h"
-#import "DCType.h"
+#import "DCType+CoreDataProperties.h"
 
 @interface DCEventDataSource ()
 
@@ -23,7 +23,7 @@
     self.eventStrategy = eventStrategy;
     self.selectedDay = date;
     self.actualEventIndexPath = nil;
-    [self loadEvents];
+    [self loadEvents:false];
   }
   return self;
 }
@@ -32,12 +32,12 @@
  *  This method should be reload in child classes it responsibles to load events 
  *  according to DCEventStrategy
  */
-- (void)loadEvents {
+- (void)loadEvents:(BOOL)isFromPullToRefresh {
   // TODO: Reload in the child classes
 }
 
-- (void)reloadEvents {
-  [self loadEvents];
+- (void)reloadEvents:(BOOL)isFromPullToRefresh {
+  [self loadEvents:isFromPullToRefresh];
 }
 
 const NSString* kDCTimeslotKEY = @"timeslot_key";
