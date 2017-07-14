@@ -110,8 +110,9 @@
 
 -(BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
   if(userActivity.webpageURL.description){
-    NSInteger lenght = userActivity.webpageURL.description.length;
-    NSString* code = [userActivity.webpageURL.description substringFromIndex:lenght - 4];
+    NSString* codeQuery = userActivity.webpageURL.query;
+    NSUInteger firstIndex = [codeQuery rangeOfString:@"="].location + 1;
+    NSString* code = [codeQuery substringFromIndex:firstIndex];
     //TODO: - add in NSUserDefaults + DC
     [[NSUserDefaults standardUserDefaults] setObject:code forKey:@"codeFromLink"];
     //TODO: - add in Constants

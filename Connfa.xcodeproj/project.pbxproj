@@ -485,7 +485,6 @@
 		FC34ED7F1EBB573700EE9C22 /* DCSharedSchedule+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = FCACB8A61EB3681D000D6CB6 /* DCSharedSchedule+DC.m */; };
 		FC4903821EE9884100E681BA /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FC4903811EE9884100E681BA /* libsqlite3.0.tbd */; };
 		FC4903841EE9885500E681BA /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FC4903831EE9885500E681BA /* libsqlite3.tbd */; };
-		FC59A0251EA5F4C500F82DE0 /* DCDeviceType.m in Sources */ = {isa = PBXBuildFile; fileRef = FC59A0241EA5F4C500F82DE0 /* DCDeviceType.m */; };
 		FC59C59D1EBB0491008C1505 /* DCLevel+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FC59C59A1EBB0491008C1505 /* DCLevel+CoreDataClass.m */; };
 		FC59C59E1EBB0491008C1505 /* DCLevel+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = FC59C59C1EBB0491008C1505 /* DCLevel+CoreDataProperties.m */; };
 		FC59C5A31EBB04D6008C1505 /* DCSpeaker+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FC59C5A01EBB04D6008C1505 /* DCSpeaker+CoreDataClass.m */; };
@@ -839,8 +838,6 @@
 		FC4903811EE9884100E681BA /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		FC4903831EE9885500E681BA /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		FC4DC55B1EEAADCF00AAA0A9 /* Connfa!.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Connfa!.entitlements"; sourceTree = "<group>"; };
-		FC59A0231EA5F4C500F82DE0 /* DCDeviceType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCDeviceType.h; sourceTree = "<group>"; };
-		FC59A0241EA5F4C500F82DE0 /* DCDeviceType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCDeviceType.m; sourceTree = "<group>"; };
 		FC59C5991EBB0491008C1505 /* DCLevel+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DCLevel+CoreDataClass.h"; sourceTree = "<group>"; };
 		FC59C59A1EBB0491008C1505 /* DCLevel+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DCLevel+CoreDataClass.m"; sourceTree = "<group>"; };
 		FC59C59B1EBB0491008C1505 /* DCLevel+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DCLevel+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -1335,7 +1332,6 @@
 		A6C5F11A1BF4E9C50093AD65 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				FC59A0201EA5F41F00F82DE0 /* DeviceType */,
 				F580ED681D0FDE2B00F289F8 /* LESelectedActionSheetController */,
 				A66BD0BC1C5BBAA100C568EE /* AlertView */,
 				A6C5F11B1BF4E9C50093AD65 /* AppConfiuguration */,
@@ -2040,15 +2036,6 @@
 				F5D072CD1D0844AD00331E07 /* DCFloorPlanController.m */,
 			);
 			name = FloorPlan;
-			sourceTree = "<group>";
-		};
-		FC59A0201EA5F41F00F82DE0 /* DeviceType */ = {
-			isa = PBXGroup;
-			children = (
-				FC59A0231EA5F4C500F82DE0 /* DCDeviceType.h */,
-				FC59A0241EA5F4C500F82DE0 /* DCDeviceType.m */,
-			);
-			name = DeviceType;
 			sourceTree = "<group>";
 		};
 		FC5E34501EB09E7B009306BE /* SharedSchedule */ = {
@@ -2824,7 +2811,6 @@
 				288C5F101E6D9E4A00F07CB4 /* SDImageCache.m in Sources */,
 				288C5F111E6D9E4A00F07CB4 /* UIViewController+MFSideMenuAdditions.m in Sources */,
 				288C5F121E6D9E4A00F07CB4 /* SDWebImageManager.m in Sources */,
-				FC59A0251EA5F4C500F82DE0 /* DCDeviceType.m in Sources */,
 				288C5F131E6D9E4A00F07CB4 /* DCType+DC.m in Sources */,
 				288C5F141E6D9E4A00F07CB4 /* DCSideMenuViewController.m in Sources */,
 				288C5F151E6D9E4A00F07CB4 /* DCCoreDataStore.m in Sources */,

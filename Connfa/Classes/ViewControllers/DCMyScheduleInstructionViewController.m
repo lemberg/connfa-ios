@@ -7,7 +7,6 @@
 //
 
 #import "DCMyScheduleInstructionViewController.h"
-#import "DCDeviceType.h"
 #import "UIImage+Extension.h"
 
 @interface DCMyScheduleInstructionViewController ()
