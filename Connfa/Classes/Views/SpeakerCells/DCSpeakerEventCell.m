@@ -37,7 +37,7 @@
   NSString *timeFormat;
   
   if ([NSDate is24hourFormat]) {
-    timeFormat = @"H:mm aaa";
+    timeFormat = @"H:mm";
   } else {
     timeFormat = @"h:mm aaa";
   }
