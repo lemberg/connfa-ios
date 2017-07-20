@@ -102,6 +102,9 @@
   self.eventNameLabel.preferredMaxLayoutWidth = preferredWidth;
   self.eventTimeLabel.preferredMaxLayoutWidth = preferredWidth;
   self.eventTrackLabel.preferredMaxLayoutWidth = preferredWidth;
+  
+  self.eventTimeLabel.textColor = [DCAppConfiguration favoriteEventColor];
+
 }
 
 - (void)setCustomFonts {
