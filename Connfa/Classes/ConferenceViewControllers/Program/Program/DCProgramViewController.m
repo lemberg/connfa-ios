@@ -396,7 +396,11 @@
   UIAlertAction *addScheduleAction = [UIAlertAction actionWithTitle:@"Add a schedule" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     [self addSchedule:nil];
   }];
-  UIAlertAction *shareMyScheduleAction = [UIAlertAction actionWithTitle:@"Share My Schedule" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+  NSString* shareMyScheduleActionTitle = @"Share My Schedule";
+  if([NSUserDefaults myScheduleCode]){
+    shareMyScheduleActionTitle = [NSString stringWithFormat:@"Share My Schedule \"%@\"", [NSUserDefaults myScheduleCode]];
+  }
+  UIAlertAction *shareMyScheduleAction = [UIAlertAction actionWithTitle:shareMyScheduleActionTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     [self shareMySchedule];
   }];
   
