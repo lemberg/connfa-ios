@@ -72,7 +72,6 @@
 		281F86961E7FF0730065EA1B /* UIAlertView+DCWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = A66BD0BE1C5BBAB700C568EE /* UIAlertView+DCWrapper.m */; };
 		281F86971E7FF0730065EA1B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2231BF4E9C60093AD65 /* main.m */; };
 		281F86981E7FF0730065EA1B /* DCSideMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1E91BF4E9C50093AD65 /* DCSideMenuCell.m */; };
-		281F86991E7FF0730065EA1B /* DCProgramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1141BF4E9C50093AD65 /* DCProgramViewController.m */; };
 		281F869A1E7FF0730065EA1B /* DCInfoMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1BD1BF4E9C50093AD65 /* DCInfoMenuCell.m */; };
 		281F869B1E7FF0730065EA1B /* NSCalendar+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1311BF4E9C50093AD65 /* NSCalendar+DC.m */; };
 		281F869C1E7FF0730065EA1B /* SDWebImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F2411BF4E9C60093AD65 /* SDWebImageDownloader.m */; };
@@ -513,6 +512,26 @@
 		FC7EE2011EC33D7600FC5AA0 /* DCSchedulesListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC703B131EA7A0E200539E41 /* DCSchedulesListTableViewController.m */; };
 		FC9E3FAC1ED31843001B6265 /* DCSharedScheduleDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = FC9E3FAB1ED31843001B6265 /* DCSharedScheduleDataSource.m */; };
 		FCACB8A71EB3681D000D6CB6 /* DCSharedSchedule+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = FCACB8A61EB3681D000D6CB6 /* DCSharedSchedule+DC.m */; };
+		FCE7E6521F2224CB0004BA17 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FC4903811EE9884100E681BA /* libsqlite3.0.tbd */; };
+		FCE7E6531F2224EF0004BA17 /* DCProgramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A6C5F1141BF4E9C50093AD65 /* DCProgramViewController.m */; };
+		FCE7E6541F22250B0004BA17 /* DCSharedScheduleDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = FC9E3FAB1ED31843001B6265 /* DCSharedScheduleDataSource.m */; };
+		FCE7E6551F22250C0004BA17 /* DCSharedScheduleDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = FC9E3FAB1ED31843001B6265 /* DCSharedScheduleDataSource.m */; };
+		FCE7E6561F2225110004BA17 /* DCSharedSchedule+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FC59C5CE1EBB120B008C1505 /* DCSharedSchedule+CoreDataClass.m */; };
+		FCE7E6571F2225110004BA17 /* DCSharedSchedule+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FC59C5CE1EBB120B008C1505 /* DCSharedSchedule+CoreDataClass.m */; };
+		FCE7E6581F2225130004BA17 /* DCSharedSchedule+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = FC59C5D01EBB120B008C1505 /* DCSharedSchedule+CoreDataProperties.m */; };
+		FCE7E6591F2225140004BA17 /* DCSharedSchedule+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = FC59C5D01EBB120B008C1505 /* DCSharedSchedule+CoreDataProperties.m */; };
+		FCE7E65A1F2225470004BA17 /* DCTrack+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FC59C5BC1EBB07E8008C1505 /* DCTrack+CoreDataClass.m */; };
+		FCE7E65B1F2225470004BA17 /* DCTrack+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FC59C5BC1EBB07E8008C1505 /* DCTrack+CoreDataClass.m */; };
+		FCE7E65C1F2225490004BA17 /* DCTrack+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = FC59C5BE1EBB07E8008C1505 /* DCTrack+CoreDataProperties.m */; };
+		FCE7E65D1F2225490004BA17 /* DCTrack+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = FC59C5BE1EBB07E8008C1505 /* DCTrack+CoreDataProperties.m */; };
+		FCE7E65E1F2225540004BA17 /* DCTimeRange+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FC59C5B61EBB05E7008C1505 /* DCTimeRange+CoreDataClass.m */; };
+		FCE7E65F1F2225550004BA17 /* DCTimeRange+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FC59C5B61EBB05E7008C1505 /* DCTimeRange+CoreDataClass.m */; };
+		FCE7E6601F2225560004BA17 /* DCTimeRange+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = FC59C5B81EBB05E7008C1505 /* DCTimeRange+CoreDataProperties.m */; };
+		FCE7E6611F2225570004BA17 /* DCTimeRange+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = FC59C5B81EBB05E7008C1505 /* DCTimeRange+CoreDataProperties.m */; };
+		FCE7E6621F2225680004BA17 /* DCType+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FC59C5C21EBB0A52008C1505 /* DCType+CoreDataClass.m */; };
+		FCE7E6631F2225690004BA17 /* DCType+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FC59C5C21EBB0A52008C1505 /* DCType+CoreDataClass.m */; };
+		FCE7E6641F22256A0004BA17 /* DCType+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = FC59C5C41EBB0A52008C1505 /* DCType+CoreDataProperties.m */; };
+		FCE7E6651F22256B0004BA17 /* DCType+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = FC59C5C41EBB0A52008C1505 /* DCType+CoreDataProperties.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -882,6 +901,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCE7E6521F2224CB0004BA17 /* libsqlite3.0.tbd in Frameworks */,
 				281F86D21E7FF0730065EA1B /* AdSupport.framework in Frameworks */,
 				281F86D31E7FF0730065EA1B /* libz.dylib in Frameworks */,
 				281F86D41E7FF0730065EA1B /* SystemConfiguration.framework in Frameworks */,
@@ -2489,8 +2509,10 @@
 				281F865E1E7FF0730065EA1B /* UIWebView+DC.m in Sources */,
 				281F865F1E7FF0730065EA1B /* DCDescriptionTextCell.m in Sources */,
 				281F86601E7FF0730065EA1B /* DCLocation+DC.m in Sources */,
+				FCE7E6531F2224EF0004BA17 /* DCProgramViewController.m in Sources */,
 				281F86611E7FF0730065EA1B /* DCMainEvent+DC.m in Sources */,
 				281F86621E7FF0730065EA1B /* UIImageView+WebCache.m in Sources */,
+				FCE7E6561F2225110004BA17 /* DCSharedSchedule+CoreDataClass.m in Sources */,
 				FC59C5A91EBB050A008C1505 /* DCLevel+CoreDataProperties.m in Sources */,
 				281F86641E7FF0730065EA1B /* DCAppSettings.m in Sources */,
 				281F86651E7FF0730065EA1B /* DCCalendarManager.m in Sources */,
@@ -2511,6 +2533,7 @@
 				281F86721E7FF0730065EA1B /* DCLevel+DC.m in Sources */,
 				281F86731E7FF0730065EA1B /* DCInfoCategory+DC.m in Sources */,
 				281F86741E7FF0730065EA1B /* DCEvent+DC.m in Sources */,
+				FCE7E65E1F2225540004BA17 /* DCTimeRange+CoreDataClass.m in Sources */,
 				281F86751E7FF0730065EA1B /* DCTime+DC.m in Sources */,
 				281F86761E7FF0730065EA1B /* DCSpeakerCell.m in Sources */,
 				281F86771E7FF0730065EA1B /* UIButton+WebCache.m in Sources */,
@@ -2519,8 +2542,10 @@
 				281F867A1E7FF0730065EA1B /* DCSocialEvent+DC.m in Sources */,
 				FC59C5AB1EBB050D008C1505 /* DCLevel+CoreDataClass.m in Sources */,
 				281F867C1E7FF0730065EA1B /* DCPoi+DC.m in Sources */,
+				FCE7E65A1F2225470004BA17 /* DCTrack+CoreDataClass.m in Sources */,
 				281F867D1E7FF0730065EA1B /* DCInfo.m in Sources */,
 				281F867E1E7FF0730065EA1B /* DCMainEvent.m in Sources */,
+				FCE7E6541F22250B0004BA17 /* DCSharedScheduleDataSource.m in Sources */,
 				281F867F1E7FF0730065EA1B /* DCEventDetailHeaderCell.m in Sources */,
 				281F870B1E7FF0B40065EA1B /* DCConstants.m in Sources */,
 				281F86801E7FF0730065EA1B /* NSDictionary+DC.m in Sources */,
@@ -2534,11 +2559,13 @@
 				281F86881E7FF0730065EA1B /* MFSideMenuShadow.m in Sources */,
 				281F86891E7FF0730065EA1B /* DCEventCell.m in Sources */,
 				281F868A1E7FF0730065EA1B /* SDWebImageDownloaderOperation.m in Sources */,
+				FCE7E6621F2225680004BA17 /* DCType+CoreDataClass.m in Sources */,
 				281F868B1E7FF0730065EA1B /* DCSpeakerEventCell.m in Sources */,
 				281F868C1E7FF0730065EA1B /* SDImageCache.m in Sources */,
 				281F868D1E7FF0730065EA1B /* UIViewController+MFSideMenuAdditions.m in Sources */,
 				281F868E1E7FF0730065EA1B /* SDWebImageManager.m in Sources */,
 				281F868F1E7FF0730065EA1B /* DCType+DC.m in Sources */,
+				FCE7E65C1F2225490004BA17 /* DCTrack+CoreDataProperties.m in Sources */,
 				281F86901E7FF0730065EA1B /* DCSideMenuViewController.m in Sources */,
 				281F86911E7FF0730065EA1B /* DCCoreDataStore.m in Sources */,
 				281F86921E7FF0730065EA1B /* DCTextField.m in Sources */,
@@ -2547,8 +2574,8 @@
 				281F86951E7FF0730065EA1B /* DCWebService.m in Sources */,
 				281F86961E7FF0730065EA1B /* UIAlertView+DCWrapper.m in Sources */,
 				281F86971E7FF0730065EA1B /* main.m in Sources */,
+				FCE7E6601F2225560004BA17 /* DCTimeRange+CoreDataProperties.m in Sources */,
 				281F86981E7FF0730065EA1B /* DCSideMenuCell.m in Sources */,
-				281F86991E7FF0730065EA1B /* DCProgramViewController.m in Sources */,
 				281F869A1E7FF0730065EA1B /* DCInfoMenuCell.m in Sources */,
 				281F869B1E7FF0730065EA1B /* NSCalendar+DC.m in Sources */,
 				281F869C1E7FF0730065EA1B /* SDWebImageDownloader.m in Sources */,
@@ -2560,6 +2587,7 @@
 				281F86A21E7FF0730065EA1B /* UIScrollView+EmptyDataSet.m in Sources */,
 				281F86A31E7FF0730065EA1B /* DCTime.m in Sources */,
 				281F86A41E7FF0730065EA1B /* DCDayEventsDataSource.m in Sources */,
+				FCE7E6641F22256A0004BA17 /* DCType+CoreDataProperties.m in Sources */,
 				281F86A51E7FF0730065EA1B /* DCFilterCheckBox.m in Sources */,
 				281F86A61E7FF0730065EA1B /* NSManagedObject+DC.m in Sources */,
 				281F86A71E7FF0730065EA1B /* DCProgramHeaderCellView.m in Sources */,
@@ -2569,6 +2597,7 @@
 				281F86AB1E7FF0730065EA1B /* SDWebImagePrefetcher.m in Sources */,
 				281F86AC1E7FF0730065EA1B /* DCEventFilterHeaderCell.m in Sources */,
 				281F86AD1E7FF0730065EA1B /* DCHousePlan.m in Sources */,
+				FCE7E6581F2225130004BA17 /* DCSharedSchedule+CoreDataProperties.m in Sources */,
 				281F86AE1E7FF0730065EA1B /* UIColor+Helper.m in Sources */,
 				281F86AF1E7FF0730065EA1B /* DCSocialMediaViewController.m in Sources */,
 				281F86B01E7FF0730065EA1B /* UIImage+Extension.m in Sources */,
@@ -2626,6 +2655,7 @@
 				281F87211E7FF1550065EA1B /* DCMainEvent+DC.m in Sources */,
 				281F87221E7FF1550065EA1B /* UIImageView+WebCache.m in Sources */,
 				FC59C5AA1EBB050A008C1505 /* DCLevel+CoreDataProperties.m in Sources */,
+				FCE7E6571F2225110004BA17 /* DCSharedSchedule+CoreDataClass.m in Sources */,
 				281F87241E7FF1550065EA1B /* DCAppSettings.m in Sources */,
 				281F87251E7FF1550065EA1B /* DCCalendarManager.m in Sources */,
 				281F87261E7FF1550065EA1B /* DCBaseViewController.m in Sources */,
@@ -2646,6 +2676,7 @@
 				281F87331E7FF1550065EA1B /* DCInfoCategory+DC.m in Sources */,
 				281F87341E7FF1550065EA1B /* DCEvent+DC.m in Sources */,
 				281F87351E7FF1550065EA1B /* DCTime+DC.m in Sources */,
+				FCE7E65F1F2225550004BA17 /* DCTimeRange+CoreDataClass.m in Sources */,
 				281F87361E7FF1550065EA1B /* DCSpeakerCell.m in Sources */,
 				281F87371E7FF1550065EA1B /* UIButton+WebCache.m in Sources */,
 				281F87381E7FF1550065EA1B /* LESelectedActionSheetController.m in Sources */,
@@ -2654,8 +2685,10 @@
 				FC59C5AC1EBB050D008C1505 /* DCLevel+CoreDataClass.m in Sources */,
 				281F873C1E7FF1550065EA1B /* DCPoi+DC.m in Sources */,
 				281F873D1E7FF1550065EA1B /* DCInfo.m in Sources */,
+				FCE7E65B1F2225470004BA17 /* DCTrack+CoreDataClass.m in Sources */,
 				281F873E1E7FF1550065EA1B /* DCMainEvent.m in Sources */,
 				281F873F1E7FF1550065EA1B /* DCEventDetailHeaderCell.m in Sources */,
+				FCE7E6551F22250C0004BA17 /* DCSharedScheduleDataSource.m in Sources */,
 				281F87C71E7FF1620065EA1B /* DCConstants.m in Sources */,
 				281F87411E7FF1550065EA1B /* NSDictionary+DC.m in Sources */,
 				281F87421E7FF1550065EA1B /* DCEventDataSource.m in Sources */,
@@ -2669,11 +2702,13 @@
 				281F874A1E7FF1550065EA1B /* DCEventCell.m in Sources */,
 				281F874B1E7FF1550065EA1B /* SDWebImageDownloaderOperation.m in Sources */,
 				281F874C1E7FF1550065EA1B /* DCSpeakerEventCell.m in Sources */,
+				FCE7E6631F2225690004BA17 /* DCType+CoreDataClass.m in Sources */,
 				281F874D1E7FF1550065EA1B /* SDImageCache.m in Sources */,
 				281F874E1E7FF1550065EA1B /* UIViewController+MFSideMenuAdditions.m in Sources */,
 				281F874F1E7FF1550065EA1B /* SDWebImageManager.m in Sources */,
 				281F87501E7FF1550065EA1B /* DCType+DC.m in Sources */,
 				281F87511E7FF1550065EA1B /* DCSideMenuViewController.m in Sources */,
+				FCE7E65D1F2225490004BA17 /* DCTrack+CoreDataProperties.m in Sources */,
 				281F87521E7FF1550065EA1B /* DCCoreDataStore.m in Sources */,
 				281F87531E7FF1550065EA1B /* DCTextField.m in Sources */,
 				281F87541E7FF1550065EA1B /* DCInfoCategory.m in Sources */,
@@ -2682,6 +2717,7 @@
 				281F87571E7FF1550065EA1B /* UIAlertView+DCWrapper.m in Sources */,
 				281F87581E7FF1550065EA1B /* main.m in Sources */,
 				281F87591E7FF1550065EA1B /* DCSideMenuCell.m in Sources */,
+				FCE7E6611F2225570004BA17 /* DCTimeRange+CoreDataProperties.m in Sources */,
 				281F875A1E7FF1550065EA1B /* DCProgramViewController.m in Sources */,
 				281F875B1E7FF1550065EA1B /* DCInfoMenuCell.m in Sources */,
 				281F875C1E7FF1550065EA1B /* NSCalendar+DC.m in Sources */,
@@ -2694,6 +2730,7 @@
 				281F87631E7FF1550065EA1B /* UIScrollView+EmptyDataSet.m in Sources */,
 				281F87641E7FF1550065EA1B /* DCTime.m in Sources */,
 				281F87651E7FF1550065EA1B /* DCDayEventsDataSource.m in Sources */,
+				FCE7E6651F22256B0004BA17 /* DCType+CoreDataProperties.m in Sources */,
 				281F87661E7FF1550065EA1B /* DCFilterCheckBox.m in Sources */,
 				281F87671E7FF1550065EA1B /* NSManagedObject+DC.m in Sources */,
 				281F87681E7FF1550065EA1B /* DCProgramHeaderCellView.m in Sources */,
@@ -2703,6 +2740,7 @@
 				281F876C1E7FF1550065EA1B /* SDWebImagePrefetcher.m in Sources */,
 				281F876D1E7FF1550065EA1B /* DCEventFilterHeaderCell.m in Sources */,
 				281F876E1E7FF1550065EA1B /* DCHousePlan.m in Sources */,
+				FCE7E6591F2225140004BA17 /* DCSharedSchedule+CoreDataProperties.m in Sources */,
 				281F876F1E7FF1550065EA1B /* UIColor+Helper.m in Sources */,
 				281F87701E7FF1550065EA1B /* DCSocialMediaViewController.m in Sources */,
 				281F87711E7FF1550065EA1B /* UIImage+Extension.m in Sources */,
