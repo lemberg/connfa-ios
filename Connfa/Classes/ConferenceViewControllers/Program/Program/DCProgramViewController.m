@@ -403,6 +403,10 @@
   UIAlertAction *shareMyScheduleAction = [UIAlertAction actionWithTitle:shareMyScheduleActionTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     [self shareMySchedule];
   }];
+
+  if(![NSUserDefaults myScheduleCode]){
+    shareMyScheduleAction.enabled = false;
+  }
   
   UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
   [actionSheet addAction:addScheduleAction];
