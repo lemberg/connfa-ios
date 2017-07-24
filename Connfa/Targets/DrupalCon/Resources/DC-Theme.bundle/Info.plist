@@ -7,13 +7,13 @@
 	<key>EventPlace</key>
 	<string> </string>
 	<key>NavigationBarColour</key>
-	<string>#17293c</string>
+	<string>#425c6d</string>
 	<key>EventDetailHeaderColour</key>
 	<string>#3d5275</string>
 	<key>EventDetailNavBarTextColour</key>
 	<string>#ffffff</string>
 	<key>FavoriteEventColour</key>
-	<string>#806d27</string>
+	<string>#cd9b23</string>
 	<key>IsFilterEnable</key>
 	<true/>
 	<key>SpeakerDetailBarColour</key>

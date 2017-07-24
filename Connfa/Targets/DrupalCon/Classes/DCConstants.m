@@ -10,8 +10,8 @@
 
 @implementation DCConstants
 
-NSString *const BASE_URL = @"https://baltimore2017.connfa.com/api/v2/";;
-NSString *const SERVER_URL = @"https://baltimore2017.connfa.com";
+NSString *const BASE_URL = @"https://connfa-integration.uat.link/api/v2/euna-mcdermott-dds/";;
+NSString *const SERVER_URL = @"https://connfa-integration.uat.link/";
 NSString *const BUNDLE_NAME = @"DC-Theme";
 NSString *const GOOGLE_ANALYTICS_APP_ID = @"UA-267362-67";
 NSString *const TWITTER_API_KEY = @"Mxl1GoGSM98T3jTIWdlUuqXmh";
@@ -48,7 +48,7 @@ NSString *const EVENT_NAME = @"DrupalCon";
 +(NSArray*)appFonts {
   
   NSArray* fonts = @[
-                     [DCFontItem initWithTitleFont:kFontMerriweatherRegularRegular andNameFont:kFontMerriweatherRegularRegular andDescriptionFont:kFontHelveticaNeueRegular]
+                     [DCFontItem initWithTitleFont:kFontGlassAntiquaRegular andNameFont:kFontMerriweatherRegularRegular andDescriptionFont:kFontHelveticaNeueRegular]
                      ];
   
   return fonts;

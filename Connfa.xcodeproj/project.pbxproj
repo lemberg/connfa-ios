@@ -510,6 +510,15 @@
 		FC703B141EA7A0E200539E41 /* DCSchedulesListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC703B131EA7A0E200539E41 /* DCSchedulesListTableViewController.m */; };
 		FC7EE2001EC33D7600FC5AA0 /* DCSchedulesListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC703B131EA7A0E200539E41 /* DCSchedulesListTableViewController.m */; };
 		FC7EE2011EC33D7600FC5AA0 /* DCSchedulesListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC703B131EA7A0E200539E41 /* DCSchedulesListTableViewController.m */; };
+		FC8303BA1F25E47500BEB323 /* GlassAntiqua-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC8303B91F25E47500BEB323 /* GlassAntiqua-Regular.ttf */; };
+		FC8303BB1F25E4F800BEB323 /* DCDetailEventHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC63F6FC1EB21AAC00CA446A /* DCDetailEventHeaderTableViewCell.m */; };
+		FC8303BC1F25E4F800BEB323 /* DCDetailEventHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC63F6FC1EB21AAC00CA446A /* DCDetailEventHeaderTableViewCell.m */; };
+		FC8303BD1F25E59A00BEB323 /* DCDetailEventScheduleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC63F6FF1EB21ADD00CA446A /* DCDetailEventScheduleTableViewCell.m */; };
+		FC8303BE1F25E59B00BEB323 /* DCDetailEventScheduleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC63F6FF1EB21ADD00CA446A /* DCDetailEventScheduleTableViewCell.m */; };
+		FC8303BF1F25E81000BEB323 /* GlassAntiqua-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC8303B91F25E47500BEB323 /* GlassAntiqua-Regular.ttf */; };
+		FC8303C01F25E81000BEB323 /* GlassAntiqua-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC8303B91F25E47500BEB323 /* GlassAntiqua-Regular.ttf */; };
+		FC8303C11F25EB2000BEB323 /* DCMyScheduleInstructionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6212901E9E229F008008C9 /* DCMyScheduleInstructionViewController.m */; };
+		FC8303C21F25EB2000BEB323 /* DCMyScheduleInstructionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6212901E9E229F008008C9 /* DCMyScheduleInstructionViewController.m */; };
 		FC9E3FAC1ED31843001B6265 /* DCSharedScheduleDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = FC9E3FAB1ED31843001B6265 /* DCSharedScheduleDataSource.m */; };
 		FCACB8A71EB3681D000D6CB6 /* DCSharedSchedule+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = FCACB8A61EB3681D000D6CB6 /* DCSharedSchedule+DC.m */; };
 		FCE7E6521F2224CB0004BA17 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FC4903811EE9884100E681BA /* libsqlite3.0.tbd */; };
@@ -890,6 +899,7 @@
 		FC63F6FF1EB21ADD00CA446A /* DCDetailEventScheduleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCDetailEventScheduleTableViewCell.m; sourceTree = "<group>"; };
 		FC703B121EA7A0E200539E41 /* DCSchedulesListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCSchedulesListTableViewController.h; sourceTree = "<group>"; };
 		FC703B131EA7A0E200539E41 /* DCSchedulesListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCSchedulesListTableViewController.m; sourceTree = "<group>"; };
+		FC8303B91F25E47500BEB323 /* GlassAntiqua-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GlassAntiqua-Regular.ttf"; sourceTree = "<group>"; };
 		FC9E3FAA1ED31843001B6265 /* DCSharedScheduleDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCSharedScheduleDataSource.h; sourceTree = "<group>"; };
 		FC9E3FAB1ED31843001B6265 /* DCSharedScheduleDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCSharedScheduleDataSource.m; sourceTree = "<group>"; };
 		FCACB8A51EB3681D000D6CB6 /* DCSharedSchedule+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DCSharedSchedule+DC.h"; sourceTree = "<group>"; };
@@ -1213,6 +1223,7 @@
 		A68AE7BD1C626470002E862D /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				FC8303B91F25E47500BEB323 /* GlassAntiqua-Regular.ttf */,
 				287E7BC81E8535A200E03F56 /* Merriweather-Regular.ttf */,
 				F547A7E01D537C3200CD24F2 /* Montserrat */,
 				A68AE7BE1C626470002E862D /* OpenSans-Bold.ttf */,
@@ -2250,6 +2261,7 @@
 				281F86F01E7FF0730065EA1B /* Events.storyboard in Resources */,
 				281F86F21E7FF0730065EA1B /* (null) in Resources */,
 				281F86F31E7FF0730065EA1B /* OpenSans-Regular.ttf in Resources */,
+				FC8303BF1F25E81000BEB323 /* GlassAntiqua-Regular.ttf in Resources */,
 				281F86F41E7FF0730065EA1B /* DCEventCell.xib in Resources */,
 				281F86F51E7FF0730065EA1B /* OpenSans-Bold.ttf in Resources */,
 			);
@@ -2279,6 +2291,7 @@
 				281F87B11E7FF1550065EA1B /* Events.storyboard in Resources */,
 				281F87B21E7FF1550065EA1B /* (null) in Resources */,
 				281F87B31E7FF1550065EA1B /* OpenSans-Regular.ttf in Resources */,
+				FC8303C01F25E81000BEB323 /* GlassAntiqua-Regular.ttf in Resources */,
 				281F87B41E7FF1550065EA1B /* DCEventCell.xib in Resources */,
 				281F87B51E7FF1550065EA1B /* OpenSans-Bold.ttf in Resources */,
 			);
@@ -2308,6 +2321,7 @@
 				288C5FB51E6D9E8C00F07CB4 /* style.css in Resources */,
 				288C5F721E6D9E4A00F07CB4 /* (null) in Resources */,
 				288C5F731E6D9E4A00F07CB4 /* OpenSans-Regular.ttf in Resources */,
+				FC8303BA1F25E47500BEB323 /* GlassAntiqua-Regular.ttf in Resources */,
 				288C5F741E6D9E4A00F07CB4 /* DCEventCell.xib in Resources */,
 				288C5F751E6D9E4A00F07CB4 /* OpenSans-Bold.ttf in Resources */,
 			);
@@ -2576,6 +2590,7 @@
 				281F86971E7FF0730065EA1B /* main.m in Sources */,
 				FCE7E6601F2225560004BA17 /* DCTimeRange+CoreDataProperties.m in Sources */,
 				281F86981E7FF0730065EA1B /* DCSideMenuCell.m in Sources */,
+				FC8303BD1F25E59A00BEB323 /* DCDetailEventScheduleTableViewCell.m in Sources */,
 				281F869A1E7FF0730065EA1B /* DCInfoMenuCell.m in Sources */,
 				281F869B1E7FF0730065EA1B /* NSCalendar+DC.m in Sources */,
 				281F869C1E7FF0730065EA1B /* SDWebImageDownloader.m in Sources */,
@@ -2599,6 +2614,7 @@
 				281F86AD1E7FF0730065EA1B /* DCHousePlan.m in Sources */,
 				FCE7E6581F2225130004BA17 /* DCSharedSchedule+CoreDataProperties.m in Sources */,
 				281F86AE1E7FF0730065EA1B /* UIColor+Helper.m in Sources */,
+				FC8303BB1F25E4F800BEB323 /* DCDetailEventHeaderTableViewCell.m in Sources */,
 				281F86AF1E7FF0730065EA1B /* DCSocialMediaViewController.m in Sources */,
 				281F86B01E7FF0730065EA1B /* UIImage+Extension.m in Sources */,
 				281F86B11E7FF0730065EA1B /* DCDateHelper.m in Sources */,
@@ -2607,6 +2623,7 @@
 				281F86B31E7FF0730065EA1B /* DCSpeakersDetailViewController.m in Sources */,
 				281F86B41E7FF0730065EA1B /* MFSideMenuContainerViewController.m in Sources */,
 				281F86B51E7FF0730065EA1B /* SDWebImageDecoder.m in Sources */,
+				FC8303C11F25EB2000BEB323 /* DCMyScheduleInstructionViewController.m in Sources */,
 				281F86B61E7FF0730065EA1B /* NSString+HTML.m in Sources */,
 				281F86B81E7FF0730065EA1B /* DCParserService.m in Sources */,
 				281F86B91E7FF0730065EA1B /* DCAboutViewController.m in Sources */,
@@ -2719,6 +2736,7 @@
 				281F87591E7FF1550065EA1B /* DCSideMenuCell.m in Sources */,
 				FCE7E6611F2225570004BA17 /* DCTimeRange+CoreDataProperties.m in Sources */,
 				281F875A1E7FF1550065EA1B /* DCProgramViewController.m in Sources */,
+				FC8303BE1F25E59B00BEB323 /* DCDetailEventScheduleTableViewCell.m in Sources */,
 				281F875B1E7FF1550065EA1B /* DCInfoMenuCell.m in Sources */,
 				281F875C1E7FF1550065EA1B /* NSCalendar+DC.m in Sources */,
 				281F875D1E7FF1550065EA1B /* SDWebImageDownloader.m in Sources */,
@@ -2742,6 +2760,7 @@
 				281F876E1E7FF1550065EA1B /* DCHousePlan.m in Sources */,
 				FCE7E6591F2225140004BA17 /* DCSharedSchedule+CoreDataProperties.m in Sources */,
 				281F876F1E7FF1550065EA1B /* UIColor+Helper.m in Sources */,
+				FC8303BC1F25E4F800BEB323 /* DCDetailEventHeaderTableViewCell.m in Sources */,
 				281F87701E7FF1550065EA1B /* DCSocialMediaViewController.m in Sources */,
 				281F87711E7FF1550065EA1B /* UIImage+Extension.m in Sources */,
 				281F87721E7FF1550065EA1B /* DCDateHelper.m in Sources */,
@@ -2750,6 +2769,7 @@
 				281F87741E7FF1550065EA1B /* DCSpeakersDetailViewController.m in Sources */,
 				281F87751E7FF1550065EA1B /* MFSideMenuContainerViewController.m in Sources */,
 				281F87761E7FF1550065EA1B /* SDWebImageDecoder.m in Sources */,
+				FC8303C21F25EB2000BEB323 /* DCMyScheduleInstructionViewController.m in Sources */,
 				281F87771E7FF1550065EA1B /* NSString+HTML.m in Sources */,
 				281F87781E7FF1550065EA1B /* DCParserService.m in Sources */,
 				281F87791E7FF1550065EA1B /* DCAboutViewController.m in Sources */,

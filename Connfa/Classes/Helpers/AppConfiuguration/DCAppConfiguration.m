@@ -11,6 +11,7 @@ const NSString*  kFontOpenSansCondBold = @"Open Sans Condensed";
 const NSString*  kFontOpenSansRegular = @"Open Sans";
 const NSString*  kFontHelveticaNeueRegular = @"Helvetica Neue";
 const NSString*  kFontMerriweatherRegularRegular = @"Merriweather-Regular";
+const NSString*  kFontGlassAntiquaRegular = @"GlassAntiqua-Regular";
 
 
 @implementation DCAppConfiguration
