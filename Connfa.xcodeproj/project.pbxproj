@@ -3050,7 +3050,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Connfa/Vendor/GoogleAnalytics",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon.qa;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3083,7 +3083,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Connfa/Vendor/GoogleAnalytics",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon.qa;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lemberg.drupalcon;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
