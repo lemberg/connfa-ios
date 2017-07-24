@@ -18,6 +18,8 @@ extern NSString* kFontGlassAntiquaRegular;
 + (UIColor*)eventDetailHeaderColour;
 + (UIColor*)eventDetailNavBarTextColor;
 + (UIColor*)speakerDetailBarColor;
++ (UIColor*)speakerNavigationbarItemsColor;
++ (UIColor*)sideMenuTextColor;
 + (BOOL)isFilterEnable;
 + (NSString*)eventTime;
 + (NSString*)eventPlace;

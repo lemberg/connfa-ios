@@ -62,6 +62,9 @@ static int descriptionSectionIndex = 3;
 @property(nonatomic, strong) NSMutableArray* schedulesIndexPaths;
 @property(nonatomic)BOOL isWhoIsGoingExpanded;
 
+@property(nonatomic, strong) UIImage* filledStarImage;
+@property(nonatomic, strong) UIImage* starImage;
+
 @end
 
 @implementation DCEventDetailViewController
@@ -80,6 +83,9 @@ static int descriptionSectionIndex = 3;
   [super viewDidLoad];
 
   [self setNeedsStatusBarAppearanceUpdate];
+  
+  self.filledStarImage = [[UIImage imageNamedFromBundle:@"star+"]  imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+  self.starImage = [[UIImage imageNamedFromBundle:@"star-"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   
   self.cellsForSizeEstimation = @{
     cellIdHeader :
@@ -121,6 +127,7 @@ static int descriptionSectionIndex = 3;
                                            selector:@selector(openMyScheduleFromUrl)
                                                name:@"openMyScheduleFromUrl"
                                              object:nil];
+  self.currentBarColor = [DCAppConfiguration eventDetailNavBarTextColor];
 }
 
 
@@ -165,13 +172,11 @@ static int descriptionSectionIndex = 3;
   self.navigationController.navigationBar.translucent = YES;
   self.navigationController.navigationBar.backgroundColor =
   [UIColor clearColor];
-  UIColor* eventNavColor = [DCAppConfiguration eventDetailNavBarTextColor];
+  UIColor* eventNavColor = self.currentBarColor;
   UIImage* startImage =
   self.event.favorite.boolValue
-  ? [[UIImage imageNamedFromBundle:@"star+"]
-     imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
-  : [[UIImage imageNamedFromBundle:@"star-"]
-     imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+  ? self.filledStarImage
+  : self.starImage;
   UIBarButtonItem* favoriteButton = [[UIBarButtonItem alloc]
                                      initWithImage:startImage
                                      style:UIBarButtonItemStylePlain
@@ -180,7 +185,6 @@ static int descriptionSectionIndex = 3;
   // tag 1: unselected state
   // tag 2: selected state
   favoriteButton.tag = self.event.favorite.boolValue ? 2 : 1;
-  favoriteButton.tintColor = eventNavColor;
   
   if (self.event.link.length > 0) {
     UIBarButtonItem* sharedButton = [[UIBarButtonItem alloc]
@@ -194,7 +198,6 @@ static int descriptionSectionIndex = 3;
   
   self.navigationController.navigationBar.tintColor = eventNavColor;
   self.topTitleLabel.textColor = [UIColor whiteColor];
-  self.currentBarColor = eventNavColor;
 }
 
 - (BOOL)showEmptyDetailIcon {
@@ -483,6 +486,11 @@ static int descriptionSectionIndex = 3;
       alpha = (-self.topBackgroundTop.constant >= topStopPoint) ? maxAlpha : 0;
     }
     self.topBackgroundShadowView.alpha = alpha;
+    if(alpha == 0.0) {
+      self.navigationController.navigationBar.tintColor = [DCAppConfiguration eventDetailNavBarTextColor];
+    }else {
+      self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    }
 
     // constraints setting
     if (shouldMoveToTop) {
@@ -531,13 +539,8 @@ static int descriptionSectionIndex = 3;
 
   sender.image =
       isSelected
-          ? [[UIImage imageNamedFromBundle:@"star+"]
-                imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
-          : [[UIImage imageNamedFromBundle:@"star-"]
-                imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-
-  sender.tintColor = [DCAppConfiguration eventDetailNavBarTextColor];
-  
+          ? self.filledStarImage
+          : self.starImage;
   if (isSelected) {
     [[DCMainProxy sharedProxy] addToFavoriteEvent:self.event];
   } else {

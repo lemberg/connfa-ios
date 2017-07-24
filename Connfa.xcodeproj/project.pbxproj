@@ -901,6 +901,7 @@
 		FC703B121EA7A0E200539E41 /* DCSchedulesListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCSchedulesListTableViewController.h; sourceTree = "<group>"; };
 		FC703B131EA7A0E200539E41 /* DCSchedulesListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCSchedulesListTableViewController.m; sourceTree = "<group>"; };
 		FC8303B91F25E47500BEB323 /* GlassAntiqua-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "GlassAntiqua-Regular.ttf"; sourceTree = "<group>"; };
+		FC8303D51F26336000BEB323 /* DrupalCon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DrupalCon.entitlements; sourceTree = "<group>"; };
 		FC9E3FAA1ED31843001B6265 /* DCSharedScheduleDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DCSharedScheduleDataSource.h; sourceTree = "<group>"; };
 		FC9E3FAB1ED31843001B6265 /* DCSharedScheduleDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DCSharedScheduleDataSource.m; sourceTree = "<group>"; };
 		FCACB8A51EB3681D000D6CB6 /* DCSharedSchedule+DC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DCSharedSchedule+DC.h"; sourceTree = "<group>"; };
@@ -1118,6 +1119,7 @@
 		5DC8C408198656DA00BF5816 = {
 			isa = PBXGroup;
 			children = (
+				FC8303D51F26336000BEB323 /* DrupalCon.entitlements */,
 				FC4DC55B1EEAADCF00AAA0A9 /* Connfa!.entitlements */,
 				A6C5F0F21BF4E9C50093AD65 /* Connfa */,
 				288C5F7E1E6D9E6D00F07CB4 /* Targets */,
@@ -2203,6 +2205,11 @@
 					281F86521E7FF0730065EA1B = {
 						DevelopmentTeam = J7LBYY3B34;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.SafariKeychain = {
+								enabled = 1;
+							};
+						};
 					};
 					281F87121E7FF1550065EA1B = {
 						DevelopmentTeam = FN2T3UCV4E;
@@ -2956,6 +2963,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = DrupalCon.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Lemberg Solutions Limited (J7LBYY3B34)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = J7LBYY3B34;
@@ -2989,6 +2997,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = DrupalCon.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Lemberg Solutions Limited (J7LBYY3B34)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = J7LBYY3B34;

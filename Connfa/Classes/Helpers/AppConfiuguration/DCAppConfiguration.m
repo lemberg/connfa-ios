@@ -25,6 +25,8 @@ static NSString* const kIsFilterEnable = @"IsFilterEnable";
 static NSString* const kSpeakerDetailBarColour = @"SpeakerDetailBarColour";
 static NSString* const kEventDate = @"EventDate";
 static NSString* const kEventPlace = @"EventPlace";
+static NSString* const kSpeakerNavigationbarItemsColor = @"SpeakerNavigationBarItemsColor";
+static NSString* const kSideMenuTextColor = @"SideMenuTextColor";
 
 static NSBundle* themeBundle;
 
@@ -58,6 +60,16 @@ static NSBundle* themeBundle;
 
 + (UIColor*)speakerDetailBarColor {
   NSString* colorId = [themeBundle infoDictionary][kSpeakerDetailBarColour];
+  return [UIColor colorFromHexString:colorId];
+}
+
++ (UIColor*)speakerNavigationbarItemsColor {
+  NSString* colorId = [themeBundle infoDictionary][kSpeakerNavigationbarItemsColor];
+  return [UIColor colorFromHexString:colorId];
+}
+
++ (UIColor*)sideMenuTextColor {
+  NSString* colorId = [themeBundle infoDictionary][kSideMenuTextColor];
   return [UIColor colorFromHexString:colorId];
 }
 

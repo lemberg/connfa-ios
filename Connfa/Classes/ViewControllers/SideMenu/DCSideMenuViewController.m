@@ -230,6 +230,8 @@
   DCSideMenuCell* cell = (DCSideMenuCell*)
       [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
+  cell.captionLabel.textColor = [DCAppConfiguration sideMenuTextColor];
+  
   DCMenuItem* item = self.arrayOfCaptions[indexPath.row];
   cell.captionLabel.text = item.titleName;//itemDict[kMenuItemTitle];
 

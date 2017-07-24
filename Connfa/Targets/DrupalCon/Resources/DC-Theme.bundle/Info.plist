@@ -9,14 +9,18 @@
 	<key>NavigationBarColour</key>
 	<string>#425c6d</string>
 	<key>EventDetailHeaderColour</key>
-	<string>#3d5275</string>
+	<string>#425c6d</string>
 	<key>EventDetailNavBarTextColour</key>
-	<string>#ffffff</string>
+	<string>#757575</string>
 	<key>FavoriteEventColour</key>
 	<string>#cd9b23</string>
 	<key>IsFilterEnable</key>
 	<true/>
 	<key>SpeakerDetailBarColour</key>
-	<string>#3d5275</string>
+	<string>#425c6d</string>
+	<key>SpeakerNavigationBarItemsColor</key>
+	<string>#757575</string>
+	<key>SideMenuTextColor</key>
+	<string>#757575</string>
 </dict>
 </plist>

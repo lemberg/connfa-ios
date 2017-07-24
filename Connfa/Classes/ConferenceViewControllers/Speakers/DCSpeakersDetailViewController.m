@@ -56,7 +56,7 @@ static NSString* eventCellId = @"SpeakerEventCellId";
 
 
   self.cellsHeight = [NSMutableDictionary dictionary];
-  self.currentBarColor = [UIColor whiteColor];  // NAV_BAR_COLOR;
+  self.currentBarColor = [DCAppConfiguration speakerNavigationbarItemsColor];  // NAV_BAR_COLOR;
   self.navBarBackgroundView.backgroundColor =
       [DCAppConfiguration speakerDetailBarColor];
   self.cellPrototypes = @{
@@ -306,8 +306,12 @@ static NSString* eventCellId = @"SpeakerEventCellId";
         alpha = (offset >= showNavBarPoint) ? maxAlpha : 0;
       }
       self.navBarBackgroundView.alpha = alpha;
-
-      self.navBarBackgroundTitleLabel.textColor = self.currentBarColor;
+      if(alpha == 0){
+        self.navigationController.navigationBar.tintColor = [DCAppConfiguration speakerNavigationbarItemsColor];
+      }else{
+        self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+      }
+      self.navBarBackgroundTitleLabel.textColor = [UIColor whiteColor];
     }
   }
 }

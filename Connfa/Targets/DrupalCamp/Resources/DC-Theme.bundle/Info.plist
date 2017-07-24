@@ -18,5 +18,9 @@
 	<true/>
 	<key>SpeakerDetailBarColour</key>
 	<string>#00ACE1</string>
+	<key>SpeakerNavigationBarItemsColor</key>
+	<string>#ffffff</string>
+	<key>SideMenuTextColor</key>
+	<string>#ffffff</string>
 </dict>
 </plist>
