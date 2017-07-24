@@ -2212,7 +2212,7 @@
 						};
 					};
 					281F87121E7FF1550065EA1B = {
-						DevelopmentTeam = FN2T3UCV4E;
+						DevelopmentTeam = J7LBYY3B34;
 						ProvisioningStyle = Automatic;
 					};
 					288C5ED71E6D9E4A00F07CB4 = {
@@ -3034,7 +3034,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = FN2T3UCV4E;
+				DEVELOPMENT_TEAM = J7LBYY3B34;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3067,7 +3067,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Lyubomyr Dutko (7AUC8NL7FV)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = FN2T3UCV4E;
+				DEVELOPMENT_TEAM = J7LBYY3B34;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
