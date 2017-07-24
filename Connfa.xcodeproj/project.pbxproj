@@ -519,6 +519,7 @@
 		FC8303C01F25E81000BEB323 /* GlassAntiqua-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC8303B91F25E47500BEB323 /* GlassAntiqua-Regular.ttf */; };
 		FC8303C11F25EB2000BEB323 /* DCMyScheduleInstructionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6212901E9E229F008008C9 /* DCMyScheduleInstructionViewController.m */; };
 		FC8303C21F25EB2000BEB323 /* DCMyScheduleInstructionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC6212901E9E229F008008C9 /* DCMyScheduleInstructionViewController.m */; };
+		FC8303D41F26096100BEB323 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FC4903811EE9884100E681BA /* libsqlite3.0.tbd */; };
 		FC9E3FAC1ED31843001B6265 /* DCSharedScheduleDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = FC9E3FAB1ED31843001B6265 /* DCSharedScheduleDataSource.m */; };
 		FCACB8A71EB3681D000D6CB6 /* DCSharedSchedule+DC.m in Sources */ = {isa = PBXBuildFile; fileRef = FCACB8A61EB3681D000D6CB6 /* DCSharedSchedule+DC.m */; };
 		FCE7E6521F2224CB0004BA17 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FC4903811EE9884100E681BA /* libsqlite3.0.tbd */; };
@@ -934,6 +935,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC8303D41F26096100BEB323 /* libsqlite3.0.tbd in Frameworks */,
 				281F87921E7FF1550065EA1B /* AdSupport.framework in Frameworks */,
 				281F87931E7FF1550065EA1B /* libz.dylib in Frameworks */,
 				281F87941E7FF1550065EA1B /* SystemConfiguration.framework in Frameworks */,
