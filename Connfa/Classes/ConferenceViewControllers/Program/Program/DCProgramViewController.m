@@ -754,6 +754,7 @@
 -(void)setScheduleType:(EScheduleType)scheduleType andSchedule:(DCSharedSchedule *)schedule {
   selectedScheduleType = scheduleType;
   selectedSchedule = schedule;
+  self.currentDayIndex = 0;
   if(scheduleType == EFriendSchedule){
     self.eventsStrategy = [[DCEventStrategy alloc] initWithStrategy:EDCEventStrategySharedSchedule andSchedule:schedule];
   }else{
