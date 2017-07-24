@@ -131,7 +131,7 @@ DCDayEventSourceDelegate> {
       break;
     case EDCEventStrategySocialEvents: {
       self.stubImage = [UIImage imageNamed:@"ic_no_social_events"];
-      self.stubMessage = isFilterEnabled ? @"No Matching social events" : @"Currently there are no social events";
+      self.stubMessage = isFilterEnabled ? @"No Matching Social Events" : @"Currently there are no social events";
     }
       break;
     case EDCEventStrategySharedSchedule: {
