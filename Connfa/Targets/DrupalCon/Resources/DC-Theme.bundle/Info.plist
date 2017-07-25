@@ -7,9 +7,9 @@
 	<key>EventPlace</key>
 	<string> </string>
 	<key>NavigationBarColour</key>
-	<string>#425c6d</string>
+	<string>#4b697c</string>
 	<key>EventDetailHeaderColour</key>
-	<string>#425c6d</string>
+	<string>#4b697c</string>
 	<key>EventDetailNavBarTextColour</key>
 	<string>#757575</string>
 	<key>FavoriteEventColour</key>
@@ -17,7 +17,7 @@
 	<key>IsFilterEnable</key>
 	<true/>
 	<key>SpeakerDetailBarColour</key>
-	<string>#425c6d</string>
+	<string>#4b697c</string>
 	<key>SpeakerNavigationBarItemsColor</key>
 	<string>#757575</string>
 	<key>SideMenuTextColor</key>

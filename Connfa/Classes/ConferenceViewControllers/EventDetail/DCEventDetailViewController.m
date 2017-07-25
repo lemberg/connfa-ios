@@ -354,6 +354,7 @@ static int descriptionSectionIndex = 3;
     if(indexPath.row == 0){
       DCDetailEventHeaderTableViewCell *speakersCell = (DCDetailEventHeaderTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:cellWhoIsgoingHeader];
       speakersCell.headerLabel.text = @"Speakers";
+      speakersCell.headerLabel.textColor = [DCAppConfiguration eventDetailHeaderColour];
       speakersCell.selectionStyle = UITableViewCellSelectionStyleNone;
       return speakersCell;
     }
@@ -372,6 +373,7 @@ static int descriptionSectionIndex = 3;
   }else if(indexPath.section == schedulesSectionIndex){
     if(indexPath.row == 0){
       DCDetailEventHeaderTableViewCell *whoIsGoingCell = (DCDetailEventHeaderTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:cellWhoIsgoingHeader];
+      whoIsGoingCell.headerLabel.textColor = [DCAppConfiguration eventDetailHeaderColour];
       return whoIsGoingCell;
     }
     
