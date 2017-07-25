@@ -37,7 +37,7 @@
   NSString *timeFormat;
   
   if ([NSDate is24hourFormat]) {
-    timeFormat = @"H:mm aaa";
+    timeFormat = @"H:mm";
   } else {
     timeFormat = @"h:mm aaa";
   }
@@ -102,6 +102,9 @@
   self.eventNameLabel.preferredMaxLayoutWidth = preferredWidth;
   self.eventTimeLabel.preferredMaxLayoutWidth = preferredWidth;
   self.eventTrackLabel.preferredMaxLayoutWidth = preferredWidth;
+  
+  self.eventTimeLabel.textColor = [DCAppConfiguration favoriteEventColor];
+
 }
 
 - (void)setCustomFonts {

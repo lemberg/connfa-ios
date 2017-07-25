@@ -396,9 +396,17 @@
   UIAlertAction *addScheduleAction = [UIAlertAction actionWithTitle:@"Add a schedule" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     [self addSchedule:nil];
   }];
-  UIAlertAction *shareMyScheduleAction = [UIAlertAction actionWithTitle:@"Share My Schedule" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+  NSString* shareMyScheduleActionTitle = @"Share My Schedule";
+  if([NSUserDefaults myScheduleCode]){
+    shareMyScheduleActionTitle = [NSString stringWithFormat:@"Share My Schedule \"%@\"", [NSUserDefaults myScheduleCode]];
+  }
+  UIAlertAction *shareMyScheduleAction = [UIAlertAction actionWithTitle:shareMyScheduleActionTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
     [self shareMySchedule];
   }];
+
+  if(![NSUserDefaults myScheduleCode]){
+    shareMyScheduleAction.enabled = false;
+  }
   
   UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
   [actionSheet addAction:addScheduleAction];
@@ -746,6 +754,7 @@
 -(void)setScheduleType:(EScheduleType)scheduleType andSchedule:(DCSharedSchedule *)schedule {
   selectedScheduleType = scheduleType;
   selectedSchedule = schedule;
+  self.currentDayIndex = 0;
   if(scheduleType == EFriendSchedule){
     self.eventsStrategy = [[DCEventStrategy alloc] initWithStrategy:EDCEventStrategySharedSchedule andSchedule:schedule];
   }else{
