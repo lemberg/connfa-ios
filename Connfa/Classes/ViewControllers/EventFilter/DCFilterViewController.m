@@ -1,7 +1,7 @@
 
 #import "DCFilterViewController.h"
-#import "DCLevel.h"
-#import "DCTrack.h"
+#import "DCLevel+CoreDataProperties.h"
+#import "DCTrack+CoreDataProperties.h"
 #import "DCMainProxy.h"
 #import "DCEventFilterHeaderCell.h"
 #import "NSManagedObject+DC.h"

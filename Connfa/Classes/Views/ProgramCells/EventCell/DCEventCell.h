@@ -31,6 +31,7 @@
 @property(nonatomic) BOOL isFirstCellInSection;
 
 @property(weak, nonatomic) id<DCEventCellProtocol> delegate;
+@property (weak, nonatomic) IBOutlet UIImageView *friendScheduleIcon;
 
 - (void)initData:(DCEvent*)event delegate:(id<DCEventCellProtocol>)aDelegate;
 - (CGFloat)getHeightForEvent:(DCEvent*)event isFirstInSection:(BOOL)isFirst;

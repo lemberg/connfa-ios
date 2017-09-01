@@ -21,6 +21,7 @@ extern NSString *const BUNDLE_NAME;
 extern NSString *const GOOGLE_ANALYTICS_APP_ID;
 extern NSString *const TWITTER_API_KEY;
 extern NSString *const TWITTER_API_SECRET;
+extern NSString *const EVENT_NAME;
 
 +(NSArray*)appMenuItems;
 +(NSArray*)appFonts;

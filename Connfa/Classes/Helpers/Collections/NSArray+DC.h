@@ -11,5 +11,5 @@
 - (NSArray*)eventsForTimeRange:(DCTimeRange*)timeRange;
 - (NSArray*)dictionaryByReplacingNullsWithStrings;
 - (NSArray*)sortedByKey:(NSString*)key;
-
+- (NSArray*)uniqueDates;
 @end

@@ -23,7 +23,7 @@ extern NSString* kDCTimeslotEventKEY;
 
 @protocol DCDayEventSourceProtocol<NSObject>
 
-- (void)reloadEvents;
+- (void)reloadEvents:(BOOL)isFromPullToRefresh;
 - (DCEvent*)eventForIndexPath:(NSIndexPath*)indexPath;
 - (DCTimeRange*)timeRangeForSection:(NSInteger)section;
 - (NSIndexPath*)actualEventIndexPath;

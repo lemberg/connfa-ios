@@ -4,21 +4,38 @@
 #import "DCMainEvent+DC.h"
 #import "DCBof.h"
 #import "DCTimeRange+DC.h"
-#import "DCLevel.h"
-#import "DCTrack.h"
+#import "DCLevel+CoreDataProperties.h"
+#import "DCTrack+CoreDataProperties.h"
+#import "DCSharedSchedule+CoreDataClass.h"
+#import "DCSharedSchedule+DC.h"
+#import "NSManagedObject+DC.h"
+#import "NSUserDefaults+DC.h"
+#import "DCWebService.h"
+#import "DCCoreDataStore.h"
 
 #import "NSDate+DC.h"
 #import "NSArray+DC.h"
+#import "DCAlertsManager.h"
 
 @implementation DCMainProxy (Additions)
 
 #pragma mark -
 
 - (NSArray*)daysForClass:(Class)eventClass {
-  return [self daysForClass:eventClass predicate:nil];
+  return [self daysForClass:eventClass sharedSchedule:nil predicate:nil];
 }
 
-- (NSArray*)daysForClass:(Class)eventClass predicate:(NSPredicate*)aPredicate {
+- (NSArray*)daysForClass:(Class)eventClass
+          sharedSchedule:(DCSharedSchedule *)schedule
+               predicate:(NSPredicate*)aPredicate {
+  
+  if(schedule){
+    NSMutableArray* dates = [[NSMutableArray alloc] init];
+    for (DCEvent* event in schedule.events) {
+      [dates addObject:[event.date dateWithoutTime]];
+    }
+    return [dates uniqueDates];
+  }
   @try {
     NSEntityDescription* entityDescription =
         [NSEntityDescription entityForName:NSStringFromClass(eventClass)
@@ -52,12 +69,26 @@
 
 - (NSArray*)eventsForDay:(NSDate*)day
                 forClass:(__unsafe_unretained Class)eventClass {
-  return [self eventsForDay:day forClass:eventClass predicate:nil];
+  return [self eventsForDay:day forClass:eventClass sharedSchedule: nil predicate:nil];
 }
 
 - (NSArray*)eventsForDay:(NSDate*)day
                 forClass:(__unsafe_unretained Class)eventClass
+          sharedSchedule:(DCSharedSchedule *)schedule
                predicate:(NSPredicate*)aPredicate {
+  if (schedule) {
+    NSSet* events = schedule.events;
+    NSMutableArray *eventsForDay = [[NSMutableArray alloc] init];
+    for (DCEvent* event in events) {
+      NSDate *eventDate = event.date;
+      NSDateComponents *eventDatecomponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:eventDate];
+      NSDateComponents *dayDatecomponents = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:day];
+      if ((eventDatecomponents.year == dayDatecomponents.year) && (eventDatecomponents.month == dayDatecomponents.month) && (eventDatecomponents.day == dayDatecomponents.day)) {
+        [eventsForDay addObject:event];
+      }
+    }
+    return eventsForDay;
+  }
   @try {
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription* entity =
@@ -98,12 +129,17 @@
 
 - (NSArray*)uniqueTimeRangesForDay:(NSDate*)day
                           forClass:(__unsafe_unretained Class)eventClass {
-  return [self uniqueTimeRangesForDay:day forClass:eventClass predicate:nil];
+  return [self uniqueTimeRangesForDay:day forClass:eventClass sharedSchedule:nil predicate:nil];
 }
 
 - (NSArray*)uniqueTimeRangesForDay:(NSDate*)day
                           forClass:(__unsafe_unretained Class)eventClass
+                     sharedSchedule:(DCSharedSchedule *)schedule
                          predicate:(NSPredicate*)aPredicate {
+  if(schedule){
+    NSArray* result = [self eventsForDay:day forClass:[DCEvent class] sharedSchedule:schedule predicate:nil];
+    return [[self DC_filterUniqueTimeRangeFromEvents:result] sortedByStartHour];
+  }
   @try {
     NSEntityDescription* entityDescription =
         [NSEntityDescription entityForName:NSStringFromClass(eventClass)
@@ -145,20 +181,26 @@
   return [self favoriteEventsWithPredicate:nil];
 }
 
+-(NSArray*)getAllFavoritesEvents {
+  NSEntityDescription* entityDescription =
+  [NSEntityDescription entityForName:NSStringFromClass([DCEvent class])
+              inManagedObjectContext:self.workContext];
+  NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
+  [fetchRequest setEntity:entityDescription];
+  [fetchRequest setReturnsObjectsAsFaults:NO];
+  NSPredicate* predicate = [NSPredicate
+                            predicateWithFormat:@"favorite=%@", [NSNumber numberWithBool:YES]];
+  [fetchRequest setPredicate:predicate];
+  
+  NSArray* result =
+  [self.workContext executeFetchRequest:fetchRequest error:nil];
+  return result;
+}
+
 - (NSArray*)favoriteEventsWithPredicate:(NSPredicate*)aPredicate {
   @try {
-    NSEntityDescription* entityDescription =
-        [NSEntityDescription entityForName:NSStringFromClass([DCEvent class])
-                    inManagedObjectContext:self.workContext];
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
-    [fetchRequest setEntity:entityDescription];
-    [fetchRequest setReturnsObjectsAsFaults:NO];
-    NSPredicate* predicate = [NSPredicate
-        predicateWithFormat:@"favorite=%@", [NSNumber numberWithBool:YES]];
-    [fetchRequest setPredicate:predicate];
-
-    NSArray* result =
-        [self.workContext executeFetchRequest:fetchRequest error:nil];
+    
+    NSArray* result = [self getAllFavoritesEvents];
     NSArray* uniqueDates =
         [result valueForKeyPath:@"@distinctUnionOfObjects.date"];
     NSArray* sortDates = [uniqueDates sortedDates];
@@ -209,6 +251,184 @@
       return NO;
 
   return YES;
+}
+
+#pragma mark - Schedule
+
+- (void)getSchedule:(NSString*)code callback:(void (^)(BOOL, NSDictionary*))callback{
+  NSString* url = [NSString stringWithFormat:@"getSchedule/%@",code];
+  NSURLRequest* request = [DCWebService urlRequestForURI:url withHTTPMethod:@"GET" withHeaderOptions:nil];
+  [DCWebService fetchDataFromURLRequest:request onSuccess:^(NSHTTPURLResponse *response, id data) {
+    NSError* err = nil;
+    NSDictionary* dictionary =
+    [NSJSONSerialization JSONObjectWithData:data
+                                    options:kNilOptions
+                                      error:&err];
+    dictionary = [dictionary dictionaryByReplacingNullsWithStrings];
+    if([dictionary[@"status_code"] integerValue] == 404){
+      callback(false, nil);
+      return;
+    }
+    
+//    [DCSharedSchedule updateFromDictionary:dictionary inContext:self.workContext];
+    NSDictionary *scheduleDictionary = [((NSArray *)[dictionary objectForKey:@"schedules"]) firstObject];
+    if(!scheduleDictionary){
+      scheduleDictionary = dictionary;
+    }
+    callback(true, scheduleDictionary);
+  } onError:^(NSHTTPURLResponse *response, id data, NSError *error) {
+    [DCAlertsManager showAlertWithTitle:@"Schedule not found."
+                                message:@"Please check your code."];
+    callback(false, nil);
+  }];
+}
+
+//TODO: Replace
+-(NSString*)createParametersStringForCodes:(NSArray *)codes{
+    NSMutableString* parametesString = [[NSMutableString alloc] init];
+    for (NSNumber* code in codes) {
+        [parametesString appendString:[NSString stringWithFormat:@"codes[]=%@", code]];
+        if(code != [codes lastObject]){
+            [parametesString appendString:@"&"];
+        }
+    }
+    return parametesString;
+}
+
+-(void)updateSchedule{
+    NSNumber *code = [NSUserDefaults myScheduleCode];
+    if (!code) {
+        [self createSchedule];
+    }else{
+        NSMutableURLRequest* request = [DCWebService mutableURLRequestForURI:[NSString stringWithFormat:@"updateSchedule/%@",[code stringValue]] withHTTPMethod:@"PUT" ];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        [request setHTTPBody:[self createDataForScheduleRequest]];
+        [DCWebService fetchDataFromURLRequest:request onSuccess:^(NSHTTPURLResponse *response, id data) {
+            NSLog(@"%@",response);
+        } onError:^(NSHTTPURLResponse *response, id data, NSError *error) {
+            NSLog(@"%@",error.description);
+        }];
+    }
+}
+
+-(void)createSchedule{
+    if(![NSUserDefaults myScheduleCode]){
+        NSMutableURLRequest* request = [DCWebService mutableURLRequestForURI:@"createSchedule" withHTTPMethod:@"POST" ];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        [request setHTTPBody:[self createDataForScheduleRequest]];
+        [DCWebService fetchDataFromURLRequest:request onSuccess:^(NSHTTPURLResponse *response, id data) {
+            NSLog(@"%@",response);
+            NSError* err = nil;
+            NSDictionary* dictionary =
+            [NSJSONSerialization JSONObjectWithData:data
+                                            options:kNilOptions
+                                              error:&err];
+            dictionary = [dictionary dictionaryByReplacingNullsWithStrings];
+            NSNumber *code = [dictionary objectForKey:@"code"];
+            
+            DCSharedSchedule* sharedSchedule = [DCSharedSchedule createManagedObjectInContext:self.workContext];
+            sharedSchedule.scheduleId = code;
+            sharedSchedule.isMySchedule = [NSNumber numberWithBool:true];
+            sharedSchedule.name = @"My Schedule";
+            [[DCCoreDataStore defaultStore] saveWithCompletionBlock:nil];
+            
+            [NSUserDefaults saveMyScheduleCode:code];
+        } onError:^(NSHTTPURLResponse *response, id data, NSError *error) {
+            NSLog(@"%@",error.description);
+        }];
+    }else{
+        [self updateSchedule];
+    }
+}
+
+-(NSData *)createDataForScheduleRequest{
+  NSArray *ids = [self getFavoritesIds];
+  NSDictionary* dataDictionary = [NSDictionary dictionaryWithObject:ids forKey:@"data"];
+  NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dataDictionary options:NSJSONWritingPrettyPrinted error:nil];
+  return jsonData;
+}
+
+- (NSArray*)getAllSharedSchedules {
+    return [self sharedSchedulesWithPredicate:nil];
+}
+
+- (void)removeSchedule:(DCSharedSchedule *)schedule {
+  [self.workContext deleteObject:schedule];
+  [[DCCoreDataStore defaultStore]
+   saveMainContextWithCompletionBlock:^(BOOL isSuccess){
+   }];
+}
+//TODO: replace methods into shredSchedule model
+- (NSArray*)sharedSchedulesWithPredicate:(NSPredicate*)aPredicate {
+    @try {
+        NSEntityDescription* entityDescription =
+        [NSEntityDescription entityForName:NSStringFromClass([DCSharedSchedule class])
+                    inManagedObjectContext:self.workContext];
+        NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
+        [fetchRequest setEntity:entityDescription];
+        [fetchRequest setReturnsObjectsAsFaults:NO];
+        NSPredicate* predicate = [NSPredicate
+                                  predicateWithFormat:@"isMySchedule=%@", [NSNumber numberWithBool:NO]];
+        [fetchRequest setPredicate:predicate];
+        
+        NSArray* result =
+        [self.workContext executeFetchRequest:fetchRequest error:nil];
+        
+        if (result && [result count]) {
+            return result;
+        }
+    } @catch (NSException* exception) {
+        NSLog(@"%@", NSStringFromClass([self class]));
+        NSLog(@"%@", [self.workContext description]);
+        NSLog(@"%@", [self.workContext.persistentStoreCoordinator description]);
+        NSLog(@"%@", [self.workContext.persistentStoreCoordinator
+                      .managedObjectModel description]);
+        NSLog(@"%@", [self.workContext.persistentStoreCoordinator.managedObjectModel
+                      .entities description]);
+        @throw exception;
+    } @finally {
+    }
+    
+    return nil;
+}
+
+-(NSArray *)getScheduleWithId:(NSString *)idString{
+    NSEntityDescription* entityDescription =
+    [NSEntityDescription entityForName:NSStringFromClass([DCSharedSchedule class])
+                inManagedObjectContext:self.workContext];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:entityDescription];
+    [fetchRequest setReturnsObjectsAsFaults:NO];
+    NSPredicate* predicate = [NSPredicate
+                              predicateWithFormat:@"scheduleId=%ul", [idString integerValue]];
+    [fetchRequest setPredicate:predicate];
+    
+    NSArray* result =
+    [self.workContext executeFetchRequest:fetchRequest error:nil];
+    return result;
+}
+
+-(NSArray *)getSchedulesIds{
+    NSArray *schedules = [[DCMainProxy sharedProxy] getAllSharedSchedules];
+    NSMutableArray* ids = [[NSMutableArray alloc] init];
+    for (DCSharedSchedule* schedule in schedules) {
+        [ids addObject:schedule.scheduleId];
+    }
+    return ids;
+}
+
+-(NSArray *)getFavoritesIds{
+    NSArray* events = [self getAllFavoritesEvents];
+    if(!events.count){
+        return [[NSArray alloc] init];
+    }
+    NSMutableArray *ids = [[NSMutableArray alloc] init];
+    for(DCEvent* event in events){
+        [ids addObject:event.eventId];
+    }
+    return ids;
 }
 
 #pragma mark -

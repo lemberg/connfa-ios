@@ -1,7 +1,7 @@
 
 #import "DCEventDetailHeaderCell.h"
-#import "DCLevel.h"
-#import "DCTrack.h"
+#import "DCLevel+CoreDataProperties.h"
+#import "DCTrack+CoreDataProperties.h"
 #import "DCTimeRange+DC.h"
 #import "NSDate+DC.h"
 #import "DCEvent+DC.h"

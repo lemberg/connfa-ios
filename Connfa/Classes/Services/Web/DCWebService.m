@@ -29,23 +29,26 @@
 + (NSURLRequest*)urlRequestForURI:(NSString*)uri
                    withHTTPMethod:(NSString*)httpMethod
                 withHeaderOptions:(NSDictionary*)options {
-  NSMutableURLRequest* request = [[NSMutableURLRequest alloc] init];
-
-  //    TODO: Remove testing property in getParameter
-  NSString* testUriParameter = uri;
-//      [NSString stringWithFormat:@"%@/?testing=1", uri];
-  NSURL* requestURL = [NSURL URLWithString:testUriParameter
-                             relativeToURL:[NSURL URLWithString:BASE_URL]];
-  [request setURL:requestURL];
-  request.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
-  [request setHTTPMethod:httpMethod];
-
+  NSMutableURLRequest* request = [self mutableURLRequestForURI:uri withHTTPMethod:httpMethod];
   if (options) {
     for (NSString* key in [options allKeys]) {
       [request setValue:options[key] forHTTPHeaderField:key];
     }
   }
 
+  return request;
+}
+
++(NSMutableURLRequest *)mutableURLRequestForURI:(NSString *)uri
+                                 withHTTPMethod:(NSString*)httpMethod {
+  NSMutableURLRequest* request = [[NSMutableURLRequest alloc] init];
+  
+  NSString* testUriParameter = uri;
+  NSURL* requestURL = [NSURL URLWithString:testUriParameter
+                             relativeToURL:[NSURL URLWithString:BASE_URL]];
+  [request setURL:requestURL];
+  request.cachePolicy = NSURLRequestReloadIgnoringLocalCacheData;
+  [request setHTTPMethod:httpMethod];
   return request;
 }
 

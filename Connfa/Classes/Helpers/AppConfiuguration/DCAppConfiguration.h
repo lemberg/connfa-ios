@@ -7,6 +7,7 @@ extern NSString* kFontOpenSansCondBold;
 extern NSString* kFontOpenSansRegular;
 extern NSString* kFontHelveticaNeueRegular;
 extern NSString* kFontMerriweatherRegularRegular;
+extern NSString* kFontGlassAntiquaRegular;
 
 
 @interface DCAppConfiguration : NSObject
@@ -17,6 +18,8 @@ extern NSString* kFontMerriweatherRegularRegular;
 + (UIColor*)eventDetailHeaderColour;
 + (UIColor*)eventDetailNavBarTextColor;
 + (UIColor*)speakerDetailBarColor;
++ (UIColor*)speakerNavigationbarItemsColor;
++ (UIColor*)sideMenuTextColor;
 + (BOOL)isFilterEnable;
 + (NSString*)eventTime;
 + (NSString*)eventPlace;

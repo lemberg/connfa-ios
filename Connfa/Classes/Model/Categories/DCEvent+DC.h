@@ -1,6 +1,6 @@
 
-#import "DCEvent.h"
 #import "DCManagedObjectUpdateProtocol.h"
+#import "DCEvent+CoreDataProperties.h"
 
 #import "NSDictionary+DC.h"
 

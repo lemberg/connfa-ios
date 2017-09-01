@@ -7,7 +7,7 @@
 
 @implementation DCDayEventsDataSource
 
-- (void)loadEvents {
+- (void)loadEvents:(BOOL)isFromPullToRefresh {
   [self dataSourceStartUpdateEvents];
   __weak typeof(self) weakSelf = self;
 //  dispatch_async(
@@ -29,7 +29,7 @@
           [weakSelf dataSourceEndUpdateEvents];
 
           // when this controller shows Current day
-          if (strongSelf.actualEventIndexPath)
+          if (!isFromPullToRefresh && strongSelf.actualEventIndexPath)
             [strongSelf moveTableToCurrentTime];
 
 //        });
@@ -51,8 +51,8 @@
                   completion:nil];
 }
 
-- (void)reloadEvents {
-  [self loadEvents];
+- (void)reloadEvents:(BOOL)isFromPullToRefresh {
+  [self loadEvents:isFromPullToRefresh];
 }
 
 - (NSArray*)eventsForDay {

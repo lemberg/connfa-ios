@@ -14,6 +14,8 @@
 #import "DCTime+DC.h"
 #import "DCLevel+DC.h"
 #import "DCInfo.h"
+#import "DCSharedSchedule+DC.h"
+#import "DCMainProxy+Additions.h"
 
 #import "UIImageView+WebCache.h"
 #import "UIConstants.h"
@@ -21,13 +23,25 @@
 #import "DCCoreDataStore.h"
 #import "DCDayEventsController.h"
 #import "DCGoldSponsorBannerHeandler.h"
+#import "DCDetailEventHeaderTableViewCell.h"
+#import "DCDetailEventScheduleTableViewCell.h"
 
 static NSString* cellIdHeader = @"DetailCellIdHeader";
 static NSString* cellIdSpeaker = @"DetailCellIdSpeaker";
 static NSString* cellIdDescription = @"DetailCellIdDescription";
+static NSString* cellWhoIsgoingHeader = @"WhoIsGoingHeaderCell";
+static NSString* cellSchedule = @"scheduleCell";
+
+static int headerSectionIndex = 0;
+static int speakersSectionIndex = 1;
+static int schedulesSectionIndex = 2;
+static int descriptionSectionIndex = 3;
 
 
-@interface DCEventDetailViewController ()
+@interface DCEventDetailViewController (){
+  NSSet* schedulesSet;
+  NSArray* schedules;
+}
 
 @property(nonatomic, weak) IBOutlet UITableView* tableView;
 @property(weak, nonatomic) IBOutlet UIView* noDataView;
@@ -44,6 +58,12 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
 @property(nonatomic, strong) UIColor* currentBarColor;
 
 @property(nonatomic, strong) NSDictionary* cellsForSizeEstimation;
+
+@property(nonatomic, strong) NSMutableArray* schedulesIndexPaths;
+@property(nonatomic)BOOL isWhoIsGoingExpanded;
+
+@property(nonatomic, strong) UIImage* filledStarImage;
+@property(nonatomic, strong) UIImage* starImage;
 
 @end
 
@@ -63,6 +83,9 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
   [super viewDidLoad];
 
   [self setNeedsStatusBarAppearanceUpdate];
+  
+  self.filledStarImage = [[UIImage imageNamedFromBundle:@"star+"]  imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+  self.starImage = [[UIImage imageNamedFromBundle:@"star-"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
   
   self.cellsForSizeEstimation = @{
     cellIdHeader :
@@ -93,8 +116,20 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
   NSString *bannerName = [handler getSponsorBannerName];
   [self trackSponsorBannerViaGAI:bannerName];
   self.topBackgroundView.image = [UIImage imageNamed:bannerName];
+  schedulesSet = self.event.schedules;
+  schedules = [schedulesSet allObjects];
+  NSLog(@"%@", self.event.eventId);
+  [self addIndexPathsForWhoIsGoing];
 
+  self.isWhoIsGoingExpanded = true;
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(openMyScheduleFromUrl)
+                                               name:@"openMyScheduleFromUrl"
+                                             object:nil];
+  self.currentBarColor = [DCAppConfiguration eventDetailNavBarTextColor];
 }
+
 
 - (void)viewWillDisappear:(BOOL)animated {
   if (self.closeCallback)
@@ -137,13 +172,11 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
   self.navigationController.navigationBar.translucent = YES;
   self.navigationController.navigationBar.backgroundColor =
   [UIColor clearColor];
-  UIColor* eventNavColor = [DCAppConfiguration eventDetailNavBarTextColor];
+  UIColor* eventNavColor = self.currentBarColor;
   UIImage* startImage =
   self.event.favorite.boolValue
-  ? [[UIImage imageNamedFromBundle:@"star+"]
-     imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
-  : [[UIImage imageNamedFromBundle:@"star-"]
-     imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+  ? self.filledStarImage
+  : self.starImage;
   UIBarButtonItem* favoriteButton = [[UIBarButtonItem alloc]
                                      initWithImage:startImage
                                      style:UIBarButtonItemStylePlain
@@ -152,7 +185,6 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
   // tag 1: unselected state
   // tag 2: selected state
   favoriteButton.tag = self.event.favorite.boolValue ? 2 : 1;
-  favoriteButton.tintColor = eventNavColor;
   
   if (self.event.link.length > 0) {
     UIBarButtonItem* sharedButton = [[UIBarButtonItem alloc]
@@ -166,15 +198,15 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
   
   self.navigationController.navigationBar.tintColor = eventNavColor;
   self.topTitleLabel.textColor = [UIColor whiteColor];
-  self.currentBarColor = eventNavColor;
 }
 
 - (BOOL)showEmptyDetailIcon {
+  BOOL isSchedulesEmpty = self.schedulesIndexPaths == 0;
   BOOL isTrackEmpty = [[self.event.tracks allObjects].lastObject name].length == 0;
   BOOL isExperienceEmpty = self.event.level.name.length == 0;
   BOOL isNoSpeakers = [self.speakers count] == 0;
   BOOL isDescriptionEmpty = self.event.desctiptText.length == 0;
-  return isTrackEmpty && isExperienceEmpty && isNoSpeakers && isDescriptionEmpty;
+  return isTrackEmpty && isExperienceEmpty && isNoSpeakers && isDescriptionEmpty && isSchedulesEmpty;
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -247,65 +279,148 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
   [tracker send:[[GAIDictionaryBuilder createAppView] build]];
 }
 
+- (void)addIndexPathsForWhoIsGoing{
+  self.schedulesIndexPaths = [[NSMutableArray alloc] init];
+  int index = 1;
+  for (DCSharedSchedule *schedule in schedules) {
+      [self.schedulesIndexPaths addObject:[NSIndexPath indexPathForRow:index inSection:schedulesSectionIndex]];
+    index++;
+  }
+}
+
+-(void)openMyScheduleFromUrl {
+  [self.navigationController popViewControllerAnimated:true];
+}
 
 #pragma mark - UITableView DataSource/Delegate methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView*)tableView {
-  return 1;
+  return 4;
 }
 
 - (CGFloat)tableView:(UITableView*)tableView
     heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-  if (indexPath.row == 0)
-    return [self getHeaderCellHeight];
-
-  if (indexPath.row == (self.speakers.count + 1))
-    return [self heightForDescriptionTextCell];
-  else
+  
+  if(indexPath.section == headerSectionIndex){
+    if (indexPath.row == 0) {
+      return [self getHeaderCellHeight];
+    }
+  }else if(indexPath.section == speakersSectionIndex){
+    if(indexPath.row == 0){
+      return 48.;
+    }
     return [self getSpeakerCellHeight:self.speakers[indexPath.row - 1]];
+  }else if(indexPath.section == schedulesSectionIndex){
+      return 48.;
+  }else{
+    return [self heightForDescriptionTextCell];
+  }
+  return 48.;
 }
 
 - (NSInteger)tableView:(UITableView*)tableView
  numberOfRowsInSection:(NSInteger)section {
-  // speakers + description + header
-  return self.speakers.count + 2;
+  if(section == headerSectionIndex){
+    return 1;
+  }else if(section == speakersSectionIndex){
+    if(_speakers.count){
+      return _speakers.count + 1;
+    }
+  }else if(section == schedulesSectionIndex){
+    if(schedules.count){
+      if(_isWhoIsGoingExpanded){
+        return schedules.count + 1;
+      }else {
+        return 1;
+      }
+    }
+  }else{
+    return 1;
+  }
+  return 0;
 }
 
 - (UITableViewCell*)tableView:(UITableView*)tableView
         cellForRowAtIndexPath:(NSIndexPath*)indexPath {
-  // header cell
-  if (indexPath.row == 0) {
-    DCEventDetailHeaderCell* cell = (DCEventDetailHeaderCell*)
-        [tableView dequeueReusableCellWithIdentifier:cellIdHeader];
-    [cell initData:self.event];
+  if(indexPath.section == headerSectionIndex){
+    if (indexPath.row == 0) {
+      DCEventDetailHeaderCell* cell = (DCEventDetailHeaderCell*)
+      [tableView dequeueReusableCellWithIdentifier:cellIdHeader];
+      [cell initData:self.event];
+      return cell;
+    }
+    
+  }else if(indexPath.section == speakersSectionIndex){
+    if(indexPath.row == 0){
+      DCDetailEventHeaderTableViewCell *speakersCell = (DCDetailEventHeaderTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:cellWhoIsgoingHeader];
+      speakersCell.headerLabel.text = @"Speakers";
+      speakersCell.headerLabel.textColor = [DCAppConfiguration eventDetailHeaderColour];
+      speakersCell.selectionStyle = UITableViewCellSelectionStyleNone;
+      return speakersCell;
+    }
+    
+    DCSpeaker* speaker = self.speakers[indexPath.row - 1];
+    DCSpeakerCell* cell = (DCSpeakerCell*)
+    [tableView dequeueReusableCellWithIdentifier:cellIdSpeaker];
+    [cell initData:speaker];
+    if(indexPath.row != _speakers.count){
+      cell.separator.hidden = true;
+    } else {
+      cell.separator.hidden = false;
+    }
     return cell;
-  }
-
-  // description cell
-  if (indexPath.row == self.speakers.count + 1) {
+    
+  }else if(indexPath.section == schedulesSectionIndex){
+    if(indexPath.row == 0){
+      DCDetailEventHeaderTableViewCell *whoIsGoingCell = (DCDetailEventHeaderTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:cellWhoIsgoingHeader];
+      whoIsGoingCell.headerLabel.textColor = [DCAppConfiguration eventDetailHeaderColour];
+      return whoIsGoingCell;
+    }
+    
+    DCDetailEventScheduleTableViewCell *scheduleCell = (DCDetailEventScheduleTableViewCell *)[self.tableView dequeueReusableCellWithIdentifier:cellSchedule];
+    if(indexPath.row != schedules.count){
+      scheduleCell.separator.hidden = true;
+    } else{
+      scheduleCell.separator.hidden = false;
+    }
+    scheduleCell.scheduleName.text = ((DCSharedSchedule*)[schedules objectAtIndex:indexPath.row - 1]).name;
+    scheduleCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return scheduleCell;
+    
+  }else{
     DCDescriptionTextCell* cell = (DCDescriptionTextCell*)
-        [tableView dequeueReusableCellWithIdentifier:cellIdDescription];
+    [tableView dequeueReusableCellWithIdentifier:cellIdDescription];
     cell.descriptionWebView.delegate = self;
     self.lastIndexPath = indexPath;
     [cell.descriptionWebView loadHTMLString:_event.desctiptText
                                       style:@"event_detail_style"];
     return cell;
-  } else  // speaker cell
-  {
-    DCSpeaker* speaker = self.speakers[indexPath.row - 1];
-    DCSpeakerCell* cell = (DCSpeakerCell*)
-        [tableView dequeueReusableCellWithIdentifier:cellIdSpeaker];
-    [cell initData:speaker];
-    return cell;
   }
+
+    return [[UITableViewCell alloc] init];
 }
 
 - (void)tableView:(UITableView*)tableView
     didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
   [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
-  if (![[tableView cellForRowAtIndexPath:indexPath]
-          isKindOfClass:[DCSpeakerCell class]])
+  if(indexPath.section == schedulesSectionIndex && indexPath.row == 0){
+    if(!self.isWhoIsGoingExpanded){
+      self.isWhoIsGoingExpanded = true;
+      [self.tableView beginUpdates];
+      [self addIndexPathsForWhoIsGoing];
+      [self.tableView insertRowsAtIndexPaths:self.schedulesIndexPaths withRowAnimation:UITableViewRowAnimationTop];
+      [self.tableView endUpdates];
+    }else{
+      self.isWhoIsGoingExpanded = !self.isWhoIsGoingExpanded;
+      [self.tableView beginUpdates];
+      [self.tableView deleteRowsAtIndexPaths:self.schedulesIndexPaths withRowAnimation:UITableViewRowAnimationTop];
+      [self.tableView endUpdates];
+      [self.schedulesIndexPaths removeAllObjects];
+    }
+  }
+  
+  if (indexPath.section != speakersSectionIndex || indexPath.row == 0)
     return;
   UIStoryboard* mainStoryboard =
       [UIStoryboard storyboardWithName:@"Speakers" bundle:nil];
@@ -318,6 +433,7 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
   [self.navigationController pushViewController:speakerViewController
                                        animated:YES];
 }
+
 
 #pragma mark - UIWebView delegate
 
@@ -372,6 +488,11 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
       alpha = (-self.topBackgroundTop.constant >= topStopPoint) ? maxAlpha : 0;
     }
     self.topBackgroundShadowView.alpha = alpha;
+    if(alpha == 0.0) {
+      self.navigationController.navigationBar.tintColor = [DCAppConfiguration eventDetailNavBarTextColor];
+    }else {
+      self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    }
 
     // constraints setting
     if (shouldMoveToTop) {
@@ -420,18 +541,14 @@ static NSString* cellIdDescription = @"DetailCellIdDescription";
 
   sender.image =
       isSelected
-          ? [[UIImage imageNamedFromBundle:@"star+"]
-                imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]
-          : [[UIImage imageNamedFromBundle:@"star-"]
-                imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-
-  sender.tintColor = [DCAppConfiguration eventDetailNavBarTextColor];
-  
+          ? self.filledStarImage
+          : self.starImage;
   if (isSelected) {
     [[DCMainProxy sharedProxy] addToFavoriteEvent:self.event];
   } else {
     [[DCMainProxy sharedProxy] removeFavoriteEventWithID:self.event];
   }
+    [[DCMainProxy sharedProxy] updateSchedule];
 }
 
 - (void)shareButtonDidClick {

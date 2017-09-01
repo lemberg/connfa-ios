@@ -1,7 +1,7 @@
 
 #import "DCImportDataSevice.h"
 
-#import "DCMainProxy.h"
+#import "DCMainProxy+Additions.h"
 #import "DCEvent+DC.h"
 #import "DCMainEvent+DC.h"
 #import "DCBof+DC.h"
@@ -22,6 +22,7 @@
 #import "DCParserService.h"
 
 #import "NSUserDefaults+DC.h"
+#import "DCSharedSchedule+CoreDataProperties.h"
 
 static NSString* const CHECK_UPDATES_URI = @"checkUpdates";
 static NSString* const IDS_FOR_UPDATE = @"idsForUpdate";
@@ -37,6 +38,7 @@ static NSString* const SOCIAL_EVENTS_URI = @"getSocialEvents";
 static NSString* const POI_URI = @"getPOI";
 static NSString* const INFO_URI = @"getInfo";
 static NSString* const SETTINGS_URI = @"getSettings";
+static NSString* const SCHEDULES_URI = @"getSchedules?";
 
 @interface DCImportDataSevice ()
 
@@ -76,7 +78,7 @@ static NSString* const SETTINGS_URI = @"getSettings";
 }
 
 - (NSDictionary*)classesMap {
-  if (!_classesMap) {
+//  if (!_classesMap) {
     _classesMap = @{
       TYPES_URI : [DCType class],
       SETTINGS_URI : [DCAppSettings class],
@@ -89,9 +91,10 @@ static NSString* const SETTINGS_URI = @"getSettings";
       SOCIAL_EVENTS_URI : [DCSocialEvent class],
       LOCATIONS_URI : [DCLocation class],
       POI_URI : [DCPoi class],
-      INFO_URI : [DCInfo class]     
+      INFO_URI : [DCInfo class],
+      [self getSchedulesUrlString]: [DCSharedSchedule class]
     };
-  }
+//  }
   return _classesMap;
 }
 
@@ -249,7 +252,8 @@ static NSString* const SETTINGS_URI = @"getSettings";
     Class model = self.classesMap[keyUri];
     // Check is model can update with dictionary
     if ([model conformsToProtocol:@protocol(ManagedObjectUpdateProtocol)]) {
-      [model updateFromDictionary:dict[keyUri] inContext:context];
+      NSString* key = [keyUri stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+      [model updateFromDictionary:dict[key] inContext:context];
     } else if (model) {
       NSAssert(NO, @"Model cann't be updated because it doesn't have "
                @"ManagedObjectUpdateProtocol");
@@ -340,7 +344,10 @@ static NSString* const SETTINGS_URI = @"getSettings";
     case 11:
       result = INFO_URI;
       break;
-
+      
+      case 12:
+      result = [self getSchedulesUrlString];
+      break;
     case 0:
       result = SETTINGS_URI;
       break;
@@ -349,6 +356,19 @@ static NSString* const SETTINGS_URI = @"getSettings";
   }
 
   return result;
+}
+
+-(NSString *)getSchedulesUrlString{
+  NSMutableString* parametesString = [[NSMutableString alloc] init];
+  [parametesString appendString:SCHEDULES_URI];
+  NSArray *codes = [[DCMainProxy sharedProxy] getSchedulesIds];
+  for (NSNumber* code in codes) {
+    [parametesString appendString:[NSString stringWithFormat:@"codes[]=%@", [code stringValue]]];
+    if(code != [codes lastObject]){
+      [parametesString appendString:@"&"];
+    }
+  }
+  return parametesString;
 }
 
 @end
