@@ -1,0 +1,25 @@
+{
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint .",
+    "serve": "firebase serve --only functions",
+    "shell": "firebase experimental:functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "dependencies": {
+    "@google-cloud/storage": "1.5.1",
+    "firebase-admin": "^5.8.1",
+    "firebase-functions": "^0.8.1",
+    "knuth-shuffle": "^1.0.8",
+    "knuth-shuffle-seeded": "^1.0.6"
+  },
+  "devDependencies": {
+    "eslint": "^4.16.0",
+    "eslint-plugin-promise": "^3.6.0",
+    "flow-bin": "^0.63.1"
+  },
+  "private": true
+}
