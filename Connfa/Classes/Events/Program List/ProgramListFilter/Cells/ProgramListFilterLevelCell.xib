@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SF-UI-Text-Regular.otf">
+            <string>SFUIText-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProgramListFilterLevelCell" id="KGk-i7-Jjw" customClass="ProgramListFilterLevelCell" customModule="Connfa" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-filter-checkmark" translatesAutoresizingMaskIntoConstraints="NO" id="jnk-qT-hQJ">
+                        <rect key="frame" x="52" y="10" width="22" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="22" id="Dei-HR-DUP"/>
+                            <constraint firstAttribute="height" constant="22" id="rc2-dJ-Dfs"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Session" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D62-cg-D32">
+                        <rect key="frame" x="89" y="13" width="57" height="19"/>
+                        <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="jnk-qT-hQJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="52" id="FUL-HU-BXH"/>
+                    <constraint firstItem="jnk-qT-hQJ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="GzM-5c-ocI"/>
+                    <constraint firstItem="D62-cg-D32" firstAttribute="leading" secondItem="jnk-qT-hQJ" secondAttribute="trailing" constant="15" id="mDu-yQ-u6A"/>
+                    <constraint firstItem="D62-cg-D32" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="xr8-sB-XdY"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="checkmark" destination="jnk-qT-hQJ" id="MOe-lQ-Ut1"/>
+                <outlet property="title" destination="D62-cg-D32" id="oI7-ou-CDA"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ic-filter-checkmark" width="22" height="22"/>
+    </resources>
+</document>

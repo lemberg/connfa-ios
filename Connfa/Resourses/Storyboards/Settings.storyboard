@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="YlY-th-8QQ">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Settings-->
+        <scene sceneID="0kw-Ck-Nhd">
+            <objects>
+                <tableViewController id="XvB-cD-oGn" customClass="SettingsTableViewController" customModule="Connfa" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="jOw-8z-ZQm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <sections>
+                            <tableViewSection headerTitle="Offline mode" footerTitle="Download all remotely stored data to use device in offline mode." id="ifL-vD-NMf">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="52" id="6s0-zi-ZMI">
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="52"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6s0-zi-ZMI" id="4EA-Yy-qOO">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="51.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Download data" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="skf-Zw-oai">
+                                                    <rect key="frame" x="56" y="17" width="147" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="147" id="ZnR-kk-IFh"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="download-image" translatesAutoresizingMaskIntoConstraints="NO" id="XhI-53-ETQ">
+                                                    <rect key="frame" x="18" y="12" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="ree-Ar-jtZ"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="AZ8-bZ-wYU">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="2"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="2" id="JIS-Sx-FnS"/>
+                                                    </constraints>
+                                                </progressView>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="oPZ-8L-pTi">
+                                                    <rect key="frame" x="19" y="10" width="30" height="37"/>
+                                                    <color key="color" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                </activityIndicatorView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="buD-aQ-JZJ">
+                                                    <rect key="frame" x="304" y="19" width="63" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="63" id="4Gt-1a-A6L"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="buD-aQ-JZJ" firstAttribute="centerY" secondItem="skf-Zw-oai" secondAttribute="centerY" id="3X6-Nu-5GF"/>
+                                                <constraint firstItem="AZ8-bZ-wYU" firstAttribute="top" secondItem="4EA-Yy-qOO" secondAttribute="top" id="F7p-8w-P7p"/>
+                                                <constraint firstAttribute="trailing" secondItem="AZ8-bZ-wYU" secondAttribute="trailing" id="IGg-Kq-xkt"/>
+                                                <constraint firstItem="skf-Zw-oai" firstAttribute="leading" secondItem="oPZ-8L-pTi" secondAttribute="trailing" constant="7" id="PvK-B2-gxL"/>
+                                                <constraint firstItem="skf-Zw-oai" firstAttribute="top" secondItem="AZ8-bZ-wYU" secondAttribute="bottom" constant="15" id="YVf-Bc-XEe"/>
+                                                <constraint firstItem="skf-Zw-oai" firstAttribute="leading" secondItem="XhI-53-ETQ" secondAttribute="trailing" constant="8" symbolic="YES" id="YhD-5M-R1Q"/>
+                                                <constraint firstItem="oPZ-8L-pTi" firstAttribute="leading" secondItem="4EA-Yy-qOO" secondAttribute="leadingMargin" constant="11" id="ZV2-cU-NCK"/>
+                                                <constraint firstItem="XhI-53-ETQ" firstAttribute="leading" secondItem="4EA-Yy-qOO" secondAttribute="leadingMargin" constant="10" id="f0o-sr-K7v"/>
+                                                <constraint firstItem="XhI-53-ETQ" firstAttribute="top" secondItem="AZ8-bZ-wYU" secondAttribute="bottom" constant="10" id="gcN-ee-1n1"/>
+                                                <constraint firstItem="buD-aQ-JZJ" firstAttribute="trailing" secondItem="4EA-Yy-qOO" secondAttribute="trailingMargin" id="l18-4f-Srg"/>
+                                                <constraint firstItem="oPZ-8L-pTi" firstAttribute="top" secondItem="AZ8-bZ-wYU" secondAttribute="bottom" constant="8" symbolic="YES" id="oRb-PB-7SK"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="XhI-53-ETQ" secondAttribute="bottom" constant="1.5" id="sOm-RI-Kp3"/>
+                                                <constraint firstItem="AZ8-bZ-wYU" firstAttribute="leading" secondItem="4EA-Yy-qOO" secondAttribute="leading" id="t80-Yy-CJM"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="XvB-cD-oGn" id="bmR-sH-sGZ"/>
+                            <outlet property="delegate" destination="XvB-cD-oGn" id="7xL-2Q-FZQ"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Settings" id="dmT-09-fEG"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="oPZ-8L-pTi" id="Ock-3V-w9e"/>
+                        <outlet property="contentSizeLabel" destination="buD-aQ-JZJ" id="BBO-yV-kwO"/>
+                        <outlet property="downloadCell" destination="6s0-zi-ZMI" id="SCN-JX-8Ur"/>
+                        <outlet property="downloadImage" destination="XhI-53-ETQ" id="kqu-lJ-L7d"/>
+                        <outlet property="progressBar" destination="AZ8-bZ-wYU" id="Nbx-3H-jlo"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y5r-9F-BrS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="933.60000000000002" y="147.97601199400302"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="dw2-0c-48i">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="YlY-th-8QQ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Settings" id="axr-RX-Nj4"/>
+                    <toolbarItems/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="WfV-5E-HLv">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="XvB-cD-oGn" kind="relationship" relationship="rootViewController" id="gb0-ba-1tv"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QFr-Yc-mZd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5.5999999999999996" y="147.97601199400302"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="download-image" width="800" height="800"/>
+    </resources>
+</document>

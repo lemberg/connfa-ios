@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/RomanM/Documents/Projects/connfa/Connfa.xcodeproj">
+      location = "self:Connfa.xcodeproj">
    </FileRef>
 </Workspace>

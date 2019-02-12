@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GMy-kt-daJ" customClass="EmptyStateView" customModule="Connfa" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Koc-0s-E3z">
+                    <rect key="frame" x="163" y="278.5" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="Sq3-9f-xoT"/>
+                        <constraint firstAttribute="width" secondItem="Koc-0s-E3z" secondAttribute="height" multiplier="1:1" id="d3n-Ur-mXs"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iAX-t8-LcU">
+                    <rect key="frame" x="187.5" y="343.5" width="0.0" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                    <color key="textColor" red="0.70588235294117641" green="0.70588235294117641" blue="0.70588235294117641" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Koc-0s-E3z" firstAttribute="centerX" secondItem="Rhh-Rl-Efs" secondAttribute="centerX" id="Enu-rS-MVb"/>
+                <constraint firstItem="iAX-t8-LcU" firstAttribute="top" secondItem="Koc-0s-E3z" secondAttribute="bottom" constant="15" id="Ls8-pe-hk8"/>
+                <constraint firstItem="iAX-t8-LcU" firstAttribute="centerX" secondItem="Rhh-Rl-Efs" secondAttribute="centerX" id="WLs-cE-O07"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iAX-t8-LcU" secondAttribute="trailing" constant="15" id="gdl-K4-P5s"/>
+                <constraint firstItem="iAX-t8-LcU" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="GMy-kt-daJ" secondAttribute="leading" constant="15" id="oVc-lK-PtG"/>
+                <constraint firstItem="iAX-t8-LcU" firstAttribute="centerY" secondItem="Rhh-Rl-Efs" secondAttribute="centerY" id="wbc-U2-sec"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="Rhh-Rl-Efs"/>
+            <connections>
+                <outlet property="emptyStateDescription" destination="iAX-t8-LcU" id="fio-ds-BLp"/>
+                <outlet property="icon" destination="Koc-0s-E3z" id="JCG-ej-Z6Q"/>
+            </connections>
+        </view>
+    </objects>
+</document>

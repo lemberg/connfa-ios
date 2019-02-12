@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hWa-MK-7bY">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Info View Controller-->
+        <scene sceneID="H7E-kT-ReN">
+            <objects>
+                <viewController extendedLayoutIncludesOpaqueBars="YES" id="hWa-MK-7bY" customClass="InfoViewController" customModule="Connfa" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Fdm-i1-tHh"/>
+                        <viewControllerLayoutGuide type="bottom" id="bgE-a5-ubC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Oh3-cF-9qd">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hJL-aK-wl4">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <connections>
+                                    <segue destination="szz-Hc-Ylk" kind="embed" id="Pam-y7-VWf"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hJL-aK-wl4" firstAttribute="leading" secondItem="Oh3-cF-9qd" secondAttribute="leading" id="1iN-L8-qJ1"/>
+                            <constraint firstAttribute="trailing" secondItem="hJL-aK-wl4" secondAttribute="trailing" id="Clk-Mn-JwY"/>
+                            <constraint firstAttribute="bottom" secondItem="hJL-aK-wl4" secondAttribute="bottom" id="ehj-0v-Adh"/>
+                            <constraint firstItem="hJL-aK-wl4" firstAttribute="top" secondItem="Oh3-cF-9qd" secondAttribute="top" id="oPL-e2-eIp"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="NgT-4i-vQB"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zDp-Xv-m6B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1055.2" y="122.78860569715144"/>
+        </scene>
+        <!--WebView-->
+        <scene sceneID="Bvj-92-EV1">
+            <objects>
+                <viewControllerPlaceholder storyboardName="WebView" id="szz-Hc-Ylk" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l9T-k0-Dto" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1598" y="123"/>
+        </scene>
+    </scenes>
+</document>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gRo-vB-60L">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SF-UI-Text-Semibold.otf">
+            <string>SFUIText-Semibold</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Program List Days View Controller-->
+        <scene sceneID="zMq-pM-twb">
+            <objects>
+                <viewController id="gRo-vB-60L" customClass="ProgramListDaysViewController" customModule="Connfa" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4va-2l-1zs"/>
+                        <viewControllerLayoutGuide type="bottom" id="aFj-iQ-u7F"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8RO-1e-Mlz">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="81"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YU7-ka-0vw">
+                                <rect key="frame" x="157" y="50" width="6.5" height="16"/>
+                                <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fxt-ev-Tmc">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="43" id="iEH-LF-PdA"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="5" minimumInteritemSpacing="5" id="qia-5M-KcE">
+                                    <size key="itemSize" width="46" height="43"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="9" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="fxt-ev-Tmc" secondAttribute="trailing" id="Tqu-nO-uIG"/>
+                            <constraint firstItem="fxt-ev-Tmc" firstAttribute="top" secondItem="4va-2l-1zs" secondAttribute="bottom" id="agN-wi-ZsC"/>
+                            <constraint firstItem="aFj-iQ-u7F" firstAttribute="top" secondItem="YU7-ka-0vw" secondAttribute="bottom" constant="15" id="kBs-YL-Vng"/>
+                            <constraint firstItem="fxt-ev-Tmc" firstAttribute="leading" secondItem="8RO-1e-Mlz" secondAttribute="leading" id="vEq-ph-DEd"/>
+                            <constraint firstItem="YU7-ka-0vw" firstAttribute="centerX" secondItem="8RO-1e-Mlz" secondAttribute="centerX" id="vJU-U4-aCJ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="vK3-Rp-nfg"/>
+                    </view>
+                    <size key="freeformSize" width="320" height="81"/>
+                    <connections>
+                        <outlet property="collection" destination="fxt-ev-Tmc" id="jTJ-a5-Ro2"/>
+                        <outlet property="fullDate" destination="YU7-ka-0vw" id="Bbp-uc-qdP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HTN-kh-DIW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1366" y="-141"/>
+        </scene>
+    </scenes>
+</document>

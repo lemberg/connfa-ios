@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SF-UI-Text-Bold.otf">
+            <string>SFUIText-Bold</string>
+        </array>
+        <array key="SF-UI-Text-Semibold.otf">
+            <string>SFUIText-Semibold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProgramListHeader" id="KGk-i7-Jjw" customClass="ProgramListHeader" customModule="Connfa" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="39.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-slot-bg" translatesAutoresizingMaskIntoConstraints="NO" id="nda-ot-hW0">
+                        <rect key="frame" x="0.0" y="13.5" width="88" height="52"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="52" id="CVO-Ep-Hq1"/>
+                            <constraint firstAttribute="width" constant="88" id="fcZ-NA-kcT"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10:15 AM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KeZ-4c-aNw">
+                        <rect key="frame" x="17.5" y="25.5" width="55.5" height="14"/>
+                        <fontDescription key="fontDescription" name="SFUIText-Bold" family="SF UI Text" pointSize="12"/>
+                        <color key="textColor" red="0.94117647058823528" green="0.29019607843137252" blue="0.098039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11:45 PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Av9-Bi-rXx">
+                        <rect key="frame" x="28" y="41.5" width="45" height="12"/>
+                        <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="10"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-going-now" translatesAutoresizingMaskIntoConstraints="NO" id="5bu-y1-5Q5">
+                        <rect key="frame" x="185" y="20.5" width="135" height="38"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="135" id="Il8-bl-h5Q"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Going Now" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ohc-XH-pkZ">
+                        <rect key="frame" x="200" y="32.5" width="120" height="14"/>
+                        <fontDescription key="fontDescription" name="SFUIText-Semibold" family="SF UI Text" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="KeZ-4c-aNw" firstAttribute="trailing" secondItem="nda-ot-hW0" secondAttribute="trailing" constant="-15" id="LOK-DX-Rbk"/>
+                    <constraint firstItem="Ohc-XH-pkZ" firstAttribute="centerY" secondItem="5bu-y1-5Q5" secondAttribute="centerY" id="QwQ-nc-P9T"/>
+                    <constraint firstItem="5bu-y1-5Q5" firstAttribute="centerY" secondItem="nda-ot-hW0" secondAttribute="centerY" id="Wfy-j7-HgD"/>
+                    <constraint firstItem="nda-ot-hW0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="bPv-Tr-vco"/>
+                    <constraint firstItem="Av9-Bi-rXx" firstAttribute="trailing" secondItem="KeZ-4c-aNw" secondAttribute="trailing" id="fds-Ps-BP0"/>
+                    <constraint firstItem="Ohc-XH-pkZ" firstAttribute="trailing" secondItem="5bu-y1-5Q5" secondAttribute="trailing" id="hOb-Sd-R4v"/>
+                    <constraint firstAttribute="bottom" secondItem="nda-ot-hW0" secondAttribute="bottom" constant="-26" id="jPr-T3-635"/>
+                    <constraint firstItem="Av9-Bi-rXx" firstAttribute="top" secondItem="KeZ-4c-aNw" secondAttribute="bottom" constant="2" id="kUj-qZ-suN"/>
+                    <constraint firstAttribute="trailing" secondItem="5bu-y1-5Q5" secondAttribute="trailing" id="mgs-gJ-jHe"/>
+                    <constraint firstItem="KeZ-4c-aNw" firstAttribute="top" secondItem="nda-ot-hW0" secondAttribute="top" constant="12" id="pXy-qL-CBd"/>
+                    <constraint firstItem="Ohc-XH-pkZ" firstAttribute="leading" secondItem="5bu-y1-5Q5" secondAttribute="leading" constant="15" id="tqL-Uh-JFw"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="end" destination="Av9-Bi-rXx" id="QRi-Pz-vVf"/>
+                <outlet property="rightMessage" destination="Ohc-XH-pkZ" id="h8r-Cz-9Kh"/>
+                <outlet property="rightPanel" destination="5bu-y1-5Q5" id="Klg-TS-2ze"/>
+                <outlet property="start" destination="KeZ-4c-aNw" id="ZY1-lw-WAk"/>
+            </connections>
+            <point key="canvasLocation" x="39" y="-156"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="ic-going-now" width="110" height="38"/>
+        <image name="ic-slot-bg" width="88" height="52"/>
+    </resources>
+</document>

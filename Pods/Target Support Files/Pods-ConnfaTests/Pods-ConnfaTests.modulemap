@@ -1,0 +1,6 @@
+framework module Pods_ConnfaTests {
+  umbrella header "Pods-ConnfaTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

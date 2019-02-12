@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="5jp-br-T7q">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SF-UI-Text-Regular.otf">
+            <string>SFUIText-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Tab Bar Controller-->
+        <scene sceneID="cGk-qU-dQX">
+            <objects>
+                <tabBarController storyboardIdentifier="MainTabBarController" id="1P6-uo-hDK" sceneMemberID="viewController">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="gca-qx-47C">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="selectedImageTintColor" red="0.90196078431372551" green="0.29019607843137252" blue="0.098039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Ke7-rV-kUb" kind="relationship" relationship="viewControllers" id="TWJ-Zl-Ws8"/>
+                        <segue destination="IAj-uf-dlY" kind="relationship" relationship="viewControllers" id="EBD-9l-z4g"/>
+                        <segue destination="Sba-BP-iYS" kind="relationship" relationship="viewControllers" id="tTT-lW-vQx"/>
+                        <segue destination="X7V-Ff-zh0" kind="relationship" relationship="viewControllers" id="kNa-hk-eJt"/>
+                        <segue destination="3R4-9i-XtU" kind="relationship" relationship="viewControllers" id="I8a-Zy-mio"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wXM-8e-q7N" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-938" y="266"/>
+        </scene>
+        <!--Interested-->
+        <scene sceneID="Tc9-El-deR">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Interested" id="IAj-uf-dlY" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="gxE-hY-Ju1"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hiQ-6Q-qnZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-158" y="33"/>
+        </scene>
+        <!--Program-->
+        <scene sceneID="doT-dO-N2A">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Program" id="Ke7-rV-kUb" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="f5r-88-HBd"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dDS-N6-rqE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-145" y="100"/>
+        </scene>
+        <!--SocialMedia-->
+        <scene sceneID="zF4-P2-aXc">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SocialMedia" id="Sba-BP-iYS" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="bh3-wf-oyO"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gxJ-g9-zI9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-131" y="184"/>
+        </scene>
+        <!--Speakers-->
+        <scene sceneID="bL8-6J-7a7">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Speakers" id="X7V-Ff-zh0" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="saj-ki-jF9"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GEo-MM-eHV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-145" y="266"/>
+        </scene>
+        <!--More-->
+        <scene sceneID="eUe-Gc-g6W">
+            <objects>
+                <viewControllerPlaceholder storyboardName="More" id="3R4-9i-XtU" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="kIW-dJ-b9G"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XQ9-HZ-ld1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-170" y="373"/>
+        </scene>
+        <!--Preloader View Controller-->
+        <scene sceneID="vT3-6k-Gxx">
+            <objects>
+                <viewController id="5jp-br-T7q" customClass="PreloaderViewController" customModule="Connfa" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Uax-bO-ijU"/>
+                        <viewControllerLayoutGuide type="bottom" id="Jg7-9w-1Mm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="uOY-1L-js0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="connfa-logo" translatesAutoresizingMaskIntoConstraints="NO" id="yPG-Uw-0Od">
+                                <rect key="frame" x="130" y="182" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="XGM-K3-Wf8"/>
+                                    <constraint firstAttribute="height" constant="60" id="tda-To-dcH"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connfa" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K6K-vh-Rke">
+                                <rect key="frame" x="126.5" y="302" width="67.5" height="24"/>
+                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="20"/>
+                                <color key="textColor" red="0.90196078430000004" green="0.2901960784" blue="0.098039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="juH-BB-ow3">
+                                <rect key="frame" x="150" y="386" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="K6K-vh-Rke" firstAttribute="centerY" secondItem="uOY-1L-js0" secondAttribute="centerY" constant="30" id="A1Q-sH-KIZ"/>
+                            <constraint firstItem="K6K-vh-Rke" firstAttribute="top" secondItem="yPG-Uw-0Od" secondAttribute="bottom" constant="60" id="JxT-fE-Grl"/>
+                            <constraint firstItem="K6K-vh-Rke" firstAttribute="centerX" secondItem="uOY-1L-js0" secondAttribute="centerX" id="OCE-fx-hAB"/>
+                            <constraint firstItem="yPG-Uw-0Od" firstAttribute="centerX" secondItem="uOY-1L-js0" secondAttribute="centerX" id="OiM-Pz-WQY"/>
+                            <constraint firstItem="K6K-vh-Rke" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="uOY-1L-js0" secondAttribute="leading" constant="15" id="Spb-Lt-Doa"/>
+                            <constraint firstItem="juH-BB-ow3" firstAttribute="top" secondItem="K6K-vh-Rke" secondAttribute="bottom" constant="60" id="bT5-aK-snl"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="K6K-vh-Rke" secondAttribute="trailing" constant="15" id="gGg-5t-qmf"/>
+                            <constraint firstItem="juH-BB-ow3" firstAttribute="centerX" secondItem="PVj-es-Cbp" secondAttribute="centerX" id="tZX-ld-WJA"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="PVj-es-Cbp"/>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="juH-BB-ow3" id="U25-2n-azt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9PD-8z-RT7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1742" y="266"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="connfa-logo" width="60" height="60"/>
+    </resources>
+</document>

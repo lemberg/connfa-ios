@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0820"
+   LastUpgradeVersion = "0920"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "288C5ED71E6D9E4A00F07CB4"
-               BuildableName = "Connfa!.app"
-               BlueprintName = "Connfa!"
+               BlueprintIdentifier = "1ADD64CE1F14AC2C00485ED2"
+               BuildableName = "Connfa.app"
+               BlueprintName = "Connfa"
                ReferencedContainer = "container:Connfa.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "288C5ED71E6D9E4A00F07CB4"
-            BuildableName = "Connfa!.app"
-            BlueprintName = "Connfa!"
+            BlueprintIdentifier = "1ADD64CE1F14AC2C00485ED2"
+            BuildableName = "Connfa.app"
+            BlueprintName = "Connfa"
             ReferencedContainer = "container:Connfa.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -55,12 +55,18 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "288C5ED71E6D9E4A00F07CB4"
-            BuildableName = "Connfa!.app"
-            BlueprintName = "Connfa!"
+            BlueprintIdentifier = "1ADD64CE1F14AC2C00485ED2"
+            BuildableName = "Connfa.app"
+            BlueprintName = "Connfa"
             ReferencedContainer = "container:Connfa.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "-FIRAnalyticsDebugEnabled"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -74,9 +80,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "288C5ED71E6D9E4A00F07CB4"
-            BuildableName = "Connfa!.app"
-            BlueprintName = "Connfa!"
+            BlueprintIdentifier = "1ADD64CE1F14AC2C00485ED2"
+            BuildableName = "Connfa.app"
+            BlueprintName = "Connfa"
             ReferencedContainer = "container:Connfa.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

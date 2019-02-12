@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Title</key>
+	<dict>
+		<key>Calendar name</key>
+		<string>Connfa</string>
+	</dict>
+	<key>Date</key>
+	<dict>
+		<key>Time Zone Identifier</key>
+		<string>Europe/Kiev</string>
+		<key>Start Date</key>
+		<date>2017-12-15T00:00:00Z</date>
+	</dict>
+	<key>Colors</key>
+	<dict>
+		<key>Tint Color</key>
+		<string>E64A19</string>
+	</dict>
+	<key>Twitter</key>
+	<dict>
+		<key>API Key</key>
+		<string>oHG4YmcsyJ5zTJIdwgWsZJzq0</string>
+		<key>API Secret</key>
+		<string>5nm8Pt1GFh13WPe9jOLJonfdMXGNTNlUd6z6xoI4Pp1JwzhgdU</string>
+		<key>Search Query</key>
+		<string>#DrupalCon</string>
+	</dict>
+</dict>
+</plist>
