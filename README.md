@@ -3,6 +3,11 @@ This is a new iOS Connfa! It is developed in Swift with updated UI/UX. The app r
 
 Please notice, that if your aim is to build iOS + Android + Integration Server(CMS) for your conference, then you should refer to Objective-C iOS Connfa!, which is now available in [connfa-objc](https://github.com/lemberg/connfa-ios/tree/connfa-objc) branch.
 
-Documentation is available on [https://connfa.com/](https://connfa.com/).
+Documentation:
+- [Basic spec](https://connfa.com/ios-swift/)
+- [How to build iOS app](https://connfa.com/ios-swift/build/)
+- [Screenshots](https://connfa.com/ios-swift/screenshots/)
+
+More documentation is available on [https://connfa.com/](https://connfa.com/).
 
 Project is supported by [Lemberg Solutions](https://lembergsolutions.com/).
